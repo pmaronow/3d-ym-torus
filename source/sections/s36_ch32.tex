@@ -1,0 +1,1134 @@
+\chapter{Quartic asymptotics near central holonomies}\label{ch32:chapter}
+
+This section describes the continuum measures $\lambda_\gamma$ near the eight central triples $(\pm\Id,\pm\Id,\pm\Id)$ as $\gamma\to0$, and proves \cref{s2:thm:central}. We observe the holonomies $H=(H_1,H_2,H_3)$ around the three coordinate cycles, based at the origin, at a fixed flow time $t=\theta L^2$. Near the identity we write their logarithms as $X\in\su^3\simeq\R^9$. Near the trivial flat connection, the Hessian of the Wilson action vanishes in the nine constant directions, and the leading term in these directions is the constant-mode quartic form
+\begin{equation*}
+ Q(Y)=\frac12\sum_{i<j}\abs{y_i\times y_j}^2,\qquad Y=(y_1,y_2,y_3)\in\R^9,
+\end{equation*}
+where the cross product corresponds to the Lie bracket of $\su$. We study central windows of radius $r_\gamma=\gamma^{1/4}$ and show that compactly supported tests of $X/r_\gamma$ have leading expectations proportional to their integrals against the quartic reference measure $e^{-Q(Y)}\,dY$. This measure has infinite total mass, and all statements concern compactly supported tests. A continuous, nonnegative, nonzero, compactly supported invariant test has expectation comparable to $r_\gamma$. Ratios of expectations converge to ratios of integrals against $e^{-Q(Y)}\,dY$, with an error $O(\gamma^{1/4})$ for Lipschitz tests, and the dilation statistic tends to zero. We also treat the eight central triples, finitely many flow times, and holonomy paths on a compact time interval, and we compute the dilation statistic for four comparison measures.
+
+The block averaging constraint and the effective classical action come from \cref{ch03:chapter,ch06:chapter,ch07:chapter}, and the flat refinements, the reconstruction maps, and the disintegration of the conditioned Wilson measure from \cref{ch11:chapter,ch12:chapter}. The coordinates near the trivial flat connection, the transverse Hessian, and the order of the normalization constant come from \cref{ch27:chapter}, and the regularity of the flowed zero-fluctuation reconstruction and the comparison of flowed holonomies from \cref{ch22:chapter,ch30:chapter,ch31:chapter}. Finally, we use the bound on the small-field failure probability from \cref{ch20:chapter} and the continuum limit at fixed coupling from \cref{ch26:chapter}. The covariance of \cref{ch27:thm:flowed-log-covariance} enters only in the last comparison measure. The results of this section are not used in later sections; they prove \cref{s2:thm:central} and the further statements about central triples described after it in \cref{s2:chapter}.
+
+\Cref{ch32:sec:setting} fixes the setting and explains the scaling. The main steps are the exact quartic term of the effective classical action (\cref{ch32:sec:quartic}), the comparison of flowed holonomies (\cref{ch32:sec:holonomy}), and the integration over the transverse modes (\cref{ch32:sec:integration}). The passage to the continuum measure and the further results occupy \cref{ch32:sec:continuum,ch32:sec:rates,ch32:sec:paths,ch32:sec:comparison}, and \cref{ch32:sec:proof-central} deduces \cref{s2:thm:central}.
+
+The separation of constant modes, with a quartic commutator interaction, from the nonconstant modes on a torus is an established idea in finite-volume Yang--Mills theory; see L\"uscher \cite{Luscher1983Torus} and Coste, Gonz\'alez-Arroyo, Jurkiewicz, and Korthals Altes \cite{CosteEtAl1985ZeroMomentum}. For a direct comparison in four-dimensional perturbation theory in finite volume, see Fodor, Holland, Kuti, N\'ogr\'adi, and Wong \cite[Section~2, (2.1)--(2.7)]{FodorEtAl2012FiniteVolumeFlow}, who separate the constant modes, treat their quartic interaction separately, and integrate the nonconstant modes. What we add is the exact coefficient $Q/n$ for the constrained minimizers of our block averaging constraint at every finite depth, with bounds uniform in the depth, and a uniform comparison on windows of size $\gamma^{1/4}$. Up to normalization, $Q$ is the action of the bosonic reduced $\SU$ Yang--Mills matrix integral with three matrices, whose divergence is known: see Krauth, Nicolai, and Staudacher \cite[(24)]{KrauthNicolaiStaudacher1998}, Krauth and Staudacher \cite[(2)]{KrauthStaudacher1998FiniteIntegrals}, and, for a rigorous treatment, Austing and Wheater \cite[Section~3 and Appendix~A]{AustingWheater2001Convergence}. The integration over the transverse modes is a Laplace argument with degenerate directions (see Wong \cite{Wong2001AsymptoticIntegrals} for background); the main work is to verify its hypotheses uniformly. The center symmetry of \cref{ch32:lem:finite-center-invariance} is the standard center symmetry of periodic lattice gauge theory, which goes back to 't Hooft \cite{Hooft1979}.
+
+\section{Setting and notation}\label{ch32:sec:setting}
+
+We fix the comparison side $n$ and all parameters of the construction before the coupling varies. Below, $K$ counts RG steps, and the underlying classical depth is $JK$. The quantity $a_{\mathrm{map}}$ below is the bound on the derivatives of the zero-fluctuation reconstruction maps fixed in \cref{ch30:def:paired-history}.
+
+\begin{definition}\label{ch32:def:core-insertions}
+Fix $L>0$, $\theta>0$, an odd integer $M\ge3$, an integer $J\ge1$ with $B=M^J$, and the remaining parameters of the construction, such that $a_{\mathrm{map}}\sqrt B\le32/49$. Fix $n_*\in4\N$ and a comparison side $n=n_*B^{a}$ on the sequence $(n_*B^K)_{K\ge0}$, large enough for the lower bounds on the coarse side in \cref{ch20:cor:payment-all-powers,ch26:cor:common-ladder-family,ch30:def:paired-history}, and in particular for \eqref{ch32:eq:flat-side-margin} below. These choices are made before $\gamma$ varies in $(0,\gamma_0]$, where $0<\gamma_0\le1$ is a fixed ceiling. For $K\ge0$ set
+\[
+ N=nB^K,\qquad g^2=\frac\gamma n,\qquad \nu=\SelectedLaw Nn\gamma,\qquad \StoppedLaw=(T_M^{JK})_\#\nu,\qquad r_\gamma=\gamma^{1/4},
+\]
+and let $Q$ be the quartic form on $\R^9$ displayed at the beginning of this section.
+\begin{enumerate}
+\item The stopped measure $\StoppedLaw$ is the law of the coarse configuration $V=T_M^{JK}U$ on $\Lat n$ when $U$ has law $\nu$. It has density
+\[
+ d\StoppedLaw=\widehat Z^{-1}\one_{D_r}e^{-E_{JK,\mathrm{sat}}/g^2-\overline R_{K,\gamma}}\,dH_n,\qquad \overline R_{K,\gamma}=R_{K,\gamma}-R_{K,\gamma}(\Id),
+\]
+where $\widehat Z$ is the normalization constant, $R_{K,\gamma}$ is the effective interaction, and $E_{JK,\mathrm{sat}}$ is the gauge-invariant extension of the effective classical action $E_{JK}$ from $B_r$ to $D_r$ of \cref{ch08:thm:compact-overlap}, that is, $E_{JK,\mathrm{sat}}(U)=E_{JK}(U^k)$ whenever $U^k\in B_r$. In particular $E_{JK,\mathrm{sat}}=E_{JK}$ on $B_r$.
+\item Near the trivial orbit modulo based gauge transformations (gauge transformations equal to the identity at the origin) we use the coordinates of \cref{ch27:thm:central-stiff-chart},
+\[
+ V(X,s)=e^{X/n+s},\qquad X\in\R^9,\qquad d_0^*s=0,\qquad \sum_xs_i(x)=0,
+\]
+with $d_{\mathrm{st}}=\dim s=6n^3-6$,
+where $X/n$ denotes the constant configuration and $d_0^*$ is the lattice divergence on $\Lat n$. We write $J_n(X,s)\,dX\,ds$ for the image of the product Haar measure in the based quotient, and set
+\[
+ F_K(X,s)=E_{JK}(V(X,s)),\qquad f_K(X)=F_K(X,0),\qquad A_K(X)=D_s^2F_K(X,0).
+\]
+We write $\overline R_{K,\gamma}(X,s)$ for $\overline R_{K,\gamma}(V(X,s))$.
+\item Let $\mathcal H^K=(\mathcal H^K_i)_{i=1}^3$ be the holonomies, around the three coordinate cycles based at the origin, of the fine configuration flowed by the Wilson flow $\Flowlat N_{\theta L^2}$, where the fine configuration is represented through the reconstruction maps of \cref{ch12:thm:replacement-family}. Let $\mathcal H^K_0(V)$ be the same triple for the flowed zero-fluctuation reconstruction of $V$ (the map $\Xi_0^K$ of \cref{ch30:def:paired-history}), in the same gauge frame at the basepoint. Let $\mathcal H_n(V)=\Hol(V)$ be the triple of coordinate-cycle holonomies of $V$ itself, without flow.
+\item Fix a neighborhood $\mathcal V$ of $(\Id,\Id,\Id)$ with compact closure in $(\SU\setminus\{-\Id\})^3$, on which $\Log$ denotes the componentwise principal logarithm. For a bounded Borel function $\varphi:\R^9\to\R$ with compact support, define
+\[
+ \mathcal I_{\gamma,\varphi}(H)=
+ \begin{cases}
+ \varphi(\Log H/r_\gamma),&H\in\mathcal V,\\
+ 0,&H\notin\mathcal V.
+ \end{cases}
+\]
+\item A radial cutoff is a function $\chi\in C_c^\infty([0,\infty))$ that is nonnegative, not identically zero, and constant near zero. For a radial cutoff $\chi$ we write $\mathcal I_{\gamma,\chi(\abs\cdot)}$ for the observable of the test $Y\mapsto\chi(\abs Y)$, and we set
+\[
+ W_\chi(Y)=(4Q(Y)-9)\chi(\abs Y)-\abs Y\chi'(\abs Y),\qquad
+ \WardStat(\chi)=\frac{\E_P\mathcal I_{\gamma,W_\chi}}{\E_P\mathcal I_{\gamma,\chi(\abs\cdot)}}
+\]
+for a probability $P$ under which the denominator is positive.
+\item For a probability $P$ of a random vector $X\in\R^9$ we use instead $\mathcal I^{\mathrm{coord}}_{\gamma,\varphi}(X)=\one_{\{X\in\Log\mathcal V\}}\varphi(X/r_\gamma)$, and define $\WardStat(\chi)$ with $\mathcal I^{\mathrm{coord}}$ in place of $\mathcal I$.
+\end{enumerate}
+\end{definition}
+
+We call $\WardStat(\chi)$ the dilation statistic; the name refers to the dilation integration-by-parts identity $\int W_\chi\,e^{-Q}\,dY=0$ of \cref{ch32:lem:quartic-intensity}. For each fixed bound on the support of $\varphi$ and all sufficiently small $\gamma$, the map $Y\mapsto r_\gamma Y$ sends the support of $Y\mapsto\varphi(Y)$ into a compact subset of $\Log\mathcal V$. Then $\mathcal I_{\gamma,\varphi}$ is a continuous function on $\SU^3$ for continuous $\varphi$, and the indicator in $\mathcal I^{\mathrm{coord}}_{\gamma,\varphi}$ equals one on the support of $\varphi(\cdot/r_\gamma)$. The observables are defined by extension by zero because we never use a logarithm outside $\mathcal V$.
+
+We apply \cref{ch27:thm:central-stiff-chart} at depth $JK$; in the depth notation of that theorem, $F_K=F_{JK}$, $A_K=A_{JK}$, and $d_{\mathrm{st}}=d_n$. The coordinates $V(X,s)$ are defined on a fixed neighborhood $\{\abs X<\rho_n,\ \abs s<s_n\}$ whose image lies in $B_r\subset D_r$, and the density $J_n$ is smooth and strictly positive. The gauge directions along a based spanning tree integrate to one, while the conjugation at the root remains in the measure and is not divided out. The theorem also gives
+\[
+ D_sF_K(X,0)=0,\qquad a_n\Id\le A_K(X)\le C_n\Id,
+\]
+where the Hessian lower bound $a_n>0$ is a fixed constant (in this section $a_n$ does not denote the mesh $L/n$).
+The first derivative of $\overline R_{K,\gamma}$ remains in the density. The measure $\StoppedLaw$ is the stopped measure of \cref{ch01:def:selected-law} at side $n$ and depth $JK$. Since no coarser restriction remains at the side $n$, it is the law of $V$ under $\nu$ by \cref{ch11:thm:terminal-anchor}(9).
+
+\paragraph{Constants.}
+Unless stated otherwise, constants $C,c,C_n,c_n,\dots$ in this section may depend on $n$, $L$, $\theta$, $M$, $J$, the remaining parameters, $\gamma_0$, the charts, the neighborhoods, and the gauge frames fixed in this section, and the test functions, but not on $K$, $N$, the number of preceding averaging steps, or $\gamma\in(0,\gamma_0]$. This is the dependence described in item (6) of \cref{ch01:conv:constants}. Additional dependence is indicated by subscripts. All estimates are on the periodic torus of side $L$.
+
+\paragraph{Margins.}
+Fix a radius $r_{\mathrm{flat}}<r$ below the margins of the classical, block-averaging, and gauge domains of the construction. The lower bound on $n$ in \cref{ch32:def:core-insertions} includes
+\begin{equation}\label{ch32:eq:flat-side-margin}
+ \frac{2\pi}n<\frac{r_{\mathrm{flat}}}4.
+\end{equation}
+By \cref{ch11:lem:flat-lifts}, every flat configuration on $\Lat n$ is gauge equivalent to constant commuting links $e^{H_i/n}$ with commuting $H_i\in\su$, $\abs{H_i}\le2\pi$. Its flat refinements to side $nM^\ell$ have links $e^{H_i/(nM^\ell)}$, and $\abs{H_i}/(nM^\ell)\le2\pi/n<r_{\mathrm{flat}}/4$ for every $\ell\ge0$. The flat refinements, their vanishing conditional constrained minimizers, and their vanishing normalized fluctuation variables therefore lie in all coordinate domains of the construction with the same margins at every depth. This holds near each of the eight central triples.
+
+We also fix nested coordinate balls $\mathcal C\Subset\mathcal C^+$ in the chart of \cref{ch27:thm:central-stiff-chart}, with
+\begin{equation}\label{ch32:eq:central-interior-margin}
+ \frac{\rho_{\mathrm c}^+}n+s_{\mathrm c}^+<\frac12\min(r,r_{\mathrm{flat}}),\qquad
+ \mathcal C^+=\{\abs X<\rho_{\mathrm c}^+,\ \abs s<s_{\mathrm c}^+\},
+\end{equation}
+where the radii may be reduced, and such that the closure of $\mathcal C^+$ lies in the chart. Since $\max_{x,i}\abs{X_i/n+s_i(x)}\le\abs X/n+\abs s$, the bound \eqref{ch32:eq:central-interior-margin} gives a fixed chart of link logarithms on which the derivative bounds for $\overline R_{K,\gamma}$ in \cref{ch27:lem:residual-derivatives} hold. On $\{s=0\}$, it also places the commuting constant configurations in the domains above. The coordinate map extends analytically past the closure of $\mathcal C^+$, and by compactness its derivatives of each fixed order are bounded there. These choices concern only the coordinates used for integration; the conditioned Wilson measure and the restriction to $D_r$ in $\StoppedLaw$ are unchanged.
+
+\paragraph{Heuristics.}
+In the coordinates $V(X,s)$, the stopped measure has density proportional to $e^{-F_K(X,s)/g^2}$ times the smooth positive factor $e^{-\overline R_{K,\gamma}}J_n$. By \cref{ch32:thm:absolute-quartic} below, $f_K(X)=Q(X)/n+O(\abs X^5)$, and by \cref{ch27:thm:central-stiff-chart}, $F_K(X,s)=f_K(X)+(1/2)s^{\mathsf T}A_K(X)s+O(\abs s^3)$. Since $ng^2=\gamma=r_\gamma^4$, the substitution
+\[
+ X=r_\gamma Y,\qquad s=gz,\qquad g=\frac{r_\gamma^2}{\sqrt n},
+\]
+gives
+\[
+ \frac{F_K(X,s)}{g^2}=Q(Y)+\frac12z^{\mathsf T}A_K(0)z+(\text{an error of order }r_\gamma\text{ after integration}).
+\]
+The Jacobian of the substitution is $r_\gamma^9g^{d_{\mathrm{st}}}$. By \cref{ch27:thm:sharp-normalizer}, the normalization constant is of order $g^{d_{\mathrm{st}}+4}$, where the extra power $g^4$ comes from a neighborhood of the cone of commuting triples, along which $Q$ vanishes. Since $r_\gamma^9/g^4=n^2r_\gamma$, the expectation of a compactly supported test of $X/r_\gamma$ is of order $r_\gamma$. More precisely, for a bounded test $\varphi$ supported in $\{\abs Y\le R\}$ and either output map of \cref{ch32:thm:common-scalar-core}, its expectation is $r_\gamma\kappa_{K,\gamma}\{\int\varphi(Y)e^{-Q(Y)}\,dY+O_{n,R}(\norm\varphi_\infty r_\gamma)\}$, where $\kappa_{K,\gamma}$ is positive and bounded above and below. The factor $\kappa_{K,\gamma}$ does not depend on the test and cancels in ratios, so we never need its limit. The measure $e^{-Q(Y)}\,dY$ has infinite mass because $Q$ vanishes on the five-dimensional cone of commuting triples and grows only quadratically in the four normal directions, with a coefficient proportional to the square of the distance from the origin (\cref{ch32:lem:quartic-intensity}). After rescaling, most of the mass near the cone lies at commuting triples far from the central triple. In the unscaled variables these triples give the dominant contribution to the normalization constant, but tests supported on the scale $r_\gamma$ do not see them. This is why only compactly supported tests appear.
+
+To pass from the coarse configuration to the flowed holonomies of the fine configuration, we compare $\mathcal H^K$ with the deterministic triple $\mathcal H^K_0(V)$. The matrix difference is of order $\sqrt\gamma=r_\gamma^2$, while the window $\{\abs{\Log\mathcal H^K_0(V)}\le Rr_\gamma\}$ has probability of order $r_\gamma$. An average estimate of the difference does not suffice, since its contribution could be large relative to the small probability of the window. Instead, we use an estimate conditional on the coarse configuration $V$ (\cref{ch30:thm:terminal-frozen-matrix-tail}). Suppose that the window is measurable with respect to $V$ and has probability $O(r_\gamma)$, and that the conditional expected difference is $O(r_\gamma^2)$ uniformly in $V$. Then the expected difference on the window is $O(r_\gamma^3)$, which is $O(r_\gamma^2)$ relative to the window. This is the mechanism behind the rate $\gamma^{1/4}$.
+
+Finally, we distinguish three quotients. The integration over $V$ takes place in the quotient by based gauge transformations, so that the constant coordinates $X\in\R^9$ include the simultaneous conjugation at the basepoint, which is kept in the nine-dimensional integral. Observables of the continuum measure are invariant under simultaneous conjugation of the triple, and at several flow times they are invariant under an independent conjugation at each time. On a time interval, the observable is a path in the quotient $\su^3/\Ad\SU$; no gauge frame common to different times is needed.
+
+\section{The quartic term of the effective classical action}\label{ch32:sec:quartic}
+
+The following theorem identifies the fourth Taylor polynomial of the effective classical action on constant configurations. Here $E_d$ is the effective classical action at depth $d$ on the lattice of side $n$, that is, the value of the constrained minimizer of \cref{ch07:thm:regular-minimum} (the background field, following Ba{\l}aban \cite{Balaban1985Variational}), with $E_0=S_W$.
+
+\begin{theorem}\label{ch32:thm:absolute-quartic}
+For every side $n$ as in \cref{ch32:def:core-insertions} there exist $\rho_0(n)>0$ and $C_n<\infty$ such that, for every depth $d\ge0$, the function $f_d(X)=E_d(e^{X/n})$ satisfies
+\[
+ D^jf_d(0)=0\quad(0\le j\le3),\qquad \frac1{4!}D^4f_d(0)[X,X,X,X]=\frac{Q(X)}n,
+\]
+and
+\begin{equation}\label{ch32:eq:absolute-quartic-remainder}
+ \Bigl\lvert E_d(e^{X/n})-\frac{Q(X)}n\Bigr\rvert\le C_n\abs X^5\qquad(\abs X<\rho_0(n)).
+\end{equation}
+The constants depend only on $n$, $M$, and the domains and derivative bounds of \cref{ch07:thm:all-root-classical}; they do not depend on $d$ or on the coupling. In particular this applies to $f_K$ of \cref{ch32:def:core-insertions}, with $d=JK$.
+
+Moreover, for every fixed $d$ and $X$ there exist constant fine links $e^{a_i(u)}$, analytic in $u$ for $\abs u<u_{d,X}$, such that
+\[
+ a_i(u)=uM^{-d}x_i/n+O_{d,X}(u^2),\qquad T_M^d(e^{a(u)})=e^{uX/n},
+\]
+and these links lie in the domain of the variational comparison of \cref{ch06:thm:constrained-convexity} at depth $d$. The radius $u_{d,X}$ need not be uniform in $d$.
+\end{theorem}
+
+We identify the fourth Taylor polynomial exactly, at each finite depth, by comparing the minimizer with an exactly constrained trial configuration. The proof uses two different tools. To identify the Taylor coefficients at a fixed depth $d$, we use an inverse of the block averaging constraint on constant configurations whose radius of definition may shrink as $d$ grows. This is harmless, because Taylor coefficients at the origin are determined by arbitrarily small neighborhoods. For the uniformity of the remainder in $d$, we use instead the bounds on the fifth derivative of $E_d$ from \cref{ch07:thm:all-root-classical}, which are uniform in the depth. We also distinguish two constraints: the block averaging constraint $T_M^dU=e^\theta$ itself, and the gauge-modified constraint satisfied by the fields in the projected Landau gauge slice of \cref{ch06:thm:projected-landau-slice}. The trial configurations and the representative of the minimizer constructed in Step~2 satisfy the former, and their transforms into the slice in Step~1 satisfy the latter. The gauge transformation used in Step~5 need not preserve either constraint; we use it only to compute the action, which it leaves unchanged.
+
+\begin{proof}
+All variational comparisons use real targets, fields, and parameters; holomorphic extensions supply analytic representatives and Taylor bounds.
+
+\paragraph{Step 1: the variational comparison.}
+We set $\varepsilon_d=M^{-d}$ and measure lengths in units of the lattice of side $n$, so that the fine lattice has side $n/\varepsilon_d$ and the action is
+\begin{equation}\label{ch32:eq:physical-action}
+ S_{\varepsilon_d}(U)=\frac4{\varepsilon_d}\sum_pq(U_p).
+\end{equation}
+We take the minimizer and its value from \cref{ch07:thm:regular-minimum}, in the notation of \cref{ch07:def:physical-classical-data}. We write $\Xi_d$ for the constraint coordinates $\mathsf P_d^{\mathrm{cl}}$ and $H_d$ for the minimizing linear extension $\mathsf H_d$, as in \cref{ch06:thm:constrained-convexity}. The critical point is $v_d^*(\theta)\in\mathcal V_d$, the minimizing field is $A_d(\theta)=\Xi_d(v_d^*(\theta)+H_d\theta)$, and
+\begin{equation}\label{ch32:eq:attained-value}
+ E_d(e^\theta)=S_{\varepsilon_d}(e^{\varepsilon_dA_d(\theta)}).
+\end{equation}
+Fix $0<r_{\mathrm{ph}}<r_0$ within the common margins, where $r_0$ and $C_*$ are the constants of \cref{ch06:thm:constrained-convexity}. By the bound on $v_d^*$ in \cref{ch07:thm:regular-minimum}, there exists a constant $C_{\min}$, which includes the conversion from first differences to the curl, such that
+\[
+ \norm{v_d^*(\theta)}_\infty+\norm{\mathrm d_{\varepsilon_d}v_d^*(\theta)}_\infty\le C_{\min}\norm\theta_\infty^2.
+\]
+Let $\tau>0$ be a target radius with
+\begin{equation}\label{ch32:eq:minimum-domain}
+ \tau<\min\{r_\theta/2,\ r_{\mathrm{ph}}/(2C_*)\},\qquad C_{\min}\tau^2<r_{\mathrm{ph}}/4,
+\end{equation}
+where $r_\theta$ is the radius of \cref{ch07:thm:regular-minimum}. For $\norm\theta_\infty<\tau$ the critical point then lies strictly inside the convex domain of potentials and curls of \cref{ch06:thm:constrained-convexity}, which verifies the critical point hypothesis of that theorem.
+
+Next we describe the trial configurations, which are needed only in a small neighborhood that may depend on $d$. Let $U=e^{\varepsilon_dA}$ satisfy $T_M^dU=e^\theta$ with $\norm\theta_\infty<\tau$, $\norm A_{\mathsf X}=\norm A_\infty+\norm{\operatorname{div}_{\varepsilon_d}A}_\infty<r_{\mathsf X}$, and small curl. We apply \cref{ch06:thm:projected-landau-slice} with prescribed coarse gauge datum zero. The transformed field has vanishing projected divergence and gauge-modified target exactly $e^\theta$. It has the same action, and its potential $A'$ and its curl tend to zero with those of $A$. The transformed field need not satisfy the block averaging constraint $T_M^dU=e^\theta$ itself; for this reason, Step~2 constructs a separate representative of the minimizer that does.
+
+To check that $A'$ lies in the chart of \cref{ch06:thm:constrained-convexity}, we write the constraint coordinates as $\Xi_d(w)=w-H_d\mathscr D_d(w)$, with $\mathscr D_d(0)=D\mathscr D_d(0)=0$; here the argument $w$ is a fine field, not a vector of normalized fluctuation variables. Since $H_d$ is a fixed linear map on this finite lattice, the first-derivative estimate of \cref{ch07:thm:all-root-classical} makes $w\mapsto A'+H_d\mathscr D_d(w)$ a contraction on a sufficiently small ball, which implies that $\Xi_d$ is locally invertible at $A'$. By the defining identities of the constraint coordinates, the gauge-modified constraint of $\Xi_d(w)$ is the linear target, and the correction $H_d\mathscr D_d(w)$ has vanishing projected divergence. Hence the inverse parameter has the form $w=a+H_d\theta$ with $a\in\mathcal V_d$, and on this finite lattice the norm of $a$ in potential and curl tends to zero with $(A',\theta)$. In particular, a sufficiently small trial configuration satisfies
+\begin{equation}\label{ch32:eq:trial-domain}
+ \norm a_\infty+\norm{\mathrm d_{\varepsilon_d}a}_\infty<r_{\mathrm{ph}}/2.
+\end{equation}
+
+By \eqref{ch32:eq:minimum-domain} and \eqref{ch32:eq:trial-domain}, the trial parameter and the critical point lie in the same convex domain with target $e^\theta$, and so does the segment joining them. Since the transformation into the slice preserves the action, the convexity inequality of \cref{ch06:thm:constrained-convexity}, together with the minimum of \cref{ch07:thm:regular-minimum}, implies that
+\begin{equation}\label{ch32:eq:trial-comparison}
+ E_d(e^\theta)\le S_{\varepsilon_d}(U).
+\end{equation}
+The smallness required in this step may depend on $d$ and on the direction of the trial configuration.
+
+\paragraph{Step 2: an analytic representative of the minimizer.}
+The field $A_d(\theta)$ is holomorphic, and its value is \eqref{ch32:eq:attained-value}. It satisfies the gauge-modified constraint of the projected Landau slice, and its accumulated gauge transformation is a finite composition of the analytic gauge maps of that slice. We take the logarithm of this gauge transformation at the vertices of the coarse lattice, extend it by any fixed linear extension to all fine vertices, and exponentiate. The result is an analytic periodic fine gauge transformation with the prescribed values at the coarse vertices. Since $T_M$ is gauge covariant, applying this transformation changes the target of the block averaging constraint to $e^\theta$, and it leaves \eqref{ch32:eq:physical-action} unchanged. We obtain an analytic configuration $U_*(\theta)$ with
+\[
+ U_*(0)=\Id,\qquad T_M^dU_*(\theta)=e^\theta,\qquad S_{\varepsilon_d}(U_*(\theta))=E_d(e^\theta).
+\]
+Only analyticity at the fixed depth $d$ is used: even if the derivative bounds of this extension grow with $d$, it tends to the identity as $\theta\to0$ at fixed $d$.
+
+\paragraph{Step 3: an exactly constrained trial and the upper bound.}
+Fix $d$ and $X$. On constant configurations, the map $G_d(a)=\Log T_M^d(e^a)$ is analytic near zero and $DG_d(0)=\varepsilon_d^{-1}\Id_9$. Indeed, the derivative at the identity of the formula of \cref{ch03:def:centered-map} is the average of the integrals of $a$ over the block paths. On a constant configuration each of these paths has integral $Ma_i$, and $d$ iterations give $M^da_i$. To invert $G_d$ without a radius uniform in $d$, we solve
+\[
+ a=\varepsilon_du\frac Xn-\varepsilon_d\bigl\{G_d(a)-\varepsilon_d^{-1}a\bigr\}.
+\]
+Since the derivative of the term in braces vanishes at zero, the right side is a contraction with factor at most $1/2$ on a small fixed complex ball. For small $\abs u$, it also maps the ball into itself. The iterates converge uniformly on a smaller complex disc in $u$, and the limit is analytic in $u$ and real for real $u$. A fixed point satisfies $G_d(a)=uX/n$, and we obtain
+\begin{equation}\label{ch32:eq:exact-trial}
+ a_i(u)=u\varepsilon_dx_i/n+O_{d,X}(u^2),\qquad T_M^d(e^{a(u)})=e^{uX/n}.
+\end{equation}
+The potential $a(u)/\varepsilon_d$ is constant, has vanishing divergence and curl, and tends to zero as $u\to0$. We reduce $u_{d,X}$ until $\norm{uX/n}_\infty<\tau$, the input bound of the projected Landau slice holds, and the trial parameter satisfies \eqref{ch32:eq:trial-domain}. By \eqref{ch32:eq:minimum-domain}, the critical point for the same target lies in the same convex chart, and \eqref{ch32:eq:trial-comparison} applies to $e^{a(u)}$. The logarithm of a plaquette of the constant configuration $e^{a(u)}$ in the $(i,j)$ plane is $u^2[\varepsilon_dx_i/n,\varepsilon_dx_j/n]+O_{d,X}(u^3)$. Using $q(e^v)=\abs v^2/8+O(\abs v^4)$ and the fact that there are $(n/\varepsilon_d)^3$ plaquettes in each plane, we obtain
+\begin{equation}\label{ch32:eq:quartic-upper}
+ \begin{split}
+ E_d(e^{uX/n})
+ &\le\frac4{\varepsilon_d}\Bigl(\frac n{\varepsilon_d}\Bigr)^3\frac{u^4}8\sum_{i<j}\abs{[\varepsilon_dx_i/n,\varepsilon_dx_j/n]}^2+O_{d,X}(u^5)\\
+ &=\frac{u^4}nQ(X)+O_{d,X}(u^5).
+ \end{split}
+\end{equation}
+
+\paragraph{Step 4: the first-order term of the minimizer.}
+We write the link logarithms of $U_*(uX/n)$ from Step~2 as $ua+O(u^2)$, where $a$ is a cochain on the fine torus. By Step~2, its action equals $E_d(e^{uX/n})$, which is nonnegative and, by \eqref{ch32:eq:quartic-upper}, of order $u^4$. The coefficient of $u^2$ in its action therefore vanishes. This coefficient is
+\[
+ \frac1{2\varepsilon_d}\sum_x\sum_{i<j}\abs{(\mathrm da)_{ij}(x)}^2,
+\]
+where $\mathrm d$ denotes the unscaled cochain differential on the fine torus. We conclude that $\mathrm da=0$.
+
+We record the periodic decomposition of a closed cochain. A closed cochain has the same integral over every translate of a coordinate cycle, because the difference of two such cycles is a sum of plaquette boundaries. We subtract the constant $c_i$ equal to this integral divided by $n/\varepsilon_d$. The resulting cochain is closed and has vanishing integrals over the coordinate cycles. Its integrals over all closed paths vanish: neighboring coordinate steps can be exchanged using plaquette boundaries, adjacent inverse steps cancel, and a remaining closed path reduces to a combination of the three coordinate cycles. Hence its integral from a fixed vertex to a vertex $x$ does not depend on the path. Applying this to $a$ and writing $\phi(x)$ for the integral of the modified cochain from the fixed vertex to $x$, we have
+\begin{equation}\label{ch32:eq:closed-cochain}
+ a_i(x)=c_i+\phi(x+\varepsilon_de_i)-\phi(x).
+\end{equation}
+Each statement holds separately in each real component of $\su$.
+
+At the identity, the derivative of the block averaging map is the average of the integrals over the block paths. For a closed cochain, a translated path with endpoint connectors and the reference path differ by a contractible closed path and have equal integrals. It follows that $d$ averaging steps send the constant part of \eqref{ch32:eq:closed-cochain} to $\varepsilon_d^{-1}c_i$, and the gradient to the gradient of the restriction of $\phi$ to the coarse lattice. The linearization of the constraint $T_M^dU_*(uX/n)=e^{uX/n}$ states that this image equals $x_i/n$ on every coarse link in direction $i$. When we average over all coarse links in direction $i$, the gradient terms cancel by periodicity, and we obtain
+\begin{equation}\label{ch32:eq:harmonic-part}
+ c_i=\varepsilon_dx_i/n.
+\end{equation}
+
+\paragraph{Step 5: the lower bound.}
+The periodic fine gauge transformation $e^{u\phi(x)}$, with $\phi$ normalized to vanish at the root, removes the gradient in \eqref{ch32:eq:closed-cochain} to first order, and it preserves the action. In this gauge the link logarithms are $uc+u^2b+O(u^3)$ for some cochain $b$, and the plaquette logarithms are
+\[
+ u^2\bigl\{(\mathrm db)_{ij}(x)+[c_i,c_j]\bigr\}+O(u^3).
+\]
+For each $i<j$, we have $\sum_x(\mathrm db)_{ij}(x)=0$ by periodicity, and therefore
+\[
+ \sum_x\abs{(\mathrm db)_{ij}(x)+[c_i,c_j]}^2=\sum_x\abs{(\mathrm db)_{ij}(x)}^2+\Bigl(\frac n{\varepsilon_d}\Bigr)^3\abs{[c_i,c_j]}^2.
+\]
+Using \eqref{ch32:eq:harmonic-part} and $q(e^v)=\abs v^2/8+O(\abs v^4)$, we find that the coefficient of $u^4$ in $E_d(e^{uX/n})$ is at least
+\[
+ \frac1{2\varepsilon_d}\Bigl(\frac n{\varepsilon_d}\Bigr)^3\sum_{i<j}\abs{[\varepsilon_dx_i/n,\varepsilon_dx_j/n]}^2=\frac{Q(X)}n.
+\]
+Together with \eqref{ch32:eq:quartic-upper}, this proves that the fourth Taylor coefficient of $u\mapsto E_d(e^{uX/n})$ equals $Q(X)/n$ for every direction $X$. The vanishing of the lower coefficients also follows from $0\le f_d(uX)\le C_{d,X}u^4$ for both signs of small real $u$. By analyticity and polarization, we obtain the stated identities for the multilinear derivatives, so the fourth Taylor polynomial of $f_d$ at zero is $Q/n$ at every finite depth. We make no claim about the fifth Taylor polynomial.
+
+\paragraph{Step 6: the uniform remainder.}
+Fix the side $n$. On a common smaller ball, we restrict the bound of \cref{ch07:thm:all-root-classical} on the derivatives of order five of $\theta\mapsto E_d(e^\theta)$ to the linear substitution $\theta_{x,i}=X_i/n$. At the fixed side $n$ there are finitely many coordinates $\theta_{x,i}$. Summing the tensor entries and including the factors $1/n$, we obtain
+\[
+ \sup_{d\ge0}\sup_{\abs X<\rho_0(n)}\norm{D^5f_d(X)}\le C_n.
+\]
+The ball and the bound do not depend on the radii $u_{d,X}$ of the trial configurations. Since the Taylor polynomial of order four of $f_d$ at zero is $Q/n$ by Step~5, Taylor's formula on the segment from $0$ to $X$ gives
+\[
+ f_d(X)-\frac{Q(X)}n=\frac1{4!}\int_0^1(1-t)^4D^5f_d(tX)[X,X,X,X,X]\,dt.
+\]
+The absolute value of the right side is at most $C_n\abs X^5/5!$, which proves \eqref{ch32:eq:absolute-quartic-remainder}.
+\end{proof}
+
+\section{Holonomies near the trivial flat configuration}\label{ch32:sec:holonomy}
+
+This section proves two facts about the flowed holonomies. The first is deterministic. In the central coordinates, the logarithm of the flowed zero-fluctuation holonomy triple equals $X$ up to errors of order $\abs X^2+\abs s$. Further, a configuration that is close to the set of flat configurations and whose zero-fluctuation holonomies are close to the identity lies close to the trivial flat configuration. The second fact is probabilistic: under the conditioned Wilson measure, the flowed holonomies of the configuration differ from those of its zero-fluctuation reconstruction by $O(\sqrt\gamma)$ in mean square. Let $\mathcal F_n$ denote the set of flat configurations on $\Lat n$, regarded in the quotient by based gauge transformations.
+
+\begin{theorem}\label{ch32:thm:central-matrix-transfer}
+After a fixed reduction of the central coordinate neighborhood and of $\mathcal V$, the map $Z_K(X,s)=\Log\mathcal H_0^K(V(X,s))$ is defined on that neighborhood for every $K$, and
+\[
+ \sup_K\norm{Z_K}_{C^{1,1}}\le C_n,\qquad
+ \abs{Z_K(X,s)-X}\le C_n(\abs X^2+\abs s),\qquad
+ \abs{Z_K(X,s)}\ge\tfrac34\abs X-C_n\abs s,
+\]
+\[
+ \norm{D_XZ_K(X,s)-\Id}_{\mathrm{op}}\le C_n(\abs X+\abs s).
+\]
+The maps $\mathcal H_0^K$ are equicontinuous, in a fixed finite family of smooth charts of the based quotient, on a neighborhood of $\mathcal F_n$, and $\mathcal H^K_0=\mathcal H_n$ on $\mathcal F_n$ for every finite $K$. Fix a continuous distance $d$ on the based quotient. For every open neighborhood $\mathcal U$ of the trivial based orbit there exists $\delta_{\mathcal U}>0$, independent of $K$ and $\gamma$, such that
+\[
+ d(V,\mathcal F_n)\le\delta_{\mathcal U}\quad\text{and}\quad
+ \Bigl(\sum_{i=1}^3\groupdist(\mathcal H^K_{0,i}(V))^2\Bigr)^{1/2}\le\delta_{\mathcal U}
+ \qquad\text{imply}\qquad V\in\mathcal U.
+\]
+The constant $\delta_{\mathcal U}$ may depend on $d$ and $\mathcal U$.
+
+Let $D_K=\max_i\norm{\mathcal H^K_i-\mathcal H^K_{0,i}(V)}_{\mathrm{op}}$. Then, uniformly in $K$ and $0<\gamma\le\gamma_0$,
+\[
+ \E_\nu\min(1,D_K)^2\le C_n\gamma.
+\]
+For every neighborhood $\mathcal V'$ with compact closure in $\mathcal V$,
+\[
+ \E_\nu\Bigl[\one_{\{\mathcal H^K,\mathcal H^K_0(V)\in\mathcal V'\}}\min\bigl(1,\abs{\Log\mathcal H^K-\Log\mathcal H^K_0(V)}\bigr)^2\Bigr]\le C_{n,\mathcal V'}\gamma.
+\]
+\end{theorem}
+
+The estimates on $D_K$ are averages over the whole conditioned Wilson measure; they are not conditioned on the configuration being near a central triple.
+
+\begin{proof}
+Steps~1--3 prove the deterministic statements, and Step~4 the probabilistic ones.
+
+\paragraph{Step 1: deterministic regularity.}
+We apply \cref{ch31:thm:prefix-regularity} with $m=0$ to the parameters and the side $n$ of \cref{ch32:def:core-insertions}. With $m=0$ there are no fluctuation variables among the inputs. The input is the coarse configuration alone, and the map of that theorem is $\Xi_0^K=\mathcal H^K_0$, with the same gauge frame at the basepoint and the same flow time. The part of \cref{ch31:thm:prefix-regularity} concerning a neighborhood of all flat configurations applies, because \eqref{ch32:eq:flat-side-margin} places every commuting constant representative strictly inside the classical, block-averaging, and gauge margins, as checked in \cref{ch32:sec:setting}. We obtain a neighborhood of the trivial flat configuration on which $\sup_K\norm{\mathcal H^K_0}_{C^{1,1}}\le C_n$, a modulus of continuity of $\mathcal H^K_0$ near $\mathcal F_n$ that is common to all $K$, and the identity
+\begin{equation}\label{ch32:eq:flat-value}
+ \mathcal H^K_0(V_0)=\Hol(V_0)\qquad(V_0\in\mathcal F_n)
+\end{equation}
+at every finite $K$. Independently, \cref{ch11:lem:flat-lifts} explains \eqref{ch32:eq:flat-value}: the zero-fluctuation refinements of a flat configuration are flat refinements, and the Wilson flow is stationary on flat configurations. These are identities of matrices; the conjugation at the basepoint has not been divided out. The neighborhoods and the modulus are those of the deterministic theorem, on its finite cover of charts, and they do not depend on $K$ or $\gamma$. In particular, they are not chosen using the small-field event.
+
+\paragraph{Step 2: the logarithm.}
+At $V=\Id$ the output is $(\Id,\Id,\Id)$. By the common modulus, for any prescribed smaller neighborhood of the identity in $\mathcal V$, there exists a neighborhood of the input whose outputs lie in it. The logarithm and its first two derivatives are bounded on the closure of that neighborhood. Composing with the maps of Step~1, we obtain $\sup_K\norm{Z_K}_{C^{1,1}}\le C_n$. Let $b_K(X,s)=Z_K(X,s)-X$. If $s=0$ and the three components of $X$ are parallel, the links of $V(X,0)$ commute, the configuration is flat, and \eqref{ch32:eq:flat-value} implies that $b_K(X,0)=0$. Each of the nine coordinate directions of $\R^9$ is of this form, and these directions span $\R^9$. Differentiating along them, we find
+\[
+ b_K(0,0)=0,\qquad D_Xb_K(0,0)=0.
+\]
+Integrating the Lipschitz bound on $D_Xb_K$ along $v\mapsto(vX,0)$, we obtain $\abs{b_K(X,0)}\le C_n\abs X^2$, and the bound on the derivative in $s$ gives $\abs{b_K(X,s)-b_K(X,0)}\le C_n\abs s$. The Lipschitz bound on the derivative also implies $\norm{D_XZ_K(X,s)-\Id}\le C_n(\abs X+\abs s)$. We reduce the radius in $X$ so that $C_n\abs X\le1/4$. Then, by the triangle inequality, $\abs{Z_K(X,s)}\ge\abs X-C_n\abs X^2-C_n\abs s\ge(3/4)\abs X-C_n\abs s$. The same reduction works for every $K$ and every coupling.
+
+\paragraph{Step 3: localization near the trivial flat configuration.}
+The based quotient is compact, since it is the quotient of a finite product of copies of $\SU$ by a compact group, and $\mathcal F_n$ is a closed subset. On a flat configuration, the transport along a path is unchanged by elementary plaquette moves and depends only on the homotopy class of the path. Then, on the universal covering lattice, the transports from the root define a periodic gauge transformation to the trivial configuration if and only if all three cycle holonomies are the identity. Thus the trivial orbit is the only flat based orbit whose cycle triple is $(\Id,\Id,\Id)$; this is the based version of \cref{ch11:lem:flat-lifts}.
+
+Let $\mathcal U$ be given, and let $\mathcal U_1$ be an open set containing the trivial orbit with $\overline{\mathcal U_1}\subset\mathcal U$. Suppose first that $\mathcal F_n\setminus\mathcal U_1$ is nonempty. Since it is compact and contains no flat configuration with identity cycle triple,
+\[
+ m=\min_{V_0\in\mathcal F_n\setminus\mathcal U_1}\Bigl(\sum_i\groupdist(\Hol_i(V_0))^2\Bigr)^{1/2}>0.
+\]
+By the common modulus of Step~1, \eqref{ch32:eq:flat-value}, and the continuity of $\groupdist$, there exists $\delta_1>0$ such that, for every $K$, if $V_0$ is flat and $d(V,V_0)<\delta_1$, then the quantities $(\sum_i\groupdist(\mathcal H^K_{0,i}(V))^2)^{1/2}$ and $(\sum_i\groupdist(\Hol_i(V_0))^2)^{1/2}$ differ by less than $m/2$. Let $\delta_2>0$ be smaller than the distance from $\overline{\mathcal U_1}$ to the complement of $\mathcal U$, and let $\delta_{\mathcal U}$ be smaller than $\delta_1/2$, $\delta_2/2$, $m/4$, and the radius of the charts of Step~1. Suppose that $V$ satisfies the two hypotheses, and let $V_0\in\mathcal F_n$ be a closest flat point, which exists by compactness. Then the cycle radius of $V_0$, that is, the second of the two quantities above, is less than $\delta_{\mathcal U}+m/2<m$. Hence $V_0\notin\mathcal F_n\setminus\mathcal U_1$, that is, $V_0\in\mathcal U_1$, and since $d(V,V_0)<\delta_2$, we have $V\in\mathcal U$. If $\mathcal F_n\setminus\mathcal U_1$ is empty, then $\mathcal F_n$ has positive distance from the complement of $\mathcal U$, and the first hypothesis alone implies the conclusion. This argument includes all flat configurations, in particular those near the other seven central triples.
+
+\paragraph{Step 4: the probabilistic estimates.}
+We apply \cref{ch30:thm:scaled-matrix-tail} with $m=0$ and $p=2$. Its comparison triple is $\mathcal H^K_0(V)$, and its probability measure is the whole conditioned Wilson measure $\nu$. By the moment bound of that theorem, we have
+\[
+ \E_\nu\min(1,D_K)^2\le C_n\gamma.
+\]
+This uses the condition $a_{\mathrm{map}}\sqrt B\le32/49$ imposed in \cref{ch32:def:core-insertions}. That theorem includes the conditional means, the matrices at the basepoint, and all flat configurations.
+
+Finally, $\Log$ is Lipschitz, as a map of the three matrices, on the compact closure of $\mathcal V'$. To obtain a single constant for all pairs, we cover the closure by finitely many neighborhoods on which $\Log$ has bounded derivatives. Pairs closer than a Lebesgue number of this cover satisfy the derivative estimate in one of these neighborhoods. For the remaining pairs, we use the boundedness of $\Log$ and the positive lower bound on their distance. We obtain
+\[
+ \min\bigl(1,\abs{\Log H-\Log H'}\bigr)\le C_{\mathcal V'}\min\bigl(1,\max_i\norm{H_i-H_i'}_{\mathrm{op}}\bigr)\qquad(H,H'\in\mathcal V').
+\]
+Squaring, restricting to the event in the statement, and using the bound on $\E_\nu\min(1,D_K)^2$, we obtain the last estimate. All reductions used fixed neighborhoods, the fixed side, and the bounds of the cited theorems, so the constants have the stated dependence.
+\end{proof}
+
+\section{The quartic reference measure}\label{ch32:sec:measure}
+
+We write $\CoreMeasure$ for the quartic reference measure $d\CoreMeasure(Y)=e^{-Q(Y)}\,d^9Y$ on $\R^9$. The following lemma records its basic properties. The divergence of its total mass is known in the matrix-integral literature cited at the beginning of this section; we give a direct proof in the coordinates of \cref{ch27:lem:commuting-cone}.
+
+\begin{lemma}\label{ch32:lem:quartic-intensity}
+The measure $\CoreMeasure$ is locally finite and has infinite total mass. For every $\chi\in C_c^\infty([0,\infty))$ that is constant near zero and every $\lambda>0$,
+\[
+ \int\chi(\lambda\abs Y)\,d\CoreMeasure(Y)=\lambda^{-9}\int\chi(\abs Y)e^{-\lambda^{-4}Q(Y)}\,d^9Y,
+\]
+and
+\[
+ \int\bigl\{(4Q(Y)-9)\chi(\abs Y)-\abs Y\chi'(\abs Y)\bigr\}\,d\CoreMeasure(Y)=0.
+\]
+If $\chi\ge0$ and $\chi$ is not identically zero, then $\int\chi(\abs Y)\,d\CoreMeasure(Y)$ is finite and strictly positive.
+\end{lemma}
+
+We call the second identity the dilation integration-by-parts identity. It states that $\int W_\chi\,d\CoreMeasure=0$ for every radial cutoff $\chi$, and it uses only the compact support of the test; no normalization of $\CoreMeasure$ is involved.
+
+\begin{proof}
+Since $Q\ge0$ is a polynomial, $0<e^{-Q}\le1$ everywhere, which proves local finiteness.
+
+\paragraph{Infinite mass.}
+We use \cref{ch27:lem:commuting-cone}, with its homogeneous cone, its injective normal tube, and its bound on the Jacobian, at every radius. We write the commuting triples as $y_i=\rho a_iu$ with $\rho\ge1$ and $a,u\in S^2$, where $(a,u)$ and $(-a,-u)$ give the same triple, and we set $\zeta_i=a_iu$. The normal space at $\zeta$ is
+\[
+ \mathcal B_{a,u}=\Bigl\{b=(b_1,b_2,b_3):b_i\perp u,\ \sum_ia_ib_i=0\Bigr\},\qquad\dim\mathcal B_{a,u}=4.
+\]
+We claim that
+\begin{equation}\label{ch32:eq:normal-quartic}
+ Q(\zeta+b)=\tfrac12\abs b^2+Q(b)\qquad(b\in\mathcal B_{a,u}).
+\end{equation}
+Indeed, $(\zeta_i+b_i)\times(\zeta_j+b_j)=u\times(a_ib_j-a_jb_i)+b_i\times b_j$. The first term lies in $u^\perp$, while $b_i\times b_j$ is parallel to $u$ because $b_i,b_j\perp u$. The two terms are therefore orthogonal. Since $\abs{u\times w}=\abs w$ for $w\perp u$, and
+\[
+ \sum_{i<j}\abs{a_ib_j-a_jb_i}^2=\abs a^2\sum_i\abs{b_i}^2-\Bigl\lvert\sum_ia_ib_i\Bigr\rvert^2=\abs b^2,
+\]
+we obtain \eqref{ch32:eq:normal-quartic}. The same computation with $y=\rho\zeta$ gives $Q(y+b)=\rho^2\abs b^2/2+Q(b)$.
+
+Let $\eta>0$ be smaller than the relative radius of the tube in \cref{ch27:lem:commuting-cone} and so small that the Jacobian of the tube is at least $1/2$ when $\abs b/\rho\le\eta$. We restrict to $\abs b\le\eta/\rho$. For $\rho\ge1$, this set lies in the tube, and $\abs b/\rho\le\eta$. Since
+\[
+ Q(b)\le\frac12\sum_{i<j}\abs{b_i}^2\abs{b_j}^2\le\frac14\abs b^4,
+\]
+we have $Q(y+b)\le\eta^2/2+\eta^4/4$, which we denote by $C_\eta$, on this whole unbounded tube. By \cref{ch27:lem:commuting-cone}, the volume of the cone is $(1/2)\rho^4\,d\rho\,d\Omega_a\,d\Omega_u$, where the factor $1/2$ accounts for the double parametrization, and the tube is injective in the point $y$ of the cone. The normal ball has volume $v_4\eta^4\rho^{-4}$, where $v_4$ is the volume of the unit ball in $\R^4$. For every $T>1$, we obtain
+\[
+ \int_{\R^9}e^{-Q(X)}\,dX\ge\frac14e^{-C_\eta}(4\pi)^2v_4\eta^4\int_1^T\rho^4\rho^{-4}\,d\rho=c_\eta(T-1).
+\]
+Letting $T\to\infty$ proves that the total mass is infinite. All radii and constants in this argument are absolute.
+
+\paragraph{Scaling, the dilation integration-by-parts identity, and positivity.}
+The change of variables $Z=\lambda Y$, together with $Q(Z/\lambda)=\lambda^{-4}Q(Z)$, gives the scaling formula. For $\lambda$ in a compact neighborhood of $1$, the integrands and their derivatives in $\lambda$ are supported in a common compact set and have a common integrable bound. We may therefore differentiate at $\lambda=1$, which gives the dilation integration-by-parts identity. Equivalently, by the homogeneity relation $Y\cdot\nabla Q=4Q$, we have
+\[
+ \operatorname{div}\bigl\{Y\chi(\abs Y)e^{-Q(Y)}\bigr\}=\bigl\{9\chi(\abs Y)+\abs Y\chi'(\abs Y)-4Q(Y)\chi(\abs Y)\bigr\}e^{-Q(Y)}.
+\]
+The vector field on the left is smooth at zero because $\chi$ is constant there, and it vanishes outside a compact set. The integral of each of its coordinate derivatives over a box containing its support is zero, which proves the dilation integration-by-parts identity with the stated sign. Finally, a nonnegative smooth radial test that is not identically zero is positive on an interval of radii, which corresponds to a subset of $\R^9$ of positive volume. Since the density $e^{-Q}$ is positive, the integral is positive, and it is finite by compact support.
+\end{proof}
+
+\begin{remark}\label{ch32:rem:small-ball}
+For $F_Q(\rho)=\CoreMeasure\{\abs Y\le\rho\}$ and $f_Q=F_Q'$ we have, as $\rho\downarrow0$,
+\[
+ f_Q(\rho)=\frac{32\pi^4}{105}\rho^8\bigl[1+O(\rho^4)\bigr],\qquad
+ F_Q(\rho)=\frac{32\pi^4}{945}\rho^9\bigl[1+O(\rho^4)\bigr],
+\]
+with absolute constants for the Euclidean norm and the normalization of $Q$ used here. Indeed, polar coordinates give
+\begin{equation}\label{ch32:eq:radial-density}
+ f_Q(\rho)=\rho^8\int_{S^8}e^{-\rho^4Q(\omega)}\,d\omega.
+\end{equation}
+Since $Q$ is bounded on $S^8$, the exponential is $1+O(\rho^4)$ uniformly. The area of $S^8$ is $2\pi^{9/2}/\Gamma(9/2)=32\pi^4/105$, by $\Gamma(1/2)=\sqrt\pi$ and $\Gamma(v+1)=v\Gamma(v)$. Integrating the density from zero gives the asymptotics of $F_Q$. These formulas are not used below.
+\end{remark}
+
+\section{Integration over the transverse modes}\label{ch32:sec:integration}
+
+The next theorem, our main integration result, computes the expectation, under the stopped measure, of a compactly supported test of the rescaled logarithm of either the unflowed coarse holonomy triple $\mathcal H_n(V)$ or the flowed zero-fluctuation holonomy triple $\mathcal H^K_0(V)$.
+
+\begin{theorem}\label{ch32:thm:common-scalar-core}
+For every $R<\infty$ there exist $C_{n,R}<\infty$ and $\gamma_R>0$ such that, for every bounded Borel function $\varphi$ supported in $\{\abs Y\le R\}$, every $K\ge0$, and every $0<\gamma\le\gamma_R$, both $T=\mathcal H_n(V)$ and $T=\mathcal H^K_0(V)$ satisfy
+\[
+ \E_{\StoppedLaw}\mathcal I_{\gamma,\varphi}(T)=r_\gamma\kappa_{K,\gamma}\Bigl\{\int\varphi\,d\CoreMeasure+\mathcal E_{K,\gamma,T,\varphi}\Bigr\},\qquad
+ \abs{\mathcal E_{K,\gamma,T,\varphi}}\le C_{n,R}\norm\varphi_\infty r_\gamma,
+\]
+where the factor $\kappa_{K,\gamma}$ is the same for both maps and all tests, namely
+\[
+ \kappa_{K,\gamma}=(2\pi)^{d_{\mathrm{st}}/2}n^2\frac{e^{-\overline R_{K,\gamma}(0,0)}J_n(0,0)}{\sqrt{\det A_K(0)}}\,\frac{g^{d_{\mathrm{st}}+4}}{\widehat Z},\qquad0<c_n\le\kappa_{K,\gamma}\le C_n.
+\]
+Here $\widehat Z$ is the normalization constant of $\StoppedLaw$ in \cref{ch32:def:core-insertions}, and $c_ng^{d_{\mathrm{st}}+4}\le\widehat Z\le C_ng^{d_{\mathrm{st}}+4}$.
+
+Further, for $T_K(X,s)=\Log T(V(X,s))$ and both maps, the change of variables $Z=T_K(X,s)$ is invertible on a fixed smaller ball of outputs, and its inverse $X=H_K(Z,s)$ satisfies
+\[
+ \abs{H_K(Z,s)-Z}\le C_n(\abs Z^2+\abs s),\qquad\abs{\det D_ZH_K(Z,s)-1}\le C_n(\abs Z+\abs s).
+\]
+\end{theorem}
+
+The error bound depends on $\varphi$ only through $\norm\varphi_\infty$, and no modulus of continuity of $\varphi$ enters. It accounts for the density factor $e^{-\overline R_{K,\gamma}}J_n$, including the first derivatives of $\overline R_{K,\gamma}$, for the Gaussian determinant of the transverse modes, and for the contributions of configurations away from the trivial flat configuration. We do not assert that $\kappa_{K,\gamma}$ has a limit. Since $\kappa_{K,\gamma}$ depends only on the stopped measure, it does not depend on the flow time at which $\mathcal H^K_0$ is observed.
+
+\begin{proof}
+Throughout the proof we write $D=d_{\mathrm{st}}$ and $\epsilon=r_\gamma$, and we set
+\[
+ a_{K,\gamma}(X,s)=e^{-\overline R_{K,\gamma}(X,s)}J_n(X,s),\qquad a^0_{K,\gamma}=a_{K,\gamma}(0,0).
+\]
+Steps~1--3 localize to the central coordinates and invert the output map, Step~4 rescales so that the test becomes exactly $\varphi(Y)$, and Steps~5--6 compare the density with its Gaussian--quartic model and integrate.
+
+\paragraph{Step 1: bounds on the density.}
+We apply \cref{ch27:thm:central-stiff-chart} to the stopped measure at depth $JK$, with the side, the parameters, and the upper bound $\gamma_0$ on the coupling from \cref{ch32:def:core-insertions}. The chart $\mathcal C^+$ of \eqref{ch32:eq:central-interior-margin} is a fixed chart of link logarithms, independent of the depth and the coupling. On it, \cref{ch27:lem:residual-derivatives}, with $d=JK$ and link logarithms $X/n+s$, together with the residual value bound (P3) in \cref{ch27:sec:stopped}, gives
+\[
+ \sup_{K,\,0<\gamma\le\gamma_0}\ \sup_{\mathcal C^+}\bigl(\abs{\overline R_{K,\gamma}}+\norm{D_{X,s}\overline R_{K,\gamma}}\bigr)\le C_n.
+\]
+The smooth positive density $J_n$ has positive upper and lower bounds and bounded first derivatives on the closure of a slightly smaller chart that still contains $\overline{\mathcal C}$, and we replace $\mathcal C^+$ by this chart. The identity
+\[
+ D_{X,s}a_{K,\gamma}=e^{-\overline R_{K,\gamma}}\bigl(D_{X,s}J_n-J_nD_{X,s}\overline R_{K,\gamma}\bigr)
+\]
+then gives, on this fixed chart,
+\begin{equation}\label{ch32:eq:complete-amplitude}
+ 0<c_n\le a_{K,\gamma}(X,s)\le C_n,\qquad\norm{D_{X,s}a_{K,\gamma}(X,s)}\le C_n.
+\end{equation}
+This uses the first derivatives of the centered effective interaction in both $X$ and $s$. Together with the uniform classical derivative bounds of \cref{ch07:thm:all-root-classical}, \cref{ch27:thm:central-stiff-chart} also gives
+\begin{equation}\label{ch32:eq:stiff-bounds}
+ \begin{gathered}
+ c_n\Id\le A_K(X)\le C_n\Id,\qquad\norm{A_K(X)-A_K(0)}\le C_n\abs X,\\
+ F_K(X,s)=f_K(X)+\tfrac12s^{\mathsf T}A_K(X)s+O_n(\abs s^3),\qquad F_K(X,s)\ge f_K(X)+c_n\abs s^2.
+ \end{gathered}
+\end{equation}
+The density in \cref{ch27:thm:central-stiff-chart} at depth $JK$ is the stopped measure of \cref{ch32:def:core-insertions}, so its normalization constant is $\widehat Z$. By \cref{ch27:thm:sharp-normalizer}, after reducing the upper bound on the coupling if necessary, we have
+\begin{equation}\label{ch32:eq:normalizer}
+ c_ng^{D+4}\le\widehat Z\le C_ng^{D+4}.
+\end{equation}
+
+\paragraph{Step 2: reduction to a neighborhood of the trivial flat configuration.}
+Fix a neighborhood $\mathcal U$ of the trivial based orbit whose closure lies in the coordinate chart of \eqref{ch32:eq:stiff-bounds}. By \cref{ch32:thm:central-matrix-transfer}, applied to the map $\mathcal H^K_0$, there exists $\delta>0$ such that a configuration within distance $\delta$ of $\mathcal F_n$ whose cycle radius $(\sum_i\groupdist(\mathcal H^K_{0,i}(V))^2)^{1/2}$ is at most $\delta$ lies in $\mathcal U$. For the map $\mathcal H_n=\Hol$, the same statement follows from the argument of Step~3 of that proof, with the continuous map $\Hol$ in place of $\mathcal H^K_0$. On the complement of $\{d(V,\mathcal F_n)\le\delta\}$, we have $E_0\ge c_{n,\delta}>0$ by the compactness of the configuration space and $E_0^{-1}(0)=\mathcal F_n$. The lower bound $E_{JK,\mathrm{sat}}\ge\kappa E_0$ on $D_r$ and the bound $\abs{\overline R_{K,\gamma}}\le C_n$ on $D_r$, properties (P1) and (P3) in \cref{ch27:sec:stopped}, together with \eqref{ch32:eq:normalizer}, give
+\begin{equation}\label{ch32:eq:off-flat}
+ \StoppedLaw\{d(V,\mathcal F_n)>\delta\}\le C_ng^{-(D+4)}e^{-c_n/g^2}.
+\end{equation}
+Since the product Haar measure has total mass one, no volume factor depending on $K$ appears in this bound. Suppose that $R\epsilon<\delta$ and that the image of $\{\abs Y\le R\}$ under $Y\mapsto\epsilon Y$ lies in $\Log\mathcal V$. If $\mathcal I_{\gamma,\varphi}(T)\ne0$, then $\abs{\Log T}\le R\epsilon$, and the cycle radius is at most $R\epsilon<\delta$, since $\groupdist(H_i)\le\abs{\Log H_i}$. Every contribution to either observable from $V\notin\mathcal U$ is therefore bounded by \eqref{ch32:eq:off-flat}. The flat configurations near the other seven central triples, and all other flat configurations, still contribute to $\widehat Z$.
+
+\paragraph{Step 3: the output coordinates.}
+For $T=\mathcal H^K_0$, \cref{ch32:thm:central-matrix-transfer} gives
+\begin{equation}\label{ch32:eq:near-identity-output}
+ \abs{T_K(X,s)-X}\le C_n(\abs X^2+\abs s),\qquad\norm{D_XT_K(X,s)-\Id}\le C_n(\abs X+\abs s).
+\end{equation}
+For $T=\Hol$, each cycle holonomy is a product of $n$ link matrices of $V(X,s)$, which are analytic functions of $(X,s)$ at the fixed side $n$, and at $s=0$ the $i$-th holonomy is exactly $e^{x_i}$. Then $T_K(X,0)=X$ and $D_XT_K(X,0)=\Id$. Since these finite products and $\Log$ have bounded derivatives, \eqref{ch32:eq:near-identity-output} holds for this map as well, with constants independent of $K$.
+
+Fix a convex ball $\{\abs X\le\rho\}$ and a ball in $s$ on which $\norm{D_XT_K-\Id}\le1/4$ for both maps. We set $b_K=T_K-X$ and restrict $\abs s$ further so that $\abs{b_K(0,s)}\le\rho/8$. For $\abs Z<\rho/4$, the map $X\mapsto Z-b_K(X,s)$ sends the closed ball of radius $\rho/2$ into itself, since $\abs{Z-b_K(X,s)}\le\abs Z+\abs{b_K(0,s)}+\abs X/4\le\rho/2$, and it is a contraction with factor at most $1/4$. Its iterates converge to a unique fixed point $X=H_K(Z,s)$, which solves $T_K(X,s)=Z$. The inequality
+\[
+ \abs{T_K(X,s)-T_K(X',s)}\ge\tfrac34\abs{X-X'}
+\]
+on the larger convex ball excludes any other preimage there. Differentiating the fixed point equation, or taking difference quotients and using the uniformly convergent Neumann series for $(\Id+D_Xb_K)^{-1}$, we obtain
+\[
+ D_ZH_K=\bigl(\Id+D_Xb_K(H_K,s)\bigr)^{-1}.
+\]
+The fixed point equation first gives $\abs{H_K}\le\abs Z+\abs{b_K(0,s)}+\abs{H_K}/4$, which implies $\abs{H_K}\le C_n(\abs Z+\abs s)$, and then
+\begin{equation}\label{ch32:eq:inverse-output}
+ \abs{H_K(Z,s)-Z}\le C_n(\abs Z^2+\abs s),\qquad\abs{\det D_ZH_K(Z,s)-1}\le C_n(\abs Z+\abs s).
+\end{equation}
+For the determinant, we expand about $\Id_9$ and use the bound on $D_Xb_K$; the determinant is positive since $D_ZH_K$ stays close to $\Id_9$. This proves the second part of the theorem. We may take the neighborhood $\mathcal U$ of Step~2 inside this domain, so that points outside it whose output lies in the compact window are controlled by \eqref{ch32:eq:off-flat}. Inside $\mathcal U$, after a further fixed reduction of $\rho$, \eqref{ch32:eq:near-identity-output} implies the lower bound $\abs{T_K(X,s)}\ge(3/4)\abs X-C_n\abs s$ for both maps. Because of its term in $s$, we use it together with the tail bound of Step~4.
+
+\paragraph{Step 4: the transverse tail and the change of variables.}
+Since $f_K\ge0$, \eqref{ch32:eq:stiff-bounds} and the bounds on the density factor give
+\begin{equation}\label{ch32:eq:stiff-tail}
+ \StoppedLaw\bigl(\{\abs s>\epsilon\}\cap\{V\text{ in the central coordinates}\}\bigr)\le C_ng^{-4}e^{-c_n\epsilon^2/g^2}=C_ng^{-4}e^{-c_n'/\sqrt\gamma}.
+\end{equation}
+To see this, we split $e^{-c_n\abs s^2/g^2}$ into two equal factors and bound one of them by $e^{-c_n\epsilon^2/(2g^2)}$ on $\{\abs s>\epsilon\}$. Integrating the other over $\R^D$ gives $C_ng^D$. The $X$-integral is over a bounded set, and we divide by \eqref{ch32:eq:normalizer}. In the last equality, we used $\epsilon^2/g^2=n/\sqrt\gamma$. Both \eqref{ch32:eq:off-flat} and \eqref{ch32:eq:stiff-tail} are smaller than every fixed power of $\epsilon$: with $v=1/\sqrt\gamma$, each is a fixed power of $v$ times $e^{-cv}$ or $e^{-cv^2}$.
+
+On $\{\abs s\le\epsilon\}$, an output with $\abs{T_K}\le R\epsilon$ satisfies $\abs X\le C_{n,R}\epsilon$ by the lower bound of Step~3. For $\gamma_R$ small, this lies in the domain of the inverse. Conversely, the inverse is defined for all $\abs Z\le R\epsilon$ and $\abs s\le\epsilon$, and the bound $\abs{H_K}\le C_{n,R}\epsilon$ places its values in $\mathcal U$ for $\gamma_R$ small. The part of the unnormalized integral of the observable over $\mathcal U\cap\{\abs s\le\epsilon\}$ is therefore transformed exactly by
+\begin{equation}\label{ch32:eq:core-change}
+ Z=\epsilon Y,\qquad s=gz,\qquad X=H_K(\epsilon Y,gz),\qquad dX\,ds=\epsilon^9g^D\det D_ZH_K(\epsilon Y,gz)\,dY\,dz.
+\end{equation}
+In these variables the test is exactly $\varphi(Y)$, and no regularity of $\varphi$ is needed. The variable $z$ ranges over the ball $\{\abs z\le\epsilon/g\}$, and the test restricts $Y$ to $\{\abs Y\le R\}$. Since $g=\epsilon^2/\sqrt n$, \eqref{ch32:eq:inverse-output} gives on this domain
+\begin{equation}\label{ch32:eq:scaled-inverse}
+ \Bigl\lvert\frac X\epsilon-Y\Bigr\rvert\le C_{n,R}\epsilon(1+\abs z),\qquad\abs{\det D_ZH_K-1}\le C_{n,R}\epsilon(1+\abs z),\qquad\frac{\abs X}\epsilon\le C_{n,R}.
+\end{equation}
+The last bound uses $\abs s\le\epsilon$, so it holds on the whole truncated ball in $z$, even when $\abs z$ is large.
+
+\paragraph{Step 5: comparison of the density.}
+By \cref{ch32:thm:absolute-quartic} and $ng^2=\epsilon^4$, we have $f_K(X)/g^2=Q(X/\epsilon)+O(\abs X^5/g^2)$, and therefore
+\[
+ \Bigl\lvert\frac{f_K(X)}{g^2}-Q(X/\epsilon)\Bigr\rvert\le C_n\frac{\abs X^5}{g^2}\le C_{n,R}\epsilon.
+\]
+Since $X/\epsilon$ and $Y$ lie in a fixed ball, on which $Q$ has bounded first derivatives, the first bound in \eqref{ch32:eq:scaled-inverse} gives
+\begin{equation}\label{ch32:eq:constant-phase-error}
+ \Bigl\lvert\frac{f_K(X)}{g^2}-Q(Y)\Bigr\rvert\le C_{n,R}\epsilon(1+\abs z).
+\end{equation}
+This uses only $\abs X\le C_{n,R}\epsilon$, which holds on the whole truncated domain. In particular, it bounds the absolute error on the compact rescaled window, including the directions of commuting triples, where $Q$ vanishes. The expansion in \eqref{ch32:eq:stiff-bounds} gives
+\begin{equation}\label{ch32:eq:stiff-phase-error}
+ \Bigl\lvert\frac{F_K(X,gz)-f_K(X)}{g^2}-\frac12z^{\mathsf T}A_K(0)z\Bigr\rvert\le C_{n,R}\bigl(\epsilon\abs z^2+g\abs z^3\bigr),
+\end{equation}
+where we used $\norm{A_K(X)-A_K(0)}\le C_n\abs X\le C_{n,R}\epsilon$ and the cubic remainder in $s=gz$. We also use the elementary inequality
+\begin{equation}\label{ch32:eq:exponential-difference}
+ \abs{e^{-A}-e^{-B}}\le\abs{A-B}\bigl(e^{-A}+e^{-B}\bigr)\qquad(A,B\in\R),
+\end{equation}
+which holds because the integral of the derivative of $t\mapsto e^{-t}$ between $A$ and $B$ is at most $\abs{A-B}\max(e^{-A},e^{-B})$.
+
+Let $P_K(Y,z)=F_K(H_K(\epsilon Y,gz),gz)/g^2$ and $P^0_K(Y,z)=Q(Y)+z^{\mathsf T}A_K(0)z/2$. Both are at least $c_n\abs z^2$, by $f_K\ge0$, $Q\ge0$, and the lower bounds in \eqref{ch32:eq:stiff-bounds}. Combining \eqref{ch32:eq:constant-phase-error} and \eqref{ch32:eq:stiff-phase-error}, and using $g\le C_n\epsilon^2\le C_n\epsilon$, we find
+\[
+ \abs{P_K-P^0_K}\le C_{n,R}\epsilon\bigl(1+\abs z+\abs z^2+\abs z^3\bigr).
+\]
+By \eqref{ch32:eq:exponential-difference}, $\abs{e^{-P_K}-e^{-P^0_K}}$ is at most $C_{n,R}\epsilon$ times a fixed polynomial in $\abs z$ times $e^{-c_n\abs z^2}$, which is integrable over $\R^D$ uniformly in $K$ and $\gamma$; the phase error itself need not be uniformly small on the whole truncated ball in $z$. For the density factor and the Jacobian, we write $b_{K,\gamma}(Y,z)=a_{K,\gamma}(X,gz)\det D_ZH_K(\epsilon Y,gz)$ with $X=H_K(\epsilon Y,gz)$. By \eqref{ch32:eq:complete-amplitude} and \eqref{ch32:eq:scaled-inverse}, these quantities are bounded on our domain and
+\[
+ \abs{b_{K,\gamma}(Y,z)-a^0_{K,\gamma}}\le C_{n,R}\epsilon(1+\abs z).
+\]
+Splitting the difference as $(b_{K,\gamma}-a^0_{K,\gamma})e^{-P_K}+a^0_{K,\gamma}(e^{-P_K}-e^{-P^0_K})$ and using that $t\mapsto(1+t+t^2+t^3)e^{-c_nt^2/2}/(1+t)$ is bounded on $[0,\infty)$, we obtain
+\begin{equation}\label{ch32:eq:compact-phase-majorant}
+ \Bigl\lvert b_{K,\gamma}(Y,z)e^{-P_K(Y,z)}-a^0_{K,\gamma}e^{-P^0_K(Y,z)}\Bigr\rvert\le C_{n,R}\epsilon(1+\abs z)e^{-c_n'\abs z^2}\qquad(\abs Y\le R,\ \abs z\le\epsilon/g),
+\end{equation}
+with $c_n'=c_n/2$.
+
+\paragraph{Step 6: integration and the common factor.}
+The Gaussian integral of $a^0_{K,\gamma}e^{-P^0_K}$ over $\{\abs z>\epsilon/g\}$ is exponentially small, since $\epsilon/g=\sqrt n/\epsilon\to\infty$. Integrating \eqref{ch32:eq:compact-phase-majorant} first in $z$ and then over $\{\abs Y\le R\}$, we obtain
+\begin{equation}\label{ch32:eq:unnormalized-core}
+ \widehat Z\,\E_{\StoppedLaw}\mathcal I_{\gamma,\varphi}(T)=g^D\epsilon^9\Bigl\{a^0_{K,\gamma}\frac{(2\pi)^{D/2}}{\sqrt{\det A_K(0)}}\int\varphi(Y)e^{-Q(Y)}\,dY+O_{n,R}\bigl(\norm\varphi_\infty\epsilon\bigr)\Bigr\}.
+\end{equation}
+The contributions discarded in Steps~2 and~4 satisfy the same bound after reducing $\gamma_R$: after normalization by $\widehat Z$ they are $O_{n,R}(\norm\varphi_\infty\epsilon^2)$, while the prefactor of the claimed expansion is bounded above and below by fixed multiples of $\epsilon$.
+
+Finally, since $\epsilon^4=\gamma=ng^2$, we have the identity
+\[
+ \frac{g^D\epsilon^9}{\widehat Z}=\epsilon n^2\frac{g^{D+4}}{\widehat Z}.
+\]
+Thus the coefficient of $\int\varphi\,d\CoreMeasure$ in \eqref{ch32:eq:unnormalized-core}, divided by $\widehat Z$, is exactly $\epsilon\kappa_{K,\gamma}$. The bounds $c_n\le\kappa_{K,\gamma}\le C_n$ follow from \eqref{ch32:eq:normalizer}, $c_n\le a^0_{K,\gamma}\le C_n$, and $c_n\Id\le A_K(0)\le C_n\Id$ in the fixed dimension $D$. Dividing by $\epsilon\kappa_{K,\gamma}$, we obtain the stated bound on $\mathcal E_{K,\gamma,T,\varphi}$. The leading term involves only $a^0_{K,\gamma}$ and $A_K(0)$, which are the same for both maps; the factor is therefore the same for both maps and every test. Every reduction used a radius or an upper bound on the coupling depending only on the fixed data and $R$.
+\end{proof}
+
+\section{Passage to the continuum measure}\label{ch32:sec:continuum}
+
+We now pass from the stopped measure to the conditioned Wilson measure, then to the Wilson measure, and finally to the continuum measure. The order of limits is as follows: at each fixed $\gamma$ we let $K\to\infty$ with the comparison side $n$ fixed, and only afterwards do we let $\gamma\to0$. Throughout, $\lambda_\gamma=\lambda_{L,\gamma,[n_*]_M}$ denotes the continuum measure for the sequence of sides $(n_*B^K)_{K\ge0}$ (\cref{ch26:thm:tier-one,ch26:cor:common-ladder-family}). Since $n=n_*B^{a}$, the classes $[n]_M$ and $[n_*]_M$ coincide. We observe the holonomies of a trajectory around the three coordinate cycles based at the origin, at the time $t=\theta L^2$. Under $\lambda_\gamma$ this triple is defined up to simultaneous conjugation, and we use invariant tests.
+
+\begin{theorem}\label{ch32:thm:core-ratios-and-ward}
+Fix the data of \cref{ch32:def:core-insertions} before varying $\gamma$. For every continuous compactly supported function $\varphi:\R^9\to\R$ that is invariant under simultaneous conjugation and every radial cutoff $\chi$,
+\[
+ \lim_{\gamma\downarrow0}\frac{\E_{\lambda_\gamma}\mathcal I_{\gamma,\varphi}}{\E_{\lambda_\gamma}\mathcal I_{\gamma,\chi(\abs\cdot)}}=\frac{\int\varphi\,d\CoreMeasure}{\int\chi(\abs Y)\,d\CoreMeasure(Y)}.
+\]
+For every such $\varphi$ that is nonnegative and not identically zero, there exist $0<c_\varphi\le C_\varphi<\infty$ and $\gamma_\varphi>0$ such that
+\[
+ c_\varphi r_\gamma\le\E_{\lambda_\gamma}\mathcal I_{\gamma,\varphi}\le C_\varphi r_\gamma\qquad(0<\gamma\le\gamma_\varphi).
+\]
+In particular the denominator above is positive for small $\gamma$, and
+\[
+ \lim_{\gamma\downarrow0}\mathcal S_{\gamma,\lambda_\gamma}(\chi)=0.
+\]
+Further, for any two smooth compactly supported functions $\chi_1,\chi_2$ on $[0,\infty)$ that are not identically zero, with $A_i=\mathcal I_{\gamma,\chi_i(\abs\cdot)}$,
+\[
+ \frac{\Var_{\lambda_\gamma}(A_1)}{\Var_{\lambda_\gamma}(A_2)}\longrightarrow\frac{\int\chi_1(\abs Y)^2\,d\CoreMeasure(Y)}{\int\chi_2(\abs Y)^2\,d\CoreMeasure(Y)}\qquad(\gamma\downarrow0).
+\]
+\end{theorem}
+
+The tests $\chi_1,\chi_2$ in the variance statement need not be nonnegative. The loops and the flow time are fixed, while the window shrinks with $\gamma$. Each expectation under $\lambda_\gamma$ is the limit, as $K\to\infty$ at fixed $\gamma$, of the expectation of the corresponding observable of the flowed lattice holonomies under the Wilson measure $\mu_{nB^K,\gamma}$. By \cref{ch20:cor:payment-all-powers}, the small-field failure probability satisfies $\sup_K\mu_{nB^K,\gamma}(S_{nB^K,n,\gamma}^c)=O_{n,q}(\gamma^q)$ for every fixed $q>0$, which is $o(r_\gamma)$.
+
+\begin{proof}
+For a compactly supported bounded test, we write $m(\varphi)=\int\varphi\,d\CoreMeasure$, and we set $\epsilon=r_\gamma$. Until Step~4, where we pass to the continuum measure, we work at finite $K$, uniformly in $K$.
+
+\paragraph{Step 1: comparison under the conditioned Wilson measure.}
+Let the support of $\varphi$ lie in the ball of radius $R$, and let $0<\eta\le1$. For $\eta\epsilon<1$, Markov's inequality and the bound on $\E_\nu\min(1,D_K)^2$ in \cref{ch32:thm:central-matrix-transfer} give
+\begin{equation}\label{ch32:eq:rare-matrix-event}
+ \nu\{D_K>\eta\epsilon\}\le C_n\eta^{-2}\frac\gamma{\epsilon^2}=C_n\eta^{-2}\gamma^{1/2}.
+\end{equation}
+On the complementary event, if either of $\mathcal I_{\gamma,\varphi}(\mathcal H^K)$ and $\mathcal I_{\gamma,\varphi}(\mathcal H^K_0(V))$ is nonzero, the corresponding triple is within distance $C_R\epsilon$ of $(\Id,\Id,\Id)$ as a triple of matrices, and the other triple is within an additional distance $\eta\epsilon$. For $\gamma$ small, both triples therefore lie in a fixed smaller neighborhood of the identity, independently of $K$. Since $\Log$ is Lipschitz there, their rescaled logarithms differ by at most $C_n\eta$, and the rescaled logarithm of $\mathcal H^K_0(V)$ lies in the ball of radius $R+C_n$.
+
+Let
+\[
+ \omega_\varphi(v)=\sup\bigl\{\abs{\varphi(Y)-\varphi(Y')}:\abs{Y-Y'}\le v\bigr\},
+\]
+which tends to zero as $v\downarrow0$ since $\varphi$ is uniformly continuous. \Cref{ch32:thm:common-scalar-core}, applied to the indicator function of the ball of radius $R+C_n$, shows that the event that the rescaled logarithm of $\mathcal H^K_0(V)$ lies in this ball has $\StoppedLaw$-probability at most $C_{n,R}\epsilon$. Since $\mathcal H^K_0(V)$ depends only on $V$, and the law of $V$ under $\nu$ is $\StoppedLaw$, we obtain
+\begin{equation}\label{ch32:eq:continuous-transfer}
+ \Bigl\lvert\E_\nu\mathcal I_{\gamma,\varphi}(\mathcal H^K)-\E_{\StoppedLaw}\mathcal I_{\gamma,\varphi}(\mathcal H^K_0)\Bigr\rvert\le C_{n,R}\epsilon\,\omega_\varphi(C_n\eta)+C_n\norm\varphi_\infty\eta^{-2}\gamma^{1/2}.
+\end{equation}
+Here the first term bounds the difference on $\{D_K\le\eta\epsilon\}$, and the second term bounds it on the event in \eqref{ch32:eq:rare-matrix-event}. After division by $\epsilon$, the right side tends to zero if we first let $\gamma\downarrow0$ at fixed $\eta$ and then let $\eta\downarrow0$, uniformly in $K$. The factor $\epsilon$ in front of the modulus of continuity is essential; it comes from the small probability of the window, and uniform continuity alone would not give it.
+
+\paragraph{Step 2: removing the conditioning.}
+Let $e_{K,\gamma}=\mu_{nB^K,\gamma}(S^c_{nB^K,n,\gamma})$. At our fixed side $n$, we have $e_{K,\gamma}\le C_{n,q}\gamma^q$ for every fixed $q>0$, uniformly in $K$, by \cref{ch20:cor:payment-all-powers}. For any bounded observable $F$, conditioning on the small-field event gives
+\[
+ \E_\mu F=(1-e_{K,\gamma})\E_\nu F+e_{K,\gamma}\E_{\mu(\cdot\mid S^c)}F,\qquad\abs{\E_\mu F-\E_\nu F}\le2\norm F_\infty e_{K,\gamma},
+\]
+where $\mu=\mu_{nB^K,\gamma}$; if $e_{K,\gamma}=0$ the inequality holds without the second conditional expectation. For $q>1/4$, this error is $o(\epsilon)$ uniformly in $K$. Combining this with \eqref{ch32:eq:continuous-transfer} and \cref{ch32:thm:common-scalar-core}, we obtain, for each fixed continuous compactly supported test,
+\begin{equation}\label{ch32:eq:original-core}
+ \E_{\mu_{nB^K,\gamma}}\mathcal I_{\gamma,\varphi}(\mathcal H^K)=\epsilon\kappa_{K,\gamma}m(\varphi)+\epsilon\delta^\varphi_{K,\gamma},\qquad\sup_K\abs{\delta^\varphi_{K,\gamma}}\longrightarrow0\quad(\gamma\downarrow0).
+\end{equation}
+The signed error $\delta^\varphi_{K,\gamma}$ converges by the explicit bound with two parameters above. Given a tolerance, we first choose $\eta$ to control the term with the modulus of continuity, and then $\gamma$ to control the remaining terms. No choice of the comparison side or of the parameters depends on $\gamma$.
+
+\paragraph{Step 3: bounds and ratios at finite $K$.}
+If $\varphi\ge0$ is continuous and not identically zero, it is positive on a nonempty open ball, and since $e^{-Q}$ is positive everywhere, $m(\varphi)>0$. By the bounds on $\kappa_{K,\gamma}$ in \cref{ch32:thm:common-scalar-core} and \eqref{ch32:eq:original-core}, there exist constants $0<c_\varphi\le C_\varphi$ with
+\begin{equation}\label{ch32:eq:original-positive-mass}
+ c_\varphi\epsilon\le\E_{\mu_{nB^K,\gamma}}\mathcal I_{\gamma,\varphi}(\mathcal H^K)\le C_\varphi\epsilon
+\end{equation}
+for all $K$ and all sufficiently small $\gamma$. For a general $\varphi$ and the fixed radial cutoff $\chi$, let $b=m(\varphi)/m(\chi(\abs\cdot))$. We apply \eqref{ch32:eq:original-core} to $\varphi-b\chi(\abs\cdot)$, using $\mathcal I_{\gamma,\varphi-b\chi(\abs\cdot)}=\mathcal I_{\gamma,\varphi}-b\mathcal I_{\gamma,\chi(\abs\cdot)}$. The leading term vanishes, and the expectation of this observable is $o(\epsilon)$ uniformly in $K$. Since \eqref{ch32:eq:original-positive-mass} gives a lower bound $c\epsilon$ for the denominator, uniformly in $K$, the ratio of the expectations under the Wilson measure tends to $b$ as $\gamma\downarrow0$, uniformly in $K$.
+
+\paragraph{Step 4: passage to the continuum measure.}
+We fix $\gamma$ and identify the limit as $K\to\infty$. For small $\gamma$, the support of the observable lies strictly inside the logarithmic chart, and $\mathcal I_{\gamma,\varphi}$, extended by zero, is a continuous function of the triple. It is invariant under simultaneous conjugation: the logarithm is conjugation covariant in its chart, $\varphi$ is invariant, and a fixed conjugation-invariant neighborhood of the identity contained in $\mathcal V$ contains the shrinking support for small $\gamma$. This holds even if $\mathcal V$ itself is not conjugation invariant. By \cref{ch02:lem:seven-traces}, $\mathcal I_{\gamma,\varphi}$ is therefore a continuous function of the normalized traces of $H_1$, $H_2$, $H_3$, $H_1H_2$, $H_1H_3$, $H_2H_3$, and $H_1H_2H_3$, and convergence in law of these seven traces implies convergence of the expectation of $\mathcal I_{\gamma,\varphi}$. The seven traces are characters, divided by two, of the holonomies of loops obtained by concatenating the three based coordinate cycles, observed at the same time. These loops and their lattice versions are covered by \cref{ch26:thm:tier-one}.
+
+To apply that theorem at a given $\gamma$, we may have to drop finitely many terms of the sequence $n_*B^K$. By \cref{ch26:cor:common-ladder-family}, the shortened sequence has the same tail and hence the same limit of the joint law of the flowed loops at fixed coupling, and neither the comparison side in \eqref{ch32:eq:original-core} nor its constants change.
+
+We now let $K\to\infty$ at fixed $\gamma$. The bounds \eqref{ch32:eq:original-positive-mass} pass to the limit, and the expectation of the observable of $\varphi-b\chi(\abs\cdot)$ remains $o(\epsilon)$, since that bound was uniform in $K$. Dividing by the limiting denominator and then letting $\gamma\downarrow0$, we obtain the ratio limit and the two-sided bounds for $\lambda_\gamma$.
+
+\paragraph{Step 5: the dilation statistic and the variances.}
+The function $W_\chi$ is continuous, compactly supported, and invariant, and $m(W_\chi)=0$ by \cref{ch32:lem:quartic-intensity}. Applying the ratio limit to $W_\chi$, we obtain $\mathcal S_{\gamma,\lambda_\gamma}(\chi)\to0$.
+
+For the variances, let $m_i=m(\chi_i(\abs\cdot)^2)>0$ and $b=m_1/m_2$. Since $A_i^2=\mathcal I_{\gamma,\chi_i(\abs\cdot)^2}$, \eqref{ch32:eq:original-core} applied to $\chi_1(\abs\cdot)^2-b\chi_2(\abs\cdot)^2$ shows that $\E A_1^2-b\E A_2^2=o(\epsilon)$ under the Wilson measure, uniformly in $K$. By the same formula, each mean $\E A_i$ is $O(\epsilon)$, and subtracting the squared means changes this difference by $O(\epsilon^2)$. Further, since $\E A_2^2\ge c\epsilon m_2$ and $(\E A_2)^2=O(\epsilon^2)$, we have $\Var A_2\ge c'\epsilon$ for small $\gamma$, uniformly in $K$. We conclude that $\Var A_1/\Var A_2-b\to0$ uniformly in $K$. At fixed $\gamma$, the first and second moments pass to $\lambda_\gamma$ by the identification of Step~4, and the ratio of the variances tends to $b$.
+\end{proof}
+
+\section{Rates, central triples, and several times}\label{ch32:sec:rates}
+
+This section strengthens \cref{ch32:thm:core-ratios-and-ward} in three directions: a rate $\gamma^{1/4}$ for Lipschitz tests, the extension to the eight central triples, and joint statements at finitely many flow times.
+
+\begin{definition}\label{ch32:conv:core-strengthening-notation}
+For a bounded Borel function $\varphi$ on $\R^9$ with compact support we write $m(\varphi)=\int_{\R^9}\varphi(Y)e^{-Q(Y)}\,d^9Y$. For a bounded function $f$ on $(\R^9)^\ell$, $\ell\ge1$, we write
+\[
+ \norm f_{\mathrm{BL}}=\norm f_\infty+\Lip f,\qquad\norm{(Y^{(1)},\dots,Y^{(\ell)})}_{\max}=\max_{1\le j\le\ell}\abs{Y^{(j)}},
+\]
+where $\Lip f$ is the global Lipschitz constant with respect to the metric of $\norm\cdot_{\max}$; for $\ell=1$ this is the Euclidean metric on $\R^9$. We write $B_R$ for the closed Euclidean ball of radius $R$ about the origin in $\R^9$. The coupling-dependent scale is always written $r_\gamma$; the radius $r$ in the domains $B_r$ and $D_r$ of configurations keeps its fixed meaning from \cref{ch32:def:core-insertions}.
+\end{definition}
+
+The norm $\norm f_{\mathrm{BL}}$ is a sum. Its unit ball is contained in the set of functions with $\norm f_\infty\le1$ and $\Lip f\le1$ that defines the bounded-Lipschitz distance $d_{\mathrm{BL}}$ used in \cref{ch25:lem:probability-approximation}, and it contains that set scaled by $1/2$. The distance dual to $\norm f_{\mathrm{BL}}$ is therefore equivalent to $d_{\mathrm{BL}}$, within a factor two, but not identical to it.
+
+\subsection{Rates for compactly supported Lipschitz tests}
+
+The next lemma is the quantitative version of Step~1 of the proof of \cref{ch32:thm:core-ratios-and-ward}. It uses the comparison of holonomies conditional on the coarse configuration, \cref{ch30:thm:terminal-frozen-matrix-tail}. For a coarse configuration $v$ represented in $B_r$, let $\mathbb Q^K_v$ be the conditional law of the normalized fluctuation variables of all $K$ renormalization group steps given $V=v$, that is, the product of the conditional fluctuation kernels of \cref{ch12:lem:backward-law}. By that lemma, $\nu$ disintegrates as $\nu(d\,\cdot)=\int\mathbb Q^K_v(d\,\cdot)\,\StoppedLaw(dv)$.
+
+\begin{lemma}\label{ch32:lem:quantitative-rare-transfer}
+For every $R<\infty$ there exist $C_R,\gamma_R>0$, independent of $K$ and of the test, such that every globally Lipschitz function $\varphi:\R^9\to\R$ supported in $B_R$ satisfies
+\begin{equation}\label{ch32:eq:quantitative-rare-transfer}
+ \Bigl\lvert\E_\nu\mathcal I_{\gamma,\varphi}(\mathcal H^K)-\E_{\StoppedLaw}\mathcal I_{\gamma,\varphi}(\mathcal H^K_0)\Bigr\rvert\le C_R\norm\varphi_{\mathrm{BL}}r_\gamma^2
+\end{equation}
+for all $K$ and $0<\gamma\le\gamma_R$.
+\end{lemma}
+
+The proof is the mechanism described in \cref{ch32:sec:setting}: an event determined by $V$ of probability $O(r_\gamma)$, a conditional matrix difference $O(r_\gamma^2)$, and a loss $r_\gamma^{-1}$ from the rescaling of the logarithm.
+
+\begin{proof}
+Let $d=\min(1,\max_i\norm{\mathcal H^K_i-\mathcal H^K_{0,i}(v)}_{\mathrm{op}})$. By \cref{ch30:thm:terminal-frozen-matrix-tail}, applied with $\tau=T=\theta L^2$ and $p=1,2$, we have, for every coarse configuration $v$ in the support of $\StoppedLaw$ and every $K$,
+\[
+ \E_{\mathbb Q^K_v}d\le Cr_\gamma^2,\qquad\E_{\mathbb Q^K_v}d^2\le Cr_\gamma^4,
+\]
+for $\gamma$ below the upper bound on the coupling in that theorem. On the event $\{d\le r_\gamma\}$, with $r_\gamma<1$, if either observable is nonzero, then both triples lie in a fixed compact subset of the logarithmic chart, and their rescaled logarithms differ by at most $Cd/r_\gamma$. In this case, the zero-fluctuation triple also lies in the event
+\[
+ E_{R'}=\bigl\{\mathcal H^K_0(v)\in\mathcal V,\ \abs{\Log\mathcal H^K_0(v)}\le R'r_\gamma\bigr\},
+\]
+where $R'$ and the upper bound on $\gamma$ depend only on $R$ and the chart. The event $E_{R'}$ is determined by $v$. \Cref{ch32:thm:common-scalar-core}, applied to the indicator function of $B_{R'}$, implies that $\StoppedLaw(E_{R'})\le C_Rr_\gamma$. By the disintegration of \cref{ch12:lem:backward-law},
+\[
+ \E_\nu[d\one_{E_{R'}}]=\int_{E_{R'}}\E_{\mathbb Q^K_v}d\,\StoppedLaw(dv)\le Cr_\gamma^2\StoppedLaw(E_{R'})\le C_Rr_\gamma^3.
+\]
+The contribution of $\{d\le r_\gamma\}$ to the left side of \eqref{ch32:eq:quantitative-rare-transfer} is therefore at most $C\Lip\varphi\,r_\gamma^{-1}\E_\nu[d\one_{E_{R'}}]\le C_R(\Lip\varphi)r_\gamma^2$. On $\{d>r_\gamma\}$ we use the bound $2\norm\varphi_\infty$ and
+\[
+ \nu(d>r_\gamma)\le r_\gamma^{-2}\E_\nu d^2=r_\gamma^{-2}\int\E_{\mathbb Q^K_v}d^2\,\StoppedLaw(dv)\le Cr_\gamma^2.
+\]
+This proves \eqref{ch32:eq:quantitative-rare-transfer}.
+\end{proof}
+
+\begin{theorem}\label{ch32:thm:core-ratio-rates}
+Fix the data and the measures $\lambda_\gamma$ of \cref{ch32:thm:core-ratios-and-ward}, and a radial cutoff $\chi$, and set $b_\chi=\int\chi(\abs Y)\,d\CoreMeasure(Y)>0$. For every $R<\infty$ there exist $C_{R,\chi},\gamma_{R,\chi}>0$ such that every globally Lipschitz function $\varphi$ supported in $B_R$ and invariant under simultaneous conjugation satisfies
+\[
+ \Bigl\lvert\frac{\E_{\lambda_\gamma}\mathcal I_{\gamma,\varphi}}{\E_{\lambda_\gamma}\mathcal I_{\gamma,\chi(\abs\cdot)}}-\frac{\int\varphi\,d\CoreMeasure}{b_\chi}\Bigr\rvert\le C_{R,\chi}\bigl(\norm\varphi_\infty+\Lip\varphi\bigr)\gamma^{1/4}\qquad(0<\gamma\le\gamma_{R,\chi}),
+\]
+and the denominator is at least $c_\chi r_\gamma$. The same bounds hold for the expectations of $\mathcal I_{\gamma,\varphi}(\mathcal H^K)$ and $\mathcal I_{\gamma,\chi(\abs\cdot)}(\mathcal H^K)$ under the Wilson measures $\mu_{nB^K,\gamma}$, uniformly in $K$. In particular $\abs{\mathcal S_{\gamma,\lambda_\gamma}(\chi)}\le C_\chi\gamma^{1/4}$. For any two fixed smooth compactly supported functions $\chi_1,\chi_2$ on $[0,\infty)$ that are not identically zero, the ratio of variances in \cref{ch32:thm:core-ratios-and-ward} differs from $m(\chi_1(\abs\cdot)^2)/m(\chi_2(\abs\cdot)^2)$ by at most $C_{\chi_1,\chi_2}\gamma^{1/4}$, and the denominator $\Var A_2$ is at least $c_{\chi_2}r_\gamma$; this holds for $\lambda_\gamma$ and, uniformly in $K$, for $\mu_{nB^K,\gamma}$.
+\end{theorem}
+
+\begin{proof}
+We write $m(\varphi)=\int\varphi\,d\CoreMeasure$ and, in this proof only,
+\[
+ A_K(\varphi)=\E_{\mu_{nB^K,\gamma}}\mathcal I_{\gamma,\varphi}(\mathcal H^K).
+\]
+We combine \cref{ch32:lem:quantitative-rare-transfer}, \cref{ch32:thm:common-scalar-core}, and the bound of \cref{ch20:cor:payment-all-powers} with the exponent $q=1$. Since $\gamma=r_\gamma^4$, the error from removing the conditioning is at most $2\norm\varphi_\infty C_{n,1}\gamma=2C_{n,1}\norm\varphi_\infty r_\gamma^4$, and we obtain
+\begin{equation}\label{ch32:eq:finite-core-rate}
+ A_K(\varphi)=r_\gamma\kappa_{K,\gamma}m(\varphi)+O_R\bigl(\norm\varphi_{\mathrm{BL}}r_\gamma^2\bigr).
+\end{equation}
+Applying \eqref{ch32:eq:finite-core-rate} to $\chi(\abs\cdot)$, which is globally Lipschitz, and using $\kappa_{K,\gamma}\ge c_n$, we find $A_K(\chi(\abs\cdot))\ge c_\chi r_\gamma$ for small $\gamma$. When we subtract $m(\varphi)A_K(\chi(\abs\cdot))/b_\chi$ from $A_K(\varphi)$, the leading terms cancel at finite $K$. Since $\abs{m(\varphi)}\le m(\one_{B_R})\norm\varphi_\infty$, the difference is $O_{R,\chi}(\norm\varphi_{\mathrm{BL}}r_\gamma^2)$. Dividing by $A_K(\chi(\abs\cdot))\ge c_\chi r_\gamma$ proves the assertion at finite cutoff, with one upper bound on $\gamma$ for the whole class of tests.
+
+At fixed $\gamma$, these observables are continuous functions of the triple, supported strictly inside the logarithmic chart, and invariant under simultaneous conjugation. By \cref{ch02:lem:seven-traces}, they factor continuously through the seven traces, which are traces of holonomies of concatenations of the three based cycles. We apply \cref{ch26:thm:tier-one,ch26:cor:common-ladder-family} to the combination $A_K(\varphi)-m(\varphi)A_K(\chi(\abs\cdot))/b_\chi$ and to the denominator; the comparison side remains valid on the sequence $n_*B^K$, as in Step~4 of the proof of \cref{ch32:thm:core-ratios-and-ward}. Letting $K\to\infty$ at fixed $\gamma$ proves the assertion for $\lambda_\gamma$.
+
+The function $W_\chi$ is globally Lipschitz with a fixed support, and $m(W_\chi)=0$ by \cref{ch32:lem:quartic-intensity}. The ratio bound then gives the bound on the dilation statistic. For the variances, the argument is the same before and after the limit $K\to\infty$. The two means are $O(r_\gamma)$, and their squares are $O(r_\gamma^2)$. Applying \eqref{ch32:eq:finite-core-rate} to the Lipschitz function $\chi_1(\abs\cdot)^2-b\chi_2(\abs\cdot)^2$, we obtain
+\[
+ \E A_1^2-b\E A_2^2=O(r_\gamma^2),\qquad b=\frac{m(\chi_1(\abs\cdot)^2)}{m(\chi_2(\abs\cdot)^2)}>0.
+\]
+The second moment $\E A_2^2$ is at least $cr_\gamma$ by \eqref{ch32:eq:finite-core-rate} and the lower bound on $\kappa_{K,\gamma}$. Subtracting the squared mean preserves a lower bound $c'r_\gamma$ for small $\gamma$. Subtracting the squared means in the combination above and dividing by this lower bound proves the rate for the variances.
+\end{proof}
+
+\subsection{The eight central triples}
+
+The next lemma is the center symmetry of the periodic lattice Wilson measure \cite{Hooft1979}, with a verification that it commutes with the Wilson flow. Here $\mu_{N,\gamma}$ is the Wilson measure of \cref{ch01:def:ensemble}, and the winding number $w_i(\ell)\in\Z$ of a closed lattice loop $\ell$ is the signed number of its crossings of the hyperplane $\{x_i=N-1/2\}$ in lattice units.
+
+\begin{lemma}\label{ch32:lem:finite-center-invariance}
+Let $z=(z_1,z_2,z_3)\in\{\Id,-\Id\}^3$. There exists a central link configuration $c^z$, with all plaquette products equal to $\Id$ and coordinate-cycle products equal to $z_i$, such that the map $\Gamma_zU=(c^z_eU_e)_e$ preserves $\mu_{N,\gamma}$ and commutes with the Wilson flow at every time. For every based closed lattice loop $\ell$,
+\[
+ \Hol_\ell\bigl(\Flowlat N_t(\Gamma_zU)\bigr)=\Bigl(\prod_{i=1}^3z_i^{w_i(\ell)}\Bigr)\Hol_\ell\bigl(\Flowlat N_tU\bigr).
+\]
+In particular, for any finite list of times, the vector of coordinate-cycle holonomies of the flowed configuration has the same law under $\mu_{N,\gamma}$ after the $i$-th holonomy is multiplied by $z_i$ at every listed time. These are exact identities for every $N\ge4$ and $\gamma>0$; they do not concern the small-field event.
+\end{lemma}
+
+\begin{proof}
+We represent the vertices by $x\in\{0,\dots,N-1\}^3$ and define, on the positive link from $x$ in direction $i$,
+\[
+ c^z_{x,i}=
+ \begin{cases}
+ z_i,&x_i=N-1,\\
+ \Id,&x_i\ne N-1,
+ \end{cases}
+ \qquad c^z_{\bar e}=(c^z_e)^{-1}.
+\]
+In an $(i,j)$ plaquette, the two links in direction $i$ carry the same factor, because a displacement in direction $j$ does not change $x_i$, and similarly for the two links in direction $j$. Since the factors are central, they cancel against the oppositely oriented factors. Hence every plaquette product of $c^z$ is $\Id$, including the plaquettes that cross a periodic seam. A positive coordinate cycle in direction $i$ crosses the seam in its direction once, and its product is $z_i$. For a general closed loop, the signed number of crossings of the $i$-th seam is $w_i(\ell)$. Since the factors are central, they can be moved past every link matrix, and the product of all factors is $\prod_iz_i^{w_i(\ell)}$.
+
+The map $\Gamma_z$ is a smooth involution of the configuration space, and the product Haar measure is invariant under it, since Haar measure is invariant under multiplication by a fixed element (\cref{ch02:lem:haar-and-forests}). Every plaquette matrix is unchanged, and so are every $q(U_p)$, the Wilson action, and the normalization constant. This proves that $\mu_{N,\gamma}$ is invariant.
+
+We use the product of the bi-invariant Riemannian metrics, as in the definition of the Wilson flow. Since multiplication by a fixed central element is an isometry, so is $\Gamma_z$. Let $S(U)=\sum_pq(U_p)$, so that $S\circ\Gamma_z=S$. For every tangent vector $v$ at $U$,
+\[
+ \ip{\nabla S(\Gamma_zU)}{D\Gamma_zv}_{\Gamma_zU}=dS_{\Gamma_zU}(D\Gamma_zv)=dS_U(v)=\ip{D\Gamma_z\nabla S(U)}{D\Gamma_zv}_{\Gamma_zU},
+\]
+which implies $\nabla S(\Gamma_zU)=D\Gamma_z\nabla S(U)$. The smooth vector field $-\nabla S$ on the compact configuration space has a unique global flow, and $\Gamma_z$ maps its trajectories to trajectories. This proves commutation at every lattice time, and hence at every physical time $4t/a_N^2$. The identity for the holonomies follows from the identity for the products of the factors. Integrating any bounded Borel function of the finite vector of holonomies, we obtain the identity in law.
+\end{proof}
+
+\begin{theorem}\label{ch32:thm:all-central-triples}
+Choose $\mathcal V$ in \cref{ch32:def:core-insertions} invariant under simultaneous conjugation. For $z\in\{\Id,-\Id\}^3$ let $\mathcal V_z=z\mathcal V$, and set
+\[
+ \mathcal I^z_{\gamma,\varphi}(H)=
+ \begin{cases}
+ \varphi\bigl((\Log(z_i^{-1}H_i))_{i=1}^3/r_\gamma\bigr),&H\in\mathcal V_z,\\
+ 0,&H\notin\mathcal V_z,
+ \end{cases}
+\]
+so that $\mathcal I^{(\Id,\Id,\Id)}_{\gamma,\varphi}=\mathcal I_{\gamma,\varphi}$. For every $\gamma>0$, every positive observation time, and every bounded Borel compactly supported test $\varphi$ invariant under simultaneous conjugation,
+\[
+ \E_{\lambda_\gamma}\mathcal I^z_{\gamma,\varphi}=\E_{\lambda_\gamma}\mathcal I_{\gamma,\varphi}.
+\]
+The corresponding identity holds under $\mu_{nB^K,\gamma}$ for the flowed lattice holonomies at every finite $K$, for every bounded Borel compactly supported test. Consequently the ratio limits, the two-sided bounds, the limits of the ratios of variances, and the limit of the dilation statistic in \cref{ch32:thm:core-ratios-and-ward}, and the rates of \cref{ch32:thm:core-ratio-rates}, hold at each of the eight central triples, with expectations equal to those at $(\Id,\Id,\Id)$ and with constants and ceilings on $\gamma$ independent of $z$.
+\end{theorem}
+
+\begin{proof}
+Let $H$ denote the triple of flowed coordinate-cycle holonomies. At finite cutoff, \cref{ch32:lem:finite-center-invariance} shows that $H$ and $z^{-1}H$ have the same law. By definition, $\mathcal I^z_{\gamma,\varphi}(H)=\mathcal I_{\gamma,\varphi}(z^{-1}H)$ pointwise, including on the complements of the charts, since $H\in z\mathcal V$ if and only if $z^{-1}H\in\mathcal V$. This proves the identity at finite cutoff, without any assumption of regularity or invariance on the test.
+
+For the continuum measure, let $F$ be any continuous function on $\SU^3$ invariant under simultaneous conjugation. Since $z$ is central, $F(z^{-1}\cdot)$ is also continuous and invariant, and both factor continuously through the seven traces by \cref{ch02:lem:seven-traces}. Passing the identity $\E F(H)=\E F(z^{-1}H)$ at finite cutoff to the limit at every fixed $\gamma>0$ by \cref{ch26:thm:full-M-ladder,ch26:thm:spatial-center-symmetry}, we obtain $\E_{\lambda_\gamma}F(H)=\E_{\lambda_\gamma}F(z^{-1}H)$ for every such $F$. By the same lemma, the compact quotient of $\SU^3$ by simultaneous conjugation is homeomorphic to the image of the seven traces. The law of the conjugacy class of $H$ under $\lambda_\gamma$, a Borel probability on this compact metric space, is therefore invariant under the continuous map induced by multiplication by $z^{-1}$. Indeed, continuous functions determine Borel probabilities on a metric space. For a closed set $C$, the continuous functions $\max(0,1-j\dist(\cdot,C))$ decrease to $\one_C$, so the two probabilities agree on closed sets, and hence on all Borel sets by the monotone class theorem. The identity then extends to bounded Borel functions on the quotient. Since $\mathcal V$ is invariant, the logarithm is conjugation covariant on it, and $\varphi$ is invariant, the observable $\mathcal I^z_{\gamma,\varphi}$ is a bounded Borel function on the quotient. This proves the identity for the continuum measure, even if $\varphi$ is not continuous.
+
+Applying the identity to each numerator and denominator in \cref{ch32:thm:core-ratios-and-ward,ch32:thm:core-ratio-rates}, and to the squares of the observables for the variances, we obtain the remaining assertions. Since all eight expectations are equal, so are the constants.
+\end{proof}
+
+\subsection{Joint asymptotics at finitely many times}
+
+We now observe the holonomies at finitely many flow times. The observables are invariant under an independent conjugation at each time; no relation between the gauge frames at different times is used or asserted.
+
+\begin{definition}\label{ch32:def:finite-time-core-insertion}
+Fix $\ell\ge1$, positive times $t_j=\theta_jL^2$ for $1\le j\le\ell$, and the same three based coordinate cycles at each time, before varying $\gamma$. Choose the parameters, the side $n$, and the margins as in \cref{ch32:def:core-insertions}, so that the finitely many lower bounds required at each of the times $t_j$ hold. Write $H^{(j)}$ for the triple of cycle holonomies at time $t_j$. Let $\mathcal V$ be a neighborhood of $(\Id,\Id,\Id)$ as in \cref{ch32:def:core-insertions}, invariant under simultaneous conjugation and small enough for all listed times. For $\Phi\in C_c((\R^9)^\ell;\R)$ define
+\[
+ \mathcal J_{\gamma,\Phi}(H^{(1)},\dots,H^{(\ell)})=
+ \begin{cases}
+ \Phi\bigl(\Log H^{(1)}/r_\gamma,\dots,\Log H^{(\ell)}/r_\gamma\bigr),&H^{(j)}\in\mathcal V\text{ for every }j,\\
+ 0,&\text{otherwise}.
+ \end{cases}
+\]
+The class of tests consists of the functions $\Phi$ that are invariant under independent conjugations at the different times:
+\[
+ \Phi\bigl(\Ad(k_1)Y^{(1)},\dots,\Ad(k_\ell)Y^{(\ell)}\bigr)=\Phi\bigl(Y^{(1)},\dots,Y^{(\ell)}\bigr)\qquad\text{for all }k_1,\dots,k_\ell\in\SU,
+\]
+where each $\Ad(k_j)$ acts simultaneously on the three components of $Y^{(j)}$. Put $\Phi_\Delta(Y)=\Phi(Y,\dots,Y)$ and $m_\Delta(\Phi)=\int\Phi_\Delta\,d\CoreMeasure$. We write $\mathcal H^K_{t}$ and $\mathcal H^K_{0,t}(V)$ for the triples of \cref{ch32:def:core-insertions} observed at time $t$.
+\end{definition}
+
+The following lemma localizes the transverse coordinates on the event that the flowed zero-fluctuation holonomies at the first time are in a window of size $r_\gamma$.
+
+\begin{lemma}\label{ch32:lem:localized-stiff-core-moment}
+Use the stopped measure $\StoppedLaw$, the coordinates $V(X,s)$, and the zero-fluctuation holonomies at the first time $t_1$ of \cref{ch32:def:finite-time-core-insertion}. Set
+\[
+ E_R=\bigl\{\mathcal H^K_{0,t_1}\in\mathcal V,\ \abs{\Log\mathcal H^K_{0,t_1}}\le Rr_\gamma\bigr\},\qquad D=d_{\mathrm{st}},\qquad g^2=\gamma/n.
+\]
+There is a fixed neighborhood $\mathcal U$ of the trivial based orbit, contained in the central coordinates, such that, for every fixed $R<\infty$, all sufficiently small $\gamma$, and every $K$,
+\[
+ \StoppedLaw(E_R\setminus\mathcal U)\le Cg^{-(D+4)}e^{-c/g^2},\qquad\E_{\StoppedLaw}\bigl[\one_{E_R\cap\mathcal U}\abs s^a\bigr]\le C_{R,a}r_\gamma g^a\quad(a=0,1,2).
+\]
+Further, $\StoppedLaw(\mathcal U\cap\{\abs s>r_\gamma\})\le Cg^{-4}e^{-cr_\gamma^2/g^2}$.
+\end{lemma}
+
+\begin{proof}
+We choose $\mathcal U$ with closure strictly inside the chart of \cref{ch27:thm:central-stiff-chart} and inside the domains of the deterministic results at all listed times. By the localization statement of \cref{ch32:thm:central-matrix-transfer}, applied with $\theta_1$ in place of $\theta$, there exists a fixed $\delta>0$ such that a coarse configuration within distance $\delta$ of $\mathcal F_n$ whose holonomies at time $t_1$ have cycle radius at most $\delta$ lies in $\mathcal U$. For $Rr_\gamma<\delta$, every point of $E_R\setminus\mathcal U$ therefore lies outside the fixed neighborhood $\{d(V,\mathcal F_n)\le\delta\}$. There $E_0\ge c_{n,\delta}>0$, by compactness of the configuration space at side $n$ and $E_0^{-1}(0)=\mathcal F_n$, which follows from the classification of flat configurations in \cref{ch11:lem:flat-lifts}. The first estimate follows as in \eqref{ch32:eq:off-flat}. We use properties (P1) and (P3) in \cref{ch27:sec:stopped}, namely the lower bound $E_{JK,\mathrm{sat}}\ge\kappa E_0$ on $D_r$ and the bound on the centered effective interaction, together with the normalization of $H_n$ and the lower bound on the normalization constant in \cref{ch27:thm:sharp-normalizer}.
+
+On $\mathcal U$, \cref{ch32:thm:central-matrix-transfer} at time $t_1$ gives $\abs{\Log\mathcal H^K_{0,t_1}}\ge(3/4)\abs X-C\abs s$, which implies
+\[
+ \abs X\le C(Rr_\gamma+\abs s)\qquad\text{on }E_R\cap\mathcal U.
+\]
+The density factor $e^{-\overline R_{K,\gamma}}J_n$ is bounded above, and $F_K(X,s)\ge f_K(X)+c\abs s^2\ge c\abs s^2$ by \cref{ch27:thm:central-stiff-chart}. For fixed $s$, the possible values of $X$ form a set of volume at most $C_R(r_\gamma+\abs s)^9$. Substituting $s=gz$, we find
+\[
+ \begin{split}
+ \E_{\StoppedLaw}\bigl[\one_{E_R\cap\mathcal U}\abs s^a\bigr]
+ &\le\frac{C_R}{\widehat Z}\int_{\R^D}\abs s^a(r_\gamma+\abs s)^9e^{-c\abs s^2/g^2}\,ds\\
+ &=\frac{C_Rg^{D+a}r_\gamma^9}{\widehat Z}\int_{\R^D}\abs z^a\Bigl(1+\frac g{r_\gamma}\abs z\Bigr)^9e^{-c\abs z^2}\,dz.
+ \end{split}
+\]
+Since $g/r_\gamma=r_\gamma/\sqrt n\le1$, the Gaussian integral is bounded in the fixed dimension $D$. Since $\widehat Z\ge cg^{D+4}$ and $r_\gamma^9g^{-4}=n^2r_\gamma$, the right side is at most $C_{R,a}r_\gamma g^a$. The conjugation at the basepoint has not been divided out: the nine-dimensional volume in $X$ and the Haar density are kept.
+
+For the last estimate there is no restriction on the output, and the volume in $X$ is bounded by a fixed constant. We split the Gaussian factor into two factors, bound one of them on $\{\abs s>r_\gamma\}$ by $e^{-cr_\gamma^2/(2g^2)}$, and integrate the other over $\R^D$. After division by $\widehat Z\ge cg^{D+4}$, we obtain the bound $Cg^{-4}e^{-c'r_\gamma^2/g^2}$, and renaming $c'$ proves the claim. Since $g=r_\gamma^2/\sqrt n$, the first and last bounds are smaller than every fixed power of $r_\gamma$.
+\end{proof}
+
+\begin{theorem}\label{ch32:thm:finite-time-core}\label{ch32:cor:endpoint-joint-core}
+Use \cref{ch32:def:finite-time-core-insertion}, and fix a radial cutoff $\chi$. For every continuous compactly supported test $\Phi$ in the class of \cref{ch32:def:finite-time-core-insertion},
+\[
+ \lim_{\gamma\downarrow0}\frac{\E_{\lambda_\gamma}\mathcal J_{\gamma,\Phi}}{\E_{\lambda_\gamma}\mathcal I_{\gamma,\chi(\abs\cdot)}(H^{(1)})}=\frac{\int_{\R^9}\Phi(Y,\dots,Y)e^{-Q(Y)}\,dY}{\int_{\R^9}\chi(\abs Y)e^{-Q(Y)}\,dY},
+\]
+and the denominator is at least $c_\chi r_\gamma$ for small $\gamma$. If $\Phi\ge0$ and $m_\Delta(\Phi)>0$, the numerator is bounded above and below by positive multiples of $r_\gamma$; if $m_\Delta(\Phi)=0$, the numerator is $o(r_\gamma)$.
+
+More precisely, with the factor $\kappa_{K,\gamma}$ of \cref{ch32:thm:common-scalar-core},
+\[
+ \E_{\mu_{nB^K,\gamma}}\mathcal J_{\gamma,\Phi}(\mathcal H^K_{t_1},\dots,\mathcal H^K_{t_\ell})=r_\gamma\kappa_{K,\gamma}\bigl\{m_\Delta(\Phi)+\delta^\Phi_{K,\gamma}\bigr\},\qquad\sup_K\abs{\delta^\Phi_{K,\gamma}}\longrightarrow0\quad(\gamma\downarrow0),
+\]
+and the expectation of $\mathcal J_{\gamma,\Phi}(\mathcal H^K_{0,t_1},\dots,\mathcal H^K_{0,t_\ell})$ under $\StoppedLaw$ has the same expansion with the same factor. For every $R<\infty$ there exist $C_{R,\chi,\boldsymbol t}$ and $\gamma_{R,\chi,\boldsymbol t}>0$ such that, for every globally Lipschitz test $\Phi$ in the class with $\supp\Phi\subset(B_R)^\ell$ and $0<\gamma\le\gamma_{R,\chi,\boldsymbol t}$, the difference between the ratio above (for $\lambda_\gamma$, or for $\mu_{nB^K,\gamma}$ at any finite $K$) and $m_\Delta(\Phi)/m(\chi(\abs\cdot))$ is at most $C_{R,\chi,\boldsymbol t}(\norm\Phi_\infty+\Lip\Phi)\gamma^{1/4}$. Here $\Lip$ refers to the metric of $\norm\cdot_{\max}$, and $\boldsymbol t=(t_1,\dots,t_\ell)$.
+\end{theorem}
+
+A nonnegative test that is not identically zero but vanishes near the diagonal has $m_\Delta(\Phi)=0$, and its numerator is $o(r_\gamma)$: to leading order, the rescaled logarithms at the different times coincide. The diagonal is described through tests that are invariant under independent conjugations at the different times. Uniform statements on a time interval are proved in \cref{ch32:thm:central-quotient-path}. The constants depend additionally on the list of times, on $\ell$, $R$, and $\chi$.
+
+\begin{proof}
+Step~1 reduces the joint observable of the zero-fluctuation holonomies to the single-time observable of $\Phi_\Delta$, Step~2 compares with the holonomies of the configuration, and Steps~3--5 treat Lipschitz tests, continuous tests, and the continuum measure. All estimates use the same coarse configuration $V$ and the same reconstruction.
+
+\paragraph{Step 1: the zero-fluctuation holonomies near the diagonal.}
+For each listed time we apply \cref{ch31:thm:prefix-regularity} with $m=0$. By its bound in $C^{1,1}$ at fixed time and its identity on flat configurations, we have, on a common smaller central neighborhood,
+\begin{equation}\label{ch32:eq:joint-central-flat-jet}
+ Z_j(X,s)=\Log\mathcal H^K_{0,t_j}(V(X,s))=X+O_{\boldsymbol t}(\abs X^2+\abs s),\qquad\norm{D_XZ_j-\Id}\le C_{\boldsymbol t}(\abs X+\abs s).
+\end{equation}
+Indeed, each of the nine coordinate directions in $X$ consists of commuting triples. The identity on flat configurations therefore gives $Z_j(ue_a,0)=ue_a$, and hence $D_XZ_j(0,0)=\Id$. Integrating the Lipschitz bound on the derivative along $v\mapsto(vX,0)$, and then using the bounded derivative in $s$, we obtain \eqref{ch32:eq:joint-central-flat-jet}. This is the statement of \cref{ch32:thm:central-matrix-transfer} at each listed time. We intersect finitely many domains and take the maximum of finitely many constants.
+
+Let $\Phi$ be globally Lipschitz with support in $(B_R)^\ell$. We compare $\mathcal J_{\gamma,\Phi}(\mathcal H^K_{0,t_1},\dots,\mathcal H^K_{0,t_\ell})$ with $\mathcal I_{\gamma,\Phi_\Delta}(\mathcal H^K_{0,t_1})$. If either is nonzero, then the event $E_R$ of \cref{ch32:lem:localized-stiff-core-moment} holds. Outside the fixed neighborhood $\mathcal U$ of that lemma its probability is smaller than every power of $r_\gamma$, and inside $\mathcal U$ we discard $\{\abs s>r_\gamma\}$, again at a cost smaller than every power of $r_\gamma$. On the remaining set, the lower bound for $Z_1$ implies $\abs X\le C_Rr_\gamma$. By \eqref{ch32:eq:joint-central-flat-jet}, all outputs lie in $\mathcal V$ for small $\gamma$, and
+\[
+ \max_j\frac{\abs{Z_j-Z_1}}{r_\gamma}\le C_R\Bigl(r_\gamma+\frac{\abs s}{r_\gamma}\Bigr).
+\]
+On this set, both observables are given by their formulas in coordinates, $\Phi(Z_1/r_\gamma,\dots,Z_\ell/r_\gamma)$ and $\Phi(Z_1/r_\gamma,\dots,Z_1/r_\gamma)$, including when one of them vanishes. \Cref{ch32:lem:localized-stiff-core-moment} gives, for any fixed $A\ge2$,
+\begin{equation}\label{ch32:eq:zero-white-diagonal-error}
+ \begin{split}
+ &\Bigl\lvert\E_{\StoppedLaw}\mathcal J_{\gamma,\Phi}(\mathcal H^K_{0,t_1},\dots,\mathcal H^K_{0,t_\ell})-\E_{\StoppedLaw}\mathcal I_{\gamma,\Phi_\Delta}(\mathcal H^K_{0,t_1})\Bigr\rvert\\
+ &\qquad\le C_R(\Lip\Phi)\Bigl\{r_\gamma\StoppedLaw(E_R\cap\mathcal U)+r_\gamma^{-1}\E_{\StoppedLaw}\bigl[\abs s\one_{E_R\cap\mathcal U}\bigr]\Bigr\}+O_A\bigl(\norm\Phi_\infty r_\gamma^A\bigr)\\
+ &\qquad\le C_R\norm\Phi_{\mathrm{BL}}r_\gamma^2,
+ \end{split}
+\end{equation}
+where in the last step we used $g=r_\gamma^2/\sqrt n$. The diagonal test $\Phi_\Delta$ is globally Lipschitz, supported in $B_R$, and invariant under simultaneous conjugation. \Cref{ch32:thm:common-scalar-core} at time $t_1$ therefore implies that
+\begin{equation}\label{ch32:eq:zero-white-joint-scalar}
+ \E_{\StoppedLaw}\mathcal J_{\gamma,\Phi}(\mathcal H^K_{0,t_1},\dots,\mathcal H^K_{0,t_\ell})=r_\gamma\kappa_{K,\gamma}m_\Delta(\Phi)+O_R\bigl(\norm\Phi_{\mathrm{BL}}r_\gamma^2\bigr).
+\end{equation}
+The factor is the same $\kappa_{K,\gamma}$ as at a single time, and no factor depending on the times appears.
+
+\paragraph{Step 2: comparison at all listed times.}
+Let $[\tau,T]$ be an interval containing all listed times, and let
+\[
+ d=\min\Bigl(1,\sup_{\tau\le t\le T}\max_i\norm{\mathcal H^K_{t,i}-\mathcal H^K_{0,t,i}(v)}_{\mathrm{op}}\Bigr).
+\]
+By \cref{ch30:thm:terminal-frozen-matrix-tail} with $p=1,2$, we have $\E_{\mathbb Q^K_v}d\le Cr_\gamma^2$ and $\E_{\mathbb Q^K_v}d^2\le Cr_\gamma^4$ for every coarse configuration $v$ and every $K$, where $\mathbb Q^K_v$ is the conditional law of \cref{ch32:lem:quantitative-rare-transfer}. On $\{d\le r_\gamma\}$, if either joint observable is nonzero, then all flowed holonomies of the configuration and of the zero-fluctuation reconstruction at the listed times lie in a fixed compact subset of the logarithmic chart, and their rescaled logarithms differ by at most $Cd/r_\gamma$ in the metric of $\norm\cdot_{\max}$. In this case, the zero-fluctuation holonomies at time $t_1$ also lie in the enlarged window $E_{R'}$ of \cref{ch32:lem:localized-stiff-core-moment}, which is determined by $v$ and has probability $O_R(r_\gamma)$ by \cref{ch32:thm:common-scalar-core}. The argument of \cref{ch32:lem:quantitative-rare-transfer}, with the metric of $\norm\cdot_{\max}$, gives
+\begin{equation}\label{ch32:eq:finite-joint-transfer}
+ \Bigl\lvert\E_\nu\mathcal J_{\gamma,\Phi}(\mathcal H^K_{t_1},\dots,\mathcal H^K_{t_\ell})-\E_{\StoppedLaw}\mathcal J_{\gamma,\Phi}(\mathcal H^K_{0,t_1},\dots,\mathcal H^K_{0,t_\ell})\Bigr\rvert\le C_{R,\boldsymbol t}\norm\Phi_{\mathrm{BL}}r_\gamma^2.
+\end{equation}
+The same argument at the time $t_1$ alone, applied to a Lipschitz function equal to one on $B_{R+1}$, shows that the event that $\mathcal H^K_{t_1}$ lies in $\mathcal V$ and its rescaled logarithm lies in $B_{R+1}$ has $\nu$-probability $O_R(r_\gamma)$.
+
+\paragraph{Step 3: Lipschitz tests at finite cutoff.}
+We remove the conditioning with \cref{ch20:cor:payment-all-powers} at $q=1$, which costs at most $2\norm\Phi_\infty C_{n,1}\gamma=2C_{n,1}\norm\Phi_\infty r_\gamma^4$. Combining this with \eqref{ch32:eq:zero-white-joint-scalar} and \eqref{ch32:eq:finite-joint-transfer}, we obtain
+\begin{equation}\label{ch32:eq:original-joint-core-rate}
+ \Bigl\lvert\E_{\mu_{nB^K,\gamma}}\mathcal J_{\gamma,\Phi}(\mathcal H^K_{t_1},\dots,\mathcal H^K_{t_\ell})-r_\gamma\kappa_{K,\gamma}m_\Delta(\Phi)\Bigr\rvert\le C_{R,\boldsymbol t}\norm\Phi_{\mathrm{BL}}r_\gamma^2.
+\end{equation}
+For the denominator, \eqref{ch32:eq:finite-core-rate} at time $t_1$ holds with the same factor $\kappa_{K,\gamma}$, and the denominator is at least $c_\chi r_\gamma$. When we subtract $m_\Delta(\Phi)/m(\chi(\abs\cdot))$ times the denominator, the factor $\kappa_{K,\gamma}$ cancels at finite $K$. Dividing by $c_\chi r_\gamma$, we obtain the rate $\gamma^{1/4}=r_\gamma$ for the ratio at finite cutoff, with one upper bound on $\gamma$ for the whole class of tests supported in $(B_R)^\ell$.
+
+\paragraph{Step 4: continuous tests.}
+Let $\Phi$ be continuous, compactly supported, and in the class, with support in $(B_R)^\ell$. There exist smooth compactly supported functions $\Phi_\eta$, $\eta>0$, with support in $(B_{R+1})^\ell$ and $\norm{\Phi_\eta-\Phi}_\infty\to0$. For example, we may convolve $\Phi$ with the product of $\ell$ copies of a nonnegative radial smooth approximate identity on $\R^9$ of total mass one, and use the uniform continuity of $\Phi$. Radial convolution preserves the invariance under independent conjugations, as we see by changing each integration variable by the orthogonal map $\Ad(k_j)$. Each $\Phi_\eta$ is globally Lipschitz. The difference of the joint observables of $\Phi_\eta$ and $\Phi$ is nonzero only if the first output lies in a fixed enlarged compact window, which has probability $O_R(r_\gamma)$, both for the holonomies of the configuration under $\nu$ (by Step~2) and for the zero-fluctuation holonomies under $\StoppedLaw$ (by \cref{ch32:thm:common-scalar-core}). The corresponding expectations therefore differ by at most $C_Rr_\gamma\norm{\Phi_\eta-\Phi}_\infty$. For the Wilson measure, we add at most $2C_{n,a}\gamma^a\norm{\Phi_\eta-\Phi}_\infty$, with any fixed $a>1/4$, from \cref{ch20:cor:payment-all-powers}. Further,
+\[
+ \abs{m_\Delta(\Phi_\eta)-m_\Delta(\Phi)}\le m(\one_{B_{R+1}})\norm{\Phi_\eta-\Phi}_\infty.
+\]
+At fixed $\eta$ we apply \eqref{ch32:eq:original-joint-core-rate} and \eqref{ch32:eq:zero-white-joint-scalar} to $\Phi_\eta$ and let $\gamma\downarrow0$ uniformly in $K$; then we let $\eta\downarrow0$. Since $c\le\kappa_{K,\gamma}\le C$, this proves $\sup_K\abs{\delta^\Phi_{K,\gamma}}\to0$, both for the Wilson measure and for the zero-fluctuation expectation. For continuous tests we do not obtain a rate.
+
+\paragraph{Step 5: the continuum measure.}
+At fixed small $\gamma$, the joint observable is a bounded continuous function on $(\SU^3)^\ell$, since its support lies strictly inside the logarithmic charts. By the invariance under independent conjugations, it factors through the product of the $\ell$ maps $\mathfrak p$ of seven traces of \cref{ch02:lem:seven-traces}: two points with the same vector of traces at every time differ by one conjugation at each time. The factored function $f$ is continuous on the compact image $C$ of this product map, since every convergent sequence of trace vectors has convergent subsequences of representatives, and all possible limits give the same value. On $C$, the functions $\inf_{u\in C}\{f(u)+k\abs{v-u}\}$, truncated to the range of $f$, are bounded Lipschitz functions on the ambient Euclidean space that converge uniformly to $f$ on $C$ as $k\to\infty$. This follows from the uniform continuity of $f$, by considering separately the points $u$ with $\abs{v-u}$ small and large. Joint convergence in law of the traces therefore suffices for these observables. The seven words at each time are concatenations of the three based cycles at that time, and the whole finite vector of their traces is covered by \cref{ch26:thm:tier-one}, with the comparison side justified by \cref{ch26:cor:common-ladder-family}. Letting $K\to\infty$ at fixed $\gamma$ in the lower bound on the denominator and in the combination in which $\kappa_{K,\gamma}$ cancels proves the ratio limit for continuous tests and the rate for Lipschitz tests under $\lambda_\gamma$. The expansions and $c\le\kappa_{K,\gamma}\le C$ imply that the numerator is comparable with $r_\gamma$ when $m_\Delta(\Phi)>0$ and $\Phi\ge0$, and that it is $o(r_\gamma)$ when $m_\Delta(\Phi)=0$. These bounds are uniform in $K$ and pass to the limit.
+\end{proof}
+
+\section{Holonomy paths on a time interval}\label{ch32:sec:paths}
+
+We now observe the holonomies on a whole compact time interval $[\tau,T]\subset(0,\infty)$. The observable is the path of rescaled holonomy triples modulo simultaneous conjugation. After weighting with a compactly supported cutoff at the initial time, we show that this path converges to a constant path whose value has density proportional to the cutoff times $e^{-Q}$. The first ingredient is a version of \cref{ch32:thm:central-matrix-transfer} that is uniform in time.
+
+\begin{lemma}\label{ch32:lem:uniform-time-central-jet}
+Fix the data of \cref{ch32:def:core-insertions} and an interval $0<\tau<T<\infty$ before varying $\gamma$, choosing the side $n$ and the margins for the whole interval. There exist a central coordinate neighborhood $\mathcal U$ and a neighborhood of the identity in $\mathcal V$ such that
+\[
+ Z_{K,t}(X,s)=\Log\mathcal H^K_{0,t}(V(X,s))
+\]
+is defined on $\mathcal U$ for every $K$ and $t\in[\tau,T]$, is continuous in $t$, and satisfies
+\[
+ \sup_{K,t}\norm{Z_{K,t}}_{C^{1,1}(\mathcal U)}\le C_{\tau,T},\qquad
+ \sup_t\abs{Z_{K,t}(X,s)-X}\le C_{\tau,T}(\abs X^2+\abs s),
+\]
+\[
+ \sup_t\norm{D_XZ_{K,t}(X,s)-\Id}\le C_{\tau,T}(\abs X+\abs s).
+\]
+For every flat coarse configuration, the flowed zero-fluctuation holonomy triple equals the holonomy triple of the coarse configuration, for every $K$ and $t$. The neighborhoods and constants do not depend on $K$, $\gamma$, or the number of preceding averaging steps.
+\end{lemma}
+
+\begin{proof}
+We work in the smooth chart $V(X,s)$ of the based quotient, not with a Borel selection of representatives; the parameters $(X,s)$ have a fixed dimension at the side $n$. On a neighborhood of the trivial flat configuration, the zero-fluctuation reconstructions stay within the input and image bounds of the reconstruction maps of \cref{ch12:thm:replacement-family}. Indeed, they vanish at zero input, and the uniform bounds on the coefficients together with the contraction condition $a_{\mathrm{map}}\sqrt B\le32/49<1$ of \cref{ch32:def:core-insertions} give one smaller neighborhood, independent of the number of steps. More precisely, items (1) and (3) of \cref{ch30:lem:zero-white-and-chaining} bound the linear and quadratic flow data $\mathcal E_K(u)$ of the zero-fluctuation reconstruction, in the weighted norms $\Xnorm\alpha a$ and $\Ynorm\alpha a$ of \cref{ch01:def:enhancement}, by a constant $R$ on a fixed complex domain of inputs. Here $a=L/(nB^K)$ is the finest mesh, and $\alpha$ is the fixed regularity exponent of \cref{ch30:def:paired-history}; the bound is uniform in $K$ with this mesh. We compose with the analytic map $u=(X,s)\mapsto V(X,s)$ of finitely many variables and shrink the domain once. Let $U_0\Subset U_1$ be real domains whose complex neighborhoods of radius $\delta>0$ lie in this domain. The Cauchy integral formula on one coordinate circle, or on two circles for mixed derivatives, gives
+\[
+ \sup_{K,\,u\in U_1}\sum_{j=0}^2\norm{D_u^j\mathcal E_K(u)}_{\mathrm{fl}}\le C_{n,\delta}R\bigl(1+\delta^{-1}+\delta^{-2}\bigr),
+\]
+where $\norm\cdot_{\mathrm{fl}}$ is the flow-data norm at the finest mesh $a$, which we suppress from the notation. It is the sum of the two weighted norms, which include the first differences of both components. This bound is deterministic and does not depend on the coupling.
+
+We apply \cref{ch22:thm:real-flow-variations} on $U_0\subset U_1$, with waiting time $t_*=\tau$, horizon $T$, and damping gauge transformations started at the identity in the common gauge frame at the basepoint. Its hypotheses are the displayed bound on derivatives and the margins of the based charts. It yields bounds, uniform in $K$, on the first and second derivatives in the parameters of the flowed cycle holonomies, simultaneously for all $t\in[\tau,T]$, including the finitely many remaining meshes. Continuity in $t$ follows from the smoothness of the flow on a finite lattice. At $u=0$ every output is the identity. By the uniform bound on the first derivatives, the outputs on a smaller central neighborhood lie in one compact subset of the logarithmic chart, simultaneously for all $K$ and $t$. Since $\Log$ has bounded first and second derivatives there, we obtain the bound in $C^{1,1}$.
+
+By \cref{ch11:lem:flat-lifts}, the zero-fluctuation refinements of a flat configuration are flat and have the same based cycle holonomies, and the Wilson flow is stationary on flat configurations. The flowed holonomies therefore equal the coarse holonomies at every time, in the given gauge frame. For $s=0$ and $X$ in one of the nine coordinate directions, the configuration consists of commuting links, and the identity on flat configurations gives $Z_{K,t}(ue_a,0)=ue_a$. Since these directions span $\R^9$, we have $Z_{K,t}(0,0)=0$ and $D_XZ_{K,t}(0,0)=\Id$ for all $K$ and $t$. Integrating the uniform Lipschitz bound on the derivative along $v\mapsto(vX,0)$ gives the remainder $C\abs X^2$ and the error $C\abs X$ for the derivative. The bounded derivative in $s$ and the Lipschitz bound on the first derivative add $C\abs s$ to these two errors. All choices were made before the coupling and are uniform on the interval.
+\end{proof}
+
+\begin{definition}\label{ch32:def:central-quotient-path}
+Let
+\[
+ \begin{gathered}
+ \mathfrak C=\su^3/\Ad\SU,\qquad\rho([Y],[Y'])=\min_{k\in\SU}\abs{Y-\Ad(k)Y'},\\
+ \mathscr P=C([\tau,T];\mathfrak C),\qquad\rho_\infty(z,z')=\sup_{\tau\le t\le T}\rho(z(t),z'(t)).
+ \end{gathered}
+\]
+Fix a smooth map $\eta:\SU^3\to\su^3$, equivariant under simultaneous conjugation, that agrees with the componentwise logarithm on a fixed smaller neighborhood of the identity. For the triple $H(t)$ of cycle holonomies of a trajectory, defined up to simultaneous conjugation, set $Z_\gamma(t)=[\eta(H(t))/r_\gamma]$. For a radial cutoff $\chi$ let
+\[
+ D_\gamma=\E_{\lambda_\gamma}\mathcal I_{\gamma,\chi(\abs\cdot)}(H(\tau)),\qquad
+ \Pi_\gamma(F)=\frac{\E_{\lambda_\gamma}\bigl[\mathcal I_{\gamma,\chi(\abs\cdot)}(H(\tau))F(Z_\gamma)\bigr]}{D_\gamma}.
+\]
+For small $\gamma$, $D_\gamma>0$ by \cref{ch32:thm:core-ratio-rates}, and $\Pi_\gamma$ is a probability on $\mathscr P$. Define $\Pi_{K,\gamma}$ by the same formula under the Wilson measure $\mu_{nB^K,\gamma}$, with the flowed lattice holonomies and with its own denominator.
+\end{definition}
+
+Only the conjugacy class of $H(t)$ is needed to define $Z_\gamma$; we never choose representatives depending on $t$.
+
+\begin{theorem}\label{ch32:thm:central-quotient-path}
+Fix $L$, an interval $0<\tau<T<\infty$, the parameters, a sufficiently large side $n$ on the sequence, and the central margins for that interval, all before varying $\gamma$, and use \cref{ch32:def:central-quotient-path}. Let $b_\chi=m(\chi(\abs\cdot))$, and define the probability
+\[
+ \Pi_0=\bigl(Y\mapsto(t\mapsto[Y])\bigr)_\#\Bigl(\frac{\chi(\abs Y)e^{-Q(Y)}\,d^9Y}{b_\chi}\Bigr)
+\]
+on $\mathscr P$. There exist $C_{\tau,T,\chi,\eta}$ and $\gamma_{\tau,T,\chi,\eta}>0$ such that, for every bounded function $F:\mathscr P\to\R$ that is globally Lipschitz for $\rho_\infty$, and every $0<\gamma\le\gamma_{\tau,T,\chi,\eta}$,
+\[
+ \abs{\Pi_\gamma(F)-\Pi_0(F)}\le C_{\tau,T,\chi,\eta}\bigl(\norm F_\infty+\Lip F\bigr)\gamma^{1/4}.
+\]
+The same bound holds for $\Pi_{K,\gamma}$, uniformly in $K$, and every denominator is at least $c_\chi r_\gamma$. At each fixed small $\gamma$, $\Pi_{K,\gamma}\to\Pi_\gamma$ weakly as $K\to\infty$. In particular $\Pi_\gamma\to\Pi_0$ weakly on $(\mathscr P,\rho_\infty)$ as $\gamma\downarrow0$, after the continuum limit, and the limit does not depend on the choice of $\eta$.
+\end{theorem}
+
+\begin{proof}
+The core of the proof is Steps~2--3, which reduce the weighted path to the single-time test $\varphi_F(Y)=\chi(\abs Y)F(c_{[Y]})$ defined below.
+
+\paragraph{Step 1: quotients and paths.}
+The minimum defining $\rho$ is attained because $\SU$ is compact, and it vanishes exactly when the two orbits coincide. The symmetry of $\rho$ follows from the invariance of the Euclidean norm under the orthogonal maps $\Ad(k)$, and composing minimizers gives the triangle inequality. The quotient map is $1$-Lipschitz. Since $\rho([Y],[0])=\abs Y$, closed bounded balls of $\mathfrak C$ are continuous images of compact Euclidean balls. They are therefore compact, and $\mathfrak C$ is complete. The classes of vectors with rational coordinates are dense, and $\mathfrak C$ is separable. Since uniform limits of continuous paths are continuous, $\mathscr P$ is complete. For separability, let $\varepsilon>0$. Given a path, by uniform continuity there exist a rational subdivision of $[\tau,T]$ on whose intervals the path oscillates by at most $\varepsilon$, and balls of radius $\varepsilon$, centered in a fixed countable dense set, containing its values at the subdivision points. We consider the classes of paths determined by a rational subdivision and a finite list of such balls, with oscillation at most $\varepsilon$ on each interval. There are countably many classes, each of diameter at most $4\varepsilon$, and we choose one path in each nonempty class. For $\varepsilon=1/j$, $j\ge1$, the chosen paths form a countable dense set, and $\mathscr P$ is Polish.
+
+To see that a map $\eta$ exists, we multiply the componentwise logarithm by a smooth cutoff, invariant under conjugation, supported strictly inside the logarithmic chart, and equal to one on a smaller neighborhood, and we extend the product by zero. The result is smooth and equivariant, and its global Lipschitz constant is finite by compactness of $\SU^3$, for the maximum of the operator norms of the three components. By \cref{ch02:lem:seven-traces}, the map $\mathfrak p$ of seven traces identifies the quotient of $\SU^3$ by simultaneous conjugation homeomorphically with $C=\mathfrak p(\SU^3)$. The map
+\[
+ f_\eta:C\to\mathfrak C,\qquad f_\eta(\mathfrak p(H))=[\eta(H)],
+\]
+is therefore well defined, by the equivariance of $\eta$, and continuous. Composing with this uniformly continuous map at each time carries a continuous path of traces to a continuous path in $\mathfrak C$, continuously for the uniform metrics, and scaling by $1/r_\gamma$ is continuous at fixed $\gamma$. This defines $Z_\gamma$ under $\lambda_\gamma$.
+
+\paragraph{Step 2: comparison with the zero-fluctuation path.}
+We abbreviate $I(H)=\mathcal I_{\gamma,\chi(\abs\cdot)}(H(\tau))$, and we write $Z$ and $Z^0$ for the paths of the flowed holonomies of the configuration and of the zero-fluctuation reconstruction. Let $d=d_{K,[\tau,T]}$ be the quantity of \cref{ch30:thm:terminal-frozen-matrix-tail}, that is, the minimum of $1$ and the supremum over $t\in[\tau,T]$ of $\max_i\norm{\mathcal H^K_{t,i}-\mathcal H^K_{0,t,i}(v)}_{\mathrm{op}}$. Since $\eta$ is globally Lipschitz and the quotient map is $1$-Lipschitz,
+\[
+ \rho_\infty(Z,Z^0)\le C_\eta\frac d{r_\gamma}\qquad\text{on }\{d\le r_\gamma\},\ r_\gamma<1.
+\]
+On this event, if either $I(\mathcal H^K)$ or $I(\mathcal H^K_0)$ is nonzero, the zero-fluctuation holonomies at time $\tau$ lie in an enlarged window $E_R$ as in \cref{ch32:lem:localized-stiff-core-moment}, and
+\[
+ \abs{I(\mathcal H^K)-I(\mathcal H^K_0)}\le C_\chi\frac d{r_\gamma}.
+\]
+These two assertions use the logarithm only at time $\tau$, in its fixed compact subchart; at the other times we use $\eta$. Writing the difference of products as $(I(\mathcal H^K)-I(\mathcal H^K_0))F(Z)+I(\mathcal H^K_0)(F(Z)-F(Z^0))$, we find, on the same event,
+\[
+ \abs{I(\mathcal H^K)F(Z)-I(\mathcal H^K_0)F(Z^0)}\le C_{\chi,\eta}\bigl(\norm F_\infty+\Lip F\bigr)\frac d{r_\gamma}\one_{E_R}.
+\]
+Integrating with the disintegration of \cref{ch12:lem:backward-law}, we have $\E_\nu[d\one_{E_R}]\le Cr_\gamma^2\StoppedLaw(E_R)\le C_Rr_\gamma^3$, exactly as in the proof of \cref{ch32:lem:quantitative-rare-transfer}. On $\{d>r_\gamma\}$ we use the bound $2\norm\chi_\infty\norm F_\infty$ and $\nu(d>r_\gamma)\le Cr_\gamma^2$. We conclude that
+\begin{equation}\label{ch32:eq:path-transfer}
+ \Bigl\lvert\E_\nu I(\mathcal H^K)F(Z)-\E_{\StoppedLaw}I(\mathcal H^K_0)F(Z^0)\Bigr\rvert\le C_{\chi,\eta}\norm F_{\mathrm{BL}}r_\gamma^2.
+\end{equation}
+
+\paragraph{Step 3: the weighted zero-fluctuation path is nearly constant.}
+We use \cref{ch32:lem:localized-stiff-core-moment} with $t_1=\tau$, choosing its neighborhood $\mathcal U$ with closure in the domain of \cref{ch32:lem:uniform-time-central-jet}; the localization argument in the proof of that lemma allows any such fixed reduction. Outside $\mathcal U$ the contribution of the window at time $\tau$ is smaller than every power of $r_\gamma$, and so is the contribution of $\{\abs s>r_\gamma\}$. On the remaining part of the weighted set, the lower bound on the output at time $\tau$ implies $\abs X\le C_\chi r_\gamma$. By \cref{ch32:lem:uniform-time-central-jet}, for small $\gamma$ every output lies in the region where $\eta=\Log$, and
+\[
+ \rho_\infty\bigl(Z^0,c_{[Z_{K,\tau}(X,s)/r_\gamma]}\bigr)\le\sup_{\tau\le t\le T}\frac{\abs{Z_{K,t}-Z_{K,\tau}}}{r_\gamma}\le C_\chi\Bigl(r_\gamma+\frac{\abs s}{r_\gamma}\Bigr),
+\]
+where $c_{[Y]}$ denotes the constant path with value $[Y]$. The localized moments give $\StoppedLaw(E_R)\le C_Rr_\gamma$ and $\E_{\StoppedLaw}[\abs s\one_{E_R\cap\mathcal U}]\le C_Rr_\gamma g$, with $g=r_\gamma^2/\sqrt n$. Since $I(\mathcal H^K_0)F(c_{[Z_{K,\tau}/r_\gamma]})=\mathcal I_{\gamma,\varphi_F}(\mathcal H^K_{0,\tau})$ on this set, we obtain
+\begin{equation}\label{ch32:eq:path-constant}
+ \Bigl\lvert\E_{\StoppedLaw}I(\mathcal H^K_0)F(Z^0)-\E_{\StoppedLaw}\mathcal I_{\gamma,\varphi_F}(\mathcal H^K_{0,\tau})\Bigr\rvert\le C_\chi\norm F_{\mathrm{BL}}r_\gamma^2,
+\end{equation}
+where $\varphi_F(Y)=\chi(\abs Y)F(c_{[Y]})$. This test is invariant under simultaneous conjugation, supported in the fixed ball containing the support of $\chi(\abs\cdot)$, and globally Lipschitz, with
+\[
+ \norm{\varphi_F}_\infty\le\norm\chi_\infty\norm F_\infty,\qquad\Lip\varphi_F\le\Lip(\chi(\abs\cdot))\norm F_\infty+\norm\chi_\infty\Lip F,
+\]
+since the quotient map and the map $[Y]\mapsto c_{[Y]}$ are $1$-Lipschitz. We apply \cref{ch32:thm:common-scalar-core} to $\varphi_F$ at time $\tau$. Combining \eqref{ch32:eq:path-transfer} and \eqref{ch32:eq:path-constant}, and removing the conditioning with \cref{ch20:cor:payment-all-powers} at $q=1$, we obtain
+\begin{equation}\label{ch32:eq:path-finite}
+ A_K(F)=\E_{\mu_{nB^K,\gamma}}I(\mathcal H^K)F(Z)=r_\gamma\kappa_{K,\gamma}m(\varphi_F)+O\bigl(\norm F_{\mathrm{BL}}r_\gamma^2\bigr).
+\end{equation}
+Here $A_K(F)$, notation local to this proof, is the numerator of $\Pi_{K,\gamma}(F)$. The same factor appears in $A_K(1)$, with leading coefficient $b_\chi>0$, which implies $A_K(1)\ge c_\chi r_\gamma$. Since $m(\varphi_F)=b_\chi\Pi_0(F)$, subtracting $\Pi_0(F)A_K(1)$ from $A_K(F)$ cancels the leading terms. Dividing by $A_K(1)$ gives the bound for $\Pi_{K,\gamma}=A_K(\cdot)/A_K(1)$, uniformly in $K$.
+
+\paragraph{Step 4: the continuum limit in the uniform topology.}
+At fixed $\gamma$ we apply \cref{ch26:thm:actual-observable-paths} to the seven loops, concatenations of the three based coordinate cycles, that define $\mathfrak p$. Each loop has a single lattice approximation independent of time, of uniformly bounded length. The comparison side is covered by \cref{ch26:cor:common-ladder-family}; at fixed coupling only finitely many terms of the sequence of sides are dropped. The paths of traces converge jointly in law in $C([\tau,T];\R^7)$. All their values lie in the compact set $C$, and $C([\tau,T];C)$ is a closed subset. Applying the continuous map of paths induced by $f_\eta$, followed by scaling, we obtain convergence in law of the lattice paths $Z$ to $Z_\gamma$, jointly with the vector of traces at time $\tau$. For small fixed $\gamma$, $I(H(\tau))$ is a continuous invariant function of the triple at time $\tau$, and by \cref{ch02:lem:seven-traces} it is a continuous function of its seven traces. For every bounded continuous $F$ on $\mathscr P$, the product $I(H(\tau))F(Z_\gamma)$ is then a bounded continuous function on the space of trace paths with values in $C$. By the continuous mapping theorem on this closed subspace, which carries all the measures involved, $A_K(F)$ converges to the numerator of $\Pi_\gamma(F)$, and $A_K(1)$ converges to $D_\gamma$. Dividing by the positive limit of the denominators proves $\Pi_{K,\gamma}\to\Pi_\gamma$ weakly, and the bound of Step~3 passes to the limit.
+
+\paragraph{Step 5: weak convergence.}
+The bound for bounded Lipschitz functions implies weak convergence on $\mathscr P$. Indeed, for a closed set $A\subset\mathscr P$, the functions $f_j(z)=(1-j\dist(z,A))_+$, $j\ge1$, are bounded and Lipschitz, and $\Pi_\gamma(f_j)\to\Pi_0(f_j)$ for each fixed $j$. This implies $\limsup_{\gamma\downarrow0}\Pi_\gamma(A)\le\Pi_0(f_j)$, and letting $j\to\infty$, by monotone convergence, $\limsup_{\gamma\downarrow0}\Pi_\gamma(A)\le\Pi_0(A)$. By the portmanteau theorem, $\Pi_\gamma\to\Pi_0$ weakly. The same argument applies to any sequence of finite cutoffs with $\gamma\downarrow0$, since the bound is uniform in $K$. The argument works for each such $\eta$ and gives the same $\Pi_0$; the limit therefore does not depend on $\eta$.
+\end{proof}
+
+\section{Dilation statistics of comparison measures}\label{ch32:sec:comparison}
+
+To show that the value zero in \cref{ch32:thm:core-ratios-and-ward} reflects the structure of $\lambda_\gamma$ near a central triple, we compute the dilation statistic for the comparison probabilities of \cref{ch01:def:references}, observed at the same cycles and the same flow time. For $k\in\{1,2,3,5\}$ we write $P_k$ for the probability of item (k) of \cref{ch01:def:references}. Here $P_1$ is the Abelian Maxwell measure with Haar cycle holonomies, $P_2$ the Gaussian holonomies with independent Haar factors, $P_3$ the Gaussian holonomies with Gaussian constant modes, and $P_5$ the mixture of normalized conditional normal Gaussian measures over the cone of commuting triples. For $P_5$ we use the observables $\mathcal I^{\mathrm{coord}}$ of \cref{ch32:def:core-insertions}. The local mass scales differ. A compact window has probability of order $r_\gamma^3$ under $P_1$, $r_\gamma^9$ under $P_2$, and $r_\gamma^5$ under $P_5$, while under $P_3$ the rescaled logarithm tends to zero. For $\lambda_\gamma$ the scale is $r_\gamma$.
+
+Recall that $\CommMan=\{(\vartheta_1u,\vartheta_2u,\vartheta_3u):\Toron\in\R^3,\ u\in S^2\}$ is the cone of commuting triples, that $\NormalFiber y=\{b:b_i\perp u,\ \sum_i\vartheta_ib_i=0\}$ is the normal space at $y=(\vartheta_iu)_i\ne0$, and that $\NormalCov$ is the normal covariance of \cref{ch27:thm:flowed-log-covariance}.
+
+\begin{theorem}\label{ch32:thm:corrected-reference-ward}
+Let $\chi$ be a radial cutoff with $\chi(0)>0$. Under each of $P_1$, $P_2$, $P_3$, with the hypotheses of \cref{ch01:def:references,ch31:lem:reference-comparisons}, the denominator of the dilation statistic is positive for all sufficiently small $\gamma$, and
+\[
+ \lim_{\gamma\downarrow0}\mathcal S_{\gamma,P_1}(\chi)=-6,\qquad
+ \lim_{\gamma\downarrow0}\mathcal S_{\gamma,P_2}(\chi)=4\,\frac{\int_{\R^9}Q(Y)\chi(\abs Y)\,dY}{\int_{\R^9}\chi(\abs Y)\,dY}>0,\qquad
+ \lim_{\gamma\downarrow0}\mathcal S_{\gamma,P_3}(\chi)=-9.
+\]
+For $P_3$ the hypotheses are that the field is a centered Gaussian field with covariance $\gamma C$ for a fixed covariance $C$, smoothed by a fixed linear operator, and that the smoothed field divided by $\sqrt\gamma$ has a centered separable realization with continuous paths, a measurable and almost surely bounded supremum, and finite supremum variance, as specified there.
+
+For $P_5$, let the prior be a fixed probability $\alpha(y)\dvol_{\CommMan}(y)$ on a small neighborhood of the tip of $\CommMan$, with $\alpha$ continuous at the tip and $\alpha(0)>0$. Conditionally on $y\ne0$, let $b$ be the normalized Gaussian $N(0,\gamma\Sigma(y))$ on $\NormalFiber y$, and put $X=y+b$. Assume that $\Sigma$ is measurable and positive definite, with
+\[
+ c\abs y^{-2}\Id\le\Sigma(y)\le C\abs y^{-2}\Id,\qquad\abs y^2\Sigma(y)\longrightarrow\Id_{\NormalFiber y}\quad(\abs y\downarrow0),
+\]
+uniformly in the angular directions. The covariance $\Sigma=\NormalCov$ has these properties; in fact $\NormalCov(y)=\abs y^{-2}\Id+O(1)$ uniformly for small $\abs y$. Then, for every continuous compactly supported $\varphi$,
+\[
+ r_\gamma^{-5}\E_{P_5}\varphi(X/r_\gamma)\longrightarrow\alpha(0)\int\varphi(y+b)\,d\BGMMeasure(y,b),
+\]
+where
+\[
+ d\BGMMeasure(y,b)=(2\pi)^{-2}\abs y^4e^{-\abs y^2\abs b^2/2}\dvol_{\CommMan}(y)\,db.
+\]
+The weighted normal-bundle measure $\BGMMeasure$ is locally finite, and $y$ and $b$ are bounded on compact sets of outputs $y+b$ because $y\perp b$. The denominator of $\mathcal S_{\gamma,P_5}(\chi)$ is positive for all sufficiently small $\gamma$. Writing $\langle\cdot\rangle_{\chi,\BGMMeasure}$ for the integral against $\BGMMeasure$ divided by $\int\chi(\abs{y+b})\,d\BGMMeasure$,
+\[
+ \lim_{\gamma\downarrow0}\mathcal S_{\gamma,P_5}(\chi)=4+2\Bigl\langle\sum_{i<j}\abs{b_i\times b_j}^2\Bigr\rangle_{\chi,\BGMMeasure}>4.
+\]
+The constants in these comparisons may depend on the fixed priors, the bounds on the covariances, the smoothing, and the test, but not on $\gamma$.
+\end{theorem}
+
+The factor $\abs y^4$ in $\BGMMeasure$ comes from the normalization of the four-dimensional conditional Gaussian. The weighted volume element $(2\pi)^{-2}\abs y^4\dvol_{\CommMan}(y)\,db$ is homogeneous of degree $13=5+4+4$ under dilations: five from the volume of the cone, four from the normal fibers, and four from the factor $\abs y^4$. The remaining factor of $\BGMMeasure$ is $e^{-Q_2}$, where $Q_2(y,b)=\abs y^2\abs b^2/2$ is homogeneous of degree four. The degree $13$, compared with the degree $9$ of Lebesgue measure on $\R^9$, produces the constant $4$. Without the normalization of the conditional Gaussians, both the mixture and the value would change. The conclusions concern only these specified priors and covariances.
+
+\begin{proof}
+We write $\epsilon=r_\gamma$. Each numerator is the observable of the bounded compactly supported function $W_\chi$.
+
+\paragraph{The Abelian Maxwell measure with Haar cycle holonomies.}
+We condition on the smoothed Abelian field and on the color direction $u\in S^2$ of the embedded subgroup. The circulations of the field translate the three independent uniformly distributed phases in $(\R/4\pi\Z)^3$, and conditionally the cycle phases are still independent and uniformly distributed. In a small neighborhood of the identity their logarithms have the form $(x_1u,x_2u,x_3u)$, with density $(4\pi)^{-3}d^3x$. For radial tests, a further common conjugation does not change the integrals. The triple commutes, and $Q=0$ on it. Once the compact support lies in the logarithmic chart, the denominator is exactly
+\[
+ (4\pi)^{-3}\epsilon^3\int_{\R^3}\chi(\abs x)\,dx>0.
+\]
+The divergence of $x\chi(\abs x)$ on $\R^3$ has integral zero, which gives $\int\abs x\chi'(\abs x)\,dx=-3\int\chi(\abs x)\,dx$. The dilation statistic therefore equals $-9+3=-6$ for every sufficiently small $\gamma$.
+
+\paragraph{Gaussian holonomies with independent Haar factors.}
+By \cref{ch31:lem:reference-comparisons}, the triple has the law of three independent Haar distributed matrices for every $\gamma$. We write $H=\cos(\abs x/2)\Id+2\sin(\abs x/2)(x/\abs x)^a\tau_a$. The Haar probability is the normalized volume of $S^3$, and its polar factor $\sin^2(\abs x/2)\,d(\abs x/2)/(2\pi^2)$ gives $dH(e^x)=(16\pi^2)^{-1}\sinc^2(\abs x/2)\,d^3x$, as in \eqref{ch01:eq:haar-coordinates}. For every bounded test $\psi$ supported in $\{\abs Y\le R\}$, we obtain
+\[
+ \E_{P_2}\mathcal I_{\gamma,\psi}=\epsilon^9(16\pi^2)^{-3}\Bigl\{\int\psi(Y)\,dY+O_R\bigl(\norm\psi_\infty\epsilon^2\bigr)\Bigr\}.
+\]
+The denominator has a positive limiting coefficient. In $\R^9$ the divergence of $Y\chi(\abs Y)$ has integral zero, that is, $\int(9\chi(\abs Y)+\abs Y\chi'(\abs Y))\,dY=0$. The limit of the statistic is therefore $4\int Q\chi/\int\chi$. To see that it is strictly positive, take a radius at which $\chi>0$ and, at that radius, a triple with two nonzero orthogonal components. Then $Q>0$ there, and a neighborhood of this point has positive measure, $\chi>0$, and $Q>0$.
+
+\paragraph{Gaussian holonomies with Gaussian constant modes.}
+At the observation time $t=\theta L^2$, let $G_i(x)=(\mathsf S_ta)_i(x)/\sqrt\gamma$ be the smoothed field divided by $\sqrt\gamma$, and consider the real process
+\[
+ Z_{x,i,v}=\ip v{G_i(x)},\qquad(x,i,v)\in\mathcal T=\Torus\times\{1,2,3\}\times S^2.
+\]
+The index set $\mathcal T$ is nonempty, compact, and metrizable, and the process is centered Gaussian since the smoothing is fixed and linear. By the hypotheses of \cref{ch01:def:references,ch31:lem:reference-comparisons}, there exists a separable realization with almost surely continuous paths on $\mathcal T$, and $\sigma_*^2=\sup_{x,i,v}\E Z_{x,i,v}^2<\infty$. These are the hypotheses of \cref{ch31:lem:gaussian-supremum}, which allows degenerate covariances; that lemma is the Borell--TIS inequality in the formulation of Adler and Taylor \cite[Theorem~2.1.1]{AdlerTaylor2007}. It provides a measurable, almost surely finite, and integrable supremum
+\[
+ Z_*=\sup_{\mathcal T}Z_{x,i,v}=\max_i\sup_x\abs{G_i(x)},\qquad m_*=\E Z_*<\infty,
+\]
+where the equality follows by taking the supremum over all unit vectors $v$. The law of $G$, and hence $m_*$ and $\sigma_*^2$, do not depend on $\gamma$, since the field has covariance $\gamma C$ and the covariance and the smoothing are fixed. When $\sigma_*^2>0$, the same lemma implies that
+\begin{equation}\label{ch32:eq:gaussian-supremum}
+ \Prob\{Z_*-m_*\ge u\}\le e^{-u^2/(2\sigma_*^2)}\qquad(u>0).
+\end{equation}
+
+The group distance of the transport along a path from the identity is at most the integral of the norm of its generator. This follows by partitioning the path, using the triangle inequality for the bi-invariant metric, and passing to the limit in the transport equation. Since each coordinate cycle has length $L$, we obtain
+\[
+ \Bigl(\sum_i\groupdist(H_i)^2\Bigr)^{1/2}\le\sqrt3L\sqrt\gamma Z_*.
+\]
+Since $Z_*$ is almost surely finite and its law does not depend on $\gamma$, all three holonomies lie in the logarithmic chart with probability tending to one. There the rescaled logarithm has norm at most $\sqrt3L\epsilon Z_*$, which tends to zero in probability. Quantitatively, fix $\delta>0$ and suppose that $\sigma_*^2>0$. For small $\gamma$ we have $\sqrt3L\epsilon m_*\le\delta/2$, and the ball of radius $\delta\epsilon$ about the identity, for the product of the group distances, lies in $\mathcal V$. By the transport bound and \eqref{ch32:eq:gaussian-supremum}, we have
+\begin{equation}\label{ch32:eq:gaussian-core-tail}
+ \begin{split}
+ \Prob\bigl\{H\notin\mathcal V\text{ or }(H\in\mathcal V,\ \abs{\Log H}/\epsilon>\delta)\bigr\}
+ &\le\exp\Bigl\{-\frac{(\delta/(\sqrt3L\epsilon)-m_*)^2}{2\sigma_*^2}\Bigr\}\\
+ &\le\exp\Bigl\{-\frac{\delta^2}{24L^2\sigma_*^2\sqrt\gamma}\Bigr\},
+ \end{split}
+\end{equation}
+with constants depending only on $\delta$, $L$, the covariance, and the smoothing. If $\sigma_*^2=0$, \cref{ch31:lem:gaussian-supremum} shows that the continuous process vanishes almost surely, and then $G=0$ and $H=(\Id,\Id,\Id)$ almost surely. Since the two tests are bounded and continuous at zero, we obtain
+\[
+ \E_{P_3}\mathcal I_{\gamma,\chi(\abs\cdot)}\longrightarrow\chi(0)>0,\qquad\E_{P_3}\mathcal I_{\gamma,W_\chi}\longrightarrow W_\chi(0)=-9\chi(0);
+\]
+to see this, we split each expectation according to whether the rescaled logarithm has norm at most $\delta$, use continuity at zero on this event, and bound the expectation on its complement by twice the supremum of the test times its probability. This gives the value $-9$ without any statement about densities of the nonlinear cycle logarithms.
+
+\paragraph{The mixture over the cone of commuting triples.}
+Here $P_5$ is the law of the vector $X=y+b\in\R^9$, and the statistic uses $\mathcal I^{\mathrm{coord}}$. Fix $\zeta>0$ with $\{\abs X<\zeta\}\subset\Log\mathcal V$. For a bounded test $\psi$ supported in $\{\abs Y\le R\}$ and $R\epsilon<\zeta$, we have the identity on all of $\R^9$
+\begin{equation}\label{ch32:eq:bgm-coordinate-window}
+ \mathcal I^{\mathrm{coord}}_{\gamma,\psi}(X)=\psi(X/\epsilon).
+\end{equation}
+Indeed, if the right side is nonzero, then $\abs X\le R\epsilon<\zeta$ and the indicator equals one; if it is zero, both sides vanish. This applies to $\psi=\chi(\abs\cdot)$ and $\psi=W_\chi$ simultaneously, with one bound on the supports. The observables therefore agree with the expectations computed below, even though the conditional Gaussians have unbounded support.
+
+We record the geometry and the normalization. Away from the tip, we write $y_i=\vartheta_iu$ and $s=\abs\Toron=\abs y>0$; in this proof and in \cref{ch32:rem:bundle-small-ball}, $s$ denotes this radius, not a transverse coordinate. For variations of $\Toron$ and $u$, the induced metric is $\abs{d\Toron}^2+s^2\abs{du}^2$, since $u\cdot du=0$, and the parametrization is two-to-one under the simultaneous change of sign. The volume of the cone is therefore
+\begin{equation}\label{ch32:eq:cone-volume}
+ \dvol_{\CommMan}(y)=\tfrac12s^4\,ds\,d\omega\,du,\qquad\omega=\Toron/s\in S^2,\quad u\in S^2,
+\end{equation}
+which is homogeneous of degree five and gives zero volume to the tip. The normal space $\NormalFiber y$ has dimension four, and $\ip yb=\sum_i\vartheta_i\,u\cdot b_i=0$, which gives
+\begin{equation}\label{ch32:eq:orthogonal-output}
+ \abs{y+b}^2=\abs y^2+\abs b^2.
+\end{equation}
+The computation proving \eqref{ch32:eq:normal-quartic}, applied with $a=\Toron/s$, gives
+\begin{equation}\label{ch32:eq:bgm-quartic}
+ Q(y+b)=Q_2(y,b)+\frac12\sum_{i<j}\abs{b_i\times b_j}^2,\qquad Q_2(y,b)=\frac12\abs y^2\abs b^2.
+\end{equation}
+These are identities on the normal bundle; they do not require uniqueness of the decomposition $X=y+b$.
+
+The conditional density in the fiber $\NormalFiber{y_0}$ is
+\[
+ (2\pi\gamma)^{-2}\det\Sigma(y_0)^{-1/2}\exp\bigl\{-b_0^{\mathsf T}\Sigma(y_0)^{-1}b_0/(2\gamma)\bigr\}\,db_0.
+\]
+We set $y_0=\epsilon y$, $b_0=\epsilon b$, and $C_\epsilon(y)=\epsilon^2\Sigma(\epsilon y)$, using that the normal spaces are constant along rays. Then $\dvol(y_0)=\epsilon^5\dvol(y)$ and $db_0=\epsilon^4db$, and since $\gamma=\epsilon^4$ we obtain the exact formula
+\begin{equation}\label{ch32:eq:rescaled-bg-density}
+ \epsilon^{-5}\E_{P_5}\varphi(X/\epsilon)=\int\varphi(y+b)\,\alpha(\epsilon y)(2\pi)^{-2}\det C_\epsilon(y)^{-1/2}e^{-b^{\mathsf T}C_\epsilon(y)^{-1}b/2}\dvol_{\CommMan}(y)\,db,
+\end{equation}
+where the prior is set to zero outside its neighborhood; on a compact set of outputs, this neighborhood eventually contains every $\epsilon y$ that occurs. By the assumptions on the covariance, we have, uniformly in the angular directions and for $y\ne0$,
+\[
+ C_\epsilon(y)\longrightarrow\abs y^{-2}\Id,\qquad c\abs y^{-2}\Id\le C_\epsilon(y)\le C\abs y^{-2}\Id.
+\]
+Hence the Gaussian density in \eqref{ch32:eq:rescaled-bg-density} tends to $\abs y^4e^{-Q_2(y,b)}$ and is bounded by $C\abs y^4$. If $\varphi$ is supported in the ball of radius $R$, then \eqref{ch32:eq:orthogonal-output} bounds both $\abs y$ and $\abs b$ by $R$. The continuity of $\alpha$ at the tip bounds $\alpha(\epsilon y)$ there and gives the limit $\alpha(0)$. The dominating integral is finite, since by \eqref{ch32:eq:cone-volume} its radial factor near zero is $s^8\,ds$, and each fiber is restricted to a bounded ball in four dimensions. In finitely many angular trivializations of the normal bundle, or with the intrinsic Gaussian density on each fiber, the dominated convergence theorem applies. Then \eqref{ch32:eq:rescaled-bg-density} gives the claimed limit with the normalization $(2\pi)^{-2}$ of $\BGMMeasure$.
+
+For $\Sigma=\NormalCov$, the explicit formula \eqref{ch01:eq:normal-covariance} gives $\NormalCov(y)=\abs y^{-2}\Id+O_\theta(1)$ uniformly in the angular directions: the term $m=0$ of each $d_i$ equals $e^{-2\theta\abs\Toron^2}\abs\Toron^{-2}$, since $R_i(0,\Toron)=1$, and the sum of the terms with $m\ne0$ is bounded for small $\abs\Toron$, since then $\lambda_m\ge c\abs m^2$ and $\abs{R_i}\le1$. After a fixed reduction of the neighborhood carrying the prior, this implies both bounds on the covariance and the relative limit, and \cref{ch27:thm:flowed-log-covariance} shows that $\NormalCov$ is positive definite and measurable there.
+
+By the same domination and \eqref{ch32:eq:orthogonal-output}, $\BGMMeasure$ is locally finite as a measure of the output $y+b$. Its integral against $\chi(\abs{y+b})$ is finite and strictly positive, for instance by considering an open set of the bundle with $\abs y>0$ and output radius in an interval on which $\chi>0$. By \eqref{ch32:eq:bgm-coordinate-window}, the denominator of the statistic satisfies
+\[
+ \E_{P_5}\mathcal I^{\mathrm{coord}}_{\gamma,\chi(\abs\cdot)}(X)\sim\epsilon^5\alpha(0)\int\chi(\abs{y+b})\,d\BGMMeasure>0.
+\]
+
+Under the dilation $(y,b)\mapsto(\lambda y,\lambda b)$, the measure $\dvol_{\CommMan}\,db$ is homogeneous of degree $5+4=9$, the factor $\abs y^4$ of degree four, and $Q_2$ of degree four. Changing variables in the compactly supported integral of $\chi(\lambda\abs{y+b})$ and differentiating at $\lambda=1$, we obtain
+\begin{equation}\label{ch32:eq:bundle-ward}
+ \int\bigl\{(4Q_2-13)\chi(\rho)-\rho\chi'(\rho)\bigr\}\,d\BGMMeasure=0,\qquad\rho=\abs{y+b}.
+\end{equation}
+The differentiation is justified on a common compact set of outputs by \eqref{ch32:eq:orthogonal-output}, with the integrable radial bound $Cs^8\,ds$. This change of variables includes the tip of the cone and needs no boundary term there. We apply the limit of the rescaled expectations to $W_\chi$ and $\chi(\abs\cdot)$, using \eqref{ch32:eq:bgm-coordinate-window}, and divide by the positive limit of the denominators. Combining \eqref{ch32:eq:bgm-quartic} and \eqref{ch32:eq:bundle-ward}, we find
+\[
+ \lim_{\gamma\downarrow0}\mathcal S_{\gamma,P_5}(\chi)=4+2\,\frac{\int\sum_{i<j}\abs{b_i\times b_j}^2\chi(\rho)\,d\BGMMeasure}{\int\chi(\rho)\,d\BGMMeasure}.
+\]
+The second term is strictly positive. To see this, take $\Toron$ in the third coordinate direction, a fixed color direction $u$, linearly independent $b_1,b_2\in u^\perp$, and $b_3=0$. Then $b\in\NormalFiber y$ and $b_1\times b_2\ne0$. Scaling $y$ and $b$ together, we place the output radius in an interval on which $\chi>0$. A neighborhood of this point in the bundle has positive measure, and on it $\chi>0$ and the polynomial $\sum_{i<j}\abs{b_i\times b_j}^2$ is positive. This proves the strict inequality.
+\end{proof}
+
+\begin{remark}\label{ch32:rem:bundle-small-ball}
+With the normalization of $\BGMMeasure$ in \cref{ch32:thm:corrected-reference-ward},
+\[
+ \BGMMeasure\{\abs{y+b}\le\rho\}=\frac{8\pi^2}{1287}\rho^{13}\bigl[1+O(\rho^4)\bigr]\qquad(\rho\downarrow0).
+\]
+Indeed, on the ball $\{\abs{y+b}\le\rho\}$ we have $0\le Q_2\le\rho^4/8$ by \eqref{ch32:eq:orthogonal-output}, and $e^{-Q_2}=1+O(\rho^4)$ uniformly there. The angular integral in \eqref{ch32:eq:cone-volume} is $(4\pi)^2/2=8\pi^2$, and the ball of radius $(\rho^2-s^2)^{1/2}$ in the four-dimensional fiber has volume $(\pi^2/2)(\rho^2-s^2)^2$. Hence
+\[
+ \begin{split}
+ \BGMMeasure\{\abs{y+b}\le\rho\}&=\pi^2\int_0^\rho s^8(\rho^2-s^2)^2\,ds\,\bigl[1+O(\rho^4)\bigr]\\
+ &=\pi^2\rho^{13}\Bigl(\frac19-\frac2{11}+\frac1{13}\Bigr)\bigl[1+O(\rho^4)\bigr]=\frac{8\pi^2}{1287}\rho^{13}\bigl[1+O(\rho^4)\bigr].
+ \end{split}
+\]
+This formula is not used elsewhere.
+\end{remark}
+
+\section{The main result on central holonomies}\label{ch32:sec:proof-central}
+
+We conclude by deducing \cref{s2:thm:central} from the results of this section.
+
+\begin{proof}[Proof of \cref{s2:thm:central}]
+Fix $L>0$, an odd integer $M\ge3$, an integer $n$ divisible by four, and $\theta>0$. By \cref{s2:thm:main} (part 5), proved in \cref{ch26:thm:full-M-ladder}, the measure $\lambda_\gamma=\lambda_{L,\gamma,[n]_M}$ depends only on $L$, $\gamma$, and the class $[n]_M$. We choose $J$ and the remaining parameters as in \cref{ch26:cor:common-ladder-family,ch30:def:paired-history}, so that $a_{\mathrm{map}}\sqrt B\le32/49$, and take $n_*=n$ and a comparison side $nB^{a}$ satisfying the lower bounds of \cref{ch32:def:core-insertions}. Then $\lambda_\gamma$ is the continuum measure of the sequence $(nB^K)_{K\ge0}$, and the results of this section apply with this comparison side in place of $n$; all choices depend only on $L$, $M$, $n$, and $\theta$. The observable $\mathcal I_{\gamma,\varphi}$ of \cref{s2:thm:central} is the observable of \cref{ch32:def:core-insertions}, with the extension by zero outside the fixed neighborhood $\mathcal V$ of the identity. With $\rho=\abs X/r_\gamma$, the statistic of part (3) of \cref{s2:thm:central} is the dilation statistic $\mathcal S_{\gamma,\lambda_\gamma}(\chi)$.
+
+Part (1) of \cref{s2:thm:central} is the ratio limit and the two-sided bound of \cref{ch32:thm:core-ratios-and-ward}. Parts (2) and (3) are the rates of \cref{ch32:thm:core-ratio-rates}, for invariant Lipschitz tests supported in the ball of radius $R$ and for the dilation statistic. Part (4) follows from \cref{ch32:thm:all-central-triples}, with $\mathcal V$ chosen invariant under simultaneous conjugation: at each fixed $\gamma$ the expectations near the eight central triples are equal, and hence parts (1)--(3) hold near each of them with the same constants. In all these results, the continuum limit is taken first, at fixed $\gamma$, and then $\gamma\to0$. The constants depend on $L$, $M$, $n$, $\theta$, and the test functions, but not on $\gamma$. The further statements after \cref{s2:thm:central} are \cref{ch32:thm:corrected-reference-ward,ch32:thm:finite-time-core,ch32:thm:central-quotient-path}.
+\end{proof}

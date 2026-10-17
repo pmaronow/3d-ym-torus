@@ -1,0 +1,1001 @@
+\chapter{Exponential-moment bounds between renormalization scales}\label{ch19:chapter}
+
+In this section, we prove exponential-moment bounds for sums of plaquette energies of block-averaged configurations. The bounds are uniform in the number of averaging steps between the lattice on which the measure is given and the lattice on which the energies are evaluated. The main result is \cref{ch19:thm:all-phase-window}. Under its hypotheses, fix a coupling ceiling $\Gamma>0$ and take the smallest side $u\ge n_{\min}(\Gamma)$. Let $b\in J\N_0$ with $0\le b\le j-1$, and let $\nu$ be either the Wilson measure on the lattice of side $n_b$ or a normalized stopped measure there at a preceding depth in $J\N_0$. The theorem states that the exponential moments under $\nu$ of the sum $Q_j^{\mathcal T}$ of the energies of the predecessor plaquettes of a chessboard tiling, \eqref{ch19:eq:cell-source}, are bounded by $\exp\{3C_vn_{j-1}^3+C_sn_{j-1}^2\log(1/g_{n_{j-1}})+C_b\}$. The constants are independent of $\gamma\in(0,\Gamma]$, of the lattice sides, and of $j-1-b$, and the expectation contains no small-field or regularity indicator. We also prove a chessboard estimate in which the regularity indicators stay inside the root (\cref{ch19:lem:marked-chessboard}). Finally, we compare the Wilson measure, restricted to the first $a$ conditions of the small-field event, with the stopped measures; this bounds the probability that the next condition fails, without conditioning on later scales (\cref{ch19:lem:original-prefix-onsets,ch19:lem:finite-ceiling-windows-and-prefixes}). The inputs are the large-field decomposition and the density bounds of \cref{ch18:chapter} (\cref{ch18:thm:history-cover,ch18:thm:slice-induction,ch18:thm:canonical-density}); the regional integration estimates of \cref{ch17:chapter} (\cref{ch17:thm:controlled-kernel,ch17:thm:real-scalar-ledger,ch17:lem:ambient-white-comparison}); the classical lower bound of \cref{ch08:thm:classical-cutoff,ch08:thm:compact-overlap}; the energy transport and predecessor geometry of \cref{ch04:thm:energy-near-contraction,ch04:lem:cones-and-cells}; the reference normalization of \cref{ch11:thm:terminal-anchor}; the chessboard estimate of \cref{ch03:thm:original-chessboard}; and, for the comparison of restrictions, \cref{ch11:thm:admitted-white-comparison,ch04:thm:small-curvature-admission}. The results are used in \cref{ch20:chapter} to prove the bound on large fields, \cref{s2:thm:large-field}.
+
+\Cref{ch19:sec:setting} states the main theorem and outlines its proof, \cref{ch19:sec:products,ch19:sec:energy,ch19:sec:completion,ch19:sec:source,ch19:sec:envelope} prove the estimates for one large-field decomposition, \cref{ch19:sec:summation} completes the proof, and \cref{ch19:sec:chessboard,ch19:sec:prefix} contain the chessboard estimate and the comparison of restrictions.
+
+\section{Setting and the main estimate}\label{ch19:sec:setting}
+
+\paragraph{Scales and couplings.}
+Fix $L>0$, an odd integer $M\ge3$, an integer $J\ge1$, and $B=M^J$. For $u\in4\N$ and $K\in\N_0$ let $N=uB^K$, $n_i=N/M^i$, and $V^i=T_M^iU$ for $0\le i\le JK$, where $T_M$ is the block averaging map of \cref{ch01:def:block-map}, including its Borel extension at the exceptional values. Increasing $i$ moves toward the infrared, and all the sides $n_i$ are divisible by four. One application of $T_M$ is an averaging step, and $J$ consecutive averaging steps form an RG step. The levels $i\in J\N_0$ are the boundaries of RG steps. At side $n$ the coupling is $h_n=g_n^2=\gamma/n$, as in \cref{ch01:def:ensemble}, so that $h_{n_{i+1}}=Mh_{n_i}$. All Haar measures in this section are probability measures.
+
+\paragraph{Plaquette energies.}
+For $A\in\SU$ let $\groupdist(A)\in[0,2\pi]$ be the distance from $A$ to $I$ in the bi-invariant metric of \cref{ch01:chapter}, and recall that $q(A)=1-(\tr A)/2$. On the whole group,
+\begin{equation}\label{ch19:eq:angle-cost}
+ \frac{\groupdist(A)^2}{2\pi^2}\le q(A)\le\frac{\groupdist(A)^2}{8},\qquad 0\le q(A)\le2.
+\end{equation}
+Indeed, if $t=\groupdist(A)/4\in[0,\pi/2]$, then $q(A)=1-\cos(2t)=2\sin^2t$ by \eqref{ch01:eq:haar-coordinates}, and $2t/\pi\le\sin t\le t$. For a set $\mathcal P$ of positive plaquettes at level $i$ and a configuration $V$ on the lattice of side $n_i$ we write
+\[
+ \mathcal S_i^{\mathcal P}(V)=\frac4{h_{n_i}}\sum_{p\in\mathcal P}q(V_p).
+\]
+If $\mathcal P$ is the set of all positive plaquettes, then $\mathcal S_i^{\mathcal P}(V)=S_W(V)/h_{n_i}$ is the Wilson exponent.
+
+\paragraph{The plaquette-energy sum.}
+For a set $\mathcal A$ of positive plaquettes at level $i+1$, let $\operatorname{Pa}(\mathcal A)$ be the union, counted once, of the plaquettes at level $i$ in the complete predecessor rectangles of the elements of $\mathcal A$ (\cref{ch04:thm:energy-near-contraction}). Let $1\le j\le JK$. For each of the eight tilings $\mathcal T$ of the level-$j$ lattice into cells of $2\times2\times2$ sites in \cref{ch04:lem:cones-and-cells}, and each cell $C\in\mathcal T$, let $\mathcal P_{j-1}(C)$ be the union of the complete predecessor rectangles of the six internal level-$j$ plaquettes of $C$, and let $\mathcal P_{j-1}^{\mathcal T}=\bigcup_{C\in\mathcal T}\mathcal P_{j-1}(C)$, counted once. By \cref{ch04:lem:cones-and-cells}, $\abs{\mathcal P_{j-1}(C)}\le24M^3$. For a configuration $V$ on the lattice of side $n_{j-1}$ we set
+\begin{equation}\label{ch19:eq:cell-source}
+ Q_j^{\mathcal T}(V)=\frac4{h_{n_{j-1}}}\sum_{p\in\mathcal P_{j-1}^{\mathcal T}}q(V_p)
+ =\mathcal S_{j-1}^{\mathcal P_{j-1}^{\mathcal T}}(V).
+\end{equation}
+This is the function that enters the chessboard estimate of \cref{ch19:sec:chessboard}.
+
+\paragraph{Initial measures.}
+Every estimate of this section starts from a probability measure $\nu$ on the configurations of some side $n_b$ of the hierarchy, which we call the initial measure. It is one of the following.
+\begin{enumerate}
+\item The Wilson measure $\nu=\mu_{n_b,\gamma}$, with partition function $Z_\nu=Z_{n_b,\gamma}$. It is not restricted to $D_r$.
+\item A normalized stopped measure at a depth $d_0\in J\N_0$,
+\[
+ d\nu=Z_\nu^{-1}\one_{D_r}e^{-E_{d_0,\mathrm{sat}}/h_{n_b}-R_{d_0,\mathrm{sat}}}\dH_{n_b},
+ \qquad
+ Z_\nu=\int_{D_r}e^{-E_{d_0,\mathrm{sat}}/h_{n_b}-R_{d_0,\mathrm{sat}}}\dH_{n_b},
+\]
+as in \cref{ch01:def:selected-law,ch11:thm:deep-buffer-law}. Here $E_{d,\mathrm{sat}}$ is the extension of the effective classical action $E_d$ to $D_\rho$ by gauge invariance (\cref{ch08:thm:compact-overlap}), and $R_{d,\mathrm{sat}}$ is the corresponding effective interaction. The partition function $Z_\nu$ is not centered: the value $R_{d_0}(I)$ is kept in it.
+\end{enumerate}
+
+\paragraph{Large-field decompositions.}
+We use the partition of \cref{ch18:thm:history-cover}. Given an initial measure $\nu$ and a stopping level, the support of $\nu$ is partitioned into finitely many Borel sets $\mathcal A_{\mathcal X}$, indexed by large-field decompositions $\mathcal X$. A decomposition is produced by testing the plaquettes of the iterates $T_M^\ell V$ in increasing order of the level $\ell$, and in a fixed order within one level. A plaquette $f$ at level $\ell_f$ is a recorded bad plaquette of $\mathcal X$ if $q_f\ge d_*$ and its full dependence set avoids the set excluded before it. The variables of that dependence set that are not yet frozen are then frozen at the beginning of the RG step containing the level $\ell_f$, together with a neighborhood, the excluded neighborhood of $f$, which is enlarged at each later RG step. We write $n_f=n_{\ell_f}$ for the side on which $f$ is recorded and $x_f=n_f/\gamma$. Away from the excluded regions, the renormalization group is run on block regions, in RG steps of $J$ averaging steps each, from the initial level to the stopping level; both levels are boundaries of RG steps. At the stopping level, of side $m$, the decomposition leaves a stopping field $c\in\SU^F$ on the set $F$ of links of the block region at the stopping level. We write $H=\Links m\setminus F$ for the other links of the stopping lattice, including the links across the boundary of the block region. For $z\in\SU^H$, we write $c\oplus z$ for the configuration on the stopping lattice that equals $c$ on $F$ and $z$ on $H$, and we call it a completion of $c$. The frozen coordinates $\Rec$ consist of all frozen group variables, each kept on the lattice of the scale at which it was frozen. The map $V\mapsto\mathscr O_T^{\mathcal X}(V)=(c,\Rec)$ records the stopping field and the frozen coordinates. For a nonnegative function $Q$ and $s\ge0$, we write
+\[
+ \eta_{\mathcal X}=(\mathscr O_T^{\mathcal X})_\#(\one_{\mathcal A_{\mathcal X}}\nu),
+ \qquad
+ \eta_{\mathcal X}^s=(\mathscr O_T^{\mathcal X})_\#(e^{sQ}\one_{\mathcal A_{\mathcal X}}\nu).
+\]
+For a Wilson initial measure, the first RG step of \cref{ch18:thm:history-cover} separates the frozen group variables adjacent to the block region from those deep inside the excluded regions. The latter are arbitrary elements of $\SU$; they are never inserted into an analytic function and enter only through an exact Wilson factor.
+
+The analytic estimates are applied at gauge representatives of the stopping field and the frozen coordinates that satisfy the domain conditions and the reconstruction identities of \cref{ch18:thm:slice-induction}. They are obtained from the representatives with small frozen coordinates at the stopping level by applying the reconstruction maps of the successive RG steps, and they also satisfy the identities for the insertion of frozen coordinates stated there. Below, we call them representatives satisfying the reconstruction identities.
+
+\Cref{ch19:tab:measures} lists the measures that occur in the proof of \cref{ch19:thm:all-phase-window}, with their total masses and normalizations. The measures $\eta_{\mathcal X}$, $\eta_{\mathcal X}^s$, and $\xi_T$ are not renormalized; they keep the partition function $Z_\nu$ of the initial measure.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Measures used in the proof of \cref{ch19:thm:all-phase-window}.}
+\label{ch19:tab:measures}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.27\textwidth}
+>{\raggedright\arraybackslash}p{.2\textwidth}
+>{\raggedright\arraybackslash}p{.2\textwidth}
+>{\raggedright\arraybackslash}p{.25\textwidth}@{}}
+\toprule
+Measure & Space & Total mass & Normalization \\
+\midrule
+Wilson initial measure $\mu_{n_b,\gamma}$ & $\Conf{n_b}$ & $1$ & $Z_{n_b,\gamma}$ \\
+Stopped initial measure & $D_r\subset\Conf{n_b}$ & $1$ & $Z_\nu$, not centered \\
+$\eta_{\mathcal X}$ & stopping fields and frozen coordinates & $\nu(\mathcal A_{\mathcal X})\le1$ & that of $\nu$ \\
+$\eta_{\mathcal X}^s$ & same as $\eta_{\mathcal X}$ & $\E_\nu[e^{sQ};\mathcal A_{\mathcal X}]$ & that of $\nu$ \\
+Reference measure $\xi_T$ (\cref{ch19:thm:classical-source-payment}) & $D_r\subset\Conf m$ & $m_T^{\mathbb T}\le1$ & prefactor $Z_\nu^{-1}e^{\Lambda_T^{\mathbb T}}$ \\
+Comparison measure $\widetilde\sigma_{\lambda,d,g}$ (\cref{ch19:thm:invariant-wilson-envelope}) & $\Conf m$ & finite & $\widehat Z_d(g)$, an integral over $D_r$ \\
+Frozen-coordinate measure $\rho_{\mathcal X}=w_{\mathcal X}H_{\mathcal X}$ & frozen coordinates & $\le1$ & Haar \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Dependence of constants.}
+The constants of the local analytic estimates have the dependence described in item~(3) of \cref{ch01:conv:constants}. They depend only on $M$, $J$, the larger construction domains and their radius ratios, the spatial and boundary decay rates, the density of variables, and the norm bounds. They are independent of $L$, $\gamma$, the lattice sides, the depth, the number of RG steps since a frozen coordinate was created, the shape and topology of the block regions, and the real values of the frozen coordinates in their domain. Where stated, they are also independent of the widths of the boundary layers and excluded neighborhoods chosen later; these widths enter only through explicit counts. The constants in the probability estimates have the dependence described in item~(4) of \cref{ch01:conv:constants}. They may in addition depend on $L$, a fixed coupling ceiling, the fixed parameters, and the finite family of stopping offsets, but not on the coupling below the ceiling, the sides, the depth, or the geometry, age, and frozen values of a decomposition. We claim no useful bound as $J\to\infty$.
+
+\paragraph{Thresholds.}
+Fix $d_{\mathrm{cut}}>0$ and set
+\[
+ d_*=d_{\mathrm{cut}}/2,\qquad c_E=1+C_M\pi\sqrt{2d_{\mathrm{cut}}},
+\]
+where $\delta_*$ and $C_M$ are the constants of \cref{ch19:thm:classical-source-payment}(a). For the chessboard estimate of \cref{ch19:lem:marked-chessboard} we assume $\pi\sqrt{2d_{\mathrm{cut}}}\le\delta_*$. In \cref{ch19:thm:all-phase-window}, these numbers enter only through the range of $s$ and the definition of the recorded bad plaquettes.
+
+\paragraph{The main estimate.}
+The constants $K_M,K_1,\kappa_*,\kappa_0,c_A^{\mathrm{act}},\alpha_W$ in the following theorem are defined in \cref{ch19:thm:classical-source-payment}; they depend only on $M$ and on the fixed classical data.
+
+\begin{theorem}\label{ch19:thm:all-phase-window}
+Fix $L>0$, an odd integer $M\ge3$, an integer $J\ge1$, and $B=M^J$, and fix parameters satisfying the hypotheses of \cref{ch17:thm:controlled-kernel,ch18:thm:history-cover,ch18:thm:slice-induction}. These include the coefficient-norm bounds at initialization, both substitution bounds \eqref{ch19:eq:history-freeze-gates}, the boundary-distance comparison, and the product domains verified in \cref{ch19:lem:covered-history-admission}. The cutoff amplitude $A_{\mathrm w}$ is fixed before the coupling ceiling $g_*<1$. Fix a finite nonempty set $\mathscr R\subset\N_0$ of stopping offsets, all remainders $0\le u_{\mathrm{ph}}<J$, the buffers containing their full dependence sets, and the bound $F_J$ of \cref{ch18:thm:history-cover} for the number of affected source plaquettes. Fix $\chi_*\ge1$ such that the ratio of every stopping side of this family to the requested side $n_{j-1}$ is at most $\chi_*$, and such that $n_b/n_{j-1}\le\chi_*$ whenever the stopping level lies at or below the initial level. Every iterate of $T_M$ that is used must belong to the given finite hierarchy, and only full RG steps are integrated.
+
+Let $K_M,K_1,\kappa_*,\kappa_0,c_A^{\mathrm{act}},\alpha_W$ be as in \cref{ch19:thm:classical-source-payment}, and put $K_W=48K_1/\alpha_W$ and $\theta=1/2$. Choose $s_0>0$, after $F_J$, such that
+\[
+ s_0\le\min\Bigl\{\frac12,\ \frac{\kappa_*}2c_E^{-(J-1)},\ \frac1{4K_W},\
+ \frac{\theta c_A^{\mathrm{act}}d_*}{16F_J},\ \frac{\kappa_0}{2K_M}\Bigr\}.
+\]
+Any further fixed decrease of $s_0$ is allowed. Then for every $0<\Gamma<\infty$ there exist $n_{\min}\in4\N$ and finite nonnegative constants $C_v,C_s,C_b$ with $C_s\ge9\chi_*^2$, chosen before the coupling, the side, and the depth, such that the following holds.
+
+Let $0<\gamma\le\Gamma$, $u\in4\N$ with $u\ge n_{\min}$, $K\in\N_0$, $N=uB^K$, $n_i=N/M^i$, $1\le j\le JK$, and $b\in J\N_0$ with $0\le b\le j-1$. Let $\nu$ be either the Wilson measure $\mu_{n_b,\gamma}$ or a normalized stopped measure on $\Conf{n_b}$ at a depth $aJ$, $a\in\N_0$. Then, for each of the eight tilings $\mathcal T$ and every $0\le s\le s_0$,
+\[
+ \log\E_\nu\exp\bigl\{sQ_j^{\mathcal T}(T_M^{j-1-b}V)\bigr\}
+ \le3C_vn_{j-1}^3+C_sn_{j-1}^2\log(1/g_{n_{j-1}})+C_b.
+\]
+This covers every remainder $u_{\mathrm{ph}}$, stopping levels at or below the initial level, an empty block region at the stopping level, and decompositions whose block region becomes empty before the stopping level and which are continued by empty RG steps.
+
+More precisely, a recorded bad plaquette $f$ created at side $n_f$ contributes at least $P_0x_f$ to the classical part of the exponent, where $x_f=n_f/\gamma$ and $P_0=4\theta c_A^{\mathrm{act}}d_*$. The plaquette-energy sum costs at most $8sF_Jx_f\le P_0x_f/4$ per recorded bad plaquette, and all the corrections assigned to $f$, from the normalization constants, the missing coordinates, the boundary bands, the substitutions, and the integration over the omitted links, are at most
+\[
+ C_{\mathrm{ch},J}^{\Gamma}(1+\log x_f)^2\le P_0x_f/4.
+\]
+Here one may take $C_{\mathrm{ch},J}^{\Gamma}=(1+\log_+\Gamma)C_{\mathrm{ch},J}^{\mathrm{base}}$, where $C_{\mathrm{ch},J}^{\mathrm{base}}$ depends only on the fixed parameters and the family of stopping offsets. Each decomposition retains the factor $\prod_fe^{-a_{\mathrm{act}}n_f/\gamma}$, with $a_{\mathrm{act}}=P_0/2$, and the sum of these factors over all decompositions is at most
+\[
+ \exp\Bigl\{\sum_\ell3n_\ell^3e^{-a_{\mathrm{act}}n_\ell/\gamma}\Bigr\},
+\]
+which is bounded uniformly in the depth once $u\ge n_{\min}$. At a stopping side $m=\chi n_{j-1}$ one has $g_m=g_{n_{j-1}}/\sqrt\chi$, and the only surface term is $9\chi^2n_{j-1}^2\log(1/g_{n_{j-1}})$.
+
+The constants $n_{\min},C_v,C_s,C_b$ have the dependence described in item~(4) of \cref{ch01:conv:constants}, with the fixed ceiling $\Gamma$, the fixed parameters, and the finite family of stopping offsets and remainders. They are independent of the coupling $\gamma\in(0,\Gamma]$, the sides, the depth, the position and the length $j-1-b$ of the range of scales, and the age, shape, topology, and frozen values of the decompositions. The constants of the local analytic estimates keep the dependence described in item~(3) of \cref{ch01:conv:constants}; the widths enter only through the displayed counts.
+\end{theorem}
+
+\begin{remark}
+There is no restriction on $j-b$, and the expectation contains no indicator of a cell condition or of a condition of the small-field event. Taking $b=0$ and $\nu=\mu_{N,\gamma}$ gives the estimate under the Wilson measure with its own partition function. The proof does not use the bounds on the Wilson measure at successive scales of \cref{ch20:chapter}, where the theorem is used in \cref{ch20:thm:common-parameters,ch20:thm:shell-induction}.
+\end{remark}
+
+\paragraph{Outline of the proof.}
+Fix $j$, $b$, and $\mathcal T$, and write $n=n_{j-1}$. If the planned stopping level lies at or below the initial level, then only a bounded number of averaging steps separates the initial lattice from level $j-1$, and the estimate follows from the partition-function bounds on the initial lattice. Otherwise we integrate full RG steps from level $b$ to a stopping level $t_{\mathrm{stop}}\le j-1$ and keep the remaining $v=j-1-t_{\mathrm{stop}}$ averaging steps inside the function $Q_j^{\mathcal T}\circ T_M^v$.
+
+\emph{Step 1: classical lower bounds.} Along a decomposition $\mathcal X$, the density of $\eta_{\mathcal X}$ at a representative satisfying the reconstruction identities is bounded by $e^{-E_T/g_m^2}$ times normalization factors, where $E_T$ is the effective classical action of the stopping field with all external classical exponents included (\cref{ch18:thm:slice-induction}). We reconstruct one configuration $U_*$ on the initial lattice with zero fluctuations. Using an energy transport estimate that is uniform in the number of averaging steps, we show that $E_T/g_m^2$ dominates both $\Psi_F(c)/g_m^2$, where $\Psi_F(c)$ is the minimum of $\alpha_WS_W(c\oplus z)$ over all values $z$ of the links in $H$, and $A_{\mathcal X}=c_A^{\mathrm{act}}\sum_f4q_f/h_{n_f}\ge4c_A^{\mathrm{act}}d_*\sum_fx_f$ (\cref{ch19:thm:classical-source-payment}). Since both lower bounds are gauge invariant, the density bound extends to all points (\cref{ch19:thm:invariant-wilson-envelope}).
+
+\emph{Step 2: the plaquette-energy sum.} At every point of $\mathcal A_{\mathcal X}$, the plaquette-energy sum is at most $K_W\Psi_F(c)/g_m^2+8F_J\sum_fx_f$ (\cref{ch19:lem:compact-wilson-source-cap}). Since $sK_W\le1/4$, the factor $e^{sQ}$ is absorbed by the factor $e^{-\Psi_F(c)/(2g_m^2)}$, which leaves at least $e^{-\Psi_F(c)/(4g_m^2)}$. The minimum is then replaced by a Haar integral over the links in $H$, which adds $3\abs H\log(1/(c_*g_m))$ to the exponent (\cref{ch19:lem:compact-wilson-completion}).
+
+\emph{Step 3: summation over decompositions.} Each recorded bad plaquette contributes $-P_0x_f$ to the exponent. All normalization corrections, boundary terms, substitution terms, and the correction from the integration over the omitted links can be assigned to recorded bad plaquettes, and the corrections assigned to $f$ are at most $C(1+\log x_f)^2$. For a large minimum side, they are absorbed by $P_0x_f/4$. This leaves a factor $e^{-P_0x_f/2}$ per recorded bad plaquette, and the sum over decompositions converges uniformly in the depth. The remaining ratio of a Wilson integral to the reference partition function on the stopping lattice is at most $e^{Cm^3+9m^2\log(1/g_m)}$ (see \cref{ch19:rem:surface-term}).
+
+The number of ultraviolet scales causes no accumulated loss, for the following reason. A recorded bad plaquette created at side $n_f$ has $q_f\ge d_*$, and therefore contributes at least a fixed multiple of $x_f=n_f/\gamma$ to the classical action. At each later RG step, its excluded neighborhood contains a number of variables bounded independently of the scale, and there are at most $O(1+\log n_f)$ later RG steps. Each missing Gaussian coordinate changes the normalization by $\log(1/g_i)=\log(n_i/\gamma)/2\le(\log x_f)/2+O(1)$, and each other correction is bounded per variable. The total correction is therefore $O_\Gamma((1+\log x_f)^2)$, which is small compared to $x_f$ once $x_f$ is large.
+
+We distinguish two sets attached to a recorded bad plaquette $f$; see \cref{ch19:fig:sets}. The first is its energy-estimate predecessor set $\mathcal B_f$ on the initial lattice, which carries the classical lower bound for $q_f$. These sets are disjoint for recorded bad plaquettes at different levels and overlap at most $48$ times at one level. The second is the full excluded neighborhood assigned to $f$, which is much larger and may overlap with the neighborhoods of other recorded bad plaquettes. Source plaquettes whose full dependence sets meet such a neighborhood are discarded, and their number per recorded bad plaquette is bounded by $F_J$.
+
+\begin{figure}[htbp]
+\centering
+\setlength{\unitlength}{1mm}
+\begin{picture}(120,62)
+\put(0,0){\framebox(120,62){}}
+\put(8,8){\dashbox{1.5}(58,46){}}
+\put(10,50){\small excluded neighborhood of $f$}
+\put(24,18){\framebox(22,20){}}
+\put(25.5,34.5){\small $\mathcal B_f$}
+\put(33,25){\rule{4mm}{4mm}}
+\put(38,25.5){\small $f$}
+\put(58,28){\framebox(22,12){}}
+\put(68,30){\small $D(p_1)$}
+\put(88,12){\framebox(20,12){}}
+\put(89.5,14){\small $D(p_2)$}
+\end{picture}
+\caption{Schematic picture of the sets attached to a recorded bad plaquette $f$, drawn at one scale. The energy-estimate predecessor set $\mathcal B_f$ carries the lower bound for the action. The source plaquette $p_1$ is discarded because its full dependence set $D(p_1)$ meets the excluded neighborhood of $f$; the source plaquette $p_2$ is kept because $D(p_2)$ consists only of links of the block region at the stopping level.}
+\label{ch19:fig:sets}
+\end{figure}
+
+\section{Product domains along a large-field decomposition}\label{ch19:sec:products}
+
+The following lemma checks that the regional integration estimates of \cref{ch17:chapter}, on which the density bounds of \cref{ch18:thm:slice-induction} rest, apply along an arbitrary large-field decomposition. Only the small frozen coordinates are substituted into analytic functions (\cref{ch18:thm:history-cover,ch18:thm:slice-induction}).
+
+\begin{lemma}\label{ch19:lem:covered-history-admission}
+Fix $A_{\mathrm w}\ge1$ first, and then fix parameters satisfying the hypotheses of \cref{ch17:thm:controlled-kernel,ch18:thm:history-cover}, including the product domains and the coefficient-norm bounds at initialization in \cref{ch18:thm:slice-induction}. Let $\mathcal X$ be a large-field decomposition whose initial and stopping levels are boundaries of RG steps, with $T$ integrated RG steps. Then every integrated step consists of $J$ averaging steps, the total number of integrated averaging steps is $JT$, and \cref{ch17:thm:controlled-kernel,ch17:thm:real-scalar-ledger,ch17:lem:ambient-white-comparison} apply at the gauge representatives of $\mathcal X$ satisfying the domain conditions and reconstruction identities of \cref{ch18:thm:slice-induction}, with the frozen coordinates satisfying the bounds of \cref{ch18:thm:history-cover}. In each such application the fluctuation cutoff domain is
+\begin{equation}\label{ch19:eq:implemented-history-product}
+ \mathcal W_t=\prod_{i=0}^{J-1}\prod_e\{\abs{w_{i,e}}\le p(t_t)\},\qquad
+ t_t=\max_ig_{t,i},\qquad p(t)=A_{\mathrm w}\log(1/t),
+\end{equation}
+where $g_{t,i}$ is the coupling of the $i$-th averaging step of the $t$-th RG step. The coupling ceiling may depend on the fixed amplitude $A_{\mathrm w}$; this does not change the constants of the local analytic estimates or the bounds that are uniform before $J$ is chosen. The conclusion is uniform in the number of RG steps since the creation of the frozen coordinates and in the real values of the frozen coordinates in their stated domain, including the first step for a Wilson initial measure. No derivative with respect to a frozen coordinate is involved.
+\end{lemma}
+
+\begin{proof}
+The cutoff amplitude is fixed before the coupling ceiling of \cref{ch17:thm:controlled-kernel} is chosen. By \cref{ch18:thm:slice-induction}, every integrated step has $J$ averaging steps, and \eqref{ch19:eq:implemented-history-product} holds. If $m_t$ is the output side of an RG step, then
+\[
+ t_t^2=\gamma/(Mm_t),\qquad g_{t,i}=t_tM^{(i-J+1)/2}\quad(0\le i<J).
+\]
+In particular, the radii $p_{t,i}=p(t_t)$ used in the small-field event belong to the family of radii allowed in \cref{ch17:thm:controlled-kernel},
+\[
+ p(t_t)\le p_{t,i}\le p(t_t)+c_J^{\log},\qquad c_J^{\log}=\tfrac12A_{\mathrm w}(J-1)\log M.
+\]
+The larger enclosing product domain is used only in the comparison of \cref{ch17:lem:ambient-white-comparison}; its radii do not replace the radii $p(t_t)$.
+
+We now check the conditions on the coupling for this logarithmic family, which contains the common radius as a special case. Let $p^+(t)=p(t)+c_J^{\log}$. The condition that the cutoff domain lies in the enclosing product domain is $tp^+(t)<R_{\mathrm{en}}$. With the local constants of \cref{ch17:thm:controlled-kernel}, and with $E+\sigma_*$ for the norm bound of the input effective interaction, the small-interaction condition and the condition on the auxiliary complex parameter domain required there read
+\begin{equation}\label{ch19:eq:logarithmic-product-gates}
+ \begin{gathered}
+ C_Jtp^+(t)\le\tfrac12,\qquad
+ \frac{C_Jt[(p^+(t))^3+p^+(t)+(E+\sigma_*)p^+(t)]}{1-C_Jtp^+(t)}\le\epsilon_J,\\
+ 2t[(p^+(t))^3+p^+(t)+(E+\sigma_*)p^+(t)]\le c_{z,J}.
+ \end{gathered}
+\end{equation}
+These are the expansion conditions of \cref{ch17:thm:controlled-kernel}, and by the same choice of parameters the denominators of its rational image bounds are positive on the outer product domains. With $v=\log(1/t)$, every term of the form $t^k(p^+(t))^q$ with $k>0$ equals $e^{-kv}(A_{\mathrm w}v+c_J^{\log})^q$, which tends to zero as $v\to\infty$. Hence one fixed ceiling on $t$ gives the containment, all the inequalities \eqref{ch19:eq:logarithmic-product-gates}, and the required smallness of the perturbative term
+\[
+ C_Jt^2(E+\sigma_*)\bigl[(p^+(t))^4+(E+\sigma_*)(p^+(t))^2\bigr].
+\]
+This ceiling is one of the fixed parameters. Since $g_*<e^{-1}$ and $A_{\mathrm w}\ge1$, the radii $p(t_t)$ are at least one. At each fixed value of the frozen coordinates, the bound for the conditional mean in \cref{ch17:lem:ambient-white-comparison} stays uniformly below the cutoff radius: the ratio of the mean bound to $p(t)$ is at most $C_1t(\mathcal L_V+2)/p(t)$, which tends to zero. Together with the containment, this verifies the hypotheses of the tail estimate of \cref{ch17:lem:ambient-white-comparison} on the chosen cutoff domain.
+
+We also verify the measure-theoretic hypotheses of that comparison, at every fixed real value of the frozen coordinates and every fixed coarse background. The enclosing product domain $\mathcal K_t$ is a finite product of closed balls of positive radius in $\R^3$, so it is Borel, compact, and of finite positive Lebesgue volume. The conditional fluctuation potential $V$ given by \cref{ch17:thm:controlled-kernel} is real and of class $C^2$ on a neighborhood of $\mathcal K_t$, because the image bounds keep its inverse maps, Jacobians, and positive Hessian determinants within their domains. Thus there exist finite real numbers $v_-\le v_+$, which may depend on the fixed background and frozen coordinates, such that $v_-\le V\le v_+$ on $\mathcal K_t$. In particular,
+\begin{equation}\label{ch19:eq:ambient-finite-normalizer}
+ 0<e^{-v_+}\abs{\mathcal K_t}\le Z_{\mathcal K_t}=\int_{\mathcal K_t}e^{-V}\,dw\le e^{-v_-}\abs{\mathcal K_t}<\infty.
+\end{equation}
+The set $S$ of supported fluctuation coordinates is the inverse image under a Borel coordinate map of the finitely many tests of the decomposition and of the coordinate domains, and the cutoff domain $\mathcal W_t$ is defined by finitely many inequalities; both are Borel. Every indicator or optional test $0\le\chi\le1$ that is kept is Borel, and $e^{-V}$ is positive and Borel. The Haar disintegration, Gaussian, and constant prefactors are identical on both sides of the comparison. Since these checks are made at each fixed preceding output point and fixed frozen coordinates, no uniform bound on $v_\pm$ is needed. If there are no fluctuation blocks, the product domain is a point of mass one; its partition function is positive and finite, its determinant is one, and its logarithmic determinant is zero.
+
+For the substitution of frozen coordinates into analytic functions, \cref{ch18:thm:history-cover} includes the initial bound for finite products of links and all conversion constants in $C_{\mathrm{conv},J}\ge C_{\mathrm{ad},J}$. At the representatives of the lemma, we have, at each scale at which variables are frozen and for both spatially varying radii $\phi_{\mathrm{cl}},\phi_{\mathrm q}$,
+\begin{equation}\label{ch19:eq:history-freeze-gates}
+ \abs{c_j^\sharp}\le\min\{\beta_{\mathrm{rec}},\phi_\bullet(j)/4\},\qquad
+ C_{\mathrm{bc},\bullet}E_\bullet\beta_{\mathrm{rec}}/\rho_\bullet\le\sigma_*/4,
+ \qquad\bullet\in\{\mathrm{cl},\mathrm q\}.
+\end{equation}
+For a frozen group variable $b_j$ kept on the lattice where it was frozen, we have $c_j^\sharp=\Log b_j$ in the identity chart, and hence $\abs{c_j^\sharp}=\groupdist(b_j)$. A longer fixed product of links uses the conversion included in $C_{\mathrm{conv},J}$, which is fixed before $\beta_{\mathrm{rec}}$ and $r$. At initialization, for a stopped initial measure, we use the bound by $r$ coming from $D_r$, together with $C_{\mathrm{ad},J}r<\beta_{\mathrm{rec}}$; for a Wilson initial measure, the bound for the frozen variables adjacent to the block region is the other initialization clause of \cref{ch18:thm:history-cover}. The bound \eqref{ch19:eq:history-freeze-gates} covers all frozen variables, including the boundary band, the boundary neighborhoods, the links across the boundary of the block region, and the initialization, and its constant $C_{\mathrm{bc},\bullet}$ includes the sum over all these types. The arbitrary frozen group variables deep inside excluded regions are fixed external parameters and are not inserted into analytic functions.
+
+All variables in the band of reduced analytic radius are frozen. Thus every variable that remains in the incoming block region $D_{\mathrm{in},t}$ has the classical radius $\rho_{\mathrm{cl}}$, and the incoming norm of the classical perturbation in the coefficient-norm bounds is evaluated at that radius; the spatially varying radius is used only for the output. By \cref{ch18:thm:history-cover}, the old fixed complement and the points of creation of frozen variables remain in the fixed complement of the next block region, up to the fixed buffer of the finite link products. In the current units, the incoming and current distances to the fixed complement satisfy
+\[
+ d_{D_{\mathrm{in},t}}(i)\ge Bd_{\mathrm{current}}(e)-B\dist(e,i/B)-C_{\mathrm{buf},J},
+\]
+where $i$ is the point of creation of an incoming variable, $e$ is a current point, and $C_{\mathrm{buf},J}$ is the fixed buffer constant. This is the boundary-distance comparison required in \cref{ch18:thm:slice-induction} (compare \cref{ch16:thm:controlled-perturbation}); enlarging the fixed complement preserves the inclusion, and at initialization there is no boundary. The uniform bound on the conditional force kept in that induction is the following condition on the same product domains:
+\begin{equation}\label{ch19:eq:history-conditional-force}
+ \begin{gathered}
+ \delta_{V,t}=\max_I\sup_{y\in\mathcal T_I}
+ \bigl\lVert A_I^{-1}V_I(c,a_I(c,y;\xi),y)\bigr\rVert_{\mathrm{coeff}},\\
+ C_{\mathrm{seq},J}(2\delta_{V,t}+r_q)<\tfrac12\varepsilon_{\mathrm{tube}}.
+ \end{gathered}
+\end{equation}
+Here $I$ runs over the finitely many initial segments of the conditional integrations, $A_I$ is the positive reference block of the segment $I$, $a_I$ is its conditional constrained minimizer without perturbation, $V_I$ is the $z_I$-derivative, in the original free coordinates, of the added force $V$ of \eqref{ch18:eq:force-function}, $\mathcal T_I$ is the domain of the remaining parameters, and $r_q$ is the fixed radius of the free coordinates. The coefficient norm includes the common product domain of the coarse fields, uniformly at fixed real frozen coordinates. The condition \eqref{ch19:eq:history-conditional-force} is a hypothesis on the product domains in \cref{ch18:thm:slice-induction} (see \cref{ch16:lem:admitted-products}), uniform on the prescribed ball of classical perturbations; it is part of the fixed parameters and is verified in \cref{ch20:chapter}, see \eqref{ch20:eq:conditional-force-gate}. The supremum is over every remaining parameter used in the sequential construction, not only over the point with zero fluctuations, and all real frozen coordinates are held fixed. Hence the image bounds and the sequential containment used in the induction hold on their stated domains.
+
+Finally, $x_0,x_0^{\mathrm{cl}}\le\sigma_*$ are the coefficient-norm hypotheses of the induction at initialization, including the substitution at initialization. Its constants are those of the perturbed maps: $K_{\mathrm{col},J}$ in \cref{ch17:thm:controlled-kernel} bounds the columns of the perturbed zero-fluctuation map uniformly on the larger perturbation domain, and we use the resulting $K_J$ in the output bound of that theorem and in its choice of the width $s_{\mathrm{er}}$ of the boundary layer removed at each step. By the substitution bounds \eqref{ch19:eq:history-freeze-gates}, we have $z_t,z_t^{\mathrm{cl}}\le\sigma_*/4$, and the choice of $s_{\mathrm{er}}$ gives $2e^{-\alpha(s_{\mathrm{er}}-1)}y_t\le\sigma_*/2$, with the same inequality for the classical output bound. Thus both incoming norms at the next boundary are at most $3\sigma_*/4<\sigma_*$, and by induction the coefficient-norm hypothesis holds after any number of RG steps. Since every integrated step is a full RG step, \cref{ch17:thm:real-scalar-ledger} applies at every step, including its incoming value and the initialization.
+
+The sets of such representatives in \cref{ch18:thm:slice-induction} start from the representatives at which the bounds on the frozen coordinates just checked hold, and they contain every supported fiber point over each preceding output point. A gauge transformation acting independently at the endpoints of the frozen variables need not preserve the bound on their logarithms. We therefore use analytic estimates only on these sets, and we use the pointwise gauge covariance of \cref{ch18:thm:canonical-density} only after a gauge-invariant upper bound has been obtained. This verifies the hypotheses for both initial measures.
+\end{proof}
+
+\section{Energy transport, feasible configurations, and the reference normalization}\label{ch19:sec:energy}
+
+The next theorem collects the classical estimates: (a) is used in \cref{ch19:sec:source,ch19:sec:chessboard}, (b) in \cref{ch19:sec:envelope}, and (c) in \cref{ch19:sec:summation}.
+
+\begin{theorem}\label{ch19:thm:classical-source-payment}
+Fix an odd integer $M\ge3$.
+\begin{enumerate}
+\item[(a)] There are $\delta_*(M)>0$ and $C_M<\infty$, depending only on $M$, such that for every level $i$, every set $\mathcal P'$ of positive plaquettes at level $i+1$, every configuration $V$ at level $i$, and every $\delta$,
+\[
+ \max_{p\in\operatorname{Pa}(\mathcal P')}\groupdist(V_p)\le\delta\le\delta_*
+ \quad\Longrightarrow\quad
+ \mathcal S_{i+1}^{\mathcal P'}(T_MV)\le(1+C_M\delta)\,\mathcal S_i^{\operatorname{Pa}(\mathcal P')}(V).
+\]
+Under this hypothesis no based loop holonomy in these predecessor rectangles equals $-I$, so all the logarithms in the definition of $T_M$ there are the analytic ones. Define
+\[
+ B_*=\min\Bigl\{\frac{\delta_*^2}{\pi^2},\Bigl[\frac{(\sqrt M-1)\log2}{\pi C_M}\Bigr]^2\Bigr\},
+ \qquad\sigma(b)=\frac{\pi C_M\sqrt b}{\sqrt M-1}.
+\]
+Let $\ell\ge0$ be such that the side at level $\ell$ is at least four, let $\mathcal P_\ell$ be a set of positive plaquettes at level $\ell$, and let $\mathcal P_i=\operatorname{Pa}(\mathcal P_{i+1})$ for $0\le i<\ell$; we call the $\mathcal P_i$ the energy-estimate predecessor sets of $\mathcal P_\ell$. Then for every configuration $U$ at level $0$ and every $0<b\le B_*$,
+\begin{equation}\label{ch19:eq:cone-transport}
+ \mathcal S_\ell^{\mathcal P_\ell}(T_M^\ell U)\le\max\{e^{\sigma(b)},8\abs{\mathcal P_\ell}/b\}\,\mathcal S_0^{\mathcal P_0}(U).
+\end{equation}
+This holds for every holonomy and with the Borel extension of $T_M$. If $\mathcal S_0^{\mathcal P_0}(U)\le b/h_{n_\ell}$, then for $0\le i\le\ell$ every plaquette in $\mathcal P_i$ has angle at most $\pi\sqrt b\,M^{-(\ell-i)/2}$, and the factor in \eqref{ch19:eq:cone-transport} can be replaced by $e^{\sigma(b)}\le2$. If $q<d_{\mathrm{cut}}$ for every plaquette in $\mathcal P_\ell$, then $8\abs{\mathcal P_\ell}/b$ may be replaced by $4\abs{\mathcal P_\ell}d_{\mathrm{cut}}/b$. Let $p_M\le24M^3$ be the largest number of plaquettes in a set $\mathcal P_{j-1}(C)$, and put
+\[
+ K_M=\max(2,8p_M/B_*),\qquad K_1=\max(2,8/B_*).
+\]
+Then for $0\le k\le j-1$ and every configuration $V$ at level $k$, and for every depth $\ell$,
+\[
+ Q_j^{\mathcal T}(T_M^{j-1-k}V)\le K_M\frac{S_W(V)}{h_{n_k}},\qquad
+ \frac{S_W(T_M^\ell U)}{h_{n_\ell}}\le48K_1\frac{S_W(U)}{h_{n_0}}.
+\]
+These constants are independent of the depth, the side, $J$, $L$, $\gamma$, and the geometry. The factor $K_M$ may be replaced by $2$ only if $q<d_{\mathrm{cut}}$ for all the relevant plaquettes at level $j-1$ and $4p_Md_{\mathrm{cut}}\le B_*$.
+
+\item[(b)] Let $\mathcal X$ be a large-field decomposition as in \cref{ch18:thm:slice-induction}, with $\ell$ integrated averaging steps and stopping side $m$, and let $g_{\mathrm{base}}^2=\gamma/n_b$ be the coupling of the initial lattice. At every representative $(\widehat c,\widehat\Rec)$ satisfying the domain conditions and reconstruction identities of \cref{ch18:thm:slice-induction}, the zero-fluctuation reconstructions of the successive RG steps, with the frozen coordinates inserted at the scales at which they were frozen, give one configuration $U_*$ on the initial lattice such that
+\[
+ (T_M^\ell U_*)|_F=\widehat c,\qquad
+ \frac{E_T(\widehat c;\widehat\Rec)}{g_m^2}=\frac{\mathcal E_{\mathrm{base}}(U_*)}{g_{\mathrm{base}}^2},\qquad
+ g_m^2=M^\ell g_{\mathrm{base}}^2.
+\]
+Here $E_T$ is the effective classical action of the stopping field after all external classical exponents have been incorporated once into the classical exponent. For a stopped initial measure, $U_*\in D_\rho$ and $\mathcal E_{\mathrm{base}}=E_{d_0,\mathrm{sat}}$ on this larger gauge-invariant domain; for a Wilson initial measure, $U_*$ is a configuration in $\Conf{n_b}$ and $\mathcal E_{\mathrm{base}}=S_W$. Consequently
+\[
+ E_T(\widehat c;\widehat\Rec)\ge M^\ell\inf\bigl\{\mathcal E_{\mathrm{base}}(U):U\in\mathcal S,\ (T_M^\ell U)|_F=\widehat c\bigr\},
+\]
+where $\mathcal S=D_\rho$ or $\mathcal S=\Conf{n_b}$, respectively. No minimizer in $D_r$ is asserted.
+
+Let $\kappa_*>0$ be such that $E_{d,\mathrm{sat}}\ge\kappa_*S_W$ on $D_\rho$ for every depth $d\ge0$ (\cref{ch08:thm:classical-cutoff,ch08:thm:compact-overlap}), and set
+\[
+ \kappa_0=\min(1,\kappa_*),\qquad
+ c_A^{\mathrm{act}}=\alpha_W=\frac{\kappa_0}{48K_1},\qquad
+ \mathcal V_m=\alpha_WS_W.
+\]
+The two names $c_A^{\mathrm{act}}$ and $\alpha_W$ denote the same number, in its two roles below. For $c\in\SU^F$ and for frozen coordinates $\Rec$ put
+\[
+ \Psi_F(c)=\mathcal V_{m;F}(c)=\min_{z\in\SU^H}\mathcal V_m(c\oplus z),
+ \qquad
+ A_{\mathcal X}(\Rec)=c_A^{\mathrm{act}}\sum_{f\in\mathcal X}\frac{4q_f(\Rec)}{h_{n_f}},
+\]
+where $q_f(\Rec)$ is the energy of the recorded bad plaquette $f$, a function of the frozen coordinates because the full dependence set of $f$ is frozen. Then, at the same representative,
+\begin{equation}\label{ch19:eq:two-lower-bounds}
+ \frac{E_T}{g_m^2}\ge\frac{\Psi_F(\widehat c)}{g_m^2},\qquad
+ \frac{E_T}{g_m^2}\ge A_{\mathcal X}(\widehat\Rec),
+\end{equation}
+and
+\[
+ A_{\mathcal X}(\Rec)\ge4c_A^{\mathrm{act}}d_*\sum_{f\in\mathcal X}\frac{n_f}\gamma
+ \qquad\text{on }I_{\mathcal X}^{\mathrm{act}}=\{q_f(\Rec)\ge d_*\text{ for all }f\in\mathcal X\}.
+\]
+
+\item[(c)] Use the full-torus recursion of the stopped measures (\cref{ch11:thm:deep-buffer-law}) with the same RG steps as the decomposition; we call it the reference recursion. At a depth $d\ge0$ of the reference recursion on the stopping lattice put
+\[
+ \widehat Z_d(g)=\int_{D_r}e^{-E_{d,\mathrm{sat}}/g^2-[R_{d,\mathrm{sat}}-R_d(I)]}\dH_m,\qquad g^2=\gamma/m.
+\]
+The restriction of the initial measure to the small-field conditions of the reference recursion and its pushforward to the stopping lattice has the form
+\[
+ d\xi_T=Z_\nu^{-1}e^{\Lambda_T^{\mathbb T}}\one_{D_r}e^{-E_{d,\mathrm{sat}}/g^2-[R_{d,\mathrm{sat}}-R_d(I)]}\dH_m,
+\]
+where $\Lambda_T^{\mathbb T}$ is the normalization constant of the reference recursion; for a Wilson initial measure, only this reference measure is restricted to $D_r$ at the start. With $m_T^{\mathbb T}=\xi_T(1)\le1$, one has exactly
+\begin{equation}\label{ch19:eq:reference-identity}
+ \frac{e^{\Lambda_T^{\mathbb T}}}{Z_\nu}=\frac{m_T^{\mathbb T}}{\widehat Z_d(g)}\le\widehat Z_d(g)^{-1}.
+\end{equation}
+All Haar disintegration, Gaussian, cluster expansion, and substitution constants are included in $\Lambda_T^{\mathbb T}$, and for a stopped initial measure $\Lambda_0^{\mathbb T}=-R_{d_0}(I)$.
+
+For every fixed $0<\lambda_0\le\lambda_1<\infty$ there are $C,C',C''<\infty$, uniform in the depth $d$ of the reference recursion, in $m$, and in $0<g\le g_*<1$, such that
+\[
+ \widehat Z_d(g)\ge e^{-C3m^3}g^{3(2m^3+1)},\qquad
+ \int e^{-\lambda\mathcal V_m/g^2}\dH_m\le e^{C'3m^3}g^{3(2m^3-3m^2+1)}
+\]
+for $\lambda\in[\lambda_0,\lambda_1]$ with $4\lambda\alpha_W/g^2\ge1$. Consequently the logarithm of the ratio of these two integrals is at most $C''3m^3+9m^2\log(1/g)$. The normalized stopped measure $\widehat\nu$ on the stopping lattice, with the same support $D_r$, satisfies
+\[
+ \log\E_{\widehat\nu}e^{vS_W/g^2}\le C''3m^3+9m^2\log(1/g),\qquad 0\le v\le\kappa_*/2.
+\]
+For fixed $0<\lambda_0\le1$, the quantity
+\[
+ \widehat Z_d(g)^{-1}\int_{D_r}e^{-\lambda(E_{d,\mathrm{sat}}/g^2+R_{d,\mathrm{sat}}-R_d(I))+vS_W/g^2}\dH_m,
+ \qquad\lambda\in[\lambda_0,1],\quad0\le v\le\lambda_0\kappa_*/2,
+\]
+satisfies the same bound with a larger volume constant. In each of these ratios the boundary correction $9m^2\log(1/g)$ occurs once. The denominator is always the integral over exactly $D_r$; the periodic boundary plaquettes are deleted only in the upper bound for the numerator.
+\end{enumerate}
+The constants of the reconstruction and of the normalization constants have the dependence described in item~(3) of \cref{ch01:conv:constants}, excluding the widths chosen later. The constants in~(c) depend on the fixed domains on the torus, $r$, the norm bounds, and the interval $[\lambda_0,\lambda_1]$ of action coefficients, not on the depth, the side, or the coupling. Applications to probability estimates have the dependence described in item~(4) of \cref{ch01:conv:constants}.
+\end{theorem}
+
+\begin{remark}\label{ch19:rem:surface-term}
+The factor $g^{-9m^2}$ in~(c) comes from a count of independent coordinates. The periodic lattice of side $m$ has $3m^3$ links and $m^3$ sites, so the complement of a spanning tree has $2m^3+1$ links; restricting each of them to a ball of radius proportional to $g$ in $\SU$, a group of dimension three, gives the lower bound $g^{3(2m^3+1)}$ for $\widehat Z_d(g)$. The open cube with $m$ sites per side, used for the numerator, has $3m^2(m-1)$ links and $m^3$ sites, hence $2m^3-3m^2+1$ links outside a spanning tree, which give the upper bound $g^{3(2m^3-3m^2+1)}$. The difference $3[(2m^3+1)-(2m^3-3m^2+1)]=9m^2$ is a boundary correction in an inequality; it is not an identification of a physical quantity. At a side $m=\chi n$ it becomes $9\chi^2n^2\log(1/g_n)+(9/2)\chi^2n^2\log\chi$. Gauge fixing along a tree, deleting nonnegative plaquette terms, and factorizing one-plaquette integrals are elementary stability arguments in the tradition of Faria da Veiga and O'Carroll \cite{FariaVeigaOCarroll2019,FariaVeigaOCarroll2025}; the precise periodic and open counts used here are proved in \cref{ch11:thm:terminal-anchor}, with the open-cube estimate of \cref{ch03:lem:open-normalization}.
+\end{remark}
+
+\begin{proof}[Proof of \cref{ch19:thm:classical-source-payment}(a)]
+We write $h_i=h_{n_i}$ within this proof.
+
+\emph{Transport over one averaging step.} Multiplying the restricted conclusion of \cref{ch04:thm:energy-near-contraction} by four and dividing by $h_{i+1}=Mh_i$, we obtain the displayed implication. Its hypotheses are local: the maximum is over the union of the complete predecessor rectangles, and the side at level $i+1$ is at least four. We may decrease $\delta_*(M)$ so that the exceptional based loop holonomies are excluded as well. To check this, note that a contour $F_{c,x}C_c^{-1}$ in \eqref{ch01:eq:ordinary-map} is filled by moving its straight segment of length $M$ across the coordinate segments of the path $\sigma_{v,x}$. At most $M\sum_{k=1}^3\abs{x_k-v_k}\le3M(M-1)/2$ elementary moves across one plaquette are needed, and each move inserts a conjugate of a plaquette transport or of its inverse. All these plaquettes belong to the complete predecessor rectangle, so by the bi-invariant triangle inequality the distance of this based loop holonomy from $I$ is at most $3M^2\delta$. If we also require $3M^2\delta_*<2\pi$, then this holonomy is not $-I$, and its logarithm is the analytic one. This decrease of $\delta_*$ changes only a constant depending on $M$.
+
+\emph{Transport over many averaging steps.} Let $V^i=T_M^iU$ and write
+\[
+ e_i=\mathcal S_i^{\mathcal P_i}(V^i),\qquad
+ \delta_i=\max_{p\in\mathcal P_i}\groupdist(V^i_p),\qquad
+ \Pi_i=\prod_{k<i}(1+C_M\delta_k).
+\]
+For an empty set of plaquettes we set the maximum to zero; the corresponding energy is also zero. Suppose first that $e_0\le b/h_\ell$. We prove by induction on $i\le\ell$ that the first $i$ steps satisfy
+\begin{equation}\label{ch19:eq:cone-bootstrap}
+ e_i\le\Pi_ie_0,\qquad
+ \Pi_i\le\exp\Bigl\{\pi C_M\sqrt b\sum_{k<i}M^{-(\ell-k)/2}\Bigr\}\le2.
+\end{equation}
+The case $i=0$ is immediate. Suppose that \eqref{ch19:eq:cone-bootstrap} holds for some $i$. Since all plaquette energies are nonnegative, \eqref{ch19:eq:angle-cost} implies that, for every $p\in\mathcal P_i$,
+\[
+ \groupdist(V^i_p)^2\le2\pi^2q(V^i_p)\le\frac{\pi^2h_i}{2}e_i\le\frac{\pi^2}{2}\Pi_ibM^{-(\ell-i)}\le\pi^2bM^{-(\ell-i)},
+\]
+where we used $h_i/h_\ell=M^{-(\ell-i)}$ and $\Pi_i\le2$. For $i<\ell$ this is at most $\pi^2b\le\delta_*^2$. Then the transport over one averaging step applies with $\operatorname{Pa}(\mathcal P_{i+1})=\mathcal P_i$; it gives $e_{i+1}\le(1+C_M\delta_i)e_i$ and excludes all exceptional values used in that step. Further,
+\[
+ \log\Pi_{i+1}\le C_M\sum_{k\le i}\delta_k\le\pi C_M\sqrt b\sum_{r\ge1}M^{-r/2}=\sigma(b)\le\log2.
+\]
+This closes the induction \eqref{ch19:eq:cone-bootstrap}. The bound on individual plaquettes also holds at $i=\ell$, and no further transport step is needed there. This proves all the stated conclusions under the hypothesis $e_0\le b/h_\ell$, including the case $\ell=0$.
+
+If instead $e_0>b/h_\ell$, then since $q\le2$, we have $e_\ell\le8\abs{\mathcal P_\ell}/h_\ell<(8\abs{\mathcal P_\ell}/b)e_0$. If every plaquette of $\mathcal P_\ell$ has $q<d_{\mathrm{cut}}$, the upper bound is $4\abs{\mathcal P_\ell}d_{\mathrm{cut}}/h_\ell$. These two cases prove \eqref{ch19:eq:cone-transport} for arbitrary configurations. Since no logarithm is taken in the second case, the exceptional values of the Borel extension cause no difficulty. If $q<d_{\mathrm{cut}}$ for all the relevant plaquettes and $4p_Md_{\mathrm{cut}}\le B_*$, we may choose $b=4p_Md_{\mathrm{cut}}$; then for every cell the second factor in \eqref{ch19:eq:cone-transport} is at most one and the first is at most two.
+
+\emph{Cells and all plaquettes.} We apply \eqref{ch19:eq:cone-transport} with $b=B_*$ separately to the set $\mathcal P_{j-1}(C)$ of each cell, with level $k$ in place of level $0$. Each such set has at most $p_M$ plaquettes, so the factor is at most $K_M$. By \cref{ch04:lem:cones-and-cells}, the energy-estimate predecessor sets at level $k$ of distinct cells of one tiling are disjoint, and the sum of their energies is therefore at most $S_W(V)/h_{n_k}$. This proves the bound with $K_M$. For an arbitrary set of plaquettes at level $\ell$, we apply \eqref{ch19:eq:cone-transport} to each plaquette separately, with $\abs{\mathcal P_\ell}=1$ and factor at most $K_1$. By the same lemma, a plaquette of the initial lattice lies in at most $48$ of these predecessor sets, and summation gives the factor $48K_1$. Both arguments apply with any intermediate level as initial level.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch19:thm:classical-source-payment}(b)]
+\emph{The effective classical action along the decomposition.} By \cref{ch18:thm:slice-induction}, the initial and stopping levels are boundaries of RG steps, and there are $T$ integrated RG steps of $J$ averaging steps each; thus $\ell=JT$. The logarithmic product domains, the bounds on the frozen coordinates that are inserted into analytic functions, the coefficient-norm bounds, and the representatives are those checked in \cref{ch19:lem:covered-history-admission}. For the $t$-th RG step, let $C_t^0$ be its reconstruction map with every normalized fluctuation variable set to zero, that is, its zero-fluctuation reconstruction. By the definition of the classical part of its objective, the outgoing effective classical action is
+\begin{equation}\label{ch19:eq:full-value-step}
+ E_{t+1}^{\mathrm{out}}(c;\Rec^{(t)})=B\,E_t\bigl(C_t^0(c;\Rec^{(t)});\Rec^{(t)}\bigr),\qquad B=M^J.
+\end{equation}
+If new coordinates $c^\sharp$ are frozen at the end of the step, the next incoming action is
+\[
+ E_{t+1}(v;\Rec^{(t)},c^\sharp)=E_{t+1}^{\mathrm{out}}(v\oplus c^\sharp;\Rec^{(t)}).
+\]
+Thus freezing is a direct substitution in this identity; in particular, the value at $v=0$ is kept together with the nonconstant part. For an external classical exponent $S_{\mathrm{ext}}$, the convention of \cref{ch18:thm:slice-induction} is the exact identity
+\[
+ e^{-S_{\mathrm{ext}}}e^{-E_t^{\mathrm{int}}/g_t^2}=e^{-[E_t^{\mathrm{int}}+g_t^2S_{\mathrm{ext}}]/g_t^2}.
+\]
+It adds the term once to the effective classical action and removes it from the weight of the frozen coordinates. Under \eqref{ch19:eq:full-value-step} the added action and $g_t^2$ are both multiplied by $B$, which leaves the exponent unchanged.
+
+\emph{One feasible configuration.} We start from such a representative at which the bounds on the frozen coordinates hold. We insert the frozen coordinates at each preceding scale at which they were frozen, and apply the maps $C_t^0$ downward. The reconstruction identities and the protection of all stored endpoints in \cref{ch18:thm:slice-induction,ch18:thm:history-cover} ensure that each insertion gives back the coordinate of the preceding output point, that each reconstruction solves its block averaging constraint exactly, and that every older frozen dependence is preserved. The image bounds of \cref{ch17:thm:controlled-kernel}, applied with the hypotheses verified in \cref{ch19:lem:covered-history-admission}, keep this downward sequence of reconstructions in its product domains. For a stopped initial measure, the resulting representative on the initial lattice lies in the larger common chart, so its configuration $U_*$ lies in $D_\rho$; this uses the larger image domain, not membership in $D_r$. For a Wilson initial measure, the frozen variables deep inside excluded regions remain arbitrary group elements, and the initial classical exponent is exactly $S_W(U_*)$. Composing the constraint identities, we obtain $(T_M^\ell U_*)|_F=\widehat c$. Dividing \eqref{ch19:eq:full-value-step} by $g_{t+1}^2=Bg_t^2$ and iterating over the $T$ RG steps gives the identity for $E_T/g_m^2$, and $JT=\ell$ implies $g_m^2=M^\ell g_{\mathrm{base}}^2$. Since $U_*$ belongs to the constrained set, the lower bound by the infimum follows; no interchange of minima is involved.
+
+\emph{The first lower bound.} By the lower bound of \cref{ch08:thm:classical-cutoff} on the common radius $\rho$, transported by the fixed gauge transformation of a representative on the initial lattice (\cref{ch08:thm:compact-overlap}), we have
+\begin{equation}\label{ch19:eq:base-floor}
+ \frac{\mathcal E_{\mathrm{base}}(U_*)}{g_{\mathrm{base}}^2}\ge\kappa_0\frac{S_W(U_*)}{g_{\mathrm{base}}^2}.
+\end{equation}
+The radius is within the domain of \cref{ch08:thm:classical-cutoff}, and the constant $\kappa_*$ there is valid for every integer depth, whether or not an effective interaction is attached to that depth, as also stated in \cref{ch11:thm:terminal-anchor}; for a Wilson initial measure \eqref{ch19:eq:base-floor} holds with constant one. Combining this with the bound for all plaquettes in~(a), we obtain
+\[
+ \frac{E_T}{g_m^2}\ge\frac{\kappa_0}{48K_1}\frac{S_W(T_M^\ell U_*)}{g_m^2}\ge\frac{\Psi_F(\widehat c)}{g_m^2}.
+\]
+In the last inequality we used that $T_M^\ell U_*=\widehat c\oplus z$ for some $z\in\SU^H$, and that $\Psi_F$ minimizes over all such $z$.
+
+\emph{The second lower bound.} For a recorded bad plaquette $f$, let $\mathcal B_f$ be the energy-estimate predecessor set of $\{f\}$ on the initial lattice. We first justify disjointness at different levels. On the input lattice of the RG step in which $f$ is recorded, the endpoints of its full dependence list cover every vertex of the four centered blocks obtained by pulling back the corners of $f$ to that input lattice. Indeed, each one-step formula reads the root paths $\sigma_{a,x}$ for every vertex $x$ of each endpoint block; their trees span those blocks, and the same assertion follows recursively from the centered nesting identity. For a plaquette at the input level, its four boundary links already cover its four corner vertices. By \cref{ch04:lem:cones-and-cells}, every plaquette of $\mathcal B_f$ lies in the centered preimages of these blocks.
+
+All these dependence variables are frozen together with their excluded neighborhood by \cref{ch18:def:ordered-tests}(2). The neighborhood includes the protected endpoint margins, so it excludes the incident dependence links as well as the marked vertices; the endpoint protection rule of \cref{ch18:thm:fat-cell-admission}(4) preserves this exclusion at later scales. Suppose that $f$ and $f'$ are recorded at levels $\ell_f<\ell_{f'}$ and that their initial energy-estimate predecessor sets share a plaquette. The centered partitions are nested. A shared vertex therefore places a marked vertex from a corner block of $f$ in a corner block of $f'$, when both are read on the input lattice where $f$ was recorded. If the two tests belong to the same RG step, the full dependence list of $f'$ meets the excluded neighborhood just added for $f$. If they belong to different RG steps, the centered ancestor of that mark is excluded by the endpoint protection rule, and again the full dependence list of $f'$ meets the earlier excluded set. Both cases contradict the rule that a recorded test avoid that set. Thus the sets $\mathcal B_f$ at different levels are disjoint. This argument uses endpoint coverage and the protected neighborhoods; it does not require the minimal list of read links to contain every link of an energy-estimate patch.
+
+At one level, a plaquette lies in at most $48$ of the sets $\mathcal B_f$ by \cref{ch04:lem:cones-and-cells}. Since plaquette energies are nonnegative, we have
+\[
+ \frac{S_W(U_*)}{g_{\mathrm{base}}^2}\ge\frac1{48}\sum_f\mathcal S_0^{\mathcal B_f}(U_*).
+\]
+The comparison \eqref{ch19:eq:cone-transport} for one plaquette and arbitrary configurations, proved in~(a), applies at the level $\ell_f$ of each $f$ with constant $K_1$. Since the feasible configuration $U_*$ preserves every frozen dependence, the energy of $f$ in it is $q_f(\widehat\Rec)$. Thus
+\[
+ \frac{S_W(U_*)}{g_{\mathrm{base}}^2}\ge\frac1{48K_1}\sum_f\frac{4q_f(\widehat\Rec)}{h_{n_f}}.
+\]
+Multiplying by $\kappa_0$ and using \eqref{ch19:eq:base-floor}, we find $E_T/g_m^2\ge A_{\mathcal X}(\widehat\Rec)$. On $I_{\mathcal X}^{\mathrm{act}}$ we have $q_f\ge d_*$ and $h_{n_f}=\gamma/n_f$ for every $f$, which gives the lower bound for $A_{\mathcal X}$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch19:thm:classical-source-payment}(c)]
+\emph{The reference identity.} We apply the identity at the end of \cref{ch11:thm:terminal-anchor} to the same reference operators and the same partition function $Z_\nu$ as in \cref{ch18:thm:slice-induction}. Every reference operator is a full RG step on the same levels. The depth $d_0$ of a stopped initial measure is a multiple of $J$, and the depth at the stopping level is $d=d_0+JT$, with $d_0=0$ for a Wilson initial measure. Thus the reference recursion lies within the scope of \cref{ch11:thm:terminal-anchor}. The stopping side is $m$, the preceding depth is $d$, and the centered effective interaction is $R_{d,\mathrm{sat}}-R_d(I)$. Restriction and pushforward give a subprobability measure, also for a Wilson initial measure. Its density is the displayed $\xi_T$, with mass at most one. Integrating it, we obtain \eqref{ch19:eq:reference-identity}. The initial value $\Lambda_0^{\mathbb T}=-R_{d_0}(I)$ for a stopped initial measure holds because $Z_\nu$ is not centered. All later constants are those of this one recursion.
+
+\emph{The partition-function bounds.} These are the bounds of \cref{ch11:thm:terminal-anchor} on the lattice of side $m$, with $D=3m^3$. The trial configurations of that theorem have $2m^3+1$ links outside a spanning tree, each with logarithm of norm at most $a_0g<\min(r/2,1)$, and the tree variables have Haar integral one. The bounds on the action and the effective interaction on this set, together with the volume of a ball in $\SU$, give
+\[
+ \widehat Z_d(g)\ge\Bigl(\frac{a_0g-\sin(a_0g)}{2\pi}\Bigr)^{2m^3+1}e^{-C3m^3}\ge e^{-C_L3m^3}g^{3(2m^3+1)},
+\]
+where we used $x-\sin x\ge x^3/8$ for $0\le x\le1$ and included the powers of $a_0$ in $C_L$. This lower bound is an integral over exactly $D_r$. The upper bound for $\int e^{-\lambda\mathcal V_m/g^2}\dH_m=\int e^{-\lambda\alpha_WS_W/g^2}\dH_m$ is the bound for Wilson numerators in \cref{ch11:thm:terminal-anchor}, with $\alpha_0=\alpha_W$, $s=0$, and inverse coupling $4\lambda\alpha_W/g^2\ge1$. In its proof, the plaquettes crossing the periodic boundary are deleted from the numerator, the unused links integrate to one, and on the remaining open cube with $m$ sites per side the $2m^3-3m^2+1$ plaquettes selected along an axial tree have independent Haar-distributed transports; the one-plaquette bound $\int e^{-\beta q}\dH\le\sqrt{2/\pi}\,\beta^{-3/2}$ of \cref{ch03:lem:open-normalization} then gives the factor $g^{3(2m^3-3m^2+1)}$. Dividing by the lower bound for $\widehat Z_d(g)$ leaves $3[(2m^3+1)-(2m^3-3m^2+1)]=9m^2$ powers of $1/g$.
+
+The bound for the stopped measure is the exponential-moment bound of \cref{ch11:thm:terminal-anchor}, with $\lambda_{\mathrm{en}}=\kappa_*/2$. It can also be read off from the same calculation: on $D_r$ its integrand satisfies
+\[
+ e^{-E_{d,\mathrm{sat}}/g^2-[R_{d,\mathrm{sat}}-R_d(I)]+vS_W/g^2}\le e^{C3m^3}e^{-(\kappa_*-v)S_W/g^2},
+ \qquad\kappa_*-v\ge\kappa_*/2,
+\]
+where we used $E_{d,\mathrm{sat}}\ge\kappa_*S_W$ and the bound on the oscillation of the centered effective interaction. For the quantity with the coefficient $\lambda$ we replace the coefficient by $\lambda\kappa_*-v\ge\lambda_0\kappa_*/2$, and we bound the centered effective interaction by its uniform oscillation bound from \cref{ch11:thm:terminal-anchor}. Both estimates then follow from the upper bound for the Wilson numerator and the single lower bound for the denominator. If the ceiling $g_*$ has not yet been reduced so that the inverse coupling of these two numerators is at least one, then on the remaining range of $g$, below $g_*$ and above that threshold, $\log(1/g)$ is bounded by a fixed constant; enlarging the volume constant gives the same bounds there. Alternatively, one may make the common reduction of the ceiling in \cref{ch11:thm:terminal-anchor}.
+\end{proof}
+
+\section{The minimum of the Wilson action over omitted links}\label{ch19:sec:completion}
+
+The density bounds of \cref{ch19:sec:envelope} contain the factor $e^{-\lambda\Psi_F(c)/g^2}$, a minimum over all values of the links in $H$, which we compare with a Haar integral over these links. The comparison is a lower bound of Laplace type that uses only stationarity at a minimizer, an upper bound on the second derivative, and the Haar volume of a small ball; no nondegenerate Hessian is needed. We first record the continuity and gauge invariance of the minimum and of the corresponding integral.
+
+Throughout this section $m\ge4$, $H\subset\Links m$ is a set of positive links, $F=\Links m\setminus H$, and for $c\in\SU^F$ and $z\in\SU^H$ we write $c\oplus z$ for the configuration on $\Lat m$ that equals $c$ on $F$ and $z$ on $H$. We write $H_H$ for the product Haar measure on $\SU^H$, and $\mathcal V_m=\alpha_WS_W$ and $\Psi_F(c)=\min_z\mathcal V_m(c\oplus z)$ for a fixed $\alpha_W>0$, as in \cref{ch19:thm:classical-source-payment}(b).
+
+\begin{lemma}\label{ch19:lem:wilson-minimum}
+For $\lambda>0$ and $g>0$ let
+\[
+ I_{\lambda,g}(c)=\int_{\SU^H}e^{-\lambda\mathcal V_m(c\oplus z)/g^2}\dH_H(z).
+\]
+The functions $\Psi_F$ and $I_{\lambda,g}$ are continuous on $\SU^F$. Let $k\in\SU^{\Lat m}$ be a lattice gauge transformation and let $c^k$ be the transformed field on $F$, which depends only on the values of $k$ at the endpoints of the links in $F$. Then $\Psi_F(c^k)=\Psi_F(c)$ and $I_{\lambda,g}(c^k)=I_{\lambda,g}(c)$. In particular, $\Psi_F$ and $I_{\lambda,g}$ are invariant under every gauge transformation of the endpoints of the links in $F$, extended arbitrarily to the other sites, and the result does not depend on the extension.
+\end{lemma}
+
+\begin{proof}
+For $c,c'\in\SU^F$ we have
+\[
+ \abs{\Psi_F(c)-\Psi_F(c')}\le\alpha_W\sup_{z\in\SU^H}\abs{S_W(c\oplus z)-S_W(c'\oplus z)}.
+\]
+Since $S_W$ is uniformly continuous on the compact group $\SU^{\Links m}$, the right side tends to zero as $c'\to c$. The same argument, applied to the integrand, shows that $I_{\lambda,g}$ is continuous. Let $k$ be a gauge transformation, and write $z\mapsto z^k$, $(z^k)_{xy}=k_xz_{xy}k_y^{-1}$, for its action on the links in $H$. This map is a bijection of $\SU^H$ that acts on each factor by a fixed left and a fixed right translation, so it preserves $H_H$. Since $(c\oplus z)^k=c^k\oplus z^k$ and $S_W$ is gauge invariant, we have
+\[
+ \mathcal V_m(c^k\oplus z^k)=\mathcal V_m(c\oplus z),\qquad\dH_H(z^k)=\dH_H(z).
+\]
+Taking the minimum over $z$ and changing variables in the integral, we conclude that $\Psi_F$ and $I_{\lambda,g}$ are invariant. If a gauge transformation is given only at the endpoints of the links in $F$, any two extensions to the other sites give bijections of the whole product $\SU^H$ as above, so the result does not depend on the extension.
+\end{proof}
+
+\begin{lemma}\label{ch19:lem:compact-wilson-completion}
+For every $m\ge4$, every set $H\subset\Links m$ of positive links, $F=\Links m\setminus H$, every $c\in\SU^F$, and every fixed $\alpha_W>0$, the function $z\mapsto\mathcal V_m(c\oplus z)=\alpha_WS_W(c\oplus z)$ has a minimizer $z_*$ on $\SU^H$, and it is stationary at $z_*$ in all directions of the links in $H$. For $X=(X_e)_{e\in H}\in\su^H$ and the curve $z_e(t)=z_{*,e}e^{tX_e}$,
+\[
+ \Bigl\lvert\frac{d^2}{dt^2}S_W(c\oplus z(t))\Bigr\rvert\le16\sum_{e\in H}\abs{X_e}^2.
+\]
+Hence, for every $0<g\le1$, the product neighborhood $\{z_{*,e}e^{X_e}:\abs{X_e}<g\text{ for all }e\in H\}$ has Haar mass at least
+\[
+ (c_*g)^{d_H},\qquad d_H=3\abs H,\qquad c_*=(16\pi)^{-1/3},
+\]
+and on it $\mathcal V_m(c\oplus z)-\Psi_F(c)\le8\alpha_W\abs Hg^2$. For $0<\lambda_0\le\lambda\le\lambda_1<\infty$,
+\[
+ e^{-\lambda\Psi_F(c)/g^2}\le(c_*g)^{-d_H}e^{8\lambda\alpha_W\abs H}
+ \int_{\SU^H}e^{-\lambda\mathcal V_m(c\oplus z)/g^2}\dH_H(z),
+\]
+and the exponential factor may be enlarged to $e^{8\lambda_1\alpha_W\abs H}$. These bounds hold for arbitrary links across the boundary of the block region, arbitrary values of $c$, and arbitrary shape, topology, age, and depth; the displayed constants do not depend on these parameters or on the coupling. If $H$ is empty, equality holds. No regularity, uniqueness, or measurable choice of a minimizer is required.
+\end{lemma}
+
+\begin{proof}
+The function $z\mapsto\mathcal V_m(c\oplus z)$ is continuous on the compact product $\SU^H$, so it attains its minimum. Every curve $t\mapsto z_{*,e}e^{tX_e}$ through the minimizer stays in this product for both signs of $t$, and differentiating at $t=0$ proves stationarity in all directions of the links in $H$.
+
+We extend $X$ by zero on $F$. Along the curve, the transport around a positive plaquette is a product of four unitary factors. A factor $z_{*,e}e^{tX_e}$ has first and second derivatives of operator norm at most $\abs{X_e}/2$ and $\abs{X_e}^2/4$, since $\norm{X_e}_{\mathrm{op}}=\abs{X_e}/2$ with our normalization of the inner product; an inverse factor $e^{-tX_e}z_{*,e}^{-1}$ has the same bounds. By the product rule, $\abs{\tr A}/2\le\norm A_{\mathrm{op}}$, and the Cauchy--Schwarz inequality for four terms,
+\[
+ \Bigl\lvert\frac{d^2}{dt^2}q\bigl((c\oplus z(t))_p\bigr)\Bigr\rvert
+ \le\frac14\Bigl(\sum_{e\in\partial p}\abs{X_e}\Bigr)^2\le\sum_{e\in\partial p}\abs{X_e}^2.
+\]
+Here the sum is over the positive links underlying the oriented boundary of $p$; for $m\ge4$ they are distinct. Since each positive link lies in exactly four positive plaquettes and $S_W=4\sum_pq(U_p)$, the second derivative of $S_W$ is bounded by $16\sum_{e\in H}\abs{X_e}^2$ everywhere along the curve. By Taylor's formula with integral remainder, whose weight $\int_0^1(1-t)\,dt$ equals $1/2$, and stationarity at $t=0$, we have
+\[
+ \mathcal V_m(c\oplus z_*e^X)-\Psi_F(c)\le8\alpha_W\sum_{e\in H}\abs{X_e}^2.
+\]
+Thus on the product of balls of radius $g$ the increase is at most $8\alpha_W\abs Hg^2$.
+
+The Haar probability measure on $\SU$ has radial density $(2/\pi)\sin^2\vartheta\,d\vartheta$ in the angle $\vartheta=\abs X/2$. Thus the ball $\{e^X:\abs X<g\}$ has mass $(g-\sin g)/(2\pi)$. Taylor's formula for the sine gives, for $0\le g\le1$,
+\[
+ g-\sin g\ge g^3/6-g^5/120\ge g^3/8.
+\]
+The exponential map is injective on this ball since $g\le1<2\pi$. By translation invariance of Haar measure and the product structure, the product neighborhood has mass at least $(g^3/(16\pi))^{\abs H}=(c_*g)^{d_H}$. On this neighborhood the integrand $e^{-\lambda\mathcal V_m(c\oplus z)/g^2}$ is at least $e^{-\lambda\Psi_F(c)/g^2-8\lambda\alpha_W\abs H}$. Integrating over the neighborhood, enlarging the domain of integration to the whole product, and rearranging, we obtain the displayed inequality. Replacing $\lambda$ by $\lambda_1$ in the positive exponential only enlarges the right side. If $H$ is empty, all products have mass one and the additional exponents vanish. Each bound is uniform on the whole compact group, and a minimizer was used separately for each $c$, not as a measurable function of $c$.
+\end{proof}
+
+\section{Domination of the plaquette-energy sum by the Wilson minimum}\label{ch19:sec:source}
+
+Along a large-field decomposition, the function $Q_j^{\mathcal T}\circ T_M^{j-1-b}$ need not be a function of the stopping field and the frozen coordinates alone: some requested plaquettes may have dependence sets that meet excluded neighborhoods. The next lemma shows that this does not matter for an upper bound: the bound holds for every completion $c\oplus z$, and we may then take the infimum over completions.
+
+\begin{lemma}\label{ch19:lem:compact-wilson-source-cap}
+Fix an odd integer $M\ge3$, an integer $J\ge1$, $B=M^J$, and the fixed analytic, geometric, and buffer data of \cref{ch18:thm:history-cover,ch18:thm:slice-induction}. Fix a finite family of stopping offsets and remainders, with total exponents $v=r_{\mathrm{stop}}J+u_{\mathrm{ph}}$ and $0\le u_{\mathrm{ph}}<J$, and fix the corresponding enlargement $F_J$ of the bound for the number of affected source plaquettes in \cref{ch18:thm:history-cover}, before the interval of $s$ or any minimum side is chosen. Let $K_1,\alpha_W>0$ be as in \cref{ch19:thm:classical-source-payment} and put $K_W=48K_1/\alpha_W$.
+
+Let $L>0$ and $\gamma>0$, and let a finite hierarchy of sides in $4\N$, an initial measure (stopped, at a depth $d_0\in J\N_0$, or Wilson), a large-field decomposition $\mathcal X$ from its initial level to its stopping level with $\ell\in J\N_0$ averaging steps, and an exponent $v$ of the family be given. Write $m=M^vn_{\mathrm{req}}$ for the stopping side, where $n_{\mathrm{req}}\in4\N$ is the requested side; every iterate that is used must belong to the finite hierarchy. Let $F$ be the set of links of the block region at the stopping level, $H=\Links m\setminus F$, and let $\mathcal P_{\mathrm{orig}}$ be the requested list of plaquettes at side $n_{\mathrm{req}}$, a union of the sets $\mathcal P_{j-1}(C)$ of cells, counted once. Set
+\[
+ Q_{\mathrm{orig}}(V)=\frac4{h_{n_{\mathrm{req}}}}\sum_{p\in\mathcal P_{\mathrm{orig}}}q\bigl((T_M^{\ell+v}V)_p\bigr),\qquad
+ g_m^2=\gamma/m,\qquad
+ D_{\mathcal X}=8F_J\sum_{f\in\mathcal X}\frac{n_f}\gamma.
+\]
+Then every point $V\in\mathcal A_{\mathcal X}$, with $(c,\Rec)=\mathscr O_T^{\mathcal X}(V)$, and every $z\in\SU^H$ satisfy
+\begin{equation}\label{ch19:eq:arbitrary-completion-source-cap}
+ Q_{\mathrm{orig}}(V)\le48K_1\frac{S_W(c\oplus z)}{g_m^2}+D_{\mathcal X}.
+\end{equation}
+Consequently, at every point of $\mathcal A_{\mathcal X}$,
+\begin{equation}\label{ch19:eq:compact-wilson-source-cap}
+ Q_{\mathrm{orig}}(V)\le\frac{K_W}{g_m^2}\min_{z\in\SU^H}\{\alpha_WS_W(c\oplus z)\}+8F_J\sum_{f\in\mathcal X}\frac{n_f}\gamma
+ =\frac{K_W\Psi_F(c)}{g_m^2}+D_{\mathcal X}.
+\end{equation}
+The minimum $\Psi_F$ is continuous and invariant under gauge transformations of the endpoints of the links in $F$ (\cref{ch19:lem:wilson-minimum}). For either initial measure $\nu$, with its partition function $Z_\nu$, which is not centered, let $\eta_{\mathcal X}$ and $\eta_{\mathcal X}^s$ be as in \cref{ch19:sec:setting}, with $Q=Q_{\mathrm{orig}}$. For every $s\ge0$,
+\begin{equation}\label{ch19:eq:source-cap-pushforward}
+ \eta_{\mathcal X}^s(dc\,d\Rec)\le e^{sK_W\Psi_F(c)/g_m^2+sD_{\mathcal X}}\,\eta_{\mathcal X}(dc\,d\Rec).
+\end{equation}
+This includes decompositions without recorded bad plaquettes, an empty set $F$, and decompositions whose block region becomes empty before the planned stopping level, continued by empty RG steps. No small-field event, support, or partition function is changed, and no smallness of the coupling is needed beyond the existence of the decomposition. The constant $K_W$ depends only on $M$ and on the fixed classical lower bound and its domain; it does not depend on the side, $L$, the coupling, the depth, the geometry, the age, or the frozen values. The constant $F_J$ keeps the explicit polynomial dependence on the widths in \cref{ch18:thm:history-cover}, and its coefficient has the dependence described in item~(3) of \cref{ch01:conv:constants}, independently of the widths chosen later. The constants of later probability estimates have the dependence described in item~(4) of \cref{ch01:conv:constants}.
+\end{lemma}
+
+\begin{proof}
+We fix the decomposition and the requested list first.
+
+\paragraph{Step 1: dependence sets.}
+For each requested plaquette $p$, let $D_m(p)$ be the full set of links of the stopping lattice on which $C\mapsto q((T_M^vC)_p)$ depends. It contains the links of the four boundary transports of $p$ and, recursively, all reference paths, relative contours, filling plaquettes, and branch tests of every entry read in the $v$ averaging steps; the clause on complete predecessor sets in \cref{ch04:lem:cones-and-cells} supplies these finite dependence sets. We also trace them to every scale of the integrated decomposition at which variables were frozen. We keep $p$ only if $D_m(p)\subset F$ and the traced dependence sets avoid all the full excluded neighborhoods assigned in \cref{ch18:thm:history-cover}: the neighborhoods of the recorded bad plaquettes with their buffers, the adjacent cells, the frozen boundary bands, the links across the boundary of the block region, the enlarged earlier excluded regions, the buffers protecting earlier stored endpoints, and the protective sets of the first step for a Wilson initial measure. Their levels of creation and their assignment to recorded bad plaquettes are kept. The smaller energy-estimate predecessor sets $\mathcal B_f$ would not suffice for this definition.
+
+\paragraph{Step 2: kept plaquettes are determined by the stopping field.}
+If two configurations on the stopping lattice agree on $D_m(p)$, then for every entry needed in the first averaging step they read identical path products and identical branch tests. A regular entry has the same analytic logarithm in both configurations, and an exceptional entry has the same reference-path value. By induction over the $v$ averaging steps, the final plaquette transports agree, and hence so do their traces. This proves locality for all group values, including the exceptional branches; for $v=0$ it is the equality of the four boundary links. By the identity for the observation map in \cref{ch18:thm:canonical-density,ch18:thm:history-cover}, we have $(T_M^\ell V)|_F=c$, and therefore, for every completion $C=c\oplus z$,
+\[
+ \frac4{h_{n_{\mathrm{req}}}}\sum_{p\text{ kept}}q\bigl((T_M^{\ell+v}V)_p\bigr)
+ =\frac4{h_{n_{\mathrm{req}}}}\sum_{p\text{ kept}}q\bigl((T_M^vC)_p\bigr).
+\]
+This equality concerns the point $V$ itself; no auxiliary feasible configuration or representative has been substituted.
+
+\paragraph{Step 3: discarded plaquettes.}
+We assign each discarded requested plaquette to the first full excluded neighborhood that its dependence set meets, ordering first by the level of creation and then by the fixed order of the tests. If $D_m(p)\not\subset F$, an omitted link lies in an excluded neighborhood at the stopping level; otherwise the exclusion comes from an earlier traced intersection. The counting clause of \cref{ch18:thm:history-cover}, enlarged for the finite family of stopping offsets and remainders, bounds the number of plaquettes assigned to each recorded bad plaquette $f$ by $F_J$. The deterministic assignment to a single $f$ is needed only because the neighborhoods may overlap; we never use disjointness of the full neighborhoods. Since $n_{\mathrm{req}}\le n_f$ and $0\le q\le2$, each discarded plaquette contributes at most $8n_{\mathrm{req}}/\gamma\le8n_f/\gamma$ to $Q_{\mathrm{orig}}$. Summing over the discarded plaquettes, we find, for every $C=c\oplus z$,
+\[
+ Q_{\mathrm{orig}}(V)\le\frac4{h_{n_{\mathrm{req}}}}\sum_{p\text{ kept}}q\bigl((T_M^vC)_p\bigr)+D_{\mathcal X}
+ \le\frac4{h_{n_{\mathrm{req}}}}\sum_pq\bigl((T_M^vC)_p\bigr)+D_{\mathcal X},
+\]
+where the last sum is over all positive plaquettes at side $n_{\mathrm{req}}$.
+
+\paragraph{Step 4: the Wilson action of a completion.}
+We apply the bound for all plaquettes and arbitrary configurations in \cref{ch19:thm:classical-source-payment}(a) with initial configuration $C$ at side $m$ and depth $v$. Its initial exponent is $S_W(C)/g_m^2$, and $h_{n_{\mathrm{req}}}=M^vg_m^2$. Together with Step~3, this gives \eqref{ch19:eq:arbitrary-completion-source-cap}, with no additional factor $m/n_{\mathrm{req}}$ and no regularity test at the requested level. The bound applies to every completion, whatever its holonomies or exceptional values. Taking the infimum over the whole compact product $\SU^H$, we obtain \eqref{ch19:eq:compact-wilson-source-cap}. By continuity of $S_W$ and compactness, the infimum is attained, but no measurable choice of a minimizer is needed. Continuity and invariance of $\Psi_F$ are proved in \cref{ch19:lem:wilson-minimum}.
+
+\paragraph{Step 5: empty cases.}
+If $\mathcal X$ has no recorded bad plaquettes, there are no excluded neighborhoods and $D_{\mathcal X}=0$. If $F$ is empty, then no plaquette is kept, since the dependence set of every plaquette is nonempty on sides at least four, and the assignment of Step 3 gives $Q_{\mathrm{orig}}\le D_{\mathcal X}$ directly; in this case $\Psi_\varnothing=0$, attained by the identity configuration. If the block region becomes empty before the planned stopping level, we carry the frozen coordinates unchanged through the remaining RG steps. For these steps the fluctuation integral and the determinant equal one, the nonconstant norm is zero, and the simultaneous replacement $E\mapsto BE$, $g^2\mapsto Bg^2$ leaves the exponent unchanged. The recurrence $R_{t+1}(f)\le B^{-1}R_t(f)+C_J(W+R_{\mathrm{cell}}+1)$ for the radii of the excluded neighborhoods in \cref{ch18:thm:history-cover} still assigns every later omitted link to the same neighborhoods, even when their union is the whole torus. The finite dependence range of the requested plaquettes at the stopping level is included in $F_J$. Thus the same assignment and the same bound hold at the planned stopping level. These empty steps use only the clauses on empty products and on normalization constants in \cref{ch17:thm:controlled-kernel,ch17:thm:real-scalar-ledger} and the partition of \cref{ch18:thm:history-cover}.
+
+\paragraph{Step 6: integration.}
+For a nonnegative Borel function $\varphi(c,\Rec)$, we integrate $\varphi(\mathscr O_T^{\mathcal X}(V))e^{sQ_{\mathrm{orig}}(V)}$ against $\one_{\mathcal A_{\mathcal X}}\,d\nu(V)$ and insert \eqref{ch19:eq:compact-wilson-source-cap}. The right side becomes the integral of $\varphi e^{sK_W\Psi_F/g_m^2+sD_{\mathcal X}}$ against $\eta_{\mathcal X}$, which proves \eqref{ch19:eq:source-cap-pushforward}. Both sides carry the same factor $Z_\nu^{-1}$. All integrands are nonnegative, the spaces are finite-dimensional, and $Q_{\mathrm{orig}}$ is bounded on them. The dependence of the constants follows from the bound for all plaquettes and from the explicit count $F_J$.
+\end{proof}
+
+The same argument applies to the Wilson exponent of all plaquettes at the requested side, with a larger bound for the number of affected plaquettes. This version is used in \cref{ch20:chapter} for exponential moments of the full blocked action.
+
+\begin{corollary}\label{ch19:lem:all-face-source-cap}
+In the setting of \cref{ch19:lem:compact-wilson-source-cap}, let the requested function at side $n$ instead be $\mathcal Q_n(V)=S_W(T_M^{\ell+v}V)/g_n^2$, where $m=M^vn$, $v$ belongs to a fixed finite family of exponents, and all iterates are available. Enlarge the bound for the number of affected plaquettes to a bound $F_J^{\mathrm A}$ for the list of all positive plaquettes, before choosing any interval of $s$. Then at every point of $\mathcal A_{\mathcal X}$ and for every completion $z$,
+\[
+ \mathcal Q_n(V)\le48K_1\frac{S_W(c\oplus z)}{g_m^2}+8F_J^{\mathrm A}\sum_f\frac{n_f}\gamma,
+ \qquad\text{hence}\qquad
+ \mathcal Q_n(V)\le\frac{K_W\Psi_F(c)}{g_m^2}+8F_J^{\mathrm A}\sum_f\frac{n_f}\gamma.
+\]
+The corresponding inequality for the pushforward measures, analogous to \eqref{ch19:eq:source-cap-pushforward}, holds with the same partition function. This includes Wilson initial measures, empty sets $F$, and decompositions continued by empty RG steps. One may take $F_J^{\mathrm A}=C_J^{\mathrm A}(W+R_{\mathrm{cell}}+1)^3$; this bound has the same polynomial dependence on the widths, and its coefficient the same dependence, as $F_J$, and $K_W$ is unchanged.
+\end{corollary}
+
+\begin{proof}
+Steps~1, 2, and 4--6 of the proof of \cref{ch19:lem:compact-wilson-source-cap} apply verbatim with the list of all positive plaquettes at side $n$ in place of $\mathcal P_{\mathrm{orig}}$, with $n$ in place of $n_{\mathrm{req}}$, and with $F_J^{\mathrm A}$ in place of $F_J$. In Step~3, each discarded plaquette still contributes at most $8n/\gamma\le8n_f/\gamma$, since the recorded bad plaquette to which it is assigned lies at a level finer than the requested side. In Step~4, the Wilson exponent of $T_M^v(c\oplus z)$ at side $n$ is bounded by \cref{ch19:thm:classical-source-payment}(a) with no factor depending on the ratio of the sides.
+
+It remains to justify the count in Step~3. We check explicitly that the counting clause of \cref{ch18:thm:history-cover} extends to the list of all plaquettes. The family of exponents $v$ is finite, and each exponent has a finite fixed dependence range. A neighborhood of radius $R$ is met by the dependence sets of at most a fixed multiple of $(R+1)^3$ positive plaquettes. The recurrence for the radii in \cref{ch18:thm:history-cover} bounds $R$ by a fixed multiple of $W+R_{\mathrm{cell}}+1$ at later outputs, and the enlargement at the input of the RG step of creation is already included in the count at creation, which carries the factor $B$. Thus passing to all plaquettes changes only this incidence constant, and unions and overlaps are handled by subadditivity and by the assignment to a single recorded bad plaquette. This proves the bound $F_J^{\mathrm A}=C_J^{\mathrm A}(W+R_{\mathrm{cell}}+1)^3$, with the enlargement for the finite family of exponents; the number of RG steps of the decomposition does not occur.
+\end{proof}
+
+\section{Gauge-invariant domination of the densities}\label{ch19:sec:envelope}
+
+We now combine the density bound of \cref{ch18:thm:slice-induction}, which holds at representatives satisfying the reconstruction identities, with the classical lower bounds of \cref{ch19:thm:classical-source-payment}(b). Since the resulting bound has only gauge-invariant factors, the pointwise gauge covariance of the density in \cref{ch18:thm:canonical-density} extends it to every point.
+
+\begin{theorem}\label{ch19:thm:invariant-wilson-envelope}
+Let $\mathcal X$ be a large-field decomposition for a stopped or a Wilson initial measure as in \cref{ch18:thm:slice-induction}, with stopping side $m$, $g^2=\gamma/m$, and $0<g\le1$. Whenever the uniform bounds of \cref{ch19:thm:classical-source-payment}(c) on the stopping lattice are used, impose also their fixed ceiling on $g$. Let $F$ be the set of links of the block region at the stopping level, $H$ the set of all other links of the stopping lattice, including the links across the boundary of the block region, and $d_H=3\abs H$. Let $p_{\mathcal X}(c,\Rec)$ be the density of $\eta_{\mathcal X}$ with respect to $H_F\otimes H_{\mathcal X}$ given by \cref{ch18:thm:canonical-density}, where $H_F$ and $H_{\mathcal X}$ are the product Haar measures on the stopping field and on the frozen coordinates. Let $w_{\mathcal X}$ be the gauge-invariant weight of the frozen coordinates and $\rho_{\mathcal X}=w_{\mathcal X}H_{\mathcal X}$, as in \cref{ch18:thm:slice-induction}; they keep the indicator $I_{\mathcal X}^{\mathrm{act}}$ of the tests of all recorded bad plaquettes. Fix $0<\theta<1$, put $\lambda=1-\theta$, and use the constants of \cref{ch19:thm:classical-source-payment}.
+
+At every representative $(\widehat c,\widehat\Rec)$ in the support satisfying the domain conditions and reconstruction identities of \cref{ch18:thm:slice-induction}, the density bound of \cref{ch18:thm:slice-induction} and its estimate for the normalization constant give
+\[
+ p_{\mathcal X}(\widehat c,\widehat\Rec)\le\widehat Z_d(g)^{-1}e^{L_{\mathcal X}(\widehat\Rec)}w_{\mathcal X}(\widehat\Rec)e^{-E_T(\widehat c;\widehat\Rec)/g^2},
+ \qquad L_{\mathcal X}\le\overline L_{\mathcal X}.
+\]
+One may take
+\[
+ L_{\mathcal X}=\log A_T+\Lambda_T-\Lambda_T^{\mathbb T}+C_{\mathrm{osc},J}m^3,
+ \qquad
+ \overline L_{\mathcal X}=C_\delta+3C_Jm^3+C_\partial\operatorname{Surf}_{\mathcal X}+\sum_{f\in\mathcal X}\overline{\mathrm{ch}}_f.
+\]
+Here $\Lambda_T$ is the normalization constant of the regional recursion along $\mathcal X$, $\Lambda_T^{\mathbb T}$ is that of the reference recursion, and $A_T$ is the accumulated comparison constant of \cref{ch18:thm:slice-induction}. Further, $\operatorname{Surf}_{\mathcal X}$ is the number of variables in the boundary bands that enter the normalization constant, and $\overline{\mathrm{ch}}_f$ is the sum of the nonnegative upper bounds, assigned to $f$ by \cref{ch18:thm:history-cover}, for the corrections from missing Gaussian coordinates, from missing constant terms of fluctuation integrals, and from substitutions of frozen coordinates. Each missing Gaussian coordinate contributes its own $\log(1/g_i)$, and each other such variable contributes a fixed bound $C_J$, including the variables at initialization. These are deterministic bounds in terms of the geometry and the couplings, independent of the chosen representative. The identity \eqref{ch19:eq:reference-identity} supplies only the prefactor $\widehat Z_d(g)^{-1}$; the bound for $\Lambda_T-\Lambda_T^{\mathbb T}$ comes from the increment estimate of \cref{ch17:thm:real-scalar-ledger}.
+
+Applying both lower bounds \eqref{ch19:eq:two-lower-bounds} at the same representative gives a gauge-invariant upper bound which is defined everywhere. At every point $(c,\Rec)$, with the density of \cref{ch18:thm:canonical-density}, which vanishes off the gauge saturation of these representatives,
+\[
+ p_{\mathcal X}(c,\Rec)\le\widehat Z_d(g)^{-1}e^{\overline L_{\mathcal X}}w_{\mathcal X}(\Rec)
+ \exp\bigl\{-\lambda\Psi_F(c)/g^2-\theta A_{\mathcal X}(\Rec)\bigr\}.
+\]
+The minimum $\Psi_F$ and the corresponding integral over $H$ are invariant under every gauge transformation of the endpoints of the links in $F$, extended to the other sites. The tests of the recorded bad plaquettes and the other tests in $w_{\mathcal X}$ are invariant under the action of consistent endpoint gauge transformations at all scales. Hence the pointwise covariance of \cref{ch18:thm:canonical-density} applies to this bound. Define the finite measure, which is in general not normalized,
+\[
+ d\widetilde\sigma_{\lambda,d,g}(C)=\widehat Z_d(g)^{-1}e^{-\lambda\mathcal V_m(C)/g^2}\dH_m(C),
+\]
+and let $\widetilde\sigma_{\lambda,d,g;F}$ be its marginal on the links of $F$. Integrating the Wilson factor over the links in $H$ gives
+\[
+ \begin{split}
+ \eta_{\mathcal X}(dc\,d\Rec)\le{}&
+ \exp\bigl\{\overline L_{\mathcal X}+d_H\log(1/(c_*g))+8\lambda\alpha_W\abs H-\theta A_{\mathcal X}(\Rec)\bigr\}\\
+ &\times[\widetilde\sigma_{\lambda,d,g;F}\otimes\rho_{\mathcal X}](dc\,d\Rec).
+ \end{split}
+\]
+
+For $\theta=\lambda=1/2$, let $Q_{\mathrm{orig}}$ be a requested plaquette-energy sum as in \cref{ch19:lem:compact-wilson-source-cap}, and let $\eta_{\mathcal X}^s=(\mathscr O_T^{\mathcal X})_\#(e^{sQ_{\mathrm{orig}}}\one_{\mathcal A_{\mathcal X}}\nu)$. For $0\le s\le(4K_W)^{-1}$ and $\lambda_s=1/2-sK_W\in[1/4,1/2]$,
+\begin{equation}\label{ch19:eq:completed-source-envelope}
+ \eta_{\mathcal X}^s\le
+ \exp\bigl\{\overline L_{\mathcal X}+sD_{\mathcal X}+d_H\log(1/(c_*g))+8\lambda_s\alpha_W\abs H-A_{\mathcal X}(\Rec)/2\bigr\}
+ \,[\widetilde\sigma_{\lambda_s,d,g;F}\otimes\rho_{\mathcal X}].
+\end{equation}
+The function $Q_{\mathrm{orig}}$ need not be a function of the observation $(c,\Rec)$, and the same partition function $Z_\nu$ and the same centered denominator $\widehat Z_d(g)$ are used for all $s$.
+
+All external classical exponents occur once in $E_T$ and are absent from $\rho_{\mathcal X}$. The intermediate auxiliary actions and effective interactions need only be defined at the analytic arguments given by these representatives; no global auxiliary density is asserted or integrated. The local constants in the bounds for the normalization constant and for the oscillation have the dependence described in item~(3) of \cref{ch01:conv:constants}, independently of the widths chosen later. The explicit counts contain the dependence on the geometry, and uniform probability constants have the dependence described in item~(4) of \cref{ch01:conv:constants}.
+\end{theorem}
+
+\begin{proof}
+We first check the hypotheses of the imported estimates, then bound the density at such a representative, extend the bound to every point by gauge invariance, and finally integrate over the omitted links.
+
+\paragraph{Step 1: hypotheses.}
+The decomposition in \cref{ch18:thm:slice-induction} has its initial and stopping levels at boundaries of RG steps and integrates only full RG steps. By \cref{ch19:lem:covered-history-admission}, its logarithmic product domains satisfy the containment and the expansion conditions, its frozen coordinates satisfy the one-quarter radius bounds and the substitution bounds, and its coefficient norms at initialization remain within the same bounds. Here $A_{\mathrm w}$ is fixed before the ceiling, and \eqref{ch19:eq:ambient-finite-normalizer} gives measurability and a positive finite partition function for every comparison with the enclosing product domain. This verifies the hypotheses of the integration estimate and of the comparison at every step, with all frozen coordinates real.
+
+\paragraph{Step 2: the bound at a representative.}
+We choose such a representative at which the bounds on the frozen coordinates hold, and let $Z_\nu$ be the partition function of \cref{ch18:thm:slice-induction}. At this representative, after the external classical exponents have been incorporated once, the induction of that theorem gives
+\[
+ p_{\mathcal X}(\widehat c,\widehat\Rec)\le A_TZ_\nu^{-1}e^{\Lambda_T(\widehat\Rec)}w_{\mathcal X}(\widehat\Rec)e^{-E_T/g^2-R_T(\widehat c;\widehat\Rec)}.
+\]
+The regional effective interaction $R_T$ is centered at the origin of the block region at the stopping level. By \cref{ch17:thm:controlled-kernel}, its part coming from the full torus and its boundary correction satisfy the oscillation bound
+\[
+ \abs{R_T(v;\Rec)}\le\rho^2\Bigl[E\abs{\Omega_T}+y_*\sum_{i\in\Omega_T}e^{-\alpha d_{\Omega_T}(i)}\Bigr]\le C_{\mathrm{osc},J}m^3,
+\]
+where $\Omega_T$ is the list of scalar variables of the block region at the stopping level, $d_{\Omega_T}(i)$ is the distance of $i$ to its complement, and $y_*$ is the fixed output bound of \cref{ch17:thm:controlled-kernel}, which is used because no boundary layer is removed after the last RG step. There are at most $9m^3$ scalar variables. In the last inequality, we used $e^{-\alpha d}\le1$, which avoids any assumption on the shape of the boundary. The linear terms are included in this oscillation bound. The constants are evaluated on the fixed analytic domains, before the widths are chosen.
+
+\paragraph{Step 3: the normalization constants.}
+Inserting \eqref{ch19:eq:reference-identity}, that is $e^{\Lambda_T^{\mathbb T}}/Z_\nu\le\widehat Z_d(g)^{-1}$, into this density bound, we obtain the stated expression for $L_{\mathcal X}$. To bound it, we sum over the RG steps the increment inequality of \cref{ch17:thm:real-scalar-ledger}, as recorded in \cref{ch18:thm:slice-induction}. Every summand comes from a full RG step, and the column bounds of the perturbed maps and all the product conditions have been checked in \cref{ch19:lem:covered-history-admission}. At initialization the normalization constant equals the constant of the reference recursion plus the increment from the substitution at initialization. Each missing scalar Gaussian coordinate contributes $\log(1/g_i)$, and each missing constant term of a fluctuation integral and each substituted variable contributes its fixed bound $C_J$. Using \cref{ch18:thm:history-cover}, we assign these nonnegative bounds to the recorded bad plaquette whose assigned neighborhood contains the variable. Variables in the boundary bands contribute $C_\partial\operatorname{Surf}_{\mathcal X}$. A variable that lies in several neighborhoods is assigned to the first recorded bad plaquette in the fixed order of the tests, and is therefore counted once, or overcounted by a bounded positive amount. Variables at initialization are assigned in the same way. Thus
+\[
+ \Lambda_T-\Lambda_T^{\mathbb T}\le C_\partial\operatorname{Surf}_{\mathcal X}+\sum_f\overline{\mathrm{ch}}_f,
+\]
+after a fixed bound for the bulk at the stopping level has been absorbed into $3C_Jm^3$; the same $C_J$ may include $C_{\mathrm{osc},J}/3$. Finally, $\log A_T\le C_\delta$ by \cref{ch18:thm:slice-induction,ch17:lem:ambient-white-comparison}. These estimates prove the bound by $\overline L_{\mathcal X}$, in which only counts of geometric objects and the given couplings $g_i$ occur, and no value at the representative.
+
+\paragraph{Step 4: the classical lower bounds.}
+At the same representative, by \cref{ch19:thm:classical-source-payment}(b), we have $E_T/g^2\ge\Psi_F(\widehat c)/g^2$ and $E_T/g^2\ge A_{\mathcal X}(\widehat\Rec)$. Multiplying these inequalities by $\lambda$ and $\theta$, respectively, adding them, and using $\lambda+\theta=1$, we obtain
+\[
+ \frac{E_T}{g^2}\ge\frac{\lambda\Psi_F(\widehat c)}{g^2}+\theta A_{\mathcal X}(\widehat\Rec).
+\]
+Inserting this into the bound of Step~2, we find the pointwise upper bound at every such representative.
+
+\paragraph{Step 5: extension to every point.}
+By \cref{ch19:lem:wilson-minimum}, $\Psi_F$ and the integral $I_{\lambda,g}$ are continuous and invariant under gauge transformations of the endpoints of the links in $F$, extended to the other sites. Each value $q_f(\Rec)=1-\tr(U_f(\Rec))/2$ of a recorded bad plaquette is computed from the transport $U_f(\Rec)$ around $f$, using its frozen full dependence set and the Borel extension of $T_M$; under an endpoint gauge transformation the intermediate endpoint factors cancel and the final transport is conjugated. Thus $A_{\mathcal X}$ and all tests in $w_{\mathcal X}$ are invariant under the action of consistent endpoint gauge transformations in \cref{ch18:thm:canonical-density}. The bound $\overline L_{\mathcal X}$ is gauge invariant, since it depends only on the geometry and the couplings. It follows that the right side of the bound is a gauge-invariant Borel function $G$ defined everywhere. For a point $x=(c,\Rec)$ in the gauge saturation of these representatives, we choose such a representative $\widehat x=x^k$ at which the bounds on the frozen coordinates hold; it exists by \cref{ch18:thm:history-cover}, and the bounds of Steps~2--4 hold at $\widehat x$. The endpoint action on arbitrary frozen variables need not preserve the bound on their logarithms, but $G$ is defined by invariant factors only. By the pointwise covariance of the density in \cref{ch18:thm:canonical-density}, we have
+\[
+ p_{\mathcal X}(x)=p_{\mathcal X}(\widehat x)\le G(\widehat x)=G(x).
+\]
+This is a pointwise statement for each $x$, and the gauge transformation $k$ may depend on $x$; neither a random choice according to Haar measure nor an integration over the set of representatives is needed. Off the gauge saturation the density vanishes, and the inequality holds there as well.
+
+\paragraph{Step 6: integration over the omitted links.}
+It remains to integrate the Wilson factor, which is now defined globally. The hypothesis of \cref{ch19:lem:compact-wilson-completion} is $0<g\le1$, which we have assumed; hence that lemma applies with the fixed $\lambda$. This condition at the stopping side is separate from the ceiling on the largest coupling of an integrated RG step: at the output of a full RG step, $g=\sqrt M\,t_{\max}$. The reference identity used in Step~3 needs no uniform bound on the ratio of partition functions; whenever that bound is used, its fixed ceiling is imposed as well, as required in the statement. Multiplying by $\widehat Z_d(g)^{-1}\dH_F(c)$ gives exactly
+\[
+ \widehat Z_d(g)^{-1}\Bigl[\int_{\SU^H}e^{-\lambda\mathcal V_m(c\oplus z)/g^2}\dH_H(z)\Bigr]\dH_F(c)=d\widetilde\sigma_{\lambda,d,g;F}(c).
+\]
+All these are finite nonnegative integrals over compact products. Multiplying the pointwise inequality by $\dH_F(c)\dH_{\mathcal X}(\Rec)$ proves the inequality for $\eta_{\mathcal X}$, with $w_{\mathcal X}\dH_{\mathcal X}=d\rho_{\mathcal X}$. Every external classical exponent has entered $E_T$ exactly once. The invariant indicators of the recorded bad plaquettes remain in $\rho_{\mathcal X}$; hence $q_f\ge d_*$ holds at every point of integration used later. No global value or covariance property of $E_T$ or $R_T$ was used. The dependence of the constants follows from the local bounds for the oscillation and the normalization constant and from the displayed counts.
+
+\paragraph{Step 7: the weighted measures.}
+For the last assertion, we take $\theta=\lambda=1/2$ and apply \eqref{ch19:eq:source-cap-pushforward} to the bound for $\eta_{\mathcal X}$ obtained in Step~5, before the integration over $H$. This changes $-\Psi_F/(2g^2)$ into $-\lambda_s\Psi_F/g^2$ and adds $sD_{\mathcal X}$ to the exponent. We then apply \cref{ch19:lem:compact-wilson-completion} to this Wilson factor with $\lambda=\lambda_s$. Its constants are uniform for $\lambda_s\in[1/4,1/2]$, and the marginal is exactly $\widetilde\sigma_{\lambda_s,d,g;F}$. This proves \eqref{ch19:eq:completed-source-envelope}. Since the multiplication by $e^{sQ_{\mathrm{orig}}}$ was made before the integration over $H$, no two partition functions are compared.
+\end{proof}
+
+\section{Summation over large-field decompositions}\label{ch19:sec:summation}
+
+We now prove \cref{ch19:thm:all-phase-window}, following the outline in \cref{ch19:sec:setting}. The method of absorbing the normalization losses of excluded regions into the action of the large fields goes back to Bałaban's treatment of large fields \cite{Balaban1989LargeI,Balaban1989LargeII}; the decomposition, the frozen coordinates, and the constants used here are those of \cref{ch18:chapter}.
+
+\begin{proof}[Proof of \cref{ch19:thm:all-phase-window}]
+Steps~1 and~2 fix the ceilings and the stopping level, Steps~3--6 treat a stopping level above the initial level, and Step~7 treats the remaining case.
+
+\paragraph{Step 1: ceilings and the minimum side.}
+We write $n=n_{j-1}$. The parameters, the buffers, and the count $F_J$ are fixed first. We choose the coupling bound $g_{\mathrm{anc}}>0$ for the bounds in \cref{ch19:thm:classical-source-payment}(c), uniformly for $\lambda\in[1/4,1/2]$, and impose
+\begin{equation}\label{ch19:eq:window-endpoint-gates}
+ g_{\mathrm{end}}\le\min\{1,g_*,g_{\mathrm{anc}},\sqrt{\alpha_W},\sqrt{2\kappa_*}\},\qquad
+ n_{\min}\ge\max\{e\Gamma,\Gamma/g_{\mathrm{end}}^2,\Gamma/(Mg_*^2)\}.
+\end{equation}
+We also include every fixed minimum side required by the geometry and by the first step for a Wilson initial measure in \cref{ch18:thm:history-cover}. Then, for every stopping side $m\ge n_{\min}$, we have $g_m\le1$, as required in \cref{ch19:lem:compact-wilson-completion}. Each ratio of partition functions satisfies its own coupling bound, the inverse-coupling conditions $4\lambda\alpha_W/g_m^2\ge1$ for $\lambda\ge1/4$ and $2\kappa_*/g_m^2\ge1$ hold, and a full RG step with output side $m$ has $t_{\max}^2=\gamma/(Mm)\le g_*^2$. The identity $g_m=\sqrt M\,t_{\max}$ shows why the condition at the stopping side is checked separately. No restriction on $\gamma$ enters a local estimate.
+
+\paragraph{Step 2: the stopping level.}
+Let $t_0=J\lfloor(j-1)/J\rfloor$ and $u_{\mathrm{ph}}=j-1-t_0$. For a given $r_{\mathrm{stop}}\in\mathscr R$, we set $t_{\mathrm{stop}}=t_0-r_{\mathrm{stop}}J$. If $t_{\mathrm{stop}}>b$, we integrate the $(t_{\mathrm{stop}}-b)/J$ full RG steps of the decomposition. The function at their endpoint is exactly
+\begin{equation}\label{ch19:eq:aligned-source-pullback}
+ C\longmapsto Q_j^{\mathcal T}(T_M^vC),\qquad
+ v=r_{\mathrm{stop}}J+u_{\mathrm{ph}}=j-1-t_{\mathrm{stop}},\qquad
+ m=n_{t_{\mathrm{stop}}}=M^vn.
+\end{equation}
+Here $0\le b<t_{\mathrm{stop}}\le j-1<JK$, and therefore all $v$ iterates are available and all their sides are multiples of four. The depth $aJ+t_{\mathrm{stop}}-b$ of the reference recursion is a multiple of $J$. If $t_{\mathrm{stop}}\le b$, we use the initial measure directly: $j-1-b$ is an available nonnegative exponent, bounded by $J\max\mathscr R+J-1$, and $n_b/n\le\chi_*$. This treats all remainders without integrating a partial RG step. Steps~3--6 concern the case $t_{\mathrm{stop}}>b$.
+
+\paragraph{Step 3: one decomposition.}
+We use the Borel partition of \cref{ch18:thm:history-cover} and the density induction of \cref{ch18:thm:slice-induction}. For a Wilson initial measure, the first step covers all of $\Conf{n_b}$ and does not first restrict the Wilson measure to $D_r$. By \cref{ch19:lem:covered-history-admission}, the product domains, the coefficient norms, the bounds on the frozen coordinates, and the boundary comparisons hold for every finite decomposition, without a bound on its number of RG steps.
+
+Fix one decomposition $\mathcal X$. Let $\Psi_F=\min_z\alpha_WS_W(c\oplus z)$, and let $H_{\mathcal X}=\sum_fx_f$. In Steps~3--6, $H_{\mathcal X}$ denotes this scalar sum, not the product Haar measure on the frozen coordinates. At the observation, by \cref{ch19:lem:compact-wilson-source-cap}, we have $Q_{\mathrm{orig}}\le K_W\Psi_F/g_m^2+8F_JH_{\mathcal X}$. We apply the bound of \cref{ch19:thm:invariant-wilson-envelope} with $\theta=1/2$, before the integration over $H$. Multiplication by $e^{sQ_{\mathrm{orig}}}$ is justified by the inequality \eqref{ch19:eq:source-cap-pushforward} between pushforward measures, without assuming that $Q_{\mathrm{orig}}$ is a function of the observation. With $\lambda_s=1/2-sK_W\in[1/4,1/2]$, the exponent before the integration over $H$ satisfies
+\[
+ sQ_{\mathrm{orig}}-\frac{\Psi_F}{2g_m^2}-\frac{A_{\mathcal X}}2\le-\frac{\lambda_s\Psi_F}{g_m^2}-(P_0-8sF_J)H_{\mathcal X}.
+\]
+Indeed, by \cref{ch19:thm:classical-source-payment}(b) and the invariant indicators of the recorded bad plaquettes, we have $A_{\mathcal X}/2\ge2c_A^{\mathrm{act}}d_*H_{\mathcal X}=P_0H_{\mathcal X}$, and the condition $s\le\theta c_A^{\mathrm{act}}d_*/(16F_J)$ gives $8sF_J\le P_0/8\le P_0/4$. We integrate the Wilson minimum once over $H$ by \cref{ch19:lem:compact-wilson-completion}, which adds $3\abs H\log(1/(c_*g_m))+8\lambda_s\alpha_W\abs H$ to the exponent. The centered reference denominator and the partition function $Z_\nu$ of the initial measure are the same for every $s$.
+
+\paragraph{Step 4: assignment of the corrections.}
+We enlarge the local counting constant to account for the directions, the colors, the links across the boundary of the block region, and the finite family of remainders, and set
+\[
+ D_0=C_J(BW+R_{\mathrm{cell}}+1)^3,\qquad D_1=C_J(W+R_{\mathrm{cell}}+1)^3.
+\]
+By \cref{ch18:thm:history-cover}, every variable outside the bulk that enters the normalization constant is assigned to a recorded bad plaquette at whose creation it was produced, and the assignment is subadditive when neighborhoods merge. At most $D_0$ variables are assigned to $f$ at its creation, and at most $D_1$ at each later RG step. At creation their integration side is at most $Bn_f$, and the sides at later steps decrease by the factor $B$. We absorb the finite factors coming from the stopping offsets and the finite link products into a constant $\chi_{\mathrm{lay}}\ge1$. For every missing Gaussian coordinate assigned to $f$,
+\begin{equation}\label{ch19:eq:label-log}
+ \log(1/g_i)=\tfrac12\log(n_i/\gamma)\le\tfrac12\log x_f+\tfrac12\log\chi_{\mathrm{lay}}.
+\end{equation}
+By \cref{ch17:thm:real-scalar-ledger,ch18:thm:slice-induction}, all other corrections per variable have fixed bounds. Thus a constant $C_{\mathrm{lab}}$, with the dependence described in item~(3) of \cref{ch01:conv:constants}, bounds the correction of each variable by $C_{\mathrm{lab}}(1+\log x_f)$. The dependence on the widths is entirely in $D_0$, $D_1$, and the fixed counts of affected plaquettes.
+
+Let $H_f$ be the number of RG steps after the creation of $f$, including empty steps. Counting the decreasing sides down to four, we find
+\[
+ H_f+1\le C_{\mathrm{lay},J}+\#\{q\in\N_0:4B^q\le\chi_{\mathrm{lay}}n_f\}\le C'_{\mathrm{lay},J}(1+\log n_f).
+\]
+The finite additive term includes the conventions at creation and at the stopping level; the number of RG steps of the decomposition does not occur. Since $x_f\ge e$ and $\gamma\le\Gamma$, we have $1+\log n_f\le(1+\log_+\Gamma)(1+\log x_f)$. We write $H_f^{\mathrm{term}}$ for the set of omitted links at the stopping level assigned to $f$. The deterministic assignment of \cref{ch18:thm:history-cover}, to the first recorded bad plaquette in the fixed order of the tests, partitions $H$ into these sets, and $\abs{H_f^{\mathrm{term}}}\le D_1$. The corrections assigned to $f$ are listed in \cref{ch19:tab:activation-charges}. For the integration over $H$ we also used that $m\le n_f$, so that $\log(1/(c_*g_m))\le\log(1/c_*)+(\log x_f)/2$.
+
+\begin{table}[htbp]
+\centering\small
+\caption{All corrections assigned to one recorded bad plaquette $f$ created at side $n_f$. Here $L_f=1+\log x_f$, and the later RG steps include empty steps.}
+\label{ch19:tab:activation-charges}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.19\textwidth}
+>{\raggedright\arraybackslash}p{.46\textwidth}
+>{\raggedright\arraybackslash}p{.26\textwidth}@{}}
+\toprule
+Stage & Corrections included, and where they are bounded & Bound \\
+\midrule
+Creation & Missing Gaussian coordinates, missing constant terms of the Haar disintegration and fluctuation integrals, substitutions at initialization and at creation; \cref{ch17:thm:real-scalar-ledger,ch18:thm:slice-induction} & $D_0C_{\mathrm{lab}}L_f$ \\
+Later nonempty RG steps & Missing coordinates and constant terms, boundary bands, and every later substitution, at the couplings of their integration; the same increment estimate & $D_1C_{\mathrm{lab}}L_f$ per step \\
+Integration over $H$ & Omitted links, including links across the boundary of the block region: $3\abs{H_f^{\mathrm{term}}}\log(1/(c_*g_m))+8\lambda_s\alpha_W\abs{H_f^{\mathrm{term}}}$; \cref{ch19:lem:compact-wilson-completion} & $D_1C_{\mathrm{com}}L_f$, once \\
+Empty RG steps & Determinant and fluctuation integral equal one; logarithmic determinant and centered effective interaction vanish. Missing reference variables use the same increment estimate & at most $D_1C_{\mathrm{lab}}L_f$ per empty step \\
+External exponents & Incorporated once into the classical exponent; the weight of the frozen coordinates is a subprobability; \cref{ch18:thm:slice-induction} & no further positive correction \\
+Plaquette-energy sum & Discarded plaquettes keep the coefficient $4/g_n^2$; \cref{ch19:lem:compact-wilson-source-cap} & $8sF_Jx_f\le P_0x_f/4$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The numbers of nonempty and of empty later RG steps in the table add up to at most $H_f$, so no step contributes twice. At the first RG step at which the block region is empty, all omitted variables are covered by assigned neighborhoods, and the recurrence $R_{t+1}(f)\le B^{-1}R_t(f)+C_J(W+R_{\mathrm{cell}}+1)$ of \cref{ch18:thm:history-cover} continues to cover their coarse images, including the full finite dependence range, even when the union of the neighborhoods is the whole torus. We carry the frozen coordinates by the identity through the remaining full RG steps; both the effective classical action and $g^2$ acquire the factor $B$, which leaves each external exponent unchanged. The clauses on empty products in \cref{ch17:thm:controlled-kernel,ch17:thm:real-scalar-ledger} therefore justify the row for empty steps.
+
+Combining the first four rows of the table, we find
+\begin{equation}\label{ch19:eq:charge-budget}
+ C_\partial\operatorname{Surf}_{\mathcal X}+\sum_f\overline{\mathrm{ch}}_f+3\abs H\log(1/(c_*g_m))+8\lambda_s\alpha_W\abs H
+ \le\sum_fC_{\mathrm{ch},J}^{\Gamma}(1+\log x_f)^2.
+\end{equation}
+For example, one may take for $C_{\mathrm{ch},J}^{\mathrm{base}}$ a fixed multiple of $(D_0+D_1)(1+C'_{\mathrm{lay},J})(C_{\mathrm{lab}}+C_{\mathrm{com}})$. The bulk term $3C_Jm^3$ and the single comparison constant $C_\delta$ of \cref{ch19:thm:invariant-wilson-envelope} remain as explicit prefactors at the stopping level; they are not generated again at each step.
+
+\paragraph{Step 5: absorption and the bound for one decomposition.}
+For $x\ge e$, the function $(1+\log x)^2/x$ decreases to zero. We increase the minimum side so that $C_{\mathrm{ch},J}^{\Gamma}(1+\log x)^2\le P_0x/4$ for every $x\ge n_{\min}/\Gamma$. Since $n_f\ge m\ge u\ge n_{\min}$ and $\gamma\le\Gamma$, every $x_f$ is in this range, and by Steps~3 and~4 at least $P_0x_f/2$ of the classical lower bound remains for each recorded bad plaquette. By \cref{ch18:thm:slice-induction}, the weight of the frozen coordinates, after the removal of the incorporated external exponents, has mass at most one. The marginal $\widetilde\sigma_{\lambda_s,d,g_m;F}$ has the mass of the whole Wilson numerator, $\widehat Z_d(g_m)^{-1}\int e^{-\lambda_s\mathcal V_m/g_m^2}\dH_m$. Using the bound for the single ratio in \cref{ch19:thm:classical-source-payment}(c), uniform for $\lambda_s\in[1/4,1/2]$, we conclude that
+\begin{equation}\label{ch19:eq:history-moment}
+ \E_\nu\bigl[e^{sQ_{\mathrm{orig}}};\mathcal A_{\mathcal X}\bigr]\le e^{3C_Tm^3+9m^2\log(1/g_m)+C_\delta}\prod_fe^{-a_{\mathrm{act}}n_f/\gamma},
+\end{equation}
+where $C_T$ collects $C''$ of \cref{ch19:thm:classical-source-payment}(c) and $C_J$. Only the reference integral in the denominator is restricted to $D_r$.
+
+\paragraph{Step 6: summation over decompositions.}
+Since the sets $\mathcal A_{\mathcal X}$ partition the support of $\nu$, $\E_\nu e^{sQ_{\mathrm{orig}}}$ is the sum of the left sides of \eqref{ch19:eq:history-moment} over all decompositions. By \cref{ch18:thm:history-cover}, there is at most one decomposition for each attainable set of recorded bad plaquettes, and there are at most $3n_\ell^3$ positive plaquettes at level $\ell$. Hence
+\[
+ \sum_{\mathcal X}\prod_fe^{-a_{\mathrm{act}}n_f/\gamma}
+ \le\prod_\ell\bigl(1+e^{-a_{\mathrm{act}}n_\ell/\gamma}\bigr)^{3n_\ell^3}
+ \le\exp\Bigl\{\sum_\ell3n_\ell^3e^{-a_{\mathrm{act}}n_\ell/\gamma}\Bigr\},
+\]
+which is the bound in the theorem. To bound its logarithm, we include all levels, also those inside RG steps, so that consecutive sides differ by the factor $M$, and note that
+\[
+ \frac{(Mm')^3e^{-a_{\mathrm{act}}Mm'/\gamma}}{m'^3e^{-a_{\mathrm{act}}m'/\gamma}}=M^3e^{-a_{\mathrm{act}}(M-1)m'/\gamma}\le\frac12
+\]
+for all sides $m'$ above a fixed further minimum side, uniformly for $\gamma\le\Gamma$. We also require $n_{\min}\ge3\Gamma/a_{\mathrm{act}}$, so that $x\mapsto x^3e^{-a_{\mathrm{act}}x/\gamma}$ decreases for $x\ge n_{\min}$, and $6n_{\min}^3e^{-a_{\mathrm{act}}n_{\min}/\Gamma}\le1$. Since all sides $n_\ell$ that occur are at least $u\ge n_{\min}$, the sum in the exponent is at most twice its first term, hence at most one, for every finite depth. Since $m=\chi n$, the remaining exponent is
+\[
+ 3C_T\chi^3n^3+9\chi^2n^2\log(1/g_n)+\tfrac92\chi^2n^2\log\chi+C_\delta+1.
+\]
+The fixed term containing $\log\chi$ is absorbed into the volume constant, and the condition $C_s\ge9\chi_*^2$ accommodates the single surface term.
+
+\paragraph{Step 7: stopping level at or below the initial level.}
+In this case $Q_{\mathrm{orig}}=Q_j^{\mathcal T}\circ T_M^{j-1-b}$, and by the bound for cells in \cref{ch19:thm:classical-source-payment}(a), we have $Q_{\mathrm{orig}}\le K_MS_W(V)/h_{n_b}$. For a stopped initial measure, the bound for stopped measures in \cref{ch19:thm:classical-source-payment}(c) applies, because $sK_M\le\kappa_0/2\le\kappa_*/2$. For a Wilson initial measure, we have $sK_M\le1/2$, and the moment is at most
+\[
+ \frac{\int e^{-(1-sK_M)S_W/h_{n_b}}\dH_{n_b}}{\int e^{-S_W/h_{n_b}}\dH_{n_b}}.
+\]
+We use the integral over $D_r$ of the reference recursion at depth zero only to bound the denominator from below, and the Wilson integral over the whole configuration space, with coefficient $1-sK_M\in[1/2,1]$, in the numerator. The same calculation of \cref{ch19:thm:classical-source-payment}(c), that is, of \cref{ch11:thm:terminal-anchor}, bounds this ratio by $e^{3C_Tn_b^3+9n_b^2\log(1/g_{n_b})}$. We convert units using $n_b/n\le\chi_*$, as in Step~6. Finally, we enlarge the constants $C_v,C_s,C_b$ to cover the finite family of stopping offsets and remainders, which proves the theorem. All increases of the minimum side are made after $\Gamma$ is fixed and before the coupling is chosen. No step used a bound on $j-b$ or a bound on the probability, under the Wilson measure, of the complement of a small-field event.
+\end{proof}
+
+\section{Chessboard estimates with regularity indicators}\label{ch19:sec:chessboard}
+
+The chessboard estimate converts the exponential-moment bound of \cref{ch19:thm:all-phase-window} into a bound for the probability that a given cell contains a bad plaquette at level $j$, given regularity at finer levels inside the cells. Reflection positivity of the Wilson measure with respect to reflections in lattice planes is due to Osterwalder and Seiler \cite{OsterwalderSeiler1978}, and systematic treatments of reflection positivity and chessboard estimates were given by Fröhlich, Israel, Lieb, and Simon \cite{FILS1978,FILS1980}. We use the functional form of the chessboard estimate in \cite[Theorem~5.8, (5.34)--(5.35)]{Biskup2009}. It applies to the algebra of bounded gauge-invariant functions of the links on one side of a lattice plane through links, and to the pullbacks of such functions by the block averaging maps with their Borel extension, as verified in \cref{ch03:thm:original-chessboard}. In the form proved there, it states the following. Let $\mu^{(\ell)}$ be the pushforward of the Wilson measure to level $\ell$, tile the lattice at level $\ell$ into cells $Q_t$ of $2\times2\times2$ sites, $\mathfrak m$ in number, and let $\vartheta_t$ denote the reflected placements in the cells. Then for nonnegative bounded gauge-invariant functions $f_1,\dots,f_k$ of the links of one cell and distinct cells $t_1,\dots,t_k$,
+\[
+ \E_{\mu^{(\ell)}}\prod_{i=1}^k\vartheta_{t_i}f_i\le\prod_{i=1}^k\Bigl[\E_{\mu^{(\ell)}}\prod_t\vartheta_tf_i\Bigr]^{1/\mathfrak m},
+\]
+and the same holds for each of the eight shifted tilings. Reflection positivity is used only for the Wilson measure and its pushforwards under the block averaging maps; a measure restricted to a fiber of the block averaging map or to a small-field event need not be reflection positive.
+
+\begin{lemma}\label{ch19:lem:marked-chessboard}
+Let $N=uB^K$ with $u\in4\N$, and let $1\le j\le JK$. For each of the eight tilings at level $j$, let $\mathfrak m_j=n_j^3/8$ be the number of its disjoint cells of $2\times2\times2$ sites. All events below are gauge-invariant functions of the links of one cell, at the respective levels, pulled back to the fine lattice by the block averaging maps with their Borel extension, and they are considered under the Wilson measure $\mu=\mu_{N,\gamma}$. For two such events $R_0$ and $I_0$ attached to one cell, let $\vartheta_tR_0$ and $\vartheta_tI_0$ be their reflected placements in the cells $t$ of the tiling, and set
+\[
+ R=\bigcap_t\vartheta_tR_0,\qquad I_{\mathrm{all}}=\bigcap_t\vartheta_tI_0.
+\]
+Then
+\[
+ \mu(R\cap I_0)\le\mu(R\cap I_{\mathrm{all}})^{1/\mathfrak m_j}\mu(R)^{1-1/\mathfrak m_j},\qquad
+ \mu(R_0\cap I_0)\le\mu(R\cap I_{\mathrm{all}})^{1/\mathfrak m_j}.
+\]
+If $\mu(R)>0$, this gives $\mu(I_0\mid R)\le\mu(I_{\mathrm{all}}\mid R)^{1/\mathfrak m_j}$.
+
+Now let $R_0=R_{<j}(C;d_{\mathrm{cut}})$ be the event of \cref{ch04:lem:cones-and-cells} that $q<d_{\mathrm{cut}}$ for exactly those plaquettes at finer levels whose full dependence sets lie in the cell $C$, and let $I_0=I_j(C;d_*)$ be the event that at least one internal level-$j$ plaquette of $C$ has $q\ge d_*$, where $d_*=d_{\mathrm{cut}}/2$. The event $R$ imposes no condition on plaquettes whose dependence sets cross the boundaries of the cells. Assume $\pi\sqrt{2d_{\mathrm{cut}}}\le\delta_*$, and let $c_E=1+C_M\pi\sqrt{2d_{\mathrm{cut}}}$. On $R\cap I_{\mathrm{all}}$, the function \eqref{ch19:eq:cell-source} of the configuration at level $j-1$ satisfies
+\[
+ Q_j^{\mathcal T}\ge\frac{4d_*\mathfrak m_j}{c_Eh_{n_j}}.
+\]
+Consequently, for every $s>0$,
+\[
+ \log\mu_{N,\gamma}(R_0\cap I_0)\le-\frac{4sd_*n_j}{c_E\gamma}+\mathfrak m_j^{-1}\log\E_{\mu_{N,\gamma}}\bigl[e^{sQ_j^{\mathcal T}};R\bigr].
+\]
+The expectation on the right is restricted to the event $R$ and taken with the partition function of the Wilson measure. If its logarithm is at most $3C_vn_{j-1}^3+C_sn_{j-1}^2\log(1/g_{n_{j-1}})+C_b^\circ$, then dividing this bound by $\mathfrak m_j$ gives, at $m=n_j$, exactly
+\[
+ \mathcal A_\gamma(m)=24C_vM^3+\frac{4C_sM^2}{m}\log(Mm/\gamma)+\frac{8C_b^\circ}{m^3}.
+\]
+No division by the probability of a regularity event occurs. Regularity of all plaquettes at finer levels implies the event $R$, but $R$ implies neither regularity of the plaquettes whose dependence sets cross cell boundaries nor any condition of the small-field event. The inequalities contain no constant depending on the depth, the geometry, or the coupling, apart from $c_E$.
+\end{lemma}
+
+\begin{proof}
+Each indicator of an event in a cell used below is bounded by one and Borel: its list of plaquettes is finite, $q$ is continuous, and every iterate of the block averaging map with its Borel extension is Borel. Since it is gauge invariant and depends only on links internal to its cell, it belongs to the algebra of \cref{ch03:thm:original-chessboard}; the support condition, the reflection geometry for odd $M$, and the exact number of cells needed there are given by \cref{ch04:lem:cones-and-cells}. In the functional inequality we place $\one_{R_0\cap I_0}$ in the distinguished cell and $\one_{R_0}$ in every other cell. Placing the first function at all reflected translates gives $\one_{R\cap I_{\mathrm{all}}}$, and placing each of the other functions at all reflected translates gives $\one_R$. The product on the left is $\one_{R\cap I_0}$. This proves the first inequality, including the case of zero probabilities. Applying the same inequality to the single function $\one_{R_0\cap I_0}$, with the constant function one in the other cells, proves the second inequality. If $\mu(R)>0$, dividing the first inequality by $\mu(R)$ gives the conditional form, with the normalization still inside the root.
+
+For the event $R$, every plaquette in a complete predecessor rectangle of an internal level-$j$ plaquette is tested, since these lists are included in the tests of \cref{ch04:lem:cones-and-cells}. By \eqref{ch19:eq:angle-cost}, the angles of these plaquettes at level $j-1$ are at most $\pi\sqrt{2d_{\mathrm{cut}}}\le\delta_*$. Applying the transport estimate over one averaging step in \cref{ch19:thm:classical-source-payment}(a) to the union of the internal level-$j$ plaquettes, we obtain
+\[
+ \frac4{h_{n_j}}\sum_{\text{internal }P}q(V_P^j)\le c_EQ_j^{\mathcal T}.
+\]
+On $I_{\mathrm{all}}$ every cell has at least one internal plaquette with $q\ge d_*$. The internal plaquettes of distinct cells are distinct, so the sum on the left is at least $4d_*\mathfrak m_j/h_{n_j}$. This proves the lower bound for $Q_j^{\mathcal T}$. For $s>0$, the exponential Markov inequality under the Wilson measure implies that
+\[
+ \mu(R\cap I_{\mathrm{all}})\le\exp\bigl\{-4sd_*\mathfrak m_j/(c_Eh_{n_j})\bigr\}\E_{\mu_{N,\gamma}}\bigl[e^{sQ_j^{\mathcal T}};R\bigr].
+\]
+Taking the $\mathfrak m_j$-th root, using the second chessboard inequality, and taking logarithms, with $\log0=-\infty$, we obtain the stated bound, since $h_{n_j}=\gamma/n_j$. Only one factor $d_*=d_{\mathrm{cut}}/2$ occurs.
+
+Finally, we have $n_{j-1}=Mm$, $\mathfrak m_j=m^3/8$, and $\log(1/g_{n_{j-1}})=\log(Mm/\gamma)/2$. Dividing the three terms of the assumed bound by $m^3/8$ gives $24C_vM^3$, $4C_sM^2\log(Mm/\gamma)/m$, and $8C_b^\circ/m^3$, respectively, which is $\mathcal A_\gamma(m)$. Regularity of all plaquettes at finer levels implies the event $R$ by inclusion of the lists of plaquettes, while $R$ omits every finer plaquette whose full dependence set crosses the boundary of its cell.
+\end{proof}
+
+\section{Domination of successive small-field restrictions}\label{ch19:sec:prefix}
+
+The next lemma is the input for the second term in the bound on large fields, \cref{s2:thm:large-field}, which concerns configurations whose curvature is small at every scale but for which some fluctuation cutoff or coordinate-domain condition fails. The probability of the preceding conditions is multiplied, never divided, and no condition at later scales enters. The restricted measures and their dominations are indexed by $0\le a\le K$, and quantities involving the next RG step by $0\le a<K$.
+
+\begin{lemma}\label{ch19:lem:original-prefix-onsets}
+Fix the small-field event of \cref{ch01:def:selected-law,ch11:def:literal-selection}, with its prefactors and its fixed local parameters, together with $L>0$, $M$, $J$, and $0<\gamma_0\le1$. For $N=uB^K$ and $0\le a\le K$, let $S^a$ be the event consisting of the initial condition $U\in D_r$ and precisely the conditions of the first $a$ RG steps in \eqref{ch01:eq:literal-event}, and put
+\[
+ \eta_a=(T_M^{aJ})_\#(\one_{S^a}\mu_{N,\gamma}),\qquad
+ \zeta_a=(T_M^{aJ})_\#\bigl(\one\{V^{bJ}\in D_r\text{ for }0\le b\le a\}\,\mu_{N,\gamma}\bigr).
+\]
+For $0\le a<K$, at the output side $m=n_{(a+1)J}$ of the next RG step, set
+\[
+ \begin{gathered}
+ t_a^2=\gamma/(Mm),\qquad
+ \delta_a=6\mathsf b_ae^{-m_{\mathrm w}p(t_a)^2/24},\qquad
+ z_a=6\mathsf b_ae^{-m_{\mathrm w}Q_{\mathrm{DB}}^2/(24t_a^2)},\\
+ \epsilon_a=\delta_a/(1-z_a),\qquad\mathsf b_a\le C_Jm^3,
+ \end{gathered}
+\]
+where $p(t)=A_{\mathrm w}\log(1/t)$ and $a_{\mathrm w}=m_{\mathrm w}A_{\mathrm w}^2/24$. Here $\mathsf b_a$ is the number of three-dimensional fluctuation blocks of the RG step, $Q_{\mathrm{DB}}>0$ is the radius denoted $Q_{\mathrm{phys}}$ in \cref{ch11:def:literal-selection}, whose product of balls of radius $Q_{\mathrm{DB}}/t_a$ lies inside the supported fiber coordinates, and $m_{\mathrm w}>0$ is the lower bound for the Hessian of the conditional fluctuation potential; neither $Q_{\mathrm{DB}}$ nor $m_{\mathrm w}$ is related to the plaquette-energy sum or to the logarithmic cutoff. Above the common minimum side described below, the comparison of \cref{ch11:thm:admitted-white-comparison}, with identical unnormalized prefactors, gives
+\[
+ \one_{D_r}(T_M^J)_\#\eta_a\le(1-\epsilon_a)^{-1}\eta_{a+1},\qquad
+ \zeta_a\le\prod_{b<a}(1-\epsilon_b)^{-1}\eta_a.
+\]
+It also gives the following bound for the failure of the next condition:
+\[
+ \mu_{N,\gamma}(S^a\cap A_m\cap W_m^c)\le\epsilon_a\mu_{N,\gamma}(S^a)\le C_Jm^3e^{-a_{\mathrm w}\log^2\sqrt{Mm/\gamma}},
+\]
+where $A_m=\{V^{(a+1)J}\in D_r\}$ and $W_m=\mathcal A_{a,J}\cap\{\max_{i,e}\abs{w_{a,i,e}}\le p(t_a)\}$ is the condition of the next RG step on the coordinate domains and the fluctuation cutoff, so that $S^{a+1}=S^a\cap A_m\cap W_m$. This bound keeps only the preceding conditions and the condition on the target; there is no conditioning on regularity at later scales.
+
+There is one minimum side, valid simultaneously for all $0<\gamma\le\gamma_0$ and every finite depth, above which $z_a,\epsilon_a\le1/2$ and the product is at most $e^{C_\delta}$; the logarithm of the product can be made at most one. Every event $S^a$ has positive probability. Let $\widehat\nu_a=\eta_a/\mu_{N,\gamma}(S^a)$ be the normalized stopped measure. If $G_{\le aJ}$ is an event of regularity of the curvature which, by \cref{ch04:thm:small-curvature-admission}, implies the conditions $V^{bJ}\in D_r$ for $0\le b\le a$, then for every nonnegative Borel function $F$ of the configuration at level $aJ$,
+\[
+ \E_{\mu_{N,\gamma}}[F(V^{aJ});G_{\le aJ}]\le e^{C_\delta}\mu_{N,\gamma}(S^a)\E_{\widehat\nu_a}F\le e^{C_\delta}\E_{\widehat\nu_a}F.
+\]
+This is a multiplicative domination, valid also for test functions with exponentially large values on the finite lattice; the probability $\mu_{N,\gamma}(S^a)$ is not inverted. It does not identify a stopped measure with a marginal of the conditioned Wilson measure.
+
+The same minimum side can be chosen so that, in addition, any fixed finite collection of the following inequalities holds: for $k\in\{1,2\}$, fixed $C<\infty$, and fixed $\varepsilon>0$,
+\[
+ C[1+\log(m/\gamma)]^k\le\varepsilon m/\gamma\qquad(m\ge n_0,\ 0<\gamma\le\gamma_0).
+\]
+For the event $\mathrm{FF}_0=\{\max_pq(U_p)\ge d_*\}$ that some plaquette of the fine lattice has $q(U_p)\ge d_*$, the following bound holds at every $N\in4\N$ with $\beta_N=4N/\gamma\ge2$:
+\[
+ \mu_{N,\gamma}(\mathrm{FF}_0)\le3N^3\exp\Bigl\{\frac{C_{\mathrm{LT}}+36\log\beta_N/N}{8}-\frac{\beta_Nd_*}{16}\Bigr\},
+\]
+where $C_{\mathrm{LT}}=\max\{C_0+24\log2,0\}$, with $C_0$ the constant of \cref{ch03:thm:original-chessboard}, is independent of $N$, $\beta_N$, and $\gamma$. Since
+\[
+ \sup_{\beta\ge4N/\gamma_0}\frac{C_{\mathrm{LT}}+36\log\beta/N}{\beta}\le\frac{C_{\mathrm{LT}}\gamma_0}{4N}+\frac{9\gamma_0\log(4N/\gamma_0)}{N^2}\longrightarrow0,
+\]
+one obtains, above the common minimum side,
+\[
+ \mu_{N,\gamma}(\mathrm{FF}_0)\le3N^3e^{-d_*N/(8\gamma)}.
+\]
+The bound for the supremum is used for $4N/\gamma_0\ge e$. The numbers of free blocks can always be kept in the form $\mathsf b\le C_Jm^3$; in terms of $t^2=\gamma/(Mm)$ this also gives $\mathsf b\le C_J\gamma_0^3t^{-6}/M^3$. All minimum sides and all constants of absorption and of the products have the dependence described in item~(4) of \cref{ch01:conv:constants}; they are independent of the coupling, the side, the depth, and the geometry and age of decompositions. The correction $36\log\beta_N/N$ is kept exactly until the minimum side, uniform in the coupling, has been chosen.
+\end{lemma}
+
+\begin{proof}
+Restricted measures are indexed by $0\le a\le K$, and quantities of a transition by $0\le a<K$. We first choose the common minimum side, so that all positivity conditions on denominators hold before a quantitative comparison is applied.
+
+\paragraph{Step 1: measure-theoretic hypotheses.}
+The amplitude $A_{\mathrm w}\ge1$ is fixed before its coupling ceiling and before $n_0$. The product domains on the torus here are the instances of \cref{ch19:lem:covered-history-admission} without boundary. In particular, their sets of supported fluctuation coordinates, their cutoff domains, and their tests are Borel, the conditional fluctuation potential is smooth on a neighborhood of the compact enclosing product domain, and \eqref{ch19:eq:ambient-finite-normalizer} gives a positive finite partition function at each fixed target satisfying the coordinate-domain conditions. The initial Wilson density is positive, and every identical prefactor carries the normalization of the Wilson measure. These facts verify the measure-theoretic hypotheses of the comparison in \cref{ch17:lem:ambient-white-comparison} whenever its conclusion for products over endpoints is used below.
+
+\paragraph{Step 2: the common minimum side.}
+We choose all minimum sides uniformly in the coupling. Set
+\[
+ z(m,\gamma)=\tfrac12\log(Mm/\gamma),\qquad a_{\mathrm w}=m_{\mathrm w}A_{\mathrm w}^2/24>0.
+\]
+Since $p(t)=A_{\mathrm w}\log(1/t)$ and $\log(1/t_a)=z(m,\gamma)$, the errors satisfy
+\[
+ \delta_a\le C_Jm^3e^{-a_{\mathrm w}z(m,\gamma)^2},\qquad
+ z_a\le C_Jm^3e^{-b_{\mathrm{DB}}m/\gamma},\qquad
+ b_{\mathrm{DB}}=m_{\mathrm w}MQ_{\mathrm{DB}}^2/24>0.
+\]
+For any fixed $R>1$, the exponential envelope has ratio
+\[
+ R^3e^{-b_{\mathrm{DB}}(R-1)m/\gamma}\le R^3e^{-b_{\mathrm{DB}}(R-1)n_0/\gamma_0}
+\]
+between the sides $Rm$ and $m$, for $m\ge n_0$ and $\gamma\le\gamma_0$. For the envelope $W(m,\gamma)=C_Jm^3e^{-a_{\mathrm w}z(m,\gamma)^2}$, let $\Delta_R=(\log R)/2$. Since $z(Rm,\gamma)=z(m,\gamma)+\Delta_R$, its ratio is exactly
+\[
+ \frac{W(Rm,\gamma)}{W(m,\gamma)}=R^3e^{-a_{\mathrm w}(2\Delta_Rz+\Delta_R^2)},
+\]
+and the right side decreases in $z$. Also
+\[
+ \frac{\partial\log W}{\partial\log m}=3-a_{\mathrm w}z,\qquad
+ \frac{\partial\log W}{\partial\log\gamma}=a_{\mathrm w}z>0\quad\text{when }z>0.
+\]
+Thus, for $m\ge n_0$ and $0<\gamma\le\gamma_0$, one sufficiently large $n_0$ makes both ratios at $R=B$ at most $1/2$. Both envelopes then decrease in $m$, they are maximized in the coupling at $\gamma_0$, and their first terms tend to zero as $n_0\to\infty$. The same holds for each ratio in a fixed finite family of remainders, after taking the maximum of the required minimum sides.
+
+We increase this minimum side until $z_a\le1/2$ for every $a$ and $W(n_0,\gamma_0)\le1/4$. Then
+\begin{equation}\label{ch19:eq:prefix-positivity-gates}
+ z_a\le\tfrac12<1,\qquad\delta_a\le\tfrac14<1,\qquad\epsilon_a=\frac{\delta_a}{1-z_a}\le\tfrac12<1\qquad(0\le a<K).
+\end{equation}
+Thus the hypotheses $d_t<1$ and $\epsilon_t<1$ of \cref{ch11:thm:admitted-white-comparison} both hold before any error bound or reciprocal bound is used. We set $D_a=\prod_{0\le b<a}(1-\epsilon_b)^{-1}$ for $0\le a\le K$, with $D_0=1$. The output sides of the RG steps of a finite sequence, ordered increasingly, form a segment of the sequence $m,mB,mB^2,\dots$, where $m\ge n_0$. Using $\epsilon_a\le2\delta_a$ and $-\log(1-x)\le2x$ for $0\le x\le1/2$, we obtain
+\[
+ \sum_a\epsilon_a\le4W(n_0,\gamma_0),\qquad
+ \log D_a\le2\sum_b\epsilon_b\le8W(n_0,\gamma_0).
+\]
+Increasing $n_0$ makes the last quantity at most one, or arbitrarily small. This proves the assertion on $C_\delta$ and the bound by the exponential envelope, with an enlarged fixed $C_J$. The argument is an explicit instance of the conclusion for products over endpoints in \cref{ch17:lem:ambient-white-comparison}.
+
+\paragraph{Step 3: positivity.}
+The events $S^a$ have positive probability. Initially, $D_r$ contains a product neighborhood of the identity of positive Haar measure, on which the Wilson density is positive. At each further RG step on the torus, the cutoff domain has positive volume and the integrand is real and positive. The recursion for the stopped measures used in \cref{ch11:thm:terminal-anchor,ch18:thm:slice-induction} therefore multiplies a positive constant by a positive integral at the stopping level, which is bounded below by its strictly positive trial integral over $D_r$. By induction, $\mu_{N,\gamma}(S^a)>0$ for every $0\le a\le K$. The normalized pushforward is exactly the stopped measure $\widehat\nu_a$, at the preceding depth $aJ$.
+
+\paragraph{Step 4: one RG step.}
+At the initial side, $\eta_0=\zeta_0=\one_{D_r}\mu_{N,\gamma}$. The density of $\eta_a$ is the unnormalized density of the stopped measure, including the probability of the preceding conditions and all its constant factors. For $0\le a<K$, at a target of side $m=n_{(a+1)J}$ satisfying the coordinate-domain conditions, we apply \cref{ch11:thm:admitted-white-comparison} to this density. Its functions $G$ and $\widetilde F$ have identical Haar disintegration, Gaussian, and constant prefactors, and multiplying both by the probability of the preceding conditions preserves their ratio. The quantities $Q_{\mathrm{phys}}$ and $m_{\mathrm{cv}}$ of that theorem are the present $Q_{\mathrm{DB}}$ and $m_{\mathrm w}$. Its number of blocks is the number $\mathsf b_a\le C_Jm^3$ of blocks of the RG step, its largest integrated coupling is $t_a^2=\gamma/(Mm)$, and its logarithmic cutoff is the common $p(t_a)$ at every averaging step of this RG step. The condition $t_ap(t_a)<R_{\mathrm{en}}$ follows from the fixed ceiling for the logarithmic family, and the enclosing product domain is that of the fixed parameters of the stopped measures. The exact identity $\widetilde F_a/G_a=\kappa_c^{\mathrm{old}}(\Omega_p^{\mathrm w})$ needs no smallness of the errors. Its consequence for the tail uses $d_{t_a}=z_a<1$ from \eqref{ch19:eq:prefix-positivity-gates} and gives, on $D_r$,
+\begin{equation}\label{ch19:eq:prefix-common-ratio}
+ \widetilde F_a/G_a\ge1-\epsilon_a,\qquad\epsilon_a=\delta_a/(1-z_a),
+\end{equation}
+with the displayed $\delta_a$ and $z_a$. The reciprocal bound also uses $\epsilon_a<1$ from \eqref{ch19:eq:prefix-positivity-gates}. The ratio bound holds at every target satisfying the coordinate-domain conditions, and integrating it, we obtain $\one_{D_r}(T_M^J)_\#\eta_a\le(1-\epsilon_a)^{-1}\eta_{a+1}$. This comparison includes the coordinate-domain conditions of the next RG step, as required in $\widetilde F_a$.
+
+\paragraph{Step 5: induction and the failure bound.}
+For $0\le a<K$, if $\zeta_a\le D_a\eta_a$, then, since pushforward and restriction preserve inequalities between measures,
+\[
+ \zeta_{a+1}=\one_{D_r}(T_M^J)_\#\zeta_a\le D_a\one_{D_r}(T_M^J)_\#\eta_a\le D_a(1-\epsilon_a)^{-1}\eta_{a+1}.
+\]
+By induction, the stated domination holds for every $0\le a\le K$. For $0\le a<K$, the failure bound follows from the other consequence of \eqref{ch19:eq:prefix-common-ratio}, namely $G_a-\widetilde F_a\le\epsilon_aG_a$ on $D_r$. Integrating over the targets in $D_r$, we obtain
+\[
+ \mu_{N,\gamma}(S^a\cap A_m\cap W_m^c)\le\epsilon_a\mu_{N,\gamma}(S^a\cap A_m)\le\epsilon_a\mu_{N,\gamma}(S^a).
+\]
+
+
+\paragraph{Step 6: regular events and test functions.}
+For $0\le a\le K$, by the hypothesis on $G_{\le aJ}$, the deterministic inclusion of \cref{ch04:thm:small-curvature-admission} places every configuration $V^{bJ}$, $0\le b\le a$, on this event in $D_r$. Its hypotheses include the fixed threshold for the plaquette energies and the minimum side of that theorem, and arbitrary holonomies of flat connections are allowed. Thus the pushforward of the restriction of $\mu_{N,\gamma}$ to $G_{\le aJ}$ is bounded by $\zeta_a$. For every nonnegative bounded Borel function $F$, the domination implies that
+\[
+ \E_{\mu_{N,\gamma}}[F(V^{aJ});G_{\le aJ}]\le D_a\int F\,d\eta_a=D_a\mu_{N,\gamma}(S^a)\E_{\widehat\nu_a}F.
+\]
+For an arbitrary nonnegative Borel function $F$, we apply this to $\min(F,k)$ and let $k\to\infty$. This proves the stated inequality also when the test function has exponentially large values on the finite lattice. The probability $\mu_{N,\gamma}(S^a)$ is at most one and may be dropped, without being inverted. When $K=0$ there is only $\eta_0=\zeta_0=\one_{D_r}\mu_{N,\gamma}$ and $D_0=1$, and no transition error, next target, or failure event occurs.
+
+\paragraph{Step 7: absorption of logarithms.}
+For the remaining minimum sides, we set $x=m/\gamma\ge n_0/\gamma_0$. For $k=1,2$, we have
+\[
+ \frac{d}{dx}\frac{(1+\log x)^k}{x}=\frac{(1+\log x)^{k-1}(k-1-\log x)}{x^2}.
+\]
+Thus this ratio decreases to zero once $x\ge e^{k-1}$. For a given finite collection of $C$, $k$, and $\varepsilon$, we choose $n_0$ so that the ratio at $n_0/\gamma_0$ is at most $\varepsilon/C$ for each entry. This proves all the displayed absorptions simultaneously.
+
+\paragraph{Step 8: the fine lattice.}
+Finally, we use the bound of \cref{ch03:thm:original-chessboard} for exponential moments of arbitrary sets of plaquettes at the fine scale, with a single plaquette and its parameter $s=1/2$. At $\beta_N=4N/\gamma\ge2$ it reads
+\[
+ \E_{\mu_{N,\gamma}}e^{\beta_Nq(U_p)/16}\le\exp\bigl\{[C_0+24\log2+36\log\beta_N/N]/8\bigr\}.
+\]
+By the exponential Markov inequality and a union bound over the $3N^3$ positive plaquettes, we obtain the displayed bound with $C_{\mathrm{LT}}=C_0+24\log2$, enlarged to be nonnegative if necessary. For $4N/\gamma_0\ge e$, both $1/\beta$ and $(\log\beta)/\beta$ decrease on the ray $\beta\ge4N/\gamma_0$; evaluating each at the left endpoint gives the displayed bound for the supremum. Its right side tends to zero as $N\to\infty$, independently of the coupling. We choose the common minimum side so that it is at most $d_*/4$ for every larger $N$. Then the positive part of the exponent is at most $\beta_Nd_*/32$, which leaves
+\[
+ -\frac{\beta_Nd_*}{16}+\frac{\beta_Nd_*}{32}=-\frac{\beta_Nd_*}{32}=-\frac{d_*N}{8\gamma}.
+\]
+This is the asserted bound, in which the exact correction $36\log\beta_N/N$ was kept until this absorption, which is uniform in the coupling.
+
+Solving $t^2=\gamma/(Mm)$ gives $m^3=\gamma^3t^{-6}/M^3\le\gamma_0^3t^{-6}/M^3$, which proves the last counting formula. Taking the maximum of the finitely many minimum sides constructed above, and rounding up to an element of $4\N$, proves the claim on the common minimum side, with the dependence stated in the lemma.
+\end{proof}
+
+The next lemma extends these conclusions to an arbitrary finite coupling ceiling $\Gamma$, which is the form used in \cref{ch20:thm:finite-ceiling-parameters}.
+
+\begin{lemma}\label{ch19:lem:finite-ceiling-windows-and-prefixes}
+Fix $0<\Gamma<\infty$ and the parameters, the buffers, the count of affected plaquettes, the finite family of stopping offsets and remainders, and the interval of $s$ of \cref{ch19:thm:all-phase-window}. The exponential-moment bounds and the conclusions on decompositions of that theorem hold for $0<\gamma\le\Gamma$. Above one further minimum side, all conclusions of \cref{ch19:lem:original-prefix-onsets} on successive restrictions, on nonnegative test functions, and on the fine lattice also hold for $0<\gamma\le\Gamma$, with the same small-field event and identical unnormalized prefactors. One may require
+\[
+ m\ge\max\{e\Gamma,\Gamma/g_{\mathrm{end}}^2,\Gamma/(Mg_*^2)\},
+\]
+with $g_{\mathrm{end}}$ as in \eqref{ch19:eq:window-endpoint-gates}, and $C_{\mathrm{ch},J}^{\Gamma}=(1+\log_+\Gamma)C_{\mathrm{ch},J}^{\mathrm{base}}$. In particular, for $0\le a<K$, with $m=n_{(a+1)J}$ and with $A_m$ and $W_m$ as in \cref{ch19:lem:original-prefix-onsets},
+\[
+ \mu_{N,\gamma}(S^a\cap A_m\cap W_m^c)\le\epsilon_a\mu_{N,\gamma}(S^a)\le C_Jm^3e^{-a_{\mathrm w}\log^2\sqrt{Mm/\gamma}}.
+\]
+There is no conditioning on the curvature at later scales. All constants have the dependence described in item~(4) of \cref{ch01:conv:constants}, with the fixed ceiling $\Gamma$; the constants of the local estimates and the intervals of $s$ and of the action coefficients do not change when the ceiling is increased.
+\end{lemma}
+
+\begin{proof}
+The assertion on exponential moments was proved in \cref{ch19:thm:all-phase-window} for the whole interval $0<\gamma\le\Gamma$. For the assertions on successive restrictions, we use \cref{ch11:thm:admitted-white-comparison} with the same unnormalized prefactor and the count $\mathsf b_a\le C_Jm^3$. With $t_a^2=\gamma/(Mm)$, its cutoff and exterior errors are exactly $\delta_a=6\mathsf b_ae^{-m_{\mathrm w}p(t_a)^2/24}$ and $z_a=6\mathsf b_ae^{-m_{\mathrm w}Q_{\mathrm{DB}}^2/(24t_a^2)}$. The bounds for a finite coupling ceiling in \cref{ch17:lem:finite-ceiling-endpoint-gates} make $z_a\le1/4$, $\epsilon_a=\delta_a/(1-z_a)\le1/2$, and the logarithm of every reciprocal product at most one, above a minimum side independent of $\gamma\in(0,\Gamma]$. All transitions have $a<K$. Every finite sequence of satisfied conditions has positive probability. Indeed, at the identity configuration its coordinate-domain conditions hold strictly and its normalized fluctuation variables vanish; thus a finite intersection of neighborhoods of the identity on which the conditions hold has positive Haar measure, and the Wilson density is positive. Iterating the comparison of one RG step as in Steps~4--6 of the proof of \cref{ch19:lem:original-prefix-onsets}, we obtain the domination and every consequence for nonnegative test functions. Multiplying the failure bound for one RG step by the probability of the preceding conditions proves the displayed bound; the event keeps only the preceding conditions and the target.
+
+The estimate on the fine lattice from \cref{ch03:thm:original-chessboard}, in the form used in Step~8 of the proof of \cref{ch19:lem:original-prefix-onsets}, is
+\[
+ \mu(\mathrm{FF}_0)\le3N^3\exp\bigl\{(C_{\mathrm{LT}}+36\log\beta/N)/8-\beta d_*/16\bigr\},\qquad\beta=4N/\gamma.
+\]
+For $4N/\Gamma\ge e$, the monotonicity of $1/\beta$ and $\log\beta/\beta$ implies that
+\[
+ \frac{C_{\mathrm{LT}}+36\log\beta/N}{\beta}\le\frac{C_{\mathrm{LT}}\Gamma}{4N}+\frac{9\Gamma\log(4N/\Gamma)}{N^2}\longrightarrow0.
+\]
+We choose the minimum side so that this is at most $d_*/4$. The exponent is then at most $-\beta d_*/32=-d_*N/(8\gamma)$, which proves the same bound on the fine lattice uniformly for $0<\gamma\le\Gamma$.
+\end{proof}

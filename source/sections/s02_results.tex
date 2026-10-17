@@ -1,0 +1,269 @@
+\chapter{Statement of results}\label{s2:chapter}
+
+This section states our results precisely. \Cref{s2:model} defines the lattice model, the Wilson flow, and the lattice approximations of loops, and \cref{s2:trajectories} defines the space on which the limiting measure lives. The main theorem is stated in \cref{s2:main}, and further properties of the limit in \cref{s2:further}. \Cref{s2:largefield} states the bound on large fields that underlies the proof. The results on short distances and on weak coupling are in \cref{s2:short,s2:weak}.
+
+\section{The lattice model}\label{s2:model}
+
+Fix a side length $L>0$ and an integer $N\ge4$, and let $a_N=L/N$. Let $\Lat N=a_N\Z^3/L\Z^3$ be the periodic cubic lattice of mesh $a_N$ in the torus $\Torus=\R^3/L\Z^3$. A positive link is a pair $(x,x+a_Ne_i)$ with $x\in\Lat N$ and $i\in\{1,2,3\}$, and a positive plaquette is the positively oriented boundary of the square spanned by $a_Ne_i$ and $a_Ne_j$ at $x$, with $i<j$. Let $\Links N$ and $\Faces N$ denote the sets of positive links and positive plaquettes; each has $3N^3$ elements. A configuration is an element $U=(U_e)_{e\in\Links N}$ of $\Conf N=\SU^{\Links N}$. For the reversed link we set $U_{\bar e}=U_e^{-1}$, and for a path $e_1\cdots e_m$ in the lattice we write $U_{e_1}\cdots U_{e_m}$ for the transport along it. For a plaquette $p$, $U_p$ is the transport around its boundary.
+
+Let $H$ be the Haar probability measure on $\SU$, and let $H_N$ be the product of copies of $H$ over $\Links N$. Set
+\[
+ q(U)=1-\tfrac12\tr U,\qquad U\in\SU.
+\]
+For $\gamma>0$ we define the Wilson measure
+\begin{equation}\label{s2:eq:wilson}
+ d\mu_{N,\gamma}(U)=\frac{1}{Z_{N,\gamma}}\exp\Bigl(-\frac{4N}{\gamma}\sum_{p\in\Faces N}q(U_p)\Bigr)\,dH_N(U),
+\end{equation}
+where $Z_{N,\gamma}$ is the normalizing constant. In the usual notation the inverse coupling is $\beta=4/g_N^2$ with $g_N^2=\gamma/N$, as in \eqref{s1:eq:coupling}. A lattice gauge transformation $k\in\SU^{\Lat N}$ acts by $(U^k)_{(x,y)}=k_xU_{(x,y)}k_y^{-1}$, and $\mu_{N,\gamma}$ is invariant under this action.
+
+We write $\su$ for the Lie algebra of $\SU$, with the inner product $\ip XY=-2\tr(XY)$ and norm $\abs X=\ip XX^{1/2}$. With this normalization $q(e^X)=\abs X^2/8+O(\abs X^4)$. On $\smash{\smash{\Conf N}}$ we use the product of the corresponding bi-invariant Riemannian metrics.
+
+\paragraph{The Wilson flow.}
+Let $\Phi^{\mathrm W}_s$ be the flow on $\Conf N$ of the vector field $-\nabla\sum_{p\in\Faces N}q(U_p)$, the negative gradient of the Wilson action. It is defined for all $s\ge0$ and commutes with lattice gauge transformations. For a physical time $t\ge0$ we write
+\[
+ \Psi^{(N)}_t=\Phi^{\mathrm W}_{4t/a_N^2},
+\]
+and call $\Psi^{(N)}_tU$ the flowed configuration at time $t$. We choose the factor $4t/a_N^2$ so that $\Psi^{(N)}_t U$ approximates the Yang--Mills heat flow at time $t$: if $U_e=\exp(a_NA(x)\cdot e_i)$ for a smooth connection $A$, then $\Psi^{(N)}_t U$ approximates the heat flow of $A$; see \cref{ch21:chapter}. This is the flow introduced by L\"uscher \cite{Luscher2010WilsonFlow}, with time measured in physical units. We also use the lattice energy
+\begin{equation}\label{s2:eq:lattice-energy}
+ \mathsf E_{a_N}(U)=\frac{8}{a_N}\sum_{p\in\Faces N}q(U_p),
+\end{equation}
+which is nonincreasing along the flow and approximates the continuum energy \eqref{s2:eq:energy} below.
+
+\paragraph{Lattice approximations of loops.}
+A loop is a piecewise $C^1$ map $\ell:[0,1]\to\Torus$ with $\ell(0)=\ell(1)$. We approximate loops by closed paths in the lattice in the following sense.
+
+\begin{definition}\label{s2:def:approx}
+Let $\ell$ be a loop, and let $(N_k)_{k\ge0}$ be an increasing sequence of lattice sides. A sequence $(\ell_k)_{k\ge0}$ of closed lattice paths, with $\ell_k$ in $\Lat{N_k}$, is an \emph{admissible approximation} of $\ell$ if the physical lengths of the $\ell_k$ are bounded, and if for all sufficiently large $k$ there exists a piecewise $C^1$ based homotopy between $\ell_k$ and $\ell$ (together with a path joining their base points, if these differ) whose swept area, counted with absolute value, tends to zero as $k\to\infty$.
+\end{definition}
+
+Every loop has an admissible approximation (\cref{ch26:lem:matched-grid-paths}), and a sequence of lattice paths of bounded length that converges uniformly to $\ell$, after reparametrization, is an admissible approximation of $\ell$ (\cref{ch26:thm:matched-paths}). For a closed lattice path $\ell_k$ with base point $x$ we write $\Hol_{\ell_k}U\in\SU$ for the transport along $\ell_k$; it changes by conjugation under gauge transformations, so $\chi(\Hol_{\ell_k}U)$ is gauge invariant for every character $\chi$ of a finite-dimensional representation of $\SU$. The basic observables of this paper are the flowed Wilson loops
+\[
+ \chi\bigl(\Hol_{\ell_k}\Psi^{(N_k)}_t U\bigr),\qquad t>0.
+\]
+
+\section{The trajectory space}\label{s2:trajectories}
+
+Let $\SpaceA=C^\infty(\Torus;\su^3)$ be the space of smooth connections on the trivial bundle over $\Torus$, and let $\SpaceG=C^\infty(\Torus;\SU)$ act by $A^k=kAk^{-1}-(dk)k^{-1}$. For $A\in\SpaceA$ we write $F_{ij}=\partial_iA_j-\partial_jA_i+[A_i,A_j]$ and
+\begin{equation}\label{s2:eq:energy}
+ E_L(A)=\sum_{i<j}\int_{\Torus}\abs{F_{ij}(x)}^2\,dx
+\end{equation}
+for the Yang--Mills energy; with this normalization the exponent in \eqref{s2:eq:wilson} approaches $E_L/(2g_3^2)$ for smooth configurations. The Yang--Mills heat flow $\partial_tA_i=\sum_jD_jF_{ji}$, with $D_j=\partial_j+[A_j,\cdot]$, has a global smooth solution for every smooth initial datum on $\Torus$, and it induces a semigroup $(\Phi_t)_{t\ge0}$ on the orbit space $\SpaceA/\SpaceG$ (R\aa de \cite{Rade1992}; see \cref{ch21:chapter}). Following Charalambous and Gross \cite{CharalambousGross2013} and Cao and Chatterjee \cite{CCState2023v4}, we consider trajectories of this flow at positive times.
+
+\begin{definition}\label{s2:def:trajectories}
+The trajectory space is
+\[
+ \OrbitSpace=\bigl\{X:(0,\infty)\to\SpaceA/\SpaceG:\ X(t)=\Phi_{t-s}X(s)\text{ for all }0<s<t\bigr\}.
+\]
+For a loop $\ell$, a character $\chi$, and $t>0$, let $W_{\ell,\chi,t}(X)=\chi(\Hol_\ell X(t))$, where $\Hol_\ell$ is the holonomy of any representative of $X(t)$ along $\ell$. The Wilson topology $\WilsonTopology$ on $\OrbitSpace$ is the weakest topology for which all the functions $W_{\ell,\chi,t}$ are continuous.
+\end{definition}
+
+The space $\OrbitSpace$ is a version of the state space of Cao and Chatterjee \cite{CCState2023v4}. In \cref{ch26:thm:wilson-borel-space} we choose a countable family $(\ell_j,t_j)_{j\ge1}$ of loops and positive times and set $w_j(X)=\tr\Hol_{\ell_j}X(t_j)/2$. We show that
+\[
+ d_c(X,Y)=\sum_{j\ge1}2^{-j}\abs{w_j(X)-w_j(Y)}
+\]
+is a metric on $\OrbitSpace$ whose topology is coarser than $\WilsonTopology$, that both topologies are separable and have the same Borel $\sigma$-algebra, and that a Borel probability measure on $\OrbitSpace$ is determined by the joint laws of finitely many of the $w_j$. For this reason we call the $w_j$ determining coordinates. The energy $X\mapsto E_L(X(t))$ is a Borel function for every $t>0$. For every sequence $(R_j)_{j\ge1}$ of finite nonnegative numbers, the set $\{X:E_L(X(L^22^{-j}))\le R_j\text{ for all }j\ge1\}$ is compact for both topologies (\cref{ch26:thm:energy-compact-containment}).
+
+\section{The main theorem}\label{s2:main}
+
+Fix an odd integer $M\ge3$. For integers $n,n'\ge1$ we write $n\sim_Mn'$ if $nM^a=n'M^b$ for some integers $a,b\ge0$, and $[n]_M$ for the equivalence class of $n$.
+
+\begin{theorem}\label{s2:thm:main}
+Fix $L>0$, $\gamma>0$, an odd integer $M\ge3$, and a positive integer $n$ divisible by four. Set $N_k=nM^k$ and $\mu_k=\mu_{N_k,\gamma}$. Then the following statements hold.
+\begin{enumerate}
+\item Let $\ell_1,\dots,\ell_m$ be loops, $\chi_1,\dots,\chi_m$ characters of finite-dimensional representations of $\SU$, and $t_1,\dots,t_m>0$, and for each $i$ let $(\ell_{i,k})_{k\ge0}$ be an admissible approximation of $\ell_i$. Then the law under $\mu_k$ of the random vector
+\begin{equation}\label{s2:eq:loopvector}
+ \Bigl(\chi_i\bigl(\Hol_{\ell_{i,k}}\Psi^{(N_k)}_{t_i}U\bigr)\Bigr)_{i=1}^m
+\end{equation}
+converges as $k\to\infty$, and the limit does not depend on the choice of admissible approximations. For every $R>0$, the expectations of $\exp\bigl(\sum_iz_i\chi_i(\Hol_{\ell_{i,k}}\Psi^{(N_k)}_{t_i}U)\bigr)$ converge uniformly in $z\in\C^m$ with $\sum_i\abs{z_i}\le R$.
+\item There exists a unique Borel probability measure $\lambda=\lambda_{L,\gamma,[n]_M}$ on $\OrbitSpace$ such that, for every choice of data as in (1), the limit law of \eqref{s2:eq:loopvector} is the law of $(W_{\ell_i,\chi_i,t_i})_{i=1}^m$ under $\lambda$.
+\item There exist Borel maps $\pi_k:\Conf{N_k}\to\OrbitSpace$, invariant under all lattice gauge transformations, such that the measures $(\pi_k)_\#\mu_k$ converge to $\lambda$ against every bounded $\WilsonTopology$-continuous function and weakly with respect to $d_c$, and such that
+\[
+ \lim_{k\to\infty}\E_{\mu_k}\bigl\lvert w_j(\pi_kU)-\tfrac12\tr\Hol_{\ell_{j,k}}\Psi^{(N_k)}_{t_j}U\bigr\rvert=0
+\]
+for every $j\ge1$, where $(\ell_{j,k})_k$ is a fixed admissible approximation of $\ell_j$.
+\item The energies are tight at positive times: for every $t>0$,
+\[
+ \lim_{R\to\infty}\sup_{k\ge0}\mu_k\bigl(E_L((\pi_kU)(t))>R\bigr)=0.
+\]
+\item The measure $\lambda$ depends only on $L$, $\gamma$, and the class $[n]_M$; in particular it does not depend on the auxiliary parameters used in its construction.
+\end{enumerate}
+\end{theorem}
+
+The proof is completed in \cref{ch26:thm:full-M-ladder}. The maps $\pi_k$ do not preserve holonomies exactly: they are measurable selections of smooth trajectories whose Wilson loops approximate the flowed lattice Wilson loops, and we construct them in \cref{ch26:thm:energy-constrained-matching}. Their role is to realize all limits on one probability space. Part (2) and the determining property of the coordinates $w_j$ show that $\lambda$ is characterized by the limits in part (1).
+
+\begin{remark}\label{s2:rem:ladders}
+The proof first establishes the theorem along the subsequences $N_K=n_*B^K$ with $B=M^J$, for a fixed integer $J$ chosen at the start, and for $n_*$ larger than a threshold depending on $\gamma$; see \cref{ch26:thm:finite-ceiling-tier-one}. For every finite $\Gamma$, the parameters of the construction, including $J$ and the threshold, can be chosen before $\gamma\in(0,\Gamma]$ is fixed. This uniformity is used in the results on weak coupling. The extension to the full sequence $nM^k$ and to every $n$ uses two consecutive values of $J$ and the fact that the corresponding sequences of lattice sides share infinitely many terms.
+\end{remark}
+
+\section{Further properties of the limit}\label{s2:further}
+
+The following theorem collects further properties of the limit. For $0<\tau<T$ we consider the lattice energy \eqref{s2:eq:lattice-energy} and the flowed Wilson loops as continuous functions of the flow time.
+
+\begin{theorem}\label{s2:thm:further}
+Assume the hypotheses of \cref{s2:thm:main}, and let $\lambda=\lambda_{L,\gamma,[n]_M}$.
+\begin{enumerate}
+\item (Energy and loop processes.) Let $0<\tau<T<\infty$, and let $\ell_i$, $\chi_i$, and $(\ell_{i,k})_k$, $1\le i\le m$, be as in \cref{s2:thm:main}. Under $\mu_k$, the processes
+\[
+ t\mapsto\Bigl(\mathsf E_{a_{N_k}}\bigl(\Psi^{(N_k)}_tU\bigr),\ \bigl(\chi_i(\Hol_{\ell_{i,k}}\Psi^{(N_k)}_tU)\bigr)_{i=1}^m\Bigr),\qquad t\in[\tau,T],
+\]
+converge in distribution in $C([\tau,T];\R\times\C^m)$ to $t\mapsto(E_L(X(t)),(W_{\ell_i,\chi_i,t}(X))_i)$ with $X$ distributed according to $\lambda$. For two admissible approximations of the same loops, the expected supremum over $[\tau,T]$ of the difference of the corresponding loop processes tends to zero.
+\item (Sobolev topology.) The image measures of $(\pi_k)_\#\mu_k$ and $\lambda$ in the space of trajectories of Sobolev connections in $H^1$ modulo gauge transformations in $W^{2,2}$, with the topology of Cao and Chatterjee described in \cref{ch26:def:sobolev-trajectory-space}, converge against every bounded continuous function.
+\item (Symmetries.) The measure $\lambda$ is invariant under the maps induced by the isometries $x\mapsto Qx+y$ of $\Torus$ with $Q\in O(3,\Z)$ and $y\in\Torus$. It is also invariant under the three center symmetries: for $z\in\{\pm\Id\}^3$, the map $[A]\mapsto[A^{h}]$, where $h:\R^3\to\SU$ is smooth with $h(x+Le_i)=z_ih(x)$. In particular, if $\ell_1,\dots,\ell_m$ are loops with winding vectors $\nu(\ell_j)\in\Z^3$, $t_1,\dots,t_m>0$, and $b_1,\dots,b_m\ge0$ are integers with $\sum_jb_j\nu(\ell_j)\ne0$ in $(\Z/2\Z)^3$, then $\E_\lambda\prod_j\bigl(\tr\Hol_{\ell_j}X(t_j)/2\bigr)^{b_j}=0$.
+\item (Scaling.) Let $D_L$ map a trajectory $X$ on the unit torus to the trajectory $(D_LX)(t)=L^{-1}X(t/L^2)(\cdot/L)$ on $\Torus$. Then $\lambda_{L,\gamma,[n]_M}=(D_L)_\#\lambda_{1,\gamma,[n]_M}$.
+\item (Continuity in the coupling.) On every compact interval $I\subset(0,\infty)$ of couplings, the convergence in \cref{s2:thm:main}(1) holds uniformly in $\gamma\in I$ in the bounded-Lipschitz distance, and the maps $\pi_k$ can be chosen independently of $\gamma\in I$ so that the convergence in \cref{s2:thm:main}(3) and the tightness in \cref{s2:thm:main}(4) hold uniformly in $\gamma\in I$. The map $\gamma\mapsto\lambda_{L,\gamma,[n]_M}$ is weakly continuous on $(0,\infty)$ for both topologies on $\OrbitSpace$.
+\end{enumerate}
+\end{theorem}
+
+Part (1) is \cref{ch26:thm:actual-observable-paths}, part (2) is \cref{ch26:thm:sobolev-image-limit}, part (3) is \cref{ch26:thm:spatial-center-symmetry}, part (4) is \cref{ch26:thm:exact-L-dilation}, and part (5) is \cref{ch26:thm:positive-coupling-uniform-UV}. By parts (4) and (5), at fixed physical coupling $g_3^2=\gamma/L$ the measures on different tori, transported to the unit torus, depend continuously on $L$. Since $\gamma=g_3^2L$, part (4) is not an infinite-volume statement.
+
+\paragraph{Other smoothing flows.}
+The limit does not depend on the details of the smoothing within the following family of flows. For $c\ge0$, let $\Psi^{(N,c)}_t$ be the flow of the vector field $-\nabla\sum_p[q(U_p)+c\,q(U_p)^2]$ run for the lattice time $4t/a_N^2$; for $c=0$ this is the Wilson flow. The measure $\mu_{N,\gamma}$ is unchanged.
+
+\begin{theorem}\label{s2:thm:altflow}
+Fix $L>0$ and $0<\gamma\le1$, and let $N_K=n_*B^K$ be as in \cref{s2:rem:ladders}. Let $C_0\ge0$, let $\ell_i$, $\chi_i$, $t_i$, and $(\ell_{i,K})_K$ be as in \cref{s2:thm:main}, and write $W^c_{K,i}=\chi_i(\Hol_{\ell_{i,K}}\Psi^{(N_K,c)}_{t_i}U)$. Then
+\[
+ \lim_{K\to\infty}\E_{\mu_{N_K,\gamma}}\sup_{0\le c\le C_0}\max_i\abs{W^c_{K,i}-W^0_{K,i}}=0.
+\]
+Further, for $0<\tau<T$, the joint fields of lattice energies and Wilson loops along the modified flows converge in distribution in $C([0,C_0]\times[\tau,T];\R\times\C^m)$ to the field $(c,t)\mapsto(E_L(X(t)),(W_{\ell_i,\chi_i,t}(X))_i)$, $X\sim\lambda$, which does not depend on $c$.
+\end{theorem}
+
+This is \cref{ch26:thm:bounded-quartic-flow-universality,ch26:thm:bounded-quartic-observable-paths}.
+
+\section{The bound on large fields}\label{s2:largefield}
+
+The proof of \cref{s2:thm:main} rests on a renormalization group analysis of $\mu_{N,\gamma}$ restricted to a small-field event. We describe the event briefly; the precise definition is \cref{ch01:def:selected-law}. Fix an odd integer $M\ge3$ and an integer $J\ge1$, and set $B=M^J$. For $N=uB^K$, let $T_M$ be the block averaging map of \cref{ch01:def:block-map}, which maps configurations on $\Lat{N'}$ to configurations on $\Lat{N'/M}$; it is a version of Bałaban's averaging operation \cite{Balaban1985Averaging}. Let $V^{j}=T_M^jU$ be the averaged configurations. A renormalization group step consists of $J$ consecutive averaging steps. At the step from $V^{kJ}$ to $V^{(k+1)J}$, the fine configuration is described by the coarse configuration and by normalized fluctuation variables $w_i$, one for each of the $J$ intermediate scales. In free logarithmic coordinates $z_i$ on the fiber of the averaging map, in a fixed gauge-fixed chart, they are defined by $z_i=z_i^*+g_iK_i^{-1/2}w_i$. Here $z_i^*$ is the conditional constrained minimizer of the effective classical action, $K_i$ is its constrained Hessian, and $g_i$ is the coupling at that scale; see \cref{s3:rg}. The small-field event $S_{N,u,\gamma}$ is the set of configurations $U$ such that $U$ and each $V^{(k+1)J}$, $0\le k<K$, are gauge equivalent to configurations all of whose link variables are close to the identity, such that each renormalization group step is defined at $U$, and such that every normalized fluctuation variable of the $k$-th step has size at most $A_{\mathrm w}\log(1/t_k)$, where $t_k^2=\gamma/(Mn_{(k+1)J})$ is the largest effective coupling of that step and $n_j=N/M^j$.
+
+\begin{theorem}\label{s2:thm:large-field}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\Gamma<\infty$. There exist an integer $J\ge1$, a choice of the remaining parameters in the definition of $S_{N,u,\gamma}$, and an integer $n_\Gamma$ such that the following holds with $B=M^J$. There exist constants $C,C_{\mathrm w},c_*,a_{\mathrm w}>0$ and $H_0,H_2\ge0$ such that, for every $\gamma\in(0,\Gamma]$, every $u\ge n_\Gamma$ divisible by four, and every $K\ge0$,
+\begin{equation}\label{s2:eq:large-field}
+ \mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)
+ \le Cu^3\exp\Bigl(H_0+H_2\log\frac{\Gamma}{\gamma}-\frac{c_*u}{\gamma}\Bigr)
+ +C_{\mathrm w}u^3\exp\Bigl(-a_{\mathrm w}\log^2\sqrt{\frac{Mu}{\gamma}}\Bigr).
+\end{equation}
+The constants depend only on $L$, $M$, $\Gamma$, and the chosen parameters. In particular, for every fixed $u\ge n_\Gamma$ and every $q>0$ there exists $C_{u,q}$ with $\sup_{K\ge0}\mu_{uB^K,\gamma}(S_{uB^K,u,\gamma}^c)\le C_{u,q}\gamma^q$ for all $\gamma\in(0,\Gamma]$, and the right side of \eqref{s2:eq:large-field} tends to zero as $u\to\infty$, uniformly in $\gamma\in(0,\Gamma]$. Further, for each such $u$ there exist $c_u,C_u>0$ and $\gamma_u>0$ such that
+\[
+ e^{-C_u(1+\log(1/\gamma))^2}\le\sup_{K\ge0}\mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)\le e^{-c_u\log^2(1/\gamma)}\qquad(0<\gamma\le\gamma_u).
+\]
+\end{theorem}
+
+This is proved in \cref{ch20:thm:finite-ceiling-parameters,ch20:thm:finite-ceiling-payment,ch20:cor:finite-ceiling-rejection-order}. By the last display, at fixed $u$ the supremum over $K$ of the discarded probability lies between $\exp(-C_u(1+\log(1/\gamma))^2)$ and $\exp(-c_u\log^2(1/\gamma))$; in particular it is much larger than $\exp(-c/\gamma)$. The lower bound comes from configurations that violate the cutoff on the normalized fluctuation variables, and it already holds for $K=1$. The first term in \eqref{s2:eq:large-field} bounds the probability that some averaged configuration has a plaquette with large curvature. We prove it using reflection positivity and chessboard estimates under the unconditioned Wilson measure. The second term bounds the probability that some normalized fluctuation variable exceeds its cutoff.
+
+\section{Short distances}\label{s2:short}
+
+For a loop $\ell$ in $\R^3$, a point $x\in\Torus$, and $\varepsilon>0$ small, let $x+\varepsilon\ell$ be the scaled and translated loop in $\Torus$, and let
+\[
+ W_{x+\varepsilon\ell,s}(X)=\tfrac12\tr\Hol_{x+\varepsilon\ell}X(s)
+\]
+be the normalized fundamental Wilson loop under the measure $\lambda$ of \cref{s2:thm:main}.
+
+\begin{theorem}\label{s2:thm:short-distance}
+Fix $L>0$, $\gamma>0$, an odd integer $M\ge3$, and $n$ divisible by four, let $\lambda=\lambda_{L,\gamma,[n]_M}$, and set $g_3^2=\gamma/L$. Let $\ell_1,\dots,\ell_m$ be smooth loops in $\R^3$ and $\sigma>0$. For $x\in\Torus$ and $\varepsilon>0$ set
+\[
+ Z_\varepsilon(x)=\Bigl(\frac{1-W_{x+\varepsilon\ell_i,\sigma\varepsilon^2}}{g_3^2\varepsilon}\Bigr)_{i=1}^m.
+\]
+Let $C^a=(C^a_i)_{i=1}^m$, $a=1,2,3$, be independent centered Gaussian vectors with covariance
+\begin{equation}\label{s2:eq:circulation-covariance}
+ \Sigma_{ij}=(2\pi)^{-3}\int_{\R^3}\frac{e^{-2\sigma\abs k^2}}{\abs k^2}\,\overline{\widehat J_i(k)}\cdot\widehat J_j(k)\,dk,\qquad
+ \widehat J_i(k)=\int_0^1e^{-ik\cdot\ell_i(s)}\dot\ell_i(s)\,ds,
+\end{equation}
+and set $Z_G=(\abs{C_i}^2/8)_{i=1}^m$, where $C_i=(C_i^1,C_i^2,C_i^3)$. Then the following statements hold.
+\begin{enumerate}
+\item As $\varepsilon\to0$, the law of $Z_\varepsilon(x)$ under $\lambda$ converges to the law of $Z_G$ in the bounded-Lipschitz distance, uniformly in $x\in\Torus$.
+\item If $m=1$ and $v=\Sigma_{11}>0$, then
+\[
+ \liminf_{\varepsilon\to0}\inf_{x\in\Torus}\frac{\Var_\lambda W_{x+\varepsilon\ell_1,\sigma\varepsilon^2}}{(g_3^2\varepsilon)^2}\ge\frac{3v^2}{32}.
+\]
+\item For every bounded Borel function $G:\OrbitSpace\to\R$,
+\[
+ \lim_{\varepsilon\to0}\sup_{x\in\Torus}\sup_f\bigl\lvert\E_\lambda[f(Z_\varepsilon(x))G]-\E[f(Z_G)]\,\E_\lambda[G]\bigr\rvert=0,
+\]
+where the supremum is over functions $f$ with $\norm f_\infty\le1$ and Lipschitz constant at most one.
+\end{enumerate}
+\end{theorem}
+
+This is proved in \cref{ch29:thm:short-distance-gaussian,ch29:cor:short-distance-variance-liminf,ch29:thm:short-distance-orbit-borel-mixing}. In the notation of \cref{ch28:chapter}, $C_i=G_i$ and $(Z_G)_i=\mathsf Z_i$. The vector $C$ is the heat-smoothed circulation of a Gaussian free field (Maxwell field) with three independent colors, so the theorem says that at short distances the flowed Wilson loops of $\lambda$ behave as those of the free field, up to the quadratic map $V\mapsto\abs V^2/8$ coming from $1-\tr e^V/2=\abs V^2/8+O(\abs V^4)$. As an intermediate step, we prove a Gaussian limit for the normalized heat-smoothed circulations of the reconstructed field. This holds in a fixed gauge, under the conditioned Wilson measure, at every sufficiently large fixed coarse side (\cref{ch29:thm:every-fixed-side-gaussian}). These circulations are not gauge-invariant functions on $\OrbitSpace$; the gauge-invariant conclusion is the theorem above. Part (2) is a lower bound only, since the proof does not give uniform integrability.
+
+\section{Weak coupling}\label{s2:weak}
+
+We now let $\gamma\to0$ with $L$, $M$, and $n$ fixed, and write $\lambda_\gamma=\lambda_{L,\gamma,[n]_M}$. Fix $\theta>0$ and the flow time $t=\theta L^2$. For $X\in\OrbitSpace$, let $H=(H_1,H_2,H_3)\in\SU^3$ be the holonomies of $X(t)$ around the three coordinate cycles of $\Torus$ based at the origin; the triple $H$ is defined up to simultaneous conjugation. Every continuous function of $H$ that is invariant under simultaneous conjugation is a continuous function of the seven traces of $H_i$, $H_iH_j$ ($i<j$), and $H_1H_2H_3$ (\cref{ch02:lem:seven-traces}). Such functions are bounded and $\WilsonTopology$-continuous on $\OrbitSpace$. In the proofs we fix, before $\gamma$ varies, a coarse side in the class $[n]_M$ that is larger than certain thresholds; by \cref{s2:thm:main}(5) this choice does not change $\lambda_\gamma$. Each of the following theorems holds for all sufficiently small $\gamma$, with a threshold that depends on the theorem, and in each the continuum limit is taken first, at fixed $\gamma$.
+
+A connection is flat if $F_A=0$. Flat connections on $\Torus$ modulo gauge are classified by their holonomies, which form a commuting triple; the moduli space is
+\[
+ \Hom(\Z^3,\SU)/\SU\simeq(\R/4\pi\Z)^3/\{\bm\vartheta\sim-\bm\vartheta\},
+\]
+where $\bm\vartheta$ parametrizes the triple $(e^{\vartheta_1u},e^{\vartheta_2u},e^{\vartheta_3u})$ for a unit vector $u\in\su$. The eight central triples $H\in\{\pm\Id\}^3$ are the singular points.
+
+\begin{theorem}\label{s2:thm:flat}
+Fix $L>0$, an odd integer $M\ge3$, and $n$ divisible by four. Then the following statements hold.
+\begin{enumerate}
+\item For every $t>0$ and $\delta>0$, $\lambda_\gamma(E_L(X(t))>\delta)\to0$ as $\gamma\to0$.
+\item There exists $\gamma_0\in(0,1]$ such that the family $(\lambda_\gamma)_{0<\gamma\le\gamma_0}$ is tight: for every $\eta>0$ there exist $R_j<\infty$ such that $\lambda_\gamma(E_L(X(L^22^{-j}))\le R_j\text{ for all }j\ge1)\ge1-\eta$ for all $0<\gamma\le\gamma_0$. The sets in this display are compact for $\WilsonTopology$ and for $d_c$, so every sequence $\gamma_k\to0$ has a subsequence along which $\lambda_{\gamma_k}$ converges against bounded $\WilsonTopology$-continuous functions and weakly for $d_c$.
+\item Every subsequential limit of $\lambda_\gamma$ as $\gamma\to0$, against bounded $\WilsonTopology$-continuous functions or weakly for $d_c$, is supported on the stationary flat trajectories $\{X:X(t)=[A]\text{ for all }t>0,\ F_A=0\}$.
+\end{enumerate}
+\end{theorem}
+
+This is \cref{ch30:thm:flat-supported-cluster-laws}. The theorem does not identify the limiting distribution on the moduli space of flat connections. The next two theorems describe the fluctuations near the regular and the singular points of this moduli space.
+
+\paragraph{Regular commuting triples.}
+In a fixed neighborhood of the identity, write $X=(x_1,x_2,x_3)=(\Log H_1,\Log H_2,\Log H_3)\in\su^3\simeq\R^9$. The commuting triples correspond to the cone $\CommMan=\{(\vartheta_1u,\vartheta_2u,\vartheta_3u):\bm\vartheta\in\R^3,\ u\in S^2\}$. On a regular patch $0<r_0\le\abs{\bm\vartheta}\le r_1<\pi$ the normal space to $\CommMan$ at $y=(\vartheta_iu)_i$ is
+\[
+ \NormalFiber y=\Bigl\{b=(b_1,b_2,b_3):\ b_i\perp u,\ \sum_i\vartheta_ib_i=0\Bigr\},
+\]
+which has dimension four, and near the patch we write $X=y+b$ with $y\in\CommMan$ and $b\in\NormalFiber y$. Let $\NormalCov(y)$ be the normal covariance, the positive definite covariance on $\NormalFiber y$ defined in \eqref{ch01:eq:normal-covariance}. It is the covariance, divided by $\gamma$, of the linear response of the flowed logarithms $X$ at the flat connection $y$, and it does not depend on $\gamma$. Let $\psi$ be a smooth function of $X$ that is invariant under simultaneous conjugation and supported in a small tube around a compact regular patch. We assume that $\psi$ has the form (tangential bump)$\times$(normal cutoff equal to one near $b=0$), and that its tangential factor takes values in $[0,1]$, vanishes on a nonempty open subset, and is positive on another. Set
+\[
+ q_*(y+b)=\tfrac12\,b^{\mathsf T}\NormalCov(y)^{-1}b,\qquad \ObsB=\psi,\qquad \ObsA=\psi\,q_*,
+\]
+where the formula for $q_*$ is used on a fixed normal tube that contains the supports of all the functions $\psi$ and $\widetilde w$ below, and $q_*$ is extended outside this tube by a bounded nonnegative invariant function. The functions $\ObsA$ and $\ObsB$ are extended by zero outside the chart. We define the normalized regression residual variance
+\[
+ \SchurStat=\frac{\Var(\ObsA)-\Cov(\ObsA,\ObsB)^2/\Var(\ObsB)}{\E(\ObsB^2)},
+\]
+with all moments under $\lambda_\gamma$. This is the mean square error of the best affine predictor of $\ObsA$ from $\ObsB$, normalized by $\E\ObsB^2$.
+
+\begin{theorem}\label{s2:thm:regular}
+Fix $L>0$, an odd integer $M\ge3$, $n$ divisible by four, $\theta>0$, and $\psi$ as above with a sufficiently small tube. Then the following statements hold.
+\begin{enumerate}
+\item There exists $c>0$ such that $\E_{\lambda_\gamma}\ObsB^2\ge c$ and $\Var_{\lambda_\gamma}\ObsB\ge c$ for all sufficiently small $\gamma>0$, and
+\[
+ \SchurStat=2\gamma^2+o(\gamma^2)\qquad(\gamma\to0).
+\]
+\item Let $w\ge0$ be a nonzero smooth invariant function on $\CommMan$ supported in the interior of the regular patch, let $\chi_w$ be a smooth normal cutoff invariant under simultaneous conjugation, with $0\le\chi_w\le1$, supported in the tube and equal to one near $b=0$, and set $\widetilde w(y+b)=w(y)\chi_w(b)$. Then $\E_{\lambda_\gamma}\widetilde w\ge c_w>0$ for small $\gamma$, and for every bounded continuous $f:[0,\infty)\to\R$,
+\[
+ \frac{\E_{\lambda_\gamma}[\widetilde w\,f(q_*/\gamma)]}{\E_{\lambda_\gamma}\widetilde w}\longrightarrow\int_0^\infty f(s)\,s\,e^{-s}\,ds\qquad(\gamma\to0).
+\]
+\item More generally, on $\{\widetilde w\ne0\}$ write $X=y_\gamma+b_\gamma$ and $z_\gamma=\gamma^{-1/2}\NormalCov(y_\gamma)^{-1/2}b_\gamma$, and define products with $\widetilde w$ to be zero where $\widetilde w=0$. For every bounded continuous function $F(y,z)$ on the normal bundle that is invariant under simultaneous conjugation,
+\[
+ \frac{\E_{\lambda_\gamma}\bigl[\widetilde w\,\bigl(F(y_\gamma,z_\gamma)-\overline F(y_\gamma)\bigr)\bigr]}{\E_{\lambda_\gamma}\widetilde w}\longrightarrow0,\qquad
+ \overline F(y)=\int F(y,z)\,\mathcal N(0,I_{\NormalFiber y})(dz).
+\]
+\end{enumerate}
+\end{theorem}
+
+This is \cref{ch31:thm:regular-toron-statistic,ch31:thm:inserted-chi-square-law,ch31:thm:invariant-normal-bundle-gaussian}. Part (3) is a Gaussian approximation for the normal component of the flowed holonomies near a regular commuting triple, with covariance $\gamma\NormalCov(y)$, in the sense of the displayed ratio of weighted expectations. The tangential component keeps its own law under the weighting, and we do not claim that this law converges. Part (2) is the special case $F=f(\abs z^2/2)$, since $\abs z^2/2$ has density $se^{-s}$ when $z$ is a standard Gaussian vector in four dimensions. The coefficient $2$ in part (1) comes from the first two moments $2$ and $6$ of this density. It is the coefficient of the Gaussian approximation around a regular commuting flat background, and the theorem does not identify corrections beyond it. For comparison, consider the reference measures of \cref{ch01:def:references}. For the Abelian Maxwell measure with Haar cycle holonomies, the holonomy triples commute and the statistic vanishes identically. For the Gaussian holonomies with independent Haar factors, $H_i=U_i^0\Hol_i(a)$, where $a$ is a smoothed Gaussian field and $U_1^0,U_2^0,U_3^0$ are independent Haar distributed elements of $\SU$, independent of $a$, the triple is exactly Haar distributed, and the statistic is a positive constant independent of $\gamma$ (\cref{ch31:lem:reference-comparisons}).
+
+\paragraph{Central triples.}
+Near the central triples the cone of commuting triples is singular, and the constant modes are no longer Gaussian. Let
+\[
+ Q(Y)=\tfrac12\sum_{i<j}\abs{y_i\times y_j}^2,\qquad Y=(y_1,y_2,y_3)\in\R^9,\qquad r_\gamma=\gamma^{1/4},
+\]
+where $\times$ is the cross product, which corresponds to the Lie bracket under $\su\simeq\R^3$. We call $Q$ the constant-mode quartic form. The measure $e^{-Q(Y)}dY$ on $\R^9$ is locally finite but has infinite total mass. For a function $\varphi$ on $\R^9$ we write $\mathcal I_{\gamma,\varphi}=\varphi(X/r_\gamma)$, extended by zero outside the fixed neighborhood of the identity in which $X$ is defined. A radial cutoff is a function $\chi(\abs Y)$ with $\chi\ge0$ smooth, compactly supported, not identically zero, and constant near zero.
+
+\begin{theorem}\label{s2:thm:central}
+Fix $L>0$, an odd integer $M\ge3$, $n$ divisible by four, and $\theta>0$. Then the following statements hold.
+\begin{enumerate}
+\item For every continuous compactly supported function $\varphi$ on $\R^9$ invariant under simultaneous conjugation and every radial cutoff $\chi$,
+\begin{equation}\label{s2:eq:core-ratio}
+ \lim_{\gamma\to0}\frac{\E_{\lambda_\gamma}\mathcal I_{\gamma,\varphi}}{\E_{\lambda_\gamma}\mathcal I_{\gamma,\chi(\abs\cdot)}}=\frac{\int_{\R^9}\varphi(Y)e^{-Q(Y)}\,dY}{\int_{\R^9}\chi(\abs Y)e^{-Q(Y)}\,dY}.
+\end{equation}
+If $\varphi\ge0$ is not identically zero, then $c_\varphi r_\gamma\le\E_{\lambda_\gamma}\mathcal I_{\gamma,\varphi}\le C_\varphi r_\gamma$ for small $\gamma$.
+\item For every $R<\infty$ and radial cutoff $\chi$ there exist $C,\gamma_0>0$ such that for all $0<\gamma\le\gamma_0$ and all invariant Lipschitz functions $\varphi$ supported in the ball of radius $R$, the difference of the two sides of \eqref{s2:eq:core-ratio} is at most $C(\norm\varphi_\infty+\Lip\varphi)\gamma^{1/4}$.
+\item Let $W_\chi(Y)=[4Q(Y)-9]\chi(\abs Y)-\abs Y\chi'(\abs Y)$. Then
+\[
+ \frac{\E_{\lambda_\gamma}\mathcal I_{\gamma,W_\chi}}{\E_{\lambda_\gamma}\mathcal I_{\gamma,\chi(\abs\cdot)}}=O(\gamma^{1/4}).
+\]
+\item The same statements hold, with the same constants, near each of the eight central triples $z\in\{\pm\Id\}^3$, with $X$ replaced by $(\Log(z_i^{-1}H_i))_{i=1}^3$; at each fixed $\gamma$ the corresponding expectations near different central triples are equal.
+\end{enumerate}
+\end{theorem}
+
+This is proved in \cref{ch32:thm:core-ratios-and-ward,ch32:thm:core-ratio-rates,ch32:thm:all-central-triples}. Part (3) is the dilation integration-by-parts identity, $\int\operatorname{div}(Y\chi(\abs Y)e^{-Q(Y)})\,dY=0$, which follows from the homogeneity $Y\cdot\nabla Q=4Q$. For the reference measures of \cref{ch01:def:references}, and for radial cutoffs with $\chi(0)>0$, the same statistic has the following limits (\cref{ch32:thm:corrected-reference-ward}). It tends to $-6$ for the Abelian Maxwell measure with Haar cycle holonomies, and to $-9$ for the Gaussian holonomies with Gaussian constant modes. For the mixture of normalized conditional normal Gaussian measures over commuting backgrounds, with a fixed prior density that is continuous and positive at the tip of the cone of commuting triples, its limit is strictly larger than $4$. Hence the statistic distinguishes $\lambda_\gamma$ from these comparison measures. In \cref{ch32:chapter} we also prove joint versions of \eqref{s2:eq:core-ratio} at finitely many flow times, for test functions that are invariant under independent simultaneous conjugations at the different times (\cref{ch32:thm:finite-time-core}). Finally, let $0<\tau<T$, and weight $\lambda_\gamma$ by $\mathcal I_{\gamma,\chi(\abs\cdot)}$ evaluated at time $\tau$, normalized to a probability measure. Under this measure, the rescaled holonomy paths on $[\tau,T]$, defined with a fixed smooth equivariant extension of the logarithm and taken modulo conjugation at each time, converge in the uniform topology to constant paths. The value of the limiting path has the law with density proportional to $\chi(\abs Y)e^{-Q(Y)}$, and the error against bounded Lipschitz path functionals is $O(\gamma^{1/4})$ (\cref{ch32:thm:central-quotient-path}).
+
+Constants in \cref{s2:thm:regular,s2:thm:central} may depend on $L$, $M$, $n$, $\theta$, and the test functions, but not on $\gamma$.

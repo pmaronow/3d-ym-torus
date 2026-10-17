@@ -1,0 +1,763 @@
+\chapter{Gaussian short-distance limits and asymptotic independence}\label{ch29:chapter}
+
+This section completes the proof of the short-distance theorem, \cref{s2:thm:short-distance}. Fix smooth closed loops $\ell_1,\dots,\ell_m$ in $\R^3$ and $\sigma>0$, set $g_3^2=\gamma/L$, and for $x\in\Torus$ and $\varepsilon>0$ let
+\[
+ Z_\varepsilon(x)=\Bigl(\frac{1-W_{x+\varepsilon\ell_i,\sigma\varepsilon^2}}{g_3^2\varepsilon}\Bigr)_{i=1}^m,
+\]
+where $W_{x+\varepsilon\ell_i,\sigma\varepsilon^2}$ is the normalized fundamental Wilson loop of the trajectory at time $\sigma\varepsilon^2$. We prove that under the continuum measure $\lambda$ of \cref{s2:thm:main}, the law of $Z_\varepsilon(x)$ converges to the law of $Z_G=(|C_i|^2/8)_{i=1}^m$, uniformly in $x$ (\cref{ch29:thm:short-distance-gaussian}). Here the three color components of $C$ are independent centered Gaussian vectors with the covariance $\Sigma$ of \cref{ch28:def:closed-current-target}, the covariance of heat-smoothed circulations of a Gaussian Maxwell field; in the notation of that definition, $C_i=G_i$ and $(Z_G)_i=\mathsf Z_i$. We deduce a lower bound on the variance of small Wilson loops (\cref{ch29:cor:short-distance-variance-liminf}), and we prove that $Z_\varepsilon(x)$ is asymptotically independent of every fixed bounded Borel function of the trajectory (\cref{ch29:thm:short-distance-macroscopic-mixing,ch29:thm:short-distance-orbit-borel-mixing}). All results are at a fixed positive coupling; no weak-coupling limit is taken.
+
+The form of the limit has a short heuristic explanation. By the computation at the beginning of \cref{ch28:chapter}, the circulation of the heat-smoothed Gaussian Maxwell field around $x+\varepsilon\ell_i$ is a centered Gaussian vector with covariance of order $g_3^2\varepsilon\,\Sigma$ in each color. A Wilson loop sees only the squared norm of this circulation, since for $X\in\su$
+\[
+ 1-\tfrac12\tr e^X=|X|^2/8+O(|X|^4).
+\]
+Dividing by $g_3^2\varepsilon$ therefore produces $|C_i|^2/8$. The proof shows that the nonlinear terms, the coarse field, and the conditioning on the small-field event do not change this picture.
+
+The proof proceeds as follows. By \cref{ch28:lem:top-current-and-caps}, the heat-smoothed circulation $I^{K,s}$ is the sum of a coarse-field term, a martingale whose increments are linear in the centered fluctuation variables, and a small remainder. For each RG step we compare the conditional law of the linear increment with a Gaussian law by an integration by parts with a cutoff, in the spirit of Stein's method \cite{Stein1972NormalApproximation} (\cref{ch29:lem:fiber-and-martingale-stein}), and we telescope the conditional characteristic functions (\cref{ch29:lem:characteristic-telescope}). The cutoff error grows with the number of fluctuation variables, which is polynomial in $1/t_j$, but the probability that the cutoff is active decays like $\exp(-c\log^2(1/t_j))$ (\cref{ch29:lem:current-telescope-and-cutoff}). We then replace the coefficient matrices by their values at the zero field, whose Gram sum converges to $\Sigma\otimes I_3$ by \cref{ch28:thm:maxwell-calibration}. This proves a Gaussian limit for the circulations under the conditioned measure (\cref{ch29:thm:every-fixed-side-gaussian}), and the same proof applies conditionally on the first $q$ RG steps, uniformly in their values (\cref{ch29:lem:fixed-prefix-current-mixing}). Next we compare flowed Wilson loops with circulations (\cref{ch29:lem:actual-flow-trace-reduction}), remove the conditioning using the bound of \cref{ch20:thm:finite-ceiling-payment}, and pass to the continuum measure using \cref{ch26:chapter}. For asymptotic independence we approximate macroscopic flowed Wilson loops by functions of the first $q$ RG steps (\cref{ch29:lem:same-history-macroscopic-prefix}).
+
+Four length scales appear: the coarse mesh $H_s$, the mesh $a_q=H_{s+q}$ after $q$ RG steps, the loop size $\varepsilon$, and the fine mesh $a$, with $a\le\varepsilon\ll a_q\le H_s$. The estimates split at the scales with $a_j\approx\varepsilon$; the meshes $H_s$ and $a_q$ stay fixed while $\varepsilon\to0$. The limits are taken in the following order. For the Gaussian limit,
+\[
+ K\to\infty,\qquad\varepsilon\downarrow0\ \ (s,R\text{ fixed}),\qquad R\to\infty,\qquad s\to\infty,
+\]
+where $R$ is the radius of a ball for the linear and quadratic flow data; for asymptotic independence,
+\[
+ K\to\infty,\qquad\varepsilon\downarrow0\ \ (s,q,R,\delta\text{ fixed}),\qquad q\to\infty,\qquad\delta\downarrow0,\qquad R\to\infty,\qquad s\to\infty,
+\]
+where $\delta$ is a tolerance. No estimate allows these parameters to vary simultaneously.
+
+Besides \cref{ch28:chapter}, we use the bound for conditioning of \cref{ch02:lem:bounded-transfer}, the identity for finite-scale reconstructions of \cref{ch12:thm:representative-prefixes}, and the bound on the small-field failure probability of \cref{ch20:thm:finite-ceiling-payment}. We also use the local theory of the Wilson flow and its stability, \cref{ch21:thm:enhanced-local-flow,ch22:cor:bounded-input-trace-stability}, the estimates on the linear and quadratic flow data of \cref{ch25:lem:finite-ceiling-finite-mesh-estimates,ch25:lem:fixed-smooth-prefix}, and the construction of the continuum measure in \cref{ch26:chapter}. The section ends with the proof of \cref{s2:thm:short-distance}.
+
+\section{Setting and inputs}\label{ch29:sec:setting}
+
+\begin{definition}\label{ch29:def:current-chain}
+Fix $L>0$, $\Gamma>0$, $0<\gamma\le\Gamma$, and the parameters of \cref{ch20:thm:finite-ceiling-parameters}, chosen before $\gamma$: an odd integer $M\ge3$, the integer $J$, $B=M^J$, the reconstruction maps, and their analytic domains. Fix $n_*\in4\N$, smooth closed loops $\ell_1,\dots,\ell_m$ in $\R^3$, and $\sigma>0$. We use the notation of \cref{ch28:sec:setting}: $N_K=n_*B^K$, $n_s=n_*B^s$, $H_s=L/n_s$, $k=K-s$, $a_j=H_sB^{-j}$, $a=a_k$, $g_3^2=\gamma/L$, $\eta=g_3^2\varepsilon$, $t_j=M^{(J-1)/2}g_3\sqrt{a_j}$, and $p_j=A_{\rm w}\log(1/t_j)$. The probability measure is the conditioned Wilson measure
+\[
+ \nu_{K,s}=\nu_{N_K,n_s,\gamma}=\mu_{N_K,\gamma}(\,\cdot\mid S_{N_K,n_s,\gamma}).
+\]
+Its backward reconstruction sequence is
+\[
+ \widehat\theta_j=\widehat\Phi_j(\widehat\theta_{j-1},g_{j,\cdot}w_j),\qquad \mathcal F_j=\sigma(\widehat\theta_0,w_1,\dots,w_j),
+\]
+where $g_{j,\ell}$ are the couplings of the intermediate scales of the $j$-th RG step, and, conditionally on $\mathcal F_{j-1}$, the vector $w_j$ has the conditional fluctuation kernel $k_j(\widehat\theta_{j-1},\cdot)$ of \cref{ch28:thm:predictable-rows-and-means}, whose potential includes the input effective interaction produced by the integrations at finer scales, the Haar disintegration density, and the determinants of the change of variables. We write $\bar w_j=\E(w_j\mid\mathcal F_{j-1})$. All maps, zero-fluctuation continuations, and circulations use the same reconstruction maps and the same choice of representative of the coarse field. Put
+\[
+ \widehat\Pi_{k\leftarrow j}=\widehat\Phi_k(\cdot,0)\circ\cdots\circ\widehat\Phi_{j+1}(\cdot,0),\qquad \widehat\Pi_{k\leftarrow k}=\operatorname{id}.
+\]
+The circulation map $\mathcal I$ is the map denoted $\mathcal I_a$ in \cref{ch28:def:closed-current-target}, with lattice cycles of physical length at most $C_\ell\varepsilon$, zero winding, and swept area at most $C_\ell\varepsilon a$, which tends to zero at fixed $\varepsilon$ as $a\to0$. Thus $I^{K,s}=\mathcal I(\widehat\theta_k)\in\R^{3m}$. As in \cref{ch28:sec:setting} we put
+\[
+ G_j(v,w)=\mathcal I\bigl(\widehat\Pi_{k\leftarrow j}\widehat\Phi_j(v,g_{j,\cdot}w)\bigr),\qquad \Gamma_j(v)=D_wG_j(v,0),\qquad \omega_j=\min\{a_j/\varepsilon,\sqrt{\varepsilon/a_j}\},
+\]
+\[
+ Q_j^{\rm Tay}=G_j(\widehat\theta_{j-1},w_j)-G_j(\widehat\theta_{j-1},0)-\Gamma_j(\widehat\theta_{j-1})w_j.
+\]
+The Taylor remainder $Q_j^{\rm Tay}$ is the quantity denoted $\mathsf R_j^{\rm cur}$ in \cref{ch28:sec:setting}, and the vector $C$ below is the vector $G$ of \cref{ch28:def:closed-current-target}.
+Unless stated otherwise, constants may depend on $L$, $\gamma$, $M$, $J$, $n_*$, $\Theta$, the analytic domains, the loops, $\sigma$, and the coarse index $s$ (the dependence described in item (5) of \cref{ch01:conv:constants}); they are independent of $K$, $j$, $x$, the lattice offset, and the classical recursion index $d_j=J(K-s-j)$. A constant indexed by $s$ may depend on $H_s$. All regions are the full periodic torus.
+\end{definition}
+
+The threshold $s_0$ below depends on the fixed data and is chosen before the coarse index $s$; the reconstruction maps do not change with $s$. The classical recursion index $d_j$ is the depth $\mathfrak d_j$ of \cref{ch23:chapter}, not the increment $x_j-x_{j-1}$ of the heat path there.
+
+\begin{remark}\label{ch29:rem:fixed-current-output}
+The bounds of \cref{ch28:thm:predictable-rows-and-means}(4) on the circulation Taylor remainders $Q_j^{\rm Tay}$ come from the bound for general outputs in part (3) of that theorem, applied to
+\[
+ Z_j^a(\theta,q)=\widehat{\mathcal E}_j^a\bigl(\widehat\Phi_j(\theta,q)\bigr),\qquad G_j(\theta,w)=\mathscr C_{a,\varepsilon,x}\bigl(a_j^{-1}Z_j^a(\theta,g_{j,\cdot}w)\bigr),
+\]
+with the field $\widehat{\mathcal E}_j^a$ of \cref{ch28:thm:one-shot-and-source-sum}. That bound is useful only if the larger coarse/free radius, which we denote $\rho_{\rm joint}^+$, and the coefficient bound, which we denote $C_F^{\rm cur}$, are fixed before $K$, $s$, $j$, and the output resolution vary. We explain why. The only composition of growing length in $Z_j^a$ is the field $\widehat{\mathcal E}_j^a$. Let $C_E$ bound the rows and volume-normalized columns of the matrices $E_i^a$, let $C_{\rm src}$ be the constant in \cref{ch28:thm:one-shot-and-source-sum}(4), and recall $D=\beta_J/(1-\alpha_*)$ and $q=B\alpha_*^2<1$. A common majorant for $\widehat{\mathcal E}_j^a$ is
+\begin{equation}\label{ch29:eq:fixed-extension-ceiling}
+ \mathcal M_{\rm ext}(z)=C_Ez+\frac{C_EC_{\rm src}C_*}{1-q}\frac{z^2}{(1-Dz)^2}.
+\end{equation}
+Indeed, a remainder at scale $i>j$, with $r'=i-1-j$, contributes at most $C_EC_{\rm src}C_*q^{r'}z^2/(1-Dz)^2$, since $(a_j/a_i)\alpha_*^{2r'+1}=C_*q^{r'}$; for a distinguished input its column factors multiply to $a^3/a_j^3$, so the same series and its derivatives bound the columns. We fix a radius $\rho_E$ inside the larger domain, with $D\rho_E<1$, such that the reconstruction images lie strictly inside the disk of radius $\rho_E$. Then $\mathcal M_{\rm ext}(\rho_E)<\infty$, and its derivatives on the smaller domain are fixed constants. We then choose the larger coarse/free domain of radius $\rho_{\rm joint}^+$ so that its image under $\widehat\Phi_j$ lies in this disk, uniformly in the indices, as in Step 7 of the proof of \cref{ch28:thm:predictable-rows-and-means}. The majorant $\mathcal M_{\rm ext}$ and its derivatives on the smaller domain, composed with the joint coefficient bound for $\widehat\Phi_j$, then give the fixed constant $C_F^{\rm cur}$. Both maps are equivariant and vanish at zero, so $Z_j^a(0,0)=0$. After the substitution $q_{j,\ell}=g_{j,\ell}w_{j,\ell}$, each fluctuation factor contributes its coupling $g_{j,\ell}\le t_j$, and one derivative in the coarse field costs a fixed factor on the larger domain, which we include in $C_F^{\rm cur}$. Thus neither $C_F^{\rm cur}$ nor $\rho_{\rm joint}^+$ depends on the remaining number of steps or on $s$; the bound for general outputs is not applied to an output chosen anew at each cutoff. This is Step 7 of the proof of \cref{ch28:thm:predictable-rows-and-means}.
+\end{remark}
+
+The following proposition collects the estimates of \cref{ch28:chapter} that are used below, together with the dependence of their constants.
+
+\begin{proposition}\label{ch29:prop:inputs}
+In the setting of \cref{ch29:def:current-chain}, let $s_0$ be the threshold of \cref{ch28:thm:predictable-rows-and-means}, enlarged as in \cref{ch28:lem:top-current-and-caps}. For every $s\ge s_0$, $K\ge s$, $1\le j\le k$, and $a\le\varepsilon\le\varepsilon_0(s)$, the following statements hold. The constants do not depend on $s\ge s_0$, except through the factors in $H_s$ and $n_s$ that are displayed.
+\begin{enumerate}
+\item Conditionally on $\mathcal F_{j-1}$, the vector $w_j$ has the law $k_j(\widehat\theta_{j-1},\cdot)$ on $\Omega_j=\prod_\ell\overline B_{\R^3}(0,p_{j,\ell})$, with $p_j\le p_{j,\ell}\le p_j+C_J$; this kernel does not depend on the restrictions at coarser scales once $\widehat\theta_{j-1}$ is fixed. Its potential satisfies $D_w^2V_j\ge I/2$ and $\|D_w^2V_j-I\|_{\rm row+col}\le\vartheta_j\le C[t_jp_j+t_j^2(1+\mathsf E_{\rm q})]$, and $\Var f\le2\E|\nabla f|^2$ and $\Ent(f^2)\le4\E|\nabla f|^2$ conditionally on $\mathcal F_{j-1}$. Further, $m_j\le C_J(L/a_j)^3$, $|\E[w_{j,\ell}\mid\mathcal F_{j-1}]|\le Ct_jb_{j-1}$, $p_j\ge1$, $6m_je^{-p_j^2/192}\le1/2$, and $|\E[w_{j,\ell}^c\mid\mathcal F_{j-1}]|\le p_j/(16\sqrt3)$.
+\item For $\theta$ in the reconstruction domain, $\|\Gamma_j(\theta)\|_{\ell^2\to\R^{3m}}\le C\omega_j$, $\|\Gamma_j(\theta)\|_{\ell^\infty\to\R^{3m}}\le C\sqrt{\varepsilon/a_j}$, and $\|\Gamma_j(\theta)-\Gamma_j(0)\|_{\ell^2\to\R^{3m}}\le C\|\theta\|_\infty\omega_j$.
+\item We have $|\Gamma_j(\widehat\theta_{j-1})\bar w_j+\E[Q_j^{\rm Tay}\mid\mathcal F_{j-1}]|\le Ct_jb_{j-1}\sqrt{\varepsilon/a_j}$, the same bound for $|\E[Q_j^{\rm Tay}\mid\mathcal F_{j-1}]|$, and $\E[|Q_j^{\rm Tay}-\E(Q_j^{\rm Tay}\mid\mathcal F_{j-1})|^2\mid\mathcal F_{j-1}]\le Ct_j^2p_j^2\omega_j^2$.
+\item Pathwise, $b_0\le r$, $b_j\le C[r\alpha_*^j+g_3\sqrt{a_j}\,p_j]$, and $\sum_{j=1}^kb_{j-1}\le D_s$, with $D_s$ as in \cref{ch28:lem:top-current-and-caps} and $\sup_{s\ge s_0}D_s<\infty$. With $T_s$ as in \cref{ch28:lem:top-current-and-caps} and $\widetilde N$ the quantity denoted $\mathsf N_{K,s}$ there, $\sup_{\|\widehat\theta_0\|_\infty\le r}|T_s|\le Cr\sqrt\varepsilon/(g_3H_s)$ and $\E|\widetilde N|+\sup_{\|\widehat\theta_0\|_\infty\le r}|T_s|\le Cr\sqrt\varepsilon/(g_3H_s)+Cg_3D_s\sqrt\varepsilon+C\sqrt\eta[1+\log(1/\eta)]^2$.
+\item We have $\sum_j\Gamma_j(0)\Gamma_j(0)^{\mathsf T}=C^{a,\varepsilon,L}\otimes I_3-C^{\rm ret}_{s,a,\varepsilon}$ with $\|C^{\rm ret}_{s,a,\varepsilon}\|\le Cn_s^2\varepsilon/H_s$. As $a\downarrow0$ at fixed $\varepsilon$, $C^{a,\varepsilon,L}\to C^{\varepsilon,L}$ uniformly in $x$ and the lattice offset, and $C^{\varepsilon,L}\to\Sigma$ as $\varepsilon\downarrow0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Parts (1)--(3) are parts (1), (2), and (4) of \cref{ch28:thm:predictable-rows-and-means}; the constants in part (3) are fixed by \cref{ch29:rem:fixed-current-output}. Part (4) is \cref{ch28:lem:top-current-and-caps}, and part (5) is \cref{ch28:thm:maxwell-calibration} together with \cref{ch28:lem:free-current-covariance}(5). By \cref{ch28:lem:finite-ceiling-current-suppliers}, all of these hold at the fixed coupling $\gamma$, with constants independent of $s\ge s_0$ apart from the displayed factors.
+\end{proof}
+
+\section{Integration by parts and conditional characteristic functions}\label{ch29:sec:stein}
+
+We now prove two finite-dimensional lemmas. The first compares one conditional increment with a Gaussian vector by an integration by parts against the density of the conditional fluctuation kernel, with a cutoff that vanishes near the boundary of the product of balls; this is the characteristic-function form of Stein's Gaussian integration by parts \cite{Stein1972NormalApproximation}. The second lemma assembles the one-step comparisons by telescoping conditional characteristic functions.
+
+\begin{lemma}\label{ch29:lem:fiber-and-martingale-stein}
+Let $\mathcal K\subset\R^D$ be compact and convex with nonempty interior, let $V$ be a $C^2$ function on a neighborhood of $\mathcal K$ with $D^2V\ge\kappa I$ for some $\kappa>0$, and let $d\zeta=Z^{-1}\one_{\mathcal K}e^{-V}\,dw$. Assume the Poincaré inequality $\Var_\zeta f\le\kappa^{-1}\E_\zeta|\nabla f|^2$ for every real $C^1$ function $f$. Let $\Psi$ be a real $d\times D$ matrix with rows $\psi_b$, and set
+\[
+ \mu=\E_\zeta w,\qquad \xi=\Psi(w-\mu),\qquad S=\Psi\Psi^{\mathsf T},\qquad R_b=\langle\nabla V-(w-\mu),\psi_b\rangle.
+\]
+Then for every $\chi\in C_c^1(\operatorname{int}\mathcal K;[0,1])$, with $\vartheta=\sup_{\supp\chi}\|D^2V-I\|_{\rm op}$, every $u\in\R^d$, and $1\le b\le d$,
+\begin{align*}
+ \bigl|\E_\zeta[(\xi_b-i(Su)_b)e^{iu\cdot\xi}]\bigr|&\le\frac{\sqrt2}\kappa\|\Psi\|_{\rm op}|u|\bigl(\vartheta|\psi_b|+\|R_b\nabla\chi\|_{L^2(\zeta)}\bigr)\\
+ &\quad+2\E_\zeta|D_{\psi_b}\chi|+2\E_\zeta[(1-\chi)|\xi_b|]+|(Su)_b|\,\zeta\{\chi<1\}.
+\end{align*}
+The numerical coefficients do not depend on $D$, on the shape of $\mathcal K$, or on its radii.
+\end{lemma}
+
+By \cref{ch29:prop:inputs}(1), the conditional fluctuation kernels satisfy the Poincaré hypothesis with $\kappa=1/2$.
+
+\begin{proof}
+We write $\E$ for $\E_\zeta$ and $e_u(w)=e^{iu\cdot\xi(w)}$. Since $\chi$ has compact support in the interior of $\mathcal K$, we may integrate the directional derivative of $\chi e_ue^{-V}$, extended by zero, over $\R^D$; there is no boundary contribution. Since
+\[
+ D_{\psi_b}(u\cdot\xi)=(Su)_b,\qquad D_{\psi_b}V=\xi_b+R_b,
+\]
+the resulting identity is
+\begin{equation}\label{ch29:eq:interior-ibp}
+ \E[\chi(\xi_b+R_b)e_u]=i(Su)_b\E[\chi e_u]+\E[(D_{\psi_b}\chi)e_u].
+\end{equation}
+Rearranging, we obtain
+\begin{equation}\label{ch29:eq:stein-split}
+ \E[(\xi_b-i(Su)_b)e_u]=\E[(1-\chi)(\xi_b-i(Su)_b)e_u]-\E[\chi R_be_u]+\E[(D_{\psi_b}\chi)e_u].
+\end{equation}
+At $u=0$, the identity \eqref{ch29:eq:interior-ibp} and $\E\xi_b=0$ imply
+\begin{equation}\label{ch29:eq:cutoff-score-mean}
+ \E[\chi R_b]=\E[D_{\psi_b}\chi]+\E[(1-\chi)\xi_b].
+\end{equation}
+Here it matters that $R_b$ is defined with the mean $\mu$ of $\zeta$.
+
+For a real function $F$ and a complex function $H$, we have $|\Cov(F,H)|\le(\Var F)^{1/2}(\E|H-\E H|^2)^{1/2}$ by the Cauchy--Schwarz inequality. We apply the Poincaré inequality to $F=\chi R_b$ and separately to $\Re e_u$ and $\Im e_u$; the sum of the squared gradients of the latter two functions is $|\Psi^{\mathsf T}u|^2\le\|\Psi\|_{\rm op}^2|u|^2$. Further,
+\[
+ \nabla(\chi R_b)=\chi(D^2V-I)\psi_b+R_b\nabla\chi,\qquad \|\nabla(\chi R_b)\|_{L^2}\le\vartheta|\psi_b|+\|R_b\nabla\chi\|_{L^2},
+\]
+and only the Hessian on $\supp\chi$ enters the last bound. Thus
+\[
+ |\Cov(\chi R_b,e_u)|\le\kappa^{-1}\|\Psi\|_{\rm op}|u|\bigl(\vartheta|\psi_b|+\|R_b\nabla\chi\|_{L^2}\bigr).
+\]
+In \eqref{ch29:eq:stein-split} we write $\E[\chi R_be_u]=\Cov(\chi R_b,e_u)+\E[\chi R_b]\E e_u$ and use \eqref{ch29:eq:cutoff-score-mean}. The two occurrences of each cutoff term are bounded by the corresponding absolute expectations, and the remaining term with $(Su)_b$ is bounded by $|(Su)_b|\zeta\{\chi<1\}$. This proves the stated inequality, even with $1$ in place of $\sqrt2$ in the first coefficient.
+\end{proof}
+
+\begin{lemma}\label{ch29:lem:characteristic-telescope}
+Let $(\mathcal F_j)_{j=0}^k$ be a finite filtration, and let $\xi_j\in\R^d$ be bounded, $\mathcal F_j$-measurable, and conditionally centered, $\E[\xi_j\mid\mathcal F_{j-1}]=0$. Let $S_j^0\ge0$ be deterministic matrices, and let $\rho_j,\eta_j\ge0$ be integrable $\mathcal F_{j-1}$-measurable random variables. Suppose that for every $u\in\R^d$
+\[
+ \bigl|\E[(\xi_j-iS_j^0u)e^{iu\cdot\xi_j}\mid\mathcal F_{j-1}]\bigr|\le\rho_j|u|+\eta_j(1+|u|).
+\]
+For $0\le q\le k$ put $M_{q,k}^0=\sum_{j=q+1}^k\xi_j$. Then almost surely
+\[
+ \Bigl|\E[e^{iu\cdot M_{q,k}^0}\mid\mathcal F_q]-\exp\Bigl(-\frac12u^{\mathsf T}\sum_{j=q+1}^kS_j^0u\Bigr)\Bigr|\le\sum_{j=q+1}^k\E\bigl[\tfrac12\rho_j|u|^2+\eta_j|u|(1+|u|)\bigm|\mathcal F_q\bigr].
+\]
+For every integrable random vector $N$, replacing $M_{q,k}^0$ by $M_{q,k}^0+N$ adds at most $|u|\E[|N|\mid\mathcal F_q]$ to the bound. No independence or smallness of the increments is assumed, and the numerical constants do not depend on $k$, $q$, or the dimensions.
+\end{lemma}
+
+\begin{proof}
+We set
+\[
+ \varphi_j(v)=\E[e^{iv\cdot\xi_j}\mid\mathcal F_{j-1}],\qquad \Delta_j(v)=\E[(\xi_j-iS_j^0v)e^{iv\cdot\xi_j}\mid\mathcal F_{j-1}].
+\]
+Since $\xi_j$ is bounded, we may differentiate along $v=\tau u$, and we find
+\[
+ \frac d{d\tau}\varphi_j(\tau u)=-\tau u^{\mathsf T}S_j^0u\,\varphi_j(\tau u)+iu\cdot\Delta_j(\tau u).
+\]
+The integrating factor from $\tau$ to $1$ is $\exp[-(1-\tau^2)u^{\mathsf T}S_j^0u/2]\le1$. Since $\varphi_j(0)=1$, integrating from $0$ to $1$, we obtain
+\begin{equation}\label{ch29:eq:one-step-characteristic}
+ |\varphi_j(u)-\varphi_j^0(u)|\le\mathsf e_j(u),\qquad \varphi_j^0(u)=e^{-u^{\mathsf T}S_j^0u/2},\qquad \mathsf e_j(u)=\tfrac12\rho_j|u|^2+\eta_j|u|(1+|u|).
+\end{equation}
+Fix $q$, and for $q\le j\le k$ set
+\[
+ H_j=\exp\Bigl(iu\cdot\sum_{l=q+1}^j\xi_l\Bigr)\prod_{l=j+1}^k\varphi_l^0(u).
+\]
+Then $H_q=\prod_{l=q+1}^k\varphi_l^0(u)$ is deterministic and $H_k=e^{iu\cdot M_{q,k}^0}$. Conditioning the difference $H_j-H_{j-1}$ first on $\mathcal F_{j-1}$ and then on $\mathcal F_q$, and using \eqref{ch29:eq:one-step-characteristic}, we bound its conditional expectation given $\mathcal F_q$ in modulus by $\E[\mathsf e_j(u)\mid\mathcal F_q]$; here we used that the exponential of the past increments has modulus one and that every remaining deterministic factor lies in $[0,1]$. Telescoping proves the assertion. Finally, $|e^{iu\cdot(z+n)}-e^{iu\cdot z}|\le|u||n|$ implies the statement about $N$; no measurability or independence requirement on $N$ is needed.
+\end{proof}
+
+\section{Telescoping circulations and dimension-dependent cutoffs}\label{ch29:sec:cutoff}
+
+The next lemma applies \cref{ch29:lem:fiber-and-martingale-stein} to the conditional fluctuation kernels. The cutoff $\chi_j$ must vanish near the boundary of the product of balls, and its gradient grows like the square root of the number $D_j$ of fluctuation variables, so the error terms carry a polynomial factor in $D_j$. This factor is harmless because the cutoff radius grows logarithmically in $1/t_j$, so that the probability that the cutoff is active decays faster than any power of the mesh.
+
+\begin{lemma}\label{ch29:lem:current-telescope-and-cutoff}
+In the setting of \cref{ch29:def:current-chain}, for every finite $K\ge s$,
+\[
+ I^{K,s}=T_s+\sum_{j=1}^k\Gamma_j(\widehat\theta_{j-1})(w_j-\bar w_j)+\widetilde N,
+\]
+where
+\[
+ T_s=\mathcal I(\widehat\Pi_{k\leftarrow0}\widehat\theta_0),\qquad \widetilde N=\sum_{j=1}^k\bigl\{\Gamma_j(\widehat\theta_{j-1})\bar w_j+Q_j^{\rm Tay}\bigr\}.
+\]
+All zero-fluctuation continuations lie in the reconstruction domain, and the middle sum is a sum of martingale increments under $\nu_{K,s}$.
+
+There is $s_0<\infty$, depending only on $L$, $\gamma$, $M$, $J$, $n_*$, $\Theta$, the analytic domains and column bounds, the loops, and $\sigma$, and not on the later index $s$, such that for $s\ge s_0$ the following holds at each RG step. The kernel $k_j$ lives on $m_j$ balls in $\R^3$, with $D_j=3m_j\le3C_J(L/a_j)^3$, and $p_j\ge1$, $D_w^2V_j\ge I/2$, and
+\[
+ \|D_w^2V_j-I\|_{\rm op}\le\vartheta_j\le C\{t_jp_j+t_j^2(1+\mathsf E_{\rm q})\}\le\tfrac12.
+\]
+There is a smooth function $\chi_j:\Omega_j\to[0,1]$, equal to one on the product of the balls of half the radii and to zero outside the product of the balls of three quarters of the radii, with $|\nabla\chi_j|\le C\sqrt{D_j}/p_j$ and $\nabla\chi_j$ supported in $\{\chi_j<1\}$. The conditional probability that the cutoff is active,
+\[
+ q_j^{\rm cut}=\Prob\{\chi_j(w_j)<1\mid\mathcal F_{j-1}\},
+\]
+satisfies $q_j^{\rm cut}\le6m_je^{-p_j^2/192}\le1/2$. Put $\widehat\tau_j=(1+3m_j)(6m_j)^{1/2}e^{-p_j^2/384}$. Let $\Psi_j$ be either $\Gamma_j(\widehat\theta_{j-1})$ or $\Gamma_j(0)$, and let $\xi_j=\Psi_j(w_j-\bar w_j)$ and $S_j=\Psi_j\Psi_j^{\mathsf T}$. Then for every $u\in\R^{3m}$,
+\[
+ \bigl|\E[(\xi_j-iS_ju)e^{iu\cdot\xi_j}\mid\mathcal F_{j-1}]\bigr|\le\rho_j|u|+\eta_j(1+|u|),
+\]
+with
+\[
+ \rho_j\le C_{3m}\vartheta_j\|\Psi_j\|_{\rm op}^2,\qquad \eta_j\le C_{3m}\|\Psi_j\|_{\rm op}(1+\|\Psi_j\|_{\rm op})\widehat\tau_j,
+\]
+where $C_{3m}$ depends only on $m$, $J$, and the ratios of the radii, and not on $D_j$, $p_j$, or the coarse field. There is a deterministic function $T$ of the mesh such that
+\[
+ \widehat\tau_j\le T(a_j)\le C\bigl(1+(L/a_j)^3\bigr)(L/a_j)^{3/2}\exp\Bigl\{-\frac{A_{\rm w}^2}{384}\log^2\frac1{M^{(J-1)/2}g_3\sqrt{a_j}}\Bigr\}.
+\]
+For every $r'>0$ we have $T(h)\le C_{r'}h^{r'}$ as $h\downarrow0$. In particular, with $A_s^{\rm cut}=\sum_{j\ge1}a_j^{-1/2}T(a_j)$ and $\Theta_{\rm cut}(v)=\sup_{0<h\le v}T(h)$,
+\[
+ \sum_{j=1}^k\omega_j(1+\omega_j)\widehat\tau_j\le C\sqrt\varepsilon\,A_s^{\rm cut}+C_B\Theta_{\rm cut}(\varepsilon)\longrightarrow0\qquad(\varepsilon\downarrow0),
+\]
+uniformly in $K$, $x$, the lattice offset, and $d_j$, and $A_s^{\rm cut}\le A_{s_0}^{\rm cut}<\infty$. The number of blocks is $m_j=O_{J,L,\gamma}(t_j^{-6})$.
+\end{lemma}
+
+\begin{proof}
+The decomposition is that of \cref{ch28:lem:top-current-and-caps}, proved in Step 5 of its proof: for $F_j=\mathcal I(\widehat\Pi_{k\leftarrow j}\widehat\theta_j)$ we have $F_0=T_s$, $F_k=I^{K,s}$, and $F_j-F_{j-1}=\Gamma_j(\widehat\theta_{j-1})w_j+Q_j^{\rm Tay}$, since $\widehat\Pi_{k\leftarrow j-1}=\widehat\Pi_{k\leftarrow j}\circ\widehat\Phi_j(\cdot,0)$ on the reconstruction domain, which contains all sampled fields and all zero-fluctuation continuations by \cref{ch28:thm:one-shot-and-source-sum}. The coefficients are $\mathcal F_{j-1}$-measurable and $\bar w_j$ is the conditional mean under the same law, so the middle sum is a martingale.
+
+We next fix the threshold, uniformly for all later coarse indices; all data in the dependence list are fixed before this choice. The largest coupling of each RG step and the cutoff radii satisfy
+\begin{equation}\label{ch29:eq:couplings-and-radii}
+ t_1(s)=g_3\sqrt{H_s/M},\qquad t_j(s)=t_1(s)B^{-(j-1)/2},\qquad p_j=p_1(s)+\tfrac12A_{\rm w}(j-1)\log B.
+\end{equation}
+By \cref{ch29:prop:inputs}(1), the kernel $k_j$ lives on $m_j$ balls with radii $p_j\le p_{j,\ell}\le p_j+C_J$ and has the stated Hessian, dimension, and mean bounds. The bound on rows and columns implies the bound on the operator norm, since for a finite matrix $A$
+\[
+ \|A\|_{\ell^2\to\ell^2}^2\le\Bigl(\sup_i\sum_l|A_{il}|\Bigr)\Bigl(\sup_l\sum_i|A_{il}|\Bigr),
+\]
+as follows by applying the weighted Cauchy--Schwarz inequality in each row and then summing. The Hessian error therefore tends to zero with $t_jp_j+t_j^2(1+\mathsf E_{\rm q})$. Since $t_1(s)\downarrow0$, one enlargement of $s_0$ enforces $p_j\ge1$ and $\vartheta_j\le1/2$ at every level. The number of blocks satisfies
+\[
+ m_j\le C_J(L/a_j)^3\le C_{J,L,\gamma}t_j^{-6},\qquad a_j=t_j^2/(\lambda_B^2g_3^2),
+\]
+with $\lambda_B=M^{(J-1)/2}$, so $6m_je^{-p_j^2/192}\to0$ uniformly over all sufficiently small $t_j$. The same $s_0$ enforces the bound $1/2$ on this quantity and the bound on the means
+\begin{equation}\label{ch29:eq:mean-slack}
+ |\E[w_{j,\ell}^c\mid\mathcal F_{j-1}]|\le p_j/(16\sqrt3),\qquad1\le c\le3.
+\end{equation}
+These are restrictions on the coarse side only; the cutoff radii and the maps are not changed.
+
+\paragraph{The cutoff.}
+Fix a smooth function $\psi:[0,\infty)\to[0,1]$, equal to one on $[0,1/2]$ and to zero on $[3/4,\infty)$, and set
+\[
+ \chi_j(w)=\prod_{\ell=1}^{m_j}\psi(|w_\ell|/p_{j,\ell}).
+\]
+It is smooth, since each factor is constant near $w_\ell=0$, and it has compact support in the interior of the product. The gradient of each factor has norm at most $C/p_j$, so $|\nabla\chi_j|\le C\sqrt{m_j}/p_j\le C\sqrt{D_j}/p_j$, and $\nabla\chi_j$ vanishes wherever $\chi_j=1$. These bounds depend only on $\psi$, not on the number of balls.
+
+\paragraph{The probability that the cutoff is active.}
+We use the logarithmic Sobolev inequality $\Ent(f^2)\le4\E|\nabla f|^2$ of \cref{ch29:prop:inputs}(1) on the product itself, by Herbst's argument (see \cite{Ledoux1999}). For a scalar coordinate $F(w)=w_\ell^c$, let $H(\lambda)=\log\E e^{\lambda F}$. Applying the inequality to $f=e^{\lambda F/2}$, we find $\lambda H'(\lambda)-H(\lambda)\le\lambda^2$. Integrating $(H/\lambda)'\le1$ from zero for $\lambda>0$, and applying the same argument to $-F$, we obtain
+\[
+ \E e^{\lambda(F-\E F)}\le e^{\lambda^2}\quad(\lambda\in\R),\qquad \Prob\{|F-\E F|\ge v\}\le2e^{-v^2/4},
+\]
+where the tail bound follows by taking $\lambda=v/2$ in $e^{\lambda^2-\lambda v}$ for each of the two tails. If $\chi_j<1$, then some $|w_\ell|>p_{j,\ell}/2\ge p_j/2$, so some coordinate has absolute value larger than $p_j/(2\sqrt3)$. By \eqref{ch29:eq:mean-slack}, its deviation from its conditional mean is at least $p_j/(4\sqrt3)$. A union bound over the $3m_j$ coordinates gives
+\begin{equation}\label{ch29:eq:cutoff-probability}
+ q_j^{\rm cut}=\Prob\{\chi_j<1\mid\mathcal F_{j-1}\}\le6m_je^{-p_j^2/192}.
+\end{equation}
+
+\paragraph{The error terms with the dimension retained.}
+We suppress the index $j$ and write $D=3m_j$, $p=p_j$, $q=\zeta\{\chi<1\}\le1/2$, $\Psi=\Psi_j$, and $\zeta$ for the conditional kernel. Both choices of $\Psi$ are linear maps whose rows are fixed once the coarse field is fixed; neither choice changes the law, its mean, the cutoff, or the score vector $\nabla V-(w-\mu)$. The contraction $R_b=(\nabla V-(w-\mu))\cdot\psi_b$ retains its dependence on the chosen row $\psi_b$. The product of balls has diameter at most $C_Jp\sqrt D$, and by convexity the mean $\mu=\E w$ lies in the product. Since $\nabla R_b=(D^2V-I)\psi_b$, with $c_b=R_b(\mu)$ we have
+\begin{equation}\label{ch29:eq:score-oscillation}
+ \sup_w|R_b(w)-c_b|\le C_J\vartheta p\sqrt D\,|\psi_b|.
+\end{equation}
+By the Poincaré inequality, $\E|\xi_b|^2\le2|\psi_b|^2$. Further,
+\[
+ \E|D_{\psi_b}\chi|\le C\sqrt D\,|\psi_b|\,q/p,\qquad \E[(1-\chi)|\xi_b|]\le\sqrt2\,|\psi_b|\sqrt q.
+\]
+Using \eqref{ch29:eq:cutoff-score-mean}, $\E\chi\ge1/2$, and \eqref{ch29:eq:score-oscillation}, we obtain
+\[
+ |c_b|\le C_J|\psi_b|\bigl\{\vartheta p\sqrt D+(\sqrt D/p)q+\sqrt q\bigr\}.
+\]
+Since $\nabla\chi$ is supported in $\{\chi<1\}$, multiplying the resulting bound on $\sup|R_b|$ by the gradient bound and by $\sqrt q$, and using $p\ge1$ and $\vartheta\le1/2$, we find
+\begin{equation}\label{ch29:eq:dimension-score}
+ \|R_b\nabla\chi\|_{L^2}\le C_J(1+D)|\psi_b|\sqrt q.
+\end{equation}
+In particular, $R_b$ is not bounded independently of $D$.
+
+We insert these estimates into \cref{ch29:lem:fiber-and-martingale-stein} with $\kappa=1/2$, and use $|(Su)_b|\le|\psi_b|\|\Psi\|_{\rm op}|u|$ and $(\sum_b|\psi_b|^2)^{1/2}\le\sqrt{3m}\|\Psi\|_{\rm op}$. The Euclidean norm of the vector of errors is at most
+\[
+ C_{3m}\vartheta\|\Psi\|_{\rm op}^2|u|+C_{3m}\|\Psi\|_{\rm op}(1+\|\Psi\|_{\rm op})(1+D)\sqrt q\,(1+|u|).
+\]
+All constants may depend on $J$ and the ratios of the radii, but not on $D$, $p$, or the coarse field. By \eqref{ch29:eq:cutoff-probability}, $(1+D)\sqrt q\le\widehat\tau_j$, which gives the stated $\rho_j$ and $\eta_j$.
+
+\paragraph{The deterministic envelope.}
+On $0<h\le H_{s_0}/B$ we take
+\begin{equation}\label{ch29:eq:tail-envelope}
+ T(h)=C\bigl(1+(L/h)^3\bigr)(L/h)^{3/2}\exp\Bigl[-\frac{A_{\rm w}^2}{384}\log^2\frac1{\lambda_Bg_3\sqrt h}\Bigr],
+\end{equation}
+with one sufficiently large $C$; then $\widehat\tau_j\le T(a_j)$, since $m_j\le C_J(L/a_j)^3$ and $p_j=A_{\rm w}\log(1/(\lambda_Bg_3\sqrt{a_j}))$. This definition uses the mesh itself, not the index $j$ or the coarse index. To verify the decay, let $h_*=H_{s_0}/B$ and $z=\log(h_*/h)\ge0$. The logarithm of the polynomial prefactor is at most $C+(9/2)z$. The exponent is a quadratic polynomial in $z$ with leading coefficient $-A_{\rm w}^2/1536$. For every $r'>0$, subtracting $\log h^{r'}$ adds only $r'z$ and a constant, and the resulting quadratic polynomial is bounded above. This proves $T(h)\le C_{r'}h^{r'}$ and $\Theta_{\rm cut}(v)\to0$, with constants of the stated dependence.
+
+Taking $r'=2$ shows that $\sum_{j\ge1}a_j^{-1/2}T(a_j)<\infty$. For $s\ge s_0$ this series is a tail of the same series along the fixed sequence of meshes, so $A_s^{\rm cut}\le A_{s_0}^{\rm cut}$. Finally $\omega_j\le1$, and
+\[
+ \sum_{a_j>\varepsilon}\omega_j(1+\omega_j)T(a_j)\le2\sqrt\varepsilon\,A_s^{\rm cut},\qquad \sum_{a_j\le\varepsilon}\omega_j(1+\omega_j)T(a_j)\le\frac{2\Theta_{\rm cut}(\varepsilon)}{1-B^{-1}}.
+\]
+For the second bound we used that the meshes form a geometric sequence, so that $\sum_{a_j\le\varepsilon}a_j/\varepsilon\le(1-B^{-1})^{-1}$. Truncating either sum at $k$ only decreases it. This proves the summability and uniformity assertions.
+\end{proof}
+
+\section{Gaussian approximation of the circulations}\label{ch29:sec:gaussian}
+
+We first record how characteristic-function estimates are converted into estimates in the bounded-Lipschitz distance $\BLdist$, which uses test functions bounded by one with Lipschitz constant at most one. The argument also covers a singular limiting covariance.
+
+\begin{lemma}\label{ch29:lem:smoothing}
+Let $P'$ and $P$ be probability measures on $\R^d$, with characteristic functions $\widehat P'(u)=\int e^{iu\cdot z}P'(dz)$ and $\widehat P$. For all $A>0$ and $\delta>0$,
+\begin{multline}\label{ch29:eq:smoothing-bound}
+ \BLdist(P',P)\le P'\{|z|>A\}+P\{|z|>A\}+4\delta\E|Z_d|\\
+ +\frac{|B_{\R^d}(0,A+1)|}{(2\pi)^d}\int_{\R^d}e^{-\delta^2|u|^2/2}|\widehat P'(u)-\widehat P(u)|\,du,
+\end{multline}
+where $Z_d$ is a standard Gaussian vector in $\R^d$. In particular, if probability measures $P_l$ are uniformly tight and their characteristic functions converge pointwise to that of $P$, then $\BLdist(P_l,P)\to0$. If $d=3m$, the same convergence holds after applying $\mathfrak q(v)=(|v_i|^2/8)_{i=1}^m$, provided the tails of the $P_l$ and of $P$ vanish uniformly as the radius tends to infinity; quantitatively, for every $A>0$,
+\begin{equation}\label{ch29:eq:quadratic-truncation}
+ \BLdist(\mathfrak q_*P',\mathfrak q_*P)\le\max\{1,A/4\}\BLdist(P',P)+2P'\{|v|>A\}+2P\{|v|>A\}.
+\end{equation}
+The constants depend only on $d$ and on the chosen radii $A$ and $\delta$.
+\end{lemma}
+
+\begin{proof}
+Let $f$ satisfy $\|f\|_\infty\le1$ and $\Lip f\le1$, and let $\chi_A(z)=\min\{1,(A+1-|z|)_+\}$ and $h=f\chi_A$. Then $h$ is supported in the ball of radius $A+1$, is bounded by one, and has Lipschitz constant at most two. If $\varphi_\delta$ is the centered Gaussian density with covariance $\delta^2I_d$, then $\|h*\varphi_\delta-h\|_\infty\le2\delta\E|Z_d|$. The Fourier transform of a Gaussian density gives $\varphi_\delta(z)=(2\pi)^{-d}\int e^{iu\cdot z}e^{-\delta^2|u|^2/2}\,du$. Inserting this formula into the convolution and using Fubini's theorem, which is justified since $h$ and the Gaussian in $u$ are integrable, we obtain, with $\widehat h(u)=\int h(z)e^{-iu\cdot z}\,dz$,
+\[
+ P'(h*\varphi_\delta)-P(h*\varphi_\delta)=(2\pi)^{-d}\int\widehat h(u)e^{-\delta^2|u|^2/2}\bigl(\widehat P'(u)-\widehat P(u)\bigr)\,du.
+\]
+Since $|\widehat h(u)|\le|B_{\R^d}(0,A+1)|$, the modulus of the right side is at most the last term of \eqref{ch29:eq:smoothing-bound}. Restoring $h$ costs $4\delta\E|Z_d|$, and restoring $f$ costs at most $P'\{|z|>A\}+P\{|z|>A\}$, since $|f-h|\le\one_{\{|z|>A\}}$. The right side does not depend on $f$, which proves \eqref{ch29:eq:smoothing-bound}. Under the hypotheses on $P_l$, dominated convergence (the characteristic functions differ by at most two) shows that the last term tends to zero for fixed $A$ and $\delta$; we then let $A\to\infty$ and $\delta\downarrow0$.
+
+For the quadratic map, let $\pi_A$ be the nearest-point projection onto the closed ball of radius $A$. It is $1$-Lipschitz: for $z,z'\in\R^d$, the inequalities $\langle z-\pi_Az,y-\pi_Az\rangle\le0$ for $y$ in the ball, applied with $y=\pi_Az'$ and symmetrically, give $|\pi_Az-\pi_Az'|^2\le\langle z-z',\pi_Az-\pi_Az'\rangle$. On the ball,
+\[
+ |\mathfrak q(v)-\mathfrak q(w)|\le\tfrac18(|v|+|w|)|v-w|\le(A/4)|v-w|.
+\]
+Thus, for a test function $f$ on $\R^m$ bounded by one with Lipschitz constant at most one, the function $f\circ\mathfrak q\circ\pi_A$ is bounded by one and has Lipschitz constant at most $A/4$. Further, $f\circ\mathfrak q$ differs from it only outside the ball, by at most two. This proves \eqref{ch29:eq:quadratic-truncation}. For the convergence, take $P'=P_l$, let $l\to\infty$, and then let $A\to\infty$.
+\end{proof}
+
+\begin{theorem}\label{ch29:thm:every-fixed-side-gaussian}
+In the setting of \cref{ch29:def:current-chain}, there is an integer $s_0$ such that for every fixed integer $s\ge s_0$,
+\[
+ \lim_{\varepsilon\downarrow0}\limsup_{K\to\infty}\sup_{x\in\Torus,\,\text{offset}}\BLdist\Bigl(\Law_{\nu_{K,s}}I^{K,s}(\varepsilon,x),\,N(0,\Sigma\otimes I_3)\Bigr)=0,
+\]
+where $\Sigma$ is the covariance of \cref{ch28:def:closed-current-target}; it may be singular. The underlying estimates hold for every $K\ge s$, $1\le j\le K-s$, and $a\le\varepsilon\le\varepsilon_0(s)$, where one may take $\varepsilon_0(s)\le\min\{cH_s,\varepsilon_{\rm loop},c/g_3^2\}$. The constants in the bounds on the coefficients, on the variation of the covariance, and on the conditional remainders can be chosen independently of $s\ge s_0$. More explicitly, let $\kappa_*=-\log\alpha_*/\log B$, which exceeds $1/2$ since $\alpha_*<B^{-1/2}$, and let
+\[
+ \Psi_\kappa(u)=\begin{cases}u^\kappa,&\kappa<1,\\ u(1+|\log u|),&\kappa=1,\\ u,&\kappa>1,\end{cases}\qquad0<u\le1.
+\]
+Then the variation of the coefficients and the remainder satisfy
+\[
+ \sum_j\|\widehat\theta_{j-1}\|_\infty\omega_j^2\le Cr\Psi_{\kappa_*}(\varepsilon/H_s)+C\sqrt\eta\,[1+|\log\eta|],
+\]
+\[
+ \E|\widetilde N|+|T_s|\le\frac{Cr}{g_3H_s}\sqrt\varepsilon+Cg_3D_s\sqrt\varepsilon+C\sqrt\eta\,[1+|\log\eta|]^2,
+\]
+where $D_s=C\{r/(1-\alpha_*)+g_3\sqrt{H_s}(p_1(s)+1)\}$ and $\sup_{s\ge s_0}D_s<\infty$. The coarse-field term may grow like $H_s^{-1}$, $\varepsilon_0(s)$ may decrease with $s$, and $s$ is fixed before both limits.
+\end{theorem}
+
+\begin{proof}
+We first sum the one-step bounds over the scales (Steps 1--3), then replace the coefficients by their values at the zero field (Step 4), then bound the characteristic functions (Step 5), and finally pass to the bounded-Lipschitz distance (Step 6).
+
+\paragraph{Step 0: the threshold.}
+We take the threshold of \cref{ch29:lem:current-telescope-and-cutoff} and enlarge it, if necessary, to that of \cref{ch29:prop:inputs}. All constants in the coefficient, potential-derivative, and conditional variance bounds are independent of the later $s$. Indeed, the maps for coarse index $s$ are those of the fixed sequence at the absolute levels $s+j$, with recursion indices $J(K-s-j)$, and the output class is that of \cref{ch29:rem:fixed-current-output}. We use only the mean and variance bounds of \cref{ch29:prop:inputs}(3); the local bound \eqref{ch28:eq:rooted-score-Ltwo} is not needed. The domain and zero-fluctuation statements come from \cref{ch28:thm:one-shot-and-source-sum}. The law of the coarse field may depend on $s$; since every estimate holds for every coarse field, no comparison of these laws is needed. We take the range of $\varepsilon$ in the statement, shrinking $c$ if necessary so that $\eta<1$ and $p(\varepsilon)=A_{\rm w}\log(1/(\lambda_Bg_3\sqrt\varepsilon))\ge1$; this is possible with $c$ depending only on $M$, $J$, and $A_{\rm w}$.
+
+\paragraph{Step 1: sums over the scales.}
+Since the meshes $a_j$ decrease by the ratio $B$, splitting at $a_j=\varepsilon$ gives
+\begin{equation}\label{ch29:eq:row-square-sum}
+ \sum_{j=1}^k\omega_j^2\le\frac1{1-B^{-1}}+\frac1{1-B^{-2}}=C_B^{(2)}.
+\end{equation}
+For $a_j>\varepsilon$ the summands are $\varepsilon/a_j$, and reading them from the last coarse scale backward bounds their sum by the first geometric series; for $a_j\le\varepsilon$ they are $a_j^2/\varepsilon^2$, bounded by the second series. The estimate holds also if either part is empty. For $h\le\varepsilon$ write
+\[
+ p(h)=p(\varepsilon)+\tfrac12A_{\rm w}\log(\varepsilon/h),
+\]
+so that $p_j=p(a_j)$. For each fixed $v>0$, geometric summation gives
+\begin{equation}\label{ch29:eq:log-geometric}
+ \sum_{a_j\le\varepsilon}(a_j/\varepsilon)^v(1+p(a_j))\le C_{B,v,A_{\rm w}}(1+p(\varepsilon)).
+\end{equation}
+Indeed, the first ratio $z=a_{j_0}/\varepsilon\le1$ need not be one, and the sum is at most $z^v\sum_{l\ge0}B^{-vl}[1+p(\varepsilon)+(A_{\rm w}/2)(\log(1/z)+l\log B)]$; we use $z^v\le1$, $\sup_{0<z\le1}z^v\log(1/z)<\infty$, and the convergence of $\sum_lB^{-vl}$ and $\sum_llB^{-vl}$. For $a_j>\varepsilon$ we have $p(a_j)\le p(\varepsilon)$ and $\sum_{a_j>\varepsilon}a_j^{-1/2}\le C_B\varepsilon^{-1/2}$. It follows that
+\begin{equation}\label{ch29:eq:small-variation-sum}
+ g_3\sum_j\sqrt{a_j}(1+p_j)\omega_j^2\le Cg_3\sqrt\varepsilon\,(1+p(\varepsilon))\le C\sqrt\eta\,(1+|\log\eta|),
+\end{equation}
+where on the fine scales we used \eqref{ch29:eq:log-geometric} with $v=5/2$, and on the coarse scales the sum of inverse square roots. Here and below the constants may depend on $\gamma$ and on $H_{s_0}$, but not on the later $s$. Since $p_j\ge1$ and $t_j\le t_1(s_0)$, the Hessian error satisfies $\vartheta_j\le Cg_3\sqrt{a_j}(1+p_j)$. Thus
+\begin{equation}\label{ch29:eq:main-stein-sum}
+ \sum_j\vartheta_j\omega_j^2\le C\sqrt\eta\,(1+|\log\eta|).
+\end{equation}
+
+\paragraph{Step 2: the variation of the coefficients.}
+We write $b_j=\|\widehat\theta_j\|_\infty$. The bound of \cref{ch29:prop:inputs}(4) is pathwise, with a coefficient independent of $H_s$ and of all later $s\ge s_0$; we use this uniform coefficient rather than a bound with a constant depending on $H_s$. Its conditions hold here: all fields and zero-fluctuation continuations lie in the reconstruction domain, and $t_1(s)\le t_1(s_0)$ satisfies the required upper bound for every later $s$. With $b_0\le r$, it implies
+\begin{equation}\label{ch29:eq:cap-in-current-units}
+ b_{j-1}\le C\bigl\{r(a_j/H_s)^{\kappa_*}+g_3\sqrt{a_j}(1+p_j)\bigr\},\qquad1\le j\le k.
+\end{equation}
+For $j\ge2$ we used $a_{j-1}=Ba_j$, $p_{j-1}\le p_j$, and $\alpha_*^{j-1}=\alpha_*^{-1}(a_j/H_s)^{\kappa_*}$; for $j=1$ we used $b_0\le r$ and absorbed $\alpha_*^{-1}$ into $C$. The deterministic part of the weighted sum $\sum_jb_{j-1}\omega_j^2$ over the coarse scales is
+\[
+ Cr\varepsilon H_s^{-\kappa_*}\sum_{a_j>\varepsilon}a_j^{\kappa_*-1}.
+\]
+If $\kappa_*<1$, summing from the last coarse mesh bounds this by $Cr(\varepsilon/H_s)^{\kappa_*}$. If $\kappa_*=1$, every summand is one and there are at most $C_B(1+\log(H_s/\varepsilon))$ of them, which gives the logarithmic case of $\Psi_{\kappa_*}$; this case cannot be bounded by $C\varepsilon/H_s$. If $\kappa_*>1$, summing from the largest mesh bounds it by $Cr\varepsilon/H_s$. On the fine scales the sum is
+\[
+ CrH_s^{-\kappa_*}\varepsilon^{-2}\sum_{a_j\le\varepsilon}a_j^{\kappa_*+2}\le Cr(\varepsilon/H_s)^{\kappa_*}.
+\]
+In all three cases this is bounded by $Cr\Psi_{\kappa_*}(\varepsilon/H_s)$. For the fluctuation part of \eqref{ch29:eq:cap-in-current-units} we use \eqref{ch29:eq:small-variation-sum}. This proves, pathwise, the first estimate of the theorem:
+\begin{equation}\label{ch29:eq:background-sum}
+ \sum_jb_{j-1}\omega_j^2\le Cr\Psi_{\kappa_*}(\varepsilon/H_s)+C\sqrt\eta\,(1+|\log\eta|).
+\end{equation}
+
+\paragraph{Step 3: the remainder.}
+Let $\mathcal D_j=Q_j^{\rm Tay}-\E[Q_j^{\rm Tay}\mid\mathcal F_{j-1}]$. By the conditional mean and variance bounds of \cref{ch29:prop:inputs}(3), the tower property, $\E|\mathcal D_j|\le(\E|\mathcal D_j|^2)^{1/2}$, and the triangle inequality, we have, without any independence,
+\begin{equation}\label{ch29:eq:averaged-remainder}
+ \E|\widetilde N|\le C\sum_jt_j\,\E b_{j-1}\sqrt{\varepsilon/a_j}+C\sum_jt_jp_j\omega_j.
+\end{equation}
+In the first sum we apply the pathwise bound inside the expectation:
+\[
+ \sum_jt_j\,\E b_{j-1}\sqrt{\varepsilon/a_j}=\lambda_Bg_3\sqrt\varepsilon\,\E\Bigl[\sum_jb_{j-1}\Bigr]\le\lambda_Bg_3\sqrt\varepsilon\,D_s.
+\]
+On the fine scales the second sum is $\lambda_Bg_3\varepsilon^{-1}\sum_ja_j^{3/2}p_j$, which is at most $C\sqrt\eta(1+p(\varepsilon))$ by \eqref{ch29:eq:log-geometric}. On the coarse scales each term is $\lambda_B\sqrt\eta\,p_j$; there are at most $C_B[1+\log(H_{s_0}/\varepsilon)]$ such scales, and each $p_j\le p(\varepsilon)$. For fixed $g_3$ and $H_{s_0}$ both factors are at most $C(1+|\log\eta|)$. Adding the bound on $T_s$ from \cref{ch29:prop:inputs}(4), we obtain
+\begin{equation}\label{ch29:eq:nonmartingale-bound}
+ \E|\widetilde N|+\sup_{\|\widehat\theta_0\|_\infty\le r}|T_s|\le\frac{Cr}{g_3H_s}\sqrt\varepsilon+Cg_3D_s\sqrt\varepsilon+C\sqrt\eta\,(1+|\log\eta|)^2,
+\end{equation}
+which is also the estimate of \cref{ch28:lem:top-current-and-caps}. The quantity $D_s$ is the sum of the bounds on $b_{j-1}$, with a coefficient independent of $s$, and $\sup_{s\ge s_0}D_s<\infty$ follows from \eqref{ch29:eq:couplings-and-radii}: $p_1(s)$ grows linearly in $s$, and $\sqrt{H_s}$ decreases by the factor $B^{-1/2}$ at each increment of $s$.
+
+\paragraph{Step 4: coefficients at the zero field.}
+We now replace the coefficient matrices by their values at the zero field, keeping the centered fluctuation variables $e_j=w_j-\bar w_j$ of the conditioned measure. Let
+\[
+ M_k=\sum_j\Gamma_j(\widehat\theta_{j-1})e_j,\qquad M_k^0=\sum_j\Gamma_j(0)e_j,\qquad S_j^0=\Gamma_j(0)\Gamma_j(0)^{\mathsf T}.
+\]
+The reconstruction domain gives a fixed deterministic bound $b_j\le b_{\max}<\infty$. By the conditional Poincaré inequality and the bound on $\Gamma_j(\theta)-\Gamma_j(0)$ in \cref{ch29:prop:inputs}(2), we have
+\[
+ \E\bigl[|(\Gamma_j(\widehat\theta_{j-1})-\Gamma_j(0))e_j|^2\bigm|\mathcal F_{j-1}\bigr]\le C_{3m}b_{j-1}^2\omega_j^2.
+\]
+Since these differences are martingale increments for the same measure, conditioning on the earlier variables makes all cross terms vanish. With \eqref{ch29:eq:background-sum} we obtain
+\begin{equation}\label{ch29:eq:flat-row-error}
+ \E|M_k-M_k^0|^2\le C_{3m}\sum_j\E b_{j-1}^2\omega_j^2\le C_{3m}b_{\max}\bigl\{Cr\Psi_{\kappa_*}(\varepsilon/H_s)+C\sqrt\eta\,(1+|\log\eta|)\bigr\}\longrightarrow0,
+\end{equation}
+uniformly in $K$ at fixed $s$.
+
+\paragraph{Step 5: characteristic functions.}
+We apply \cref{ch29:lem:current-telescope-and-cutoff} with $\Psi_j=\Gamma_j(0)$, under the same conditional kernels at the coarse fields $\widehat\theta_{j-1}$; the kernel at the zero field is not used. The bound $\|\Gamma_j(0)\|_{\rm op}\le C\omega_j$ implies the deterministic bounds
+\[
+ \rho_j^0\le C\vartheta_j\omega_j^2,\qquad \eta_j^0\le C\omega_j(1+\omega_j)\widehat\tau_j,
+\]
+whose sums tend to zero by \eqref{ch29:eq:main-stein-sum} and \cref{ch29:lem:current-telescope-and-cutoff}. \Cref{ch29:lem:characteristic-telescope} with $q=0$, followed by \eqref{ch29:eq:flat-row-error} and \eqref{ch29:eq:nonmartingale-bound}, bounds the error in the characteristic function of the circulation by
+\begin{equation}\label{ch29:eq:deterministic-current-error}
+\begin{split}
+ \Bigl|\E e^{iu\cdot I^{K,s}}-e^{-u^{\mathsf T}(\Sigma\otimes I_3)u/2}\Bigr|&\le|u|\Bigl\{\E|T_s+\widetilde N|+(\E|M_k-M_k^0|^2)^{1/2}\Bigr\}\\
+ &\quad+\sum_j\Bigl\{\tfrac12\rho_j^0|u|^2+\eta_j^0|u|(1+|u|)\Bigr\}\\
+ &\quad+\tfrac12|u|^2\Bigl\|\sum_jS_j^0-\Sigma\otimes I_3\Bigr\|_{\rm op}.
+\end{split}
+\end{equation}
+In the last term we used $|e^{-x}-e^{-y}|\le|x-y|$ for $x,y\ge0$. The last term is deterministic. By \cref{ch29:prop:inputs}(5),
+\[
+ \sum_jS_j^0=C^{a,\varepsilon,L}\otimes I_3-C^{\rm ret}_{s,a,\varepsilon},\qquad\|C^{\rm ret}_{s,a,\varepsilon}\|\le Cn_s^2\varepsilon/H_s,
+\]
+and the first covariance converges to $C^{\varepsilon,L}\otimes I_3$ as $K\to\infty$ and then to $\Sigma\otimes I_3$ as $\varepsilon\downarrow0$, uniformly in $x$ and the lattice offset. This identification concerns the linearization of the reconstruction at the origin and the linearized coarse field; the nonlinear reconstruction is never conditioned to have zero coarse field. At each fixed $s$, every term on the right of \eqref{ch29:eq:deterministic-current-error} therefore vanishes in the stated iterated limit, uniformly in $x$ and the lattice offset. In particular,
+\begin{equation}\label{ch29:eq:current-characteristic-limit}
+ \lim_{\varepsilon\downarrow0}\limsup_{K\to\infty}\sup_{x,\,\text{offset}}\Bigl|\E e^{iu\cdot I^{K,s}}-e^{-u^{\mathsf T}(\Sigma\otimes I_3)u/2}\Bigr|=0.
+\end{equation}
+No random covariance and no compensated exponential is needed.
+
+\paragraph{Step 6: the bounded-Lipschitz distance.}
+By the conditional Poincaré inequality, we have $\E[|\Gamma_j(0)e_j|^2\mid\mathcal F_{j-1}]\le2\tr S_j^0$, and orthogonality together with \eqref{ch29:eq:row-square-sum} gives $\E|M_k^0|^2\le C_{3m}$. With \eqref{ch29:eq:flat-row-error} and \eqref{ch29:eq:nonmartingale-bound}, this gives a bound on $\E|I^{K,s}|$ that is uniform in $K$, $x$, the lattice offset, and $\varepsilon$ in a sufficiently small range at the fixed $s$; by Markov's inequality the tails of $I^{K,s}$ vanish uniformly. We apply \eqref{ch29:eq:smoothing-bound} with $P'=\Law_{\nu_{K,s}}I^{K,s}$ and $P=N(0,\Sigma\otimes I_3)$. Its last term is bounded by the integral against $e^{-\delta^2|u|^2/2}$ of the minimum of two and the right side of \eqref{ch29:eq:deterministic-current-error}, which does not depend on $x$ or the lattice offset. By dominated convergence, this integral vanishes in the iterated limit $K\to\infty$, then $\varepsilon\downarrow0$, for fixed $A$ and $\delta$. Letting then $A\to\infty$ and $\delta\downarrow0$ proves the theorem, also for singular $\Sigma$. The dependence on $s$ of the coarse-field constant and of the range of $\varepsilon$ is exactly the one in the statement; no choice of $s$ depending on $\varepsilon$ has been made.
+\end{proof}
+
+\begin{remark}\label{ch29:rem:fixed-coupling-scope}
+\Cref{ch29:lem:fiber-and-martingale-stein,ch29:lem:characteristic-telescope} are abstract finite-dimensional statements. Their application to the circulations fixes the coupling $\gamma>0$ before $s_0$ is chosen, and gives estimates with the dependence described in item (5) of \cref{ch01:conv:constants}; it does not give constants uniform as $\gamma\to0$ at a fixed side, as would be needed for item (6). The proof of \cref{ch29:thm:every-fixed-side-gaussian} uses no tightness of the linear and quadratic flow data; these enter in \cref{ch29:lem:actual-flow-trace-reduction} and in the passage to the continuum measure.
+\end{remark}
+
+The same proof applies conditionally on the first $q$ RG steps, with error bounds that do not depend on the values of these steps. This uniformity is what makes the asymptotic independence in \cref{ch29:sec:macroscopic} possible; it does not follow from \cref{ch29:thm:every-fixed-side-gaussian} itself.
+
+\begin{lemma}\label{ch29:lem:fixed-prefix-current-mixing}
+In the setting of \cref{ch29:def:current-chain}, fix $s\ge s_0$. Write $\|h\|_{\rm BL}=\max\{\|h\|_\infty,\Lip h\}$. Fix an integer $q\ge0$, and for $K-s\ge q$ let $\mathcal F_q=\sigma(\widehat\theta_0,w_1,\dots,w_q)$ be the $\sigma$-field generated by the coarse field and the fluctuation variables of the first $q$ RG steps. Let $C\sim N(0,\Sigma\otimes I_3)$ and $\mathfrak q(v)=(|v_i|^2/8)_{i=1}^m$. Regular conditional probabilities can be chosen so that
+\begin{equation}\label{ch29:eq:conditional-prefix-gaussian}
+ \lim_{\varepsilon\downarrow0}\limsup_{K\to\infty}\sup_{x,\,\text{offset}}\operatorname*{ess\,sup}_{\nu_{K,s}}\BLdist\Bigl(\Law\bigl(I^{K,s}(\varepsilon,x)\bigm|\mathcal F_q\bigr),\Law(C)\Bigr)=0.
+\end{equation}
+The same holds with $I^{K,s}$ and $C$ replaced by $\mathfrak q(I^{K,s})$ and $\mathfrak q(C)$. In particular, if $|B_{K,q}|\le1$ is any real $\mathcal F_q$-measurable random variable, then
+\begin{equation}\label{ch29:eq:prefix-bounded-multiplier}
+ \lim_{\varepsilon\downarrow0}\limsup_{K\to\infty}\sup_{x,\,\text{offset}}\sup_{\|f\|_{\rm BL}\le1}\Bigl|\E_{\nu_{K,s}}\bigl[f(\mathfrak q(I^{K,s}))B_{K,q}\bigr]-\E f(\mathfrak q(C))\,\E_{\nu_{K,s}}B_{K,q}\Bigr|=0.
+\end{equation}
+The constants may depend on $s$ and $q$ and otherwise have the dependence of item (5) of \cref{ch01:conv:constants}. The variable $B_{K,q}$ may depend on $K$, and no regularity in the values of the first $q$ steps is required. Nothing is asserted uniformly in $q$.
+\end{lemma}
+
+\begin{proof}
+We follow the proof of \cref{ch29:thm:every-fixed-side-gaussian} conditionally on $\mathcal F_q$, and check that every error bound is deterministic and does not depend on the values of the first $q$ steps.
+
+\paragraph{Step 1: the decomposition after $q$ steps.}
+Since all spaces of coarse fields and fluctuation variables are finite-dimensional compact metric spaces, the explicit normalized kernels give regular conditional probabilities. Fix a realization of the first $q$ steps. By \cref{ch29:prop:inputs}(1), the later conditional kernels are the same kernels as before conditioning, since the restrictions at coarser scales do not alter them once their coarse field is fixed. Every such field lies in the reconstruction domain and satisfies $e^{\widehat\theta_{j-1}}\in B_r$, as noted in \cref{ch28:sec:setting}. The maps at the absolute levels $s+q+1,\dots,K$ are the same reconstruction maps, with the same recursion indices. By \cref{ch28:thm:one-shot-and-source-sum}, every zero-fluctuation continuation is defined. Thus the decomposition starting at $q$ is
+\[
+ I^{K,s}=T_q+\sum_{j=q+1}^{K-s}\Gamma_j(\widehat\theta_{j-1})(w_j-\bar w_j)+N_q,
+\]
+where
+\[
+ T_q=\mathcal I\bigl(\widehat\Pi_{K-s\leftarrow q}\widehat\theta_q\bigr),\qquad N_q=\sum_{j=q+1}^{K-s}\bigl\{\Gamma_j(\widehat\theta_{j-1})\bar w_j+Q_j^{\rm Tay}\bigr\},
+\]
+and $\bar w_j$ is still the conditional mean under the conditioned Wilson measure. This is a restriction of the same telescoping sum, with no change of measure.
+
+\paragraph{Step 2: bounds uniform in the first $q$ steps.}
+The field $\widehat{\mathcal E}_q^a$ of \cref{ch28:thm:one-shot-and-source-sum} vanishes at zero and has bounded derivative on the reconstruction domain, so $\|\widehat{\mathcal E}_q^a(\widehat\theta_q)\|_\infty\le Cb_{\max}$. By its identity for circulations, the contraction of the heat semigroup, and the length bound, we have, with $a_q=H_{s+q}$,
+\[
+ |T_q|\le\frac{Cb_{\max}}{g_3a_q}\sqrt\varepsilon.
+\]
+Here $b_{\max}$ is the fixed bound for the reconstruction domain. We keep the pathwise bounds of \cref{ch29:prop:inputs}(4) and \eqref{ch29:eq:background-sum}, which hold after conditioning as well; they are not restarted at $\widehat\theta_q$. Using the mean and variance bounds of \cref{ch29:prop:inputs}(3), which hold for every coarse field, and the tower property, we obtain
+\[
+ \E[|N_q|\mid\mathcal F_q]\le Cg_3D_s\sqrt\varepsilon+C\sum_{j>q}t_jp_j\omega_j\le Cg_3D_s\sqrt\varepsilon+C\sqrt\eta\,(1+|\log\eta|)^2.
+\]
+For the means we used $t_j\sqrt{\varepsilon/a_j}=\lambda_Bg_3\sqrt\varepsilon$ and the deterministic bound on $\sum_jb_{j-1}$; for the centered part, the conditional variance and the conditional Cauchy--Schwarz inequality. These bounds vanish at fixed $s$ and $q$ and do not depend on the values of the first $q$ steps. The cutoff estimates of \cref{ch29:lem:current-telescope-and-cutoff} hold at every later coarse field. For the replacement of the coefficients by their values at the zero field, we set
+\[
+ B_{s,\varepsilon}=Cr\Psi_{\kappa_*}(\varepsilon/H_s)+C\sqrt\eta\,(1+|\log\eta|).
+\]
+By the conditional Poincaré inequality and the orthogonality of martingale increments, we have
+\begin{align*}
+ \E\Bigl[\Bigl|\sum_{j>q}\bigl(\Gamma_j(\widehat\theta_{j-1})-\Gamma_j(0)\bigr)(w_j-\bar w_j)\Bigr|^2\Bigm|\mathcal F_q\Bigr]
+ &\le C\,\E\Bigl[\sum_{j>q}b_{j-1}^2\omega_j^2\Bigm|\mathcal F_q\Bigr]\\
+ &\le Cb_{\max}B_{s,\varepsilon}.
+\end{align*}
+The last inequality follows from the pathwise bound \eqref{ch29:eq:background-sum}, which holds on every sample path; its right side is deterministic and tends to zero at fixed $s$. \Cref{ch29:lem:characteristic-telescope} applies to this tail of the sum.
+
+\paragraph{Step 3: the covariance of the tail.}
+The coefficients $\Gamma_j(0)$ for $j>q$ are exactly the coefficients at the zero field for the coarse index $s+q$, since their defining maps are the same restrictions of the fixed family. By \cref{ch28:thm:maxwell-calibration} at index $s+q$,
+\[
+ \sum_{j>q}\Gamma_j(0)\Gamma_j(0)^{\mathsf T}=C^{a,\varepsilon,L}\otimes I_3-C^{\rm ret}_{s+q,a,\varepsilon},\qquad \|C^{\rm ret}_{s+q,a,\varepsilon}\|\le Cn_{s+q}^2\varepsilon/H_{s+q},
+\]
+and by \cref{ch28:lem:free-current-covariance} the first term has the same limit $\Sigma\otimes I_3$. For every $u$, the conditional error in the characteristic function is therefore bounded almost surely by the sum of these deterministic remainder, coefficient, cutoff, and covariance errors, as in \eqref{ch29:eq:deterministic-current-error}. This bound does not depend on the first $q$ steps, and it vanishes in the stated order at fixed $s$ and $q$. The factors $1/a_q$ and $n_{s+q}^2/H_{s+q}$ grow with $q$, which is why $q$ is fixed before the limits.
+
+\paragraph{Step 4: conditional laws.}
+By the conditional Poincaré inequality, the conditional second moment of the tail $\sum_{j>q}\Gamma_j(0)(w_j-\bar w_j)$ also has a deterministic bound, and the conditional first-moment bounds of Step 2 then give uniform conditional tails for $I^{K,s}$. We apply \eqref{ch29:eq:smoothing-bound} to these conditional laws: its Fourier integral is bounded by the same deterministic envelope for the characteristic functions, and its truncation terms by these conditional tails. Choosing one null set for all rational $u$ and using the continuity of each conditional characteristic function, we obtain an almost sure bound that does not depend on the version of the conditional law or on the test function. This proves \eqref{ch29:eq:conditional-prefix-gaussian}.
+
+\paragraph{Step 5: the quadratic map.}
+By \eqref{ch29:eq:quadratic-truncation} applied to the conditional laws, with the projection onto a ball of radius $A$ on which $\mathfrak q$ has Lipschitz constant at most $A/4$, and with the conditional tails outside the ball vanishing uniformly as $A\to\infty$, the statement for $\mathfrak q(I^{K,s})$ follows; we let $K\to\infty$ and $\varepsilon\downarrow0$ before $A\to\infty$. Multiplying by $B_{K,q}$ and using the tower property proves \eqref{ch29:eq:prefix-bounded-multiplier}.
+\end{proof}
+
+\section{Wilson flow and removal of the conditioning}\label{ch29:sec:flow}
+
+We now compare the normalized Wilson-loop deficits of the flowed fine configuration with the squared circulations, and remove the conditioning on the small-field event. The comparison has two parts. The first is an expansion of the trace of a product of $\SU$ matrices to second order, with a remainder controlled by the total variation and independent of the number of links. The second is the local theory of the Wilson flow of \cref{ch21:thm:enhanced-local-flow}, which writes the flowed field as the linear heat evolution plus the quadratic Picard term plus a smaller remainder. The Wilson flow is the one introduced by Lüscher \cite{Luscher2010WilsonFlow}, with time measured in physical units as in \cref{s2:model}.
+
+\begin{lemma}\label{ch29:lem:actual-flow-trace-reduction}
+The following statements hold.
+\begin{enumerate}
+\item For every finite sequence $v_e\in\R^3$, with $D=\sum_e|v_e|$ and $Y=\sum_ev_e$, and every $s'>0$,
+\[
+ \Bigl|\frac{1-\tfrac12\tr\prod_ee^{s'v_e^a\tau_a}}{(s')^2}-\frac{|Y|^2}8\Bigr|\le\frac{s'D^3}{48}e^{s'D/2}.
+\]
+The same bound holds for an ordered exponential along a path of finite length, with $D$ the total variation of the integrated coefficient. The bound does not depend on the number of links.
+\item Fix $1/2<\alpflow<2/3$ and a horizon $T_0>0$, and put $\betflow=\alpflow-1/2$ and $\kapflow=1-3\alpflow/2$. For the reconstruction of \cref{ch29:def:current-chain}, let $\mathfrak x=\Heat{\cdot}{a}A^{K,s}$ be the linear heat evolution of the initial potential $A^{K,s}=a^{-1}\widehat\theta_k$, let $\mathfrak y=\Duhamel a(\mathfrak x,\mathfrak x)$ be its quadratic Picard term, and let $\mathcal B_{K,s}=\Xnorm{\alpflow}a(\mathfrak x)+\Ynorm{\alpflow}a(\mathfrak y)$ be the norm of the linear and quadratic flow data of \cref{ch01:def:enhancement}. For every $R<\infty$ there are $T_R\le T_0$, $a_R>0$, $\varepsilon_R>0$, and $C_R$ such that, on $\{\mathcal B_{K,s}\le R\}$ and for $a\le\varepsilon\le\varepsilon_R$, $a\le a_R$, and $\sigma\varepsilon^2<T_R$, the representative $A_{\rm fl}$ of the Wilson flow in the damping gauge of \cref{ch21:thm:enhanced-local-flow} satisfies
+\[
+ A_{\rm fl}=\mathfrak x+\mathfrak y+v,\qquad \|v(t)\|_\infty\le C_R(t+a^2)^{\kapflow}.
+\]
+Write $Y_i=(a/\sqrt\eta)\sum_{e\in\ell_{i,\varepsilon,a,x}}\operatorname{sgn}(e)A_{{\rm fl},e}(\sigma\varepsilon^2)$ and $D_i=(a/\sqrt\eta)\sum_{e\in\ell_{i,\varepsilon,a,x}}|A_{{\rm fl},e}(\sigma\varepsilon^2)|$. Then, uniformly in $x$, the lattice offset, $K$, and $s$, whenever the same radius and domains apply,
+\[
+ \max_i|Y_i-I_i^{K,s}|\le C_R\varepsilon^{3/2-2\alpflow},\qquad \max_i\bigl(D_i+|I_i^{K,s}|\bigr)\le C_R\varepsilon^{-\betflow},
+\]
+\[
+ \max_i\Bigl|\frac{1-\tfrac12\tr\Hol_{\ell_{i,\varepsilon,a,x}}\Flowlat{N_K}_{\sigma\varepsilon^2}U}{\eta}-\frac{|I_i^{K,s}|^2}8\Bigr|\le C_R\varepsilon^{2-3\alpflow}.
+\]
+The representative stays in the logarithmic chart on the whole time interval:
+\[
+ a\sup_{t\le T_R}\|A_{\rm fl}(t)\|_\infty\le C_R\bigl\{a^{1-\alpflow}+a^{2-2\alpflow}+a(T_R+a^2)^{\kapflow}\bigr\}\longrightarrow0\qquad(a\to0).
+\]
+\item Enlarge $s_0$ so that $n_{s_0}$ also satisfies the requirement on the coarse side in \cref{ch25:lem:finite-ceiling-finite-mesh-estimates} for the interval $\{\gamma\}$, the horizon $T_0$, and the exponent $\alpflow$. For each fixed $s\ge s_0$, $\rho_s(R)=\sup_{K\ge s}\nu_{K,s}\{\mathcal B_{K,s}>R\}\to0$ as $R\to\infty$. Let
+\[
+ Z_{\varepsilon,K}=\Bigl(\frac{1-\tfrac12\tr\Hol_{\ell_{i,\varepsilon,a,x}}\Flowlat{N_K}_{\sigma\varepsilon^2}U}{\eta}\Bigr)_{i=1}^m
+\]
+be the vector of normalized Wilson-loop deficits on the fine lattice, and $\mathfrak q(I)=(|I_i|^2/8)_{i=1}^m$. For every $f:\R^m\to\R$ with $\|f\|_\infty\le1$ and $\Lip f\le1$,
+\[
+ \bigl|\E_{\mu_{N_K,\gamma}}f(Z_{\varepsilon,K})-\E_{\nu_{K,s}}f(\mathfrak q(I^{K,s}))\bigr|\le2\mu_{N_K,\gamma}(S_{N_K,n_s,\gamma}^c)+2\rho_s(R)+C_R\varepsilon^{2-3\alpflow}.
+\]
+\end{enumerate}
+The constants have the dependence described in items (5) and (7) of \cref{ch01:conv:constants}, with additional dependence on $R$, $T_0$, and $\alpflow$. No expectation of an unbounded function is transferred between the two measures.
+\end{lemma}
+
+\begin{proof}
+Part (1) is an algebraic expansion (Step 1). Part (2) follows from the local theory of the Wilson flow and part (1) (Steps 2--4), and part (3) combines part (2) with the tightness of the flow data and \cref{ch02:lem:bounded-transfer} (Step 5).
+
+\paragraph{Step 1: the trace expansion.}
+Let $B_e=v_e^a\tau_a$. Then $\|B_e\|_{\rm op}=|v_e|/2$, and $|\tr T|/2\le\|T\|_{\rm op}$ for every $2\times2$ matrix $T$. In the product of the exponential series, the sum of the norms of all terms that are homogeneous of degree $p$ is at most
+\[
+ \sum_{\sum_ep_e=p}\prod_e\frac{(s'|v_e|/2)^{p_e}}{p_e!}=\frac{(s'D/2)^p}{p!},
+\]
+by the multinomial identity; this bound has no constant depending on the number of links. The trace of the term of degree one vanishes. The identity $\tr(B_eB_f)/2=-v_e\cdot v_f/4$ gives the half-trace of the terms of degree two,
+\[
+ -\frac{(s')^2}8\sum_e|v_e|^2-\frac{(s')^2}4\sum_{e<f}v_e\cdot v_f=-\frac{(s')^2}8|Y|^2.
+\]
+The norms of all terms of degree at least three sum to at most $(s'D/2)^3e^{s'D/2}/6$. Dividing by $(s')^2$ gives the first assertion. For an integrable connection coefficient along a path of finite length, the term of degree $p$ of the ordered exponential series has norm at most $(s'D/2)^p/p!$, since the ordered integral is bounded by $1/p!$ times the integral of the symmetric product of the absolute coefficients. The linear term has trace zero, and the half-trace of the quadratic term is $-(s')^2|\int v|^2/8$, since the dot product is symmetric on the two ordered halves of the square. The same remainder bound therefore proves the assertion for ordered exponentials, with $D=\int|v|$.
+
+\paragraph{Step 2: the flow.}
+Fix $R$, $T_0$, and $\alpflow$, and abbreviate $\alpha=\alpflow$, $\beta=\betflow=\alpha-1/2$, and $\kappa=\kapflow=1-3\alpha/2$. The event $\{\mathcal B_{K,s}\le R\}$ controls exactly the linear heat evolution, the quadratic Picard term, and all first differences required in \cref{ch21:thm:enhanced-local-flow}. Indeed, the linear part is $\Heat{\cdot}{a}A^{K,s}$, and the quadratic part is the ordered quadratic term of the damped Wilson equation on the same fine lattice. Restricting the horizon only decreases these norms, and the difference arrays include every forward and backward difference in the norm required by that theorem. We use its bound on the remainder of one solution and its identification with the Wilson flow, reducing its lifespan to $T_R\le T_0$ if necessary. It gives the decomposition and the bound on $v$, and it identifies $e^{aA_{\rm fl}}$ with the Wilson flow up to a time-dependent periodic lattice gauge transformation. The trace of a closed loop is unchanged by this gauge transformation.
+
+The chart condition holds on the whole interval, not only at time zero. Indeed, by the two bounds on the flow data and the remainder bound, we have
+\[
+ a\sup_{t\le T_R}\|A_{\rm fl}(t)\|_\infty\le C_R\bigl\{a^{1-\alpha}+a^{1-2\beta}+a(T_R+a^2)^\kappa\bigr\}.
+\]
+Since $1-2\beta=2-2\alpha>0$ and $\kappa>0$, all terms tend to zero as $a\to0$. The last term takes its maximum at the final time, where it is $O_R(a)$ for fixed $T_R$. We choose $a_R$ below the threshold of the chart and $\varepsilon_R\le1$ with $\sigma\varepsilon_R^2<T_R$.
+
+\paragraph{Step 3: the circulation of the flowed field.}
+At $t_\varepsilon=\sigma\varepsilon^2$ and $a\le\varepsilon$ we have $\sigma\varepsilon^2\le t_\varepsilon+a^2\le(\sigma+1)\varepsilon^2$. By the definitions of the norms and the remainder bound, we have
+\begin{equation}\label{ch29:eq:three-flow-powers}
+ \|\mathfrak x(t_\varepsilon)\|_\infty\le C_\sigma R\varepsilon^{-\alpha},\qquad \|\mathfrak y(t_\varepsilon)\|_\infty\le C_\sigma R\varepsilon^{-2\beta},\qquad \|v(t_\varepsilon)\|_\infty\le C_{R,\sigma}\varepsilon^{2\kappa}.
+\end{equation}
+The physical length of the cycle divided by $\sqrt\eta$ is at most $C_\ell\sqrt\varepsilon/g_3$. Since $I_i^{K,s}=(a/\sqrt\eta)\sum_e\operatorname{sgn}(e)\mathfrak x_e(t_\varepsilon)$, multiplying the last two estimates by this factor, we obtain
+\[
+ \max_i|Y_i-I_i^{K,s}|\le C_R\bigl\{\varepsilon^{1/2-2\beta}+\varepsilon^{1/2+2\kappa}\bigr\}\le C_R\varepsilon^{3/2-2\alpha},
+\]
+where we used $1/2-2\beta=3/2-2\alpha$ and $1/2+2\kappa=5/2-3\alpha>3/2-2\alpha$. Multiplying all three estimates in \eqref{ch29:eq:three-flow-powers} by the same factor, we find $D_i+|I_i^{K,s}|\le C_R\varepsilon^{-\beta}$. These constants depend on the fixed $g_3>0$, as allowed.
+
+\paragraph{Step 4: the Wilson-loop deficit.}
+For each oriented link we take $v_e=\operatorname{sgn}(e)aA_{{\rm fl},e}/\sqrt\eta$ and $s'=\sqrt\eta$ in the trace expansion of Step 1. A link traversed against its orientation contributes the inverse of the positive link variable, whose logarithm is the negative of the positive one. The resulting $D$ and $Y$ are exactly $D_i$ and $Y_i$. In particular,
+\[
+ \sqrt\eta\,D_i\le C_R\varepsilon^{1-\alpha},\qquad \sqrt\eta\,D_i^3\le C_R\varepsilon^{2-3\alpha},
+\]
+and the exponential in the trace bound is bounded for small $\varepsilon$. Further,
+\[
+ \bigl||Y_i|^2-|I_i^{K,s}|^2\bigr|\le(|Y_i|+|I_i^{K,s}|)|Y_i-I_i^{K,s}|\le C_R\varepsilon^{2-3\alpha}.
+\]
+This proves the bound on the deficit. It is deterministic on the event $\{\mathcal B_{K,s}\le R\}$ and uses only the length bound on the cycles, so it is uniform over $x$, the lattice offset, $K$, and $s$ for which the same radius and domains apply.
+
+\paragraph{Step 5: radius tightness and removal of the conditioning.}
+For each fixed $s\ge s_0$, we apply \cref{ch25:lem:finite-ceiling-finite-mesh-estimates}, in particular \eqref{ch25:eq:finite-ceiling-radius-tightness}, with coarse side $n_s$, remaining depth $K-s$, and $I=\{\gamma\}$; the enlargement of $s_0$ in part (3) makes $n_s$ an admissible coarse side for that lemma. Its fine potential is $A^{K,s}=a^{-1}\widehat\theta_{K-s}$, by the definition of the reconstruction, and no interpolation is involved at the fine lattice. Its tightness statement on the horizon $T_0$ is exactly $\rho_s(R)\to0$, at fixed $s$ and fixed positive coupling.
+
+Finally, $Z_{\varepsilon,K}$ is a gauge-invariant function of the fine configuration, so on the small-field event it takes the same value whether it is evaluated on the link variables of the fine configuration or on the reconstructed representative. \Cref{ch02:lem:bounded-transfer}, applied to the bounded function $f(Z_{\varepsilon,K})$, shows that replacing $\mu_{N_K,\gamma}$ by $\nu_{K,s}$ costs at most $2\mu_{N_K,\gamma}(S_{N_K,n_s,\gamma}^c)$; the event has positive probability, since $\nu_{K,s}$ is defined. Under $\nu_{K,s}$, the difference between $f(Z_{\varepsilon,K})$ and $f(\mathfrak q(I^{K,s}))$ is at most $C_R\varepsilon^{2-3\alpha}$ on $\{\mathcal B_{K,s}\le R\}$, where the dimension $m$ is absorbed into $C_R$, and at most two on its complement. Adding these bounds proves the last inequality.
+\end{proof}
+
+The next lemma restates the Gaussian limits in the form in which they are applied below. Since every input of the preceding proofs is available at each fixed coupling $0<\gamma\le\Gamma$ by \cref{ch28:lem:finite-ceiling-current-suppliers}, it requires no new argument.
+
+\begin{lemma}\label{ch29:lem:finite-ceiling-prefix-gaussian}
+In the setting of \cref{ch28:lem:finite-ceiling-current-suppliers}, every fixed $s\ge s_0$ satisfies the conclusion of \cref{ch29:thm:every-fixed-side-gaussian}. Moreover, for every fixed $q\ge0$ the conclusions of \cref{ch29:lem:fixed-prefix-current-mixing} hold, including the essential supremum over the values of the first $q$ RG steps, with $\mathcal F_q=\sigma(\widehat\theta_0,w_1,\dots,w_q)$. In particular, with $C\sim N(0,\Sigma\otimes I_3)$,
+\[
+ \lim_{\varepsilon\downarrow0}\limsup_{K\to\infty}\sup_{x,\,\text{offset}}\operatorname*{ess\,sup}\BLdist\bigl(\Law(I^{K,s}\mid\mathcal F_q),\Law(C)\bigr)=0,
+\]
+and the same holds after applying $\mathfrak q(v)=(|v_i|^2/8)_{i=1}^m$. The constants have the dependence described in item (5) of \cref{ch01:conv:constants}, with additional dependence on $q$; nothing is asserted for $q$ growing with $\varepsilon$ or $K$. \Cref{ch29:def:current-chain} and the conclusions of \cref{ch29:lem:fiber-and-martingale-stein,ch29:lem:characteristic-telescope,ch29:lem:current-telescope-and-cutoff,ch29:lem:actual-flow-trace-reduction} also hold in this setting; for the last one, only the radius tightness at a fixed coarse side is used.
+\end{lemma}
+
+\begin{proof}
+We check the inputs of the local tools. \Cref{ch29:lem:fiber-and-martingale-stein,ch29:lem:characteristic-telescope} are finite-dimensional statements; the conditional fluctuation kernels satisfy the Poincaré hypothesis by \cref{ch29:prop:inputs}(1). The decomposition in \cref{ch29:lem:current-telescope-and-cutoff} is an exact finite sum, and its cutoff estimates use the conditions on the number of blocks and on the means, and the decay of the cutoff error, which hold by Step 1 of the proof of \cref{ch28:thm:predictable-rows-and-means} and \eqref{ch28:eq:cutoff-envelope}. Hence every cutoff estimate holds with the same constants. \Cref{ch29:lem:actual-flow-trace-reduction} uses \cref{ch21:thm:enhanced-local-flow} for the linear and quadratic flow data on the fine lattice, the identity of \cref{ch12:thm:representative-prefixes} between the reconstructed field and the fine configuration, and the trace expansion; these deterministic arguments need no bound on $\gamma$, and the removal of the radius uses \eqref{ch25:eq:finite-ceiling-radius-tightness}. None of these checks uses a limiting random variable for the flow data.
+
+By \cref{ch28:lem:finite-ceiling-current-suppliers}, all five inputs of \cref{ch29:prop:inputs} hold at this fixed coupling, with the stated independence of $s$. The proofs of \cref{ch29:thm:every-fixed-side-gaussian,ch29:lem:fixed-prefix-current-mixing} therefore apply with these inputs. In the conditional proof, the pathwise bounds of \cref{ch29:prop:inputs}(4) are kept, not restarted; the coarse-field term after $q$ steps is bounded by $Cb_{\max}\sqrt\varepsilon/(g_3a_q)$, and the coarse covariance by $Cn_{s+q}^2\varepsilon/H_{s+q}$. Thus $q$ remains fixed before both limits.
+\end{proof}
+
+\section{The continuum limit}\label{ch29:sec:continuum}
+
+We now pass to the continuum measure, with the limits in the order displayed at the beginning of the section. The final limit removes the conditioning error, whose available bound $F_\Gamma(n_s)$ tends to zero as $s\to\infty$ and is independent of $K$. In the theorem below, the class $[n_*]$ in the subscript of $\OrbitLaw$ is the class $[n_*]_M$ of \cref{ch26:thm:full-M-ladder}.
+
+\begin{theorem}\label{ch29:thm:short-distance-gaussian}
+Fix $L>0$, an odd integer $M\ge3$, an equivalence class $[n_*]_M$ of lattice sides, and any $\gamma>0$. Choose $\Gamma\ge\gamma$ and the parameters of \cref{ch20:thm:finite-ceiling-parameters}, and let $\OrbitLaw$ be the continuum measure of \cref{s2:thm:main}. For every finite family of smooth closed loops $\ell_1,\dots,\ell_m$ in $\R^3$ and every $\sigma>0$, put $g_3^2=\gamma/L$ and
+\[
+ Z_\varepsilon(x)=\Bigl(\frac{1-W_{x+\varepsilon\ell_i,\sigma\varepsilon^2}}{g_3^2\varepsilon}\Bigr)_{i=1}^m.
+\]
+Then
+\[
+ \lim_{\varepsilon\downarrow0}\sup_{x\in\Torus}\BLdist\bigl(\Law_{\OrbitLaw}Z_\varepsilon(x),\Law Z_G\bigr)=0,\qquad Z_G=(|C_i|^2/8)_{i=1}^m,
+\]
+where the three color components of $C$ are independent centered Gaussian vectors with covariance
+\[
+ \Sigma_{ih}=(2\pi)^{-3}\int_{\R^3}\frac{e^{-2\sigma|k|^2}}{|k|^2}\,\overline{\widehat J_i(k)}\cdot\widehat J_h(k)\,dk,\qquad \widehat J_i(k)=\int_0^1\dot\ell_i(v)e^{-ik\cdot\ell_i(v)}\,dv.
+\]
+Degenerate covariances and repeated or reversed loops are allowed. Every sufficiently large fixed coarse index satisfies the conclusion of \cref{ch29:lem:finite-ceiling-prefix-gaussian} for the circulations. The limits are taken in the order described above. The constants have the dependence described in item (5) of \cref{ch01:conv:constants}; no rate uniform in the coupling, in the coarse index, or as $\sigma\downarrow0$ is asserted.
+\end{theorem}
+
+\begin{proof}
+By \cref{ch28:lem:free-current-covariance}(1), $k\cdot\widehat J_i(k)=0$ and $|\widehat J_i(k)|\le C\min\{|k|,1\}$, so $\Sigma$ is finite, real, symmetric, and positive semidefinite, and its positive square root constructs the three color vectors. This is the covariance of \cref{ch28:def:closed-current-target}, and \cref{ch28:lem:finite-ceiling-current-suppliers} shows that the results of \cref{ch28:chapter} apply at this coupling.
+
+Let $F_\Gamma(n_s)$ be the supremum over $0<\gamma'\le\Gamma$ of the bound in \cref{ch20:thm:finite-ceiling-payment} at coarse side $n_s$; by that theorem, $F_\Gamma(n_s)\to0$ as $s\to\infty$. At fixed $s$, let $\rho_s(R)$ be the radius tail of \cref{ch29:lem:actual-flow-trace-reduction}, which tends to zero by \eqref{ch25:eq:finite-ceiling-radius-tightness} with $I=\{\gamma\}$. Let $Z_{\varepsilon,K}(x)$ be the vector of normalized Wilson-loop deficits of \cref{ch29:lem:actual-flow-trace-reduction} for the lattice cycles approximating $x+\varepsilon\ell_i$. By that lemma and the triangle inequality, for every function $f$ with $\|f\|_\infty\le1$ and $\Lip f\le1$,
+\begin{multline*}
+ \bigl|\E_{\mu_{N_K,\gamma}}f(Z_{\varepsilon,K}(x))-\E f(Z_G)\bigr|\le2F_\Gamma(n_s)+2\rho_s(R)+C_R\varepsilon^{2-3\alpflow}\\
+ +\BLdist\bigl(\Law_{\nu_{K,s}}\mathfrak q(I^{K,s}),\Law Z_G\bigr).
+\end{multline*}
+For each fixed $\varepsilon>0$ and $x$, the joint convergence of flowed Wilson loops, \cref{ch26:thm:finite-ceiling-tier-one,ch26:thm:matched-paths}, implies that $\E_{\mu_{N_K,\gamma}}f(Z_{\varepsilon,K}(x))\to\E_{\OrbitLaw}f(Z_\varepsilon(x))$ as $K\to\infty$; the lattice cycles are admissible approximations of the loops $x+\varepsilon\ell_i$. The bound above is uniform in $x$ and the lattice offset. To see that the identification at fixed $\varepsilon$ is compatible with this uniformity, we translate the lattice sequence by a lattice vector so that the base point is near a vertex, and use the allowed lattice approximation of the translated loops; the additional swept area is $O(\varepsilon a)$, a connecting path and its inverse do not change the trace, and the laws of the fine lattice and of the continuum are invariant under translations. At fixed $\varepsilon$ all deficits lie in the compact cube $[0,2/(g_3^2\varepsilon)]^m$, so a finite net of test functions with $\|f\|_\infty\le1$ and $\Lip f\le1$ makes this passage to the limit uniform over all such test functions. We let $K\to\infty$, and then $\varepsilon\downarrow0$, using the statement for $\mathfrak q(I^{K,s})$ in \cref{ch29:lem:finite-ceiling-prefix-gaussian} and $2-3\alpflow>0$. What remains is $2F_\Gamma(n_s)+2\rho_s(R)$. We let $R\to\infty$ at fixed $s$, and only then $s\to\infty$. This proves the theorem. For the full class $[n_*]_M$, the continuum measure was identified in \cref{ch26:thm:full-M-ladder}; the argument above needs only one subsequence $N_K=n_*B^K$.
+\end{proof}
+
+\section{A uniform short-distance variance lower bound}\label{ch29:sec:variance}
+
+\begin{corollary}\label{ch29:cor:short-distance-variance-liminf}
+In \cref{ch29:thm:short-distance-gaussian} take $m=1$, write $\ell=\ell_1$ and $v=\Sigma_{11}$, and let $D_{\varepsilon,x}=(1-W_{x+\varepsilon\ell,\sigma\varepsilon^2})/(g_3^2\varepsilon)$. Then
+\begin{equation}\label{ch29:eq:variance-liminf}
+ \liminf_{\varepsilon\downarrow0}\inf_x\Var_{\OrbitLaw}D_{\varepsilon,x}=\liminf_{\varepsilon\downarrow0}\inf_x\frac{\Var_{\OrbitLaw}W_{x+\varepsilon\ell,\sigma\varepsilon^2}}{(g_3^2\varepsilon)^2}\ge\frac{3v^2}{32}.
+\end{equation}
+If $\widehat J_1\not\equiv0$, then $v>0$, and for every sufficiently small fixed $\varepsilon$ the observable $W_{x+\varepsilon\ell,\sigma\varepsilon^2}$ is not almost surely constant, for every $x$. The threshold for $\varepsilon$ may depend on the data listed in item (5) of \cref{ch01:conv:constants}.
+\end{corollary}
+
+\begin{proof}
+For independent copies $D$ and $D'$ of a random variable with finite variance, $\Var D=\E(D-D')^2/2$. At each fixed scale the variance is finite, since $0\le D_{\varepsilon,x}\le2/(g_3^2\varepsilon)$. By \cref{ch29:thm:short-distance-gaussian}, the laws of pairs of independent copies converge, uniformly in $x$, to the law of independent copies $Z$ and $Z'$ of $v\chi_3^2/8$, where $\chi_3^2$ is a chi-square variable with three degrees of freedom: on compact sets, approximate a bounded continuous function of two variables by finite sums of products, and use the uniform tails of the marginals on the complement. Applying this to the bounded continuous function $\min\{A,(u-u')^2\}$ and then letting $A\to\infty$, we find that the left side of \eqref{ch29:eq:variance-liminf} is at least $\E(Z-Z')^2/2=\Var Z=3v^2/32$. A nonzero continuous function $\widehat J_1$ is nonzero on an open set, on which the positive weight in the integral defining $v$ has positive integral, so $v>0$. The strict lower bound then gives a common threshold below which the observable is not constant. No moment is transferred from the Wilson measure.
+\end{proof}
+
+\section{Asymptotic independence from macroscopic Wilson loops}\label{ch29:sec:macroscopic}
+
+The small-loop deficits are asymptotically independent of fixed macroscopic flowed Wilson loops. The reason is that a macroscopic flowed Wilson loop is approximated, on the same probability space, by a function of the first $q$ RG steps, while the Gaussian limit of \cref{ch29:lem:fixed-prefix-current-mixing} holds uniformly conditionally on these steps. The approximation must have constants independent of the higher derivatives of the finite-scale reconstruction, which grow with $q$; this is provided by the stability estimate \cref{ch22:cor:bounded-input-trace-stability}.
+
+\begin{lemma}\label{ch29:lem:same-history-macroscopic-prefix}
+In the setting of \cref{ch29:def:current-chain}, fix $s\ge s_0$, finitely many piecewise $C^1$ closed loops $\Gamma_r$ in $\Torus$, times $t_r>0$, and characters $\chi_r$ of finite-dimensional representations of $\SU$, $1\le r\le b$. Use lattice approximations $\Gamma_{r,K}$ of bounded physical length and swept area $O(a)$, and let
+\[
+ V_{K,r}=\chi_r\bigl(\Hol_{\Gamma_{r,K}}\Flowlat{N_K}_{t_r}(U)\bigr),\qquad \mathbf V_K=(V_{K,r})_{r=1}^b
+\]
+be the vector of flowed Wilson loops of the fine configuration under $\nu_{K,s}$. There are $\mathcal F_q$-measurable random vectors $\mathbf V_K^{[q]}$ on the same probability space such that
+\begin{equation}\label{ch29:eq:macroscopic-prefix-approximation}
+ \lim_{q\to\infty}\limsup_{K\to\infty}\E_{\nu_{K,s}}\min\bigl\{2,|\mathbf V_K-\mathbf V_K^{[q]}|\bigr\}=0.
+\end{equation}
+The vector $\mathbf V_K^{[q]}$ consists of the flowed Wilson loops of the finite-scale reconstruction $U_K^{[q]}=\exp(aI_{a_q\to a}A_q)$, with the same times and lattice paths, where $A_q=\widehat\theta_q/a_q$, $a_q=H_sB^{-q}$, and $I_{a_q\to a}$ is the cardinal interpolation of \cref{ch25:lem:finite-ceiling-finite-mesh-estimates}. The approximation does not depend on $\varepsilon$, $x$, or any test function of the small loops. The constants have the dependence described in item (7) of \cref{ch01:conv:constants}, at fixed coupling and with $s$ fixed.
+\end{lemma}
+
+\begin{proof}
+We use the cardinal interpolation and the notation of \cref{ch25:lem:finite-ceiling-finite-mesh-estimates}. On the fine lattice the linear and quadratic flow data of the finite-scale reconstruction are
+\[
+ x_q=\Heat{\cdot}{a}I_{a_q\to a}A_q,\qquad y_q=\Duhamel a(x_q,x_q).
+\]
+This is the cardinal interpolation of the field at index $q$; we do not claim that it equals the nonlinear zero-fluctuation continuation. Its link variables and their Wilson flow are defined without any small-field event of their own. At fixed $q$ the field $A_q$ ranges over a fixed compact set and its cardinal interpolation is smooth, as in \cref{ch25:lem:fixed-smooth-prefix}. The construction uses only $\widehat\theta_q$, so it is $\mathcal F_q$-measurable.
+
+Fix $1/2<\alpha<2/3$ and a horizon $T_0>0$, and set
+\[
+ d_{K,q}=\Xnorm\alpha a(x_{K-s}-x_q)+\Ynorm\alpha a(y_{K-s}-y_q),\qquad \mathcal B_{K,s}=\Xnorm\alpha a(x_{K-s})+\Ynorm\alpha a(y_{K-s}).
+\]
+Both norms include every first difference on the common lattice. The exact bilinear decomposition of $y_{K-s}-y_q$ and the estimates of \cref{ch25:lem:finite-ceiling-finite-mesh-estimates} on the linear term and on the two mixed terms and the quadratic term imply, for every $\delta>0$,
+\begin{equation}\label{ch29:eq:two-grade-prefix-tail}
+ \lim_{q\to\infty}\sup_{K\ge s+q}\nu_{K,s}\{d_{K,q}>\delta\}=0.
+\end{equation}
+The linear part is bounded by Markov's inequality and the tail estimate for the linear term; the quadratic part is bounded by the sum of the tail estimates for the mixed terms and the quadratic term, each with threshold $\delta/3$. The radius tail $\rho_s(R)=\sup_{K\ge s}\nu_{K,s}\{\mathcal B_{K,s}>R\}$ tends to zero by \eqref{ch25:eq:finite-ceiling-radius-tightness}.
+
+Fix $R$ and $0<\delta\le1$. On the event $\{\mathcal B_{K,s}\le R,\ d_{K,q}\le\delta\}$, both pairs of flow data lie in the ball of radius $R+1$. Let
+\[
+ 0<u_R<\tfrac14\min\{T_{R+1},T_0,\min_rt_r\}.
+\]
+By the estimate of \cref{ch21:thm:enhanced-local-flow} for differences on the same lattice, we have, at this early time,
+\[
+ \|A_a(u_R)-A_a^{[q]}(u_R)\|_{C_a^1}\le C_{R,u_R}d_{K,q},\qquad \|A_a(u_R)\|_{C_a^1}+\|A_a^{[q]}(u_R)\|_{C_a^1}\le K_R<\infty.
+\]
+Both damping gauges start at the identity. By \cref{ch12:thm:representative-prefixes,ch21:thm:enhanced-local-flow}, the first damped solution represents the Wilson flow of the fine configuration, and the second represents the Wilson flow started from $U_K^{[q]}$. Since each character is gauge invariant, both flows may be restarted from these damped fields at time $u_R$ for the purpose of evaluating their later traced loops.
+
+We apply \cref{ch22:cor:bounded-input-trace-stability} with radius $R+1$, input horizon $T_0$, early time $u=u_R$, $\tau=\min_rt_r$, $T=\max_rt_r$, the given characters, and the fixed bounds on the lengths of the paths. Both pairs of flow data lie in that ball on the stated event, in the same initial gauge, and the discrepancy in that corollary is exactly $d_{K,q}$. It gives
+\begin{equation}\label{ch29:eq:uniform-prefix-loop-modulus}
+ |\mathbf V_K-\mathbf V_K^{[q]}|\le C_{R,u_R,\mathbf t,\boldsymbol\Gamma,\boldsymbol\chi}\,d_{K,q},
+\end{equation}
+for the whole vector of characters, including the normalized fundamental traces. The constant in \eqref{ch29:eq:uniform-prefix-loop-modulus} depends on the radius and on the fixed waiting time, but not on the higher derivatives of the finite-scale reconstruction, which grow with $q$; the threshold for the mesh depends on $R$, $u_R$, and the loops, but not on $q$. For all sufficiently fine meshes it follows that
+\begin{equation}\label{ch29:eq:prefix-error-with-radius}
+ \E\min\{2,|\mathbf V_K-\mathbf V_K^{[q]}|\}\le2\rho_s(R)+2\nu_{K,s}\{d_{K,q}>\delta\}+C_R\delta.
+\end{equation}
+We let $q\to\infty$ at fixed $s$, $R$, and $\delta$, using \eqref{ch29:eq:two-grade-prefix-tail}, then $\delta\downarrow0$, and finally $R\to\infty$. This proves the claim on the same finite probability spaces, without coupling different cutoffs.
+\end{proof}
+
+\begin{theorem}\label{ch29:thm:short-distance-macroscopic-mixing}
+Assume the setting of \cref{ch29:thm:short-distance-gaussian}. Fix, independently of $\varepsilon$ and $x$, a finite vector $\mathbf V=(\chi_r(\Hol_{\Gamma_r}X(t_r)))_{r=1}^b$ of characters of holonomies of the trajectory $X$ around piecewise $C^1$ closed loops $\Gamma_r$ in $\Torus$ at times $t_r>0$. Then
+\begin{equation}\label{ch29:eq:short-distance-macroscopic-mixing}
+ \lim_{\varepsilon\downarrow0}\sup_x\sup_{\|f\|_{\rm BL},\|g\|_{\rm BL}\le1}\bigl|\E_{\OrbitLaw}[f(Z_\varepsilon(x))g(\mathbf V)]-\E f(Z_G)\,\E_{\OrbitLaw}g(\mathbf V)\bigr|=0,
+\end{equation}
+where $\|h\|_{\rm BL}=\max\{\|h\|_\infty,\Lip h\}$. The constants have the dependence described in items (5) and (7) of \cref{ch01:conv:constants}. Nothing is asserted uniformly in a growing family of macroscopic loops, as $\gamma\downarrow0$, as $\sigma\downarrow0$, or as $\min_rt_r\downarrow0$.
+\end{theorem}
+
+\begin{proof}
+On the probability space of $\nu_{K,s}$, let $\mathbf V_K$ be the vector of flowed Wilson loops of the fine configuration and $\mathbf V_K^{[q]}$ the $\mathcal F_q$-measurable approximation of \cref{ch29:lem:same-history-macroscopic-prefix}. By \eqref{ch29:eq:prefix-error-with-radius},
+\[
+ a_{K,s,q}=\E_{\nu_{K,s}}\min\{2,|\mathbf V_K-\mathbf V_K^{[q]}|\}\le2\rho_s(R)+2\nu_{K,s}\{d_{K,q}>\delta\}+C_R\delta.
+\]
+Let $\Delta_{K,s,q}(\varepsilon)$ be the deterministic bound on the conditional bounded-Lipschitz distance for the squared circulations from \cref{ch29:lem:finite-ceiling-prefix-gaussian}. Multiplying by $g(\mathbf V_K^{[q]})$, which is $\mathcal F_q$-measurable and bounded by one, and using the tower property, we obtain an error of at most $\Delta_{K,s,q}(\varepsilon)$ against the independent Gaussian factor. Replacing $g(\mathbf V_K^{[q]})$ by $g(\mathbf V_K)$, in the product and in its separate expectation, costs at most $2a_{K,s,q}$, since $|g(\mathbf V_K)-g(\mathbf V_K^{[q]})|\le\min\{2,|\mathbf V_K-\mathbf V_K^{[q]}|\}$. Replacing $f(\mathfrak q(I^{K,s}))$ by the deficits $f(Z_{\varepsilon,K}(x))$ costs at most $2\rho_s(R)+C_R\varepsilon^{2-3\alpflow}$, by \cref{ch29:lem:actual-flow-trace-reduction}. Finally, two applications of \cref{ch02:lem:bounded-transfer}, to the product and to the expectation of $g(\mathbf V_K)$, transfer from $\nu_{K,s}$ to $\mu_{N_K,\gamma}$ at a cost of at most $4F_\Gamma(n_s)$. Thus the error under the Wilson measure is at most
+\[
+ 4F_\Gamma(n_s)+2\rho_s(R)+C_R\varepsilon^{2-3\alpflow}+2a_{K,s,q}+\Delta_{K,s,q}(\varepsilon).
+\]
+For fixed $\varepsilon$, $x$, $f$, and $g$, the joint law of the deficits and of $\mathbf V_K$ under $\mu_{N_K,\gamma}$ converges to the corresponding joint law under $\OrbitLaw$, by \cref{ch26:thm:finite-ceiling-tier-one,ch26:thm:matched-paths} applied to the union of the two families of loops. The bound above does not depend on $x$, $f$, or $g$, so it also bounds their supremum after this identification. We let $K\to\infty$, then $\varepsilon\downarrow0$ at fixed $s$, $R$, $q$, and $\delta$. Next we let $q\to\infty$, using \eqref{ch25:eq:finite-ceiling-compact-tail} to bound $\sup_{K\ge s+q}\nu_{K,s}\{d_{K,q}>\delta\}$, then $\delta\downarrow0$, then $R\to\infty$ at this $s$, and finally $s\to\infty$. The bound vanishes.
+\end{proof}
+
+\section{Asymptotic independence from bounded Borel functions}\label{ch29:sec:orbit-borel-mixing-addendum}
+
+The last theorem extends the asymptotic independence to every fixed bounded Borel function on the trajectory space. In the terminology of Rényi, as discussed by Aldous and Eagleson \cite{AldousEagleson1978}, it says that $Z_\varepsilon(x)$ converges mixingly relative to the Borel $\sigma$-field of $\OrbitSpace$, uniformly in $x$ and over test functions with $\|f\|_{\rm BL}\le1$: the limit is independent of that $\sigma$-field. This only names the mode of convergence.
+
+\begin{theorem}\label{ch29:thm:short-distance-orbit-borel-mixing}
+Assume the setting of \cref{ch29:thm:short-distance-macroscopic-mixing}, with $Z_\varepsilon(x)$ and $Z_G$ as there. For every bounded Borel function $H:\OrbitSpace\to\R$, chosen independently of $\varepsilon$ and $x$,
+\[
+ \lim_{\varepsilon\downarrow0}\sup_{x\in\Torus}\sup_{\|f\|_{\rm BL}\le1}\bigl|\E_{\OrbitLaw}[f(Z_\varepsilon(x))H]-\E f(Z_G)\,\E_{\OrbitLaw}H\bigr|=0.
+\]
+In particular this holds for $H=h\circ i^{1,2}$, for every bounded Borel function $h$ on the space of Sobolev trajectories, where $i^{1,2}$ is the map of \cref{ch26:def:sobolev-trajectory-space}. The approximations in the proof may depend on $H$ and $\OrbitLaw$. There is no supremum over $H$, and nothing is asserted for $H$ depending on $\varepsilon$ or $x$.
+\end{theorem}
+
+\begin{proof}
+Let $\lambda=\OrbitLaw$. By \cref{ch26:thm:wilson-borel-space}, the Borel $\sigma$-field of $\OrbitSpace$ is generated by the determining coordinates $w_j$, $j\ge1$, which are normalized fundamental Wilson loops. We first approximate $H$ in $L^1(\lambda)$ by a bounded Lipschitz function of finitely many of these coordinates.
+
+The events $A$ whose indicators can be approximated in $L^1(\lambda)$ by $[0,1]$-valued Borel functions of finitely many coordinates form a $\sigma$-field. It contains the events determined by finitely many coordinates. It is closed under complements, and under finite unions by the Lipschitz map $(s_1,s_2)\mapsto\max\{s_1,s_2\}$ on $[0,1]^2$; for a countable union, we first truncate to a finite union whose indicator has small $L^1$ error, by continuity of $\lambda$ from below. Hence it contains every Borel event, and approximating a bounded $H$ by simple functions gives approximations bounded by $\|H\|_\infty$.
+
+Next, a bounded Borel function of $(w_1,\dots,w_q)$ can be approximated by a bounded Lipschitz function. The law $\lambda_q$ of $(w_1,\dots,w_q)$ is a Borel probability measure on the compact cube $[-1,1]^q$, so each Borel set $A$ has a compact subset $K_A$ and a relatively open superset $O_A$ with $\lambda_q(O_A\setminus K_A)$ arbitrarily small; indeed, the sets with this property contain the compact sets, by continuity from above along decreasing open neighborhoods, and they form a $\sigma$-field, by choosing the outer errors summably and keeping finitely many inner compact sets. If the relative complement of $O_A$ is nonempty, it has positive distance $d_A$ from $K_A$, and $\max\{0,1-\dist(\cdot,K_A)/d\}$ with $0<d<d_A$ is Lipschitz, equals one on $K_A$, and vanishes outside $O_A$; in the remaining cases we use constants. Its $L^1(\lambda_q)$ distance to $\one_A$ is at most $\lambda_q(O_A\setminus K_A)$. Applying this to the indicators of a simple function, extending the resulting Lipschitz function from the cube to $\R^q$ by the distance-cone extension, and truncating at $\|H\|_\infty$, we find for every $\eta'>0$ a bounded Lipschitz function $g_{\eta'}:\R^q\to\R$ with
+\[
+ H_{\eta'}=g_{\eta'}(w_1,\dots,w_q),\qquad \E_\lambda|H-H_{\eta'}|<\eta'.
+\]
+Both $q$ and the Lipschitz constant are fixed before the loops shrink.
+
+Let $\mathbf V=(2w_1,\dots,2w_q)$. Its components are fundamental characters, so $\mathbf V$ satisfies the hypotheses of \cref{ch29:thm:short-distance-macroscopic-mixing}. We apply that theorem to the function $z\mapsto g_{\eta'}(z/2)/A_{\eta'}$, where $A_{\eta'}=\max\{1,\|g_{\eta'}\|_\infty,\Lip g_{\eta'}\}$. This function is bounded by one and has Lipschitz constant at most one, and its value at $\mathbf V$ is $H_{\eta'}/A_{\eta'}$. Multiplying by $A_{\eta'}$, we find that the expression in the statement with $H_{\eta'}$ in place of $H$ tends to zero, uniformly in $x$ and in $f$ with $\|f\|_{\rm BL}\le1$. Replacing $H_{\eta'}$ by $H$ costs at most
+\[
+ \E_\lambda|H-H_{\eta'}|+|\E f(Z_G)|\,\E_\lambda|H-H_{\eta'}|\le2\eta',
+\]
+uniformly in these variables and in $\varepsilon$. We let $\varepsilon\downarrow0$ and then $\eta'\downarrow0$. Finally, by \cref{ch26:thm:sobolev-image-limit} the map $i^{1,2}$ is Borel, so $h\circ i^{1,2}$ is an admissible $H$; no continuity of $i^{1,2}$ is used.
+\end{proof}
+
+\begin{proof}[Proof of \cref{s2:thm:short-distance}]
+Let $\lambda=\lambda_{L,\gamma,[n]_M}$ with $n$ divisible by four. Part (1) is \cref{ch29:thm:short-distance-gaussian}, applied with $n_*=n$ and any $\Gamma\ge\gamma$; its covariance $\Sigma$ is the matrix in \eqref{s2:eq:circulation-covariance}. Part (2) is \cref{ch29:cor:short-distance-variance-liminf}. Part (3) is \cref{ch29:thm:short-distance-orbit-borel-mixing}, applied to the bounded Borel function $G$.
+\end{proof}

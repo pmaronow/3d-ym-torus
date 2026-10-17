@@ -1,0 +1,906 @@
+\chapter{The continuum measure on gauge orbits}\label{ch26:chapter}
+
+In this section we construct the continuum measure $\lambda_{L,\gamma,[n]_M}$ on the trajectory space $\OrbitSpace$ of \cref{s2:def:trajectories} and prove \cref{s2:thm:main}. The main result is \cref{ch26:thm:full-M-ladder}. Fix $L>0$, $\gamma>0$, an odd integer $M\ge3$, and $n\in4\N$. Along the full sequence of lattice sides $N_k=nM^k$, every finite vector of flowed Wilson loops, evaluated on admissible approximations of loops in the sense of \cref{s2:def:approx}, converges in law under the Wilson measure $\mu_{N_k,\gamma}$, jointly with the lattice energies at positive times. The limits are the joint laws of the corresponding continuum observables under one Borel probability measure on $\OrbitSpace$. This measure is the limit of the images of $\mu_{N_k,\gamma}$ under Borel maps $\pi_k$ that are invariant under all lattice gauge transformations. The energies of the trajectories $\pi_k(U)$ are tight at every positive time, and the measure depends only on $L$, $\gamma$, and the class $[n]_M$ of $n$ under the relation $nM^a=n'M^b$.
+
+There are three inputs. The first is the convergence of the joint laws of flowed Wilson loops under the conditioned Wilson measures at a fixed coarse side, proved in \cref{ch25:chapter}, together with the description of these limits through continuum flows started from finite-scale reconstructions (\cref{ch25:thm:finite-mesh-prefix-control,ch25:thm:selected-loop-limit}). Combined with the bounds of \cref{ch20:chapter} on the small-field failure probability, these results give convergence of finite families of flowed loops under the Wilson measures (\cref{ch25:thm:original-loop-stitching}). The second is the deterministic theory of the Wilson flow and its comparison with the Yang--Mills heat flow, from \cref{ch21:chapter,ch22:chapter}. The third is the trajectory-space framework of Cao and Chatterjee \cite{CCState2023v4}: compactness modulo gauge, smoothing by the heat flow at positive times, and the Borel structure of the space of trajectories.
+
+Convergence of finite families of flowed loops does not by itself produce a measure on $\OrbitSpace$. The determining coordinates $w_j$ of \cref{ch26:thm:wilson-borel-space} define a metric $\CoordMetric$ that determines Borel probability measures on $\OrbitSpace$, but the energy $X\mapsto E_L(X(t))$ is not known to be continuous for $\CoordMetric$ or for the Wilson topology. We therefore also use the topology of Cao and Chatterjee on trajectories of Sobolev connections modulo gauge. Compactness of trajectories comes from simultaneous bounds on their energies at the times $s_j=L^22^{-j}$. Energy at each positive time is continuous in the Sobolev trajectory topology because the heat flow regularizes weakly convergent data (\cref{ch26:lem:sobolev-positive-time-energy}), and this identifies the limits of the lattice energies. To realize the limit as a limit of the lattice measures themselves, we construct the maps $\pi_k$ explicitly, by a search over a countable family of smooth trajectories subject to one-sided energy bounds (\cref{ch26:thm:energy-constrained-matching}).
+
+\Cref{ch26:sec:trajectory-space} collects the properties of $\OrbitSpace$ that we use, and \cref{ch26:sec:lattice-observables} the deterministic lattice estimates. \Cref{ch26:sec:conditioned,ch26:sec:measurable-maps,ch26:sec:unconditioning} prove joint convergence of energies and loops under the conditioned Wilson measures, construct the maps $\pi_K$, and remove the conditioning, for the parameters of \cref{ch20:thm:common-parameters}; \cref{ch26:sec:coupling-bound} extends this to couplings below an arbitrary fixed bound and treats general admissible approximations. \Cref{ch26:sec:refinement-sequences} states the resulting limit theorems along the sequences $N_K=n_*M^{JK}$, and \cref{ch26:sec:full-sequence} passes to the full sequence $nM^k$ and completes the proof of \cref{s2:thm:main}. The remaining parts of \cref{s2:thm:further} are proved in \cref{ch26:chapter-properties}. The results of this section are used in \cref{ch29:chapter} and in the weak-coupling analysis of \cref{ch30:chapter,ch31:chapter,ch32:chapter}, mainly through \cref{ch26:thm:tier-one,ch26:thm:finite-ceiling-tier-one,ch26:cor:common-ladder-family,ch26:thm:matched-paths}.
+
+\paragraph{Conventions.}
+Constants in deterministic flow estimates depend only on the data listed in each statement, with the dependence described in item (7) of \cref{ch01:conv:constants}. Stochastic convergence moduli and the number of constraints $m(K)$ used to define $\pi_K$ may in addition depend on the fixed coupling, on the parameters of the renormalization group hierarchy, on the base side, and on the observables. We claim no rate of convergence, no convergence of moments of the energy, and no uniformity as $\gamma\to0$. We use the Lie-algebra norm $\abs{\cdot}$ of \cref{ch01:chapter} on connections, and for a lattice potential $A$ at mesh $a$ we write
+\[
+ \norm A_{C_a^1}=\norm A_\infty+\max_{j\in\{1,2,3\},\ \epsilon\in\{+,-\}}\norm{D_{a,j}^\epsilon A}_\infty,
+\]
+where $D_{a,j}^\pm$ are the forward and backward physical differences. The finite-difference norms of \cref{ch01:def:enhancement} likewise include both directions and all translates.
+
+\section{The trajectory space and its Borel structure}\label{ch26:sec:trajectory-space}
+
+Recall from \cref{s2:def:trajectories} the space $\SpaceA=C^\infty(\Torus;\su^3)$ of smooth connections, the group $\SpaceG=C^\infty(\Torus;\SU)$ of smooth periodic gauge transformations (including all its connected components), acting by $A^k=kAk^{-1}-(dk)k^{-1}$, and the Yang--Mills heat semigroup $(\Flowcov_t)_{t\ge0}$ on $\SpaceA/\SpaceG$. Global existence of smooth solutions for smooth initial data is due to R\aa de \cite{Rade1992}; we use it in the form of \cite[Theorem 3.14, p.~25]{CCState2023v4}, which also relies on Charalambous and Gross \cite{CharalambousGross2013}. The trajectory space is
+\[
+ \OrbitSpace=\bigl\{X:(0,\infty)\to\SpaceA/\SpaceG:\ X(t)=\Flowcov_{t-s}X(s)\text{ for all }0<s<t\bigr\},
+\]
+the Wilson topology $\WilsonTopology$ is the weakest topology for which all the functions $W_{\ell,\chi,t}(X)=\chi(\Hol_\ell X(t))$ are continuous, where $\ell$ ranges over piecewise $C^1$ loops, $\chi$ over characters of finite-dimensional representations of $\SU$, and $t$ over $(0,\infty)$. The energy $E_L$ is defined in \eqref{s2:eq:energy}. Our parallel transport solves $H'(s)=H(s)A(\ell(s))\dot\ell(s)$ with $H(0)=\Id$, as in \cref{ch01:def:orbit-space}, and our gauge variable is the inverse of the one in \cite[(1.1), p.~2]{CCState2023v4}.
+
+In \cite{CCState2023v4}, Cao and Chatterjee introduced trajectories of the heat flow at positive times as a state space for three-dimensional Yang--Mills theory, following the proposal of Charalambous and Gross \cite{CharalambousGross2013} to regularize Wilson loops by the heat flow. We work in their framework. The separation of smooth gauge orbits by holonomies is due to Sengupta \cite{Sengupta1994}; we use it in the formulation of \cite[Lemma 1.2, p.~4]{CCState2023v4}. The compactness of energy sublevel sets modulo gauge is the form of gauge compactness proved in \cite[Theorem 3.8 and Theorem 3.51]{CCState2023v4}, which rests on Uhlenbeck's theorem \cite{Uhlenbeck1982Connections}. We add a countable determining metric, a comparison of its Borel structure with that of the Wilson topology, and the continuity of the energy after a positive time in the form needed below.
+
+\subsection{Sobolev connections modulo gauge}
+
+\begin{definition}\label{ch26:def:sobolev-trajectory-space}
+Let $\mathcal G_L^{2,2}$ be the group of all periodic maps $\Torus\to\SU$ of class $W^{2,2}$, including all connected components, and set
+\[
+ \mathcal H_L=H^1(\Torus;\su^3)/\mathcal G_L^{2,2}.
+\]
+For $[A_n],[A]\in\mathcal H_L$ we write $[A_n]\rightharpoonup_q[A]$ if there exist representatives $B_n$ of $[A_n]$ and $B$ of $[A]$ such that $B_n\rightharpoonup B$ weakly in $H^1$. The \emph{sequential weak quotient topology} $\mathcal T_q$ on $\mathcal H_L$ is defined by declaring a set $\mathcal U$ open if every sequence $[A_n]\rightharpoonup_q[A]$ with $[A]\in\mathcal U$ eventually lies in $\mathcal U$. We write $\Flowcov^{1,2}_t$, $t\ge0$, for the Yang--Mills heat semigroup on $\mathcal H_L$ of Cao and Chatterjee \cite{CCState2023v4}; the properties of it that we use are recalled, with locators, in \cref{ch26:lem:sobolev-quotient-facts}. Let $\OrbitSpace^{1,2}$ be the set of trajectories $Z:(0,\infty)\to\mathcal H_L$ with $Z(t)=\Flowcov^{1,2}_{t-s}Z(s)$ for all $0<s<t$, with the weakest topology $\mathcal T_{1,2}$ for which every evaluation $Z\mapsto Z(t)$, $t>0$, is continuous into $(\mathcal H_L,\mathcal T_q)$. This is the point-evaluation topology of \cite[Definition 3.70, p.~41]{CCState2023v4}; it is not a topology of uniform weak $H^1$ convergence on time intervals. Finally, let $i^{1,2}:\OrbitSpace\to\OrbitSpace^{1,2}$ send a trajectory of smooth orbits to the trajectory of the Sobolev orbits containing them.
+\end{definition}
+
+For a finite energy bound $R$, we write $\Omega_R=\{[A]\in\mathcal H_L:E_L(A)\le R\}$. We also need a countable family of regularized Wilson loop functions on $\mathcal H_L$: let $\Psi_0:\mathcal H_L\to\C^{\N}$ be the map whose components are the functions $[A]\mapsto\chi(\Hol_\ell\Flowcov^{1,2}_v[A])$, where $\ell$ ranges over the countable family of loops of \cref{ch26:thm:wilson-borel-space} below, $v$ over $L^2\mathbb Q_{>0}$, and $\chi$ over the characters of the irreducible representations of $\SU$. The following facts are taken from \cite{CCState2023v4}.
+
+\begin{lemma}\label{ch26:lem:sobolev-quotient-facts}
+Let $L>0$. Then the following statements hold.
+\begin{enumerate}
+\item The group $\mathcal G_L^{2,2}$ coincides with the set of continuous maps $k:\Torus\to\SU$ with a weak derivative such that $k^{-1}dk\in H^1$, and with the set of maps $s\exp\xi$, where $s:\Torus\to\SU$ is smooth and $\xi\in H^2(\Torus;\su)$.
+\item Every $A\in H^1(\Torus;\su^3)$ has finite energy, and $\norm{F_A}_2\le C_L(\norm A_{H^1}+\norm A_{H^1}^2)$ with $C_L$ depending only on $L$.
+\item The space $(\mathcal H_L,\mathcal T_q)$ is Hausdorff, each $\Omega_R$ is closed and compact metrizable, and the map $\Psi_0$ is continuous and injective, with $\Psi_0(F\cap\Omega_R)$ compact for every closed set $F\subset\mathcal H_L$ and every $R$.
+\item For every $v\ge0$ the map $\Flowcov^{1,2}_v$ is continuous on $(\mathcal H_L,\mathcal T_q)$.
+\item Restriction to times in $L^2\mathbb Q_{>0}$ is a homeomorphism of $\OrbitSpace^{1,2}$ onto the corresponding space of compatible trajectories at these times, and the Borel $\sigma$-algebra of $(\OrbitSpace^{1,2},\mathcal T_{1,2})$ is generated by the evaluations at these times.
+\item For every $t>0$, every orbit $Z(t)$ of a trajectory $Z\in\OrbitSpace^{1,2}$ has a smooth representative, and a $W^{2,2}$ gauge transformation relating two smooth connections is smooth, so that the map $j^{1,2}:\OrbitSpace^{1,2}\to\OrbitSpace$ that replaces each orbit by its smooth representatives is well defined. This map satisfies $j^{1,2}i^{1,2}=\mathrm{Id}$ and $i^{1,2}j^{1,2}=\mathrm{Id}$, it is continuous from $\mathcal T_{1,2}$ to $\WilsonTopology$, and it preserves every function $W_{\ell,\chi,t}$.
+\item Every function $W_{\ell,\chi,t}\circ j^{1,2}$ is continuous on $(\OrbitSpace^{1,2},\mathcal T_{1,2})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+On the unit torus, (1) is \cite[Definition 3.5 and (3.2), p.~22]{CCState2023v4} (we verify the identification below), (2) is \cite[Lemma 3.7, p.~23]{CCState2023v4}, (3) is \cite[Lemma 3.49, p.~35; Definition 3.50 and Theorem 3.51, pp.~35--36]{CCState2023v4}, (4) is \cite[Lemma 3.68, p.~40]{CCState2023v4}, (5) is \cite[Definitions 3.70 and 3.74, pp.~41--42; Lemmas 3.75 and 3.78, pp.~42--44]{CCState2023v4}, (6) is \cite[Lemma 3.10, p.~24; Lemmas 3.84--3.85, pp.~47--48; Definition 3.86 and Lemmas 3.87--3.89, pp.~48--49]{CCState2023v4}, and (7) is \cite[Definition 3.82, p.~47]{CCState2023v4}. In (3) the countable family of regularized Wilson loop functions may be chosen as above, from our dense loop family, rational positive delays, and all characters. The identity $i^{1,2}j^{1,2}=\mathrm{Id}$ in (6) holds because at each time the smooth representative lies in the given Sobolev orbit. It remains to check the hypotheses of these results and to transfer them to side $L$.
+
+The bundle is trivial, the base is the periodic three-torus, and the group $\SU$ belongs to the class allowed in \cite[Section 1.1, p.~2]{CCState2023v4}. All connected components of the gauge group are included. For $y=x/L$ let $\widetilde A(y)=LA(Ly)$. Differentiating, we find
+\[
+ F_{ij}(\widetilde A)(y)=L^2F_{ij}(A)(Ly),\qquad E_1(\widetilde A)=LE_L(A),\qquad \widetilde t=t/L^2,
+\]
+where $\widetilde t$ is the time of the rescaled flow. Gauge transformations transform by composition with $y\mapsto Ly$, and inversion converts the gauge convention of \cite{CCState2023v4} into ours. All results on the unit torus therefore apply at every fixed $L$ to the spaces defined here. For $f_L(y)=f(Ly)$ we have
+\[
+ \norm{f_L}_{L^p(\mathbb T^3_1)}=L^{-3/p}\norm f_{L^p(\Torus)},\qquad
+ \norm{f_L}_{H^1(\mathbb T_1^3)}^2=L^{-3}\norm f_{L^2(\Torus)}^2+L^{-1}\norm{\nabla f}_{L^2(\Torus)}^2 .
+\]
+Applying the Sobolev inequality $\norm f_p\le C_p\norm f_{H^1}$ on the unit torus for $1\le p\le6$, with compact embedding for $p<6$ \cite[Theorem 3.3, p.~21]{CCState2023v4}, componentwise to Lie-algebra and matrix coefficients, we obtain at each fixed $L>0$
+\begin{equation}\label{ch26:eq:sobolev-rescaling}
+ \norm f_{L^p(\Torus)}\le C_p\bigl(L^{3/p-3/2}\norm f_{L^2(\Torus)}+L^{3/p-1/2}\norm{\nabla f}_{L^2(\Torus)}\bigr),\qquad 1\le p\le6,
+\end{equation}
+and the compactness for $p<6$ transfers under the same linear rescaling. Below we use $p=6$ for the gauge group and $p=4$ for the curvature. The constants depend only on $L$, $p$, and the fixed coefficient norms.
+
+We now verify (1), that is, that $\mathcal G^{2,2}_L$ is the full group used in \cite{CCState2023v4}. The description there, as the set of maps $s\exp\xi$ with $s$ smooth (ranging over all components) and $\xi\in H^2$, and as the set of continuous maps with $k^{-1}dk\in H^1$, transfers to side $L$ by composition with $y\mapsto Ly$. A periodic $H^2$ matrix function is continuous, since its Fourier series converges absolutely and uniformly by the Cauchy--Schwarz inequality and $\sum_{p\in\Z^3}(1+\abs p^2)^{-2}<\infty$. For a $W^{2,2}$ group-valued map $k$ we have $dk\in H^1\subset L^6$ by \eqref{ch26:eq:sobolev-rescaling}. The derivative of $k^{-1}dk$ consists of a bounded matrix times $d^2k\in L^2$ and products of two factors $dk$, which lie in $L^3\subset L^2$. This shows that $k^{-1}dk\in H^1$. Conversely, let $k$ be continuous with values in the compact group, with $\alpha=k^{-1}dk\in H^1$. Then $dk=k\alpha\in L^6$, the derivative of this identity consists of $dk\,\alpha\in L^3$ and $k\,d\alpha\in L^2$, and we conclude that $k\in W^{2,2}$. These product identities hold weakly, by smooth convolution and convergence in the displayed Lebesgue norms. This identifies the two groups, including all periodic components. Finally, for (2) we apply \cite[Lemma 3.7]{CCState2023v4} to $\widetilde A$; its only hypothesis is $A\in H^1$ on the unit torus. We then use the scaling of curvature and energy displayed above. The constant $C_L$ depends only on $L$ and the fixed coefficient norms.
+\end{proof}
+
+\subsection{The determining metric}
+
+The trajectory space carries the Wilson topology, which is defined by uncountably many functions. The following theorem replaces it, for measure-theoretic purposes, by a countable family.
+
+\begin{theorem}\label{ch26:thm:wilson-borel-space}
+Let $L>0$. On piecewise $C^1$ loops $\ell,\ell':[0,1]\to\Torus$ consider the metric
+\[
+ d_{\mathcal L}(\ell,\ell')=\sup_{u\in[0,1]}d_{\Torus}(\ell(u),\ell'(u))+\int_0^1\abs{\dot\ell(u)-\dot\ell'(u)}\,du .
+\]
+Fix a countable family of piecewise $C^1$ loops that is dense for $d_{\mathcal L}$ and contains loops of every winding class (such families exist; see the proof), and enumerate its product with $L^2\mathbb Q_{>0}$ as $(\ell_j,t_j)_{j\ge1}$. Set
+\[
+ w_j(X)=\tfrac12\tr\Hol_{\ell_j}X(t_j),\qquad \CoordMetric(X,Y)=\sum_{j\ge1}2^{-j}\abs{w_j(X)-w_j(Y)},\qquad X,Y\in\OrbitSpace .
+\]
+Then the following statements hold.
+\begin{enumerate}
+\item $\CoordMetric$ is a metric on $\OrbitSpace$, and $(\OrbitSpace,\CoordMetric)$ is separable.
+\item $(\OrbitSpace,\WilsonTopology)$ is separable, and the identity map from $(\OrbitSpace,\WilsonTopology)$ to $(\OrbitSpace,\CoordMetric)$ is continuous.
+\item The Borel $\sigma$-algebras satisfy
+\[
+ \mathcal B(\CoordMetric)=\sigma(w_j:j\ge1)=\mathcal B(\WilsonTopology).
+\]
+\item Two Borel probability measures on $\OrbitSpace$ under which all finite vectors $(w_1,\dots,w_b)$ have the same laws are equal. In particular, a Borel probability measure on $\OrbitSpace$ is determined by the joint laws of all finite families of the functions $W_{\ell,\chi,t}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}\label{ch26:rem:no-polish}
+We do not claim that the two topologies coincide, that $\CoordMetric$ is complete, or that $\OrbitSpace$ or $\mathcal H_L$ is a Polish space. Weak convergence on $\OrbitSpace$ is always stated in two forms: against bounded $\WilsonTopology$-continuous functions, and weakly with respect to $\CoordMetric$.
+\end{remark}
+
+We call the functions $w_j$ the determining coordinates. Each is one half of a regularized Wilson loop for the fundamental character. The proof of \cref{ch26:thm:wilson-borel-space} uses the reduction of all characters of $\SU$ to the fundamental trace. Let $P_p$ be the polynomials defined by
+\[
+ P_0(u)=1,\qquad P_1(u)=u,\qquad P_{p+1}(u)=uP_p(u)-P_{p-1}(u).
+\]
+
+\begin{lemma}\label{ch26:lem:su2-characters}
+The character of every finite-dimensional representation of $\SU$ is a finite sum of the functions $H\mapsto P_p(\tr H)$, $p\ge0$.
+\end{lemma}
+
+\begin{proof}
+This is the classical highest-weight classification; we include the short argument. If $H$ has eigenvalues $z,z^{-1}$, the recursion shows that $P_p(z+z^{-1})=z^p+z^{p-2}+\dots+z^{-p}$ for $z\ne\pm1$, and by continuity the identity also holds for $z=\pm1$. Averaging a Hermitian inner product over the Haar probability measure makes a finite-dimensional representation $\rho$ unitary. An invariant subspace then has an invariant orthogonal complement, and by induction on the dimension $\rho$ is a direct sum of irreducible representations. If $\rho$ is only continuous, convolving its matrix coefficients with a smooth bump supported near the identity gives a matrix arbitrarily close to $\Id$, and in particular an invertible one. Translating the bump on the left shows that $\rho$ multiplied by this matrix is smooth, which implies that $\rho$ is smooth. In the complexified differential of an irreducible $\rho$ we set $H=d\rho(h)$, $E=d\rho(e)$, $F=d\rho(f)$ for
+\[
+ h=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad f=\begin{pmatrix}0&0\\1&0\end{pmatrix}.
+\]
+Then $[H,E]=2E$, $[H,F]=-2F$, $[E,F]=H$, $H^*=H$, and $E^*=F$, the last two because $ih$, $e-f$, and $i(e+f)$ are anti-Hermitian. Since $\exp(2\pi ih)=\Id$, the eigenvalues of $H$ are integers. Let $n$ be the largest one and $Hv=nv$ with $v\ne0$; then $Ev=0$, and by induction, using the commutation relations, we obtain
+\[
+ EF^qv=q(n-q+1)F^{q-1}v,\qquad \norm{F^{q+1}v}^2=(q+1)(n-q)\norm{F^qv}^2 .
+\]
+The case $q=0$ shows that $n\ge0$. The vectors $v,Fv,\dots,F^nv$ are nonzero with distinct weights $n,n-2,\dots,-n$, and $F^{n+1}v=0$. Their span is invariant under $H,E,F$. It is also invariant under the group, since every element of $\SU$ is an exponential after unitary diagonalization. By irreducibility the span is the whole space, and the character on $\operatorname{diag}(z,z^{-1})$ is $P_n(z+z^{-1})$. Unitary diagonalization covers every group element.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch26:thm:wilson-borel-space}]
+The proof has six steps.
+
+\paragraph{Step 1: a dense family.}
+The continuity and separability results \cite[Lemmas 3.24--3.25 and 3.28, p.~28]{CCState2023v4} apply to every fixed smooth connection and character here. A dense countable family of loops can be chosen among polygonal loops whose lifts have vertices in $L\mathbb Q^3$ and rational subdivision parameters, with final vertex equal to the initial vertex plus $Lz$, for every $z\in\Z^3$. To see that this family is dense for $d_{\mathcal L}$, we approximate each $C^1$ piece of a loop by its polygonal interpolant and then perturb the finitely many vertices and subdivision parameters within these dense sets. The first approximation converges uniformly, with derivatives in $L^1$, by uniform continuity of the derivative on each piece; for a fixed interpolant the second does so because the velocities are constant on finitely many intervals. The final vertex is imposed using the same $Lz$. This family contains every winding class and the constant loops at rational points.
+
+\paragraph{Step 2: separation.}
+Suppose that $w_j(X)=w_j(Y)$ for all $j$. Fix $t\in L^2\mathbb Q_{>0}$. Then $\tr\Hol_\ell X(t)=\tr\Hol_\ell Y(t)$ for every loop $\ell$ of the dense family, and by the continuity of holonomies in $d_{\mathcal L}$ \cite[Lemmas 3.24--3.25]{CCState2023v4} for every piecewise $C^1$ loop. By \cref{ch26:lem:su2-characters}, all characters of $\Hol_\ell X(t)$ and $\Hol_\ell Y(t)$ agree on every piecewise $C^1$ loop. The holonomy separation theorem \cite[Lemma 1.2, p.~4]{CCState2023v4}, whose hypotheses are exactly these, implies that $X(t)=Y(t)$. For an arbitrary $t>0$, let $s\in L^2\mathbb Q_{>0}$ with $s<t$; by compatibility we have $X(t)=\Flowcov_{t-s}X(s)=\Flowcov_{t-s}Y(s)=Y(t)$. No backward uniqueness is used. Thus $\CoordMetric$ separates points.
+
+\paragraph{Step 3: metric properties.}
+Symmetry and the triangle inequality hold termwise. Since $\abs{w_j}\le1$, the tail $\sum_{j>b}2^{-j}\abs{w_j(X)-w_j(Y)}$ is at most $2^{1-b}$. This implies that convergence in $\CoordMetric$ is equivalent to convergence of every coordinate, and the coordinate map $X\mapsto(w_j(X))_{j\ge1}$ is a homeomorphism of $(\OrbitSpace,\CoordMetric)$ onto a subspace of $[-1,1]^{\N}$. The countable base of cylinder sets of the product restricts to a countable base, and choosing a point in each nonempty member, we obtain a countable dense set. The same observation shows that $\mathcal B(\CoordMetric)=\sigma(w_j:j\ge1)$. The partial sums defining $\CoordMetric$ are $\WilsonTopology$-continuous and the tails are uniformly small. Then the coordinate map is continuous from $\WilsonTopology$ into the product, and the identity from $(\OrbitSpace,\WilsonTopology)$ to $(\OrbitSpace,\CoordMetric)$ is continuous.
+
+\paragraph{Step 4: the reverse Borel inclusion.}
+Since every $w_j$ is $\WilsonTopology$-continuous, it remains to show that $\mathcal B(\WilsonTopology)\subset\sigma(w_j:j\ge1)$. We first show that the coordinates of $\Psi_0$ generate the Borel $\sigma$-algebra of $(\mathcal H_L,\mathcal T_q)$. By \cref{ch26:lem:sobolev-quotient-facts}(2), every element of $\mathcal H_L$ has finite energy, and the sets $\Omega_b$, $b\in\N$, exhaust $\mathcal H_L$. For a closed set $F\subset\mathcal H_L$ we therefore have
+\begin{equation}\label{ch26:eq:closed-energy-image}
+ \Psi_0(F)=\bigcup_{b\ge1}\Psi_0(F\cap\Omega_b).
+\end{equation}
+By \cref{ch26:lem:sobolev-quotient-facts}(3), the right side is a countable union of compact, hence closed, subsets of the Hausdorff space $\C^{\N}$, and in particular it is Borel. Since $\Psi_0$ is injective, $F=\Psi_0^{-1}(\Psi_0(F))$ lies in the $\sigma$-algebra generated by the coordinates of $\Psi_0$; the converse inclusion holds because $\Psi_0$ is continuous. This argument uses the compactness of the images $\Psi_0(F\cap\Omega_b)$; injectivity and measurability of $\Psi_0$ alone would not give measurability of its inverse.
+
+Now let $u\in L^2\mathbb Q_{>0}$ and $X\in\OrbitSpace$. Each component of $\Psi_0(i^{1,2}X(u))$ is of the form $\chi(\Hol_\ell X(u+v))$ with $\ell$ in the dense family and $v\in L^2\mathbb Q_{>0}$. By \cref{ch26:lem:su2-characters} it is a polynomial in $(\tr\Hol_\ell X(u+v))/2$, which is one of the functions $w_j$, since $u+v\in L^2\mathbb Q_{>0}$. Since the coordinates of $\Psi_0$ generate the Borel $\sigma$-algebra of $\mathcal H_L$, the map $X\mapsto i^{1,2}X(u)$ is measurable from $\sigma(w_j:j\ge1)$ into the Borel $\sigma$-algebra of $\mathcal H_L$. By \cref{ch26:lem:sobolev-quotient-facts}(5), the map $i^{1,2}$ is measurable from $\sigma(w_j:j\ge1)$ into the Borel $\sigma$-algebra of $\OrbitSpace^{1,2}$. Let $\mathcal B\in\mathcal B(\WilsonTopology)$. Since $j^{1,2}$ is continuous (\cref{ch26:lem:sobolev-quotient-facts}(6)), the set $(j^{1,2})^{-1}(\mathcal B)$ is Borel in $\OrbitSpace^{1,2}$, and since $j^{1,2}i^{1,2}=\mathrm{Id}$,
+\[
+ \mathcal B=(i^{1,2})^{-1}\bigl((j^{1,2})^{-1}(\mathcal B)\bigr)\in\sigma(w_j:j\ge1).
+\]
+This proves the Borel identity in (3).
+
+\paragraph{Step 5: separability of the Wilson topology.}
+We consider the countable set of trajectories $t\mapsto\Flowcov_t[b]$, where $b$ ranges over the trigonometric polynomial one-forms with rational coefficients. Let $X\in\OrbitSpace$, and fix a basic Wilson neighborhood of $X$ determined by finitely many functions $W_{\ell,\chi,t}$. The shifted trajectories $X_\epsilon(t)=X(t+\epsilon)$ approach $X$ in every finite list of these functions as $\epsilon\downarrow0$, since $X$ is the smooth solution started at any earlier positive time. Each $X_\epsilon$ is the trajectory started from a smooth representative of $X(\epsilon)$. Approximating this representative in $C^3$ by a rational trigonometric polynomial and using \cref{ch21:thm:continuum-atlas} on a finite horizon containing the listed times, we find a trajectory of the countable set in the given neighborhood.
+
+\paragraph{Step 6: determination of probability measures.}
+If two measures have the same finite joint laws of the $w_j$, then their image measures on $[-1,1]^{\N}$ agree on the cylinder sets. The class of sets on which the two image measures agree is a Dynkin class containing the class of cylinder sets, which is closed under intersections. By Dynkin's $\pi$--$\lambda$ theorem, it contains the $\sigma$-algebra generated by the cylinders. Pulling back and using (3), we find that the two measures agree on $\mathcal B(\WilsonTopology)$. The joint laws of finite families of the functions $W_{\ell,\chi,t}$ include those of the $w_j$, which proves the last assertion. This also verifies the hypotheses of the uniqueness statement \cite[Lemma 1.4, p.~7]{CCState2023v4}.
+\end{proof}
+
+\subsection{Compactness of energy sublevel sets}
+
+\begin{theorem}\label{ch26:thm:energy-compact-containment}
+Let $L>0$. On the Borel space of \cref{ch26:thm:wilson-borel-space}, the function $X\mapsto E_L(X(t))$ is measurable for every $t>0$, and $t\mapsto E_L(X(t))$ is nonincreasing for every $X\in\OrbitSpace$. Let $s_j=L^22^{-j}$ for $j\ge1$. For every sequence $R=(R_j)_{j\ge1}$ of finite numbers $R_j\ge0$, the set
+\[
+ \mathcal K(R)=\bigl\{X\in\OrbitSpace:E_L(X(s_j))\le R_j\text{ for all }j\ge1\bigr\}
+\]
+is compact for $\WilsonTopology$ and for $\CoordMetric$. Let $\{\lambda_\iota\}$ be a family of Borel probability measures on $\OrbitSpace$ such that
+\[
+ \lim_{R\to\infty}\sup_\iota\lambda_\iota\bigl\{E_L(X(s_j))>R\bigr\}=0\qquad\text{for every }j\ge1 .
+\]
+Then for every $\eta>0$ there exists $R$ with $\lambda_\iota(\mathcal K(R))\ge1-\eta$ for all $\iota$, and every sequence in the family has a subsequence that converges, against every bounded $\WilsonTopology$-continuous function and weakly with respect to $\CoordMetric$, to a Borel probability measure on $\OrbitSpace$. Finally, if $A$ is a smooth connection with $\norm A_{C^1}\le R$, then
+\[
+ E_L(\Flowcov_t[A])\le E_L(A)\le CL^3(R+R^2)^2\qquad(t\ge0),
+\]
+where $C$ depends only on the normalization of the Lie-algebra norm.
+\end{theorem}
+
+No moment condition on the measures $\lambda_\iota$ is needed. Subsequential compactness from energy tightness is due to Cao and Chatterjee \cite[Theorem 1.6, p.~7]{CCState2023v4}. The theorem adds the explicit compact sets $\mathcal K(R)$, which are used in \cref{ch26:sec:measurable-maps}. We say that a family of Borel probability measures on $\OrbitSpace$ has \emph{compact containment} if for every $\eta>0$ some set $\mathcal K(R)$ has mass at least $1-\eta$ under every member of the family. Since the sets $\mathcal K(R)$ are compact for both $\WilsonTopology$ and $\CoordMetric$, this is compact containment in both topologies.
+
+\begin{proof}
+For probability measures on the trajectory space with its Wilson Borel $\sigma$-algebra, the energy at each positive time is measurable and nonincreasing in time \cite[Lemma 1.5, p.~7; Lemma 4.1, p.~50]{CCState2023v4}. The hypotheses on the group, the bundle, the scaling, and the gauge group were checked in \cref{ch26:lem:sobolev-quotient-facts}, and the energy in the statement has exactly this normalization.
+
+We consider the product $\prod_{j\ge1}\Omega_{R_j}$ of subsets of $\mathcal H_L$. It is compact and metrizable, by \cref{ch26:lem:sobolev-quotient-facts}(3) and a diagonal extraction of subsequences in the factors, using a summable bounded product metric. We impose the compatibility conditions
+\begin{equation}\label{ch26:eq:closed-compatibility}
+ x_i=\Flowcov^{1,2}_{s_i-s_j}x_j\qquad(j>i).
+\end{equation}
+Each of these equations defines a closed set, since $\mathcal H_L$ is Hausdorff and $\Flowcov^{1,2}_v$ is continuous for $\mathcal T_q$ (\cref{ch26:lem:sobolev-quotient-facts}(3),(4)). The compatible subset is therefore compact. Given a compatible sequence $(x_j)$, we define $Z(t)=\Flowcov^{1,2}_{t-s_j}x_j$ for any $j$ with $s_j<t$. By \eqref{ch26:eq:closed-compatibility} and the semigroup property, $Z(t)$ does not depend on $j$, and $Z$ is compatible at all times. Fixing one $j$ with $s_j<t$ for each $t$, we see that $Z(t)$ is a continuous function of $x_j$, and therefore the map $(x_j)\mapsto Z$ is continuous into $(\OrbitSpace^{1,2},\mathcal T_{1,2})$. By \cref{ch26:lem:sobolev-quotient-facts}(6), composing with $j^{1,2}$, we obtain a continuous map into $(\OrbitSpace,\WilsonTopology)$.
+
+The image of this map is exactly $\mathcal K(R)$. To see this, let $k>j$; then $Z(s_j)=\Flowcov^{1,2}_{s_j-s_k}x_k=x_j$ by \eqref{ch26:eq:closed-compatibility}. Every $x_j$ is therefore the orbit at time $s_j$ of the trajectory, it has a smooth representative, and its energy is at most $R_j$. Conversely, the values $i^{1,2}X(s_j)$ of any $X\in\mathcal K(R)$ form such a compatible sequence. As a continuous image of a compact set, $\mathcal K(R)$ is $\WilsonTopology$-compact, and by \cref{ch26:thm:wilson-borel-space}(2) it is also $\CoordMetric$-compact. It is Borel because the energies are measurable. The argument also covers an empty compatible set and thresholds equal to zero.
+
+Let $\eta>0$, and for each $j$ fix $R_j$ such that $\sup_\iota\lambda_\iota\{E_L(X(s_j))>R_j\}\le\eta2^{-j}$. By the union bound, we have $\lambda_\iota(\mathcal K(R))\ge1-\eta$ for every $\iota$. For any $t>0$, choosing $s_j<t$ and using monotonicity, we see that the energy laws at time $t$ are also tight. The subsequence theorem \cite[Theorem 1.6, p.~7]{CCState2023v4} applies to probability measures on this Borel space with tight energy laws at each positive time, and it yields a subsequence converging against every bounded $\WilsonTopology$-continuous function. Every bounded $\CoordMetric$-continuous function is $\WilsonTopology$-continuous by \cref{ch26:thm:wilson-borel-space}(2), and the same subsequence converges weakly for $\CoordMetric$.
+
+Finally, $\abs{[X,Y]}\le\abs X\abs Y$ in our normalization, which implies that $\abs{F_{ij}(A)}\le C(R+R^2)$ if $\norm A_{C^1}\le R$. There are three pairs $i<j$ and the volume is $L^3$, which gives the bound on $E_L(A)$; the bound along the flow follows from monotonicity.
+\end{proof}
+
+\subsection{Continuity of energy after a positive time}
+
+The determining coordinates $w_j$ do not control the energy, and we do not know whether $X\mapsto E_L(X(t))$ is continuous for $\CoordMetric$ or for $\WilsonTopology$. The heat flow provides a substitute: on the Sobolev quotient, the energy after any positive time is a continuous function of the initial orbit. This property lets us identify limits of lattice energies with energies of the limiting trajectories in \cref{ch26:thm:selected-energy-loop-limit}.
+
+\begin{lemma}\label{ch26:lem:sobolev-positive-time-energy}
+Let $L>0$ and $u>0$. The function $[A]\mapsto E_L(\Flowcov^{1,2}_u[A])$ is continuous on $(\mathcal H_L,\mathcal T_q)$. Moreover, for every $t>0$ the function $Z\mapsto E_L(Z(t))$ is continuous on $(\OrbitSpace^{1,2},\mathcal T_{1,2})$. Here the energy of an orbit at a positive time is the energy of its smooth representatives, which does not depend on the representative.
+\end{lemma}
+
+The lemma does not assert that $[A]\mapsto E_L(A)$ itself is continuous on $(\mathcal H_L,\mathcal T_q)$.
+
+\begin{proof}
+We work on the unit torus first. Let $A_n\rightharpoonup A$ weakly in $H^1$, and set $R_0=\sup_n\norm{A_n}_{H^1}+\norm A_{H^1}$, which is finite. Fix $0<v<\min(u,\tau_0(R_0))$, where $\tau_0(R_0)$ is the existence time of \cite[Lemma 3.23, pp.~27--28]{CCState2023v4}. By that lemma, the local solutions $B_n$, $B$ of the gauge-fixed heat equation (in the DeTurck gauge) started at $A_n$, $A$ satisfy $B_n(v)\to B(v)$ strongly in $H^1$. These endpoints are smooth, by \cite[Proposition 3.19, pp.~26--27]{CCState2023v4}, and they represent the orbits $\Flowcov_v[A_n]$ and $\Flowcov_v[A]$, by \cite[Lemma 3.21, p.~27]{CCState2023v4}. Applying \cite[Lemma 3.15, p.~25]{CCState2023v4} to the smooth, strongly convergent initial data $B_n(v)\to B(v)$, we obtain strong $H^1$ convergence of representatives of the solutions of the covariant flow at time $u-v$, that is, of representatives of $\Flowcov_u[A_n]$ and $\Flowcov_u[A]$. The smooth-data lemma is applied only after the smoothing step, and never to the weakly convergent data $A_n$.
+
+Strong $H^1$ convergence implies convergence of the energy, by the embedding $H^1\subset L^4$:
+\[
+ \norm{F(C)-F(D)}_2\le C\bigl(1+\norm C_{H^1}+\norm D_{H^1}\bigr)\norm{C-D}_{H^1}.
+\]
+Indeed, the derivative part of $F$ is linear, and $[C_i,C_j]-[D_i,D_j]=[C_i-D_i,C_j]+[D_i,C_j-D_j]$ is bounded in $L^2$ by H\"older's inequality and the embedding. Multiplying by $\norm{F(C)}_2+\norm{F(D)}_2$, we obtain convergence of the squared norms. By gauge invariance, $E_1(\Flowcov_u[A_n])\to E_1(\Flowcov_u[A])$.
+
+If $[A_n]\rightharpoonup_q[A]$, we apply this argument to weakly convergent representatives. Since $\mathcal T_q$ is generated by exactly this sequential convergence, \cite[Lemma 3.38 and Corollary 3.39, p.~32; Lemma 3.41, p.~33]{CCState2023v4} give continuity into $\R$; we do not replace weakly convergent nets by bounded sequences. For trajectories, we fix $s\in(0,t)$ and factor the energy as $Z\mapsto Z(s)\mapsto E_1(\Flowcov^{1,2}_{t-s}Z(s))$. Finally, the rescaling $\widetilde A(y)=LA(Ly)$, $\widetilde t=t/L^2$, $E_1(\widetilde A)=LE_L(A)$ of \cref{ch26:lem:sobolev-quotient-facts} transfers every assertion to side $L$.
+\end{proof}
+
+\subsection{A countable dense family of trajectories and finite-dimensional approximation}
+
+Fix an enumeration $(b_q)_{q\ge1}$ of the real $\su$-valued trigonometric polynomial one-forms on $\Torus$ with rational coefficients in a fixed basis, with $b_1=0$, and set
+\[
+ X_q(t)=\Flowcov_t[b_q],\qquad t>0 .
+\]
+In particular, $X_1$ is the zero trajectory, $X_1(t)=[0]$ for all $t$. The trajectories $X_q$ are the candidates among which the maps $\pi_K$ of \cref{ch26:sec:measurable-maps} choose.
+
+\begin{lemma}\label{ch26:lem:energy-loop-dictionary}
+Let $X\in\OrbitSpace$, let $W_{\ell_1,\chi_1,t_1},\dots,W_{\ell_b,\chi_b,t_b}$ be finitely many Wilson loop functions, let $v_1,\dots,v_p>0$, and let $\delta>0$. Then there exists $q$ such that
+\[
+ \abs{W_{\ell_h,\chi_h,t_h}(X_q)-W_{\ell_h,\chi_h,t_h}(X)}<\delta\quad(h\le b),\qquad \abs{E_L(X_q(v_i))-E_L(X(v_i))}<\delta\quad(i\le p).
+\]
+\end{lemma}
+
+\begin{proof}
+Rational trigonometric polynomials are dense in $C^3$ in the space of smooth real one-forms. Indeed, integration by parts bounds the Fourier coefficients of a smooth form by $C_p(1+\abs k)^{-p}$, so for $p>6$ the Fourier truncations converge in $C^3$, and the finitely many real sine and cosine coefficients of a truncation can be approximated by rational numbers. Since the frequencies are $2\pi k/L$, no rationality condition on $L$ is needed.
+
+For $\eta>0$, let $c_\eta$ be a smooth representative of $X(\eta)$. By compatibility, $\Flowcov_t[c_\eta]=X(t+\eta)$ for $t>0$. Smooth forward evolution from an earlier positive time shows that the energy and the holonomies are continuous in time at each of the finitely many listed times. Then the listed values on $X(\cdot+\eta)$ converge to those on $X$ as $\eta\downarrow0$. Fix $\eta$ such that all these errors are less than $\delta/2$. By \cref{ch21:thm:continuum-atlas}, the listed energies and loops of the flow are continuous functions of the initial datum in $C^3$ on the finite horizon. Approximating $c_\eta$ in $C^3$ by some $b_q$, we make the remaining errors less than $\delta/2$. The representative $c_\eta$ is used only to prove the existence of $q$.
+\end{proof}
+
+\begin{lemma}\label{ch26:lem:compact-wilson-cylinder}
+Let $\mathcal C\subset\OrbitSpace$ be $\WilsonTopology$-compact, and let $h:\OrbitSpace\to\R$ be $\WilsonTopology$-continuous with $\abs h\le D$. For every $\delta>0$ there exist $b<\infty$ and a continuous function $G:[-1,1]^b\to[-D,D]$ such that
+\[
+ \sup_{X\in\mathcal C}\abs{h(X)-G(w_1(X),\dots,w_b(X))}<\delta .
+\]
+\end{lemma}
+
+This applies in particular to the compact sets $\mathcal K(R)$ of \cref{ch26:thm:energy-compact-containment} and to $h=f(W_{\ell_1,\chi_1,t_1},\dots,W_{\ell_m,\chi_m,t_m})$ with $f$ bounded and continuous.
+
+\begin{proof}
+If $\mathcal C$ is empty, we take $G=0$. Otherwise, by \cref{ch26:thm:wilson-borel-space}(2) the identity from $(\mathcal C,\WilsonTopology)$ to $(\mathcal C,\CoordMetric)$ is a continuous bijection from a compact space to a Hausdorff space, and it is a homeomorphism: closed subsets of the compact domain have compact, hence closed, images. Thus $h$ is uniformly continuous on $(\mathcal C,\CoordMetric)$. Let $\rho>0$ be such that $\CoordMetric(X,Y)<\rho$ with $X,Y\in\mathcal C$ implies $\abs{h(X)-h(Y)}<\delta$. Fix $b$ with $2^{1-b}<\rho/4$ and a finite $\rho/8$-net $X^1,\dots,X^l$ of $(\mathcal C,\CoordMetric)$. For $u,v\in[-1,1]^b$ and $X\in\OrbitSpace$ write
+\[
+ d_b(u,v)=\sum_{j\le b}2^{-j}\abs{u_j-v_j},\qquad p_bX=(w_j(X))_{j\le b},\qquad h_\alpha(u)=\bigl(\rho/2-d_b(u,p_bX^\alpha)\bigr)_+ ,
+\]
+and let $h_0(u)$ be the $d_b$-distance from $u$ to the compact set $p_b\mathcal C$. The function $h_0+\sum_\alpha h_\alpha$ is positive on the cube: off $p_b\mathcal C$ we have $h_0>0$, and on $p_b\mathcal C$ the net property gives some $h_\alpha>0$. We define
+\[
+ G(u)=\frac{\sum_\alpha h_\alpha(u)h(X^\alpha)}{h_0(u)+\sum_\alpha h_\alpha(u)} .
+\]
+Then $G$ is continuous and $\abs G\le D$. For $X\in\mathcal C$ we have $h_0(p_bX)=0$, and $h_\alpha(p_bX)>0$ implies $\CoordMetric(X,X^\alpha)<\rho/2+2^{1-b}<\rho$. Thus $G(p_bX)$ is a convex combination of values $h(X^\alpha)$ within $\delta$ of $h(X)$.
+\end{proof}
+
+\section{Lattice observables and deterministic estimates}\label{ch26:sec:lattice-observables}
+
+\subsection{Lattice approximations of loops}
+
+Let $\ell,\ell':[0,1]\to\Torus$ be piecewise $C^1$ loops with base points $x=\ell(0)$ and $x'=\ell'(0)$, and let $c$ be a piecewise $C^1$ path from $x$ to $x'$ (the constant path if $x=x'$). A \emph{comparison homotopy} between $\ell$ and $\ell'$ with connector $c$ is a piecewise $C^1$ map $H:[0,1]^2\to\Torus$ such that $H(\cdot,0)=\ell$, $H(\cdot,1)$ is a parametrization of the concatenation $c*\ell'*c^{-1}$, and $H(0,v)=H(1,v)=x$ for all $v\in[0,1]$. Its swept area is
+\[
+ \operatorname{Area}(H)=\int_0^1\!\!\int_0^1\abs{\partial_uH\wedge\partial_vH}\,du\,dv,
+\]
+where for $v,w\in\R^3$ we write $\abs{v\wedge w}$ for the area of the parallelogram spanned by $v$ and $w$. The swept area is counted with multiplicity: parts of the homotopy with opposite orientations do not cancel. Since transport along a concatenation is the product of the transports, $\Hol_{c*\ell'*c^{-1}}A=(\Hol_cA)(\Hol_{\ell'}A)(\Hol_cA)^{-1}$, and the characters of $\Hol_{\ell'}A$ and $\Hol_{c*\ell'*c^{-1}}A$ coincide. In this language, a sequence of closed lattice paths $(\ell_k)$, with $\ell_k$ in $\Lat{N_k}$ and $N_k\to\infty$, is an admissible approximation of $\ell$ in the sense of \cref{s2:def:approx} if the physical lengths of the $\ell_k$ are bounded and, for all sufficiently large $k$, there exists a comparison homotopy $H_k$ between $\ell$ and $\ell_k$ (with some connector) such that $\operatorname{Area}(H_k)\to0$.
+
+\begin{lemma}\label{ch26:lem:matched-grid-paths}
+Let $L>0$, let $\ell$ be a piecewise $C^1$ loop in $\Torus$, and let $a=L/N$ with an integer $N\ge4$. There exist a closed lattice path $\ell_a$ in $\Lat N$ and a comparison homotopy $H_a$ between $\ell$ and $\ell_a$, whose connector is a straight segment of length at most $\sqrt3a/2$, such that
+\begin{equation}\label{ch26:eq:constructed-path-bounds}
+ \operatorname{length}(\ell_a)\le C\bigl(\operatorname{length}(\ell)+L\bigr),\qquad \operatorname{Area}(H_a)\le Ca\bigl(\operatorname{length}(\ell)+L\bigr),
+\end{equation}
+where $C$ is an absolute constant. The path $\ell_a$ has the same winding class as $\ell$. The homotopy $H_a$ is piecewise $C^1$, and piecewise smooth if $\ell$ is polygonal. If $\ell$ is constant, then $\ell_a$ is constant and $\operatorname{Area}(H_a)=0$. The path $\ell_a$ and the homotopy $H_a$ depend only on the parametrized loop $\ell$ and on $a$.
+\end{lemma}
+
+In particular, for every sequence of sides $N_k\to\infty$ the paths $\ell_{a_{N_k}}$ form an admissible approximation of $\ell$, with swept areas $O(a_{N_k})$.
+
+\begin{proof}
+Let $x:[0,1]\to\R^3$ be the lift of $\ell$ with $x(0)\in[0,L)^3$; then $x(1)=x(0)+Lz$ for a unique $z\in\Z^3$. Set $\mathfrak l=\operatorname{length}(\ell)$. Suppose first that $\mathfrak l>0$, and set $p=\lceil\mathfrak l/a\rceil$, so that $p\le1+\mathfrak l/a$. We subdivide $\ell$ by arclength into $p$ pieces of length $\mathfrak l/p\le a$. At an interior subdivision value we take the earliest parameter with that accumulated length, and we keep the two endpoint parameters; this fixes the choice also when $x$ is stationary on some subintervals. We write $x_j$, $0\le j\le p$, for the subdivision points.
+
+We round each coordinate by the rule
+\[
+ q_j^i=a\bigl\lfloor x_j^i/a+\tfrac12\bigr\rfloor,\qquad\text{so that}\qquad \abs{q_j-x_j}\le\tfrac{\sqrt3}{2}a .
+\]
+Since $L/a=N\in\N$, this rule commutes with translations by $L\Z^3$, and therefore $q_p=q_0+Lz$. Let $\sigma_j$ be the lattice path from $q_j$ to $q_{j+1}$ that changes first the first coordinate, then the second, and then the third, each monotonically, and let $\ell_a$ be the projection of the concatenation of the $\sigma_j$ to the torus. It is closed and has the same winding class as $\ell$. Its length satisfies
+\[
+ \sum_{j=0}^{p-1}\abs{q_{j+1}-q_j}_1\le\sqrt3\sum_{j=0}^{p-1}\abs{x_{j+1}-x_j}+3pa\le(\sqrt3+3)\mathfrak l+3a,
+\]
+where we used $\abs{q_{j+1}-q_j}_1\le\sqrt3\abs{q_{j+1}-q_j}\le\sqrt3\abs{x_{j+1}-x_j}+3a$ and $pa\le\mathfrak l+a$. Since $a\le L/4$, this proves the first bound in \eqref{ch26:eq:constructed-path-bounds}, including coarse meshes.
+
+Let $\eta_j$ be the $j$th subarc of the lift, from $x_j$ to $x_{j+1}$, let $c_j=[x_j,q_j]$ be the straight segments, and let $\delta_j=c_j*\sigma_j*c_{j+1}^{-1}$, which also runs from $x_j$ to $x_{j+1}$. The curves $\eta_j$, $\sigma_j$, $c_j$, and $c_{j+1}$ lie in a ball of radius $Ca$ about $x_j$. We parametrize $\eta_j$ and $\delta_j$ on $[0,1]$, piecewise $C^1$, and consider the strip $H_j(u,v)=(1-v)\eta_j(u)+v\delta_j(u)$, whose endpoints are fixed. Since $\abs{\partial_vH_j}=\abs{\delta_j(u)-\eta_j(u)}\le Ca$, its swept area satisfies
+\[
+ \begin{split}
+ \int_0^1\!\!\int_0^1\abs{\partial_uH_j\wedge\partial_vH_j}\,du\,dv&\le Ca\int_0^1\!\!\int_0^1\bigl((1-v)\abs{\eta_j'(u)}+v\abs{\delta_j'(u)}\bigr)\,du\,dv\\
+ &\le Ca\bigl(\operatorname{length}(\eta_j)+\operatorname{length}(\delta_j)\bigr)\le Ca^2 .
+ \end{split}
+\]
+For polygonal loops we may instead triangulate these strips by coning their polygonal boundaries to $x_j$; each triangle has area at most $Ca$ times the length of its boundary edge, which gives the same bound and piecewise smooth strips. We concatenate the strips. The interior pairs $c_j^{-1}*c_j$ are removed by retracing homotopies, whose differentials have rank at most one and which therefore have zero swept area. The final connector is the initial one translated by $Lz$. After projection to the torus we obtain a comparison homotopy $H_a$ between $\ell$ and $\ell_a$ with connector $c_0$, and since swept areas add,
+\[
+ \operatorname{Area}(H_a)\le Cpa^2\le Ca(\mathfrak l+a)\le Ca(\mathfrak l+L).
+\]
+All constructions take place in the lift before projection, and they are valid across the periodic identifications and at self-intersections. For piecewise $C^1$ loops the strips are piecewise $C^1$, which suffices for the holonomy variation formula of \cref{ch26:lem:holonomy-area-estimates}. If $\mathfrak l=0$, we round $x(0)$ by the same rule and take the constant lattice loop at the rounded point; the connector followed by its inverse and the constant loop are related by a retracing homotopy of zero area. These rules involve only $\ell$ and $a$.
+\end{proof}
+
+\begin{lemma}\label{ch26:lem:holonomy-area-estimates}
+Let $L>0$ and let $A$ be a smooth connection on $\Torus$.
+\begin{enumerate}
+\item Let $H:[0,1]^2\to\Torus$ be piecewise $C^1$, with $H(0,v)$ and $H(1,v)$ independent of $v$. Then
+\[
+ \bigl\lVert\Hol_{H(\cdot,1)}A-\Hol_{H(\cdot,0)}A\bigr\rVert_{\mathrm{op}}\le C\norm{F_A}_\infty\operatorname{Area}(H),
+\]
+where $C$ is an absolute constant. In particular, if $H$ is a comparison homotopy between loops $\ell$ and $\ell'$ with connector $c$, then $\Hol_\ell A$ and $(\Hol_cA)(\Hol_{\ell'}A)(\Hol_cA)^{-1}$ differ by at most $C\norm{F_A}_\infty\operatorname{Area}(H)$ in operator norm, and for every character $\chi$ and every $A$ with $\norm A_{C^1}\le R$,
+\[
+ \abs{\chi(\Hol_\ell A)-\chi(\Hol_{\ell'}A)}\le C_\chi(R+R^2)\operatorname{Area}(H).
+\]
+\item Let $a=L/N$, and let $U^A$ be the lattice configuration $U^A_{(x,x+ae_i)}=\exp(aA_i(x))$. If $\norm A_{C^1}\le R$ and $\ell_a$ is a closed lattice path of physical length at most $\mathfrak l$, then $\norm{\Hol_{\ell_a}A-\Hol_{\ell_a}U^A}_{\mathrm{op}}\le C_R\mathfrak la$, and $\abs{\chi(\Hol_{\ell_a}A)-\chi(\Hol_{\ell_a}U^A)}\le C_{\chi,R}\mathfrak la$.
+\item Let $\ell,\ell_K:[0,1]\to\Torus$ be piecewise $C^1$ loops with $\sup_K\operatorname{length}(\ell_K)<\infty$ and $\delta_K=\sup_{u}d_{\Torus}(\ell(u),\ell_K(u))\to0$. If $\delta_K<L/2$, then $\ell_K$ has the same winding class as $\ell$, and there exists a comparison homotopy $H_K$ between $\ell$ and $\ell_K$, whose connector is the shortest segment from $\ell(0)$ to $\ell_K(0)$, such that
+\begin{equation}\label{ch26:eq:ruled-strip-area}
+ \operatorname{Area}(H_K)\le\frac{\delta_K}2\bigl(\operatorname{length}(\ell)+\operatorname{length}(\ell_K)\bigr).
+\end{equation}
+In particular, a sequence of closed lattice paths of bounded physical length that converges uniformly to $\ell$, as parametrized loops, is an admissible approximation of $\ell$.
+\end{enumerate}
+The constants $C_\chi$, $C_R$, and $C_{\chi,R}$ depend only on the indicated quantities.
+\end{lemma}
+
+\begin{proof}
+(1) We first consider a piece of $H$ on which $H$ is $C^2$, and write $B=A(H)\partial_uH$ and $\widetilde C=A(H)\partial_vH$ for the pulled-back components of the connection. Let $P$ solve $\partial_uP=PB$ with $P(0,v)=\Id$, so that $P(1,v)=\Hol_{H(\cdot,v)}A$, and set $Q=\partial_vP-P\widetilde C+\widetilde C(0,v)P$. Differentiating, we find
+\[
+ \partial_uQ=QB-P\bigl(\partial_u\widetilde C-\partial_vB+[B,\widetilde C]\bigr),\qquad Q(0,v)=0 .
+\]
+The expression in parentheses is the curvature $F_A(H)(\partial_uH,\partial_vH)$. Since $\partial_u(QP^{-1})=-PF_A(H)(\partial_uH,\partial_vH)P^{-1}$ and all transports are unitary, we obtain
+\begin{equation}\label{ch26:eq:curvature-variation}
+ \norm{Q(1,v)}_{\mathrm{op}}\le C\norm{F_A}_\infty\int_0^1\abs{\partial_uH\wedge\partial_vH}\,du .
+\end{equation}
+If $H(0,v)$ and $H(1,v)$ do not depend on $v$, then $\widetilde C(0,v)=\widetilde C(1,v)=0$, so $Q(1,v)=\partial_vP(1,v)$. Integrating \eqref{ch26:eq:curvature-variation} over $v\in[0,1]$, we obtain the first assertion. For a piece that is only $C^1$, we extend a $C^1$ lift slightly beyond its parameter rectangle by reflection, $f(-u,v)=2f(0,v)-f(u,v)$ at the boundary $u=0$ and analogously at the other sides, and mollify. The mollified maps and their first derivatives converge uniformly. By their integral form, the solutions of the transport equations then converge uniformly, and the integrands in \eqref{ch26:eq:curvature-variation} converge in $L^1$. The integrated identity and the inequality therefore pass to the $C^1$ piece. For a piecewise $C^1$ map we apply this on a finite subdivision of the parameter square into rectangles and cancel the internal transport terms, which refer to the same boundary curves. This holds irrespective of crossings and orientations. For a comparison homotopy, $H(0,v)=H(1,v)$ is the base point of $\ell$, and $H(\cdot,1)$ is the concatenation $c*\ell'*c^{-1}$. A fixed character is Lipschitz on the compact group, and $\norm{F_A}_\infty\le C(R+R^2)$ if $\norm A_{C^1}\le R$.
+
+(2) Let $P$ be the exact transport along the edge from $x$ to $x+ae_i$, that is, $P'(v)=P(v)A_i(x+ve_i)$, $P(0)=\Id$. By Duhamel's formula and unitarity,
+\[
+ \norm{P(a)-e^{aA_i(x)}}_{\mathrm{op}}\le C\int_0^a\abs{A_i(x+ve_i)-A_i(x)}\,dv\le C_Ra^2 .
+\]
+Reversed edges satisfy the same bound. A closed lattice path of physical length at most $\mathfrak l$ has at most $\mathfrak l/a$ edges, and by telescoping the product of unitary matrices we obtain the bound $C_R\mathfrak la$. The character bound follows since $\chi$ is Lipschitz on $\SU$.
+
+(3) Since $\delta_K<L/2$, the shortest displacement from $\ell(u)$ to $\ell_K(u)$ is unique and has a unique continuous lift $d_K(u)\in\R^3$ with $\abs{d_K(u)}\le\delta_K$. Let $q$ be a lift of $\ell$, and set $q_K=q+d_K$, a lift of $\ell_K$. Since $\ell(1)=\ell(0)$ and $\ell_K(1)=\ell_K(0)$, we have $d_K(1)=d_K(0)$. The two lifts therefore have the same displacement $q(1)-q(0)$ and the loops have the same winding class. The ruled homotopy $G_K(u,v)=q(u)+vd_K(u)$ descends to the torus. Differentiating piecewise, we find
+\[
+ \abs{\partial_vG_K}\le\delta_K,\qquad \partial_uG_K=(1-v)q'(u)+vq_K'(u),
+\]
+so $\operatorname{Area}(G_K)\le\delta_K\int_0^1\!\int_0^1((1-v)\abs{q'}+v\abs{q_K'})\,du\,dv$, which is the right side of \eqref{ch26:eq:ruled-strip-area}. The endpoints $G_K(0,v)=G_K(1,v)$ move along the segment $c_K(v)=q(0)+vd_K(0)$ from $\ell(0)$ to $\ell_K(0)$. The homotopy $v\mapsto c_K|_{[0,v]}*G_K(\cdot,v)*(c_K|_{[0,v]})^{-1}$, suitably parametrized, is a comparison homotopy between $\ell$ and $\ell_K$ with connector $c_K$; the added retracing parts have differentials of rank at most one and contribute no swept area. This proves \eqref{ch26:eq:ruled-strip-area}. The finitely many paths with $\delta_K\ge L/2$ may have another winding class; this does not affect convergence statements.
+\end{proof}
+
+\begin{remark}\label{ch26:rem:length-needed}
+Uniform convergence of the paths alone does not suffice for convergence of holonomies; the bound on the lengths in \cref{s2:def:approx} is needed. Consider a smooth periodic connection that agrees in a coordinate ball with $A=bx_1\tau_3\,dx_2$, where $b\notin4\pi\Z$, and the loops that traverse a square of side $\delta$ based at the origin $m_\delta=\lfloor\delta^{-2}\rfloor$ times. These loops converge uniformly to the constant loop, but their lengths $4m_\delta\delta$ tend to infinity, and their holonomies $\exp(bm_\delta\delta^2\tau_3)$ converge to $\exp(b\tau_3)\ne\Id$. Taking the sides of the squares to be integer multiples of the mesh gives the same example with lattice loops. The length and area conditions of \cref{s2:def:approx} exclude it.
+\end{remark}
+
+\subsection{Lattice loop observables}
+
+\begin{definition}\label{ch26:def:actual-loop-coordinates}
+Let $N\ge4$, let $\ell$ be a piecewise $C^1$ loop, let $\chi$ be a character of a finite-dimensional representation of $\SU$, let $t>0$, and let $\ell_N$ be a closed lattice path in $\Lat N$. Set
+\begin{equation}\label{ch26:eq:actual-loop-character}
+ W^{\mathrm{lat}}_{N,\ell,\chi,t}(U)=\chi\bigl(\Hol_{\ell_N}(\Flowlat{N}_tU)\bigr),\qquad U\in\Conf N,
+\end{equation}
+where the dependence on $\ell_N$ is suppressed. For the loops and times $(\ell_j,t_j)$ of \cref{ch26:thm:wilson-borel-space}, let $\ell_{j,a_N}$ be the lattice paths of \cref{ch26:lem:matched-grid-paths}, fixed once and for all $j$ and $N$, and set
+\begin{equation}\label{ch26:eq:actual-determining-coordinate}
+ W^{\mathrm{lat}}_{N,j}(U)=\tfrac12\tr\Hol_{\ell_{j,a_N}}\bigl(\Flowlat{N}_{t_j}U\bigr),\qquad U\in\Conf N .
+\end{equation}
+On a sequence of sides $(N_K)_K$ we write $W^{\mathrm{lat}}_{K,\ell,\chi,t}$ and $W^{\mathrm{lat}}_{K,j}$ for these functions on $\Conf{N_K}$.
+\end{definition}
+
+The paths $\ell_{j,a_N}$ depend only on the loop and the mesh, and not on the configuration, on any parameter of the renormalization group, or on the coarse comparison side used below. By \cref{ch26:lem:matched-grid-paths}, along every sequence $N_K\to\infty$ they form admissible approximations of the loops $\ell_j$, with swept areas $O(a_{N_K})$.
+
+The Wilson flow and the holonomies of closed lattice paths are continuous and covariant under lattice gauge transformations, and a character removes the conjugation at the base point. The functions \eqref{ch26:eq:actual-loop-character} and \eqref{ch26:eq:actual-determining-coordinate} are therefore continuous, in particular Borel, and invariant under all lattice gauge transformations on the whole configuration space. By unitarity, $\abs{W^{\mathrm{lat}}_{N,\ell,\chi,t}}\le\chi(\Id)$, and the functions $W^{\mathrm{lat}}_{N,j}$ are real with absolute value at most one. In particular,
+\begin{equation}\label{ch26:eq:normalized-discrepancy-bound}
+ \abs{w_j(X)-W^{\mathrm{lat}}_{N,j}(U)}\le2\qquad\text{for all }X\in\OrbitSpace,\ U\in\Conf N .
+\end{equation}
+The results of \cref{ch25:chapter} allow characters of arbitrary finite-dimensional representations, including the unnormalized fundamental character. Whenever we apply \cref{ch25:thm:selected-loop-limit,ch25:thm:original-loop-stitching} to the functions $W^{\mathrm{lat}}_{N,j}$, we apply them to the vector of fundamental characters and multiply its entries by $1/2$. This continuous linear map preserves joint convergence in law, and for complex source functionals it replaces the sources $z_i$ by $z_i/2$. The limits are the corresponding joint laws of the determining coordinates $w_j$.
+
+\subsection{The lattice energy}
+
+Recall the physical lattice energy $\mathsf E_a(U)=(8/a)\sum_{p\in\Faces N}q(U_p)$ of \eqref{s2:eq:lattice-energy}, $a=L/N$, in which each positive plaquette is counted once. In terms of the Wilson action $S_W$ of \cref{ch01:def:ensemble}, which equals $E_0$, we have $\mathsf E_a=2S_W/a$. For a lattice potential $A$ at mesh $a$ we write $e^{aA}$ for the configuration with $(e^{aA})_{(x,x+ae_i)}=\exp(aA_i(x))$, and for a smooth one-form $b$ on $\Torus$ we write $S_ab$ for its restriction to the lattice, $(S_ab)_i(x)=b_i(x)$.
+
+\begin{lemma}\label{ch26:lem:lattice-energy-supplier}
+Let $L>0$ and $a=L/N$ with $N\ge4$.
+\begin{enumerate}
+\item The function $\mathsf E_a$ is continuous on $\Conf N$, invariant under lattice gauge transformations, and nonincreasing along the Wilson flow $\Flowlat N_t=\Phi^{\mathrm W}_{4t/a^2}$.
+\item For every $R>0$ there exists $C_{L,R}<\infty$, independent of $N$, such that for lattice potentials $A$, $B$ at mesh $a$ with $\norm A_{C_a^1},\norm B_{C_a^1}\le R$,
+\[
+ \abs{\mathsf E_a(e^{aA})-\mathsf E_a(e^{aB})}\le C_{L,R}\norm{A-B}_{C_a^1},\qquad 0\le\mathsf E_a(e^{aA})\le C_{L,R}.
+\]
+\item For every smooth periodic one-form $b$ we have $\mathsf E_a(e^{aS_ab})\to E_L(b)$ as $a\to0$. More precisely, if $\norm b_{C^2}\le R$ and $a$ is sufficiently small, then $\abs{\mathsf E_a(e^{aS_ab})-E_L(b)}\le C_{L,R}a$.
+\item Let $\mathcal E_a(U)=(4/a)\sum_{p\in\Faces N}q(U_p)$ be the normalization used in \cref{ch21:chapter}. Then $\mathsf E_a=2\mathcal E_a$ on $\Conf N$.
+\end{enumerate}
+\end{lemma}
+
+The factor $8/a$ is chosen so that the limit in (3) is the energy $E_L$ of \eqref{s2:eq:energy}, without a factor $1/2$; the exponent in \eqref{s2:eq:wilson} equals $\mathsf E_{a_N}/(2g_3^2)$. The point of (2) is that the Lipschitz constant does not depend on the mesh: a plaquette logarithm is $O(a^2)$, so a plaquette energy and its variation are $O(a^4)$, which compensates the factor $a^{-1}$ and the $3(L/a)^3$ plaquettes.
+
+\begin{proof}
+(1) Continuity follows from the finite products and the trace. A lattice gauge transformation conjugates each plaquette matrix, which leaves $q(U_p)$ unchanged. Since $\mathsf E_a$ is a positive multiple of the Wilson action, it is nonincreasing along the negative gradient flow $\Phi^{\mathrm W}$, and the positive change of time $s=4t/a^2$ does not affect this.
+
+(2) We consider one plaquette $p_{ij}(x)$ and set
+\[
+ v=\bigl(aA_i(x),\,aA_j(x+ae_i),\,-aA_i(x+ae_j),\,-aA_j(x)\bigr).
+\]
+For $aR$ small, the expansion of the logarithm of a product of four exponentials in \cref{ch21:lem:wilson-local-algebra} reads
+\[
+ f_A=\Log U_{p_{ij}(x)}=\sum_{k=1}^4v_k+\frac12\sum_{k<l}[v_k,v_l]+\mathcal R(v),\qquad \abs{\mathcal R(v)}\le C\abs v^3,\quad \norm{D\mathcal R(v)}\le C\abs v^2 .
+\]
+The bound on $D\mathcal R$ follows from Taylor's integral formula for the analytic logarithm of a word of fixed length: the remainder has vanishing Taylor coefficients up to order two, and its third derivative is bounded on a smaller fixed chart. The linear sum equals $a^2(D_i^+A_j-D_j^+A_i)(x)$. If we freeze the shifted entries at $x$, the quadratic sum equals $a^2[A_i(x),A_j(x)]$, and changing one entry back costs at most $C_Ra^3$. We conclude that
+\begin{equation}\label{ch26:eq:physical-plaquette-expansion}
+ a^{-2}f_A=D_i^+A_j-D_j^+A_i+[A_i,A_j]+O_R(a),\qquad \abs{f_A}\le C_Ra^2 .
+\end{equation}
+Let $\delta=\norm{A-B}_{C_a^1}$. By the exact cancellation in the linear term, we have $\abs{\sum v(A)-\sum v(B)}\le Ca^2\delta$, the difference of the quadratic terms is at most $C_Ra^2\delta$, and the difference of the remainders is at most $C_Ra^3\delta$. Thus $\abs{f_A-f_B}\le C_Ra^2\delta$. By \eqref{ch01:eq:haar-coordinates}, $q(e^f)=\abs f^2/8+O(\abs f^4)$, and the differential of $f\mapsto q(e^f)$ has norm at most $C\abs f$ on this chart. Hence the plaquette energies differ by at most $C_Ra^4\delta$. There are $3(L/a)^3$ positive plaquettes, and multiplication by $8/a$ gives the bound $24L^3C_R\delta$, with no remaining power of the mesh. This proves the Lipschitz bound for $a\le a_0(L,R)$. Meshes $a>a_0$ correspond to finitely many sides $N<L/a_0$; for them, the differential of the unitary exponential and telescoping give the plaquette bound $Ca\norm{A-B}_\infty$, which yields a Lipschitz constant $24CN^3\le24C(L/a_0)^3$. We enlarge $C_{L,R}$ to cover these meshes. Since $\mathsf E_a(\Id)=0$, taking $B=0$, we obtain $\mathsf E_a(e^{aA})\le C_{L,R}R$, and we absorb $R$ into the constant. Nonnegativity follows from $q\ge0$ on $\SU$.
+
+(3) For $A=S_ab$, forward differences differ from derivatives by $O_R(a)$ on the ball $\norm b_{C^2}\le R$. By \eqref{ch26:eq:physical-plaquette-expansion} and the expansion of $q$,
+\[
+ \mathsf E_a(e^{aS_ab})=a^3\sum_{x\in\Lat N}\sum_{i<j}\abs{F_{ij}(b)(x)}^2+O_{L,R}(a).
+\]
+Since the summand has bounded first derivatives on this ball, replacing the Riemann sum by the integral costs a further $O_{L,R}(a)$. Finally, since $\abs X^2=-2\tr X^2$ and $F_{ji}=-F_{ij}$, we have $\sum_{i,j}-\tr F_{ij}^2=\sum_{i<j}\abs{F_{ij}}^2$, and the limit is exactly $E_L(b)$.
+
+(4) This is immediate from the definitions.
+\end{proof}
+
+\subsection{Stability along the Wilson flow}
+
+We recall the setting of \cref{ch21:chapter,ch22:chapter}. Fix $1/2<\alpha<2/3$ and a horizon $T_0>0$. For a lattice potential $A_0$ at mesh $a$, its linear and quadratic flow data are $x(t)=\Heat ta A_0$ and $y=\Duhamel a(x,x)$. We measure them by the flow-data norm $\Xnorm\alpha a(x)+\Ynorm\alpha a(y)$, with the norms of \cref{ch01:def:enhancement} on $[0,T_0]$, including all physical first differences and shifts. For two potentials $A_0$, $A_0'$ in the same gauge, with flow data $(x,y)$ and $(x',y')$, we write
+\[
+ d_a=\Xnorm\alpha a(x-x')+\Ynorm\alpha a(y-y').
+\]
+On the smaller link coordinate domain used in \cref{ch21:lem:wilson-local-algebra}, the Wilson flow has damped representatives: they are obtained by a time-dependent lattice gauge transformation and solve the gauge-fixed lattice equation of that lemma, whose linear part is the lattice heat equation. A finite reference family for a smooth solution of the Yang--Mills heat flow on a time interval $[s,T]$ consists of a finite partition of $[s,T]$, smooth solutions of the DeTurck equation on the subintervals, and fixed smooth gauge transformations at the partition times, as provided by \cref{ch21:thm:continuum-atlas}. Each of these DeTurck solutions is a reference solution.
+
+The first lemma transfers a small error at a positive time $s$ to all later times up to a fixed horizon. It follows directly from the comparison with a fixed smooth reference in \cref{ch22:lem:physical-volterra}.
+
+\begin{lemma}\label{ch26:lem:continuation-from-handoff}
+Let $0<s<T$, and let $b$ be a smooth solution of the Yang--Mills heat flow on $[s,T]$ with a finite reference family, consisting of DeTurck solutions $b^{(i)}$ on intervals $I_i$. For lattice meshes $a\to0$, let $V_a$ be configurations with representatives $V_a=e^{aA_a(s)}$ such that
+\[
+ e_a=\norm{A_a(s)-S_ab(s)}_\infty+\norm{D_aA_a(s)-S_a\partial b(s)}_\infty\longrightarrow0,
+\]
+where $D_a$ and $\partial$ denote all first differences and the corresponding derivatives. Then for all sufficiently small $a$, the Wilson flow $t\mapsto\Flowlat{N}_{t-s}V_a$, $t\in[s,T]$, has representatives $A_a^{(i)}$ solving that gauge-fixed lattice equation on the intervals $I_i$, in the gauges of the reference family, such that
+\[
+ \max_i\sup_{t\in I_i}\norm{A_a^{(i)}(t)-S_ab^{(i)}(t)}_{C_a^1}\le C(e_a+a).
+\]
+The constant $C$ and the smallness threshold depend only on $L$, the horizon $T-s$, the smooth bounds of the reference family, its gauge transformations, and its chart margins. They do not depend on the mesh, the coupling, or any probability measure, and the convergence $e_a\to0$ may be arbitrarily slow.
+\end{lemma}
+
+\begin{proof}
+We translate the initial time to zero, so that the horizon is $T-s$. By Taylor's formula in our difference conventions, $\norm{D_aS_ab(s)-S_a\partial b(s)}_\infty\le Ca\norm{b(s)}_{C^2}$, so
+\[
+ \eta_a=\norm{A_a(s)-S_ab(s)}_{C_a^1}\le e_a+Ca\norm{b(s)}_{C^2}.
+\]
+Every reference solution of the family is smooth on its closed space-time domain, and in particular its spatial derivatives up to order five are bounded. The finitely many reference solutions and fixed smooth gauge transformations have common bounds, which are part of the data of the reference family and not bounds on higher derivatives of nearby lattice fields. The fixed-reference and finite-family parts of \cref{ch22:lem:physical-volterra} choose the constants and the thresholds for the mesh and the initial error from these bounds, before the incoming error is made small. At the $i$th partition time, using \eqref{ch22:eq:reference-C1-stability} together with the change of gauge, we obtain a recursion
+\[
+ \eta_{i+1}\le G_iC_i(\eta_i+a)+d_ia
+\]
+for the error $\eta_i$ at the start of the $i$th interval, with finitely many constants $G_i,C_i,d_i$ depending only on the reference family. Iterating it finitely many times, and taking the minimum of the resulting thresholds, we obtain
+\[
+ \max_i\sup_{t\in I_i}\norm{A_a^{(i)}(t)-S_ab^{(i)}(t)}_{C_a^1}\le C(\eta_a+a)\le C'(e_a+a).
+\]
+The same lemma keeps the representatives inside the coordinate domain of \cref{ch21:lem:wilson-local-algebra}, with the required positive distance from its boundary. It also identifies the solution of the gauge-fixed lattice equation on each interval with the Wilson flow, whose time normalization $4t/a^2$ is that of \cref{ch21:lem:wilson-local-algebra}. Since $e_a\to0$ and $a\to0$, the thresholds are eventually satisfied.
+\end{proof}
+
+\begin{theorem}\label{ch26:thm:bounded-input-energy-loop-stability}
+Fix $L,T_0,R>0$, $1/2<\alpha<2/3$, $0<\tau\le T<\infty$, and $u$ as in \cref{ch22:lem:bounded-input-continuation}, together with finitely many characters $\chi_1,\dots,\chi_b$ and lengths $\mathfrak l_1,\dots,\mathfrak l_b>0$. There exist $a_*>0$ and $C<\infty$, depending only on these data, with the following property. Let $a=L/N\le a_*$, and let $U$, $U'$ be the configurations of two lattice potentials at mesh $a$ in the same gauge, whose flow data have norms at most $R$ on $[0,T_0]$ and discrepancy $d_a$. Then
+\begin{equation}\label{ch26:eq:bounded-input-energy-loop-stability}
+ \sup_{\tau\le t\le T}\Bigl(\bigl\lvert\mathsf E_a(\Flowlat N_tU)-\mathsf E_a(\Flowlat N_tU')\bigr\rvert+\sum_{i=1}^b\bigl\lvert\chi_i(\Hol_{\ell_{i,a}}\Flowlat N_tU)-\chi_i(\Hol_{\ell_{i,a}}\Flowlat N_tU')\bigr\rvert\Bigr)\le Cd_a
+\end{equation}
+for all closed lattice paths $\ell_{i,a}$ in $\Lat N$ of physical length at most $\mathfrak l_i$, and
+\[
+ \sup_{\tau\le t\le T}\mathsf E_a(\Flowlat N_tU)\le C .
+\]
+\end{theorem}
+
+The constants do not depend on the coupling, on any probability measure, or on the number of averaging steps. The estimate requires no convergence of the configurations as $a\to0$, no condition on swept areas, and no bound on higher derivatives, and it has no additive error term in the mesh. This allows us to apply it to finite-scale reconstructions with a growing number of scales.
+
+\begin{proof}
+Let $\delta$, $K$ be the constants of \cref{ch22:lem:bounded-input-continuation}. Suppose first that $d_a\le\delta$. By that lemma, the two Wilson flows have damped representatives $B$, $B'$, solving the gauge-fixed lattice equation on the intervals of a common reference family. They satisfy the individual bounds $\norm{B(t)}_{C_a^1},\norm{B'(t)}_{C_a^1}\le K$ and the difference bound $\norm{B(t)-B'(t)}_{C_a^1}\le Cd_a$. By gauge invariance and \cref{ch26:lem:lattice-energy-supplier}(2), the energies differ by at most $C_{L,K}Cd_a$, and each energy is bounded on every interval. Explicitly, a plaquette logarithm is $O_K(a^2)$, the difference of two of them is $O_K(a^2\norm{B-B'}_{C_a^1})$, and, since the differential of $f\mapsto q(e^f)$ is $O(\abs f)$, the difference of two plaquette energies is $O_K(a^4\norm{B-B'}_{C_a^1})$. The normalization cancels as
+\[
+ \frac8a\cdot3\Bigl(\frac La\Bigr)^3C_Ka^4\norm{B-B'}_{C_a^1}=24L^3C_K\norm{B-B'}_{C_a^1}.
+\]
+This is the energy $\mathsf E_a$, not $\mathcal E_a$. For the loops we apply \cref{ch22:cor:bounded-input-trace-stability} at each $t\in[\tau,T]$; its constant is uniform over the times in $[\tau,T]$ and over all paths within the length bounds.  The observables are continuous in $t$, which joins the finitely many intervals. If $d_a>\delta$, we use the individual energy bound and $\abs{\chi_i}\le\chi_i(\Id)$: the left side of \eqref{ch26:eq:bounded-input-energy-loop-stability} is at most $2C+2\sum_i\chi_i(\Id)\le(2C+2\sum_i\chi_i(\Id))d_a/\delta$, and we enlarge $C$ accordingly. All constants were fixed before the two configurations were chosen.
+\end{proof}
+
+The last deterministic statement concerns a fixed compact family of smooth fields: the cardinal interpolants, in the sense of \cref{ch13:lem:cardinal-columns}, of arrays on a fixed coarse mesh. Here the constants may depend on all derivatives of the family, unlike those of \cref{ch26:thm:bounded-input-energy-loop-stability}.
+
+\begin{lemma}\label{ch26:lem:fixed-prefix-energy-paths}
+Fix a coarse mesh $h>0$, a bound $M_h<\infty$, a finite horizon, and the cardinal basis, and let $f$ range over the cardinal interpolants of arrays on the lattice of mesh $h$ with supremum at most $M_h$, as in \cref{ch25:lem:fixed-smooth-prefix}. Let $0<\tau<T<\infty$, and let $\ell_1,\dots,\ell_b$ be loops with characters $\chi_1,\dots,\chi_b$ and time-independent admissible approximations $(\ell_{i,a})$, with comparison homotopies of swept area $\mathcal A_{i,a}\to0$. Then, as $a\to0$ along meshes compatible with $h$, the paths
+\[
+ t\mapsto\Bigl(\mathsf E_a\bigl(\Flowlat N_te^{af|_a}\bigr),\ \bigl(\chi_i(\Hol_{\ell_{i,a}}\Flowlat N_te^{af|_a})\bigr)_{i\le b}\Bigr),\qquad t\in[\tau,T],
+\]
+converge uniformly in $t\in[\tau,T]$, and uniformly over the family, to the paths $t\mapsto(E_L(\Flowcov_t[f]),(\chi_i(\Hol_{\ell_i}\Flowcov_t[f]))_{i\le b})$. More precisely, the uniform distance between these paths is at most
+\begin{equation}\label{ch26:eq:fixed-prefix-energy-loop-consistency}
+ C_{h,M_h,\tau,T,\mathscr W}\bigl(a+\max_i\mathcal A_{i,a}\bigr),
+\end{equation}
+where $\mathscr W$ denotes the list of loops, characters, and lengths. The limit map from arrays to $C([\tau,T];\R\times\C^b)$ is continuous.
+\end{lemma}
+
+\begin{proof}
+We use the finite reference families and the consistency of the lattice flow with the sampled smooth flow in the proof of \cref{ch25:lem:fixed-smooth-prefix}. On each reference interval the $C_a^1$ distance between the damped representative and the sampled reference solution tends to zero uniformly over the family. The Lipschitz bound and the consistency for smooth samples in \cref{ch26:lem:lattice-energy-supplier} bound the error in the energy by $C\norm{A_a-S_ab}_{C_a^1}+Ca$. The reference bounds are uniform over this compact family and its finitely many reference families. The error in the loops is at most $C(a+\mathcal A_{i,a})$, by \cref{ch26:lem:holonomy-area-estimates}(1),(2) (as in the proof of \cref{ch25:lem:fixed-smooth-prefix}), plus the propagated error in the potential. All these bounds are uniform in time, which gives \eqref{ch26:eq:fixed-prefix-energy-loop-consistency}. The continuity of the limit map follows from the smooth dependence of the flow on its initial datum and the continuity of the energy in $C^1$.
+\end{proof}
+
+\section{Joint convergence under the conditioned measures}\label{ch26:sec:conditioned}
+
+\paragraph{Standing assumptions.}
+In \cref{ch26:sec:conditioned,ch26:sec:measurable-maps,ch26:sec:unconditioning} we fix $L>0$ and an odd integer $M\ge3$, together with the integer $J$, the remaining parameters $\Theta$ of the small-field event, and the coupling bound $\gamma_0\in(0,1]$ of \cref{ch20:thm:common-parameters}, for which \cref{ch20:thm:literal-payment} holds. We fix $\gamma\in(0,\gamma_0]$ and $n_*\in4\N$, and set $B=M^J$, $N_K=n_*B^K$, $a_K=L/N_K$, and $n_r=n_*B^r$. For $0\le r\le K$ let
+\[
+ \nu_{K\mid r}=\nu_{N_K,n_r,\gamma}=\mu_{N_K,\gamma}\bigl(\,\cdot\mid S_{N_K,n_r,\gamma}\bigr),\qquad e_{K\mid r}=\mu_{N_K,\gamma}\bigl(S_{N_K,n_r,\gamma}^c\bigr)
+\]
+be the conditioned Wilson measure with coarse side $n_r$ and the corresponding small-field failure probability. Let $\mathcal R$ be the set of indices $r$ for which \cref{ch25:thm:finite-mesh-prefix-control}, and hence \cref{ch25:thm:selected-loop-limit,ch25:thm:original-loop-stitching}, apply at the coarse side $n_r$; this set is infinite. By \cref{ch20:thm:literal-payment}, as recorded in \cref{ch25:thm:original-loop-stitching}, for $r\in\mathcal R$ we have
+\begin{equation}\label{ch26:eq:failure-bound}
+ e_{K\mid r}\le\epsilon_K+F_\gamma(n_r),\qquad \epsilon_K\to0\ (K\to\infty),\qquad F_\gamma(n_r)\to0\ (r\to\infty),
+\end{equation}
+and one may take $\epsilon_K=0$ and $F_\gamma(u)=C'u^3e^{-\bar cu/\gamma}+C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}}$.
+
+The conditioning is removed by the following elementary identity. If $e_{K\mid r}<1$, then $\mu_{N_K,\gamma}=(1-e_{K\mid r})\nu_{K\mid r}+e_{K\mid r}\rho_{K\mid r}$ with $\rho_{K\mid r}=\mu_{N_K,\gamma}(\,\cdot\mid S^c_{N_K,n_r,\gamma})$ (any probability measure if $e_{K\mid r}=0$). In particular,
+\begin{equation}\label{ch26:eq:tail-transfer}
+ \mu_{N_K,\gamma}(\mathcal B)\le\nu_{K\mid r}(\mathcal B)+e_{K\mid r}\qquad\text{for every Borel event }\mathcal B,
+\end{equation}
+and $\abs{\E_{\mu_{N_K,\gamma}}F-\E_{\nu_{K\mid r}}F}\le De_{K\mid r}$ for every measurable $F$ with $0\le F\le D$, and $\le2e_{K\mid r}\norm F_\infty$ for every bounded complex measurable $F$ (\cref{ch02:lem:bounded-transfer}). We always use these bounds in the following order: first $K\to\infty$ at a fixed $r\in\mathcal R$, and then $r\to\infty$ in $\mathcal R$.
+
+\paragraph{Finite-scale reconstructions.}
+Fix $r\in\mathcal R$ and write $n=n_r$ and $\nu_K=\nu_{nB^K,n,\gamma}$, so that $\nu_K=\nu_{K+r\mid r}$. We recall the following objects from \cref{ch25:thm:finite-mesh-prefix-control}, with input horizon $T_0=L^2$; they are all defined on the probability space $(\Conf{nB^K},\nu_K)$. Backward reconstruction of $U$ with the reconstruction maps of \cref{ch12:thm:replacement-family} gives arrays $A_j$, $0\le j\le K$, on the lattices of mesh $a_j=(L/n)B^{-j}$, and the configuration $e^{a_KA_K}$ is a gauge representative of $U$. For $0\le q\le K$, the finite-scale reconstruction from the first $q$ renormalization group steps from the coarse side is the fine configuration $U_K^{[q]}=\exp(a_KI_{a_q\to a_K}A_q)$, where $I_{a_q\to a_K}$ is the cardinal interpolation of \cref{ch13:lem:cardinal-columns}. Its flow data at mesh $a_K$ are $x_q=\Heat\cdot{a_K}I_{a_q\to a_K}A_q$ and $y_q=\Duhamel{a_K}(x_q,x_q)$, and those of $U$ are $x_K$, $y_K$. We set
+\[
+ \begin{gathered}
+ \mathsf R_K=\Xnorm\alpha{a_K}(x_K)+\Ynorm\alpha{a_K}(y_K),\qquad \rho(R)=\sup_{K\ge0}\nu_K\{\mathsf R_K>R\},\\
+ D_{K,q}=\Xnorm\alpha{a_K}(x_K-x_q)+\Ynorm\alpha{a_K}(y_K-y_q).
+ \end{gathered}
+\]
+By \cref{ch25:thm:finite-mesh-prefix-control}, we have $\rho(R)\to0$ as $R\to\infty$ and
+\begin{equation}\label{ch26:eq:finite-scale-tail}
+ \lim_{q\to\infty}\sup_{K\ge q}\nu_K\{D_{K,q}>\eta\}=0\qquad\text{for every }\eta>0 .
+\end{equation}
+For each fixed $q$, there exists a compact set $\mathcal C_q$ of arrays, independent of $K\ge q$, that supports the law of $A_q$ under every $\nu_K$. These laws converge weakly as $K\to\infty$ to a law supported on $\mathcal C_q$ (\cref{ch12:thm:representative-prefixes}). Let $f_q$ be the cardinal interpolant of $A_q$ on the torus, a one-form, and let $\lambda_q=\lambda_{r,q}$ be the law of the trajectory $t\mapsto\Flowcov_t[f_q]$ when $A_q$ has this limiting law.
+
+\begin{theorem}\label{ch26:thm:selected-energy-loop-limit}
+Assume the standing assumptions, and let $r\in\mathcal R$. There exists a Borel probability measure $\lambda_r$ on $\OrbitSpace$, written $\lambda_{r,\gamma}$ when the coupling is displayed, with the following properties.
+\begin{enumerate}
+\item As $q\to\infty$, every finite vector of energies $E_L(X(v))$, $v>0$, and functions $W_{\ell,\chi,t}$ under $X\sim\lambda_q$ converges in law to the same vector under $X\sim\lambda_r$, and $(i^{1,2})_\#\lambda_q\to(i^{1,2})_\#\lambda_r$ against bounded $\mathcal T_{1,2}$-continuous functions.
+\item Let $v_1,\dots,v_p>0$. For $h\le b$ let $\ell_h$ be loops with admissible approximations $(\ell_{h,K})_K$ along $(N_K)_K$, let $\chi_h$ be characters, let $t_h>0$, and write $W^{\mathrm{lat}}_{K,h}=\chi_h(\Hol_{\ell_{h,K}}\Flowlat{N_K}_{t_h}U)$. Then, under $\nu_{K\mid r}$, as $K\to\infty$,
+\[
+ \Bigl(\bigl(\mathsf E_{a_K}(\Flowlat{N_K}_{v_i}U)\bigr)_{i\le p},\bigl(W^{\mathrm{lat}}_{K,h}\bigr)_{h\le b}\Bigr)\Longrightarrow\Bigl(\bigl(E_L(X(v_i))\bigr)_{i\le p},\bigl(W_{\ell_h,\chi_h,t_h}(X)\bigr)_{h\le b}\Bigr),
+\]
+where $X\sim\lambda_r$.
+\item Suppose that the paths $\ell_{h,K}$ do not depend on the time, and let $0<\tau<T<\infty$. Then, under $\nu_{K\mid r}$, the processes
+\[
+ t\mapsto\Bigl(\mathsf E_{a_K}(\Flowlat{N_K}_tU),\bigl(\chi_h(\Hol_{\ell_{h,K}}\Flowlat{N_K}_tU)\bigr)_{h\le b}\Bigr),\qquad t\in[\tau,T],
+\]
+converge in law in $C([\tau,T];\R\times\C^b)$ to $t\mapsto(E_L(X(t)),(W_{\ell_h,\chi_h,t}(X))_{h\le b})$ with $X\sim\lambda_r$. If $(\ell'_{h,K})_K$ are other time-independent admissible approximations of the same loops, then
+\[
+ \lim_{K\to\infty}\E_{\nu_{K\mid r}}\sup_{\tau\le t\le T}\max_{h\le b}\bigl\lvert\chi_h(\Hol_{\ell_{h,K}}\Flowlat{N_K}_tU)-\chi_h(\Hol_{\ell'_{h,K}}\Flowlat{N_K}_tU)\bigr\rvert=0 .
+\]
+\item For admissible approximations with swept areas $O(a_K)$, in particular those of \cref{ch26:def:actual-loop-coordinates}, the limit laws of the loop vectors in (2) are those of \cref{ch25:thm:selected-loop-limit}.
+\item For every $t>0$,
+\[
+ \lim_{A\to\infty}\sup_{K\ge r}\nu_{K\mid r}\bigl\{\mathsf E_{a_K}(\Flowlat{N_K}_tU)>A\bigr\}=0,\qquad \lim_{A\to\infty}\sup_{K\ge0}\mu_{N_K,\gamma}\bigl\{\mathsf E_{a_K}(\Flowlat{N_K}_tU)>A\bigr\}=0 .
+\]
+\end{enumerate}
+\end{theorem}
+
+All convergence moduli are at the fixed coupling $\gamma$ and, for the conditioned measures, at the fixed index $r$.
+
+\begin{proof}
+We fix $r\in\mathcal R$ and use the reindexed measures $\nu_K$ and the notation introduced above; the statements for $\nu_{K\mid r}$ follow by the shift $K\mapsto K+r$. We first construct the laws $\lambda_q$ and show that the lattice observables of $U$ are close in law to those of the finite-scale reconstructions, whose limits are continuum observables under $\lambda_q$; this produces joint limits of the lattice observables. We then prove that the energies under $\lambda_q$ are tight, extract a limit $\lambda_r$ using the compactness theorem of Cao and Chatterjee for Sobolev trajectories, identify $\lambda_r$ by its Wilson loops, and use the continuity of energies after a positive time (\cref{ch26:lem:sobolev-positive-time-energy}) to identify the joint limits of energies and loops.
+
+\paragraph{Step 1: the laws $\lambda_q$.}
+The map from arrays $A_q$ to the initial datum $f_q$ is linear and continuous in every smooth norm, and by \cref{ch21:thm:continuum-atlas} the smooth flow depends continuously on its initial datum on every finite horizon. Hence every determining coordinate $w_j$ of the trajectory $t\mapsto\Flowcov_t[f_q]$ is a continuous function of the array. Since the Borel $\sigma$-algebra of $\OrbitSpace$ is generated by the $w_j$ (\cref{ch26:thm:wilson-borel-space}), the map from arrays to trajectories is measurable, and $\lambda_q$ is a Borel probability measure on $\OrbitSpace$. Its image $(i^{1,2})_\#\lambda_q$ is a Borel probability measure on $\OrbitSpace^{1,2}$, by Step 4 of the proof of \cref{ch26:thm:wilson-borel-space}.
+
+\paragraph{Step 2: approximation by finite-scale reconstructions.}
+Fix a finite list as in (2), respectively a time-independent list and an interval $[\tau,T]$ as in (3). Let $Z_K$ be the corresponding finite vector, respectively path, of observables of $U$, with values in the complete separable metric space $E=\R^p\times\C^b$, respectively $E=C([\tau,T];\R\times\C^b)$, which we equip with the bounded metric $d=\min(2,\norm{\cdot}_\infty)$. Let $Z_K^{[q]}$ be the same observables of the finite-scale reconstruction $U_K^{[q]}$, on the same probability space $(\Conf{nB^K},\nu_K)$. Since $e^{a_KA_K}$ is a gauge representative of $U$ and the observables are gauge invariant, $Z_K$ is the observable of the conditioned configuration itself, not merely a random variable with the same law.
+
+On the event $\{\mathsf R_K\le R,\ D_{K,q}\le\eta\}$ with $\eta\le1$, both flow data have norm at most $R+1$, and the two potentials are in the same gauge. By \cref{ch26:thm:bounded-input-energy-loop-stability} at radius $R+1$, applied on an interval containing all times of the list, we have $d(Z_K,Z_K^{[q]})\le C_R\eta$ whenever $a_K\le a_*(R+1)$. We conclude that, for every test function $\phi$ on $E$ bounded by one and with Lipschitz constant at most one,
+\begin{equation}\label{ch26:eq:joint-observable-prefix-BL-bound}
+ \bigl\lvert\E_{\nu_K}\phi(Z_K)-\E_{\nu_K}\phi(Z_K^{[q]})\bigr\rvert\le C_R\eta+2\rho(R)+2\nu_K\{D_{K,q}>\eta\}
+\end{equation}
+for all $K$ with $a_K\le a_*(R+1)$. This threshold does not depend on $q$. By \eqref{ch26:eq:finite-scale-tail}, the right side of \eqref{ch26:eq:joint-observable-prefix-BL-bound} tends to zero, uniformly in $K\ge q$, if we choose first $R$ large, then $\eta$ small, and then $q$ large, as in the proof of \cref{ch25:thm:selected-loop-limit}.
+
+Fix $q$, and let $G$ be the map that sends a trajectory to the continuum energies and Wilson loops of the list. By \cref{ch26:lem:fixed-prefix-energy-paths}, applied with the coarse mesh $a_q$ and the compact set $\mathcal C_q$, the observables of $U_K^{[q]}$ converge as $K\to\infty$, uniformly for $A_q\in\mathcal C_q$, to the continuous function $A_q\mapsto G(t\mapsto\Flowcov_t[f_q])$. Combining this with the weak convergence of the laws of $A_q$, which are all supported on $\mathcal C_q$, we obtain $Z_K^{[q]}\Rightarrow G_\#\lambda_q$. The observable maps converge uniformly on $\mathcal C_q$ to a continuous map, and each fixed-$K$ map is continuous on $\mathcal C_q$. By uniform convergence, compactness of $\mathcal C_q$, and completeness of $E$, the union of their images has compact closure, and so does the union of the supports of the laws of $Z_K^{[q]}$, $K\ge q$. Each $Z_K$ has compact support, since the compact configuration space is mapped continuously into $E$ by the finite-dimensional Wilson flow. By \cref{ch25:lem:probability-approximation}, a version of the converging-together principle \cite[Theorem 3.2]{Billingsley1999} that also constructs the limit, the laws of $Z_K$ converge to a probability measure $\rho_G$ on $E$. Letting $K\to\infty$ at fixed $q$ in \eqref{ch26:eq:joint-observable-prefix-BL-bound}, we find that $G_\#\lambda_q\to\rho_G$ as $q\to\infty$. The argument applies to every finite list, and in particular to the union of any two lists. The limits are therefore consistent under unions and projections, and we never combine separately obtained marginal limits.
+
+\paragraph{Step 3: tightness of the energies under $\lambda_q$.}
+Let $t>0$ and $\varepsilon>0$. Fix $R$ with $\rho(R)<\varepsilon$. By \eqref{ch26:eq:finite-scale-tail}, for all sufficiently large $q$ we have $\sup_{K\ge q}\nu_K\{D_{K,q}>1\}<\varepsilon$, and we may also assume $a_q\le a_*(R+1)$, so that $a_K\le a_*(R+1)$ for all $K\ge q$. On the event $\{\mathsf R_K\le R,\ D_{K,q}\le1\}$ the flow data of $U_K^{[q]}$ have norm at most $R+1$, and by the individual bound in \cref{ch26:thm:bounded-input-energy-loop-stability} we have $\mathsf E_{a_K}(\Flowlat{nB^K}_tU_K^{[q]})\le C_{R,t}$ for a deterministic $C_{R,t}$. Let $\phi$ be continuous, with $\phi=0$ on $(-\infty,C_{R,t}]$, $\phi=1$ on $[C_{R,t}+1,\infty)$, and $0\le\phi\le1$. Then $\E_{\nu_K}\phi(\mathsf E_{a_K}(\Flowlat{nB^K}_tU^{[q]}_K))\le2\varepsilon$ for $K\ge q$. Letting $K\to\infty$, by \cref{ch26:lem:fixed-prefix-energy-paths} and the convergence of the law of $A_q$, we obtain
+\[
+ \lambda_q\bigl\{E_L(X(t))>C_{R,t}+1\bigr\}\le\E_{\lambda_q}\phi\bigl(E_L(X(t))\bigr)\le2\varepsilon .
+\]
+The finitely many smaller $q$ have laws supported on compact sets of smooth initial data, and their energies at time $t$ are bounded. We conclude that the energies at time $t$ are tight under $\{\lambda_q\}_{q\ge0}$, for every $t>0$.
+
+\paragraph{Step 4: the limit $\lambda_r$.}
+The compactness theorem for Sobolev trajectories \cite[Theorem 3.73, pp.~41--42]{CCState2023v4} applies to Borel $\OrbitSpace^{1,2}$-valued random variables whose energy laws at each positive time are tight, which we have just verified for $(i^{1,2})_\#\lambda_q$. For fixed $L$ we use the rescaling of \cref{ch26:lem:sobolev-quotient-facts}. We obtain a subsequence along which $(i^{1,2})_\#\lambda_q$ converges, against bounded $\mathcal T_{1,2}$-continuous functions, to a Borel probability measure $\eta$ on $\OrbitSpace^{1,2}$. We set $\lambda_r=(j^{1,2})_\#\eta$, a Borel probability measure on $\OrbitSpace$. By \cref{ch26:lem:sobolev-quotient-facts}(6),(7), $j^{1,2}$ preserves the functions $W_{\ell,\chi,t}$, and these are continuous on $\OrbitSpace^{1,2}$. Hence the finite joint laws of the functions $W_{\ell,\chi,t}$ under $\lambda_r$ are the limits of those under $\lambda_q$ along the subsequence. By Step 2, these are the marginals of the limits $\rho_G$, so they do not depend on the subsequence. By \cref{ch26:thm:wilson-borel-space}(4), $\lambda_r$ does not depend on the subsequence. Since $i^{1,2}j^{1,2}=\mathrm{Id}$, we have $\eta=(i^{1,2})_\#\lambda_r$, so the limit $\eta$ is unique. The whole sequence $(i^{1,2})_\#\lambda_q$ therefore converges to $(i^{1,2})_\#\lambda_r$: otherwise a subsequence would stay away from it, and a further subsequence would converge to $(i^{1,2})_\#\lambda_r$, a contradiction.
+
+\paragraph{Step 5: identification of the energies.}
+By \cref{ch26:lem:sobolev-positive-time-energy}, for every $v>0$ the function $Z\mapsto E_L(Z(v))$ is continuous on $(\OrbitSpace^{1,2},\mathcal T_{1,2})$; one factors the evaluation at time $v$ through an earlier time $s\in(0,v)$. The functions $W_{\ell,\chi,t}\circ j^{1,2}$ are continuous as well. Applying bounded continuous functions to the whole vector, we see from Step 4 that every finite vector of energies and Wilson loops under $\lambda_q$ converges in law to the same vector under $\lambda_r$. This proves (1). By Step 2 applied to finite vectors, the same vectors under $\lambda_q$ converge to the limit law $\rho_G$ of the lattice observables. We conclude that $\rho_G$ is the law of the continuum vector under $\lambda_r$, which proves (2). This step uses the continuity of the energy after a positive time; measurability of the energy, or convergence of the energy marginals separately, would not suffice.
+
+\paragraph{Step 6: paths and comparison of approximations.}
+In the setting of (3), the limit $\rho_G$ is a probability measure on continuous paths, and by Step 5 its finite-dimensional distributions at rational times coincide with those of $G_\#\lambda_r$. Evaluations at rational times generate the Borel $\sigma$-algebra of $C([\tau,T];\R\times\C^b)$ and determine probability measures on it, and the continuum path map $G$ is Borel for the same reason. This implies that $\rho_G=G_\#\lambda_r$. For two time-independent admissible approximations, we apply this to the union of the two lists. In the limit, the corresponding loop paths coincide. The supremum over $[\tau,T]$ of their maximal difference is a continuous function of the joint path, bounded by $2\max_h\chi_h(\Id)$. It converges in law to zero, and since it is bounded, its expectation tends to zero. This proves (3).
+
+For approximations with swept areas $O(a_K)$ and lists consisting only of loops, Step 2 is the argument of \cref{ch25:thm:selected-loop-limit}, and both limits are the limits as $q\to\infty$ of the laws $G_\#\lambda_q$; this proves (4).
+
+\paragraph{Step 7: tails of the lattice energies.}
+The tails under the conditioned measures follow from the tightness of $\mathsf R_K$ and the individual energy bound of \cref{ch26:thm:bounded-input-energy-loop-stability}, applied with $U'=U$. The finitely many meshes above the threshold $a_*$ are covered by the deterministic bound $\mathsf E_a(U)\le(8/a)\cdot3N^3\cdot2=48N^3/a$, since $0\le q\le2$. For the Wilson measures we use \eqref{ch26:eq:tail-transfer} and \eqref{ch26:eq:failure-bound}:
+\[
+ \mu_{N_K,\gamma}\bigl\{\mathsf E_{a_K}(\Flowlat{N_K}_tU)>A\bigr\}\le\nu_{K\mid r}\bigl\{\mathsf E_{a_K}(\Flowlat{N_K}_tU)>A\bigr\}+\epsilon_K+F_\gamma(n_r).
+\]
+We take the limit superior as $K\to\infty$, then let $A\to\infty$ at fixed $r$, and finally let $r\to\infty$ in $\mathcal R$. This shows that $\lim_{A\to\infty}\limsup_{K\to\infty}\mu_{N_K,\gamma}\{\mathsf E_{a_K}(\Flowlat{N_K}_tU)>A\}=0$. The finitely many remaining sides $N_K$ have the deterministic bound $48N_K^3/a_K$, which proves (5).
+\end{proof}
+
+\section{Measurable approximation by smooth trajectories}\label{ch26:sec:measurable-maps}
+
+We now construct Borel maps $\pi_K$ that approximate the lattice Wilson loop coordinates by smooth trajectories, subject to one-sided energy bounds. The maps choose from the countable family of trajectories $X_q$ of \cref{ch26:lem:energy-loop-dictionary}, so no measurable choice of gauges is needed. The energy bounds transfer the tightness of the lattice energies to the trajectories $\pi_K(U)$. The map $\pi_K$ is an auxiliary measurable approximation, not a canonical continuum interpolation of a lattice configuration.
+
+\begin{theorem}\label{ch26:thm:energy-constrained-matching}
+Assume the standing assumptions of \cref{ch26:sec:conditioned}. Let $(X_q)_{q\ge1}$ be the trajectories of \cref{ch26:lem:energy-loop-dictionary}, let $w_j$ and $W^{\mathrm{lat}}_{K,j}$ be as in \cref{ch26:thm:wilson-borel-space,ch26:def:actual-loop-coordinates}, and set $s_i=L^22^{-i}$ and $\varepsilon_m=2^{-m}$. For $m\ge1$, $K\ge0$, and $U\in\Conf{N_K}$, we say that $q$ satisfies the level-$m$ conditions at $U$ if
+\begin{equation}\label{ch26:eq:energy-constrained-feasibility}
+ \begin{aligned}
+ \abs{w_j(X_q)-W^{\mathrm{lat}}_{K,j}(U)}&<\varepsilon_m &&(j\le m),\\
+ E_L(X_q(s_i))&<\mathsf E_{a_K}(\Flowlat{N_K}_{s_i}U)+\varepsilon_m &&(i\le m).
+ \end{aligned}
+\end{equation}
+Let $\pi_{K,m}(U)=X_q$ for the least $q$ satisfying the level-$m$ conditions at $U$, let $\pi_{K,m}(U)=X_1$, the zero trajectory, if there is no such $q$, and let $\pi_{K,0}=X_1$. Then the following statements hold.
+\begin{enumerate}
+\item Each map $\pi_{K,m}:\Conf{N_K}\to\OrbitSpace$ is Borel and invariant under all lattice gauge transformations.
+\item For each fixed $m\ge1$, the probability that no $q$ satisfies the level-$m$ conditions tends to zero as $K\to\infty$, both under $\nu_{K\mid r}$ for every $r\in\mathcal R$ and under $\mu_{N_K,\gamma}$.
+\item There exists a nondecreasing sequence of integers $m(K)\to\infty$, depending only on the data fixed in the standing assumptions and not on $U$, such that the maps $\pi_K=\pi_{K,m(K)}$ satisfy, for every $r\in\mathcal R$, every $j\ge1$, and every $t>0$,
+\[
+ \lim_{K\to\infty}\E_{\nu_{K\mid r}}\abs{w_j(\pi_K(U))-W^{\mathrm{lat}}_{K,j}(U)}=0,\qquad \lim_{R\to\infty}\sup_{K\ge r}\nu_{K\mid r}\bigl\{E_L(\pi_K(U)(t))>R\bigr\}=0,
+\]
+and such that the image measures $(\pi_K)_\#\nu_{K\mid r}$ converge to $\lambda_r$ against every bounded $\WilsonTopology$-continuous function and weakly with respect to $\CoordMetric$.
+\item Let $\mathscr W$ be a finite list of loops with admissible approximations, characters, and positive times as in \cref{ch26:thm:selected-energy-loop-limit}(2), with lattice vector $\mathscr W^{\mathrm{lat}}_K(U)$ and continuum vector $\mathscr W(X)$. Then for every bounded continuous function $f$ of this vector and every $r\in\mathcal R$,
+\[
+ \lim_{K\to\infty}\E_{\nu_{K\mid r}}\bigl\lvert f(\mathscr W(\pi_K(U)))-f(\mathscr W^{\mathrm{lat}}_K(U))\bigr\rvert=0 .
+\]
+\end{enumerate}
+\end{theorem}
+
+The sequence $m(K)$ may depend on $L$, $\gamma$, $M$, $J$, $\Theta$, $n_*$, the enumeration $(b_q)$, the loops and times $(\ell_j,t_j)$, and the convergence moduli in (2) for the countably many indices $r\in\mathcal R$. The maps $\pi_K$ do not depend on the index $r$ that is later used to study their laws.
+
+\begin{proof}
+We prove (1) directly from the definition, (2) from the joint convergence of \cref{ch26:thm:selected-energy-loop-limit} and an open-set argument, and then choose $m(K)$ by a diagonal argument. The energy constraint gives the tails in (3), the compactness of energy sublevel sets and the determining property of the $w_j$ identify the limits, and an approximation by functions of finitely many coordinates gives (4).
+
+\paragraph{Step 1: measurability and invariance.}
+Each condition in \eqref{ch26:eq:energy-constrained-feasibility} is a strict inequality between continuous gauge-invariant functions of $U$. Then the set $F_{K,m,q}$ of configurations at which $q$ satisfies the level-$m$ conditions is open, in particular Borel, and invariant under lattice gauge transformations. The event that $q$ is the least such index is $F_{K,m,q}\setminus\bigcup_{q'<q}F_{K,m,q'}$, and the event that no index satisfies the conditions is the complement of $\mathcal S_{K,m}=\bigcup_qF_{K,m,q}$. For a Borel set $\mathcal B\subset\OrbitSpace$, the preimage $\pi_{K,m}^{-1}(\mathcal B)$ is the countable union of the events that $q$ is the least index, over those $q$ with $X_q\in\mathcal B$, together with the failure event if $X_1\in\mathcal B$. This proves that $\pi_{K,m}$ is Borel. Gauge invariance holds event by event.
+
+\paragraph{Step 2: success at a fixed level.}
+Fix $m\ge1$. Let $\mathcal O_m\subset\R^{2m}$ be the union over $q$ of the sets
+\[
+ \bigl\{(u,v)\in\R^m\times\R^m:\ \abs{w_j(X_q)-u_j}<\varepsilon_m,\ E_L(X_q(s_i))<v_i+\varepsilon_m\ (i,j\le m)\bigr\}.
+\]
+It is open, and by \cref{ch26:lem:energy-loop-dictionary} it contains the vector $((w_j(X))_{j\le m},(E_L(X(s_i)))_{i\le m})$ for every $X\in\OrbitSpace$. By \cref{ch26:thm:selected-energy-loop-limit}(2), applied to the joint vector of the first $m$ lattice coordinates and the lattice energies at the times $s_1,\dots,s_m$, and by the portmanteau theorem for open sets \cite[Theorem 2.1]{Billingsley1999},
+\[
+ \liminf_{K\to\infty}\nu_{K\mid r}(\mathcal S_{K,m})\ge\lambda_r\bigl\{\bigl((w_j(X))_{j\le m},(E_L(X(s_i)))_{i\le m}\bigr)\in\mathcal O_m\bigr\}=1 .
+\]
+This uses the joint convergence of energies and loops on the same configuration. By \eqref{ch26:eq:tail-transfer} and \eqref{ch26:eq:failure-bound},
+\[
+ \limsup_{K\to\infty}\mu_{N_K,\gamma}(\mathcal S_{K,m}^c)\le F_\gamma(n_r),
+\]
+and letting $r\to\infty$ in $\mathcal R$, we obtain (2) for the Wilson measures.
+
+\paragraph{Step 3: the choice of $m(K)$ and the coordinates.}
+We enumerate $\mathcal R$ as $r(1),r(2),\dots$. We choose strictly increasing integers $K_m\ge\max\{m,r(1),\dots,r(m)\}$ such that for every $K\ge K_m$ the probability of $\mathcal S_{K,m}^c$ is at most $2^{-m}$, under $\mu_{N_K,\gamma}$ and under each of $\nu_{K\mid r(1)},\dots,\nu_{K\mid r(m)}$. This is possible by Step 2, since each $K_m$ involves only finitely many requirements. We set $m(K)=\max\{m:K_m\le K\}$, and $m(K)=0$ if this set is empty. This is a single deterministic definition along the sequence $N_K$. Fix $j\ge1$ and $r=r(l)\in\mathcal R$. For all sufficiently large $K$ we have $m(K)\ge\max(j,l)$, and then, both under $\nu_{K\mid r}$ and under $\mu_{N_K,\gamma}$,
+\begin{equation}\label{ch26:eq:matching-coordinate-error}
+ \E\abs{w_j(\pi_K(U))-W^{\mathrm{lat}}_{K,j}(U)}\le2^{-m(K)}+2\,\Prob(\mathcal S_{K,m(K)}^c)\le3\cdot2^{-m(K)} .
+\end{equation}
+Here we used the conditions \eqref{ch26:eq:energy-constrained-feasibility} with $j\le m(K)$ on the event $\mathcal S_{K,m(K)}$, and \eqref{ch26:eq:normalized-discrepancy-bound} on its complement.
+
+\paragraph{Step 4: energies.}
+Let $i\le m(K)$. On the event $\mathcal S_{K,m(K)}$ the energy condition in \eqref{ch26:eq:energy-constrained-feasibility} holds, and on its complement the zero trajectory has energy zero. We conclude that for every configuration $U\in\Conf{N_K}$,
+\begin{equation}\label{ch26:eq:matching-energy-domination}
+ E_L(\pi_K(U)(s_i))\le\mathsf E_{a_K}(\Flowlat{N_K}_{s_i}U)+2^{-m(K)}\qquad(i\le m(K)).
+\end{equation}
+Fix $i$. By \cref{ch26:thm:selected-energy-loop-limit}(5), the lattice energies at time $s_i$ have tails that are uniform in $K\ge r$ under $\nu_{K\mid r}$ and uniform in $K\ge0$ under $\mu_{N_K,\gamma}$. By \eqref{ch26:eq:matching-energy-domination} the same holds for $E_L(\pi_K(U)(s_i))$ for all $K$ with $m(K)\ge i$. For each of the finitely many other $K$, every output $\pi_K(U)$ is one of the smooth trajectories $X_q$. Then $E_L(\pi_K(U)(s_i))$ is a finite measurable function of $U$, and its tail probabilities tend to zero by continuity from above of the measure. Combining the two cases, we find that for every $i$ the energies $E_L(\pi_K(U)(s_i))$ have tails that are uniform in $K\ge r$ under $\nu_{K\mid r}$ and uniform in $K\ge0$ under $\mu_{N_K,\gamma}$. For an arbitrary $t>0$ we choose $s_i\le t$ and use the monotonicity of the continuum energy. This proves the tail bound in (3).
+
+\paragraph{Step 5: convergence of the image measures.}
+Fix $r\in\mathcal R$. By Step 4 and \cref{ch26:thm:energy-compact-containment}, the image measures $(\pi_K)_\#\nu_{K\mid r}$ have compact containment, and every subsequence has a further subsequence converging against bounded $\WilsonTopology$-continuous functions and weakly for $\CoordMetric$. By \cref{ch26:thm:selected-energy-loop-limit}(2), the finite vectors $(W^{\mathrm{lat}}_{K,j})_{j\le b}$ converge in law under $\nu_{K\mid r}$ to $(w_j)_{j\le b}$ under $\lambda_r$. By \eqref{ch26:eq:matching-coordinate-error}, Markov's inequality, and uniform continuity of bounded continuous functions on the cube $[-1,1]^b$, the vectors $(w_j(\pi_K(U)))_{j\le b}$ have the same limit laws. Then every subsequential limit of the image measures has the same finite joint laws of the $w_j$ as $\lambda_r$, and by \cref{ch26:thm:wilson-borel-space}(4) it equals $\lambda_r$. Since every subsequence has a further subsequence with this limit, every bounded $\WilsonTopology$-continuous function converges along the whole sequence. A bounded $\CoordMetric$-continuous function is $\WilsonTopology$-continuous, which gives the weak convergence for $\CoordMetric$. This completes the proof of (3).
+
+\paragraph{Step 6: additional lists.}
+We now prove (4); the argument uses only compact sets and does not require the functions $W_{\ell,\chi,t}$ of the list to be $\CoordMetric$-continuous. It suffices to treat real $f$; for complex $f$ we apply the result to the real and imaginary parts. Let $h(X)=f(\mathscr W(X))$ and $D=\norm f_\infty$; only the values of $f$ on the compact range of the character vector matter. Let $\eta>0$. By Step 4, \cref{ch26:thm:energy-compact-containment}, and the finiteness of the energies under $\lambda_r$, there exists a compact set $\mathcal C=\mathcal K(R)$ with mass at least $1-\eta$ under every image measure $(\pi_K)_\#\nu_{K\mid r}$ and under $\lambda_r$. Let $\delta>0$. By \cref{ch26:lem:compact-wilson-cylinder} there exist $b$ and a continuous $G:[-1,1]^b\to[-D,D]$ with $\abs{h-G\circ p_b}<\delta$ on $\mathcal C$, where $p_bX=(w_j(X))_{j\le b}$. Then
+\[
+ \E_{\nu_{K\mid r}}\abs{h(\pi_K(U))-G(p_b\pi_K(U))}\le\delta+2D\eta .
+\]
+By (3) and the uniform continuity of $G$, $\E_{\nu_{K\mid r}}\abs{G(p_b\pi_K(U))-G((W^{\mathrm{lat}}_{K,j}(U))_{j\le b})}\to0$. Next we apply \cref{ch26:thm:selected-energy-loop-limit}(2) to the single joint list consisting of the first $b$ coordinates and the whole list $\mathscr W$. Its limit is the corresponding vector under $\lambda_r$, and applying the bounded continuous function $\abs{G(u)-f(v)}$ to the joint vector, we obtain
+\[
+ \lim_{K\to\infty}\E_{\nu_{K\mid r}}\bigl\lvert G\bigl((W^{\mathrm{lat}}_{K,j}(U))_{j\le b}\bigr)-f(\mathscr W^{\mathrm{lat}}_K(U))\bigr\rvert=\E_{\lambda_r}\abs{G(p_bX)-h(X)}\le\delta+2D\eta .
+\]
+By the triangle inequality, the limit superior in (4) is at most $2\delta+4D\eta$, and we let $\delta,\eta\to0$.
+\end{proof}
+
+\section{Removal of the conditioning}\label{ch26:sec:unconditioning}
+
+\begin{theorem}\label{ch26:thm:orbit-limit}
+Assume the standing assumptions of \cref{ch26:sec:conditioned}, and let $\pi_K$ be the maps of \cref{ch26:thm:energy-constrained-matching}. Then the following statements hold.
+\begin{enumerate}
+\item For every $t>0$,
+\[
+ \lim_{R\to\infty}\sup_{K\ge0}\mu_{N_K,\gamma}\bigl\{E_L(\pi_K(U)(t))>R\bigr\}=0 .
+\]
+\item The image measures $(\pi_K)_\#\mu_{N_K,\gamma}$ have compact containment, and they converge, against every bounded $\WilsonTopology$-continuous function and weakly with respect to $\CoordMetric$, to a Borel probability measure $\OrbitLaw$ on $\OrbitSpace$.
+\item For every $j\ge1$, $\lim_{K\to\infty}\E_{\mu_{N_K,\gamma}}\abs{w_j(\pi_K(U))-W^{\mathrm{lat}}_{K,j}(U)}=0$.
+\item For every finite list $\mathscr W$ as in \cref{ch26:thm:energy-constrained-matching}(4) and every bounded continuous function $f$ of its vector,
+\[
+ \begin{gathered}
+ \lim_{K\to\infty}\E_{\mu_{N_K,\gamma}}f\bigl(\mathscr W^{\mathrm{lat}}_K(U)\bigr)=\int f(\mathscr W(X))\,d\OrbitLaw(X),\\
+ \lim_{K\to\infty}\E_{\mu_{N_K,\gamma}}\bigl\lvert f(\mathscr W(\pi_K(U)))-f(\mathscr W^{\mathrm{lat}}_K(U))\bigr\rvert=0 .
+ \end{gathered}
+\]
+\end{enumerate}
+\end{theorem}
+
+All statements concern the whole sequence $N_K=n_*B^K$ at the fixed coupling $\gamma$, and the convergence moduli and $m(K)$ may depend on $\gamma$ and on this sequence.
+
+\begin{proof}
+Statement (1) and the bound \eqref{ch26:eq:matching-coordinate-error} under $\mu_{N_K,\gamma}$, which gives (3), were proved in Steps 3 and 4 of the proof of \cref{ch26:thm:energy-constrained-matching}. By (1) and \cref{ch26:thm:energy-compact-containment}, the image measures have compact containment, and every subsequence has a further subsequence converging against bounded $\WilsonTopology$-continuous functions and weakly for $\CoordMetric$. By \cref{ch25:thm:original-loop-stitching}, applied to the fundamental characters and multiplied by $1/2$, every finite vector $(W^{\mathrm{lat}}_{K,j})_{j\le b}$ converges in law under $\mu_{N_K,\gamma}$ along the whole sequence. By (3), every subsequential limit of the image measures has these limits as the finite joint laws of the $w_j$, and by \cref{ch26:thm:wilson-borel-space}(4) all subsequential limits coincide. Applying the compactness to a subsequence that stays away from this common limit gives a contradiction, which proves (2).
+
+Fix a finite list $\mathscr W$ and a bounded continuous $f$. By \cref{ch26:thm:energy-constrained-matching}(4), the nonnegative discrepancy
+\[
+ D_K=\bigl\lvert f(\mathscr W(\pi_K(U)))-f(\mathscr W^{\mathrm{lat}}_K(U))\bigr\rvert\le2\norm f_\infty
+\]
+satisfies $\E_{\nu_{K\mid r}}D_K\to0$ for every $r\in\mathcal R$. By \cref{ch02:lem:bounded-transfer} and \eqref{ch26:eq:failure-bound}, for every $r\in\mathcal R$,
+\[
+ \limsup_{K\to\infty}\E_{\mu_{N_K,\gamma}}D_K\le2\norm f_\infty F_\gamma(n_r),
+\]
+and letting $r\to\infty$ shows that the expected absolute discrepancy tends to zero. Since $f\circ\mathscr W$ is bounded and $\WilsonTopology$-continuous, by (2) we have $\E_{\mu_{N_K,\gamma}}f(\mathscr W(\pi_K(U)))\to\int f(\mathscr W(X))\,d\OrbitLaw(X)$, and the first assertion of (4) follows. This argument covers every finite list of loops with admissible approximations, since \cref{ch26:thm:selected-energy-loop-limit} and \cref{ch26:thm:energy-constrained-matching}(4) apply to such lists; no comparison of paths under the Wilson measures is needed.
+\end{proof}
+
+\section{Couplings below a fixed bound}\label{ch26:sec:coupling-bound}
+
+\Cref{ch26:sec:conditioned,ch26:sec:measurable-maps,ch26:sec:unconditioning} use the parameters of \cref{ch20:thm:common-parameters}, which are adapted to small couplings $\gamma\le\gamma_0$. For an arbitrary fixed coupling we use instead the parameters of \cref{ch20:thm:finite-ceiling-parameters}, which are chosen for all couplings below a given bound $\Gamma$. In this subsection we check that the construction carries over, and we collect the statements about general admissible approximations of loops.
+
+\paragraph{The setting below a coupling bound.}
+Fix $0<\Gamma<\infty$, $L>0$, and an odd integer $M\ge3$. Let $J$, the parameters $\Theta$, and the minimum coarse side $n_\Gamma\in4\N$ be as in \cref{ch20:thm:finite-ceiling-parameters}; they are chosen before the coupling, and \cref{ch20:thm:finite-ceiling-payment} holds for all $\gamma\in(0,\Gamma]$, $u\in4\N$ with $u\ge n_\Gamma$, and $K\ge0$. Fix $\gamma\in(0,\Gamma]$ and $n_*\in4\N$, and define $B$, $N_K$, $a_K$, $n_r$, $\nu_{K\mid r}$, and $e_{K\mid r}$ as in the standing assumptions of \cref{ch26:sec:conditioned}. Let $\mathcal R$ be an infinite set of indices $r$ for which \cref{ch25:lem:finite-ceiling-selected-chain} applies at the coarse side $n_r$. By \cref{ch20:thm:finite-ceiling-payment}, the bound \eqref{ch26:eq:failure-bound} holds for $r\in\mathcal R$, with $\epsilon_K=0$ and $F_\gamma(u)$ equal to the right side of \eqref{ch20:eq:finite-ceiling-absorbed}. We refer to these assumptions as the setting below the coupling bound $\Gamma$.
+
+\begin{theorem}\label{ch26:thm:finite-ceiling-matching}
+Assume the setting below the coupling bound $\Gamma$. Then all conclusions of \cref{ch26:thm:selected-energy-loop-limit,ch26:thm:energy-constrained-matching,ch26:thm:orbit-limit} hold in this setting, with the same lattice energy $\mathsf E_a$, the same trajectories $X_q$, the same level-$m$ conditions, and the zero trajectory when no index satisfies them. In particular, there exist Borel maps $\pi_K:\Conf{N_K}\to\OrbitSpace$, invariant under all lattice gauge transformations and independent of $r$, and Borel probability measures $\lambda_r$, $r\in\mathcal R$, and $\OrbitLaw$ on $\OrbitSpace$, with the following properties.
+\begin{enumerate}
+\item For every $r\in\mathcal R$, the joint limits of lattice energies and loops under $\nu_{K\mid r}$ in \cref{ch26:thm:selected-energy-loop-limit}(2),(3) are the laws of the corresponding continuum vectors under $\lambda_r$, and the image measures $(\pi_K)_\#\nu_{K\mid r}$ converge to $\lambda_r$, with tight energies at positive times and $L^1$ convergence of the coordinates $w_j(\pi_K(U))-W^{\mathrm{lat}}_{K,j}(U)\to0$.
+\item Under $\mu_{N_K,\gamma}$, the image measures $(\pi_K)_\#\mu_{N_K,\gamma}$ converge to $\OrbitLaw$, the energies of $\pi_K(U)$ at every positive time have tails that are uniform in $K\ge0$, the coordinates converge in $L^1$, and every finite list of loops with admissible approximations, characters, and positive times converges in law to its continuum vector under $\OrbitLaw$.
+\end{enumerate}
+\end{theorem}
+
+These are statements at each fixed coupling; the success probabilities at a fixed level and the sequence $m(K)$ may depend on $\gamma$.
+
+\begin{proof}
+We fix $\gamma$ after $J$, $\Theta$, and $n_\Gamma$, and we go through the proofs of the three theorems. The results of \cref{ch26:sec:trajectory-space,ch26:sec:lattice-observables} do not involve the coupling.
+
+The proof of \cref{ch26:thm:selected-energy-loop-limit} used the following stochastic inputs: the reconstruction arrays, the gauge representative property, the tightness $\rho(R)\to0$, the tail bound \eqref{ch26:eq:finite-scale-tail}, and the convergence of the laws of the arrays $A_q$, all from \cref{ch25:thm:finite-mesh-prefix-control}; the argument of \cref{ch25:thm:selected-loop-limit}; and \cref{ch25:lem:fixed-smooth-prefix}. In the present setting, \cref{ch25:lem:finite-ceiling-selected-chain} provides all of them, for the same conditional fluctuation kernels, reconstruction maps, and configurations, with constants depending on the fixed coupling. Steps 1--6 of that proof therefore apply without change and construct the measures $\lambda_r$ with properties (1)--(4) of \cref{ch26:thm:selected-energy-loop-limit}. Step 7 used \cref{ch20:thm:literal-payment} only through \eqref{ch26:eq:failure-bound}, which holds here by \cref{ch20:thm:finite-ceiling-payment}; property (5) therefore holds as well.
+
+In the proof of \cref{ch26:thm:energy-constrained-matching}, Step 1 involves neither the coupling nor a measure. In Step 2, the set $\mathcal O_m$ is defined by the trajectories $X_q$, which do not depend on $\gamma$. It contains the vector of every trajectory, and in particular of $\lambda_r$-almost every one. By the joint convergence just established, we have $\nu_{K\mid r}(\mathcal S^c_{K,m})\to0$ for every fixed $m$ and $r\in\mathcal R$, and \eqref{ch26:eq:tail-transfer} with \eqref{ch26:eq:failure-bound} implies that $\limsup_K\mu_{N_K,\gamma}(\mathcal S^c_{K,m})\le F_\gamma(n_r)$, which tends to zero as $r\to\infty$. The choice of $K_m$ and $m(K)$ in Step 3 is the same; it may now depend on the fixed coupling, and \eqref{ch26:eq:matching-coordinate-error} holds under $\nu_{K\mid r}$ and under $\mu_{N_K,\gamma}$. The bound \eqref{ch26:eq:matching-energy-domination} holds on every configuration. Step 4 then gives the energy tails under both measures, using property (5) for the lattice energies and the finiteness of the energies of the finitely many other outputs. Steps 5 and 6 use only these facts and the measures $\lambda_r$ constructed above.
+
+In the proof of \cref{ch26:thm:orbit-limit}, compact containment follows from the energy tails. The whole-sequence limits of the finite vectors $(W^{\mathrm{lat}}_{K,j})_{j\le b}$ under $\mu_{N_K,\gamma}$ are given by \cref{ch25:thm:original-loop-stitching}, which holds in this setting by \cref{ch25:lem:finite-ceiling-selected-chain}. The identification of all subsequential limits of the image measures with one measure $\OrbitLaw$ is then the same. So is the treatment of additional lists: the discrepancy $D_K\le2\norm f_\infty$ has conditioned expectations tending to zero, which gives $\limsup_K\E_{\mu_{N_K,\gamma}}D_K\le2\norm f_\infty F_\gamma(n_r)$ for every $r\in\mathcal R$, and we let $r\to\infty$.
+\end{proof}
+
+The next lemma records the role of the deterministic estimates of \cref{ch26:lem:holonomy-area-estimates} for general admissible approximations of loops, below a coupling bound.
+
+\begin{lemma}\label{ch26:lem:vanishing-area-selected-passage}
+The following statements hold.
+\begin{enumerate}
+\item The estimates of \cref{ch26:lem:holonomy-area-estimates} hold with constants that do not depend on the coupling or on any probability measure.
+\item On every compact family of cardinal interpolants as in \cref{ch26:lem:fixed-prefix-energy-paths}, they give the bound \eqref{ch26:eq:fixed-prefix-energy-loop-consistency} for every finite list of loops with time-independent admissible approximations.
+\item Assume the setting below a coupling bound $\Gamma$, and let $r\in\mathcal R$. For every finite list of positive energy times and of loops with admissible approximations, characters, and positive times, the lattice vector converges in law under $\nu_{K\mid r}$ to the corresponding continuum vector under the measure $\lambda_r$ of \cref{ch26:thm:finite-ceiling-matching}. For time-independent admissible approximations, the corresponding processes converge in law in $C([\tau,T];\R\times\C^b)$ for every $0<\tau<T<\infty$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Statement (1) is \cref{ch26:lem:holonomy-area-estimates}, whose proof is purely geometric. For (2), at a fixed coarse mesh the family of cardinal interpolants is compact with bounds on all derivatives. The comparison of the lattice flow with the sampled smooth flow, together with (1), then gives \cref{ch26:lem:fixed-prefix-energy-paths}, including general admissible approximations. Statement (3) is \cref{ch26:thm:selected-energy-loop-limit}(2),(3) in the setting below the coupling bound, which holds by \cref{ch26:thm:finite-ceiling-matching}. There is no circularity: the proof of \cref{ch26:thm:selected-energy-loop-limit} uses (2) through \cref{ch26:lem:fixed-prefix-energy-paths}, which rests on (1) and on \cref{ch25:lem:fixed-smooth-prefix}, and neither of these uses (3).
+\end{proof}
+
+\begin{theorem}\label{ch26:thm:matched-paths}
+Let $\ell$ be a piecewise $C^1$ loop in $\Torus$, let $a_K\to0$, and let $(\ell_K)$ be an admissible approximation of $\ell$ along these meshes: $\sup_K\operatorname{length}(\ell_K)\le\mathfrak l<\infty$, and for all sufficiently large $K$ there exist comparison homotopies $H_K$ between $\ell$ and $\ell_K$, with connectors $c_K$, such that $A_K=\operatorname{Area}(H_K)\to0$.
+\begin{enumerate}
+\item For every smooth connection $A$ we have $\norm{\Hol_\ell A-(\Hol_{c_K}A)(\Hol_{\ell_K}A)(\Hol_{c_K}A)^{-1}}_{\mathrm{op}}\le C\norm{F_A}_\infty A_K$. If $\norm A_{C^1}\le R$, then $\abs{\chi(\Hol_\ell A)-\chi(\Hol_{\ell_K}A)}\le C_\chi(R+R^2)A_K$, and replacing the exact transports along the edges of $\ell_K$ by $\exp(a_KA_i(x))$ changes $\chi(\Hol_{\ell_K}A)$ by at most $C_{\chi,R}\mathfrak la_K$. These constants do not depend on the coupling or on $K$.
+\item Assume the setting below a coupling bound $\Gamma$, with $a_K=L/N_K$. Every finite list of loops with admissible approximations, characters, and positive times converges in law under $\nu_{K\mid r}$, $r\in\mathcal R$, to its continuum vector under $\lambda_r$, and under $\mu_{N_K,\gamma}$ to its continuum vector under the measure $\OrbitLaw$ of \cref{ch26:thm:finite-ceiling-matching}.
+\item In the setting of (2), let $(\ell_{h,K})$ and $(\ell'_{h,K})$, $h\le b$, be two admissible approximations of the same loops, with lattice vectors $\mathscr W^{\mathrm{lat}}_K$ and $\mathscr W'^{\mathrm{lat}}_K$ for fixed characters and times. Then $\E_{\mu_{N_K,\gamma}}\abs{\mathscr W^{\mathrm{lat}}_K(U)-\mathscr W'^{\mathrm{lat}}_K(U)}\to0$, and $\E_{\mu_{N_K,\gamma}}\abs{f(\mathscr W^{\mathrm{lat}}_K(U))-f(\mathscr W'^{\mathrm{lat}}_K(U))}\to0$ for every bounded continuous $f$.
+\item In the setting of (2), for every $R<\infty$,
+\[
+ \lim_{K\to\infty}\sup_{\sum_h\abs{z_h}\le R}\Bigl\lvert\E_{\mu_{N_K,\gamma}}\exp\Bigl(\sum_hz_hW^{\mathrm{lat}}_{K,h}\Bigr)-\int\exp\Bigl(\sum_hz_hW_{\ell_h,\chi_h,t_h}(X)\Bigr)\,d\OrbitLaw(X)\Bigr\rvert=0 .
+\]
+\item In the setting of (2), for time-independent admissible approximations the path convergence of \cref{ch26:thm:selected-energy-loop-limit}(3) under $\nu_{K\mid r}$ holds on every interval $[\tau,T]\subset(0,\infty)$, and for two such approximations
+\[
+ \lim_{K\to\infty}\E_{\mu_{N_K,\gamma}}\sup_{\tau\le t\le T}\max_{h\le b}\bigl\lvert\chi_h(\Hol_{\ell_{h,K}}\Flowlat{N_K}_tU)-\chi_h(\Hol_{\ell'_{h,K}}\Flowlat{N_K}_tU)\bigr\rvert=0 .
+\]
+\item A sequence of closed lattice paths of bounded physical length that converges uniformly to $\ell$, as parametrized loops, is an admissible approximation of $\ell$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Statements (1) and (6) are \cref{ch26:lem:holonomy-area-estimates}, and the convergence under $\nu_{K\mid r}$ in (2) and (5) is \cref{ch26:lem:vanishing-area-selected-passage}(3). The convergence under $\mu_{N_K,\gamma}$ in (2) is \cref{ch26:thm:finite-ceiling-matching}(2). We give the comparison argument, which also proves (3)--(5). Let $D=\max_h\chi_h(\Id)$ for a nonempty list, and let $G_K=\abs{\mathscr W^{\mathrm{lat}}_K(U)-\mathscr W'^{\mathrm{lat}}_K(U)}_\infty$, so that $0\le G_K\le2D$. By \cref{ch26:lem:vanishing-area-selected-passage}(3), applied to the union of the two lists, the two vectors converge jointly under $\nu_{K\mid r}$ to the same continuum vector, and $\E_{\nu_{K\mid r}}G_K\to0$. By \cref{ch02:lem:bounded-transfer} and \eqref{ch26:eq:failure-bound},
+\[
+ \limsup_{K\to\infty}\E_{\mu_{N_K,\gamma}}G_K\le2DF_\gamma(n_r).
+\]
+We take the limit in $K$ first at this fixed $r$, and then let $r\to\infty$ in $\mathcal R$; the right side tends to zero. This proves the first assertion of (3) for the maximum norm, hence for any norm. Taking for $(\ell'_{h,K})$ the lattice paths of \cref{ch26:lem:matched-grid-paths}, whose limit under $\mu_{N_K,\gamma}$ is identified by \cref{ch26:thm:orbit-limit} in the setting of \cref{ch26:thm:finite-ceiling-matching}, we obtain the limit in (2) for every admissible approximation. The second assertion of (3) follows from uniform continuity of $f$ on the compact range of the character vectors and Markov's inequality. For (4), the vectors are bounded by $D$, and for $\sum_h\abs{z_h}\le R$,
+\[
+ \bigl\lvert e^{z\cdot v}-e^{z\cdot v'}\bigr\rvert\le Re^{DR}\max_h\abs{v_h-v'_h}.
+\]
+Then (3) transfers the uniform convergence of source functionals for the paths of \cref{ch26:lem:matched-grid-paths}, which holds by \cref{ch25:thm:original-loop-stitching} (in this setting by \cref{ch25:lem:finite-ceiling-selected-chain}), to every admissible approximation, and (2) identifies the limit. For the supremum in (5), we apply \cref{ch26:thm:selected-energy-loop-limit}(3), in the setting below the coupling bound, to the two time-independent approximations simultaneously. Their joint limit has identical loop paths, and the supremum of the difference is bounded by $2D$, so its conditioned expectation tends to zero. The bound of \cref{ch02:lem:bounded-transfer} at the same lattice side, followed by the limit $r\to\infty$, gives the conclusion under $\mu_{N_K,\gamma}$. Two arbitrary time-independent approximations are compared through the paths of \cref{ch26:lem:matched-grid-paths}, which do not depend on time.
+\end{proof}
+
+\section{The continuum limit along the sequences \texorpdfstring{$n_*M^{JK}$}{n*M\^{}(JK)}}\label{ch26:sec:refinement-sequences}
+
+\begin{theorem}\label{ch26:thm:finite-ceiling-tier-one}
+Let $0<\Gamma<\infty$, $L>0$, and $M\ge3$ odd. There exist $J\in\N$, parameters $\Theta$, and $n_\Gamma\in4\N$, chosen before the coupling, such that the following holds for every $\gamma\in(0,\Gamma]$ and every $n_*\in4\N$ with $n_*\ge n_\Gamma$. Let $B=M^J$ and $N_K=n_*B^K$, and write $\mu_K=\mu_{N_K,\gamma}$. Then, as $K\to\infty$:
+\begin{enumerate}
+\item For loops $\ell_1,\dots,\ell_m$ with admissible approximations $(\ell_{i,K})_K$, characters $\chi_1,\dots,\chi_m$ of finite-dimensional representations of $\SU$, and times $t_1,\dots,t_m>0$, the vector $(\chi_i(\Hol_{\ell_{i,K}}\Flowlat{N_K}_{t_i}U))_{i\le m}$ converges in law under $\mu_K$, and for every $R<\infty$ the expectations $\E_{\mu_K}\exp(\sum_iz_i\chi_i(\Hol_{\ell_{i,K}}\Flowlat{N_K}_{t_i}U))$ converge uniformly in $z\in\C^m$ with $\sum_i\abs{z_i}\le R$.
+\item There exist Borel maps $\pi_K:\Conf{N_K}\to\OrbitSpace$, invariant under all lattice gauge transformations, such that the image measures $(\pi_K)_\#\mu_K$ have compact containment and converge, against every bounded $\WilsonTopology$-continuous function and weakly with respect to $\CoordMetric$, to a Borel probability measure $\OrbitLaw$ on $\OrbitSpace$.
+\item For every $t>0$ and every $j\ge1$,
+\[
+ \lim_{R\to\infty}\sup_{K\ge0}\mu_K\bigl\{E_L(\pi_K(U)(t))>R\bigr\}=0,\qquad \lim_{K\to\infty}\E_{\mu_K}\abs{w_j(\pi_K(U))-W^{\mathrm{lat}}_{K,j}(U)}=0,
+\]
+and the limit law in (1) is the law of $(W_{\ell_i,\chi_i,t_i}(X))_{i\le m}$ under $X\sim\OrbitLaw$.
+\item The limits in (1) do not depend on the choice of the admissible approximations, and for two admissible approximations of the same loops the difference of the vectors in (1) tends to zero in $L^1(\mu_K)$.
+\end{enumerate}
+\end{theorem}
+
+Here the Wilson flow runs for the lattice time $4t/a_{N_K}^2$, and the characters need not be normalized; they are bounded by the dimensions of the representations. The convergence moduli, the maps $\pi_K$, and the measure may depend on $\gamma$, on the sequence $N_K$, and on the observables. Every fixed $\gamma>0$ lies below some bound $\Gamma$, so the theorem applies to every $\gamma>0$. By \cref{ch26:cor:common-ladder-family} below, its conclusions hold for every $n_*\in4\N$, not only for $n_*\ge n_\Gamma$.
+
+\begin{proof}
+Let $J$, $\Theta$, and $n_\Gamma$ be given by \cref{ch20:thm:finite-ceiling-parameters,ch20:thm:finite-ceiling-payment}; they are chosen before the coupling. Fix $\gamma\in(0,\Gamma]$ and $n_*\ge n_\Gamma$. By \cref{ch25:lem:finite-ceiling-selected-chain}, the conditioned estimates of \cref{ch25:chapter} hold at all coarse sides $n_r$ with $r$ in an infinite set $\mathcal R$. The minimum coarse sides there, the bounds on the flow data, and the convergence moduli may depend on the fixed coupling. We are therefore in the setting below the coupling bound $\Gamma$ of \cref{ch26:sec:coupling-bound}. \Cref{ch26:thm:finite-ceiling-matching} gives (2) and (3), including the energy tails with supremum over all $K\ge0$ and the identification of every finite list of loops with admissible approximations under the same measure $\OrbitLaw$. By \cref{ch26:thm:matched-paths}(2)--(4), we obtain (1) and (4), including the uniform convergence of the source functionals. The maps $\pi_K$ are defined on the configuration spaces of all sides $N_K$, $K\ge0$. For the finitely many $K$ with $m(K)=0$ their value is the zero trajectory, which adds a single compact point and does not affect compact containment, the energy tails, or any limit. If the conditioned estimates require coarse sides larger than a bound depending on $\gamma$, we use only indices $r\in\mathcal R$ above it. No parameter of the hierarchy is chosen again.
+\end{proof}
+
+The case $\Gamma=1$ is used in the weak-coupling analysis, where the parameters of \cref{ch20:thm:common-parameters} enter. We state it separately, with the quantifiers in the form in which it is used.
+
+\begin{theorem}\label{ch26:thm:tier-one}
+Let $L>0$ and $M\ge3$ odd. There exist $J\in\N$ and parameters $\Theta$, chosen before the coupling, the lattice sides, and the number of steps, such that for every $\gamma\in(0,1]$ there exists $n_0<\infty$, which may depend on $L$, $\gamma$, $M$, $J$, and $\Theta$, with the following property. For every $n_*\in4\N$ with $n_*\ge n_0$, with $B=M^J$ and $N_K=n_*B^K$, the conclusions (1)--(4) of \cref{ch26:thm:finite-ceiling-tier-one} hold along the whole sequence $K\to\infty$, for the Wilson measures $\mu_{N_K,\gamma}$ of \cref{ch01:def:ensemble}.
+\end{theorem}
+
+All bounds that are uniform in the lattice side range over every $K\ge0$.
+
+\begin{proof}
+Fix $L$ and $M$, and choose the bound $\Gamma=1$ in \cref{ch20:thm:finite-ceiling-parameters,ch20:thm:finite-ceiling-payment}; the construction there keeps the parameters of \cref{ch20:thm:common-parameters} and provides the corresponding minimum side. The proof of \cref{ch26:thm:finite-ceiling-tier-one} establishes conclusions (1)--(4) directly from \cref{ch25:lem:finite-ceiling-selected-chain} and \cref{ch26:thm:finite-ceiling-matching,ch26:thm:matched-paths}, without using the present theorem. Specializing it to $\Gamma=1$, with $n_0=n_1$, we obtain the theorem; in fact $n_0$ can be chosen independently of $\gamma$, and larger minimum sides depending on $\gamma$ are also allowed. No choice of $m(K)$ uniform in $\gamma$ is claimed.
+\end{proof}
+
+The next corollary removes the lower bound on the base side and records how the limit is used when a comparison side is fixed before the coupling, as in \cref{ch30:chapter,ch31:chapter,ch32:chapter}.
+
+\begin{corollary}\label{ch26:cor:common-ladder-family}
+Let $0<\Gamma<\infty$, $L>0$, and $M\ge3$ odd, let $J$, $\Theta$, and $n_\Gamma$ be as in \cref{ch26:thm:finite-ceiling-tier-one}, and set $B=M^J$. Fix $n_*\in4\N$ before the coupling.
+\begin{enumerate}
+\item Let $\gamma\in(0,\Gamma]$, and let $a_\gamma\ge0$ be an integer with $n_*B^{a_\gamma}\ge n_\Gamma$. The measure given by \cref{ch26:thm:finite-ceiling-tier-one} for the base side $n_*B^{a_\gamma}$ does not depend on the choice of $a_\gamma$; we denote it by $\OrbitLaw$. Let $\pi'_K$ be the maps of that theorem for the base side $n_*B^{a_\gamma}$, and set $\pi_K=\pi'_{K-a_\gamma}$ for $K\ge a_\gamma$ and $\pi_K=X_1$, the zero trajectory, for $K<a_\gamma$. Then the conclusions (1)--(4) of \cref{ch26:thm:finite-ceiling-tier-one} hold along the sequence $N_K=n_*B^K$, $K\ge0$, for these maps and this measure, including the energy tails with supremum over all $K\ge0$.
+\item Let $n=n_*B^a$ be a comparison side, fixed before the coupling, with $n\ge n_\Gamma$, and possibly subject to further side conditions used in later sections, such as the margin \eqref{ch20:eq:whole-flat-side} for the flat connections and the conditions on the analytic radius. Then the bound of \cref{ch20:thm:finite-ceiling-payment} on $\mu_{nB^k,\gamma}(S^c_{nB^k,n,\gamma})$ holds uniformly in $\gamma\in(0,\Gamma]$ and $k\ge0$. Moreover, for each fixed $\gamma\in(0,\Gamma]$, the limits along $N=nB^k$ of the expectations of bounded continuous functions of finite loop vectors as in \cref{ch26:thm:finite-ceiling-tier-one}(1) are the corresponding expectations under $\OrbitLaw$, also when $a_\gamma>a$.
+\end{enumerate}
+\end{corollary}
+
+In (2), every further estimate at the side $n$ keeps its own range of couplings, and neither the side $n$ nor a fixed number of scales used in a later weak-coupling estimate is replaced by a side depending on $\gamma$. The coupling bound $\gamma_0$ of \cref{ch20:thm:common-parameters} is not changed. We claim no choice of $m(K)$ independent of $\gamma$, no interchange of the limits $K\to\infty$ and $\gamma\to0$, and no comparison between different classes $[n]_M$.
+
+\begin{proof}
+We fix $\Gamma$, the parameters, and $n_\Gamma$ first, and then $n_*$, before the coupling. Since $B>1$, there exists an integer $a_\gamma\ge0$ with $n_*B^{a_\gamma}\ge n_\Gamma$. For fixed $\gamma\in(0,\Gamma]$ we apply \cref{ch26:thm:finite-ceiling-tier-one} with the base side $u=n_*B^{a_\gamma}$. That theorem allows further minimum sides depending on $\gamma$ internally, and it gives its conclusions along the sequence $uB^K=N_{K+a_\gamma}$, $K\ge0$. This sequence is a tail of the sequence $(N_K)_K$, with the same configuration spaces, Wilson measures, Wilson flow, and lattice paths. Hence every finite loop vector, and every expectation of a bounded continuous function of it, has the same limit along $(N_K)_K$. Two choices of $a_\gamma$ give sequences that share a common tail. The finite joint laws of the limits of the coordinates $W^{\mathrm{lat}}_{K,j}$ therefore coincide, and by \cref{ch26:thm:wilson-borel-space}(4) the two measures coincide.
+
+The maps $\pi_K$ are Borel and gauge invariant. Changing finitely many terms of a sequence does not affect convergence or the $L^1$ convergence of the coordinates. Adding the zero trajectory to a compact set does not affect compactness in either topology, so compact containment is preserved. The added image measures have zero energy at every positive time, and the energy tails with supremum over all $K\ge0$ are therefore unchanged. This proves (1).
+
+For (2), the uniform bound on the small-field failure probability follows from \cref{ch20:thm:finite-ceiling-payment}, since $n\ge n_\Gamma$. The reindexing in (1) does not change any measure, event, or observable at the side $n$. For fixed $\gamma$, all sufficiently large sides $nB^k$ belong to the tail $(uB^K)_K$ used above, so the expectations of bounded continuous functions of finite loop vectors converge to the expectations under $\OrbitLaw$, also when $a_\gamma>a$. Every further estimate at the side $n$ keeps its own range of couplings, and no parameter of the comparison side or bound on the coupling was changed.
+\end{proof}
+
+\section{The sequence \texorpdfstring{$nM^k$}{nM\^{}k}}\label{ch26:sec:full-sequence}
+
+The results of \cref{ch26:sec:refinement-sequences} give convergence along the subsequences $n_*M^{JK}$ for one fixed $J$. To obtain convergence along the full sequence $nM^k$, we use two consecutive values $J$ and $J+1$, both of which are available by \cref{ch20:cor:finite-ceiling-macro-depths}. Each residue class of $k$ modulo $J$ shares infinitely many lattice sides with the sequence of depth $J+1$, and at a common lattice side the Wilson measures and the lattice observables are identical. This identifies the limits along all residue classes. 
+
+\begin{lemma}\label{ch26:lem:consecutive-depth-intersection}
+Let $J\ge1$, $n\in\N$, and $r\in\{0,\dots,J-1\}$. For every integer $s\ge0$ let $K=r+(J+1)s$ and $K'=r+Js$. Then $r+JK=(J+1)K'$, so that
+\begin{equation}\label{ch26:eq:common-original-cutoffs}
+ nM^{r+JK}=nM^{(J+1)K'} ,
+\end{equation}
+and $K,K'\to\infty$ as $s\to\infty$.
+\end{lemma}
+
+\begin{proof}
+We have $r+J(r+(J+1)s)=(J+1)r+J(J+1)s=(J+1)(r+Js)$.
+\end{proof}
+
+\begin{theorem}\label{ch26:thm:full-M-ladder}
+Let $0<\Gamma<\infty$, $L>0$, $M\ge3$ odd, and $n\in4\N$. There exist two choices of the parameters of \cref{ch20:thm:finite-ceiling-parameters}, with consecutive numbers $J$ and $J+1$ of averaging steps per renormalization group step, made before the coupling, such that for every $\gamma\in(0,\Gamma]$ the following statements hold, with $N_k=nM^k$ and $a_k=L/N_k$.
+\begin{enumerate}
+\item For loops $\ell_1,\dots,\ell_m$ with admissible approximations $(\ell_{i,k})_k$ along $(N_k)_k$, characters $\chi_1,\dots,\chi_m$, and times $t_1,\dots,t_m>0$, the vector $(\chi_i(\Hol_{\ell_{i,k}}\Flowlat{N_k}_{t_i}U))_{i\le m}$ converges in law under $\mu_{N_k,\gamma}$ as $k\to\infty$, and for every $R<\infty$ its source functionals $\E_{\mu_{N_k,\gamma}}\exp(\sum_iz_i\chi_i(\Hol_{\ell_{i,k}}\Flowlat{N_k}_{t_i}U))$ converge uniformly in $z\in\C^m$ with $\sum_i\abs{z_i}\le R$.
+\item There exist Borel maps $\pi_k:\Conf{N_k}\to\OrbitSpace$, invariant under all lattice gauge transformations, such that the image measures $(\pi_k)_\#\mu_{N_k,\gamma}$ have compact containment and converge, against every bounded $\WilsonTopology$-continuous function and weakly with respect to $\CoordMetric$, to a Borel probability measure $\lambda_{L,\gamma,[n]_M}$ on $\OrbitSpace$. Here $[n]_M$ is the class of $n$ for the relation
+\[
+ n\sim_Mn'\quad\Longleftrightarrow\quad nM^a=n'M^b\ \text{for some integers }a,b\ge0 .
+\]
+\item For every $t>0$ and every $j\ge1$,
+\[
+ \lim_{R\to\infty}\sup_{k\ge0}\mu_{N_k,\gamma}\bigl\{E_L(\pi_k(U)(t))>R\bigr\}=0,\qquad \lim_{k\to\infty}\E_{\mu_{N_k,\gamma}}\abs{w_j(\pi_k(U))-W^{\mathrm{lat}}_{N_k,j}(U)}=0,
+\]
+and the limit law in (1) is the law of $(W_{\ell_i,\chi_i,t_i}(X))_{i\le m}$ under $X\sim\lambda_{L,\gamma,[n]_M}$.
+\item The measure $\lambda_{L,\gamma,[n]_M}$ depends only on $L$, $\gamma$, and $[n]_M$: for every $n'\in[n]_M$, every bound $\Gamma'\ge\gamma$, and every choice of the parameters of \cref{ch20:thm:finite-ceiling-parameters} for $\Gamma'$, the measures obtained from $n'$ and these parameters in \cref{ch26:cor:common-ladder-family} and in (2) coincide with $\lambda_{L,\gamma,[n]_M}$. For two admissible approximations of the same loops, the difference of the vectors in (1) tends to zero in $L^1(\mu_{N_k,\gamma})$.
+\item The conclusions of \cref{ch26:thm:actual-observable-paths,ch26:thm:sobolev-image-limit,ch26:thm:spatial-center-symmetry} (convergence of the processes of lattice energies and loops on compact intervals of positive times, agreement of time-independent admissible approximations in expected supremum, convergence of the images in the Sobolev trajectory space, and invariance under spatial isometries and center symmetries) hold along the full sequence $N_k=nM^k$, for the maps $\pi_k$ and the measure $\lambda_{L,\gamma,[n]_M}$.
+\end{enumerate}
+\end{theorem}
+
+Since $M$ is odd and $4\mid n$, every $n'\in[n]_M$ is also divisible by four. The maps and convergence moduli may depend on the fixed coupling, on $n$, and on the two parameter choices. The proof of (5), which applies the arguments of \cref{ch26:chapter-properties} on each residue class and then the assembly below, is given in \cref{ch26:chapter-properties}.
+
+\begin{remark}\label{ch26:rem:scope-full-sequence}
+The theorem identifies the limit within one class $[n]_M$. It does not compare the measures for different classes or for different odd integers $M$. It gives no rate of convergence, no convergence of moments of the energy, and no uniformity as $\gamma\to0$, as $\Gamma\to\infty$, or in $J$. The statements about conditioned measures remain statements along the sequences $n_*B^K$ at fixed coarse sides; we do not identify the limits of the conditioned measures along different residue classes. Likewise, the bounds on the small-field failure probability refer to the sequences $uB^K$ and the coarse sides $u$ for which they are stated.
+\end{remark}
+
+\begin{proof}[Proof of \cref{ch26:thm:full-M-ladder}(1)--(4)]
+We prove the convergence along each residue class modulo $J$ by \cref{ch26:cor:common-ladder-family}, identify the limits through the common lattice sides of \cref{ch26:lem:consecutive-depth-intersection}, and then interlace the maps.
+
+\paragraph{Step 1: the two parameter choices.}
+By \cref{ch20:cor:finite-ceiling-macro-depths} there exists $J_0$ such that for every $J\ge J_0$ there exist parameters $\Theta_J$ and a minimum side, fixed before the coupling, with all conclusions of \cref{ch20:thm:finite-ceiling-parameters,ch20:thm:finite-ceiling-payment} for $0<\gamma\le\Gamma$. We fix such choices for two consecutive values $J$ and $J+1$. This use of the corollary is not circular. Its proof first applies \cref{ch20:lem:all-large-macro-depths} with the bound one and then the construction of \cref{ch20:thm:finite-ceiling-parameters}, which changes only the constants in the failure bound and the minimum sides and keeps $J$ and the structural parameters. Now fix $\gamma\in(0,\Gamma]$. For each of the two depths, \cref{ch26:thm:finite-ceiling-tier-one}, with \cref{ch25:lem:finite-ceiling-selected-chain} and \cref{ch26:thm:finite-ceiling-matching}, provides maps with all the stated properties along the corresponding sequences. These maps choose among the trajectories $X_q$, with value $X_1$ when no index satisfies the conditions and with a sequence $m(K)$ depending on the fixed coupling, and the energy constraint uses the lattice energy of \cref{ch26:lem:lattice-energy-supplier}. The additional minimum side depending on $\gamma$ is finite and does not change $J$ or the parameters. No modulus of convergence and no sequence $m(K)$ is claimed to be uniform in the coupling or in $J$.
+
+\paragraph{Step 2: the residue classes.}
+For each $r\in\{0,\dots,J-1\}$ we apply \cref{ch26:cor:common-ladder-family}(1) with depth $J$ and base side $nM^r$. This is allowed even if $nM^r$ is below the minimum side, since the corollary provides a finite shift and the zero trajectory for the finitely many omitted sides. Let $\lambda^{(r)}$ be the resulting measure and $\pi^{(r)}_K$ the resulting maps along the sequence $nM^rB^K=nM^{r+JK}$. We also apply the corollary with depth $J+1$ and base side $n$, and let $\lambda'$ be the resulting measure along the sequence $nM^{(J+1)K'}$.
+
+\paragraph{Step 3: identification of the limits.}
+For the comparison we use the lattice paths of \cref{ch26:lem:matched-grid-paths}, which depend only on the loop and the mesh and not on the parameters of the hierarchy. By \cref{ch26:lem:consecutive-depth-intersection}, for every $r$ the sequences $nM^{r+JK}$ and $nM^{(J+1)K'}$ have infinitely many common terms. At each common side $N$, the Wilson measure $\mu_{N,\gamma}$, the Wilson flow, the times, and the lattice loop vectors are identical. The two whole-sequence limits of every finite vector $(W^{\mathrm{lat}}_{N,j})_{j\le b}$ therefore agree. By \cref{ch26:thm:wilson-borel-space}(4), $\lambda^{(r)}=\lambda'$ for every $r$; we write $\lambda_{L,\gamma,[n]_M}$ for this common measure. No conditioned measure, density, or reconstruction has been compared.
+
+\paragraph{Step 4: interlacing.}
+For $k=r+JK$ with $r\in\{0,\dots,J-1\}$ and $K\ge0$, set $\pi_k=\pi^{(r)}_K$. Since each side $N_k$ belongs to exactly one residue class, these maps are Borel and gauge invariant. For every bounded $\WilsonTopology$-continuous function, the expectations along each of the $J$ residue sequences converge to its expectation under $\lambda_{L,\gamma,[n]_M}$. Taking the largest of the finitely many thresholds, we obtain convergence along the whole sequence. The same argument gives the weak convergence for $\CoordMetric$ and the $L^1$ convergence of the coordinates. If $\mathcal K(R^{(r)})$ has mass at least $1-\eta$ under all image measures of residue $r$, then $\mathcal K(R)$ with $R_j=\max_rR^{(r)}_j$ contains all these sets and has mass at least $1-\eta$ for all $k$. Moreover,
+\[
+ \sup_{k\ge0}\mu_{N_k,\gamma}\bigl\{E_L(\pi_k(U)(t))>R\bigr\}\le\max_{0\le r<J}\sup_{K\ge0}\mu_{nM^{r+JK},\gamma}\bigl\{E_L(\pi^{(r)}_K(U)(t))>R\bigr\},
+\]
+which tends to zero as $R\to\infty$. The convergence of finite loop vectors, the uniform convergence of the source functionals, and the agreement of admissible approximations follow by the same finite argument from \cref{ch26:cor:common-ladder-family}(1) on each residue class, with the limit identified by Step 3. This assembly uses different sequences $m(K)$ on the finitely many residue classes; it never identifies their values, the indices $q$ chosen, or the conditioned measures.
+
+\paragraph{Step 5: dependence only on the class.}
+Let $n'\in[n]_M$ with $nM^a=n'M^b$, and consider a construction as in \cref{ch26:cor:common-ladder-family} with base side $n'$, depth $J'$, and parameters for a bound $\Gamma'\ge\gamma$. Its sides satisfy $n'M^{J'K}=nM^{a-b+J'K}$ for all sufficiently large $K$, so they form a subsequence of a tail of $(nM^k)_k$. Its loop limits therefore coincide with those along the full sequence, and \cref{ch26:thm:wilson-borel-space}(4) identifies its measure with $\lambda_{L,\gamma,[n]_M}$. The full sequence $n'M^k=nM^{a-b+k}$, $k\ge b-a$, is a shifted tail of the full sequence $nM^k$, and the measure obtained in (2) from $n'$ is the same. In particular, constructions with two different bounds $\Gamma,\Gamma'\ge\gamma$ give the same measure. This proves (4) and completes the proof of (1)--(4).
+\end{proof}
+
+\paragraph{Proof of \cref{s2:thm:main}.}
+Let $L>0$, $\gamma>0$, $M\ge3$ odd, and $n\in4\N$, and apply \cref{ch26:thm:full-M-ladder} with any bound $\Gamma\ge\gamma$. Part (1) of \cref{s2:thm:main} is \cref{ch26:thm:full-M-ladder}(1); the independence of the limit from the admissible approximations follows from the $L^1$ agreement in \cref{ch26:thm:full-M-ladder}(4). For part (2), \cref{ch26:thm:full-M-ladder}(3) shows that every limit law in part (1) is the law of the corresponding continuum vector under $\lambda=\lambda_{L,\gamma,[n]_M}$, and uniqueness follows from \cref{ch26:thm:wilson-borel-space}(4). Part (3) is \cref{ch26:thm:full-M-ladder}(2),(3) for the paths of \cref{ch26:def:actual-loop-coordinates}; for any other fixed admissible approximation $(\ell_{j,k})_k$ of $\ell_j$ it follows from the $L^1$ agreement in \cref{ch26:thm:full-M-ladder}(4) and the triangle inequality. Part (4) is the energy bound in \cref{ch26:thm:full-M-ladder}(3), and part (5) is \cref{ch26:thm:full-M-ladder}(4).

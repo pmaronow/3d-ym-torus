@@ -1,0 +1,1016 @@
+\chapter{Local Wilson flow and continuum solutions}\label{ch21:chapter}
+
+This section proves the deterministic Wilson-flow estimates used to pass from the renormalization group variables to flowed Wilson loops. We also record an elementary comparison for exponential transforms of bounded random observables. The section has three parts.
+
+The first part concerns the lattice. Let $a=L/n$ be the mesh and write a configuration close to the identity as $U_e=e^{aA_e}$. After a time-dependent gauge transformation, which adds a damping term, the Wilson flow $\Psi^{(n)}_t=\Phi^{\mathrm W}_{4t/a^2}$ becomes the parabolic equation
+\begin{equation}\label{ch21:eq:intro-equation}
+ \partial_tA=\Delta_aA+\mathcal N_a(A,A)+F_a(A),
+\end{equation}
+where $\Delta_a$ is the lattice Laplacian, $\mathcal N_a$ is an explicit bilinear map containing one lattice difference, and $F_a$ collects the terms of degree at least three (\cref{ch21:lem:wilson-local-algebra}). We write
+\begin{equation}\label{ch21:eq:intro-decomposition}
+ A(t)=x_a(t)+y_a(t)+r_a(t),\qquad x_a(t)=P^a_tA(0),\qquad
+ y_a(t)=\int_0^tP^a_{t-s}\mathcal N_a\bigl(x_a(s),x_a(s)\bigr)\,ds,
+\end{equation}
+where $P^a_t=e^{t\Delta_a}$. As in \cref{s3:flow}, $x_a$ is the linear heat evolution and $y_a$ the quadratic Picard term, and $(x_a,y_a)$ is the flow data of $A(0)$. \Cref{ch21:thm:enhanced-local-flow} constructs a local solution on a time interval independent of the mesh, with remainder of order $(t+a^2)^{1-3\alpha/2}$, and proves Lipschitz dependence on these data. The probabilistic bounds on the flow data are proved in \cref{ch23:chapter,ch24:chapter,ch25:chapter}, using the bilinear estimate of \cref{ch21:lem:ordered-duhamel-products}.
+
+The second part, \cref{ch21:sec:continuum}, concerns the Yang--Mills heat flow on $\Torus$ and is independent of the lattice. For smooth initial data near a compact family, it represents the flow on a finite time interval by finitely many local solutions of the DeTurck equation, joined by fixed gauge transformations.
+
+The third part (\cref{ch21:sec:modified}) treats the flows of the actions $\sum_p(q(U_p)+c\,q(U_p)^2)$ with $0\le c\le C_0$, which appear in \cref{s2:thm:altflow}. The additional force begins in degree three and is $O(a^3)$ on every fixed bounded $C_a^1$ ball. We show that these flows have the same flow data as the Wilson flow, and that for the same flow data their solutions differ from the Wilson-flow solution by $O(a^\varepsilon)$ on the local time interval.
+
+The inputs are the conventions of \cref{ch01:chapter}, in particular the weighted norms of \cref{ch01:def:enhancement} and the continuum conventions of \cref{ch01:def:orbit-space}; the finite-word analyticity and the plaquette bounds of \cref{ch02:lem:haar-and-forests}; and the heat kernel bounds, convolution estimates, and cardinal interpolation of \cref{ch13:lem:heat-and-chaining,ch13:lem:weighted-convolution,ch13:lem:cardinal-columns}. The lattice results are used in \cref{ch22:chapter} (continuation to fixed time intervals and stability), in \cref{ch23:chapter,ch24:chapter,ch25:chapter} (estimates for the flow data and convergence of flowed loops), in \cref{ch26:chapter,ch26:chapter-properties} (lattice energy, trajectories, and alternative flows), and in \cref{ch29:chapter,ch30:chapter}. The continuum theorem is used in \cref{ch22:chapter,ch25:chapter,ch26:chapter,ch26:chapter-properties,ch30:chapter}.
+
+The lattice flow is the Wilson flow of L\"uscher \cite{Luscher2010WilsonFlow,Luscher2010a}; the factor $4/a^2$ in its time variable comes from our normalization of $q$, of the plaquette sum, and of the metric on $\SU$. Zwanziger \cite{Zwanziger1981}, DeTurck \cite{DeTurck1983} (for the Ricci flow), and Donaldson \cite{Donaldson1985} made gauge-invariant flows parabolic by adding a gauge velocity. The decomposition \eqref{ch21:eq:intro-decomposition} into a rough linear part and smoother corrections is the lattice analogue of the decomposition used by Cao and Chatterjee \cite[\S\S1.1 and 2.1]{CCHeat2022v4} for the Yang--Mills heat flow with random initial data, an idea that goes back to Bourgain \cite{Bourgain1996} and to Da Prato and Debussche \cite{DaPratoDebussche2003}. Here the subtracted term is the quadratic Duhamel term of the lattice equation, with the bilinear map fixed in \cref{ch21:lem:wilson-local-algebra}. The global smooth theory of the continuum flow is due to R\aa de \cite{Rade1992} and Charalambous and Gross \cite{CharalambousGross2013}; we use it in the form stated by Cao and Chatterjee \cite{CCState2023v4,CCHeat2022v4}. The explicit lattice coefficient, the weighted remainder estimates, and the finite continuation construction are proved in this section.
+
+\section{The local equation for the Wilson flow}\label{ch21:sec:equation}
+
+\paragraph{Notation.}
+Throughout this section $L>0$ is fixed, $n\ge4$ is an integer, and $a=L/n$. A field $A$ on $\Lat n$ assigns to each positive link $(x,x+ae_i)$ an element $A_i(x)\in\su$; we use the norm $\abs X=(-2\tr X^2)^{1/2}$ on $\su$, for which $\abs{[X,Y]}\le\abs X\abs Y$, since the bracket corresponds to the cross product in $\R^3$. Let $T_i$ be the translation $(T_if)(x)=f(x+ae_i)$, and let
+\[
+ D_{a,i}^+=\frac{T_i-\Id}{a},\qquad D_{a,i}^-=\frac{\Id-T_i^{-1}}{a},\qquad
+ \Delta_a=\sum_{i=1}^3D_{a,i}^-D_{a,i}^+
+\]
+act on each link component separately, a link being identified with its starting vertex. The heat semigroup $P^a_t=e^{t\Delta_a}$ acts componentwise and includes the constant mode. We write $\norm A_\infty=\max_e\abs{A_e}$, and $\norm{D_aA}_\infty$ for the maximum of $\norm{D_{a,j}^{\pm}A}_\infty$ over $j\in\{1,2,3\}$, both signs, and all link components. We set
+\begin{equation}\label{ch21:eq:c1a-norm}
+ \norm A_{C_a^1}=\norm A_\infty+\max_{j\in\{1,2,3\},\,\epsilon\in\{+,-\}}\norm{D_{a,j}^{\epsilon}A}_\infty .
+\end{equation}
+Since translations permute the sites of the periodic lattice, they are isometries for these norms and commute with $P^a_t$ and with all differences. More generally, $D_a^m$ denotes the maximum over all ordered products of $m$ differences $D^{\pm}_{a,k}$.
+
+We identify tangent vectors at $U\in\SU$ with $\su$ through $X\mapsto(d/d\varepsilon)\,e^{\varepsilon X}U|_{\varepsilon=0}$. A curve $U(s)$ then has velocity $\dot UU^{-1}$, and the gradient $\nabla f(U)\in\su$ of a function $f$ on $\SU$ is defined by $\ip{\nabla f(U)}X=(d/d\varepsilon)\,f(e^{\varepsilon X}U)|_{\varepsilon=0}$; since the metric is bi-invariant, this is the Riemannian gradient. On $\Conf n$ we use the product metric. As in \cref{s2:model}, $\Phi^{\mathrm W}_s$ is the flow of $-\nabla\sum_{p\in\Faces n}q(U_p)$ and $\Psi^{(n)}_t=\Phi^{\mathrm W}_{4t/a^2}$; no coupling enters this time change.
+
+All constants in \cref{ch21:sec:equation} depend only on the fixed finite stencils, the orders of the derivatives involved, and the margins of the logarithm charts, and not on $L$, $n$, the coupling, or any probability law. These are the dependences of item (1) of \cref{ch01:conv:constants}. Later constants may depend in addition on the quantities displayed in each statement.
+
+\paragraph{Local analytic maps of a finite stencil.}
+The terms of degree at least three in the flow equations of this section are functions of the link variables in a fixed finite neighborhood, with the same functional form at every link. We first record the estimates that such functions satisfy after the rescaling $\theta=aA$. Let $S_0$ be a finite set of pairs $(\eta,j)$ with $\eta\in\Z^3$ and $j\in\{1,2,3\}$. For a field $\theta$ and a site $x$, we write $Z_x(\theta)=(\theta_j(x+a\eta))_{(\eta,j)\in S_0}$ for the stencil array of $\theta$ at $x$. A map $G$ from fields to fields is a local analytic map with stencil $S_0$ if there exist functions $g_1,g_2,g_3$, real analytic in a neighborhood of $0$ in $\su^{S_0}$, such that $G(\theta)_i(x)=g_i(Z_x(\theta))$ whenever $\theta$ is small. For a homogeneous polynomial $P$ of degree $m$ on $\su^{S_0}$ with values in $\su$, let $\norm P_{\mathrm{coeff}}$ denote the sum of the norms of its coefficients in the monomial basis of the real coordinates. If $g_i$ extends to a bounded analytic function on a complex polydisc around $0$, then by the Cauchy estimates there exist constants $K_0,K_1$ such that the homogeneous parts $P_{m,i}$ of $g_i$ satisfy $\norm{P_{m,i}}_{\mathrm{coeff}}\le K_0K_1^m$.
+
+\begin{lemma}\label{ch21:lem:stencil-analytic}
+Let $G$ be a local analytic map with stencil $S_0$ whose Taylor coefficients at zero vanish through degree two, and suppose that the homogeneous parts of the $g_i$ satisfy $\norm{P_{m,i}}_{\mathrm{coeff}}\le K_0K_1^m$ for $m\ge3$; on $\{Z:K_1\norm Z<1\}$, where $\norm Z$ is the maximum of the norms of the entries, we use the convergent Taylor series $g_i=\sum_{m\ge3}P_{m,i}$ to define $g_i$ and hence $G$. Fix $0<\eta<1$. For $0<a\le1$ and a field $A$ with $K_1a\norm A_\infty\le\eta$, set $G_a(A)=a^{-3}G(aA)$ and $M_A=\norm A_\infty$, and let
+\[
+ b_j(M,a)=\begin{cases}M^{3-j},&0\le j\le3,\\ a^{j-3},&j>3.\end{cases}
+\]
+Then the following statements hold, with constants depending only on $S_0$, $K_0$, $K_1$, $\eta$, and the indicated orders.
+\begin{enumerate}
+\item The series $G_a(A)_i(x)=\sum_{m\ge3}a^{m-3}P_{m,i}(Z_x(A))$ converges absolutely.
+\item For every $j\ge0$ and all fields $V_1,\ldots,V_j$,
+\[
+ \norm{D^jG_a(A)[V_1,\ldots,V_j]}_\infty\le K_j\,b_j(M_A,a)\prod_{r=1}^j\norm{V_r}_\infty .
+\]
+\item If $B$ is another field with $K_1a\norm B_\infty\le\eta$, then $\norm{G_a(A)-G_a(B)}_\infty\le K(\norm A_\infty^2+\norm B_\infty^2)\norm{A-B}_\infty$.
+\item For every $m\ge1$,
+\[
+ \norm{D_a^mG_a(A)}_\infty\le K_m\sum_{j=1}^mb_j(M_A,a)\sum_{\substack{\nu_1+\cdots+\nu_j=m\\ \nu_r\ge1}}\prod_{r=1}^j\norm{D_a^{\nu_r}A}_\infty .
+\]
+\item If $B$ is as in (3) and $M=\max(\norm A_\infty,\norm B_\infty)$, then
+\[
+ \begin{split}
+ \norm{D_a(G_a(A)-G_a(B))}_\infty\le K\bigl\{&M^2\norm{D_a(A-B)}_\infty\\
+ &+M(\norm{D_aA}_\infty+\norm{D_aB}_\infty)\norm{A-B}_\infty\bigr\}.
+ \end{split}
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We write $g_i^a(Z)=a^{-3}g_i(aZ)=\sum_{m\ge3}a^{m-3}P_{m,i}(Z)$, so that $G_a(A)_i(x)=g_i^a(Z_x(A))$; every entry of $Z_x(A)$ has norm at most $M_A$. For a homogeneous polynomial $P$ of degree $m$, differentiating each monomial, we find
+\[
+ \abs{D^jP(Z)[W_1,\ldots,W_j]}\le m(m-1)\cdots(m-j+1)\,\norm P_{\mathrm{coeff}}\,\norm Z^{m-j}\prod_{r=1}^j\norm{W_r},
+\]
+where $\norm Z$ is as in the statement; the right side is zero when $j>m$. For $j\le3$ we have $a^{m-3}K_1^mM_A^{m-j}=K_1^3M_A^{3-j}(K_1aM_A)^{m-3}$, and for $j>3$ and $m\ge j$ we have $a^{m-3}K_1^mM_A^{m-j}=a^{j-3}K_1^j(K_1aM_A)^{m-j}$. Since $K_1aM_A\le\eta<1$, summing over $m$, we obtain (1) and (2), with
+\[
+ K_j=K_0K_1^{\max(3,j)}\sum_{m\ge\max(3,j)}m(m-1)\cdots(m-j+1)\,\eta^{m-\max(3,j)}<\infty .
+\]
+For (3), we write $G_a(A)-G_a(B)=\int_0^1DG_a(B+u(A-B))[A-B]\,du$. Since the field $B+u(A-B)$ has norm at most $\max(\norm A_\infty,\norm B_\infty)$, (2) with $j=1$ implies the claim.
+
+For (4), we use that $G_a$ has the same form at every site. Since $Z_{x+ae_k}(A)=Z_x(T_kA)$, by the fundamental theorem of calculus we have
+\[
+ D^+_{a,k}\bigl(G_a(A)\bigr)=\int_0^1DG_a\bigl((1-u)A+uT_kA\bigr)\bigl[D^+_{a,k}A\bigr]\,du,
+\]
+and similarly $D^-_{a,k}(G_a(A))=\int_0^1DG_a((1-u)T_k^{-1}A+uA)[D^-_{a,k}A]\,du$. The fields $(1-u)A+uT_kA$ are convex combinations of translates of $A$, so they satisfy the same bound $K_1a\norm\cdot_\infty\le\eta$. The map $(W,V)\mapsto DG_a(W)[V]$ is again of the same form at every site, so the same identity applies to it; differences of the two arguments are differences of $W$ and of $V$, and differences of products obey $D^+_{a,k}(fg)=(D^+_{a,k}f)\,T_kg+f\,D^+_{a,k}g$ and $D^-_{a,k}(fg)=(D^-_{a,k}f)\,T_k^{-1}g+f\,D^-_{a,k}g$. By induction on $m$, $D_a^mG_a(A)$ is a finite sum, with a number of terms depending only on $m$, of integrals over $[0,1]^m$ of expressions $D^jG_a(W)[\widetilde V_1,\ldots,\widetilde V_j]$, where $1\le j\le m$, $W$ is a convex combination of translates of $A$, and each $\widetilde V_r$ is a convex combination of translates of a difference $D_a^{\nu_r}A$ with $\nu_r\ge1$ and $\nu_1+\cdots+\nu_j=m$. No factor $a^{-1}$ appears outside a difference of $A$. Since translations preserve the supremum norm, (2) implies (4).
+
+For (5), we apply one difference to $\int_0^1DG_a(B+u(A-B))[A-B]\,du$ in the same way. The terms in which the difference falls on the second argument are bounded by $K\,b_1(M,a)\norm{D_a(A-B)}_\infty=KM^2\norm{D_a(A-B)}_\infty$. The other terms contain $D^2G_a$, evaluated at convex combinations of translates of $A$ and $B$, applied to a difference of $B+u(A-B)$ and to a translate of $A-B$; by (2) with $j=2$ they are bounded by $KM(\norm{D_aA}_\infty+\norm{D_aB}_\infty)\norm{A-B}_\infty$.
+\end{proof}
+
+\paragraph{The equation.}
+We derive \eqref{ch21:eq:intro-equation} and fix the bilinear map $\mathcal N_a$. In the lemma and its proof we use dimensionless differences; the symbols $d_0$, $C_0$, and $H_0$ have the meaning given there only in this lemma and its proof.
+
+\begin{lemma}\label{ch21:lem:wilson-local-algebra}
+Let $L>0$, $n\ge4$, and $a=L/n$. Write $\nabla_i=T_i-\Id$, $d_0=-\nabla$, $(C_0\theta)_{ij}=\nabla_i\theta_j-\nabla_j\theta_i$ for $i<j$, and $H_0=\sum_i\nabla_i^*\nabla_i$, where adjoints are taken with respect to counting measure on sites, links, and positive plaquettes.
+\begin{enumerate}
+\item We have
+\[
+ C_0^*C_0+d_0d_0^*=H_0\Id,\qquad d_2C_0=0,\qquad\Delta_a=-a^{-2}H_0,
+\]
+where $d_2$ is the next forward exterior difference.
+\item For $\theta$ in a sufficiently small fixed ball of link logarithms and the plaquette $p=p_{ij}(x)$, $i<j$, put
+\[
+ \begin{gathered}
+ (v_{p,1},v_{p,2},v_{p,3},v_{p,4})=\bigl(\theta_i(x),\theta_j(x+ae_i),-\theta_i(x+ae_j),-\theta_j(x)\bigr),\\
+ \mathfrak q_p(\theta)=\frac12\sum_{k<l}[v_{p,k},v_{p,l}],
+ \end{gathered}
+\]
+so that $U_p=e^{v_{p,1}}e^{v_{p,2}}e^{v_{p,3}}e^{v_{p,4}}$ for $U=e^\theta$. Let $\norm\theta_{\infty,p}$ be the maximum of $\abs{\theta_e}$ over the four links $e$ of $p$. Then, with positive plaquettes counted once,
+\[
+ \begin{gathered}
+ \Log U_p=(C_0\theta)_p+\mathfrak q_p(\theta)+O(\norm\theta_{\infty,p}^3),\\
+ \sum_pq(U_p)=\frac18\norm{C_0\theta}_2^2+\frac14\ip{C_0\theta}{\mathfrak q(\theta)}+R_E(\theta),\qquad
+ \abs{R_E(\theta)}\le C\sum_p\norm\theta_{\infty,p}^4 .
+ \end{gathered}
+\]
+Each local remainder and each of its derivatives of fixed order is bounded on a smaller fixed ball, independently of $n$.
+\item Let $s=t/a^2$, so that $\Psi^{(n)}_t=\Phi^{\mathrm W}_{4s}$ and the Wilson flow has velocity $-4\nabla\sum_pq(U_p)$ in the variable $s$. Add to this velocity the infinitesimal gauge transformation
+\[
+ (G_U\phi)_i(x)=\phi(x)-\Ad(U_i(x))\phi(x+ae_i),\qquad \phi=-d_0^*\theta .
+\]
+With $\mathcal J(\theta)=(e^{\ad\theta}-\Id)/\ad\theta$, the resulting velocity in logarithmic coordinates is $\mathcal J(\theta)^{-1}(-4\nabla\sum_pq+G_U\phi)$, and it has the expansion
+\[
+ \begin{gathered}
+ \partial_s\theta=-H_0\theta+N_2(\theta)+R_3(\theta),\qquad
+ N_2=-C_0^*\mathfrak q-D\mathfrak q(\theta)^*C_0\theta+G_2(\theta),\\
+ (G_2)_i(x)=\frac12\bigl[\theta_i(x),(d_0^*\theta)(x)+(d_0^*\theta)(x+ae_i)\bigr].
+ \end{gathered}
+\]
+The adjoint is given by
+\[
+ z_{p,k}=\frac12\Bigl[\sum_{l>k}v_{p,l}-\sum_{l<k}v_{p,l},\,y_p\Bigr],\qquad
+ D\mathfrak q(\theta)^*y=\sum_{p,k}\epsilon_{p,k}T_{p,k}^*z_{p,k},
+\]
+where $v_{p,k}=\epsilon_{p,k}T_{p,k}\theta_{\mathrm{dir}(p,k)}$ with $\epsilon_{p,k}\in\{\pm1\}$ and a translation $T_{p,k}$, and $T_{p,k}^*$ also inserts the result in the direction $\mathrm{dir}(p,k)$.
+\item Expand $N_2$ by the rules (i)--(iii) in Step~5 of the proof below. This gives a fixed finite list of terms, each a numerical multiple of $[T_\eta\theta_i,T_\zeta\nabla_k\theta_j]$ or $[T_\eta\theta_i,T_\zeta\nabla_k^*\theta_j]$ for translations $T_\eta,T_\zeta$. Replacing the first entry of each bracket by $au$, the second by $av$, and dividing by $a^3$, defines a bilinear map $\mathcal N_a$, which satisfies
+\begin{equation}\label{ch21:eq:Na-form}
+ \begin{gathered}
+ a^{-3}N_2(aA)=\mathcal N_a(A,A),\qquad
+ \mathcal N_a(u,v)=\sum_{\lambda=1}^{m_0}c_\lambda\bigl[T_{\lambda,1}u_{i_\lambda},T_{\lambda,2}D_{a,k_\lambda}^{\pm}v_{j_\lambda}\bigr],\\
+ \norm{\mathcal N_a(u,v)}_\infty\le C\norm u_\infty\norm{D_av}_\infty ,
+ \end{gathered}
+\end{equation}
+where each term also carries the insertion in the output direction prescribed by its rule. The number $m_0$, the coefficients $c_\lambda$, the directions, and the translations do not depend on $a$, $n$, or $L$. Further differences of $\mathcal N_a(u,v)$ are distributed by the exact rules $D_{a,k}^+[u,v]=[D_{a,k}^+u,T_kv]+[u,D_{a,k}^+v]$ and $D_{a,k}^-[u,v]=[D_{a,k}^-u,T_k^{-1}v]+[u,D_{a,k}^-v]$. Every later occurrence of $\mathcal N_a$ refers to this map; it is not symmetric in its two arguments.
+\item There exist numerical constants $r_*>0$ and $C<\infty$ such that, if $\norm\theta_\infty,\norm{\theta'}_\infty\le r_*$, then
+\[
+ \norm{R_3(\theta)}_\infty\le C\norm\theta_\infty^3,\qquad
+ \norm{R_3(\theta)-R_3(\theta')}_\infty\le C\bigl(\norm\theta_\infty^2+\norm{\theta'}_\infty^2\bigr)\norm{\theta-\theta'}_\infty .
+\]
+Moreover, $R_3$ is a local analytic map whose Taylor coefficients vanish through degree two and satisfy the hypotheses of \cref{ch21:lem:stencil-analytic}. In particular, for $0<a\le1$ the physical remainder $a^{-3}R_3(aA)$ is the sum of a convergent series whose term of degree $m$ carries the factor $a^{m-3}$, $m\ge3$, and on a fixed smaller ball it satisfies the bounds of \cref{ch21:lem:stencil-analytic}, uniformly in the mesh.
+\item Let $A$ be a solution of
+\[
+ \partial_tA=\Delta_aA+\mathcal N_a(A,A)+a^{-3}R_3(aA)
+\]
+on an interval $[0,T]$ with $a\norm{A(t)}_\infty<r_*$ throughout. Let $k(t)\in\SU^{\Lat n}$ solve
+\[
+ \partial_tk_x\,k_x^{-1}=a^{-2}\phi_x\bigl(aA(t)\bigr),\qquad k_x(0)=\Id,
+\]
+for every site $x$. Then $k$ is a periodic lattice gauge transformation and, for every positive link $(x,y)$,
+\[
+ e^{aA_{xy}(t)}=k_x(t)\,\Psi^{(n)}_t\bigl(e^{aA(0)}\bigr)_{xy}\,k_y(t)^{-1},\qquad 0\le t\le T .
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We first compute the linear algebra, then expand the plaquette logarithms and the energy, convert the group gradient into logarithmic coordinates, add the gauge velocity, fix the bilinear map, bound the remainder, and finally identify the flow.
+
+\paragraph{Step 1: Hodge identities.}
+With counting measure, $\nabla_i^*=T_i^{-1}-\Id$, and differences in different directions commute. We extend a function on positive plaquettes antisymmetrically by $z_{ji}=-z_{ij}$ and $z_{ii}=0$. By summation by parts, we have
+\begin{equation}\label{ch21:eq:curl-adjoint}
+ (C_0^*z)_i=-\sum_j\nabla_j^*z_{ij},\qquad d_0^*\theta=-\sum_j\nabla_j^*\theta_j .
+\end{equation}
+We obtain
+\[
+ (C_0^*C_0\theta)_i=H_0\theta_i-\nabla_i\sum_j\nabla_j^*\theta_j,\qquad
+ (d_0d_0^*\theta)_i=\nabla_i\sum_j\nabla_j^*\theta_j,
+\]
+which proves the first identity. The component of $d_2C_0\theta$ in the directions $i<j<k$ is
+\[
+ \nabla_i(\nabla_j\theta_k-\nabla_k\theta_j)-\nabla_j(\nabla_i\theta_k-\nabla_k\theta_i)+\nabla_k(\nabla_i\theta_j-\nabla_j\theta_i)=0 .
+\]
+Finally $D_{a,i}^+=a^{-1}\nabla_i$ and $D_{a,i}^-=-a^{-1}\nabla_i^*$, so $D_{a,i}^-D_{a,i}^+=-a^{-2}\nabla_i^*\nabla_i$. This checks the signs of all three identities.
+
+\paragraph{Step 2: plaquette logarithms and the energy.}
+All matrix norms below are equivalent to the norm on $\su$, with numerical constants. We fix a complex neighborhood of zero in four copies of $\su_{\C}$ on which the product of the four exponentials lies in the domain of the identity logarithm chart. Expanding the exponentials through degree two, and then $\log(\Id+Z)=Z-Z^2/2+\cdots$, we obtain
+\[
+ \Log\bigl(e^{v_1}e^{v_2}e^{v_3}e^{v_4}\bigr)=\sum_kv_k+\frac12\sum_{k<l}(v_kv_l-v_lv_k)+\text{terms of degree at least three}.
+\]
+The linear term is $\sum_kv_{p,k}=\theta_i(x)+\theta_j(x+ae_i)-\theta_i(x+ae_j)-\theta_j(x)=(C_0\theta)_p$. The finite-word analyticity of \cref{ch02:lem:haar-and-forests} applies, since the word has four letters and all its arguments lie in the same fixed identity chart. Alternatively, the two convergent series give the coefficient bounds directly on a smaller polydisc. In either description the radius and the constants are numerical. If $w_p=\norm\theta_{\infty,p}$, the remainder has size at most $Cw_p^3$, and its derivatives of order $j\le3$ are at most $C_jw_p^{3-j}$; derivatives of higher fixed order are bounded on each smaller chart.
+
+By \cref{ch02:lem:haar-and-forests}, $q(e^X)=\abs X^2/8+O(\abs X^4)$. Substituting the expansion of the logarithm, we obtain on each plaquette
+\[
+ q(U_p)=\frac18\abs{(C_0\theta)_p}^2+\frac14\ip{(C_0\theta)_p}{\mathfrak q_p(\theta)}+O(w_p^4).
+\]
+Summing over positive plaquettes, each counted once, we obtain the expansion of the energy. These estimates are local: a link lies in four positive plaquettes, so differentiating the energy with respect to one link introduces at most four of these plaquette remainders, and no volume factor.
+
+\paragraph{Step 3: the group gradient in logarithmic coordinates.}
+For a differentiable curve $\theta(s)$,
+\[
+ \Bigl(\frac{d}{ds}e^{\theta}\Bigr)e^{-\theta}=\int_0^1e^{u\theta}\dot\theta e^{-u\theta}\,du=\mathcal J(\theta)\dot\theta ;
+\]
+the integral formula follows by differentiating the exponential series term by term. The pullback of the bi-invariant metric to logarithmic coordinates is $g_\theta=\mathcal J(\theta)^*\mathcal J(\theta)$. Since the inner product is invariant, $\ad(\theta)^*=-\ad(\theta)$ for real $\theta$, and hence
+\[
+ \mathcal J(\theta)=\Id+\tfrac12\ad(\theta)+O(\abs\theta^2),\qquad g_\theta=\Id+O(\abs\theta^2).
+\]
+We write $E_W=\sum_pq(U_p)$ and let $\nabla_\theta$ denote its gradient in the Euclidean coordinates $\theta$ (only in the next formula). The velocity of $-4\nabla E_W$ in logarithmic coordinates is $-4g_\theta^{-1}\nabla_\theta E_W$. The metric correction first contributes in degree three, and by the energy expansion of Step~2 we have
+\begin{equation}\label{ch21:eq:wilson-coordinate-force}
+ \dot\theta_{\mathrm W}=-C_0^*C_0\theta-C_0^*\mathfrak q(\theta)-D\mathfrak q(\theta)^*C_0\theta+O_{\mathrm{loc}}(\theta^3),
+\end{equation}
+where $O_{\mathrm{loc}}(\theta^3)$ denotes a local analytic map vanishing to third order. The linear term $-\ad(\theta)/2$ of $\mathcal J^{-1}$ cannot be dropped unless the group gradient is also converted: the two corrections cancel only in the combination $g_\theta^{-1}=(\mathcal J^*\mathcal J)^{-1}$.
+
+We now verify the formula for $D\mathfrak q(\theta)^*$. Varying the $k$th entry of a plaquette by $\delta v_k$ changes $\mathfrak q_p$ by
+\[
+ \frac12\sum_{l>k}[\delta v_k,v_l]+\frac12\sum_{l<k}[v_l,\delta v_k].
+\]
+The invariant inner product satisfies $\ip y{[h,v]}=\ip h{[v,y]}$ and $\ip y{[v,h]}=\ip h{[y,v]}$. Pairing with $y_p$, we obtain exactly $\ip{\delta v_k}{z_{p,k}}$. Since $\delta v_k=\epsilon_{p,k}T_{p,k}\delta\theta_{\mathrm{dir}(p,k)}$, transposing gives $\epsilon_{p,k}T_{p,k}^*z_{p,k}$, including the insertion in the direction $\mathrm{dir}(p,k)$. Adding the four entries and all plaquettes containing a given link proves the formula.
+
+\paragraph{Step 4: the gauge velocity.}
+If a lattice gauge transformation has velocity $\dot k_xk_x^{-1}=\phi_x$, then differentiating $k_xU_{xy}k_y^{-1}$ and multiplying on the right by its inverse gives the link velocity $\phi_x-\Ad(U_{xy})\phi_y$. For fixed $\phi$, the corresponding logarithmic velocity on the link $(x,x+ae_i)$ is
+\[
+ \begin{split}
+ &\bigl(\Id-\tfrac12\ad(\theta_i)+O(\abs{\theta_i}^2)\bigr)\bigl(\phi_x-\phi_{x+ae_i}-[\theta_i,\phi_{x+ae_i}]+O(\abs{\theta_i}^2\abs\phi)\bigr)\\
+ &\qquad=(d_0\phi)_i-\tfrac12[\theta_i,\phi_x+\phi_{x+ae_i}]+O_{\mathrm{loc}}(\abs\theta^2\abs\phi).
+ \end{split}
+\]
+We now set $\phi=-d_0^*\theta$. The linear part is $-d_0d_0^*\theta$ and the quadratic part is $G_2$. Combining this with \eqref{ch21:eq:wilson-coordinate-force} and the identity $C_0^*C_0+d_0d_0^*=H_0$ proves the linear part $-H_0\theta$ and the formula for $N_2$. We define $R_3$ as the logarithmic velocity of part (3) minus $-H_0\theta+N_2(\theta)$.
+
+\paragraph{Step 5: the bilinear map.}
+We specify the expansion of $N_2$ by explicit rules, so that no choice of polarization is left to later applications. We write $T_\eta=\prod_{j=1}^3T_j^{\eta_j}$ for $\eta\in\Z^3$, and apply the rules in the following order.
+\begin{enumerate}
+\item[(i)] Expand $-C_0^*\mathfrak q$ using \eqref{ch21:eq:curl-adjoint}, the antisymmetric extension, and the six terms $[v_k,v_l]/2$, $k<l$. For each resulting outer $\nabla_j^*$ use, in the order displayed, the two terms
+\[
+ \nabla_j^*[u,v]=[\nabla_j^*u,T_j^{-1}v]+[u,\nabla_j^*v].
+\]
+In the first of these terms, move the difference into the second entry of the bracket by antisymmetry, keeping the minus sign.
+\item[(ii)] Expand $-D\mathfrak q(\theta)^*C_0\theta$ using the formula for the adjoint in part (3), writing each $v_{p,l}$ as its signed translated link variable and each component of $C_0\theta$ as $\nabla_i\theta_j-\nabla_j\theta_i$. Distribute the translations over the brackets.
+\item[(iii)] Expand $G_2$ using $d_0^*\theta=-\sum_j\nabla_j^*\theta_j$, and distribute its two translations.
+\end{enumerate}
+Within each rule, order the directions and the entries increasingly, and keep repeated terms. This produces one fixed finite list. Every entry is a numerical multiple of $[T_\eta\theta_i,T_\zeta\nabla_k\theta_j]$ or $[T_\eta\theta_i,T_\zeta\nabla_k^*\theta_j]$; these rules, and not a symmetrization, define the two entries. The product identity in rule (i) is exact, since both sides equal $[T_j^{-1}u,T_j^{-1}v]-[u,v]$. The number of entries and their integer translations do not depend on $n$ or $L$. The finite sum is read componentwise, and each term carries the insertion in the output direction prescribed by its rule.
+
+In this list, we replace the first entry of each bracket by $au$ and the second by $av$, and divide by $a^3$. Since $\nabla_k=aD_{a,k}^+$ and $\nabla_k^*=-aD_{a,k}^-$, the result has the form \eqref{ch21:eq:Na-form}, and $a^{-3}N_2(aA)=\mathcal N_a(A,A)$ because the list is an exact expansion of the quadratic map $N_2$. The inequality $\abs{[X,Y]}\le\abs X\abs Y$ and the fact that translations are isometries give the bound in \eqref{ch21:eq:Na-form}. A further forward difference of a bracket is distributed by
+\[
+ D_{a,k}^+[u,v]=\frac{[T_ku,T_kv]-[u,v]}{a}=[D_{a,k}^+u,T_kv]+[u,D_{a,k}^+v],
+\]
+and a backward difference by $D_{a,k}^-[u,v]=[D_{a,k}^-u,T_k^{-1}v]+[u,D_{a,k}^-v]$. Iterating, we obtain the exact rules at each fixed order.
+
+\paragraph{Step 6: the remainder.}
+The logarithmic velocity $\mathcal J(\theta)^{-1}(-4\nabla E_W+G_U\phi)$ at a link is an analytic function of the link variables in a fixed finite neighborhood of that link, with the same form at every link. Indeed, the gradient of $E_W$ at a link involves the four plaquettes containing it, and $\phi$ involves the links at the two endpoints. By Step~2, by the analyticity of $\mathcal J^{-1}$ and of $\Ad$ near the identity, and by the Cauchy estimates on a fixed complex polydisc, $R_3$ is a local analytic map whose homogeneous parts satisfy $\norm{P_{m,e}}_{\mathrm{coeff}}\le K_0K_1^m$. Its Taylor coefficients vanish through degree two by Steps~3 and~4. For $0<a\le1$ we have
+\begin{equation}\label{ch21:eq:physical-cubic-series}
+ a^{-3}R_{3,e}(aA)=\sum_{m\ge3}a^{m-3}P_{m,e}(A),\qquad \norm{P_{m,e}}_{\mathrm{coeff}}\le K_0K_1^m,
+\end{equation}
+where $P_{m,e}$ is homogeneous of degree $m$ in the stencil of $e$. We choose $r_*$ so that $K_1r_*\le\eta<1$ for a fixed $\eta$. \Cref{ch21:lem:stencil-analytic} with $a=1$ implies the two bounds on $R_3$ in part (5). Explicitly, by Taylor's formula with integral remainder, we have
+\[
+ \abs{R_{3,e}(\theta)}\le C\max_{f}\abs{\theta_f}^3,\qquad
+ \norm{DR_{3,e}(\theta)}\le C\max_f\abs{\theta_f}^2,
+\]
+where the maxima are over the stencil of $e$. Integrating the second bound along the segment from $\theta'$ to $\theta$, which stays in the chart, and using $((1-u)b+uc)^2\le b^2+c^2$ for $b,c\ge0$, we obtain the difference bound. Bounded incidence makes the constants independent of the number of links. \Cref{ch21:lem:stencil-analytic} with $0<a\le1$ implies the bounds on the physical remainder. On $K_1a\norm A_\infty\le\eta$, its $j$th field derivative is at most $C_{j,\eta}\norm A_\infty^{3-j}$ for $j\le3$ and $C_{j,\eta}a^{j-3}$ for $j>3$, and its spatial differences are finite sums of products of differences of $A$ with these field derivatives, with no inverse power of $a$ left over. The factors $a^{m-3}$ in \eqref{ch21:eq:physical-cubic-series} are nonnegative powers of $a$ for $m\ge3$ and $a\le1$.
+
+\paragraph{Step 7: identification with the Wilson flow.}
+On a finite lattice the Wilson vector field is smooth and gauge equivariant: the energy is gauge invariant, and the product metric is invariant under the action of each fixed gauge transformation. Let $A$ be as in part (6). We solve $\dot k_xk_x^{-1}=\lambda_x$ with $\lambda=a^{-2}\phi(aA)$ and $k_x(0)=\Id$. The matrix integral equation has a convergent Picard series on every bounded time interval, since its $m$th iterated integral is at most $(\int\norm\lambda)^m/m!$. Since $\lambda_x$ is skew-Hermitian and traceless, $k_x^*k_x=\Id$ and $\det k_x=1$ are preserved, and periodic coefficients give a periodic gauge transformation. In the variable $s=t/a^2$, the substitution $\theta=aA$ turns the equation of part (6) into $\partial_s\theta=-H_0\theta+N_2(\theta)+R_3(\theta)$, which by part (3) says that the links $U(t)=e^{aA(t)}$ move with velocity equal to the Wilson velocity (with factor $4/a^2$ in the variable $t$) plus the gauge velocity generated by $\lambda$. Differentiating $k_x^{-1}U_{xy}k_y$ cancels the gauge velocity, and the remaining velocity is the Wilson vector field with factor $4/a^2$, by gauge equivariance; the initial links are $e^{aA(0)}$. By uniqueness for this smooth finite-dimensional ordinary differential equation (for example by the local Lipschitz integral inequality), $k^{-1}Uk=\Psi^{(n)}_t(e^{aA(0)})$, which is the claimed formula. The chart is needed only to define the damping generator, and no coupling enters.
+\end{proof}
+
+Substituting $\theta=aA$ and $s=t/a^2$ into part (3) shows that the equation of part (6) is \eqref{ch21:eq:intro-equation} with $F_a(A)=a^{-3}R_3(aA)$, without approximation. We call the solution $A$ in part (6) the \emph{damped representative} of the Wilson flow started from $e^{aA(0)}$, and $k$ its \emph{damping gauge transformation}. The gauge velocity added in part (3) is the lattice analogue of the gauge damping of Zwanziger \cite{Zwanziger1981} and DeTurck \cite{DeTurck1983}. By \eqref{ch21:eq:curl-adjoint}, $\phi=-d_0^*\theta=\sum_j\nabla_j^*\theta_j$, so the generator of the damping gauge transformation, which we call the \emph{physical damping generator}, is
+\begin{equation}\label{ch21:eq:lattice-damping-generator}
+ \lambda_a=a^{-2}\phi(aA)=-\sum_jD_{a,j}^-A_j ,
+\end{equation}
+a linear function of $A$.
+
+\section{Linear and quadratic flow data}\label{ch21:sec:data}
+
+We recall the weighted norms of \cref{ch01:def:enhancement}. Throughout the rest of this section $1/2<\alpha<2/3$, and
+\[
+ \beta=\alpha-\tfrac12,\qquad \kappa=1-\tfrac32\alpha ;
+\]
+in the applications $\alpha=\alpflow$. Fix a horizon $T>0$ and write $v_a(t)=t+a^2$. For paths $x,y$ on $[0,T]$ with values in fields on $\Lat n$, and for a field $f$, set
+\begin{equation}\label{ch21:eq:flow-norms}
+ \begin{split}
+ \Xnorm{\alpha}{a}(x)&=\sup_{0\le t\le T}\bigl\{v_a(t)^{\alpha/2}\norm{x(t)}_\infty+v_a(t)^{(\alpha+1)/2}\norm{D_ax(t)}_\infty\bigr\},\\
+ \Ynorm{\alpha}{a}(y)&=\sup_{0\le t\le T}\bigl\{v_a(t)^{\beta}\norm{y(t)}_\infty+v_a(t)^{\alpha}\norm{D_ay(t)}_\infty\bigr\},\\
+ \Hnorm{\sigma}{a}(f)&=\sup_{0\le t\le T}\bigl\{v_a(t)^{\sigma/2}\norm{P^a_tf}_\infty+v_a(t)^{(\sigma+1)/2}\norm{D_aP^a_tf}_\infty\bigr\},\qquad 0<\sigma<1-\alpha .
+ \end{split}
+\end{equation}
+The horizon is part of the norms; when it matters we say that a bound holds on $[0,T]$. Each norm controls a value and every first difference, and translations do not change it. For paths $u,v$ we write
+\[
+ \Duhamel a(u,v)(t)=\int_0^tP^a_{t-s}\mathcal N_a\bigl(u(s),v(s)\bigr)\,ds,\qquad
+ \Polarized a(u,v)=\Duhamel a(u,v)+\Duhamel a(v,u),
+\]
+with the bilinear map $\mathcal N_a$ of \cref{ch21:lem:wilson-local-algebra}; in general $\Duhamel a(u,v)\neq\Duhamel a(v,u)$.
+
+\begin{definition}\label{ch21:def:two-grade-datum}
+Fix $L,T>0$ and $\alpha$ as above. Let $a=L/n$ and let $A_0$ be a field on $\Lat n$. The \emph{flow data} of $A_0$ on $[0,T]$ are the linear heat evolution and the quadratic Picard term
+\[
+ x_a(t)=P^a_tA_0,\qquad y_a(t)=\Duhamel a(x_a,x_a)(t),\qquad 0\le t\le T,
+\]
+and we write $\norm{(x_a,y_a)}_{\mathrm{fl},a}=\Xnorm{\alpha}{a}(x_a)+\Ynorm{\alpha}{a}(y_a)$. The equation associated with $A_0$ is
+\begin{equation}\label{ch21:eq:full-equation}
+ \partial_tA=\Delta_aA+\mathcal N_a(A,A)+a^{-3}R_3(aA),\qquad A(0)=A_0,
+\end{equation}
+considered as long as $a\norm{A(t)}_\infty<r_*$. Differences of flow data on the same lattice are measured by the same two norms applied to the differences of the paths.
+
+For comparisons between different lattices, let $I_a$ be the continuous cardinal interpolation of \cref{ch13:lem:cardinal-columns} on $\Lat n$, applied to each component of a field on positive links, each link being anchored at its starting vertex. It is applied to the value array of a path and, separately, to each of its difference arrays $D^{\pm}_{a,j}$. For flow data $(x,y)$ on the mesh $a$ and $(\widetilde x,\widetilde y)$ on the mesh $\widetilde a$, set
+\begin{equation}\label{ch21:eq:comparison-metric}
+ \begin{split}
+ d_T\bigl((x,y),(\widetilde x,\widetilde y)\bigr)=\sup_{0<t\le T}\Bigl\{&t^{\alpha/2}\norm{I_ax(t)-I_{\widetilde a}\widetilde x(t)}_\infty\\
+ &+t^{(\alpha+1)/2}\max_{j,\pm}\norm{I_a(D^{\pm}_{a,j}x(t))-I_{\widetilde a}(D^{\pm}_{\widetilde a,j}\widetilde x(t))}_\infty\\
+ &+t^{\beta}\norm{I_ay(t)-I_{\widetilde a}\widetilde y(t)}_\infty\\
+ &+t^{\alpha}\max_{j,\pm}\norm{I_a(D^{\pm}_{a,j}y(t))-I_{\widetilde a}(D^{\pm}_{\widetilde a,j}\widetilde y(t))}_\infty\Bigr\}.
+ \end{split}
+\end{equation}
+The interpolated difference array $I_a(D^{\pm}_{a,j}x)$ is a separate component of this comparison; it is not the derivative of $I_ax$. The definition involves neither a choice of gauge nor a comparison of the maps $\mathcal N_a$ on different lattices.
+\end{definition}
+
+We record four elementary properties.
+
+\emph{Interpolation.} The one-dimensional cardinal weight $\zeta$ of \cref{ch13:lem:cardinal-columns} is nonnegative and satisfies $\sum_{m\in\Z}\zeta(u-m)=1$. Multiplying three such identities and periodizing shows that the weights in each row of $I_a$ are nonnegative and sum to one, so $\norm{I_af}_\infty\le\norm f_\infty$. This applies separately to each difference component, and it uses no derivative estimate for an interpolant. The maps $I_a$ do not depend on time.
+
+\emph{Behavior at time zero.} On a fixed lattice all arrays are finite dimensional and the heat matrices are continuous in $t$, so $x(t)$, $D^{\pm}_{a,j}x(t)$, $y(t)$, and $D^{\pm}_{a,j}y(t)$ are continuous and bounded on $[0,T]$. Since the four weights in \eqref{ch21:eq:comparison-metric} have positive exponents, each weighted component of $d_T$ extends continuously by zero to $t=0$.
+
+\emph{Comparison of weights.} Since $t^c\le(t+a^2)^c$ for $c>0$, the interpolation bound implies
+\[
+ \begin{split}
+ \sup_{0<t\le T}\Bigl\{&t^{\alpha/2}\norm{I_ax(t)}_\infty+t^{(\alpha+1)/2}\max_{j,\pm}\norm{I_a(D^{\pm}_{a,j}x(t))}_\infty\\
+ &+t^\beta\norm{I_ay(t)}_\infty+t^\alpha\max_{j,\pm}\norm{I_a(D^{\pm}_{a,j}y(t))}_\infty\Bigr\}\le\norm{(x,y)}_{\mathrm{fl},a}.
+ \end{split}
+\]
+In particular, bounds in the norms with weights $t+a^2$ imply bounds in the weights of $d_T$; the reverse does not hold uniformly near $t=0$. The local existence arguments below use the norms with weights $t+a^2$.
+
+\emph{Exactness.} On a fixed lattice, the substitution $\theta=aA$, $s=t/a^2$ in \cref{ch21:lem:wilson-local-algebra}(3) gives \eqref{ch21:eq:full-equation} without approximation, and the quadratic Duhamel term generated by $A_0$ in this equation is $y_a$, with the map $\mathcal N_a$ fixed there.
+
+\section{Local existence for the Wilson flow}\label{ch21:sec:local}
+
+We first explain the choice of exponents. Suppose that a field satisfies $\norm{A(t)}_\infty\lesssim t^{-\alpha/2}$ and $\norm{D_aA(t)}_\infty\lesssim t^{-(\alpha+1)/2}$, as the linear heat evolution of initial data of regularity $-\alpha$ does. Then the sources in \eqref{ch21:eq:full-equation} have the following sizes:
+\[
+ \begin{array}{c|c|c}
+ \text{source}&\text{size}&\text{integrable at }t=0\\ \hline
+ \mathcal N_a(A,A)&t^{-\alpha-1/2}&\text{no, since }\alpha>1/2\\
+ a^{-3}R_3(aA)&t^{-3\alpha/2}&\text{yes, since }\alpha<2/3
+ \end{array}
+\]
+The Duhamel integral of the cubic term has size $t^{1-3\alpha/2}=t^\kappa$. The quadratic term is too singular to be integrated with these bounds, and its Duhamel integral cannot be estimated from bounds on $x_a$ alone. This is why the quadratic Picard term $y_a$ is part of the data: it is the Duhamel integral of the most singular source, and in the applications its bound is proved in \cref{ch23:chapter,ch24:chapter,ch25:chapter} using the probabilistic structure of $x_a$. After $x_a$ and $y_a$ are subtracted, every remaining source is bounded by a multiple of $(t+a^2)^{-3\alpha/2}$ (see the table in the proof below), and the remainder is of order $(t+a^2)^\kappa$. The restriction $\alpha>1/2$ corresponds to the regularity of the initial data in the applications (see \cref{s3:flow}), and it makes $\beta=\alpha-1/2$ positive.
+
+\begin{lemma}\label{ch21:lem:source-convolution}
+Let $0<p<1$, $a^2\le T\le1/2$, and $K\ge0$, and let $f$ be a measurable path on $[0,T]$ with values in fields on $\Lat n$ and $\norm{f(t)}_\infty\le K(t+a^2)^{-p}$ for $0\le t\le T$. Then $z(t)=\int_0^tP^a_{t-s}f(s)\,ds$ satisfies, for $0\le t\le T$,
+\begin{equation}\label{ch21:eq:source-convolution}
+ \norm{z(t)}_\infty\le C_{p,L}K(t+a^2)^{1-p},\qquad
+ \norm{D_az(t)}_\infty\le C_{p,L}K(t+a^2)^{1/2-p}.
+\end{equation}
+One may take $C_{p,L}=6(1+C_L)/(1-p)$, where $C_L$ depends only on $L$; in particular $C_{p,L}$ is bounded uniformly for $p$ in each interval $(0,1-\delta]$, $\delta>0$.
+\end{lemma}
+
+\begin{proof}
+Since the heat kernel is nonnegative with mass one, $P^a_s$ contracts the supremum norm, and
+\[
+ \norm{z(t)}_\infty\le K\int_0^t(s+a^2)^{-p}\,ds\le\frac{K}{1-p}(t+a^2)^{1-p}.
+\]
+By \cref{ch13:lem:heat-and-chaining} with one difference and horizon one, $\norm{D_aP^a_sh}_\infty\le C_L(s+a^2)^{-1/2}\norm h_\infty$ for $0\le s\le1$, where $C_L$ depends only on $L$; this applies since $0\le t-s\le T\le1/2$. Hence
+\[
+ \norm{D_az(t)}_\infty\le C_LK\int_0^t(t-s+a^2)^{-1/2}(s+a^2)^{-p}\,ds .
+\]
+The integral is bounded by a multiple of $(t+a^2)^{1/2-p}$ by \cref{ch13:lem:weighted-convolution}, whose hypotheses are $0\le p<1$ and exponent $1/2<1$. To see the dependence on $p$, we split the integral at $s=t/2$. For $s\le t/2$ we have $t-s+a^2\ge(t+a^2)/2$, and the integral of $(s+a^2)^{-p}$ over $[0,t/2]$ is at most $(t+a^2)^{1-p}/(1-p)$. For $s\ge t/2$ we have $(s+a^2)^{-p}\le2^p(t+a^2)^{-p}$, and the integral of $(t-s+a^2)^{-1/2}$ over $[t/2,t]$ is at most $2(t+a^2)^{1/2}$. Combining the two parts, we obtain
+\[
+ \int_0^t(t-s+a^2)^{-1/2}(s+a^2)^{-p}\,ds\le\Bigl(\frac{\sqrt2}{1-p}+2^{p+1}\Bigr)(t+a^2)^{1/2-p}\le\frac{6}{1-p}(t+a^2)^{1/2-p}.
+\]
+Measurable sources with the stated bound are integrable since $a>0$, and no other property of $f$ is used.
+\end{proof}
+
+\begin{theorem}\label{ch21:thm:enhanced-local-flow}
+Fix $L>0$, $1/2<\alpha<2/3$, and $R<\infty$, and let $\kappa=1-3\alpha/2$. There exist $T_R\in(0,1]$, $a_R>0$, and $C_R<\infty$, depending only on $L$, $\alpha$, $R$, and the stencil and chart of \cref{ch21:lem:wilson-local-algebra}, such that the following holds for every mesh $a=L/n\le a_R$. Let $A_0$ be a field on $\Lat n$ whose flow data on $[0,T_R]$ satisfy $\norm{(x_a,y_a)}_{\mathrm{fl},a}\le R$. Then \eqref{ch21:eq:full-equation} has a unique solution on $[0,T_R]$ of the form $A_a=x_a+y_a+r_a$ with $r_a(0)=0$ and finite remainder norm
+\begin{equation}\label{ch21:eq:remainder-norm}
+ \norm r_{\mathsf R_a}=\sup_{0\le t\le T_R}\bigl\{(t+a^2)^{-\kappa}\norm{r(t)}_\infty+(t+a^2)^{1/2-\kappa}\norm{D_ar(t)}_\infty\bigr\},
+\end{equation}
+and $\norm{r_a}_{\mathsf R_a}\le C_R$. Uniqueness holds among mild solutions with these flow data and finite remainder norm.
+
+Let $A_0'$ be a second field on $\Lat n$ whose flow data $(x'_a,y'_a)$ satisfy the same bound, the two fields being compared as arrays, without a gauge transformation between them, and let $d_a=\Xnorm{\alpha}{a}(x_a-x'_a)+\Ynorm{\alpha}{a}(y_a-y'_a)$. Then
+\[
+ \norm{r_a-r'_a}_{\mathsf R_a}\le C_Rd_a,\qquad
+ \sup_{s\le t\le T_R}\norm{A_a(t)-A'_a(t)}_{C_a^1}\le C_{R,s}d_a\qquad(0<s<T_R).
+\]
+After reducing $a_R$, the whole interval lies in the logarithm chart:
+\[
+ a\sup_{t\le T_R}\norm{A_a(t)}_\infty\le Ra^{1-\alpha}+Ra^{2-2\alpha}+C_Ra(T_R+a^2)^\kappa<r_* .
+\]
+Consequently, by \cref{ch21:lem:wilson-local-algebra}(6), $e^{aA_a(t)}$ is a periodic time-dependent gauge transform, equal to the identity at $t=0$, of the Wilson flow $\Psi^{(n)}_t(e^{aA_0})$ at physical time $t$. The constants do not depend on the coupling, on $n$ beyond the restriction $a\le a_R$, or on any probability law. They depend on $R$ and $s$, and they are not uniform as $R\to\infty$ or $s\downarrow0$.
+\end{theorem}
+
+Here a mild solution is a continuous path $A$ on $[0,T_R]$ with $a\norm{A(t)}_\infty<r_*$ and $A(t)=P^a_tA_0+\int_0^tP^a_{t-s}(\mathcal N_a(A,A)+a^{-3}R_3(aA))(s)\,ds$. Uniqueness in \cref{ch21:thm:enhanced-local-flow} holds among the mild solutions $A$ for which $A-x_a-y_a$ has finite remainder norm.
+
+\begin{proof}
+We construct $r_a$ as the fixed point of a contraction on a ball for the norm \eqref{ch21:eq:remainder-norm}. The equation for $r$ is obtained by subtracting the equations satisfied by $x_a$ and $y_a$; this removes the most singular source $\mathcal N_a(x_a,x_a)$. We then check, term by term, that the remaining sources are bounded by $(t+a^2)^{-3\alpha/2}$, choose the radius, the time, and the mesh threshold in this order, and prove uniqueness, Lipschitz dependence, and the chart bound. In Steps~2--6 the cubic term enters only through the bounds \eqref{ch21:eq:cubic-physical-bounds} on the set $\{B:a\norm B_\infty\le r_*/2\}$; we use this in the proof of \cref{ch21:thm:common-enhancement-alternative-flow}.
+
+\paragraph{Step 1: bounds on the flow data.}
+We write
+\[
+ \beta=\alpha-\tfrac12,\qquad p=\tfrac32\alpha<1,\qquad \kappa=1-p,\qquad \delta=\frac{1-\alpha}{2}>0 .
+\]
+We may assume $R\ge0$, since otherwise no field satisfies the hypothesis. For a tentative $T\le1/2$ and $a^2\le T$, we set $v=t+a^2$. If the flow data satisfy $\norm{(x,y)}_{\mathrm{fl},a}\le R$ on $[0,T]$, then
+\begin{equation}\label{ch21:eq:grade-bounds}
+ \begin{array}{ll}
+ \norm{x(t)}_\infty\le Rv^{-\alpha/2},&\norm{D_ax(t)}_\infty\le Rv^{-(\alpha+1)/2},\\
+ \norm{y(t)}_\infty\le Rv^{-\beta},&\norm{D_ay(t)}_\infty\le Rv^{-\alpha},
+ \end{array}
+\end{equation}
+and these bounds include all translations. Since $v\le2T\le1$ and $\alpha/2-\beta=\delta>0$, we have in particular $\norm{x(t)+y(t)}_\infty\le2Rv^{-\alpha/2}$.
+
+\paragraph{Step 2: the equation for the remainder.}
+Recall that $F_a(A)=a^{-3}R_3(aA)$. We take $a\le1$. By \cref{ch21:lem:wilson-local-algebra}(5) and \cref{ch21:lem:stencil-analytic}(1) and (3), on the set $\{B:a\norm B_\infty\le r_*/2\}$,
+\begin{equation}\label{ch21:eq:cubic-physical-bounds}
+ \norm{F_a(B)}_\infty\le C\norm B_\infty^3,\qquad
+ \norm{F_a(B)-F_a(B')}_\infty\le C\bigl(\norm B_\infty^2+\norm{B'}_\infty^2\bigr)\norm{B-B'}_\infty,
+\end{equation}
+with $C$ independent of $a$. Since $\partial_tx=\Delta_ax$ and $\partial_ty=\Delta_ay+\mathcal N_a(x,x)$ with $x(0)=A_0$, $y(0)=0$, the path $A=x+y+r$ solves \eqref{ch21:eq:full-equation} if and only if $r(0)=0$ and $\partial_tr=\Delta_ar+\mathcal N_a(A,A)-\mathcal N_a(x,x)+F_a(A)$. Expanding $\mathcal N_a(A,A)$ by bilinearity, we obtain the source
+\begin{equation}\label{ch21:eq:remainder-source}
+ \begin{split}
+ \mathscr F_{x,y}(r)={}&\mathcal N_a(x,y)+\mathcal N_a(y,x)+\mathcal N_a(y,y)\\
+ &+\mathcal N_a(x,r)+\mathcal N_a(r,x)+\mathcal N_a(y,r)+\mathcal N_a(r,y)+\mathcal N_a(r,r)+F_a(x+y+r),
+ \end{split}
+\end{equation}
+where every occurrence of $\mathcal N_a$ uses the bilinear map fixed in \cref{ch21:lem:wilson-local-algebra}. The fixed-point equation is
+\begin{equation}\label{ch21:eq:remainder-map}
+ \mathscr M_{x,y}(r)(t)=\int_0^tP^a_{t-s}\mathscr F_{x,y}(r)(s)\,ds,\qquad r=\mathscr M_{x,y}(r).
+\end{equation}
+
+\paragraph{Step 3: bounds on the sources.}
+If $\norm r_{\mathsf R_a}\le S$, then $\norm{r(t)}_\infty\le Sv^\kappa$ and $\norm{D_ar(t)}_\infty\le Sv^{\kappa-1/2}$. By \eqref{ch21:eq:Na-form}, we have $\norm{\mathcal N_a(u,w)}_\infty\le C\norm u_\infty\norm{D_aw}_\infty$. Together with \eqref{ch21:eq:grade-bounds}, this gives the following bounds for the quadratic sources, up to a constant depending only on the stencil:
+\[
+ \begin{array}{c|c|c}
+ \text{source}&\text{amplitude}&\text{power of }v\\ \hline
+ \mathcal N_a(x,y),\ \mathcal N_a(y,x)&R^2&-p\\
+ \mathcal N_a(y,y)&R^2&-p+\delta\\
+ \mathcal N_a(x,r),\ \mathcal N_a(r,x)&RS&-p+\delta\\
+ \mathcal N_a(y,r),\ \mathcal N_a(r,y)&RS&-p+2\delta\\
+ \mathcal N_a(r,r)&S^2&-p+3\delta
+ \end{array}
+\]
+For example, in the third row $\mathcal N_a(x,r)$, with the difference on $r$, has exponent $-\alpha/2+\kappa-1/2=1/2-2\alpha=-p+\delta$, and $\mathcal N_a(r,x)$, with the difference on $x$, has exponent $\kappa-(\alpha+1)/2$, which is the same number. In the fourth row the exponents of $\mathcal N_a(y,r)$ and $\mathcal N_a(r,y)$ are $-\beta+\kappa-1/2$ and $\kappa-\alpha$, both equal to $-p+2\delta$. In the first row the exponents of $\mathcal N_a(x,y)$ and $\mathcal N_a(y,x)$ are $-\alpha/2-\alpha$ and $-\beta-(\alpha+1)/2$, both equal to $-p$. In this way each quadratic term is estimated with its arguments in the order displayed in \eqref{ch21:eq:remainder-source}.
+
+By \eqref{ch21:eq:grade-bounds} and \eqref{ch21:eq:cubic-physical-bounds}, the cubic source at $r=0$ is at most $CR^3v^{-p}$. For $r,r'$ in the ball of radius $S$, by \eqref{ch21:eq:cubic-physical-bounds} we have
+\[
+ \begin{split}
+ \norm{F_a(x+y+r)-F_a(x+y+r')}_\infty
+ &\le C\bigl\{R^2v^{-\alpha}+S^2v^{2\kappa}\bigr\}v^\kappa\norm{r-r'}_{\mathsf R_a}\\
+ &\le C(R^2+S^2)v^{-p+2\delta}\norm{r-r'}_{\mathsf R_a},
+ \end{split}
+\]
+where we used $-\alpha+\kappa=-p+2\delta$ and $v^{3\kappa}\le v^{-p+2\delta}$, the exponents differing by $2-2\alpha=4\delta>0$, with $v\le1$. Subtracting each quadratic row gives the same table with one factor $S$ replaced by $\norm{r-r'}_{\mathsf R_a}$. Bounding every positive extra power of $v$ by its maximum on $[0,T]$, we obtain
+\begin{equation}\label{ch21:eq:source-lipschitz}
+ \begin{split}
+ \norm{\mathscr F_{x,y}(0)(t)}_\infty&\le K_Rv^{-p},\\
+ \norm{\mathscr F_{x,y}(r)(t)-\mathscr F_{x,y}(r')(t)}_\infty&\le K_{R,S}(2T)^\delta v^{-p}\norm{r-r'}_{\mathsf R_a},
+ \end{split}
+\end{equation}
+where $K_R$ depends only on $R$ and the stencil and chart, and $K_{R,S}$ depends in addition on $S$.
+
+\paragraph{Step 4: choice of the parameters.}
+By \cref{ch21:lem:source-convolution} with $p=3\alpha/2$,
+\[
+ \norm{\mathscr M_{x,y}(0)}_{\mathsf R_a}\le C_{\alpha,L}K_R,\qquad
+ \norm{\mathscr M_{x,y}(r)-\mathscr M_{x,y}(r')}_{\mathsf R_a}\le C_{\alpha,L}K_{R,S}(2T)^\delta\norm{r-r'}_{\mathsf R_a}.
+\]
+We choose $S=1+2C_{\alpha,L}K_R$, and then $T_R\in(0,1/2]$ so that $C_{\alpha,L}K_{R,S}(2T_R)^\delta\le1/2$. Neither choice involves the mesh. We then reduce $a_R$ so that $a_R\le\min(1,\sqrt{T_R})$ and
+\begin{equation}\label{ch21:eq:reserved-chart}
+ Ra_R^{1-\alpha}+Ra_R^{2-2\alpha}+Sa_R(2T_R)^\kappa<r_*/2 .
+\end{equation}
+All three exponents of $a_R$ are positive. Since $v\ge a^2$, we have $av^{-\alpha/2}\le a^{1-\alpha}$, $av^{-\beta}\le a^{2-2\alpha}$, and $av^\kappa\le a(2T_R)^\kappa$, so every candidate $x+y+r$ with $\norm r_{\mathsf R_a}\le S$ satisfies $a\norm{x+y+r}_\infty<r_*/2$ for $a\le a_R$. In particular, \eqref{ch21:eq:cubic-physical-bounds} is never used outside its domain.
+
+\paragraph{Step 5: existence and uniqueness.}
+On a fixed lattice, the continuous paths $r$ on $[0,T_R]$ with $r(0)=0$ and finite $\mathsf R_a$ norm form a complete space: $v$ is bounded below by $a^2>0$, there are finitely many coordinates, and the differences are continuous linear maps. By Step~4 and the choice of $S$, $\mathscr M_{x,y}$ maps the closed ball of radius $S$ into itself and is a contraction with constant $1/2$ there. Starting from zero, successive iterates differ by at most $2^{-m}$ times the first difference, so they converge in this space to a fixed point. The same estimate gives uniqueness inside the ball. The heat convolution vanishes at $t=0$, so $r(0)=0$. This constructs the solution, and we take $C_R\ge S$.
+
+Uniqueness in the larger class of the theorem does not require an a priori bound on the radius of a second remainder. On a fixed lattice, a continuous mild solution in the chart is differentiable, since its heat integral is finite dimensional, and it satisfies the ordinary differential equation \eqref{ch21:eq:full-equation}. On a compact subinterval of the time interval on which both solutions stay in the chart, the analytic vector field has a finite Lipschitz constant $K_a$. For two solutions with the same initial value, $\sup_{u\le t}\abs{A(u)-A'(u)}\le K_at\sup_{u\le t}\abs{A(u)-A'(u)}$. Taking $K_at<1$ and restarting at time $t$ proves equality on that interval, and finitely many such intervals give equality on the whole common interval. The flow data are determined by the initial value, so this proves uniqueness among mild solutions with the given flow data and finite remainder norm. The argument needs no bound on $K_a$ that is uniform in $a$.
+
+\paragraph{Step 6: Lipschitz dependence.}
+For two flow data in the ball, \eqref{ch21:eq:grade-bounds} applies to their differences with $R$ replaced by $d_a$. In each quadratic term of \eqref{ch21:eq:remainder-source}, we write the difference by changing first the first argument and then the second. The first three terms are then bounded by $C_Rd_av^{-p}$, and the terms involving a fixed remainder of norm at most $S$ by $C_{R,S}d_av^{-p}$, since $v\le1$. For the cubic term, the difference of $x+y$ is at most $2d_av^{-\alpha/2}$ and both arguments are bounded by $(2R+S)v^{-\alpha/2}$, so by \eqref{ch21:eq:cubic-physical-bounds} its difference is also at most $C_{R,S}d_av^{-p}$. Writing $r-r'=(\mathscr M_{x,y}(r)-\mathscr M_{x',y'}(r))+(\mathscr M_{x',y'}(r)-\mathscr M_{x',y'}(r'))$ and applying \cref{ch21:lem:source-convolution} to the first difference and the contraction estimate to the second, we obtain
+\[
+ \norm{r-r'}_{\mathsf R_a}\le C_{R,S,\alpha,L}d_a+\tfrac12\norm{r-r'}_{\mathsf R_a}.
+\]
+We enlarge $C_R$ to absorb the factor two. On $[s,T_R]$ all weights in \eqref{ch21:eq:grade-bounds} and in \eqref{ch21:eq:remainder-norm} are bounded by constants depending only on $s$, $R$, $\alpha$, and $L$. Adding the bounds for $x-x'$, $y-y'$, and $r-r'$, we obtain the estimate for $\norm{A(t)-A'(t)}_{C_a^1}$.
+
+\paragraph{Step 7: the chart and the identification.}
+Since the value bounds for $x$ and $y$ decrease in time and the value bound for the remainder increases, we have
+\[
+ a\sup_{t\le T_R}\norm{x(t)+y(t)+r(t)}_\infty\le Ra^{1-\alpha}+Ra^{2-2\alpha}+C_Ra(T_R+a^2)^\kappa .
+\]
+If necessary we reduce $a_R$ again after the last enlargement of $C_R$, so that this bound is less than $r_*$ on the whole interval. The last term is of order $a$; it is not replaced by its smaller value at $t=0$. Part (6) of \cref{ch21:lem:wilson-local-algebra} now applies on $[0,T_R]$ and identifies $e^{aA_a(t)}$ with the gauge transform of the Wilson flow by the periodic damping gauge transformation, which is the identity at $t=0$. All choices above have the stated dependence. The proof gives $T_R\le1/2$ and $a_R\le\min(1,\sqrt{T_R})$.
+\end{proof}
+
+\section{Bilinear estimates for the Duhamel integral}\label{ch21:sec:bilinear}
+
+The probabilistic estimates of \cref{ch23:chapter,ch24:chapter,ch25:chapter} decompose the flow data into many pieces and estimate the Duhamel terms of their products. The following lemma bounds such a term when one argument is a heat path with the regularity of $x_a$ and the other a heat path with the better exponent $\sigma<1-\alpha$. Since $\mathcal N_a$ is not symmetric, we estimate $\Duhamel a(u,v)$ and $\Duhamel a(v,u)$ separately.
+
+\begin{lemma}\label{ch21:lem:ordered-duhamel-products}
+Fix $L,T>0$, $1/2<\alpha=\alpflow<2/3$, and $0<\sigma<1-\alpha$. For every mesh $a=L/n$, $n\ge4$, and all fields $f,g$ on $\Lat n$, let $u(t)=P^a_tf$ and $v(t)=P^a_tg$. Then, with the norms \eqref{ch21:eq:flow-norms} on $[0,T]$,
+\[
+ \Ynorm{\alpha}{a}\bigl(\Duhamel a(u,v)\bigr)+\Ynorm{\alpha}{a}\bigl(\Duhamel a(v,u)\bigr)\le C_{L,T,\alpha,\sigma}(T+a^2)^{(\alpha-\sigma)/2}\,\Xnorm{\alpha}{a}(u)\,\Hnorm{\sigma}{a}(g).
+\]
+In particular the same right side bounds $\Ynorm{\alpha}{a}(\Polarized a(u,v))$. The constant depends only on $L$, $T$, $\alpha$, $\sigma$, and the stencil of $\mathcal N_a$; it does not depend on the mesh, the fields, the coupling, or any probability law. The estimate includes $t=0$, all translations in the stencil, and every first difference. For $a\le1$ it follows from heat kernel estimates uniformly in $a$; the finitely many lattices with $1<a\le L/4$ are included by a finite maximum.
+\end{lemma}
+
+\begin{proof}
+We first assume $a\le1$. The horizon $T$ is the same in the norms and in \cref{ch13:lem:heat-and-chaining}; every heat time below is $t-s\in[0,T]$, so the heat estimates are used only on this fixed horizon, with the constant mode included. Let $w(t)=t+a^2$, $K_u=\Xnorm{\alpha}{a}(u)$, and $K_g=\Hnorm{\sigma}{a}(g)$. By the definition of the norms, for $0\le s\le T$,
+\[
+ \begin{array}{ll}
+ \norm{u(s)}_\infty\le K_uw(s)^{-\alpha/2},&\norm{D_au(s)}_\infty\le K_uw(s)^{-(\alpha+1)/2},\\
+ \norm{v(s)}_\infty\le K_gw(s)^{-\sigma/2},&\norm{D_av(s)}_\infty\le K_gw(s)^{-(\sigma+1)/2}.
+ \end{array}
+\]
+By \eqref{ch21:eq:Na-form}, both $\mathcal N_a(u(s),v(s))$ and $\mathcal N_a(v(s),u(s))$ are bounded by $CK_uK_gw(s)^{-p}$, where
+\[
+ p=\frac{\alpha+\sigma+1}{2}<1 .
+\]
+The bound for $\mathcal N_a(u(s),v(s))$ uses the displayed bound on $D_av$, and the bound for $\mathcal N_a(v(s),u(s))$ uses the displayed bounds on $v$ and $D_au$.
+
+By \cref{ch13:lem:heat-and-chaining} with zero and one difference, for either Duhamel term $z$,
+\[
+ \begin{split}
+ \norm{z(t)}_\infty&\le CK_uK_g\int_0^tw(s)^{-p}\,ds\le CK_uK_gw(t)^{1-p},\\
+ \norm{D_az(t)}_\infty&\le C_{L,T}K_uK_g\int_0^t(t-s+a^2)^{-1/2}w(s)^{-p}\,ds\le C_{L,T,p}K_uK_gw(t)^{1/2-p}.
+ \end{split}
+\]
+In the last inequality we used \cref{ch13:lem:weighted-convolution}, whose hypotheses are $0<p<1$ and exponent $1/2<1$. The weight of the value in $\Ynorm{\alpha}{a}$ adds $\beta=\alpha-1/2$, and the weight of the difference adds $\alpha$; both resulting powers of $w(t)$ equal $(\alpha-\sigma)/2>0$. Their suprema on $[0,T]$ are bounded by $(T+a^2)^{(\alpha-\sigma)/2}$. At $t=0$ both integrals vanish. Every translation in the stencil is an isometry and commutes with the heat semigroup and with differences. Adding the bounds for $\Duhamel a(u,v)$ and $\Duhamel a(v,u)$ proves the inequality, and the triangle inequality implies the bound for $\Polarized a$. For $a\le1$ the constant consists of the constant of the stencil, the two heat kernel constants on the horizon $T$, and the constant of the scalar convolution estimate.
+
+It remains to include $a>1$ at the fixed side $L$. Let
+\[
+ \mathcal I_L=\{n\in\N:4\le n<L\},\qquad a_n=L/n .
+\]
+This finite set consists of the possible coarse lattices, and it is empty when $L\le4$. The formula \eqref{ch21:eq:Na-form} and its bound hold for every $a>0$, since they use no smallness of $a$; let $C_{\mathrm{st}}$ be the constant in that bound. For every field $h$, each difference satisfies $\norm{D^{\pm}_{a,j}h}_\infty\le2a^{-1}\norm h_\infty$, since translations preserve the supremum, and the heat semigroup contracts the supremum. Hence, for the two argument orders displayed below,
+\[
+ \norm{\mathcal N_a(P^a_sf,P^a_sg)}_\infty,\ \norm{\mathcal N_a(P^a_sg,P^a_sf)}_\infty\le2C_{\mathrm{st}}a^{-1}\norm f_\infty\norm g_\infty .
+\]
+For either Duhamel term $z$, we obtain
+\[
+ \norm{z(t)}_\infty\le2C_{\mathrm{st}}Ta^{-1}\norm f_\infty\norm g_\infty,\qquad\norm{D_az(t)}_\infty\le2a^{-1}\norm{z(t)}_\infty,
+\]
+and the second inequality holds for all translated difference components. With $\beta=\alpha-1/2>0$ and $\eta=(\alpha-\sigma)/2>0$, the two weights of $\Ynorm{\alpha}{a}$ are maximal at $t=T$. The terms at $t=0$ of the input norms give $K_u\ge a^\alpha\norm f_\infty$ and $K_g\ge a^\sigma\norm g_\infty$. The sum of the two output norms is then at most
+\begin{equation}\label{ch21:eq:coarse-ordered-product}
+ 4C_{\mathrm{st}}Ta^{-1-\alpha-\sigma}\bigl\{(T+a^2)^\beta+2a^{-1}(T+a^2)^\alpha\bigr\}K_uK_g .
+\end{equation}
+We define
+\[
+ C_{\mathrm{coarse}}=\max_{n\in\mathcal I_L}4C_{\mathrm{st}}Ta_n^{-1-\alpha-\sigma}\bigl\{(T+a_n^2)^{\beta-\eta}+2a_n^{-1}(T+a_n^2)^{\alpha-\eta}\bigr\},
+\]
+with value zero if $\mathcal I_L$ is empty. It is finite and depends only on $L$, $T$, $\alpha$, $\sigma$, and the stencil, and \eqref{ch21:eq:coarse-ordered-product} is at most $C_{\mathrm{coarse}}(T+a^2)^\eta K_uK_g$ on every coarse lattice. Taking the maximum of $C_{\mathrm{coarse}}$ and the constant for $a\le1$ proves the lemma.
+\end{proof}
+
+\section{Gauge transformations, energy, and loop observables}\label{ch21:sec:gauge}
+
+We next control changes of gauge, holonomies, the lattice energy, and exponential transforms of bounded observables.
+
+For a closed lattice path based at $z$, the holonomy of a configuration changes by conjugation at $z$ under a lattice gauge transformation, so only conjugation-invariant functions of it, such as characters, are gauge invariant. For a smooth connection $b$ and a smooth gauge transformation $k$ we use $b^k=kbk^{-1}-(dk)k^{-1}$, as in \cref{ch01:def:orbit-space}, and we write $b|_a$ for the field $(b|_a)_i(x)=b_i(x)$ obtained by restriction to the sites. The parallel transport along a path $\ell$ solves $H'(s)=H(s)b(\ell(s))\dot\ell(s)$, $H(0)=\Id$.
+
+\begin{lemma}\label{ch21:lem:local-matrix-gauge-and-loops}
+The following deterministic statements hold on the periodic lattice.
+\begin{enumerate}
+\item Let $k$ be a smooth periodic gauge transformation and $b$ a smooth connection. For a field $A$ define
+\[
+ \mathscr G_{a,k}(A)_i(x)=a^{-1}\Log\bigl(k(x)e^{aA_i(x)}k(x+ae_i)^{-1}\bigr),
+\]
+the logarithm of the lattice gauge transform of $e^{aA}$ by the restriction of $k$ to the sites. On every fixed ball $\{\norm A_{C_a^1}\le\rho\}$, for sufficiently small $a$,
+\[
+ \norm{\mathscr G_{a,k}(A)-\mathscr G_{a,k}(A')}_{C_a^1}\le C_k\norm{A-A'}_{C_a^1},\qquad
+ \norm{\mathscr G_{a,k}(b|_a)-(b^k)|_a}_{C_a^1}\le C_{k,b}a .
+\]
+The constants and the threshold for $a$ depend on $\rho$, $\norm k_{C^3}$, and, for the second bound, $\norm b_{C^2}$; they do not depend on the mesh. For a coordinate edge from $x$ to $x+ae_i$, the parallel transport of $b$ along the edge and $e^{ab_i(x)}$ differ by at most $C\norm b_{C^1}a^2$ in operator norm. The products of these matrices along a lattice path of physical length at most $\ell$ differ by at most $C_{\ell,b}a$, and so do their normalized traces.
+\item Let $A_a$ and $A'_a$ be the solutions of \cref{ch21:thm:enhanced-local-flow} for two fields $A_0,A_0'$ on the same lattice, compared as arrays, and let $d_a$ be as there. For every closed lattice path of physical length at most $\ell$ and $s\le t\le T_R$, the normalized traces of the holonomies of $\Psi^{(n)}_t(e^{aA_0})$ and $\Psi^{(n)}_t(e^{aA_0'})$ along the path differ by at most $C_{R,s,\ell}d_a$. Moreover,
+\[
+ \norm{D_a(A_a-A'_a)(t)}_\infty\le C_Rd_a\bigl\{(t+a^2)^{-(\alpha+1)/2}+(t+a^2)^{-\alpha}+(t+a^2)^{\kappa-1/2}\bigr\}.
+\]
+Let $\lambda_a=a^{-2}\phi(aA_a)$ and $\lambda'_a$ be the physical damping generators \eqref{ch21:eq:lattice-damping-generator} of the two solutions. Then $\norm{\lambda_a-\lambda'_a}_\infty\le C\norm{D_a(A_a-A'_a)}_\infty$ and $\int_0^{T_R}\norm{\lambda_a(t)-\lambda'_a(t)}_\infty\,dt\le C_Rd_a$, uniformly in $a$. The two damping gauge transformations $k,\widetilde k$ of \cref{ch21:lem:wilson-local-algebra}(6), both equal to the identity at $t=0$, satisfy $\norm{k_x(t)-\widetilde k_x(t)}_{\mathrm{op}}\le C_Rd_a$ for every site $x$ and $0\le t\le T_R$. For a closed path based at $z$, the holonomies $H_{\mathrm d}(t)$ of the damped links $e^{aA_a(t)}$ and $H_{\mathrm W}(t)$ of $\Psi^{(n)}_t(e^{aA_0})$ satisfy $H_{\mathrm d}(t)=k_z(t)H_{\mathrm W}(t)k_z(t)^{-1}$. Consequently the based holonomy matrices of the two Wilson flows along such a path differ by at most $C_{R,s,\ell}d_a$ for $s\le t\le T_R$.
+\end{enumerate}
+The constants in part (2) have the dependence of \cref{ch21:thm:enhanced-local-flow}, and depend in addition on $s$ and $\ell$ as indicated.
+\end{lemma}
+
+\begin{proof}
+We use the operator norm for matrix products; it is equivalent to the norm on $\su$ with numerical constants.
+
+\paragraph{Part (1): smooth gauge transformations.}
+We define
+\[
+ h_{a,i}(x)=k(x)k(x+ae_i)^{-1},\qquad q_{a,i}(x)=a^{-1}\Log h_{a,i}(x).
+\]
+These are defined for all sufficiently small $a$, depending on $\norm k_{C^1}$ and a fixed margin of the logarithm chart. We claim that $\norm{q_{a,i}}_{C^2}\le C_k$ and
+\begin{equation}\label{ch21:eq:sampled-gauge-generator}
+ \norm{q_{a,i}+(\partial_ik)k^{-1}}_{C^1}\le C_ka,
+\end{equation}
+where here and below $C^j$ norms of functions depending on the parameter $a$ are norms of continuous functions on $\Torus$, taken before restriction to the sites. To verify this without dividing a remainder by $a$, we set $h_i(u,x)=k(x)k(x+ue_i)^{-1}$. Then $h_i(0,x)=\Id$ and $\partial_uh_i(0,x)=-(\partial_ik)k^{-1}$. Taylor's formula with integral remainder for $\Log h_i(u,x)$ in $u$ gives \eqref{ch21:eq:sampled-gauge-generator}, using two derivatives in $u$ and one in $x$. For the bound in $C^2$, we use instead $q_{a,i}=\int_0^1\partial_u\Log h_i(ua,x)\,du$ with two spatial derivatives. These derivatives involve at most three derivatives of $k$; since $k^{-1}=k^*$, the inverse has the same derivative bounds.
+
+Let $B_i(x)=\Ad(k(x))A_i(x)$. The transformed link is $k(x)e^{aA_i(x)}k(x+ae_i)^{-1}=e^{aB_i(x)}e^{aq_{a,i}(x)}$. The function
+\[
+ F_a(B,q)=a^{-1}\Log\bigl(e^{aB}e^{aq}\bigr)=B+q+aK_a(B,q)
+\]
+has a removable singularity at $a=0$, and $K_a$ and its derivatives of fixed order are bounded on each fixed bounded set of $(B,q)$, for sufficiently small $a$. Indeed, the convergent product and logarithm series have linear term $a(B+q)$, all other terms carry at least $a^2$, and their geometric majorants can be differentiated on a smaller ball. We conclude that $\mathscr G_{a,k}(A)_i(x)=F_a(B_i(x),q_{a,i}(x))$, and the transformed links lie in the logarithm chart.
+
+For the first bound of part (1), let $A,A'$ lie in the ball. Then $B$, $D_aB$, and the corresponding quantities for $A'$ are bounded in terms of $\rho$ and $k$. We write
+\[
+ F_a(B,q)-F_a(B',q)=\int_0^1\partial_BF_a\bigl(B'+u(B-B'),q\bigr)(B-B')\,du .
+\]
+By the shifted product rule, a difference $D_a$ of this expression falls either on $B-B'$ or on the coefficient under the integral. In the second case, the integral form of the chain rule used in the proof of \cref{ch21:lem:stencil-analytic} bounds it by $C(\norm{D_aB}_\infty+\norm{D_aB'}_\infty+\norm{D_aq}_\infty)\norm{B-B'}_\infty$. It follows that the $C_a^1$ norm of the difference is at most $C_k\norm{A-A'}_{C_a^1}$. Forward and backward differences obey the same calculation, with a backward translation in place of a forward one. For a sample $A=b|_a$ of a smooth connection, \eqref{ch21:eq:sampled-gauge-generator} in $F_a=B+q+aK_a$ shows that $\mathscr G_{a,k}(b|_a)_i$ is the restriction of $\Ad(k)b_i-(\partial_ik)k^{-1}+O_{k,b}(a)=(b^k)_i+O_{k,b}(a)$, the error being of order $a$ in continuous $C^1$. Restriction to the sites preserves this bound for both differences, since $D_{a,j}^+f(x)=\int_0^1\partial_jf(x+uae_j)\,du$ and the backward difference is the average of $\partial_jf$ over the preceding segment. This proves both bounds.
+
+For the transport, let $V(s)$ solve $V'=Vb_i(x+se_i)$, $V(0)=\Id$, and let $E(s)=e^{sb_i(x)}$. The derivative of $V(s)E(a-s)$ is $V(s)(b_i(x+se_i)-b_i(x))E(a-s)$, whose outer factors are unitary. Integrating from $0$ to $a$, we obtain
+\[
+ \norm{V(a)-E(a)}_{\mathrm{op}}\le\int_0^a\norm{b_i(x+se_i)-b_i(x)}_{\mathrm{op}}\,ds\le Ca^2\norm b_{C^1}.
+\]
+Reversed edges use inverses, and $\norm{V^{-1}-E^{-1}}=\norm{V-E}$. For a product of $m$ such factors, we replace the factors one at a time; the other factors are unitary, so the errors add up to at most $mCa^2\norm b_{C^1}$, and $ma\le\ell$ gives $C_{\ell,b}a$. A normalized trace has absolute value at most the operator norm, so the same bound holds for traces.
+
+\paragraph{Part (2): holonomies and damping gauge transformations.}
+For skew-Hermitian $X,Y$, differentiating $e^{(1-u)X}e^{uY}$ in $u$, we find
+\[
+ e^X-e^Y=\int_0^1e^{(1-u)X}(X-Y)e^{uY}\,du,
+\]
+and hence $\norm{e^{aA_e}-e^{aA'_e}}_{\mathrm{op}}\le Ca\abs{A_e-A'_e}$; inverses satisfy the same bound. Telescoping along a closed path with at most $\ell/a$ links, we obtain the bound $C\ell\norm{A(t)-A'(t)}_\infty$ for the difference of the holonomies of the damped links. By \cref{ch21:thm:enhanced-local-flow} on $[s,T_R]$, this is at most $C_{R,s,\ell}d_a$. The holonomy of the Wilson flow is conjugate to the damped holonomy at the basepoint, so the two have the same trace, and the trace bound follows.
+
+Before the time weights are suppressed, Step~6 of the proof of \cref{ch21:thm:enhanced-local-flow} gives exactly
+\[
+ \norm{D_a(A-A')(t)}_\infty\le C_Rd_a\bigl\{(t+a^2)^{-(\alpha+1)/2}+(t+a^2)^{-\alpha}+(t+a^2)^{\kappa-1/2}\bigr\},
+\]
+the three terms coming from $x-x'$, $y-y'$, and $r-r'$. By \eqref{ch21:eq:lattice-damping-generator}, the damping generator is a linear combination of differences of $A$, so $\norm{\lambda_a-\lambda'_a}_\infty$ is at most a numerical constant times the last display. The three negative powers have exponents $(\alpha+1)/2$, $\alpha$, and $1/2-\kappa$, all strictly less than one. For $0\le q<1$,
+\[
+ \int_0^{T_R}(t+a^2)^{-q}\,dt\le\int_0^{T_R}t^{-q}\,dt=\frac{T_R^{1-q}}{1-q},
+\]
+which yields the bound on the integral of $\norm{\lambda_a-\lambda'_a}_\infty$, uniformly in $a$.
+
+Let $k$ and $\widetilde k$ solve $\dot k=\lambda k$ and $\dot{\widetilde k}=\lambda'\widetilde k$ with identity initial values. Direct differentiation gives
+\[
+ \frac{d}{dt}\bigl(k^{-1}\widetilde k\bigr)=k^{-1}(\lambda'-\lambda)\widetilde k,
+\]
+and the outer factors are unitary. Integrating, we obtain $\sup_x\norm{k_x(t)-\widetilde k_x(t)}_{\mathrm{op}}=\sup_x\norm{\Id-k_x(t)^{-1}\widetilde k_x(t)}_{\mathrm{op}}\le\int_0^t\norm{\lambda-\lambda'}_\infty\le C_Rd_a$. No exponential factor depending on the individual generators appears. For a closed path based at $z$, the damped links are $k_xU_{xy}k_y^{-1}$ by \cref{ch21:lem:wilson-local-algebra}(6), so $H_{\mathrm d}=k_zH_{\mathrm W}k_z^{-1}$. Undoing the two dampings adds at most $2\norm{k_z-\widetilde k_z}_{\mathrm{op}}\le2C_Rd_a$ to the difference of the damped holonomies, which implies the bound for the based holonomy matrices of the Wilson flows. Here we used that both damping gauge transformations start at the identity.
+\end{proof}
+
+\begin{lemma}\label{ch21:lem:lattice-energy}
+Write
+\[
+ \mathcal E_a(U)=\frac4a\sum_pq(U_p),\qquad F_{a,p}=a^{-2}\Log U_p,\qquad \norm{F_a}_{2,a}^2=a^3\sum_p\abs{F_{a,p}}^2 .
+\]
+There exist numerical constants $n_{\mathrm{cov}},r_{\mathrm{cov}},c_0,c,C>0$ such that the following holds for $n\ge n_{\mathrm{cov}}$. If $\abs{\Log U_p}\le r_{\mathrm{cov}}$ for every plaquette, then $c\norm{F_a}_{2,a}^2\le\mathcal E_a(U)\le C\norm{F_a}_{2,a}^2$. The Wilson flow $U(t)=\Psi^{(n)}_t(U(0))$ exists for all $t\ge0$, and $\mathcal E_a(U(t))$ is nonincreasing. If the plaquette bound holds at a time $t_0$, $\mathcal E_a(U(t_0))\le E_0$, and $aE_0\le c_0$, then $\abs{\Log U_p(t)}\le r_{\mathrm{cov}}/2$ for every plaquette and every $t\ge t_0$. No smallness of $E_0$ itself is assumed.
+\end{lemma}
+
+The normalization of $\mathcal E_a$ differs by a factor two from the lattice energy \eqref{s2:eq:lattice-energy}: $\mathcal E_a=\mathsf E_a/2$. For $U=e^{aA}$ with $A=b|_a$ the sample of a smooth connection, $\Log U_{p_{ij}(x)}=a^2F_{ij}(x)+O(a^3)$ and $q(e^X)=\abs X^2/8+O(\abs X^4)$, so $\mathcal E_a(U)$ approximates $(1/2)\sum_{i<j}\int_{\Torus}\abs{F_{ij}}^2\,dx=E_L(b)/2$ and $\mathsf E_a(U)$ approximates $E_L(b)$; see \cref{ch26:lem:lattice-energy-supplier}.
+
+\begin{proof}[Proof of \cref{ch21:lem:lattice-energy}]
+By \cref{ch02:lem:haar-and-forests}, on the principal chart of the plaquette variables, $\abs{\Log U_p}^2/(2\pi^2)\le q(U_p)\le\abs{\Log U_p}^2/8$. Since $\norm{F_a}_{2,a}^2=a^{-1}\sum_p\abs{\Log U_p}^2$, we may take $c=2/\pi^2$ and $C=1/2$. We choose any numerical $0<r_{\mathrm{cov}}<1$ and take $n_{\mathrm{cov}}=4$.
+
+On a fixed lattice the configuration space is a compact manifold and the Wilson vector field is smooth, so its flow exists for all times by the standard theorem on smooth vector fields on compact manifolds: a solution on a maximal interval with a finite endpoint would, by the bounded speed, have a limit at that endpoint, from which it could be continued. Along the flow,
+\begin{equation}\label{ch21:eq:lattice-energy-descent}
+ \frac{d}{dt}\mathcal E_a(U(t))=-\frac{16}{a^3}\norm{\nabla E_W(U(t))}_2^2\le0,\qquad E_W=\sum_pq(U_p),
+\end{equation}
+since $\mathcal E_a=4E_W/a$ and $U(t)$ moves with velocity $-(4/a^2)\nabla E_W$. An added gauge velocity contributes zero to this derivative, since $E_W$ is invariant under lattice gauge transformations at the link endpoints. Under the assumptions at $t_0$, each nonnegative plaquette term satisfies $q(U_p(t))\le aE_0/4$ for $t\ge t_0$. We fix $0<c_0\le2(1-\cos(r_{\mathrm{cov}}/4))$. Then $q(U_p(t))<1-\cos(r_{\mathrm{cov}}/4)$. Since $q(U)=1-\cos(\groupdist(U)/2)$ and this function is strictly increasing for $0\le\groupdist(U)\le2\pi$, we obtain $\groupdist(U_p(t))<r_{\mathrm{cov}}/2$. These plaquette variables avoid $-\Id$, and their principal logarithms have norm $\groupdist(U_p(t))<r_{\mathrm{cov}}/2$. This argument uses only the energy of the compact configuration; it requires no representative with small link variables and no curvature estimate at later times, and $E_0$ may be large.
+\end{proof}
+
+\begin{lemma}\label{ch21:lem:exponential-transforms}
+Let $W=(W_i)_{i=1}^m$ and $W'=(W'_i)_{i=1}^m$ be random vectors in $\R^m$ on a common probability space with $\abs{W_i},\abs{W'_i}\le1$. For a number $U\ge0$ and $u\in\C^m$ with $\sum_i\abs{u_i}\le U$,
+\[
+ \bigl\lvert\E e^{u\cdot W}-\E e^{u\cdot W'}\bigr\rvert\le e^{U}U\,\E\norm{W-W'}_\infty .
+\]
+More generally, for every event $\mathcal O$,
+\[
+ \bigl\lvert\E e^{u\cdot W}-\E e^{u\cdot W'}\bigr\rvert\le e^{U}U\,\E\bigl[\norm{W-W'}_\infty\one_{\mathcal O^c}\bigr]+2e^{U}\Prob(\mathcal O).
+\]
+For real $u$ with $\sum_i\abs{u_i}\le U$, $\E e^{u\cdot W}\ge e^{-U}$. Let $U_*>0$ satisfy $e^{U_*}-1<1/2$. On the complex neighborhood $\mathcal V=\{u:\sum_i\abs{u_i}<U_*\}$, the transform $\E e^{u\cdot W}$ has an analytic logarithm vanishing at $u=0$, and if a sequence of such transforms converges uniformly on compact subsets of $\mathcal V$, then every partial derivative of fixed order of their logarithms converges uniformly on compact subsets of $\mathcal V$. For characters of representations of dimensions $d_i$, the same statements hold with the bounds $\abs{W_i},\abs{W'_i}\le d_i$ and with $\sum_i\abs{u_i}$ replaced by $\sum_id_i\abs{u_i}$.
+\end{lemma}
+
+\begin{proof}
+The segment from $W$ to $W'$ stays in the unit cube. For complex $u$ with $\sum_i\abs{u_i}\le U$, by the fundamental theorem of calculus we have
+\[
+ \bigl\lvert e^{u\cdot W}-e^{u\cdot W'}\bigr\rvert\le\int_0^1e^{\operatorname{Re}(u\cdot((1-v)W+vW'))}\sum_i\abs{u_i}\abs{W_i-W'_i}\,dv\le e^{U}U\norm{W-W'}_\infty .
+\]
+Taking expectations, we obtain the first bound. On $\mathcal O$ each of the two integrands has modulus at most $e^{U}$, which gives the second bound. For real $u$ the integrand is at least $e^{-U}$.
+
+Since the observables are bounded, the exponential series and each of its derivatives converge uniformly on bounded sets of $u$, so $M(u)=\E e^{u\cdot W}$ is entire. Moreover $\abs{M(u)-1}\le e^{\sum_i\abs{u_i}}-1$, which is less than $1/2$ on $\mathcal V$. Hence
+\[
+ \log M(u)=\sum_{m\ge1}\frac{(-1)^{m+1}}m\bigl(M(u)-1\bigr)^m
+\]
+converges uniformly on $\mathcal V$ and vanishes at the origin. Integrating $1/w$ along the segment between two points of the disc $\{\abs{w-1}<1/2\}$ shows that the logarithms of two such transforms differ by at most twice the difference of the transforms. In particular, uniform convergence of transforms on a compact subset of $\mathcal V$ implies uniform convergence of their logarithms there. For a multi-index $\nu$ and a compact set in $\mathcal V$, we choose closed polydiscs of radii $\rho_j>0$ around its points lying in a compact subset of $\mathcal V$. The Cauchy integral formula bounds the difference of the derivatives $\partial^\nu$ at the center by $\nu!\prod_j\rho_j^{-\nu_j}$ times the supremum of the difference of the logarithms on the distinguished boundary, and the convergence of derivatives follows. For characters of dimensions $d_i$, the same calculation applies with $\sum_i\abs{u_i}$ replaced by $\sum_id_i\abs{u_i}$ and the bound $1$ replaced by $d_i$.
+\end{proof}
+
+\section{Smooth solutions of the Yang--Mills heat flow}\label{ch21:sec:continuum}
+
+In this subsection we work on the trivial periodic $\SU$ bundle over $\Torus$. For an integer $r\ge1$ let $\mathcal A^r=C^r(\Torus;\su^3)$, with the norm $\norm b_{C^r}$ given by the maximum of all component derivatives of order at most $r$; replacing it by their finite sum changes only constants depending on $r$. We write $\mathcal A^\infty=\SpaceA$ for the smooth connections. The Yang--Mills heat flow $\partial_tA_i=\sum_jD_jF_{ji}=-(d_A^*F)_i$ and its semigroup $\Flowcov$ on smooth periodic gauge orbits are as in \cref{ch01:def:orbit-space}. The DeTurck equation is
+\begin{equation}\label{ch21:eq:deturck}
+ \partial_tb_i=\Delta b_i+\sum_j\bigl\{2[b_j,\partial_jb_i]-[b_j,\partial_ib_j]+[b_j,[b_j,b_i]]\bigr\},
+\end{equation}
+and we write its right side as $\Delta b+\mathscr N(b)$, with $\mathscr N=\mathscr N_2+\mathscr N_3$ the sum of its quadratic and cubic parts. A mild solution on $[0,d]$ is a path $b\in C([0,d];\mathcal A^r)$ with $b(t)=P_tb_0+\int_0^tP_{t-s}\mathscr N(b(s))\,ds$, where $P_t$ is the continuum heat semigroup acting on each component.
+
+\paragraph{Inputs from the literature.}
+We use the following deterministic statements; page numbers refer to the arXiv versions cited. These papers work on the unit torus with a compact Lie group and the trivial bundle, and $\SU$ is allowed.
+\begin{enumerate}
+\item[(C1)] \cite[Definition~3.13, pp.~24--25, and Theorem~3.14, p.~25]{CCState2023v4}. For every initial connection in $H^1$ there exists a unique solution of the Yang--Mills heat flow in the following class: it is continuous with values in $H^1$, its curvature $F(t)$ lies in $H^1$ for $t>0$, it has a strong $L^2$ time derivative equal to $-d_A^*F$, its curvature is bounded in $L^\infty$ on compact intervals of positive times, and $t^{3/4}\norm{F(t)}_\infty$ is bounded near $t=0$. Smooth initial data give a solution that is smooth up to $t=0$. The proof of this theorem \cite[Appendix~B, p.~58]{CCState2023v4} obtains existence from Charalambous and Gross \cite[Theorem~2.5]{CharalambousGross2013} or R\aa de \cite[Theorem~1]{Rade1992}, uniqueness from \cite[Theorem~9.15]{CharalambousGross2013}, and smoothness for smooth data from \cite[Theorem~1]{Rade1992}; on the torus the boundary conditions of Charalambous and Gross are vacuous.
+\item[(C2)] \cite[Theorem~1.2 and Lemma~1.3, p.~3]{CCHeat2022v4}: local existence and uniqueness of smooth solutions of the DeTurck equation for smooth periodic initial data.
+\item[(C3)] \cite[Lemma~C.3, p.~56]{CCHeat2022v4}: for $f\in C^q$, with $q\ge0$ an integer, $\norm{P_tf}_{C^q}\le\norm f_{C^q}$ and $\norm{P_tf}_{C^{q+u}}\le C_ut^{-u/2}\norm f_{C^q}$ for $u>0$ and $0<t\le1$.
+\item[(C4)] \cite[Lemma~C.2, p.~55]{CCHeat2022v4}: $\norm{\mathscr N_2(b)}_{C^q}\le C_q\norm b_{C^q}\norm b_{C^{q+1}}$ and $\norm{\mathscr N_3(b)}_{C^q}\le C_q\norm b_{C^q}^3$, and, with $M_q=\max(\norm b_{C^q},\norm c_{C^q})$,
+\[
+ \begin{split}
+ \norm{\mathscr N_2(b)-\mathscr N_2(c)}_{C^q}&\le C_q\bigl\{M_q\norm{b-c}_{C^{q+1}}+M_{q+1}\norm{b-c}_{C^q}\bigr\},\\
+ \norm{\mathscr N_3(b)-\mathscr N_3(c)}_{C^q}&\le C_qM_q^2\norm{b-c}_{C^q}.
+ \end{split}
+\]
+\item[(C5)] \cite[(C.9) and Corollary~C.6, p.~58; Lemmas~C.12 and~C.13, p.~61]{CCHeat2022v4}: for a smooth initial datum and $0<T\le1$, a fixed point in $C([0,T];C^1)$ of the Duhamel map (C.9) belongs to $C([0,T];C^q)$ for every $q$ and is a smooth solution of the DeTurck equation on $[0,T)$; conversely, a smooth solution satisfies the Duhamel equation on each closed subinterval $[0,T']$ with $T'<T$.
+\end{enumerate}
+All connections to which we apply these statements are smooth periodic connections on the trivial $\SU$ bundle, and hence belong to $H^1$. The statements are transferred from the unit torus to $\Torus$ by
+\[
+ \widetilde b(y)=Lb(Ly),\qquad \widetilde t=t/L^2,\qquad F_{\widetilde b}(y)=L^2F_b(Ly),\qquad E_1(\widetilde b)=LE_L(b).
+\]
+Differentiating the first formula shows that both evolution equations are preserved under this change of variables, and $C^j$ norms change by the factors $L^{1+m}$, $0\le m\le j$. Constants may depend on $L$; no coupling is rescaled. With the convention of \cref{ch01:def:orbit-space}, our gauge transformation $k$ corresponds to $k^{-1}$ in \cite[(1.1), p.~2]{CCState2023v4}; the statements (C1)--(C5) involve no gauge transformation, and all gauge calculations below use our convention. The local estimates in $C^r$, the removal of the gauge fixing, and the construction of the neighborhoods in the following theorem are proved here.
+
+\begin{theorem}\label{ch21:thm:continuum-atlas}
+The following statements hold.
+\begin{enumerate}
+\item For every integer $r\ge1$ and $R<\infty$ there exists $d=d(r,R,L)>0$ such that, for every $b_0\in\mathcal A^r$ with $\norm{b_0}_{C^r}\le R$, the equation \eqref{ch21:eq:deturck} has a unique mild solution $D_\cdot b_0\in C([0,d];\mathcal A^r)$ (here $D_t$ denotes the solution map, not a covariant derivative), and, for two such initial data,
+\[
+ \sup_{t\le d}\norm{D_tb_0}_{C^r}\le2(R+1),\qquad
+ \sup_{t\le d}\norm{D_tb_0-D_tb'_0}_{C^r}\le2\norm{b_0-b'_0}_{C^r}.
+\]
+If $b_0$ is smooth, then, after reducing $d$ once if necessary (depending only on $r$, $R$, and $L$), the solution is the restriction to $[0,d]$ of a smooth solution on $[0,2d)$. If $b$ is such a smooth solution, then the solution $k$ of
+\[
+ \partial_tk=-k\,d^*b=k\sum_i\partial_ib_i,\qquad k(0)=\Id,
+\]
+is a smooth periodic gauge transformation, and $b(t)^{k(t)}=\Flowcov_t(b_0)$. Finally, for every integer $q\ge0$ there exists a polynomial $P_{q,L}$ with nonnegative coefficients such that every smooth periodic gauge transformation $k$ with $B=A^k$, for smooth connections $A$ and $B$, satisfies
+\[
+ \norm{k^{\pm1}}_{C^{q+1}}\le P_{q,L}\bigl(1+\norm A_{C^q}+\norm B_{C^q}\bigr).
+\]
+\item For every integer $r\ge1$, every finite horizon $T>0$, and every set $\mathscr K\subset\mathcal A^\infty$ that is compact in the $C^r$ topology, there exist a $C^r$-open neighborhood $\mathscr U$ of $\mathscr K$, a finite open cover $(\mathscr U_\lambda)$ of $\mathscr U$, and a partition $0=t_0<\cdots<t_Q=T$ with the following property. For every smooth $b_0\in\mathscr U_\lambda$ there exist smooth solutions $b_{\lambda,i}(s;b_0)$, $0\le s\le t_{i+1}-t_i$, of \eqref{ch21:eq:deturck}, with $b_{\lambda,0}(0;b_0)=b_0$, and smooth periodic gauge transformations $k_{\lambda,i}$ that do not depend on $b_0\in\mathscr U_\lambda$, such that
+\[
+ b_{\lambda,i+1}(0;b_0)=b_{\lambda,i}(t_{i+1}-t_i;b_0)^{k_{\lambda,i}},\qquad
+ [b_{\lambda,i}(s;b_0)]=[\Flowcov_{t_i+s}(b_0)] .
+\]
+The numbers of cover members and of intervals, the $C^r$ bounds of the $b_{\lambda,i}$, and their Lipschitz constants as maps from $\mathscr U_\lambda$, with the $C^r$ norm, to $C([0,t_{i+1}-t_i];\mathcal A^r)$ are finite and uniform on $\mathscr U$. For every $q$, the $C^q$ norms of the finitely many $k_{\lambda,i}^{\pm1}$ are bounded. These constants depend on $L$, $T$, $r$, $\mathscr K$, and the construction, and on $q$ where indicated; they do not depend on any coupling, lattice mesh, lattice side, $M$, or $J$.
+\item Fix an integer $r\ge3$ and a finite horizon $T>0$, and let $b_0,b_0'$ be smooth. As $b'_0\to b_0$ in $C^r$, or $b'_0\to b_0^h$ in $C^r$ for a fixed smooth time-independent gauge transformation $h$, every finite vector of values $W_{\ell_i,\chi_i,t}$ of loops and characters along the trajectory of $b_0'$, and the energies $\EnergyL(\Flowcov_tb'_0)$, converge to the corresponding quantities for $b_0$ uniformly for $t\in[0,T]$, and
+\[
+ \sup_{0\le t\le T}\ \inf_{k\in C^\infty(\Torus;\SU)}\norm{\Flowcov_tb_0-(\Flowcov_tb'_0)^k}_\infty\longrightarrow0 .
+\]
+The map $b_0\mapsto([\Flowcov_tb_0])_{t>0}$ from the smooth connections, with the $C^r$ topology, to $(\OrbitSpace,\WilsonTopology)$ is continuous, and hence Borel. The energy is nonincreasing along the flow, and
+\[
+ \EnergyL(\Flowcov_tb_0)\le\EnergyL(b_0)\le CL^3(K_1+K_1^2)^2,\qquad K_1=\norm{b_0}_{C^1}.
+\]
+\item If $\mathscr K$ is a set of smooth connections that is compact in the $C^3$ topology, then there exist a neighborhood $\mathscr U$ as in part (2) with $r=3$ and $\eta>0$ such that every smooth connection at $C^3$ distance less than $\eta$ from $\mathscr K$ lies in $\mathscr U$. In particular, smooth connections approaching $\mathscr K$ in $C^3$ eventually lie in $\mathscr U$; no assumption on the closure of the approximating family is needed.
+\end{enumerate}
+\end{theorem}
+
+In part (2), the members $\mathscr U_\lambda$ of the cover are neighborhoods of initial data, while the index $i$ labels time intervals; the construction is not a chart on the space of gauge orbits. On one member of the cover, the representative of the trajectory is obtained by alternating local solutions of the DeTurck equation and fixed gauge transformations:
+\begin{equation}\label{ch21:eq:atlas-diagram}
+ b_0=c_0\xrightarrow{\ D_{h_0}\ }D_{h_0}c_0\xrightarrow{\ (\cdot)^{k_0}\ }c_1\xrightarrow{\ D_{h_1}\ }D_{h_1}c_1\xrightarrow{\ (\cdot)^{k_1}\ }c_2\longrightarrow\cdots\longrightarrow c_{Q-1}\xrightarrow{\ D_{h_{Q-1}}\ }D_{h_{Q-1}}c_{Q-1},
+\end{equation}
+where $h_i=t_{i+1}-t_i$ and $c_i$ represents the orbit at time $t_i$.
+
+\begin{proof}
+We first prove the local estimates in $C^r$ and identify smooth solutions with the solutions of (C2) and (C5). Next we remove the gauge fixing and prove the bounds on gauge transformations. The neighborhoods of part (2) are then constructed around one reference trajectory, by propagating errors through \eqref{ch21:eq:atlas-diagram}, and finally around a compact family. The remaining steps prove parts (3) and (4).
+
+\paragraph{Step 1: the local solution map in $C^r$.}
+By the product rule and $\abs{[X,Y]}\le\abs X\abs Y$, for $r\ge1$ and $\norm b_{C^r},\norm c_{C^r}\le S$,
+\begin{equation}\label{ch21:eq:continuum-nonlinearity}
+ \norm{\mathscr N(b)}_{C^{r-1}}\le C_r(S^2+S^3),\qquad
+ \norm{\mathscr N(b)-\mathscr N(c)}_{C^{r-1}}\le C_r(S+S^2)\norm{b-c}_{C^r}.
+\end{equation}
+Indeed, for $\abs\nu\le r-1$, $\partial^\nu[b_j,\partial_kb_i]=\sum_{\mu\le\nu}\binom\nu\mu[\partial^\mu b_j,\partial^{\nu-\mu}\partial_kb_i]$, and both factors involve at most $r$ derivatives. For the cubic brackets, we distribute $\nu$ over the three factors. For differences, we replace one factor at a time by the corresponding factor of $b-c$ and keep the other factors at $b$ or $c$. The constants depend only on $r$ and the conventions for directions and $\su$; these formulas also give the estimates (C4).
+
+By (C3), after the rescaling to $\Torus$, for $0<h\le\min(1,L^2)$,
+\[
+ \norm{P_hf}_{C^r}\le\norm f_{C^r},\qquad\norm{P_hf}_{C^r}\le C_{r,L}h^{-1/2}\norm f_{C^{r-1}} .
+\]
+The heat semigroup is strongly continuous at zero in $C^r$: each derivative of order at most $r$ is continuous and periodic, and convolution with the positive approximate identity converges uniformly to it. For a continuous path $f$ with values in $C^{r-1}$ and bounded by $K$, the heat convolution $\int_0^tP_{t-s}f(s)\,ds$ has $C^r$ norm at most $2C_{r,L}\sqrt t\,K$. It is also continuous with values in $C^r$, including at $t=0$. To see this, we split off the upper part of the integral, of length $\eta$, whose norm is at most $2C_{r,L}\sqrt\eta\,K$. On the remaining interval the heat times are bounded below, so the kernel and all derivatives needed are continuous and bounded, and dominated convergence applies. We then let $\eta\to0$.
+
+For $R\ge0$ we set $S=2(R+1)$ and use the Banach space $C([0,2d];\mathcal A^r)$ with the supremum norm. On its closed ball of radius $S$, we consider
+\[
+ \mathscr M_{b_0}(b)(t)=P_tb_0+\int_0^tP_{t-s}\mathscr N(b(s))\,ds .
+\]
+We choose $d>0$ such that $2d\le\min(1,L^2)$ and
+\begin{equation}\label{ch21:eq:continuum-lifespan-choice}
+ 2C_{r,L}C_r\sqrt{2d}\,(S^2+S^3)\le S-R,\qquad
+ 2C_{r,L}C_r\sqrt{2d}\,(S+S^2)\le\tfrac12 .
+\end{equation}
+These choices depend only on $r$, $R$, and $L$. By \eqref{ch21:eq:continuum-nonlinearity}, the map preserves the ball and is a contraction with constant $1/2$. Its iterates converge, since successive differences form a geometric series. Subtracting the fixed-point equations for two initial data, we find
+\[
+ \sup_{t\le2d}\norm{D_tb_0-D_tb_0'}_{C^r}\le\norm{b_0-b_0'}_{C^r}+\tfrac12\sup_{t\le2d}\norm{D_tb_0-D_tb_0'}_{C^r},
+\]
+which implies the Lipschitz bound with constant two; the ball gives the size bound. Any two mild solutions in $C^r$ are bounded on a common compact interval. On an interval of length $h$, by \eqref{ch21:eq:continuum-nonlinearity}, their difference is at most $C\sqrt h$ times its supremum when the initial values agree. Choosing $h$ so that this coefficient is less than one and restarting the mild equation by the semigroup property, finitely many intervals give uniqueness. (If $R<0$ there are no initial data, and any choice made for $R=0$ will do.)
+
+\paragraph{Step 2: smooth initial data.}
+Let $b_0$ be smooth. The solution just constructed is a fixed point in $C([0,2d];C^1)$ of the map (C.9) of \cite[p.~58]{CCHeat2022v4}, and the time $2d$ corresponds to a unit-torus time at most one. By (C5) it belongs to $C([0,2d];C^q)$ for every $q$ and is a smooth solution on $[0,2d)$; conversely, a smooth solution satisfies the mild equation on every closed subinterval of its interval of definition. The local smooth existence and uniqueness of (C2) describe the same solution. Restriction to $[0,d]$ leaves a smooth solution beyond the right endpoint, which is used at the endpoints of the intervals below.
+
+\paragraph{Step 3: removal of the gauge fixing.}
+Let $v=\sum_i\partial_ib_i=-d^*b$. Expanding the curvature and the covariant derivatives gives
+\begin{equation}\label{ch21:eq:continuum-damping-identity}
+ \Delta b+\mathscr N(b)=-d_b^*F_b+d_bv .
+\end{equation}
+Indeed, in components $\sum_jD_jF_{ji}$ has linear part $\Delta b_i-\partial_iv$, quadratic part $[v,b_i]+2\sum_j[b_j,\partial_jb_i]-\sum_j[b_j,\partial_ib_j]$, and cubic part $\sum_j[b_j,[b_j,b_i]]$, and adding $(d_bv)_i=\partial_iv+[b_i,v]$ cancels the two terms $-\partial_iv$ and $[v,b_i]$.
+
+At every point, we solve $\dot k=kv$, $k(0)=\Id$. The ordered integral series converges on each finite interval on which $b$ is smooth. Its spatial derivatives also converge: after any fixed number of derivatives, their absolute majorant is a polynomial in the index of the iterated integral times the same factorially convergent series, with constants from finitely many derivatives of $v$. It follows that $k$ is smooth in space and time. Its coefficient is traceless and skew-Hermitian, and differentiating $kk^*$ and $\det k$ shows that $k\in\SU$. Uniqueness for the matrix integral equation and periodicity of $v$ give periodicity of $k$.
+
+For a time-dependent gauge transformation, we set $\lambda=\dot kk^{-1}$. Differentiating the gauge action, we find
+\begin{equation}\label{ch21:eq:continuum-moving-gauge}
+ \partial_t(b^k)=\Ad(k)\partial_tb-d_{b^k}\lambda .
+\end{equation}
+For example, the derivative of $-\partial_ik\,k^{-1}$ is $-\partial_i\lambda-[\lambda,\partial_ik\,k^{-1}]$, and combining it with the derivative $[\lambda,kb_ik^{-1}]+\Ad(k)\partial_tb_i$ of $kb_ik^{-1}$ gives the covariant term. Since $\dot k=kv$, we have $\lambda=\Ad(k)v$, and the covariance $\Ad(k)d_bv=d_{b^k}\Ad(k)v$ cancels the last term of \eqref{ch21:eq:continuum-damping-identity}. Hence $b^k$ solves the Yang--Mills heat flow with initial value $b_0$.
+
+The initial datum is a smooth periodic connection on the trivial $\SU$ bundle, so (C1) applies, and the global solution is smooth up to $t=0$. The connection $b^k$ belongs to the same solution class on the interval where it is defined: it is smooth on a compact initial time interval, its strong time derivative is given by the equation, and its curvature is bounded there, which also bounds $t^{3/4}\norm{F(t)}_\infty$ near zero. Uniqueness in (C1) implies that $b(t)^{k(t)}=\Flowcov_t(b_0)$.
+
+\paragraph{Step 4: fixed gauge transformations.}
+For a smooth time-independent gauge transformation $h$, differentiating the gauge formula, we find $F(A^h)=\Ad(h)F(A)$ and $d_{A^h}\Ad(h)z=\Ad(h)d_Az$. In particular, a fixed gauge transformation maps smooth solutions of the Yang--Mills heat flow to smooth solutions, and by the uniqueness in (C1) we have $\Flowcov_t(A^h)=\Flowcov_t(A)^h$. Time translation and uniqueness give the semigroup property. These two consequences identify the orbits on successive intervals below.
+
+If $B=A^k$, rearranging the formula for the gauge action in our convention, we obtain
+\begin{equation}\label{ch21:eq:continuum-gauge-derivatives}
+ \partial_ik=kA_i-B_ik,\qquad\partial_ik^{-1}=k^{-1}B_i-A_ik^{-1}.
+\end{equation}
+The norms of order zero of $k$ and $k^{-1}$ are fixed. Applying $\partial^\nu$ to the first identity, we obtain
+\[
+ \partial^\nu\partial_ik=\sum_{\mu\le\nu}\binom\nu\mu\bigl((\partial^\mu k)(\partial^{\nu-\mu}A_i)-(\partial^\mu B_i)(\partial^{\nu-\mu}k)\bigr).
+\]
+By induction on $\abs\nu\le q$, all derivatives of $k$ of order at most $q+1$ are bounded by a polynomial with nonnegative coefficients in $1+\norm A_{C^q}+\norm B_{C^q}$. The second identity gives the same bound for $k^{-1}$, after enlarging the polynomial. This defines $P_{q,L}$; no normalization at a point is needed. For a fixed $k$, the identity $A^k-B^k=k(A-B)k^{-1}$ and the Leibniz rule give a Lipschitz bound in $C^r$ for the action of $k$, involving at most $r$ derivatives of $k$. The inhomogeneous term of the action involves at most $r+1$ derivatives of $k$.
+
+\paragraph{Step 5: a neighborhood of one reference trajectory.}
+Fix a smooth reference $b_*\in\mathscr K$. By (C1), $A_*(t)=\Flowcov_tb_*$ is smooth on $[0,T]$; we set
+\[
+ R_*=1+\sup_{t\le T}\norm{A_*(t)}_{C^r}<\infty .
+\]
+We choose a partition whose lengths $h_i=t_{i+1}-t_i$ are at most $d(r,R_*,L)$. On the $i$th interval, let $b_i^*(s)$ be the solution of the DeTurck equation started from $A_*(t_i)$. By Step~3 and the semigroup property, there exists a smooth periodic gauge transformation $k_i^*(s)$ with $(b_i^*(s))^{k_i^*(s)}=A_*(t_i+s)$. For each $i<Q-1$ set $k_i=k_i^*(h_i)$. These fixed gauge transformations depend only on the reference and the partition, and they map the right endpoints exactly: $(b_i^*(h_i))^{k_i}=A_*(t_{i+1})$. They and their inverses have bounded derivatives of every fixed order, by smoothness and compactness, or quantitatively by \eqref{ch21:eq:continuum-gauge-derivatives}.
+
+Let $L_i\ge1$ be a Lipschitz constant in $C^r$ for the action of $k_i$, and set $K_0=1$ and $K_{i+1}=2L_iK_i$. We fix $\rho_*>0$ so small that $K_i\rho_*<1/2$ for every $i$. For $b_0$ in the open ball $\norm{b_0-b_*}_{C^r}<\rho_*$ define successively
+\begin{equation}\label{ch21:eq:atlas-recursion}
+ c_0(b_0)=b_0,\qquad b_i(s;b_0)=D_sc_i(b_0),\qquad c_{i+1}(b_0)=\bigl(D_{h_i}c_i(b_0)\bigr)^{k_i},
+\end{equation}
+as in \eqref{ch21:eq:atlas-diagram}. By induction, $\norm{c_i(b_0)-A_*(t_i)}_{C^r}\le K_i\norm{b_0-b_*}_{C^r}<1/2$. Indeed, $c_i(b_0)$ lies in the ball of radius $R_*$, the local solution map has Lipschitz constant two by Step~1 and maps $A_*(t_i)$ to $b_i^*$, and the fixed gauge transformation $k_i$ then contributes the factor $L_i$. This proves the induction step, and it shows that every map in \eqref{ch21:eq:atlas-recursion} is defined on the whole ball. Arguing in the same way for two data in the ball, we obtain
+\[
+ \norm{c_i(b_0)-c_i(b_0')}_{C^r}\le K_i\norm{b_0-b_0'}_{C^r},\qquad
+ \sup_{s\le h_i}\norm{b_i(s;b_0)-b_i(s;b_0')}_{C^r}\le2K_i\norm{b_0-b_0'}_{C^r}.
+\]
+The solutions on the intervals have $C^r$ norm at most $2(R_*+1)$. For smooth initial data all the solutions $b_i$ and all the transformed endpoints are smooth.
+
+On the first interval, Step~3 shows that $b_0(s;b_0)$ represents the orbit of $\Flowcov_s(b_0)$. If the right endpoint of the $i$th interval represents $[\Flowcov_{t_{i+1}}b_0]$, then the fixed gauge transformation $k_i$ preserves this orbit, and by Step~3, Step~4, and the semigroup property the next solution represents $[\Flowcov_{t_{i+1}+s}b_0]$. By induction, the orbit identity holds on every interval. This argument provides, for each interval, a smooth periodic gauge transformation relating the representative to the Yang--Mills heat flow; no continuous choice of such gauge transformations in $b_0$ is needed.
+
+\paragraph{Step 6: compact families.}
+The open balls of Step~5 around the points of $\mathscr K$ cover $\mathscr K$. By compactness in $C^r$ finitely many of them suffice; let $\mathscr U$ be their union and let these balls be the $\mathscr U_\lambda$. We take maxima of the finitely many bounds and Lipschitz constants; for each $q$, the finitely many fixed gauge transformations and their inverses have a finite maximal $C^q$ norm. To obtain one partition for all members of the cover, we take the union of the finitely many partitions. When a new time subdivides an interval, we restrict the solution and translate its time origin; it still solves the autonomous DeTurck equation. We use the identity gauge transformation at each new endpoint and keep the original fixed gauge transformation at each old endpoint. The recursion, the orbit identities, and all bounds persist, and the number of intervals remains finite. This proves part (2). Only the finitely many references, their smooth trajectories, the fixed gauge transformations, and the local constants in $C^r$ enter the dependence of the constants. Compactness in $C^r$ is not used to bound higher derivatives of the whole family.
+
+\paragraph{Step 7: observables and continuity.}
+Let $r\ge3$ and let smooth $b'_0\to b_0$ in $C^r$. We use one member of the cover containing $b_0$. All sufficiently close data lie in it, and by the bounds of Step~5 the representatives on each interval converge in $C^r$ uniformly in time. For two representatives $b,c$ and a piecewise $C^1$ loop $\ell$, we subtract their transport equations in a fixed unitary representation $\varrho$. By the variation-of-constants argument of \cref{ch21:lem:local-matrix-gauge-and-loops}(1), we have
+\[
+ \norm{\Hol_\ell(b)-\Hol_\ell(c)}_{\mathrm{op}}\le C_\varrho\operatorname{length}(\ell)\norm{b-c}_\infty,
+\]
+where $C_\varrho$ is the norm of the differential of $\varrho$, a linear map on the finite-dimensional Lie algebra. Taking the trace costs at most the dimension of $\varrho$. By gauge invariance, these characters coincide at the endpoints of the intervals with the characters of the Yang--Mills heat flow. We conclude that every finite vector of loop and character values converges uniformly on $[0,T]$.
+
+On a bounded set in $C^1$, by the formula for the curvature, we have
+\[
+ \norm{F_b-F_c}_\infty\le C(1+\norm b_{C^1}+\norm c_{C^1})\norm{b-c}_{C^1},\qquad
+ \norm{F_b}_\infty\le C(\norm b_{C^1}+\norm b_{C^1}^2).
+\]
+Using $\abs{\abs X^2-\abs Y^2}\le(\abs X+\abs Y)\abs{X-Y}$ and integrating over the volume $L^3$, the energies of the representatives converge uniformly. By gauge invariance they are the energies of the Yang--Mills heat flow, also at the endpoints of the intervals.
+
+To check the convergence of the orbit infimum without using any later result on metrics, we write the two representatives at time $t$ as $b=(\Flowcov_tb_0)^h$ and $c=(\Flowcov_tb'_0)^{h'}$ for smooth periodic gauge transformations $h,h'$. We apply $h^{-1}$ to both. The inhomogeneous terms cancel in the difference, and the linear part is a pointwise isometry, so
+\[
+ \norm{\Flowcov_tb_0-(\Flowcov_tb'_0)^{h^{-1}h'}}_\infty=\norm{b-c}_\infty .
+\]
+The infimum in part (3) is at most this quantity, and the bounds are uniform in $t$, which implies the uniform limit. If instead $b'_0\to b_0^h$ for a fixed smooth time-independent $h$, first use $\Flowcov_t(b_0^h)=\Flowcov_t(b_0)^h$ from Step~4; characters, energies, and the infimum take the same values.
+
+By the global smooth semigroup of (C1), $t\mapsto[\Flowcov_tb_0]$ is a compatible trajectory at positive times, that is, a point of $\OrbitSpace$. Each function $W_{\ell,\chi,t}$ that generates $\WilsonTopology$ is a continuous function of $b_0$ by what we have just proved. Since $\WilsonTopology$ is the weakest topology for which these functions are continuous, the trajectory map is continuous; preimages of open sets are open, so it is Borel. No completeness or separability of a metric on orbits enters this argument.
+
+\paragraph{Step 8: the energy.}
+For a smooth solution of the Yang--Mills heat flow, differentiation and periodic integration by parts give
+\[
+ \begin{split}
+ \frac{d}{dt}\EnergyL(A)&=2\sum_{i<j}\int\ip{F_{ij}}{D_i\dot A_j-D_j\dot A_i}\,dx\\
+ &=-2\sum_i\int\Bigl\langle\sum_jD_jF_{ji},\dot A_i\Bigr\rangle\,dx=-2\sum_i\int\abs{\dot A_i}^2\,dx\le0 .
+ \end{split}
+\]
+The integration by parts for the brackets uses the invariance of the inner product, and periodicity eliminates boundary terms. The bound on $\norm{F_b}_\infty$ in Step~7 at $t=0$ then implies $\EnergyL(b_0)\le CL^3(K_1+K_1^2)^2$.
+
+\paragraph{Step 9: approximation of a compact family.}
+Let $\mathscr K$ be compact in $C^3$ and consist of smooth connections, and apply part (2) with $r=3$. For each point of $\mathscr K$, we choose a ball around it contained in $\mathscr U$, cover $\mathscr K$ by finitely many of the balls with half these radii, and let $\eta$ be smaller than half the least chosen radius. Every point within $\eta$ of $\mathscr K$ then lies in one of the original balls, hence in $\mathscr U$. Smooth connections approaching $\mathscr K$ in $C^3$ eventually lie in $\mathscr U$.
+\end{proof}
+
+\section{Modified plaquette actions}\label{ch21:sec:modified}
+
+In this subsection $c\ge0$ is a parameter of the action. For a fixed upper bound $C_0\ge0$ and $0\le c\le C_0$ set
+\[
+ \mathcal A_c(U)=\sum_{p\in\Faces n}\bigl\{q(U_p)+c\,q(U_p)^2\bigr\},\qquad
+ \Psi^{(n,c)}_t=\Phi^{\mathcal A_c}_{4t/a^2},\qquad a=L/n,
+\]
+where $\Phi^{\mathcal A_c}$ is the flow of $-\nabla\mathcal A_c$ for the product metric of \cref{ch21:sec:equation}. In particular $\Psi^{(n,0)}=\Flowlat n$, and these are the flows of \cref{s2:thm:altflow}. The vector field is smooth on the compact configuration space, so its flow exists for all times, as for the Wilson flow. Since the action is gauge invariant and the metric is invariant under gauge transformations, the flow commutes with lattice gauge transformations.
+
+The Taylor expansion of $q(U_p)^2$ in link logarithms starts in degree four, so its force begins in degree three. The linear operator and the bilinear map of the damped equation are unchanged, and the modified flows have the same flow data. On every fixed bounded $C_a^1$ ball, the plaquette logarithms are $O(a^2)$ and the added physical force is $O(a^3)$, by \eqref{ch21:eq:quartic-curvature-gain} below. In \cref{ch21:thm:common-enhancement-alternative-flow} we use this factor near rough initial data by measuring the difference of the solutions in a norm with a slightly weaker time weight, which leaves a positive power of the mesh.
+
+\begin{lemma}\label{ch21:lem:quartic-plaquette-force}
+Let $C_0\ge0$, and use the stencil, $\mathcal J$, the gauge velocity, $\mathcal N_a$, and $R_3$ of \cref{ch21:lem:wilson-local-algebra}. Decreasing $r_*$ if necessary, depending only on the stencil, the following holds. The damped equation for $\mathcal A_c$, obtained as in \cref{ch21:lem:wilson-local-algebra}(3) with $\sum_pq(U_p)$ replaced by $\mathcal A_c$ and the same gauge velocity, is, for $a\norm A_\infty\le r_*$,
+\begin{equation}\label{ch21:eq:quartic-force-equation}
+ \partial_tA=\Delta_aA+\mathcal N_a(A,A)+F_a(A)+E_{a,c}(A),\qquad F_a(A)=a^{-3}R_3(aA).
+\end{equation}
+For $0\le c\le C_0$ and $0<a\le1$, the following statements hold uniformly in the mesh and the volume.
+\begin{enumerate}
+\item $E_{a,c}(A)=a^{-3}\mathscr E_c(aA)$, where $\mathscr E_c$ is a local analytic map whose Taylor coefficients vanish through degree two; after rescaling, its term of degree $m$ carries the factor $a^{m-3}$, $m\ge3$. If $M=\norm A_\infty$ and $aM$ lies in a fixed smaller ball, then for every $j\ge0$
+\begin{equation}\label{ch21:eq:quartic-field-jets}
+ \norm{D^jE_{a,c}(A)[V_1,\ldots,V_j]}_\infty\le K_{j,C_0}
+ \begin{cases}M^{3-j},&0\le j\le3,\\ a^{j-3},&j>3,\end{cases}
+ \ \cdot\prod_{r=1}^j\norm{V_r}_\infty,
+\end{equation}
+with the usual conventions for $j=0$ and $M^0$. In particular,
+\[
+ \norm{E_{a,c}(A)}_\infty\le K_{C_0}M^3,\qquad
+ \norm{E_{a,c}(A)-E_{a,c}(B)}_\infty\le K_{C_0}\bigl(\norm A_\infty^2+\norm B_\infty^2\bigr)\norm{A-B}_\infty .
+\]
+\item All forward and backward differences obey the composition rule of \cref{ch21:lem:stencil-analytic}, with the exact lattice translations: for $m\ge1$,
+\begin{equation}\label{ch21:eq:quartic-shifted-jets}
+ \norm{D_a^mE_{a,c}(A)}_\infty\le K_{m,C_0}\sum_{j=1}^mb_j(M,a)\sum_{\substack{\nu_1+\cdots+\nu_j=m\\ \nu_r\ge1}}\prod_{r=1}^j\norm{D_a^{\nu_r}A}_\infty,
+\end{equation}
+where $b_j(M,a)=M^{3-j}$ for $j\le3$ and $b_j(M,a)=a^{j-3}$ for $j>3$. For two fields in the same smaller ball, with $M=\max(\norm A_\infty,\norm B_\infty)$,
+\[
+ \begin{split}
+ \norm{D_a(E_{a,c}(A)-E_{a,c}(B))}_\infty\le K_{C_0}\bigl\{&M^2\norm{D_a(A-B)}_\infty\\
+ &+M(\norm{D_aA}_\infty+\norm{D_aB}_\infty)\norm{A-B}_\infty\bigr\}.
+ \end{split}
+\]
+\item For $A$ in the smaller ball,
+\begin{equation}\label{ch21:eq:quartic-curvature-gain}
+ \norm{E_{a,c}(A)}_\infty\le K_{C_0}a^3\bigl(\norm{D_aA}_\infty+\norm A_\infty^2\bigr)^3 .
+\end{equation}
+Consequently $E_{a,c}(A)=O_{C_0,\rho}(a^3)$ on $\{\norm A_{C_a^1}\le\rho\}$.
+\end{enumerate}
+The constants depend only on the stencil, the margin of the smaller ball, the orders, and $C_0$, and not on $L$, $n$, the coupling, or any probability law. Part (6) of \cref{ch21:lem:wilson-local-algebra} holds for \eqref{ch21:eq:quartic-force-equation} with $\Psi^{(n,c)}$ in place of $\Psi^{(n)}$, with the same damping equation, started at the identity.
+\end{lemma}
+
+\begin{proof}
+We first compute the added force exactly on the group, then bound it with \cref{ch21:lem:stencil-analytic}, prove the bound \eqref{ch21:eq:quartic-curvature-gain} from the size of the plaquette logarithms, and identify the flow.
+
+Let $e$ be a positive link and $p$ a plaquette containing it. We vary $U_e$ to $e^{\varepsilon X}U_e$. If $P$ is the product preceding the entry of $e$ in the oriented plaquette word, then
+\[
+ \frac{d}{d\varepsilon}U_p(\varepsilon)\Big|_{\varepsilon=0}U_p^{-1}=B_{p,e}X,\qquad
+ B_{p,e}=\begin{cases}\Ad(P),&\text{if $e$ enters positively},\\ -\Ad(PU_e^{-1}),&\text{if $e$ enters negatively}.\end{cases}
+\]
+Each $B_{p,e}$ is an isometry. Direct differentiation, with $\ip XY=-2\tr(XY)$, gives
+\[
+ h(V)=\nabla q(V)=\frac{V-V^{-1}}8,\qquad h(e^X)=\frac{\sin(\abs X/2)}{2\abs X}X,\qquad\nabla_eq(U_p)=B_{p,e}^*h(U_p),
+\]
+the quotient being continuous at $X=0$. Since $\nabla(c\,q_p^2)=2c\,q_p\nabla q_p$, the added velocity in logarithmic coordinates, in the variable $s=t/a^2$ and with the factor four, is exactly
+\begin{equation}\label{ch21:eq:quartic-exact-metric-force}
+ \mathscr E_{c,e}(\theta)=-8c\,\mathcal J(\theta_e)^{-1}\sum_{p\ni e}q(U_p(\theta))\,B_{p,e}(\theta)^*h(U_p(\theta)).
+\end{equation}
+This is the additional negative-gradient velocity expressed in logarithmic coordinates: the factor $\mathcal J(\theta_e)^{-1}$ converts the velocity on the group into the logarithmic velocity, and the Euclidean gradient in the coordinates $\theta$ is not used. The gauge velocity is unchanged. Substituting $\theta=aA$ and $s=t/a^2$ and multiplying by $a^{-3}$, we obtain \eqref{ch21:eq:quartic-force-equation}.
+
+On a fixed small ball all functions of the finite plaquette words in \eqref{ch21:eq:quartic-exact-metric-force} are analytic, and $\Log U_p=O(\norm\theta_{\infty,p})$, $q(U_p)=O(\norm\theta_{\infty,p}^2)$, $h(U_p)=O(\norm\theta_{\infty,p})$. The inverse $\mathcal J^{-1}$ is analytic on a smaller fixed ball. We conclude that the Taylor coefficients of \eqref{ch21:eq:quartic-exact-metric-force} vanish through degree two. Its Taylor series at an output link is a series in a fixed finite stencil, and, extending the finite exponential, inverse, and trace formulas to a smaller complex polydisc and using the Cauchy estimates there, its homogeneous part of degree $m$ has coefficient sum at most $K_1K_2^mC_0$. \Cref{ch21:lem:stencil-analytic}, with $K_0=K_1C_0$ and the smaller ball chosen so that $K_2aM\le\eta<1$, implies \eqref{ch21:eq:quartic-field-jets}, the bound on the values and their differences, \eqref{ch21:eq:quartic-shifted-jets}, and the estimate for the difference of two fields. In these estimates every intermediate stencil is a convex combination of translates of the fields, hence lies in the same ball, and no factor $a^{-1}$ remains outside a difference of $A$.
+
+For \eqref{ch21:eq:quartic-curvature-gain}, note that the four entries of the plaquette $p_{ij}(x)$ for $\theta=aA$ have sum $a^2(D_{a,i}^+A_j-D_{a,j}^+A_i)(x)$. The Baker--Campbell--Hausdorff formula on the fixed ball, with quadratic error bounded by a constant times the square of the largest entry, gives
+\[
+ \abs{\Log U_p}\le Ka^2\bigl(\norm{D_aA}_\infty+\norm A_\infty^2\bigr).
+\]
+On the plaquette chart, $\abs{q(e^X)}\le K\abs X^2$ and $\abs{h(e^X)}\le K\abs X$. Inserting these bounds into \eqref{ch21:eq:quartic-exact-metric-force}, and using bounded incidence and the boundedness of $\mathcal J^{-1}$, we obtain $\abs{\mathscr E_{c,e}(aA)}\le KC_0a^6(\norm{D_aA}_\infty+\norm A_\infty^2)^3$; multiplication by $a^{-3}$ gives \eqref{ch21:eq:quartic-curvature-gain}.
+
+Finally, we remove the damping by solving the same equation for the damping gauge transformation, started at the identity. Gauge equivariance of $\nabla\mathcal A_c$ cancels the gauge velocity exactly, as in Step~7 of the proof of \cref{ch21:lem:wilson-local-algebra}. The remaining ordinary differential equation is the one that defines $\Psi^{(n,c)}$, and uniqueness identifies the flows. This argument uses the force \eqref{ch21:eq:quartic-exact-metric-force}, not a truncation of it. All formulas involve boundedly many links, which gives the stated dependence of the constants.
+\end{proof}
+
+\begin{theorem}\label{ch21:thm:common-enhancement-alternative-flow}
+Fix $L>0$, $1/2<\alpha<2/3$, $0\le R<\infty$, and $0\le C_0<\infty$, and let $\kappa=1-3\alpha/2$. There exist $T_{R,C_0}\in(0,1/2]$, $a_{R,C_0}>0$, and $K_{R,C_0}<\infty$ such that the following holds for every mesh $a\le a_{R,C_0}$, every $c\in[0,C_0]$, and every field $A_0$ whose flow data, as in \cref{ch21:def:two-grade-datum}, satisfy $\norm{(x_a,y_a)}_{\mathrm{fl},a}\le R$ on $[0,T_{R,C_0}]$. The equation \eqref{ch21:eq:quartic-force-equation} with $A(0)=A_0$ has a unique solution of the form
+\[
+ A_a^c=x_a+y_a+r_a^c,\qquad r_a^c(0)=0,\qquad\norm{r_a^c}_{\mathsf R_a}\le K_{R,C_0},
+\]
+where the remainder norm \eqref{ch21:eq:remainder-norm} is taken on $[0,T_{R,C_0}]$; uniqueness holds in the class of \cref{ch21:thm:enhanced-local-flow}. The Lipschitz bounds of \cref{ch21:thm:enhanced-local-flow} for two fields, at the same $c$, hold uniformly in $c\in[0,C_0]$. These solutions represent the flows $\Psi^{(n,c)}$ in their damping gauges, started at the identity.
+
+For every fixed $0<\varepsilon<2-3\alpha$ put $\kappa_\varepsilon=\kappa-\varepsilon/2>0$ and
+\[
+ \norm w_{\mathsf R_a^{\kappa_\varepsilon}}=\sup_{0\le t\le T_{R,C_0}}\bigl\{(t+a^2)^{-\kappa_\varepsilon}\norm{w(t)}_\infty+(t+a^2)^{1/2-\kappa_\varepsilon}\norm{D_aw(t)}_\infty\bigr\}.
+\]
+The time $T_{R,C_0}$ can be chosen independently of $\varepsilon$ such that, for the same field $A_0$ and uniformly in $c\in[0,C_0]$,
+\begin{equation}\label{ch21:eq:quartic-early-comparison}
+ \norm{A_a^c-A_a^0}_{\mathsf R_a^{\kappa_\varepsilon}}\le K_{R,C_0,\varepsilon}a^\varepsilon .
+\end{equation}
+In particular, for every fixed $t_0\in(0,T_{R,C_0}]$, $\norm{A^c_a(t_0)-A^0_a(t_0)}_{C_a^1}\to0$ as $a\to0$, uniformly in $c$. The damping gauge transformations of $A^c_a$ and $A^0_a$, both equal to the identity at $t=0$, differ by $O_{R,C_0,\varepsilon}(a^\varepsilon)$ at every site, uniformly on $[0,T_{R,C_0}]$ and in $c$. The constants depend only on $L$, $\alpha$, $R$, $C_0$, $\varepsilon$, and the stencil and chart, and not on any coupling or probability law.
+\end{theorem}
+
+\begin{proof}
+The existence part repeats the contraction of \cref{ch21:thm:enhanced-local-flow} with the cubic term $F_a$ replaced by $F_a+E_{a,c}$. The new information is the comparison: the difference of the two solutions satisfies a difference equation with the inhomogeneous source $E_{a,c}(A^c_a)$, which \eqref{ch21:eq:quartic-curvature-gain} bounds by $a^\varepsilon$ times a power of $t+a^2$ that is still integrable.
+
+\paragraph{Step 1: construction.}
+We write $p=3\alpha/2<1$, $\delta=(1-\alpha)/2$, and $v=t+a^2$, and let $r_*$ be as in \cref{ch21:lem:quartic-plaquette-force}. By \cref{ch21:lem:wilson-local-algebra}(5), \cref{ch21:lem:stencil-analytic}, and \cref{ch21:lem:quartic-plaquette-force}(1), the map $F_a+E_{a,c}$ satisfies the bounds \eqref{ch21:eq:cubic-physical-bounds} on $\{B:a\norm B_\infty\le r_*/2\}$, with a constant depending also on $C_0$ and uniform in $c\in[0,C_0]$. Subtracting the equations for $x_a$ and $y_a$ from \eqref{ch21:eq:quartic-force-equation} leaves the source
+\[
+ \begin{split}
+ &\mathcal N_a(x,y)+\mathcal N_a(y,x)+\mathcal N_a(y,y)\\
+ &\quad+\mathcal N_a(x,r)+\mathcal N_a(r,x)+\mathcal N_a(y,r)+\mathcal N_a(r,y)+\mathcal N_a(r,r)+(F_a+E_{a,c})(x+y+r).
+ \end{split}
+\]
+The linear operator and the map $\mathcal N_a$ are the same as in \cref{ch21:thm:enhanced-local-flow}. The five types of quadratic sources therefore have the exponents $-p$, $-p+\delta$, $-p+\delta$, $-p+2\delta$, and $-p+3\delta$, with the amplitudes $KR^2$, $KR^2$, $KRS$, $KRS$, and $KS^2$, respectively, as in the table in Step~3 of that proof, with the arguments in the displayed order. The cubic source at $r=0$ is at most $K_{R,C_0}v^{-p}$, and its Lipschitz constant in $r$ is at most $K_{R,S,C_0}v^{-p+2\delta}\norm{r-r'}_{\mathsf R_a}$. For the latter, the possible term $S^2v^{3\kappa}$ is bounded by this power, since $3\kappa-(-p+2\delta)=4\delta>0$ and $v\le1$. Steps~3--7 of the proof of \cref{ch21:thm:enhanced-local-flow} now apply with constants depending also on $C_0$: the heat integral of the source at $r=0$ has norm at most $K_{R,C_0}$, and on a ball of fixed radius $S$ the contraction constant is at most $K_{R,S,C_0}(2T)^\delta$. We choose $S$ larger than twice the first bound, then $T\le1/2$ such that the second is at most $1/2$, and then $a_{R,C_0}\le\min(1,\sqrt T)$ such that
+\[
+ Ra^{1-\alpha}+Ra^{2-2\alpha}+Sa(2T)^\kappa<r_*/2 .
+\]
+Every candidate then stays in the ball where the estimates hold. The complete space of remainders on a fixed lattice and the Picard iteration give the fixed point. Subtracting the sources for two fields with distance $d_a$ gives an additional source bounded by $K_{R,S,C_0}d_av^{-p}$, and the contraction yields the Lipschitz bound for the same $c$. Uniqueness in the class of \cref{ch21:thm:enhanced-local-flow}, outside the ball, follows from uniqueness for the finite-dimensional ordinary differential equation on successive compact subintervals of the chart, as in Step~5 of that proof. After reducing $a_{R,C_0}$ as in Step~7, the solution stays in the chart, and \cref{ch21:lem:quartic-plaquette-force} identifies it with $\Psi^{(n,c)}$ in its damping gauge. The construction applies on every shorter time interval, so $T_{R,C_0}$ may be decreased further below.
+
+\paragraph{Step 2: bounds on the solutions and on the added force.}
+For $v\le1$ the constructed solutions satisfy
+\[
+ \norm{A_a^c(t)}_\infty\le Kv^{-\alpha/2},\qquad\norm{D_aA_a^c(t)}_\infty\le Kv^{-(\alpha+1)/2}.
+\]
+Indeed, the value bounds of $x$, $y$, and $r^c$ are $Rv^{-\alpha/2}$, $Rv^{-\beta}$, and $Sv^\kappa$, and $-\beta>-\alpha/2$, $\kappa>0$. The difference bounds are $Rv^{-(\alpha+1)/2}$, $Rv^{-\alpha}$, and $Sv^{\kappa-1/2}$; here $\alpha<(\alpha+1)/2$ since $\alpha<1$, and $\kappa-1/2+(\alpha+1)/2=1-\alpha>0$. By \eqref{ch21:eq:quartic-curvature-gain} and $v^{-\alpha}\le v^{-(\alpha+1)/2}$, we obtain
+\[
+ \norm{E_{a,c}(A_a^c(t))}_\infty\le Ka^3v^{-p-3/2}\le Ka^\varepsilon v^{-p-\varepsilon/2},
+\]
+where in the last inequality we used $a/\sqrt v\le1$ and $\varepsilon<2-3\alpha<3$. Let $p_\varepsilon=p+\varepsilon/2$. Then $p_\varepsilon<1$ exactly because $\varepsilon<2-3\alpha$, and $\kappa_\varepsilon=1-p_\varepsilon$.
+
+\paragraph{Step 3: the comparison.}
+For $0<\kappa'<1$ define $\norm\cdot_{\mathsf R_a^{\kappa'}}$ as in the statement with $\kappa'$ in place of $\kappa_\varepsilon$; thus $\mathsf R_a^\kappa=\mathsf R_a$. By \cref{ch21:lem:source-convolution}, for $0<q<1$,
+\begin{equation}\label{ch21:eq:quartic-source-heat}
+ \norm{f(t)}_\infty\le H(t+a^2)^{-q}\quad\Longrightarrow\quad
+ \Bigl\lVert\int_0^\cdot P^a_{\cdot-u}f(u)\,du\Bigr\rVert_{\mathsf R_a^{1-q}}\le K_{L,q}H,
+\end{equation}
+including $t=0$, where $K_{L,q}=2C_{q,L}$ is bounded uniformly for $q$ in every interval $(0,1-\delta']$, $\delta'>0$.
+
+The flow data cancel in $w=A^c_a-A^0_a=r^c_a-r^0_a$, and $w(0)=0$. Subtracting the two equations and treating $E_{a,c}(A^c_a)$ as an inhomogeneous source, we write the remaining source for this difference $w$ as $\mathcal L(w)$, so that
+\[
+ \partial_tw=\Delta_aw+\mathcal L(w)+E_{a,c}(A^c_a),\qquad
+ \mathcal L(w)=\mathcal N_a(w,A^c_a)+\mathcal N_a(A^0_a,w)+F_a(A^c_a)-F_a(A^0_a).
+\]
+Expanding $A^c_a=x+y+r^c$ and $A^0_a=x+y+r^0$, the terms of $\mathcal L(w)$ are $\mathcal N_a(w,x)$, $\mathcal N_a(x,w)$, $\mathcal N_a(w,y)$, $\mathcal N_a(y,w)$, $\mathcal N_a(w,r^c)$, $\mathcal N_a(r^0,w)$, and the difference of $F_a$.
+
+Let $W=\norm w_{\mathsf R_a^{\kappa_\varepsilon}}$, so that $\norm{w(t)}_\infty\le Wv^{\kappa_\varepsilon}$ and $\norm{D_aw(t)}_\infty\le Wv^{\kappa_\varepsilon-1/2}$. The quadratic terms containing $x$ and $w$ have exponent $-p_\varepsilon+\delta$: for instance $-\alpha/2+\kappa_\varepsilon-1/2=-p_\varepsilon+\delta$ and $\kappa_\varepsilon-(\alpha+1)/2=-p_\varepsilon+\delta$. Those containing $y$ and $w$ have exponent $-p_\varepsilon+2\delta$, and those containing $r^c$ and $w$, or $w$ and $r^0$, have exponent $-p_\varepsilon+3\delta$. By \eqref{ch21:eq:cubic-physical-bounds} and the value bound of Step~2 for both solutions, the difference of $F_a$ is at most $Kv^{-\alpha}Wv^{\kappa_\varepsilon}$, with exponent $-p_\varepsilon+2\delta$. Since $v\le1$, we obtain $\norm{\mathcal L(w)(t)}_\infty\le K_{R,S,C_0}Wv^{-(p_\varepsilon-\delta)}$.
+
+We apply \eqref{ch21:eq:quartic-source-heat} with $q=p_\varepsilon-\delta$; the output is bounded in $\mathsf R_a^{\kappa_\varepsilon+\delta}$, and multiplying by $(2T)^\delta$ bounds it in $\mathsf R_a^{\kappa_\varepsilon}$, since $v^{-\kappa_\varepsilon}=v^\delta v^{-\kappa_\varepsilon-\delta}$. The constants $K_{L,q}$ are bounded uniformly, because $q=p_\varepsilon-\delta\in[p-\delta,1-\delta)$ and $p-\delta=2\alpha-1/2>1/2$. Hence, decreasing $T_{R,C_0}$ once, independently of $\varepsilon$, we may assume that the heat integral of $\mathcal L(w)$ has $\mathsf R_a^{\kappa_\varepsilon}$ norm at most $W/2$.
+
+For the inhomogeneous term, \eqref{ch21:eq:quartic-source-heat} with $q=p_\varepsilon<1$ and Step~2 give the bound $K_\varepsilon a^\varepsilon$ in $\mathsf R_a^{\kappa_\varepsilon}$. On a fixed lattice $W$ is finite, since $w$ is continuous, $w(0)=0$, and $v\ge a^2$; so the inequality $W\le W/2+K_\varepsilon a^\varepsilon$ implies $W\le2K_\varepsilon a^\varepsilon$, which is \eqref{ch21:eq:quartic-early-comparison}. At a fixed $t_0>0$, this implies $\norm{w(t_0)}_{C_a^1}\le2K_\varepsilon a^\varepsilon(1+t_0^{\min(\kappa_\varepsilon-1/2,0)})$, which tends to zero uniformly in $c$.
+
+\paragraph{Step 4: the damping gauge transformations.}
+The gauge velocity is the same for all $c$, so by \eqref{ch21:eq:lattice-damping-generator} both damping generators are the same linear combination of differences of the respective solutions. Their difference is bounded by $3\norm{D_aw(t)}_\infty\le Ka^\varepsilon v^{\kappa_\varepsilon-1/2}$. Since $\kappa_\varepsilon-1/2>-1/2$ and $T_{R,C_0}\le1/2$, the integral of $v^{\kappa_\varepsilon-1/2}$ over $[0,T_{R,C_0}]$ is bounded uniformly in $a$, so the integral of the difference of the generators is $O(a^\varepsilon)$. For skew-Hermitian generators, the variation-of-constants argument in the proof of \cref{ch21:lem:local-matrix-gauge-and-loops}(2) bounds the difference of the two gauge transformations, started at the identity, by this integral. Together with Step~1, this proves the statements on the gauges and the identification of the flows. The choices of $S$, $T_{R,C_0}$, and $a_{R,C_0}$ were made in this order and have the stated dependence.
+\end{proof}

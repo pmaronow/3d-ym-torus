@@ -1,0 +1,865 @@
+\chapter{Conditional means and propagated fluctuations}\label{ch24:chapter}
+
+This section completes the estimates of \cref{ch23:chapter} on the heat evolution of the reconstructed field and its quadratic Picard term under the conditioned Wilson measure. Recall the decomposition of \cref{ch23:lem:four-piece-increment},
+\[
+ x_j-x_{j-1}=s_j+z_j+r_j+u_j,
+\]
+where $s_j$ is the centered linear fluctuation term, $z_j$ the centered nonlinear heat term, $r_j$ the interpolation defect, and $u_j$ the predictable term. The latter is $u_j=P_\cdot^\delta I_{a_j}[U_j^{\mathrm{cl}}+m_j^{\mathrm{ph}}]$, the heat evolution of the sum of the nonlinear part $U_j^{\mathrm{cl}}$ of the zero-fluctuation reconstruction and the conditional mean correction $m_j^{\mathrm{ph}}$. \Cref{ch23:chapter} proved the fluctuation estimates for $s_j$ and $z_j$; \cref{ch25:chapter} combines them with the estimates proved here to bound all ordered products. Here we treat the terms built only from $r_j$ and $u_j$. For the quadratic Picard term, these are $\mathcal B_\delta(x_{j-1},r_j)$ and $\mathcal Q_\delta(r_j,r_j)$. The products involving $u_j$ are handled in \cref{ch25:chapter} by the bilinear estimate of \cref{ch21:lem:ordered-duhamel-products}, once $u_j$ is bounded in the heat norm $\Hnorm{\sigma}{\delta}$ of its initial field; we prove that bound here.
+
+\paragraph{Three ordered terms.}
+Let $H=a_{j-1}$ and $a=a_j$. The coarser field enters both $x_{j-1}$ and $r_j$ linearly: with
+\[
+ \mathsf U=P_\cdot^\delta I_a\mathsf P_j/H,\qquad \mathsf V=P_\cdot^\delta(I_a\mathsf P_j-I_H\mathsf E_H)/H,
+\]
+we have $x_{j-1}=(\mathsf U-\mathsf V)\theta_{j-1}$ and $r_j=\mathsf V\theta_{j-1}$. For any bilinear map $\mathcal N$,
+\begin{align*}
+ \mathcal N(U-V,V)+\mathcal N(V,U-V)&=\mathcal N(U,V)+\mathcal N(V,U)-2\mathcal N(V,V),\\
+ \mathcal N(U,U)-\mathcal N(U-V,U-V)&=\mathcal N(U,V)+\mathcal N(V,U)-\mathcal N(V,V).
+\end{align*}
+Applying these identities with $U=\mathsf U\theta_{j-1}$ and $V=\mathsf V\theta_{j-1}$, we obtain $\mathcal B_\delta(x_{j-1},r_j)=\mathscr T^{UV}+\mathscr T^{VU}-2\mathscr T^{VV}$ and $\mathcal Q_\delta(r_j,r_j)=\mathscr T^{VV}$, where $\mathscr T^{UV}$, $\mathscr T^{VU}$, and $\mathscr T^{VV}$ are the quadratic Duhamel terms of the ordered pairs $(\mathsf U\theta_{j-1},\mathsf V\theta_{j-1})$, $(\mathsf V\theta_{j-1},\mathsf U\theta_{j-1})$, and $(\mathsf V\theta_{j-1},\mathsf V\theta_{j-1})$. Since $\mathcal N_\delta$ is not symmetric, the three terms are estimated separately; a bound on their sum would not bound the summands.
+
+\paragraph{Propagation through coarser scales.}
+The coarser field $\theta_{j-1}$ depends on the fluctuation variables of all coarser steps. We propagate both inputs back through the linearized reconstructions $\mathsf L_{i+1},\dots,\mathsf L_{j-1}$ and telescope over the coarser scales $i$; each step of the telescope contributes a conditionally centered term $Z^\omega_{j,i}$ and a conditional drift $e^\omega_{j,i}$ (see \eqref{ch24:eq:ordered-telescope}). \Cref{ch24:thm:ancestor-gram-rows} bounds the coefficients and the drifts, \cref{ch24:thm:ordered-rough-return} bounds and sums the centered terms, and \cref{ch24:thm:full-smoother-return} controls the predictable term.
+
+\paragraph{The scaling.}
+The maps between lattices are
+\[
+ G\xrightarrow{\ \mathsf L_{j-1}\cdots\mathsf L_{i+1}\ }H\xrightarrow{\ \mathsf P_j\ }a\xrightarrow{\ I_a\ }\delta
+ \qquad\text{and}\qquad
+ H\xrightarrow{\ I_H\ }\delta,
+\]
+where $G=a_i$ and each arrow is labeled by its map and points to the mesh of its target. The interpolation defect is the difference of the two branches out of $H$. Each column of this difference with a fixed input on the lattice of mesh $H$ has total mass zero (\cref{ch24:lem:signed-heat-defect}); after heat evolution for time $s$ this gives the factor $d_H(s)=H(s+H^2)^{-1/2}$. The cancellation must be used at the scale $H$, before the earlier maps are composed: a first moment measured at the scale $G$ would give the wrong length. Each linearization $\mathsf L_i$ has absolute row sums and volume-normalized column sums at most $a_{\mathrm{cap}}=C_{\mathrm{CP}}/B$. Dividing by the mesh $H$ of the coarser lattice, we obtain the contraction
+\[
+ \frac{a_{\mathrm{cap}}^{2(j-1-i)}}{H}=\frac{\qanc^{\,j-1-i}}{G},\qquad \qanc=Ba_{\mathrm{cap}}^2<1,
+\]
+for a quadratic term propagated from scale $i$. Finally, the Schur bound in counting norms gives a factor $(G/\delta)^{3/2}$, which cancels against the factor $\delta^{3/2}$ of the $\ell^2$ row of the heat kernel on the finest lattice.
+
+\paragraph{Inputs and constants.}
+We use the setting and notation of \cref{ch23:sec:setup,ch23:sec:deterministic}, including the conditioned Wilson measure $\nu_K$, the filtration $\mathcal F_j$, the normalized fluctuation variables $w_j$, the norms $\Xnorm{\alpha}{\delta}$, $\Ynorm{\alpha}{\delta}$, $\Hnorm{\sigma}{\delta}$, and $\Vnorm{\sigma}{\delta}$ of \cref{ch01:def:enhancement}, and the four terms of \cref{ch23:lem:four-piece-increment}. Throughout, $1/2<\alpha<2/3$, $\beta=\alpha-1/2$, $0<\sigma<1-\alpha$, and the horizon $T$ is fixed. All heat kernels keep their constant mode, and all estimates concern the whole torus. The inputs are the conditional fluctuation kernel and the bounds on conditional means and covariances of \cref{ch10:thm:complete-white-law,ch10:thm:actual-means-and-scores}; the reconstruction maps and the bounds on their absolute Taylor coefficients of \cref{ch12:thm:replacement-family,ch12:thm:representative-prefixes}; the derivatives of the zero-fluctuation reconstruction and the bounds on reconstructions of \cref{ch14:lem:signed-physical-columns,ch14:lem:backward-caps-and-means,ch14:thm:quadratic-ancestor-return}; the interpolation and heat estimates of \cref{ch13:lem:cardinal-columns,ch13:lem:heat-and-chaining,ch13:lem:coefficient-metric-chaining}; the quadratic coefficient of \cref{ch21:lem:wilson-local-algebra}; and the concentration inequalities of \cref{ch02:thm:reflecting-concentration}. The results are used in \cref{ch25:chapter}, which assembles the bounds on the linear and quadratic flow data, and in \cref{ch26:chapter,ch30:chapter}.
+
+We summarize the dependence of the constants in \cref{ch24:tab:constants}. The bounds on coefficients and on conditional means hold uniformly in the coupling below the common upper bound $g_*$. The maximal inequalities and the summations use the bound $b_i/g_i\le C_\gamma(1+i)$ on the coarser fields, which holds only at fixed positive coupling.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.47\textwidth}p{0.47\textwidth}@{}}
+\toprule
+Estimate & Constants may depend on\\
+\midrule
+Unweighted coefficients and derivatives in $w$ (\cref{ch24:lem:signed-heat-defect}; \cref{ch24:thm:ancestor-gram-rows,ch24:thm:full-smoother-return}, time-dependent rows) & $L$, $T$, $M$, $J$, the interpolation function, the analytic domains and column bounds, and the orders of differences\\
+Pointwise conditional means and drifts, unweighted (\cref{ch24:lem:quadratic-mean,ch24:lem:conditional-kernel}) & the analytic domains and coefficient bounds, $M$, $J$, and the common upper bound $g_*$\\
+Weighted coefficients and drifts in $\Ynorm{\alpha}{\delta}$ (\cref{ch24:thm:ancestor-gram-rows}) & in addition $\alpha$ and the coarse mesh $a_0=L/n$\\
+Drifts in $\Vnorm{\sigma}{\delta}$ (\cref{ch24:thm:full-smoother-return}) & in addition $\sigma$; not on $a_0$\\
+Maximal inequalities, moments, and summations (\cref{ch24:thm:ordered-rough-return,ch24:thm:full-smoother-return}) & in addition the fixed $\gamma$, $n$, $\rho_0$, the moment, the exponents, and the prescription of the cutoff radii\\
+\bottomrule
+\end{tabular}
+\caption{Dependence of constants in \cref{ch24:chapter}. No constant depends on $K$, on the scale indices $i$ and $j$, on the number of preceding averaging steps, on $a/\delta$, or on the values of the coarser fields.}
+\label{ch24:tab:constants}
+\end{table}
+
+The tools are standard: the weighted Schur test, cancellation for convolution with a signed kernel of mass zero, the logarithmic Sobolev inequality (Gross \cite{Gross1975}; Bakry and \'Emery \cite{BakryEmery1985}) and the covariance representation of Helffer and Sj\"ostrand \cite{HelfferSjostrand1994} in the forms proved in \cref{ch02:thm:reflecting-concentration}, the derivative formula for normalized expectations, and union bounds over finite nets. As in \cref{ch23:chapter}, we control a heat evolution together with its quadratic Picard term following Cao and Chatterjee \cite[Section~2.1]{CCHeat2022v4}; here the estimates are proved from the conditional fluctuation kernels.
+
+\section{Volume-normalized column sums and the interpolation defect}\label{ch24:sec:defect}
+
+We use the following norms for matrices between arrays on lattices. Each index $u$ of such an array has a location and a cell volume $v_u$: the cube of the mesh of its lattice. For a matrix $\mathsf A$ with entries $\mathsf A_{yu}$ we set
+\[
+ \mathsf R(\mathsf A)=\sup_y\sum_u\abs{\mathsf A_{yu}},\qquad
+ \mathsf C(\mathsf A)=\sup_u\frac{v_{\mathrm{out}}}{v_{\mathrm{in}}}\sum_y\abs{\mathsf A_{yu}},
+\]
+the absolute row sum and the volume-normalized column sum, where $v_{\mathrm{in}}$ and $v_{\mathrm{out}}$ are the cell volumes of the input and output lattices. All sums include the finitely many direction and color indices.
+
+\begin{lemma}\label{ch24:lem:signed-heat-defect}
+Assume the setting of \cref{ch23:sec:setup}.
+\begin{enumerate}
+\item The norms $\mathsf R$ and $\mathsf C$ are submultiplicative under composition. For a block with fixed input and output volumes,
+\[
+ \norm{\mathsf A}_{\ell^2_{\mathrm{count}}\to\ell^2_{\mathrm{count}}}\le\sqrt{\mathsf R(\mathsf A)\mathsf C(\mathsf A)v_{\mathrm{in}}/v_{\mathrm{out}}}.
+\]
+For several types of input or output indices, the column ratio in each summand is replaced by $v_{\mathrm{out}}(y)/v_{\mathrm{in}}(u)$. The operator norm from $\ell^2(v_{\mathrm{in}})$ to $\ell^2(v_{\mathrm{out}})$, the $\ell^2$ spaces weighted by the cell volumes, is then at most $\sqrt{\mathsf R\mathsf C}$, and counting norms use the corresponding conversions of volumes for each block. The ratios of volumes within one renormalization group step cost only $C_J$. For a pointwise product $c_{y;u,v}=\mathsf A_{yu}\mathsf B_{yv}$ of two matrices, the absolute row sum is at most $\mathsf R(\mathsf A)\mathsf R(\mathsf B)$, and the two column sums with a fixed input are at most $\mathsf C(\mathsf A)\mathsf R(\mathsf B)$ and $\mathsf R(\mathsf A)\mathsf C(\mathsf B)$.
+\item Let $a=a_j$, $H=a_{j-1}=Ba$, $\delta=a_K$, and put
+\[
+ \mathsf D_j=I_a\mathsf P_j-I_H\mathsf E_H,\qquad d_H(s)=H(s+H^2)^{-1/2}.
+\]
+Each column of $\mathsf D_j$ with a fixed input $u$ on the lattice of mesh $H$ has total physical mass zero, separately in every output direction and color, and first absolute moment at most $CH^4$ about the location of $u$:
+\[
+ \delta^3\sum_y(\mathsf D_j)_{yu}=0,\qquad
+ \delta^3\sum_y\dist(y,u)\abs{(\mathsf D_j)_{yu}}\le CH^4.
+\]
+The matrix $\mathsf D_j$ and the matrix $I_a\abs{\mathsf P_j}+I_H\abs{\mathsf E_H}$ of absolute values have bounded absolute row sums and volume-normalized column sums. For every $s\in[0,T]$ and $r=0,1,2$,
+\begin{align*}
+ (\mathsf R+\mathsf C)(D_\delta^rP_s^\delta\mathsf D_j)&\le C_r(s+H^2)^{-r/2}d_H(s),\\
+ (\mathsf R+\mathsf C)(D_\delta^rP_s^\delta I_a\mathsf P_j)&\le C_r(s+H^2)^{-r/2}.
+\end{align*}
+The cancellation is used for each column with input on the lattice of mesh $H$, before any earlier linearization is composed.
+\item Let $\mathsf L_i=D_\theta\mathscr R_i(0,0)$ be the linearization at the zero field of the zero-fluctuation reconstruction of step $i$, acting on link logarithms, with $\mathsf R(\mathsf L_i),\mathsf C(\mathsf L_i)\le a_{\mathrm{cap}}=C_{\mathrm{CP}}/B$ and $\qanc=Ba_{\mathrm{cap}}^2<1$. For $0\le i\le j-1$ set $m=j-1-i$, $G=a_i=B^mH$, $\mathsf T_{ji}=\mathsf L_{j-1}\cdots\mathsf L_{i+1}$ (the identity if $i=j-1$), and
+\[
+ \mathsf U_s=P_s^\delta I_a\mathsf P_j\mathsf T_{ji}/H,\qquad
+ \mathsf V_s=P_s^\delta\mathsf D_j\mathsf T_{ji}/H,\qquad
+ \mathfrak A_{ji}=C_{\mathrm{CP}}^{\,m}/G.
+\]
+If $\norm{\theta_i}_\infty\le b_i$, then for $r=0,1,2$,
+\[
+ \norm{D_\delta^r\mathsf U_s\theta_i}_\infty\le C_r\mathfrak A_{ji}b_i(s+H^2)^{-r/2},\qquad
+ \norm{D_\delta^r\mathsf V_s\theta_i}_\infty\le C_r\mathfrak A_{ji}b_i(s+H^2)^{-r/2}d_H(s).
+\]
+For $i\ge1$, the derivatives in $w_i$ of $\mathsf U_s\theta_i$ and $\mathsf V_s\theta_i$, where $\theta_i=\mathscr R_i(\theta_{i-1},w_i)$ is differentiated at the given point $w_i$ of $\Omega_i$, have absolute row sums and volume-normalized column sums bounded by the same expressions with $b_i$ replaced by $g_i$. In bounds on derivatives, $b_i$ may be any deterministic bound on $\norm{\theta_i(w)}_\infty$ valid for every $w\in\Omega_i$ at the fixed coarser field $\theta_{i-1}$; a bound sharper than the global one may be used when it holds on that whole set. A derivative in the dimensionless input $\theta_i$ removes a factor $b_i$; for an input written as a lattice potential, $\theta_i=Gv_i$, the derivative in $v_i$ acquires the factor $G$; and a derivative in a normalized fluctuation coordinate $w_{i,\lambda}$ acquires its own coupling $g_{i,\lambda}$. These conversions use the mesh of the input, never $\delta$.
+\item Let $\mathscr S_s$ be any one of the three ordered sources
+\[
+ \mathcal N_\delta(\mathsf U_s\theta_i,\mathsf V_s\theta_i),\qquad
+ \mathcal N_\delta(\mathsf V_s\theta_i,\mathsf U_s\theta_i),\qquad
+ \mathcal N_\delta(\mathsf V_s\theta_i,\mathsf V_s\theta_i),
+\]
+or their linear combinations with coefficients $1,1,-1$ or $1,1,-2$. Then
+\[
+ (\mathsf R+\mathsf C)(D_{w_i}D_\delta\mathscr S_s)\le C_JC_{\mathrm{CP}}^{\,2m}g_ib_iG^{-2}(s+H^2)^{-1}d_H(s).
+\]
+\end{enumerate}
+The constants depend on $L$, $T$, $M$, $J$, the interpolation function, the analytic domains and column bounds, and the order of differences; they do not depend on $K$, $j$, $i$, the number of preceding averaging steps, $a/\delta$, the coupling, or the coarser field. These are estimates on the whole torus.
+\end{lemma}
+
+\begin{proof}
+Constants $C_J$ may absorb the number of coordinate types and their volume ratios within one renormalization group step, but never a ratio between the mesh $G$ of a coarser scale and the finest mesh. The horizon in every heat estimate of this section is the fixed $T$. The refinement hypotheses of the cardinal interpolation and of \cref{ch14:lem:signed-physical-columns} hold because
+\begin{equation}\label{ch24:eq:integer-refinements}
+ \frac{a_j}{\delta}=B^{K-j}\in\N,\qquad \frac{a_{j-1}}{\delta}=B^{K-j+1}\in\N.
+\end{equation}
+Every order of differences used below is a nonnegative integer. The coarse side $n\ge4$ and all finer sides $nB^l$ satisfy the hypotheses on lattice sides of the heat and interpolation estimates, including meshes larger than one.
+
+\paragraph{Step 1: the matrix norms.}
+We write $v_z$ for the cell volume of an intermediate index $z$. By finite summation, we have
+\[
+ \sum_u\abs{(\mathsf A\mathsf B)_{yu}}\le\sum_z\abs{\mathsf A_{yz}}\sum_u\abs{\mathsf B_{zu}},
+\]
+and
+\[
+ \frac1{v_u}\sum_yv_y\abs{(\mathsf A\mathsf B)_{yu}}\le\sum_z\frac{v_z}{v_u}\abs{\mathsf B_{zu}}\Bigl(\frac1{v_z}\sum_yv_y\abs{\mathsf A_{yz}}\Bigr).
+\]
+Taking suprema gives both composition inequalities. For an array $f$, the Cauchy--Schwarz inequality with weights $\abs{\mathsf A_{yu}}$ implies that
+\[
+ \sum_yv_y\abs{(\mathsf Af)_y}^2\le\mathsf R(\mathsf A)\sum_u\abs{f_u}^2\sum_yv_y\abs{\mathsf A_{yu}}\le\mathsf R(\mathsf A)\mathsf C(\mathsf A)\sum_uv_u\abs{f_u}^2.
+\]
+For fixed input and output volumes, replacing both weighted norms by counting norms introduces exactly the factor $(v_{\mathrm{in}}/v_{\mathrm{out}})^{1/2}$. The same computation gives the assertion for several types of indices. For $c_{y;u,v}=\mathsf A_{yu}\mathsf B_{yv}$, summing first over $u$ and $v$ gives the row bound. Fixing $u$ and summing first over $v$, we obtain
+\[
+ \sup_u\frac{v_{\mathrm{out}}}{v_{\mathrm{in}}}\sum_{y,v}\abs{\mathsf A_{yu}\mathsf B_{yv}}\le\mathsf C(\mathsf A)\mathsf R(\mathsf B),
+\]
+and fixing $v$ gives the other column bound. The same computation applies to two different types of input indices with their volumes. Fixed translations of either output index are permutations of the output indices, so the proof applies to them with the same norms. A color bracket costs only the norm of a fixed bilinear map on $\R^3$.
+
+\paragraph{Step 2: zero mass of the defect.}
+We apply \cref{ch14:lem:signed-physical-columns} with coarse mesh $H$ and fine mesh $a=H/B$; its linear reconstruction is $\mathsf P_j$ of \cref{ch23:lem:four-piece-increment}. The two interpolations are applied on their own lattices. By \cref{ch13:lem:cardinal-columns}, after interpolation a column with input on the lattice of mesh $a$ has total physical mass $a^3$, and a column with input on the lattice of mesh $H$ has mass $H^3$. The identity for the total mass of the columns of $\mathsf P_j$ in \cref{ch14:lem:signed-physical-columns} implies that
+\[
+ \delta^3\sum_y(I_a\mathsf P_j-I_H\mathsf E_H)_{yu}=0
+\]
+in every output component, without summing over colors or directions. For an index $z$ on the lattice of mesh $a$, we use the triangle inequality $\dist(y,u)\le\dist(y,z)+\dist(z,u)$ and the first moment of the column of the cardinal interpolation matrix at $z$ to obtain
+\[
+ \delta^3\sum_y\dist(y,u)\abs{(I_a\mathsf P_j)_{yu}}\le C\sum_za^3\{a+\dist(z,u)\}\abs{(\mathsf P_j)_{zu}}\le CH^4.
+\]
+The term $I_H\mathsf E_H$ has the same bound, and periodic distances may be used in each triangle inequality. The rows and volume-normalized columns of \cref{ch14:lem:signed-physical-columns}, together with Step 1, also bound $I_a\abs{\mathsf P_j}+I_H\abs{\mathsf E_H}$.
+
+\paragraph{Step 3: heat evolution of the defect.}
+The estimate on the finest lattice in \cref{ch14:lem:signed-physical-columns} gives the bound on the absolute rows of $D_\delta^rP_s^\delta\mathsf D_j$. We give a separate argument for the columns. For $s\le H^2$ we commute every difference through the heat semigroup and apply it to the smooth columns of the cardinal interpolation matrix. Their $r$th differences have volume-normalized column sums at most $C_{J,r}H^{-r}$, since $a=H/B$ with $B$ fixed, and the heat semigroup does not increase absolute column sums. For $s\ge H^2$ we subtract the heat kernel at the location of the input $u$, which is allowed by the zero mass of the column:
+\[
+ (D_\delta^rP_s^\delta\mathsf D_j)_{yu}=\delta^3\sum_z\bigl\{D_\delta^rp_s^\delta(y,z)-D_\delta^rp_s^\delta(y,u)\bigr\}(\mathsf D_j)_{zu}.
+\]
+Using a shortest coordinate path from $z$ to $u$, the telescoping identity along it, and \cref{ch13:lem:heat-and-chaining}, we obtain
+\[
+ \delta^3\sum_y\abs{D_\delta^rp_s^\delta(y,z)-D_\delta^rp_s^\delta(y,u)}\le C_r\dist(z,u)(s+\delta^2)^{-(r+1)/2};
+\]
+the coordinate path has length at most $\sqrt3\dist(z,u)$ on the torus. Dividing the resulting column bound by the input volume $H^3$ and using the first moment of Step 2, we obtain $C_rHs^{-(r+1)/2}$, which is comparable to $(s+H^2)^{-r/2}d_H(s)$ in this range. For $r=2$ the proof uses at most three differences of the heat kernel.
+
+For $I_a\mathsf P_j$ we use differences of the cardinal interpolation for $s\le H^2$, and differences of the heat kernel for $s\ge H^2$, without subtraction; this proves both of its bounds. Thus the cancellation is used at the scale $H$; a first moment about a location at the scale $G$ would not suffice.
+
+\paragraph{Step 4: derivatives of the reconstruction at an arbitrary point.}
+The coefficient bounds come from \cref{ch12:thm:replacement-family}, not from the heat estimate of \cref{ch13:lem:cardinal-columns}. We write $\mathscr D_{\mathrm{in}}\Subset\mathscr D_{\mathrm{mid}}\Subset\mathscr D_{\mathrm{out}}$ for its nested analytic domains, with fixed positive gaps between their radii. The products of coarser fields and free coordinates in \cref{ch23:lem:four-piece-increment} lie in $\mathscr D_{\mathrm{in}}$ at a fixed positive distance from its boundary, uniformly in the side of the coarser lattice and in the number of preceding averaging steps. On that domain the reconstruction has a bounded absolute coefficient norm, including every volume-normalized column sum with a fixed input. Differentiating its majorant series on a smaller domain, we obtain bounds on the first and second derivatives in the free coordinates and on the fixed mixed derivatives used below. Indeed, a derivative of order $k$ of a monomial of degree $l$ multiplies its majorant by at most $l^k$ times a fixed inverse power of the radius. Since the ratio $\eta$ of the radii is less than one, $\sup_{l\ge k}l^k\eta^{l-k}$ is finite. The same argument with a fixed input gives the column bounds, without summing over a new output volume. These are absolute coefficient bounds, not bounds on values of a holomorphic map.
+
+The coupling-scaled fluctuation inputs are $q_{i,\lambda}=g_{i,\lambda}w_{i,\lambda}$, and the ratios $g_{i,\lambda}/g_i$ lie in a fixed interval determined by $M$ and $J$. The chain rule supplies one such coupling for every derivative in $w$. The resulting coefficients satisfy the hypotheses of \cref{ch13:lem:cardinal-columns}: a fixed number of types of coordinates, bounded rows and volume-normalized columns, and exponential decay in their own units. In particular, for the normalized derivative of the reconstruction,
+\begin{equation}\label{ch24:eq:white-jacobian}
+ W_i(w)=D_{w_i}\mathscr R_i(\theta_{i-1},w),\qquad \mathsf R(W_i)+\mathsf C(W_i)\le C_Jg_i.
+\end{equation}
+Here the coarser field is fixed, and the coefficient is evaluated on the whole cutoff domain $\Omega_i$, within the domain of \cref{ch23:lem:four-piece-increment}, not only at $w=0$. Equivalently, \cref{ch13:lem:cardinal-columns} applies to $g_i^{-1}W_i$, with the ratios of intermediate couplings included. Its fixed mixed derivatives satisfy the same bounds, with the coupling factors of their inputs. The same conclusion can be reached from the mean. The segment from the conditional mean $\E w$ to a point $w$ of the product lies in the product by convexity. Along it, Taylor's formula for the first derivative involves the second derivative in $w$, whose normalized absolute rows and columns are bounded by the same coefficient norm. Since $\norm{w-\E w}_\infty\le2p_i$, its contribution to either norm is at most $C_Jg_i^2p_i$; the first derivative at the mean has either norm at most $C_Jg_i$; and $g_ip_i$ is bounded by the smallness conditions of \cref{ch23:lem:kernel-reserve}.
+
+\paragraph{Step 5: the zero-fluctuation reconstruction and composition.}
+By the bounds on the derivatives of the zero-fluctuation reconstruction in \cref{ch14:lem:signed-physical-columns}, with the constant $C_{\mathrm{CP}}$ chosen before $J$, we have
+\begin{equation}\label{ch24:eq:center-jet-bounds}
+ \begin{split}
+ \norm{\mathscr R_i(\phi,0)}_\infty&\le a_{\mathrm{cap}}\norm\phi_\infty,\\
+ \norm{\mathscr R_i(\phi,0)-\mathsf L_i\phi}_\infty&\le Ca_{\mathrm{cap}}\norm\phi_\infty^2.
+ \end{split}
+\end{equation}
+The first line follows by integrating the first derivative along $s\phi$, $0\le s\le1$, and the second from Taylor's formula with integral remainder and the second derivative in the coarser field. Both use the constant chosen before $J$; it is not enlarged after $J$ is fixed.
+
+By composition, we have $\mathsf R(\mathsf T_{ji}),\mathsf C(\mathsf T_{ji})\le a_{\mathrm{cap}}^m$. The division is by the mesh $H$ of the coarser lattice of step $j$. Thus
+\begin{equation}\label{ch24:eq:normalization}
+ \frac{a_{\mathrm{cap}}^m}{H}=\frac{C_{\mathrm{CP}}^{\,m}}{G}=\mathfrak A_{ji},\qquad
+ \mathfrak A_{ji}^2H=\frac{\qanc^{\,m}}{G}=K_{ji}.
+\end{equation}
+The bounds of (3) follow from those of Step 3. Replacing the rightmost input by $W_i$, we obtain the bounds on rows and columns of derivatives in $w_i$. At a fixed coarser field, a smaller bound $b_i$ is allowed only if it bounds $\theta_i(w)$ at every point $w$ of $\Omega_i$. Differentiating in a dimensionless input removes its bound $b_i$, the substitution $\theta_i=Gv_i$ multiplies that derivative by $G$, and for a fluctuation coordinate the chain rule supplies its own $g_{i,\lambda}$.
+
+\paragraph{Step 6: one more difference of the source.}
+By \cref{ch21:lem:wilson-local-algebra}, it suffices to consider one translated summand $[T_\xi f,T_\zeta D_k^\pm h]$, with $(f,h)$ equal to $(\mathsf U_s\theta_i,\mathsf V_s\theta_i)$, $(\mathsf V_s\theta_i,\mathsf U_s\theta_i)$, or $(\mathsf V_s\theta_i,\mathsf V_s\theta_i)$. For a forward difference $D_l$, the product rule is
+\[
+ D_l[T_\xi f,T_\zeta D_k^\pm h]=[T_\xi D_lf,T_{\zeta+\delta e_l}D_k^\pm h]+[T_\xi f,T_\zeta D_lD_k^\pm h].
+\]
+Its derivative in $w_i$ has four terms, obtained by differentiating either argument of either bracket; their orders of differences are $(1,1)$, $(1,1)$, $(0,2)$, and $(0,2)$. A backward difference is a translated forward difference up to sign, so the same four bounds apply to it. In every term one factor is the deterministic defect or the derivative in $w_i$ of the defect. Multiplying the corresponding bounds of (3), we find
+\[
+ C_J\mathfrak A_{ji}^2g_ib_i(s+H^2)^{-1}d_H(s).
+\]
+For the row we use the row of the differentiated factor and the supremum of the other factor; for the column we use the volume-normalized column of that factor and the same supremum. For $\mathscr S_s=\mathcal N_\delta(\mathsf V_s\theta_i,\mathsf V_s\theta_i)$ there may be two factors $d_H(s)$; since $d_H(s)\le1$, we may discard one. The two signed combinations cost at most the sum of the absolute values of their coefficients. Summing over the fixed list of summands proves (4), with the stated dependence of the constants.
+\end{proof}
+
+\section{Time-dependent coefficients and conditional drifts}\label{ch24:sec:drifts}
+
+This section bounds the coefficients of the ordered quadratic terms propagated from scale $i$, and the conditional drifts in the telescope over scales. We first record an elementary summation, then the properties of the conditional fluctuation kernel that we need, with constants uniform in the coupling, and a bound on conditional means of quadratic functions of the reconstructed field. The main estimate is \cref{ch24:thm:ancestor-gram-rows}.
+
+\subsection{An elementary summation}
+
+We write $\lambda_q=-\log\qanc/\log B>0$, so that $\qanc=B^{-\lambda_q}$, and recall that $a_i=a_0B^{-i}$ with $a_0=L/n$.
+
+\begin{lemma}\label{ch24:lem:geometric-convolution}
+Let $r>0$ and $d\ge0$.
+\begin{enumerate}
+\item For every $0<\zeta<\min(r,\lambda_q)$ there exists $C$, depending only on $r$, $\zeta$, $\lambda_q$, $B$, and $a_0$, such that for all $j\ge1$,
+\[
+ \sum_{i=0}^{j-1}\qanc^{\,j-1-i}a_i^r\le Ca_{j-1}^\zeta.
+\]
+\item For every $0<\eta<\min(r,\lambda_q)$ there exists $C$, depending only on $r$, $d$, $\eta$, $\lambda_q$, $B$, and $a_0$, such that for all $k\ge1$,
+\[
+ \sum_{j\ge k}(1+j)^d\sum_{i=0}^{j-1}\qanc^{\,j-1-i}a_i^r\le Ca_k^\eta.
+\]
+In particular, the left side is finite and tends to zero as $k\to\infty$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $0<\zeta<\min(r,\lambda_q)$ and $m=j-1-i$. Since $j-1=m+i$,
+\[
+ \qanc^{\,m}a_i^r=a_0^rB^{-\lambda_qm-ri}=a_0^rB^{-\zeta(j-1)}B^{-(\lambda_q-\zeta)m-(r-\zeta)i}.
+\]
+The two remaining exponents are positive, so the sum over $0\le i\le j-1$ of the last factor is at most $\sum_{m,i\ge0}B^{-(\lambda_q-\zeta)m-(r-\zeta)i}<\infty$. This gives (1), since $B^{-\zeta(j-1)}=(a_{j-1}/a_0)^\zeta$. For (2) we choose $\zeta$ strictly between $\eta$ and $\min(r,\lambda_q)$ and apply (1). Since $\zeta-\eta>0$, the polynomial factor is absorbed: $(1+j)^dB^{-\zeta(j-1)}\le C_{d,\zeta-\eta}B^{-\eta(j-1)}$, and summing over $j\ge k$ gives at most $CB^{-\eta k}=C(a_k/a_0)^\eta$. Polynomial factors in $i$ or $m$ are bounded by $(1+j)^d$, since $i,m\le j$.
+\end{proof}
+
+\subsection{The conditional fluctuation kernel}
+
+The next lemma collects the properties of the conditional law of $w_i$ given $\mathcal F_{i-1}$ that we use. In the notation of the lemma, $\mu_{\mathfrak d_i,\phi}=k_{\mathfrak d_i}(e^\phi,dw)$ is the conditional fluctuation kernel of \eqref{ch01:eq:complete-white-kernel} after $\mathfrak d_i$ preceding averaging steps, and its mean $\mu_\phi=m_\phi$ is the conditional mean of \cref{ch23:sec:setup}. For the small-field event of \cref{ch01:def:selected-law}, all cutoff radii of one renormalization group step are equal, $p_i=A_{\mathrm w}\log(1/t_i)\ge1$. This is the case treated here; it is a special case of the prescription allowed in \cref{ch23:sec:setup}. The point of the lemma is that its constants do not depend on the coupling below the common upper bound $g_*$.
+
+\begin{lemma}\label{ch24:lem:conditional-kernel}
+Assume the setting of \cref{ch23:sec:setup}. Fix $K\ge1$ and $1\le i\le K$, and let $\phi=\theta_{i-1}$.
+\begin{enumerate}
+\item The conditional law of $w_i$ given $\mathcal F_{i-1}$ is the conditional fluctuation kernel $\mu_{\mathfrak d_i,\phi}$, $\mathfrak d_i=J(K-i)$, with density $Z_\phi^{-1}\one_{\Omega_i}e^{-V_{\mathfrak d_i,\phi}}$, and, uniformly in $K$, $i$, $\mathfrak d_i$, $\phi$, and the coupling below $g_*$,
+\begin{equation}\label{ch24:eq:complete-kernel-gates}
+ 1-Ct_ip_i>0,\qquad
+ \frac{C[t_ip_i+t_i^2(1+E_*)]}{(1-Ct_ip_i)^3}\le\frac12,
+ \qquad t_ip_i^3\le\varepsilon_{\mathrm{sc}},
+\end{equation}
+where $E_*$ is the fixed upper bound on the weighted analytic coefficient norm of the effective interaction in \cref{ch10:thm:complete-white-law}, and $\varepsilon_{\mathrm{sc}}$ is fixed by the construction. The same holds at every point $u\phi$, $0\le u\le1$, of the segment from the zero field to $\phi$, with the same product $\Omega_i$.
+\item The potential is $C^2$ on a neighborhood of the closed product $\Omega_i$, and
+\begin{equation}\label{ch24:eq:actual-product-hessian}
+ D_w^2V_{\mathfrak d_i,\phi}\ge\tfrac12I\quad\text{on }\Omega_i.
+\end{equation}
+In particular, the conditional fluctuation covariance $\Sigma_\phi$ of $w_i$ satisfies $\norm{\Sigma_\phi}_{\mathrm{op}}\le2$, and every real function $F$ on $\Omega_i$ that is Lipschitz for the Euclidean distance satisfies
+\begin{equation}\label{ch24:eq:actual-kernel-concentration}
+ \log\E_\phi e^{z(F-\E_\phi F)}\le z^2\Lip(F)^2\qquad(z\in\R).
+\end{equation}
+\item Let $\mu_\phi=\E_\phi w_i$. Then
+\begin{equation}\label{ch24:eq:uniform-white-covariance}
+ \norm{\mu_\phi}_\infty\le C_Jt_i\norm\phi_\infty,\qquad \mu_0=0,\qquad
+ \norm{\Sigma_\phi-\Sigma_0}_{\mathrm{op}}\le C_Jt_ip_i^3\norm\phi_\infty,\qquad \norm{\Sigma_\phi}_{\mathrm{op}}\le2.
+\end{equation}
+\item Let $E_\phi=g_i^{-1}D_w\mathscr R_i(\phi,\mu_\phi)$ and $\mathsf Z_\phi=E_\phi\Sigma_\phi E_\phi^{\mathsf T}$. Then
+\begin{equation}\label{ch24:eq:uniform-linear-coefficient}
+ \norm{E_\phi}_{\mathrm{op}}+\norm{E_0}_{\mathrm{op}}\le C_J,\qquad \norm{E_\phi-E_0}_{\mathrm{op}}\le C_J\norm\phi_\infty,
+\end{equation}
+and
+\begin{equation}\label{ch24:eq:uniform-reconstructed-covariance}
+ \norm{\mathsf Z_\phi-\mathsf Z_0}_{\mathrm{op}}\le C_J(1+t_ip_i^3)\norm\phi_\infty\le C_J\norm\phi_\infty.
+\end{equation}
+\end{enumerate}
+The constants depend only on the fixed analytic domains and coefficient bounds, $M$, $J$, and the common upper bound $g_*$; they do not depend on the coupling below $g_*$, on the lattice side, on $K$, $i$, $\mathfrak d_i$, or on $\phi$.
+\end{lemma}
+
+\begin{proof}
+For fixed $K$ and $i$, \cref{ch23:lem:four-piece-increment} identifies the conditional law of $w_i$ given $\mathcal F_{i-1}$ with the conditional fluctuation kernel at the coarser field $\phi$, with $\mathfrak d_i=J(K-i)$ preceding averaging steps. The side of the coarser lattice of the step is $nB^{i-1}\ge4$, the coarser field lies in $\SmallChart{r}$, and the coupling-scaled fluctuation inputs $q_{i,\lambda}=g_{i,\lambda}w_{i,\lambda}$ of every point of $\Omega_i$ lie in the common analytic domain, as checked in the proof of \cref{ch23:lem:kernel-reserve}. The domain conditions there include those on every intermediate classical background field, on the block averaging constraint, and on the Haar disintegration density, and the condition that the reconstruction of every point of the product lies in $\SatChart{r}$. These are the common domains of \cref{ch23:lem:four-piece-increment}, and \cref{ch12:thm:replacement-family,ch12:thm:representative-prefixes} preserve them. In particular, the change to the reconstruction maps preserves each ball of fluctuation coordinates, the free logarithmic coordinates, the Haar disintegration density, the triangular determinant, the inherited normalization constant, and the normalizer, and hence the normalized kernel.
+
+The hypotheses of \cref{ch10:thm:complete-white-law} hold on this product. Let $t_i=M^{(J-1)/2}g_i$; the radii are $p_i=A_{\mathrm w}\log(1/t_i)\ge1$, and the ratios of intermediate couplings are included in the reconstruction map. The common upper bound $g_*$ of \cref{ch23:lem:four-piece-increment} is also the reduced bound of \cref{ch10:thm:actual-means-and-scores}. Hence \eqref{ch24:eq:complete-kernel-gates} holds uniformly in $K$, $i$, $\mathfrak d_i$, $\phi$, and the coupling below $g_*$. The last condition is uniform in the coupling: since $t[A_{\mathrm w}\log(1/t)]^3\to0$ as $t\downarrow0$, the reduced bound controls it on the whole interval of couplings. Every point $u\phi$ of the segment lies in $\SmallChart{r}$ and satisfies the same product and domain conditions, so the theorem on means and covariances also applies along the segment.
+
+We write the density as $Z_\phi^{-1}\one_{\Omega_i}e^{-V_{\mathfrak d_i,\phi}}\,dw$. By \cref{ch10:thm:complete-white-law}, the potential is smooth on an open neighborhood of the closed product, and \eqref{ch24:eq:actual-product-hessian} holds. The restrictions imposed at coarser scales depend only on the coarser field and cancel in this normalized conditional law, by the same theorem. The product is a finite product of convex balls in $\R^3$, the potential is $C^2$ on its neighborhood, and the Hessian bound holds on the whole product. These are the hypotheses of \cref{ch02:thm:reflecting-concentration}, with $m=1/2$, and that theorem implies that $\norm{\Sigma_\phi}_{\mathrm{op}}\le2$ and \eqref{ch24:eq:actual-kernel-concentration}. All later uses of conditional concentration in this section are for this kernel, so their constants do not depend on the dimension, the number of averaging steps, or the coupling.
+
+By \cref{ch10:thm:actual-means-and-scores}, which applies by the preceding checks and the preservation of the kernel, we have \eqref{ch24:eq:uniform-white-covariance}. To bound the linear coefficient of the reconstruction map, we write the map as a function $\widehat F_i(\phi,q)$ of the coupling-scaled fluctuation inputs. Let $S_i=\operatorname{diag}(g_{i,\lambda}/g_i)$ and $q_\phi=(g_{i,\lambda}\mu_{\phi,\lambda})_\lambda$. Then
+\[
+ E_\phi=g_i^{-1}D_w\mathscr R_i(\phi,\mu_\phi)=D_q\widehat F_i(\phi,q_\phi)S_i,\qquad E_0=D_q\widehat F_i(0,0)S_i,
+\]
+and the norm of $S_i$ is bounded by the fixed ratio of intermediate couplings. The inner domain contains these points and the segments joining them: the conditional mean lies in the convex product, and $u\phi$ lies in the ball of coarser fields. The second derivatives in the free coordinates, and the mixed second derivatives in the coarser field and the free coordinates, have bounded absolute row sums and volume-normalized column sums. This follows from \cref{ch12:thm:replacement-family} and the computation with majorant series in Step 4 of the proof of \cref{ch24:lem:signed-heat-defect}. Integrating these derivatives along the two segments, we obtain
+\[
+ (\mathsf R+\mathsf C)(E_\phi-E_0)\le C_J(\norm\phi_\infty+\norm{q_\phi}_\infty)\le C_J(1+t_i^2)\norm\phi_\infty,
+\]
+where we used $\norm{q_\phi}_\infty\le t_i\norm{\mu_\phi}_\infty$. Converting the volumes of the fluctuation coordinates to the output volume uses only fixed ratios within one renormalization group step, so the weighted Schur bound of \cref{ch24:lem:signed-heat-defect}(1) implies \eqref{ch24:eq:uniform-linear-coefficient}. For $\mathsf Z_\phi=E_\phi\Sigma_\phi E_\phi^{\mathsf T}$ we expand
+\begin{equation}\label{ch24:eq:reconstructed-covariance-expansion}
+ \mathsf Z_\phi-\mathsf Z_0=(E_\phi-E_0)\Sigma_\phi E_\phi^{\mathsf T}+E_0(\Sigma_\phi-\Sigma_0)E_\phi^{\mathsf T}+E_0\Sigma_0(E_\phi^{\mathsf T}-E_0^{\mathsf T}).
+\end{equation}
+By \eqref{ch24:eq:uniform-white-covariance} and \eqref{ch24:eq:uniform-linear-coefficient}, the three terms are bounded by $C_J\norm\phi_\infty$, $C_Jt_ip_i^3\norm\phi_\infty$, and $C_J\norm\phi_\infty$, respectively, which gives \eqref{ch24:eq:uniform-reconstructed-covariance}. Every constant here comes from the common upper bound on the couplings and from the coefficient bounds of the reconstruction maps; none depends on the coupling. The covariance bound of \cref{ch14:thm:quadratic-ancestor-return}, whose constants may depend on the fixed coupling, is not used.
+\end{proof}
+
+\subsection{Conditional means of quadratic functions}
+
+The next lemma bounds the conditional mean of a quadratic function of the reconstructed field without using any spatial decay of its coefficients. This allows us to apply it after heat evolution, which spreads the coefficients over the torus. We say that a quadratic form $Q$ on link logarithms, with values in arrays of $\su$-valued components, is equivariant if $Q(\Ad_hv,\Ad_hv)=\Ad_hQ(v,v)$ for every constant $h\in\SU$ acting on all color indices.
+
+\begin{lemma}\label{ch24:lem:quadratic-mean}
+Assume the setting of \cref{ch24:lem:conditional-kernel}. Let $Q$ be an equivariant quadratic form on link logarithms on the lattice of mesh $a_i$, fix one scalar output component of $Q(v,v)$, and let $k_Q$ be the absolute sum of the coefficients of that component over both inputs. Put $r=\norm\phi_\infty$ and $c=\mathscr R_i(\phi,0)$. Then
+\begin{align}
+ \abs{\E_\phi Q(\theta_i,\theta_i)-Q(c,c)}&\le C_Jk_Q(g_i^2r+g_i^3p_i^3),\label{ch24:eq:unweighted-quantum}\\
+ \abs{Q(c,c)-Q(\mathsf L_i\phi,\mathsf L_i\phi)}&\le Ck_Qa_{\mathrm{cap}}^2r^3.\label{ch24:eq:unweighted-classical}
+\end{align}
+The constants depend only on the fixed coefficient bounds, $M$, $J$, and the common upper bound $g_*$; they do not depend on the coupling below $g_*$, the lattice side, $K$, $i$, or the number of preceding averaging steps.
+\end{lemma}
+
+\begin{proof}
+The matrix $C_Q$ of the fixed scalar component has nuclear norm at most $k_Q$, since it is a sum of coordinate matrix units, each of nuclear norm one. Thus, for every matrix $C$,
+\begin{equation}\label{ch24:eq:nuclear}
+ \abs{Q:C}=\abs{\tr(C_QC)}\le k_Q\norm C_{\mathrm{op}}.
+\end{equation}
+This needs no spatial weight on $Q$.
+
+Let $\mu=\E_\phi w_i$, $\xi=w_i-\mu$, and $v=\mathscr R_i(\phi,\mu)$. Using the bound on the mean in \eqref{ch24:eq:uniform-white-covariance}, the expansion \eqref{ch23:eq:taylor-at-mean} of \cref{ch23:lem:four-piece-increment}, and the bounds \eqref{ch24:eq:white-jacobian} on the derivatives of the reconstruction, we have
+\begin{equation}\label{ch24:eq:mean-expansion}
+ \begin{gathered}
+ \theta_i=v+g_iE_\phi\xi+g_i^2\mathsf B_\phi(\xi,\xi)+R_\phi(\xi),\qquad \norm{R_\phi}_\infty\le C_Jg_i^3p_i^3,\\
+ \norm{v-c}_\infty\le C_Jg_i\norm\mu_\infty\le C_Jg_it_ir\le C_Jg_i^2r,\qquad \norm v_\infty\le C_Jr.
+ \end{gathered}
+\end{equation}
+The normalized coefficients of $E_\phi$ and of each output component of $\mathsf B_\phi$ have bounded absolute rows. By \eqref{ch24:eq:nuclear} and the bound $\norm{\Sigma_\phi}_{\mathrm{op}}\le2$, which follows from the Poincar\'e inequality, we obtain
+\begin{equation}\label{ch24:eq:B-mean-bounded}
+ \norm{\E_\phi\mathsf B_\phi(\xi,\xi)}_\infty\le2C_J.
+\end{equation}
+We do not need the quadratic mean to vanish at a nonzero coarser field.
+
+We insert \eqref{ch24:eq:mean-expansion} into both arguments of $Q$. The terms linear in $\xi$ have mean zero, since $\xi$ is centered under the same law. The term with $g_iE_\phi\xi$ in both arguments has mean exactly $g_i^2Q:(E_\phi\Sigma_\phi E_\phi^{\mathsf T})$. By \eqref{ch24:eq:nuclear} and \eqref{ch24:eq:uniform-reconstructed-covariance}, it differs from $g_i^2Q:\mathsf Z_0$ by at most $C_Jk_Qg_i^2r$, uniformly in the coupling. The vector-valued contraction $Q:\mathsf Z_0$ vanishes. Indeed, $\mathsf Z_0$ is scalar in the color indices, so by equivariance the contraction is a vector fixed by all adjoint rotations; such a vector is zero, since a rotation through $\pi$ about an axis perpendicular to a nonzero vector changes its sign.
+
+The two terms that pair $v$ with $g_i^2\E_\phi\mathsf B_\phi(\xi,\xi)$ are bounded by $C_Jk_Qg_i^2r$, by \eqref{ch24:eq:B-mean-bounded}. Replacing $Q(v,v)$ by $Q(c,c)$ costs at most $C_Jk_Qg_i^2r$, since the extra factor $r$ is bounded on the fixed chart. Every remaining term contains $R_\phi$, or one argument linear and one quadratic in $\xi$, or two arguments quadratic in $\xi$. On the cutoff domain $\abs\xi\le2p_i$ coordinatewise, so these terms are bounded by $C_Jk_Qg_i^3p_i^3$, $C_Jk_Qg_i^3p_i^3$, and $C_Jk_Qg_i^4p_i^4$, respectively; the last is absorbed into the first because $g_ip_i$ is bounded by \eqref{ch24:eq:complete-kernel-gates}. The factors $v$ and $g_ip_i$ in products with $R_\phi$ are bounded on the same domain. This proves \eqref{ch24:eq:unweighted-quantum}. For the classical error, by \eqref{ch24:eq:center-jet-bounds}, we have
+\[
+ \abs{Q(c,c)-Q(\mathsf L_i\phi,\mathsf L_i\phi)}\le k_Q(\norm c_\infty+\norm{\mathsf L_i\phi}_\infty)\norm{c-\mathsf L_i\phi}_\infty\le Ck_Qa_{\mathrm{cap}}^2r^3,
+\]
+which is \eqref{ch24:eq:unweighted-classical}. The only quantities involving the cutoff that were absorbed into constants are $g_ip_i$, $g_it_i/g_i^2=M^{(J-1)/2}$, and $t_ip_i^3$, all bounded by fixed data as checked in \cref{ch24:lem:conditional-kernel}.
+\end{proof}
+
+\subsection{Coefficients and drifts of the propagated terms}
+
+For $\omega\in\{UV,VU,VV\}$ and $0\le i\le j-1$ we define the bilinear sources
+\[
+ S_s^{UV}(v,z)=\mathcal N_\delta(\mathsf U_sv,\mathsf V_sz),\qquad
+ S_s^{VU}(v,z)=\mathcal N_\delta(\mathsf V_sv,\mathsf U_sz),\qquad
+ S_s^{VV}(v,z)=\mathcal N_\delta(\mathsf V_sv,\mathsf V_sz),
+\]
+with $\mathsf U_s$, $\mathsf V_s$ as in \cref{ch24:lem:signed-heat-defect}(3), and the bilinear Duhamel terms
+\[
+ \mathscr T_{j,i}^\omega(v,z)(t)=\int_0^tP_{t-s}^\delta S_s^\omega(v,z)\,ds.
+\]
+Taking $z=v$ gives the quadratic terms of the introduction; each argument has a fixed place, and no symmetry of $\mathcal N_\delta$ is used. Both arguments are propagated through the same linearizations, so $\mathscr T_{j,i-1}^\omega(v,v)=\mathscr T_{j,i}^\omega(\mathsf L_iv,\mathsf L_iv)$. We write $\mathscr S_s$ for any of the sources $S_s^\omega(\theta_i,\theta_i)$.
+
+\begin{theorem}\label{ch24:thm:ancestor-gram-rows}
+Assume the setting of \cref{ch23:sec:setup} and the notation of \cref{ch24:lem:signed-heat-defect}, with $m=j-1-i$ and $G=a_i$. Set
+\begin{gather*}
+ K_{ji}=C_{\mathrm{CP}}^{\,2m}H/G^2=\qanc^{\,m}/G,\qquad
+ \ell_H(t)=1+\log(1+t/H^2),\\
+ J_H(t)=\int_0^t(t-s)^{-1/2}(s+H^2)^{-1}\,ds.
+\end{gather*}
+\begin{enumerate}
+\item For $1\le i\le j-1$, the derivative $\mathsf F_s=D_{w_i}\mathscr S_s$ in $w_i$, at any point of $\Omega_i$, satisfies
+\begin{gather*}
+ (\mathsf R+\mathsf C)(\mathsf F_s)\le C_JK_{ji}g_ib_i(s+H^2)^{-1},\\
+ \norm{\mathsf F_s}_{\ell^2(w_i)\to\ell^2(\delta)}\le C_JK_{ji}g_ib_i(s+H^2)^{-1}(G/\delta)^{3/2},
+\end{gather*}
+where both $\ell^2$ norms are counting norms. For $s\ge G^2$, the Euclidean norm of its value row improves to $C_JK_{ji}g_ib_iG^{3/2}s^{-7/4}$; no such improvement is asserted for its volume-normalized column sum.
+\item The rows of the derivatives in $w_i$ of the Duhamel terms satisfy, for $0\le t\le G^2$,
+\begin{align*}
+ \sup_x\norm{D_{w_i}\mathscr T_{j,i}^\omega(t,x)}_2&\le C_JK_{ji}g_ib_i\log(1+t/H^2),\\
+ \sup_x\norm{D_{w_i}D_\delta\mathscr T_{j,i}^\omega(t,x)}_2&\le C_JK_{ji}g_ib_iJ_H(t),
+\end{align*}
+and, for $t\ge G^2$ and $r=0,1$,
+\[
+ \sup_x\norm{D_{w_i}D_\delta^r\mathscr T_{j,i}^\omega(t,x)}_2\le C_JK_{ji}g_ib_iG^{3/2}t^{-3/4-r/2}\ell_H(T).
+\]
+At small times the displayed integrals, which vanish at $t=0$, are kept; in particular $J_H(t)\le C\min\{\sqrt t/H^2,(t+H^2)^{-1/2}\ell_H(t)\}$. The bounds on first differences use the outer heat kernel.
+\item For a quadratic coefficient $c_{y;u,v}$, let $\mathsf R_2$ be the supremum over outputs of the absolute sum over both inputs, and, for a coefficient with input mesh $G$ and output mesh $h$,
+\[
+ \mathsf C_2(c)=\max\Bigl\{\sup_u\frac{h^3}{G^3}\sum_{y,v}\abs{c_{y;u,v}},\ \sup_v\frac{h^3}{G^3}\sum_{y,u}\abs{c_{y;u,v}}\Bigr\}
+\]
+the larger of its two volume-normalized column sums with a fixed input. Here $h=\delta$; for $\mathsf Q_{j,i}$ in \cref{ch24:thm:full-smoother-return}, before interpolation, $h=a_j$. For each $\omega$,
+\begin{align*}
+ (\mathsf R_2+\mathsf C_2)(\mathscr T_{j,i}^\omega(t))&\le CK_{ji}\log(1+t/H^2),\\
+ (\mathsf R_2+\mathsf C_2)(D_\delta\mathscr T_{j,i}^\omega(t))&\le CK_{ji}J_H(t).
+\end{align*}
+With the weights of $\Ynorm{\alpha}{\delta}$, that is, after multiplying the first bound by $(t+\delta^2)^\beta$ and the second by $(t+\delta^2)^\alpha$, the supremum over $t\le T$ of these coefficient norms is therefore at most $C_{L,T,\alpha,a_0}(1+j)K_{ji}$; we call this the weighted coefficient bound. On the whole cutoff domain $\Omega_i$ we also have, for $r=0,1,2,3$,
+\[
+ \sup_{w_i,x}\norm{D_{w_i}D_\delta^r\mathscr T_{j,i}^\omega(t,x)}_2\le C_{J,r}C_{\mathrm{CP}}^{\,2m}g_ib_iG^{-2}\,tH^{-1-r},
+\]
+and, for $r=0,1$,
+\[
+ \sup_{w_i,x}\norm{D_{w_i}\partial_tD_\delta^r\mathscr T_{j,i}^\omega(t,x)}_2\le C_{J,r}C_{\mathrm{CP}}^{\,2m}g_ib_iG^{-2}(H^{-1-r}+tH^{-3-r}).
+\]
+These bounds keep the factor $g_ib_i$, for later use in coverings.
+\item Define the conditional drift
+\[
+ e_{j,i}^\omega=\E\bigl[\mathscr T_{j,i}^\omega(\theta_i,\theta_i)\bigm|\mathcal F_{i-1}\bigr]-\mathscr T_{j,i-1}^\omega(\theta_{i-1},\theta_{i-1}).
+\]
+With the deterministic bounds $b_0=\rho_0$ and $b_i=\rho_0a_{\mathrm{cap}}^{\,i}+C_Jg_3\sqrt{a_i}\,p_i$, $i\ge1$, on $\norm{\theta_i}_\infty$,
+\[
+ \Ynorm{\alpha}{\delta}(e_{j,i}^\omega)\le C_J(1+j)\frac{\qanc^{\,j-1-i}}{a_i}\bigl\{a_{\mathrm{cap}}^2b_{i-1}^3+g_i^2b_{i-1}+g_i^3p_i^3\bigr\},
+\]
+and
+\[
+ \Ynorm{\alpha}{\delta}(\mathscr T_{j,0}^\omega(\theta_0,\theta_0))\le C\rho_0^2(1+j)\qanc^{\,j-1}/a_0.
+\]
+More precisely, for $\phi=\theta_{i-1}$ and $\theta_i^{\mathrm{cl}}=\mathscr R_i(\phi,0)$, write $e_{j,i}^\omega=e_{j,i}^{\omega,\mathrm{cl}}+e_{j,i}^{\omega,\mathrm q}$, where the linearization error and the fluctuation correction are
+\begin{align*}
+ e_{j,i}^{\omega,\mathrm{cl}}&=\mathscr T_{j,i}^\omega(\theta_i^{\mathrm{cl}},\theta_i^{\mathrm{cl}})-\mathscr T_{j,i-1}^\omega(\phi,\phi),\\
+ e_{j,i}^{\omega,\mathrm q}&=\E\bigl[\mathscr T_{j,i}^\omega(\theta_i,\theta_i)\bigm|\mathcal F_{i-1}\bigr]-\mathscr T_{j,i}^\omega(\theta_i^{\mathrm{cl}},\theta_i^{\mathrm{cl}}).
+\end{align*}
+Then
+\begin{align*}
+ \Ynorm{\alpha}{\delta}(e_{j,i}^{\omega,\mathrm{cl}})&\le C_J(1+j)K_{ji}a_{\mathrm{cap}}^2\norm\phi_\infty^3,\\
+ \Ynorm{\alpha}{\delta}(e_{j,i}^{\omega,\mathrm q})&\le C_J(1+j)K_{ji}(g_i^2\norm\phi_\infty+g_i^3p_i^3).
+\end{align*}
+Both deterministic majorants have summable tails in $j$, uniformly in $K$. When the coarser field is the identity, the vector-valued quadratic mean vanishes by the invariance of the conditional law under global color rotations; at a nonzero coarser field, the variation of the covariance, the nonlinear mean, and the classical Taylor error are all kept.
+\end{enumerate}
+The constants in the coefficient and mean bounds do not depend on the coupling, $K$, $j$, $i$, the number of preceding averaging steps, or $a/\delta$; they have the dependence of \cref{ch24:lem:signed-heat-defect}, with $\alpha$ added. The weighted coefficient bounds and the weighted bounds on drifts may in addition depend on the fixed coarse mesh $a_0=L/n$; this does not apply to the unweighted time-dependent rows. The constants in the summability statements may depend on the fixed $\gamma$, $n$, $\rho_0$, and the prescription of the cutoff radii.
+\end{theorem}
+
+\begin{proof}
+We first prove the deterministic estimates on coefficients and on derivatives in $w_i$, and then the estimates on drifts, which use \cref{ch24:lem:conditional-kernel,ch24:lem:quadratic-mean}. Throughout, $K_{ji}$ is the exact value displayed in the statement.
+
+\paragraph{Step 1: sources and late rows.}
+Combining the bound on pointwise products in \cref{ch24:lem:signed-heat-defect}(1) with part (3) of that lemma without a derivative in $w_i$, and using \eqref{ch24:eq:normalization}, we find that the bilinear coefficient of the source satisfies
+\begin{equation}\label{ch24:eq:source-coefficients}
+ (\mathsf R_2+\mathsf C_2)(S_s^\omega)\le C\mathfrak A_{ji}^2(s+H^2)^{-1/2}d_H(s)=\frac{CK_{ji}}{s+H^2},
+\end{equation}
+One argument uses a volume-normalized column and the other a row; hence no factor of the output volume occurs. Differentiating the two arguments in $w_i$ instead, we obtain
+\begin{equation}\label{ch24:eq:value-source-white}
+ (\mathsf R+\mathsf C)(\mathsf F_s)\le\frac{C_JK_{ji}g_ib_i}{s+H^2}.
+\end{equation}
+The counting Schur bound of \cref{ch24:lem:signed-heat-defect}(1) then implies the operator bound of (1), with the factor $(G/\delta)^{3/2}$. For several types of fluctuation coordinates, the intermediate volumes are their own cell volumes, and replacing them by $G^3$ costs only $C_J$.
+
+For $s\ge G^2$ we split the heat semigroup in either argument into two equal halves. The first half, applied to the derivative in $w_i$, has row and volume-normalized column at most $C_J\mathfrak A_{ji}g_i$; in the argument with the defect, both acquire the factor $d_H(s/2)\le\sqrt2d_H(s)$. The second half has counting row norm at most $C\delta^{3/2}s^{-3/4-r/2}$ after $r$ differences, by \cref{ch13:lem:heat-and-chaining}. The Schur bound for the first half implies that
+\begin{equation}\label{ch24:eq:slot-gram}
+ \begin{split}
+ \sup_x\norm{D_{w_i}D_\delta^r\mathsf U_s\theta_i(x)}_2&\le C_{J,r}\mathfrak A_{ji}g_iG^{3/2}s^{-3/4-r/2},\\
+ \sup_x\norm{D_{w_i}D_\delta^r\mathsf V_s\theta_i(x)}_2&\le C_{J,r}\mathfrak A_{ji}g_iG^{3/2}s^{-3/4-r/2}d_H(s)\qquad(r=0,1),
+ \end{split}
+\end{equation}
+where we used $\delta^{3/2}(G/\delta)^{3/2}=G^{3/2}$. In a translated bracket, the derivative in $w_i$ falls either on the argument without a difference or on the argument with the difference. We use, respectively, the bound of \eqref{ch24:eq:slot-gram} with $r=0$ or $r=1$, and the complementary deterministic bound of \cref{ch24:lem:signed-heat-defect}(3) for the other argument. Every term keeps one factor $d_H$. Since $d_H(s)\le Hs^{-1/2}$ and $\mathfrak A_{ji}^2H=K_{ji}$, we find
+\begin{equation}\label{ch24:eq:late-source-row}
+ \sup_x\norm{\mathsf F_s(x,\cdot)}_2\le C_JK_{ji}g_ib_iG^{3/2}s^{-7/4}\qquad(s\ge G^2).
+\end{equation}
+For the order $VV$ we use $d_H(s)^2\le d_H(s)$. These bounds also hold on $G^2/2\le s\le G^2$ after increasing the constant: on that interval the absolute row in \eqref{ch24:eq:value-source-white} is bounded by the right side of \eqref{ch24:eq:late-source-row}. The heat semigroup conserves the mass of columns, so this argument gives no improvement at late times for the absolute column.
+
+\paragraph{Step 2: the outer heat semigroup at small times.}
+Let $\Lambda=C_JK_{ji}g_ib_i$. By heat contraction and \eqref{ch24:eq:value-source-white}, we have the value row $\Lambda\int_0^t(s+H^2)^{-1}\,ds=\Lambda\log(1+t/H^2)$ at every $t$. For the first difference we use the bound on the outer heat kernel
+\[
+ \norm{D_\delta P_r^\delta}_{\infty\to\infty}\le C(r+\delta^2)^{-1/2}\le Cr^{-1/2}\qquad(r>0),
+\]
+which gives $C\Lambda J_H(t)$, without differentiating the source; the singularity at $s=t$ is integrable. The substitution $z=\sqrt{t-s}$ yields
+\begin{equation}\label{ch24:eq:J-formula}
+ J_H(t)=\frac{2}{\sqrt{t+H^2}}\operatorname{artanh}\sqrt{\frac{t}{t+H^2}}.
+\end{equation}
+Bounding $(s+H^2)^{-1}$ by $H^{-2}$, we find $J_H(t)\le2\sqrt t/H^2$ at all $t$. For $t\ge H^2$, the identity $2\operatorname{artanh}z=\log((1+z)/(1-z))$ gives $J_H(t)\le C(t+H^2)^{-1/2}\ell_H(t)$; for $t\le H^2$ this bound also follows from $\sqrt t/H^2\le C/H$. This proves the stated minimum, including its vanishing at $t=0$.
+
+\paragraph{Step 3: late times.}
+For $2G^2\le t\le T$ we split the Duhamel integral at $t/2$. On the early half we use the counting operator bound of (1) for $\mathsf F_s$ and the counting row of the heat kernel,
+\[
+ \norm{D_\delta^rP_{t-s}^\delta(x,\cdot)}_2\le C_r\delta^{3/2}t^{-3/4-r/2},\qquad r=0,1;
+\]
+the integral is at most $C\Lambda G^{3/2}t^{-3/4-r/2}\log(1+t/H^2)$. On the late half we use \eqref{ch24:eq:late-source-row} and the $\ell^1$ row of $D_\delta^rP_{t-s}^\delta$; the integral is at most
+\[
+ C\Lambda G^{3/2}\int_{t/2}^t(t-s)^{-r/2}s^{-7/4}\,ds\le C\Lambda G^{3/2}t^{-3/4-r/2}.
+\]
+If $G^2\le t\le2G^2$, the bounds of Step 2 give the same result, since $t\asymp G^2$ and $J_H(t)\le Ct^{-1/2}\ell_H(T)$. Thus the late estimates of (2) hold from $t=G^2$ on. The constants for the fixed horizon may depend on $T/L^2$.
+
+\paragraph{Step 4: quadratic coefficients and weights.}
+The outer heat kernel has absolute row and volume-normalized column equal to one, and its first difference has both norms at most $C(t-s)^{-1/2}$. Applying these facts to \eqref{ch24:eq:source-coefficients}, we obtain the two coefficient bounds of (3), with the exact integral profiles. If $t\le H^2$, the weighted sum is at most
+\[
+ CK_{ji}\{H^{2\beta}t/H^2+H^{2\alpha}\sqrt t/H^2\}\le CK_{ji}H^{2\alpha-1}.
+\]
+If $t\ge H^2$, it is at most $C_{T,\alpha}K_{ji}\ell_H(T)$, because both powers of the weights are positive and $\delta\le H$. In the first regime we use $H\le a_0$. Since $H=a_0B^{-(j-1)}$,
+\begin{equation}\label{ch24:eq:retained-mesh-log}
+ \begin{split}
+ \ell_H(T)&=1+\log\bigl(1+(T/a_0^2)B^{2(j-1)}\bigr)\\
+ &\le1+\log(1+T/a_0^2)+2(j-1)\log B\\
+ &\le C_{T,a_0,B}(1+j),
+ \end{split}
+\end{equation}
+where we used $1+xB^{2(j-1)}\le(1+x)B^{2(j-1)}$ for $x=T/a_0^2$, since $B^{2(j-1)}\ge1$. The constant in the weighted coefficient bound may therefore depend on the fixed $a_0=L/n$. The unweighted bounds on time-dependent coefficients and the bounds on rows of derivatives in $w_i$ keep their stated dependence and their logarithmic profiles.
+
+\paragraph{Step 5: crude bounds for coverings.}
+For any fixed integer $r\ge0$ we commute the differences through the heat semigroup and apply them to the cardinal interpolations on their own lattices before smoothing. The arguments then satisfy
+\[
+ \norm{D_\delta^r\mathsf U_s\theta_i}_\infty+\norm{D_\delta^r\mathsf V_s\theta_i}_\infty\le C_{J,r}\mathfrak A_{ji}b_iH^{-r},
+\]
+and the rows of their derivatives in $w_i$ have the same bound with $b_i$ replaced by $g_i$. By the finite product rule, we have, for each fixed $r$,
+\begin{equation}\label{ch24:eq:crude-source}
+ \begin{split}
+ \sup_{w_i,s,x}\abs{D_\delta^r\mathscr S_s(x)}&\le C_{J,r}\mathfrak A_{ji}^2b_i^2H^{-1-r},\\
+ \sup_{w_i,s,x}\norm{D_{w_i}D_\delta^r\mathscr S_s(x)}_2&\le C_{J,r}\mathfrak A_{ji}^2g_ib_iH^{-1-r}.
+ \end{split}
+\end{equation}
+Heat contraction and integration in time give the factor $t$ for the Duhamel term. For the time derivative we use the exact identity $\partial_t\mathscr T(t)=\mathscr S_t+\Delta_\delta\mathscr T(t)$ in finite dimensions. The Laplacian is a sum of three second differences, which are bounded by \eqref{ch24:eq:crude-source} with two more differences. This proves both crude bounds of (3), uniformly on $\Omega_i$, and avoids a bound of size $\delta^{-2}$ for the generator.
+
+\paragraph{Step 6: the drifts.}
+We apply \cref{ch24:lem:quadratic-mean} to each output component of $\mathscr T_{j,i}^\omega(t)$ and of its first difference. Their deterministic coefficients are fixed before conditioning, they are equivariant, and their absolute sums $k_Q$ are bounded by the unweighted bounds of (3). Conditional integration commutes with finite differences of outputs. With $\phi=\theta_{i-1}$ and $\mathscr T_{j,i-1}^\omega(\phi,\phi)=\mathscr T_{j,i}^\omega(\mathsf L_i\phi,\mathsf L_i\phi)$, the weighted coefficient bound of Step 4 implies that
+\begin{equation}\label{ch24:eq:weighted-mean-mesh}
+ \begin{split}
+ \Ynorm{\alpha}{\delta}(e_{j,i}^{\omega,\mathrm{cl}})&\le C_{J,a_0}(1+j)K_{ji}a_{\mathrm{cap}}^2\norm\phi_\infty^3,\\
+ \Ynorm{\alpha}{\delta}(e_{j,i}^{\omega,\mathrm q})&\le C_{J,a_0}(1+j)K_{ji}(g_i^2\norm\phi_\infty+g_i^3p_i^3).
+ \end{split}
+\end{equation}
+Here $C_{J,a_0}$ has the deterministic dependence already listed, including $a_0$ from \eqref{ch24:eq:retained-mesh-log}; it does not depend on the coupling, $K$, $j$, $i$, the number of averaging steps, or $a/\delta$. In the weighted bounds on drifts in the statement, $C_J$ denotes this constant, while the constants of \eqref{ch24:eq:unweighted-quantum} and \eqref{ch24:eq:unweighted-classical} are unchanged. Adding the two bounds and using $\norm\phi_\infty\le b_{i-1}$, we obtain the bound on $e_{j,i}^\omega$.
+
+The identity $\mathscr T_{j,i-1}^\omega(v,v)=\mathscr T_{j,i}^\omega(\mathsf L_iv,\mathsf L_iv)$ holds because $\mathsf T_{j,i-1}=\mathsf T_{ji}\mathsf L_i$ in both arguments. Substituting $\theta_0$, whose norm is at most $\rho_0$, into the weighted coefficient bound, we obtain the bound on the coarsest term, with the same dependence on $a_0$. When the coarser field is the identity, the conditional law at the zero field and the reconstruction are equivariant under global color rotations, so the vector-valued quadratic mean itself vanishes, and not only its contribution from the linear covariance.
+
+\paragraph{Step 7: bounds on the coarser fields and summability.}
+Integrating \eqref{ch24:eq:white-jacobian} from $w=0$ to $w_i$ along the segment in the convex product, and using \eqref{ch24:eq:center-jet-bounds}, we obtain
+\[
+ \norm{\theta_i}_\infty\le a_{\mathrm{cap}}\norm{\theta_{i-1}}_\infty+C_Jg_ip_i.
+\]
+Iterating, and using $g_{i-l}=B^{l/2}g_i$ and that the cutoff radii do not decrease with $i$, we obtain
+\[
+ \norm{\theta_i}_\infty\le\rho_0a_{\mathrm{cap}}^i+C_Jg_ip_i\sum_{l=0}^{i-1}(a_{\mathrm{cap}}\sqrt B)^l\le\rho_0a_{\mathrm{cap}}^i+C_Jg_3\sqrt{a_i}\,p_i,
+\]
+where the geometric series is included in the fixed $C_J$. For fixed $\gamma$ and $n$, we obtain
+\begin{equation}\label{ch24:eq:coarse-caps}
+ b_i\le C_\gamma(1+i)\sqrt{a_i},\qquad b_i/g_i\le C_\gamma(1+i),
+\end{equation}
+because $a_{\mathrm{cap}}^i=(a_i/a_0)^{\kapterm}$ with $\kapterm=-\log a_{\mathrm{cap}}/\log B>1/2$. In particular, the three contributions to the drifts, divided by $a_i$, satisfy
+\begin{equation}\label{ch24:eq:mean-majorant}
+ \frac{a_{\mathrm{cap}}^2b_{i-1}^3+g_i^2b_{i-1}+g_i^3p_i^3}{a_i}\le C_\gamma(1+i)^3a_i^{1/2}.
+\end{equation}
+For the first term we use $a_{i-1}=Ba_i$; the other two are exactly $g_3^2b_{i-1}$ and $g_3^3\sqrt{a_i}\,p_i^3$. The double series of majorants of the drifts is bounded by
+\[
+ C_\gamma\sum_{i\ge1}\sum_{m\ge0}(2+i+m)(1+i)^3\qanc^{\,m}a_i^{1/2},
+\]
+and by \cref{ch24:lem:geometric-convolution}(2), with $r=1/2$, its tail over $j=i+1+m\ge k$ is at most $Ca_k^\eta$ for some $\eta>0$, and tends to zero; truncation at any $K$ only decreases it. The majorant of the coarsest terms is summable because $\sum_j(1+j)\qanc^{\,j-1}<\infty$. This proves the summability statement. Only this summation uses the bound \eqref{ch24:eq:coarse-caps}, which holds at fixed coupling; the constants in the coefficient bounds and in the pointwise bounds on means are uniform in the coupling below $g_*$.
+\end{proof}
+
+\section{Maximal estimates and ultraviolet tails of the ordered terms}\label{ch24:sec:ordered}
+
+We now bound the conditionally centered terms $Z^\omega_{j,i}$ of the telescope, sum the telescope, and obtain the bounds on $\mathcal Q_\delta(r_j,r_j)$ and $\mathcal B_\delta(x_{j-1},r_j)$. The maximal inequality uses a finite net in space and time at the scale $H$, whose size is a fixed power of $H^{-1}$, independent of $\delta$. It also uses the bound $b_i/g_i\le C_\gamma(1+i)$ of \eqref{ch24:eq:coarse-caps}, so it holds at fixed positive coupling.
+
+\begin{theorem}\label{ch24:thm:ordered-rough-return}
+Assume the setting of \cref{ch23:sec:setup} and the notation of \cref{ch24:thm:ancestor-gram-rows}, and fix $\gamma>0$, $L$, $n$, $T$, $M$, $J$, and the domains before any ultraviolet limit is taken. Put
+\[
+ Z_{j,i}^\omega=\mathscr T_{j,i}^\omega(\theta_i,\theta_i)-\E\bigl[\mathscr T_{j,i}^\omega(\theta_i,\theta_i)\bigm|\mathcal F_{i-1}\bigr],\qquad
+ A_{ji}=K_{ji}g_ib_iG^{2\alpha-1}\ell_H(T).
+\]
+\begin{enumerate}
+\item There exist $C_\gamma<\infty$ and a fixed finite exponent $c$ such that, for every $u\ge0$, every $1\le i\le j-1\le K-1$, and each $\omega$ separately,
+\[
+ \Prob\Bigl\{\Ynorm{\alpha}{\delta}(Z_{j,i}^\omega)>C_\gamma A_{ji}\sqrt{\log(2+L/H)+u}\Bigm|\mathcal F_{i-1}\Bigr\}\le Ce^{-u}.
+\]
+It follows that, for every fixed $0<p<\infty$,
+\[
+ \bigl\|\Ynorm{\alpha}{\delta}(Z_{j,i}^\omega)\bigr\|_{L^p(\cdot\mid\mathcal F_{i-1})}\le C_{\gamma,p}(1+j)^c\qanc^{\,j-1-i}g_ib_ia_i^{2\alpha-2}\bigl[\sqrt{\log(2+L/a_i)}+\sqrt p\bigr].
+\]
+The proof uses a net in physical space and time at the scale $H$, with at most a fixed power of $H^{-1}$ points, independently of $\delta/H$; a short initial interval of times is controlled by the factor $t$ of the Duhamel term. The proof uses $b_i/g_i\le C_\gamma(1+i)$, and no constant uniform in the coupling is asserted.
+\item At $i=j-1$ we have $(\mathsf U-\mathsf V)\theta_{j-1}=x_{j-1}$ and $\mathsf V\theta_{j-1}=r_j$, and
+\[
+ \mathcal B_\delta(x_{j-1},r_j)=\mathscr T_{j,j-1}^{UV}+\mathscr T_{j,j-1}^{VU}-2\mathscr T_{j,j-1}^{VV},\qquad
+ \mathcal Q_\delta(r_j,r_j)=\mathscr T_{j,j-1}^{VV},
+\]
+with $\theta_{j-1}$ in both arguments of each term on the right. For the full quadratic difference, $\mathcal Q_\delta(x_{j-1}+r_j,x_{j-1}+r_j)-\mathcal Q_\delta(x_{j-1},x_{j-1})=\mathscr T_{j,j-1}^{UV}+\mathscr T_{j,j-1}^{VU}-\mathscr T_{j,j-1}^{VV}$, so the coefficient of $\mathscr T^{VV}_{j,j-1}$ is $-1$.
+\item For sufficiently large fixed $C_\gamma$ and $c$, let
+\begin{multline*}
+ W_j=C_\gamma(1+j)^c\Bigl\{\rho_0^2\qanc^{\,j-1}/a_0\\
+ +\sum_{i=1}^{j-1}\qanc^{\,j-1-i}\Bigl[g_ib_ia_i^{2\alpha-2}\sqrt{\log(2+L/a_i)}+\frac{a_{\mathrm{cap}}^2b_{i-1}^3+g_i^2b_{i-1}+g_i^3p_i^3}{a_i}\Bigr]\Bigr\}.
+\end{multline*}
+For each $\omega$ separately, $\E_{\nu_K}\Ynorm{\alpha}{\delta}(\mathscr T_{j,j-1}^\omega(\theta_{j-1},\theta_{j-1}))\le W_j$, including the coarsest term and all drifts. In particular,
+\[
+ \E_{\nu_K}\Ynorm{\alpha}{\delta}(\mathcal Q_\delta(r_j,r_j))\le W_j,\qquad
+ \E_{\nu_K}\Ynorm{\alpha}{\delta}(\mathcal B_\delta(x_{j-1},r_j))\le4W_j.
+\]
+For every $0<\eta<\min\{2\alpha-1,-\log\qanc/\log B\}$ there exists $C_{\gamma,\eta}$ such that $\sum_{j\ge k}W_j\le C_{\gamma,\eta}a_k^\eta$. By the triangle inequality, the same sum bounds the expected norms of all finite partial sums over $j\ge k$, uniformly in $K$.
+\end{enumerate}
+All constants may depend on the fixed coupling, the coarse side, the moment, the exponents, the horizon, and the fixed analytic and column bounds; they do not depend on $K$, on the number of preceding averaging steps, on $i$ and $j$, on $a/\delta$, or on the values of the coarser fields. These are estimates on the whole torus.
+\end{theorem}
+
+\begin{proof}
+Throughout, we use the conditional law and the properties verified in \cref{ch24:lem:conditional-kernel}; see \eqref{ch24:eq:complete-kernel-gates}, \eqref{ch24:eq:actual-product-hessian}, and \eqref{ch24:eq:actual-kernel-concentration}. The proof has five steps: a pointwise Lipschitz bound, a deterministic net, concentration, the telescope, and the summation.
+
+\paragraph{Step 1: the Lipschitz constant of one evaluation.}
+Let $\Lambda=K_{ji}g_ib_i$. For $t\le H^2$, by the bounds of \cref{ch24:thm:ancestor-gram-rows}(2) for small times and $\delta\le H$, we have
+\[
+ (t+\delta^2)^\beta\Lambda\log(1+t/H^2)+(t+\delta^2)^\alpha\Lambda J_H(t)\le C\Lambda H^{2\beta}.
+\]
+For $H^2\le t\le G^2$, the two terms are at most $C\Lambda t^\beta\ell_H(T)$. For $t\ge G^2$, the late bounds, multiplied by their weights, are at most
+\[
+ C\Lambda G^{3/2}t^{\alpha-5/4}\ell_H(T)\le C\Lambda G^{2\alpha-1}\ell_H(T),
+\]
+since $\alpha<2/3<5/4$ and $t\ge G^2$. These three ranges show that every scalar weighted evaluation, of the value or of a first difference, is Lipschitz in $w_i$ with constant at most $C_JA_{ji}$ on the whole product $\Omega_i$. The sum of the two maxima bounds the norm $\Ynorm{\alpha}{\delta}$, at the cost of a factor two. Translations and the finite number of colors and directions cost a fixed factor.
+
+\paragraph{Step 2: a deterministic net.}
+This step uses the bound $b_i$ on the coarser fields rather than a distance between coefficient rows, so its constants depend on the fixed coupling. It suffices to consider $H\le\min(1,\sqrt T)$; the other levels form a finite set, independent of the number of remaining steps. By \eqref{ch24:eq:crude-source} and heat contraction, the uncentered Duhamel term and its first three differences satisfy
+\begin{equation}\label{ch24:eq:sample-cover-bounds}
+ \norm{D_\delta^r\mathscr T(t)}_\infty\le C_{J,r}\mathfrak A_{ji}^2b_i^2tH^{-1-r},\qquad 0\le r\le3,
+\end{equation}
+and the corresponding time derivatives for $r=0,1$ are bounded by $C_{J,r}\mathfrak A_{ji}^2b_i^2(H^{-1-r}+tH^{-3-r})$. These bounds are deterministic on the whole product $\Omega_i$. Conditional expectation preserves them, and centering costs a factor two.
+
+For $0\le t\le H^6$, both weights are bounded by their values at $2H^2$, up to fixed powers of two. The centered weighted term on this interval is at most $C\mathfrak A_{ji}^2b_i^2H^{6+2\alpha-2}$, and its ratio to $A_{ji}$ is at most
+\begin{equation}\label{ch24:eq:microscopic-cover-ratio}
+ C\frac{b_i}{g_i}H^4(H/G)^{2\alpha-1}\ell_H(T)^{-1}\le C_\gamma(1+j)H^4,
+\end{equation}
+by \eqref{ch24:eq:coarse-caps}. The right side tends to zero geometrically in $j$, uniformly in $i$ and in $j-i$. For all sufficiently fine levels it is less than $1/8$, and enlarging the constant handles the finitely many other levels. This uses the factor $t$ of the Duhamel term, not a bound on a source at time zero.
+
+On $[H^6,T]$ we consider the two scalar processes
+\[
+ (t+\delta^2)^\beta\bigl(\mathscr T-\E[\mathscr T\mid\mathcal F_{i-1}]\bigr)(t,x),\qquad
+ (t+\delta^2)^\alpha D_\delta\bigl(\mathscr T-\E[\mathscr T\mid\mathcal F_{i-1}]\bigr)(t,x).
+\]
+Their Lipschitz constants in physical space follow from one more output difference in \eqref{ch24:eq:sample-cover-bounds}. For their time derivatives we use the bounds following that display and the product rule for the weights. Differentiating a weight costs no power of the mesh: for $\zeta=\beta$ or $\zeta=\alpha$,
+\[
+ t(t+\delta^2)^{\zeta-1}\le(t+\delta^2)^\zeta\le C_{T,\zeta}.
+\]
+Thus all these Lipschitz constants are bounded by $C_{T,J}\mathfrak A_{ji}^2b_i^2H^{-4}$. Dividing by $A_{ji}$, we obtain the bound
+\[
+ C_{T,J}\frac{b_i}{g_i}H^{-5}G^{-(2\alpha-1)}\le C_\gamma(1+j)H^{-5-(2\alpha-1)}\le C_\gamma H^{-7},
+\]
+after enlarging $C_\gamma$, since $2\alpha-1<1/3$ and $j=O(1+\abs{\log H})$ for the fixed sequence of lattices. After another fixed adjustment, these inequalities also hold on the finite set of coarse levels.
+
+We choose a spacing $\varepsilon_H=c_\gamma H^{12}$ in physical space and time, with $c_\gamma>0$ small. If $\delta\ge\varepsilon_H$, we take every lattice site; there are at most $C_L\varepsilon_H^{-3}$ of them. If $\delta<\varepsilon_H$, we partition the torus into cubes of side between $\varepsilon_H/2$ and $\varepsilon_H$, and choose one lattice site in each occupied cube. Every lattice site can then be joined to its chosen site by a coordinate lattice path of length at most $C\varepsilon_H$. The bound on physical differences applies along these paths, although the net points need not form a lattice. We add a time net of spacing at most $\varepsilon_H$, including both endpoints. The total number of points is at most
+\begin{equation}\label{ch24:eq:net-cardinality}
+ C_{\gamma,L,T}(1+L/\varepsilon_H)^3(1+T/\varepsilon_H)\le C_{\gamma,L,T,a_0}H^{-48}.
+\end{equation}
+After the choice of $c_\gamma$, the error of interpolation for the centered weighted processes is at most $A_{ji}/8$, and so is the contribution of short times. The finite numbers of components are included in the constant.
+
+\paragraph{Step 3: concentration and conditional moments.}
+Consider an evaluation $F$ at a point of the net. The coarser field is fixed, the domain is the same finite product of balls, and $F$ is a smooth real function that is Lipschitz for the Euclidean distance on a neighborhood of the product. We may apply \eqref{ch24:eq:actual-kernel-concentration} with Lipschitz constant at most $C_JA_{ji}$; Chernoff's inequality with positive and negative $z$ then gives
+\[
+ \Prob\bigl\{\abs{F-\E[F\mid\mathcal F_{i-1}]}>zA_{ji}\bigm|\mathcal F_{i-1}\bigr\}\le2e^{-c_Jz^2}.
+\]
+We apply the finite-family clause of \cref{ch13:lem:coefficient-metric-chaining} with $s=C_JA_{ji}$, $b=0$, and deterministic error $e\le CA_{ji}$. The logarithm of the number of points is at most $C_\gamma\log(2+L/H)$, which implies the tail of (1). The moment clause yields all $p\ge1$, and for $0<p<1$ Jensen's inequality gives $\norm M_p\le\E M$. The moments in (1) then follow from deterministic comparisons between $H$, $G$, and $j$. By \eqref{ch24:eq:retained-mesh-log}, $\ell_H(T)\le C_{T,a_0,B}(1+j)$, and $\log(2+L/H)\le C(1+j)\log(2+L/G)$. Inserting $K_{ji}=\qanc^{\,j-1-i}/G$ and absorbing these polynomial factors, we obtain the moment bound of (1) with a fixed finite $c$ independent of $K$, $j$, and $i$. The constant $C_{\gamma,p}$ may absorb $C_{T,a_0,B}$, because $L$ and $n$ are fixed and $a_0=L/n$.
+
+\paragraph{Step 4: the three orders and the telescope.}
+At $i=j-1$ the product of linearizations is empty, and
+\[
+ (\mathsf U-\mathsf V)\theta_{j-1}=H^{-1}P_\cdot^\delta I_H\theta_{j-1}=x_{j-1},\qquad \mathsf V\theta_{j-1}=r_j.
+\]
+For any bilinear map $\mathcal N$,
+\begin{align*}
+ \mathcal N(U-V,V)+\mathcal N(V,U-V)&=\mathcal N(U,V)+\mathcal N(V,U)-2\mathcal N(V,V),\\
+ \mathcal N(U,U)-\mathcal N(U-V,U-V)&=\mathcal N(U,V)+\mathcal N(V,U)-\mathcal N(V,V).
+\end{align*}
+Integrating against the same outer heat semigroup gives the identities of (2), including the coefficient $-1$ for the full difference.
+
+For each order separately, we have the telescoping identity
+\begin{equation}\label{ch24:eq:ordered-telescope}
+ \mathscr T_{j,j-1}^\omega(\theta_{j-1},\theta_{j-1})=\mathscr T_{j,0}^\omega(\theta_0,\theta_0)+\sum_{i=1}^{j-1}\bigl(Z_{j,i}^\omega+e_{j,i}^\omega\bigr),
+\end{equation}
+since $Z_{j,i}^\omega+e_{j,i}^\omega=\mathscr T_{j,i}^\omega(\theta_i,\theta_i)-\mathscr T_{j,i-1}^\omega(\theta_{i-1},\theta_{i-1})$. Each summand uses the conditional expectation $\E_{\nu_K}[\,\cdot\mid\mathcal F_{i-1}]$. We take the norm and the expectation, and use the moment bound of (1) with $p=1$ and the bounds on drifts and on the coarsest term of \cref{ch24:thm:ancestor-gram-rows}(4). For sufficiently large fixed $C_\gamma$ and $c$, we obtain $W_j$ for each order. Here $C_\gamma$ includes the dependence on $a_0$ of the weighted bounds on drifts and on the coarsest term. By the identities of (2) and the triangle inequality, we then obtain the bounds $W_j$ and $4W_j$ for $\mathcal Q_\delta(r_j,r_j)$ and $\mathcal B_\delta(x_{j-1},r_j)$.
+
+\paragraph{Step 5: the tail of the convolution.}
+Let $r_*=2\alpha-1\in(0,1/3)$ and $\lambda_q=-\log\qanc/\log B>0$. By \eqref{ch24:eq:coarse-caps}, the centered summand of $W_j$ without the factor $\qanc^{\,m}$ is at most $C_\gamma(1+i)^da_i^{r_*}$ for a fixed finite $d$; here $\sqrt{\log(2+L/a_i)}\le C\sqrt{1+i}$. By \eqref{ch24:eq:mean-majorant}, the summand of the drifts is at most $C_\gamma(1+i)^3a_i^{1/2}$, and hence also satisfies this weaker bound, after adjusting a constant depending on $a_0$. The coarsest term is the term $i=0$, up to a constant depending on $a_0$. \Cref{ch24:lem:geometric-convolution}(2), with $r=r_*$ and the polynomial factor $(1+j)^{c+d}$, implies that
+\[
+ \sum_{j\ge k}W_j\le C_{\gamma,\eta}a_k^\eta
+\]
+for every $0<\eta<\min(r_*,\lambda_q)$. For any finite partial sum over $j\ge k$, the triangle inequality bounds its expectation by the corresponding part of this series, uniformly in $K$. At each finite $K$ the fields and their differences are continuous in $t$ and have finitely many spatial components, so their suprema are determined by a countable dense set of times and are measurable. This completes the proof, under the conditioned Wilson measure $\nu_K$.
+\end{proof}
+
+\section{The predictable term on the finest lattice}\label{ch24:sec:predictable}
+
+The predictable term of \cref{ch23:lem:four-piece-increment} is $u_j=P_\cdot^\delta I_aU_j^0$, with
+\[
+ U_j^0=F_j+H^{-1}\overline{\mathsf R}_j(\theta_{j-1})+m_j^{\mathrm{ph}},\qquad F_j=H^{-1}\overline{\mathsf Q}_j(\theta_{j-1},\theta_{j-1}).
+\]
+In the notation of the introduction, $U_j^{\mathrm{cl}}=F_j+H^{-1}\overline{\mathsf R}_j(\theta_{j-1})$ and $U_j^0=U_j^{\mathrm{cl}}+m_j^{\mathrm{ph}}$. We bound $u_j$ in the norm $\Hnorm{\sigma}{\delta}$ of its initial field, which controls both the value and the first difference of the heat evolution. The quadratic part $F_j$ is treated by the same propagation and telescope as in \cref{ch24:sec:drifts,ch24:sec:ordered}, now on the lattice of mesh $a$ and without the outer Duhamel integral. The cubic part is bounded deterministically, and the conditional mean correction $m_j^{\mathrm{ph}}$ is bounded directly, with an extra factor of the coupling, from the derivative formula for normalized expectations.
+
+\begin{theorem}\label{ch24:thm:full-smoother-return}
+Assume the setting of \cref{ch23:sec:setup} and the notation of \cref{ch24:thm:ancestor-gram-rows}, and let $0<\sigma<1-\alpha$. For $0\le i\le j-1$ let
+\[
+ \mathsf Q_{j,i}(v,z)=H^{-1}\overline{\mathsf Q}_j(\mathsf T_{ji}v,\mathsf T_{ji}z),
+\]
+the quadratic coefficient of $F_j$ propagated from scale $i$, including the factor $1/H$, on the lattice of mesh $a=a_j$.
+\begin{enumerate}
+\item The absolute row sum and both volume-normalized column sums with a fixed input of $\mathsf Q_{j,i}$ satisfy $(\mathsf R_2+\mathsf C_2)(\mathsf Q_{j,i})\le CK_{ji}=C\qanc^{\,j-1-i}/a_i$. For $1\le i\le j-1$ and $G=a_i$, the derivative in $w_i$ after interpolation satisfies
+\[
+ \sup_x\norm{D_{w_i}P_t^\delta I_a\mathsf Q_{j,i}(\theta_i,\theta_i)(x)}_2\le C_JK_{ji}g_ib_i\min\bigl\{1,G^{3/2}(t+G^2)^{-3/4}\bigr\}.
+\]
+After multiplication by $(t+\delta^2)^{\sigma/2}$ its supremum is at most $C_{T,J}K_{ji}g_ib_iG^\sigma$, for every $0<\sigma<3/2$. For every fixed pair of nonnegative integers $r,v$, the crude bounds
+\[
+ \sup_{w_i,t,x}\norm{D_{w_i}\partial_t^vD_\delta^rP_t^\delta I_a\mathsf Q_{j,i}(\theta_i,\theta_i)(x)}_2\le C_{J,r,v}K_{ji}g_ib_ia^{-r-2v}
+\]
+hold. The constant mode of the heat kernel is kept.
+\item For the conditionally centered term $Z_{j,i}^{\mathrm{st}}=\mathsf Q_{j,i}(\theta_i,\theta_i)-\E[\mathsf Q_{j,i}(\theta_i,\theta_i)\mid\mathcal F_{i-1}]$, the conditional logarithmic Sobolev inequality and a net at scale $a$ give, for every $1\le p<\infty$,
+\[
+ \bigl\|\Vnorm{\sigma}{\delta}(I_aZ_{j,i}^{\mathrm{st}})\bigr\|_{L^p(\cdot\mid\mathcal F_{i-1})}\le C_{\gamma,p,J}K_{ji}g_ib_iG^\sigma\bigl[\sqrt{\log(2+L/a)}+\sqrt p\bigr].
+\]
+\item For the conditional drift $e_{j,i}^{\mathrm{st}}=\E[\mathsf Q_{j,i}(\theta_i,\theta_i)\mid\mathcal F_{i-1}]-\mathsf Q_{j,i-1}(\theta_{i-1},\theta_{i-1})$ and for the coarsest term,
+\begin{align*}
+ \Vnorm{\sigma}{\delta}(I_ae_{j,i}^{\mathrm{st}})&\le C_{T,J}\frac{\qanc^{\,j-1-i}}{a_i}\bigl(a_{\mathrm{cap}}^2b_{i-1}^3+g_i^2b_{i-1}+g_i^3p_i^3\bigr),\\
+ \Vnorm{\sigma}{\delta}(I_a\mathsf Q_{j,0}(\theta_0,\theta_0))&\le C_{T,J}\rho_0^2\qanc^{\,j-1}/a_0.
+\end{align*}
+All three contributions to the drift are present. The drift has the same exact splitting into linearization error and fluctuation correction as in \cref{ch24:thm:ancestor-gram-rows}(4), with the factor $(1+j)K_{ji}$ there replaced by $C_{T,J}K_{ji}$ in the bounds in $\Vnorm{\sigma}{\delta}$. In the bounds on derivatives in $w_i$, $b_i$ may be replaced by any bound valid on the whole set $\Omega_i$ at the fixed coarser field.
+\item For every array $f$ on the lattice of mesh $\delta$, including the times $0\le t\le\delta^2$,
+\[
+ \Hnorm{\sigma}{\delta}(f)\le C_{L,T,\sigma}\Vnorm{\sigma}{\delta}(f),\qquad
+ \Xnorm{\alpha}{\delta}(P_\cdot^\delta f)\le C_{L,T,\alpha,\sigma}\Hnorm{\sigma}{\delta}(f).
+\]
+\item The cubic and mean terms of $U_j^0$ satisfy $\norm{\overline{\mathsf R}_j/H}_\infty\le C_Jb_{j-1}^3/H$ and $\norm{m_j^{\mathrm{ph}}}_\infty\le C_Jg_3^2b_{j-1}$. For every $p\in[1,\infty)$ and every
+\[
+ 0<\tau<\min\{\sigma,\tfrac12,-\log\qanc/\log B\},
+\]
+there exist a finite exponent $c$ and a constant $C_{\gamma,p,J,\tau}$ such that
+\[
+ \sup_{K\ge j}\Bigl\{\bigl\|\Hnorm{\sigma}{\delta}(I_aU_j^0)\bigr\|_{L^p(\nu_K)}+\bigl\|\Xnorm{\alpha}{\delta}(u_j)\bigr\|_{L^p(\nu_K)}\Bigr\}\le C_{\gamma,p,J,\tau}(1+j)^ca_{j-1}^\tau.
+\]
+In particular,
+\[
+ \sup_K\sum_{j=k}^K\E_{\nu_K}\Hnorm{\sigma}{\delta}(I_{a_j}U_j^0)\le C_{\gamma,J,\tau}(1+k)^ca_k^\tau,
+\]
+and $\Hnorm{\sigma}{\delta}(I_aU_j^0)\le C_{\gamma,J}(1+j)^c$ on the small-field event.
+\end{enumerate}
+The constants in the bounds on rows and means depend on $L$, $T$, $M$, $J$, and the fixed analytic and column bounds; they do not depend on the coupling, $K$, $i$, $j$, the number of preceding averaging steps, or $a/\delta$. The constants in the maximal and summed bounds may in addition depend on the fixed $\gamma$, $n$, $p$, $\sigma$, $\tau$, and the prescription of the cutoff radii. No maximal estimate on regions or uniform in the coupling is asserted.
+\end{theorem}
+
+\begin{proof}
+All computations take place on the common lattice of mesh $\delta$, and all uses of conditional concentration are for the kernel of \cref{ch24:lem:conditional-kernel}. The conditional mean correction is identified below with the nonlinear mean of the reconstruction maps.
+
+\paragraph{Step 1: the propagated quadratic coefficient.}
+The quadratic Taylor coefficient of the zero-fluctuation reconstruction, in the normalization of \eqref{ch23:eq:center-expansion}, is
+\[
+ \overline{\mathsf Q}_j(v,z)=\frac B2D_\theta^2\mathscr R_j(0,0)[v,z],
+\]
+and its coefficient bounds are given by \cref{ch14:lem:signed-physical-columns}. Propagating both arguments through each $\mathsf L_i$, we obtain
+\[
+ \mathsf Q_{j,i}(v,z)=H^{-1}\overline{\mathsf Q}_j(\mathsf T_{ji}v,\mathsf T_{ji}z),\qquad
+ \mathsf Q_{j,i-1}(v,z)=\mathsf Q_{j,i}(\mathsf L_iv,\mathsf L_iz).
+\]
+Here $\overline{\mathsf Q}_j$ is the symmetric bilinear Taylor coefficient just defined, while the sources of \cref{ch24:sec:drifts} keep their order. A row acquires the factor $a_{\mathrm{cap}}^2$ at each step. For a column with a fixed input, the argument with the fixed input uses the volume-normalized column of $\mathsf L_i$, and the other argument uses its row. The cell volume of the intermediate index then cancels, as in \cref{ch24:lem:signed-heat-defect}(1). Thus
+\begin{equation}\label{ch24:eq:static-coefficient}
+ (\mathsf R_2+\mathsf C_2)(\mathsf Q_{j,i})\le C\frac{a_{\mathrm{cap}}^{2m}}{H}=C\frac{\qanc^{\,m}}{G}=CK_{ji}.
+\end{equation}
+The same bound on the propagated coefficient, including its weighted version before heat evolution, is part of \cref{ch14:thm:quadratic-ancestor-return}. Interpolation from the lattice of mesh $a$ by $I_a$ preserves these column bounds, since each column of $I_a$ has physical mass exactly $a^3$.
+
+\paragraph{Step 2: rows of derivatives and crude bounds.}
+By \eqref{ch24:eq:white-jacobian}, at any point of $\Omega_i$, the derivative in $w_i$ of the two arguments has absolute row and volume-normalized column at most $C_JK_{ji}g_ib_i$. For $t\le G^2$, the absolute row controls the counting $\ell^2$ row. For $t\ge G^2$ we split the heat semigroup into two equal halves. For the first half, the Schur bound gives counting operator norm at most $C_JK_{ji}g_ib_i(G/\delta)^{3/2}$, and the second half has counting row norm at most $C\delta^{3/2}t^{-3/4}$. Their product is $C_JK_{ji}g_ib_iG^{3/2}t^{-3/4}$. The bounds for small and for late times give the profile with $t+G^2$ in (1), since this quantity is comparable to $G^2$ at small times and to $t$ at late times.
+
+For $0<\sigma<3/2$, the weighted supremum follows by splitting at $G^2$. Below that time the weight is at most $CG^\sigma$, because $\delta\le G$. Above it the profile gives
+\[
+ CG^{3/2}t^{\sigma/2-3/4}\le CG^\sigma.
+\]
+For fixed $r$ and $v$ we commute all $r$ differences and the $v$ Laplacians through the heat semigroup and apply them to $I_a$ before smoothing. Using the bound on differences of order $r+2v$ of the cardinal interpolation and heat contraction, we obtain $C_{J,r,v}K_{ji}g_ib_ia^{-r-2v}$, which proves the crude bounds uniformly on $\Omega_i$.
+
+\paragraph{Step 3: the centered term.}
+We write $Z=Z_{j,i}^{\mathrm{st}}$ and $S_i=K_{ji}g_ib_iG^\sigma$. Since the interpolation is positive and preserves constants, heat contraction gives, for $0\le t\le a^2$,
+\begin{equation}\label{ch24:eq:static-micro}
+ \sup_{t\le a^2}(t+\delta^2)^{\sigma/2}\norm{P_t^\delta I_aZ}_\infty\le Ca^\sigma\max_y\abs{Z(y)},
+\end{equation}
+where the maximum is over the sites $y$ of the lattice of mesh $a$. Each scalar output $Z(y)$ is Lipschitz in $w_i$ with constant at most $C_JK_{ji}g_ib_i$. By the conditional logarithmic Sobolev inequality for these finitely many outputs and a union bound over at most $C(L/a)^3$ of them, we control \eqref{ch24:eq:static-micro} at the scale $C_JK_{ji}g_ib_ia^\sigma[\sqrt{\log(2+L/a)}+\sqrt u]$, which is at most the claimed scale since $a\le G$.
+
+On $[a^2,T]$ the uncentered term has deterministic amplitude at most $CK_{ji}b_i^2$, and its interpolation and heat evolution have fixed derivatives in space and time bounded by $C_{J,r,v}K_{ji}b_i^2a^{-r-2v}$. For $a\le1$, the weighted process of values has Lipschitz constants in physical space and time at most $C_{T,J}K_{ji}b_i^2a^{-2}$. For the time derivative of the weight we use $(t+\delta^2)^{\sigma/2-1}\le C_{T,\sigma}a^{-2}$ on this interval. Centering costs a factor two. Dividing these constants by $S_i$, we find
+\[
+ C_{T,J}\frac{b_i}{g_i}a^{-2}G^{-\sigma}\le C_\gamma(1+i)a^{-2-\sigma}\le C_\gamma a^{-4},
+\]
+where we used \eqref{ch24:eq:coarse-caps}, $i\le j$, the fixed sequence of lattices, and $\sigma<1-\alpha<1/2$. A net in space and time of spacing $c_\gamma a^8$ therefore approximates every centered weighted value within $S_i/8$, and it has at most $C_{\gamma,L,T}a^{-32}$ points. To choose lattice sites when this spacing is smaller or larger than $\delta$, we use the two constructions of Step 2 of the proof of \cref{ch24:thm:ordered-rough-return}, with $H$ replaced by $a$ and the exponent $12$ by $8$. The lengths of coordinate paths and the count follow from the same partition into cubes. If $a^2>T$, the interval of small times covers all times, and the finitely many levels with $a>1$ are included in the constant.
+
+By the bounds of Step 2, at each point of the net, the weighted evaluation is Lipschitz in $w_i$ with constant $C_JS_i$. We use the counts of entries on the lattice of mesh $a$ and of the net, and the deterministic errors of interpolation above. The finite-family clause of \cref{ch13:lem:coefficient-metric-chaining} then implies the tail and the moments of (2). This net uses $b_i/g_i$, so it holds at fixed coupling. All bounds on rows remain valid with a smaller bound $b_i$ that holds on the whole set $\Omega_i$.
+
+\paragraph{Step 4: the drifts and the coarsest term.}
+The telescoping identity is
+\begin{equation}\label{ch24:eq:static-telescope}
+ F_j=\mathsf Q_{j,0}(\theta_0,\theta_0)+\sum_{i=1}^{j-1}\bigl(Z_{j,i}^{\mathrm{st}}+e_{j,i}^{\mathrm{st}}\bigr).
+\end{equation}
+Before interpolation, each propagated coefficient belongs to the weighted class of \cref{ch14:thm:quadratic-ancestor-return}. By \eqref{ch24:eq:static-coefficient}, its coefficient norm, including $1/H$, is bounded by $CK_{ji}$; we use that theorem for its coefficient bound and its telescope. To obtain a constant uniform in the coupling, we instead apply \cref{ch24:lem:quadratic-mean} to each scalar output of $\mathsf Q_{j,i}$ on the lattice of mesh $a$, with $k_Q\le CK_{ji}$ and $\phi=\theta_{i-1}$. The propagated coefficients are equivariant under global color rotations, since the zero-fluctuation reconstruction and its linearizations are. The conditional law, the coefficient bounds, and the covariance are those of \cref{ch24:lem:conditional-kernel}, see \eqref{ch24:eq:complete-kernel-gates} and \eqref{ch24:eq:uniform-reconstructed-covariance}. We obtain
+\begin{equation}\label{ch24:eq:uniform-static-mean}
+ \norm{e_{j,i}^{\mathrm{st}}}_\infty\le C_JK_{ji}\bigl(a_{\mathrm{cap}}^2b_{i-1}^3+g_i^2b_{i-1}+g_i^3p_i^3\bigr).
+\end{equation}
+This bounds the whole drift with a constant uniform in the coupling, as in the computation of \cref{ch24:thm:ancestor-gram-rows}. Applying \eqref{ch24:eq:unweighted-quantum} and \eqref{ch24:eq:unweighted-classical} separately gives the splitting into linearization error and fluctuation correction, with all three contributions kept. The output is still on the lattice of mesh $a$ at this step. Using the contraction of the interpolation and of the heat semigroup, together with $\sup_{t\le T}(t+\delta^2)^{\sigma/2}\le C_{L,T,\sigma}$, we obtain the bounds in $\Vnorm{\sigma}{\delta}$ of (3). The coarsest term is bounded by substituting $\norm{\theta_0}_\infty\le\rho_0$ into \eqref{ch24:eq:static-coefficient} and applying the same contractions. These bounds do not contain the factor $1+j$ of \cref{ch24:thm:ancestor-gram-rows}.
+
+\paragraph{Step 5: the first difference, including the smallest times.}
+For every array $f$ on the lattice of mesh $\delta$ and $t\ge\delta^2$, we split the heat semigroup at $t/2$ and use \cref{ch13:lem:heat-and-chaining}:
+\[
+ \norm{D_\delta P_t^\delta f}_\infty\le C(t/2+\delta^2)^{-1/2}\norm{P_{t/2}^\delta f}_\infty\le C(t+\delta^2)^{-(\sigma+1)/2}\Vnorm{\sigma}{\delta}(f).
+\]
+For $0\le t\le\delta^2$, the value term at time zero gives $\norm f_\infty\le\delta^{-\sigma}\Vnorm{\sigma}{\delta}(f)$, and writing a difference as the difference of two contractions gives
+\[
+ \norm{D_\delta P_t^\delta f}_\infty\le2\delta^{-1}\norm f_\infty\le2\delta^{-\sigma-1}\Vnorm{\sigma}{\delta}(f).
+\]
+Multiplication by $(t+\delta^2)^{(\sigma+1)/2}$ makes this bound uniform also at $t=0$. Including the value term, we obtain $\Hnorm{\sigma}{\delta}\le C\Vnorm{\sigma}{\delta}$. Since $\alpha>\sigma$, the two components of $\Xnorm{\alpha}{\delta}(P_\cdot^\delta f)$ are those of $\Hnorm{\sigma}{\delta}(f)$ multiplied by $(t+\delta^2)^{(\alpha-\sigma)/2}$, which is at most $[T+(L/4)^2]^{(\alpha-\sigma)/2}$ on the lattices considered. This proves the second comparison of (4), with the stated dependence on $L$, $T$, $\alpha$, and $\sigma$. In particular, for a bounded array,
+\begin{equation}\label{ch24:eq:bounded-smoother}
+ \Hnorm{\sigma}{\delta}(f)\le C_{L,T,\sigma}\norm f_\infty.
+\end{equation}
+
+\paragraph{Step 6: the rate of the quadratic part.}
+Applying the conditional and then the unconditional Minkowski inequality to \eqref{ch24:eq:static-telescope} for fixed $p\ge1$, we obtain, with
+\[
+ \upsilon_i=\frac{a_{\mathrm{cap}}^2b_{i-1}^3+g_i^2b_{i-1}+g_i^3p_i^3}{a_i},
+\]
+the bound
+\begin{equation}\label{ch24:eq:static-rate-convolution}
+ \begin{split}
+ \norm{\Vnorm{\sigma}{\delta}(I_aF_j)}_{L^p(\nu_K)}
+ &\le C_{\gamma,p,J}\Bigl\{\rho_0^2\qanc^{\,j-1}/a_0+\sum_{i=1}^{j-1}\qanc^{\,j-1-i}\upsilon_i\\
+ &\qquad+\bigl\{\sqrt{\log(2+L/a)}+\sqrt p\bigr\}\sum_{i=1}^{j-1}\qanc^{\,j-1-i}g_ib_ia_i^{\sigma-1}\Bigr\}.
+ \end{split}
+\end{equation}
+The factor in the last sum satisfies
+\[
+ g_ib_ia_i^{\sigma-1}\le C_J\bigl\{g_3\rho_0a_0^{-\kapterm}a_i^{\kapterm+\sigma-1/2}+g_3^2a_i^\sigma p_i\bigr\}\le C_\gamma(1+i)a_i^\sigma,
+\]
+since $\kapterm>1/2$, and $\upsilon_i$ is bounded by \eqref{ch24:eq:mean-majorant}, with rate $a_i^{1/2}$. Also $\log(2+L/a)\le C(1+j)$. For fixed $\tau<\min(\sigma,1/2,\lambda_q)$ we choose $\zeta$ strictly between $\tau$ and this minimum, and apply \cref{ch24:lem:geometric-convolution}(1) with $r=\sigma$ and with $r=1/2$. The polynomial factors in $i$ are bounded by powers of $1+j$, and the coarsest term is the term $i=0$. We obtain
+\begin{equation}\label{ch24:eq:quadratic-smoother-rate}
+ \sup_{K\ge j}\norm{\Hnorm{\sigma}{\delta}(I_aF_j)}_{L^p(\nu_K)}\le C_{\gamma,p,J,\tau}(1+j)^ca_{j-1}^\tau,
+\end{equation}
+where the comparison of Step 5 has replaced $\Vnorm{\sigma}{\delta}$ by $\Hnorm{\sigma}{\delta}$, so the first difference needs no further probability estimate.
+
+\paragraph{Step 7: the cubic term and the conditional mean.}
+The cubic bound follows from the Taylor remainder of the zero-fluctuation reconstruction in \cref{ch14:lem:signed-physical-columns}, normalized as in \eqref{ch23:eq:center-expansion}:
+\[
+ \norm{\overline{\mathsf R}_j/H}_\infty\le C_Jb_{j-1}^3/H\le C_\gamma(1+j)^3H^{1/2},
+\]
+where the last inequality is \eqref{ch24:eq:coarse-caps} on the coarser lattice. For the conditional mean correction, we take in \cref{ch14:lem:backward-caps-and-means} the coarse mesh $a_0=L/n$ and total number $K$ of renormalization group steps. Its numbers of preceding averaging steps are $J(K-j)$, its reconstruction maps are those used here, and its filtration is $\mathcal F_j$. Its lattice potentials and zero-fluctuation reconstructions are therefore
+\[
+ A_j=a_j^{-1}\theta_j,\qquad C_j=a_j^{-1}\mathscr R_j(\theta_{j-1},0),
+\]
+and its conditional mean correction $\E[A_j\mid\mathcal F_{j-1}]-C_j$ is $m_j^{\mathrm{ph}}$ of \cref{ch23:lem:four-piece-increment}. This identifies the conditional mean correction, including its conditional law.
+
+We prove the uniform bound directly from the derivative formula for normalized expectations, so that no stochastic constant depending on the fixed coarse mesh enters this deterministic bound. Fix $\phi=\theta_{j-1}$, write $r_\phi=\norm\phi_\infty$, and set
+\[
+ \mathscr G_\phi(w)=\mathscr R_j(\phi,w)-\mathscr R_j(\phi,0).
+\]
+For $0\le u\le1$ let $\E_u$, $\Cov_u$ denote expectation and covariance under the conditional fluctuation kernel at $u\phi$. The segment of coarser fields and every point of the free coordinates remain in the same domain, as checked in \cref{ch24:lem:conditional-kernel}, and the product of balls does not change. The bound on the mixed derivative of the potential in \cref{ch10:thm:actual-means-and-scores} and the covariance inequality of \cref{ch10:thm:complete-white-law} apply. The majorant series of the joint Taylor coefficients used in \eqref{ch24:eq:white-jacobian} gives deterministic envelopes $a_{e,l}\ge0$ such that, on the whole product and the whole segment, $\abs{\partial_{w_l}\mathscr G_{u\phi,e}}\le a_{e,l}$ and $\sum_la_{e,l}\le C_Jt_j$. In particular $\sum_l\norm{\partial_{w_l}\mathscr G_{u\phi,e}}_{L^2}\le C_Jt_j$; this uses the absolute coefficient majorant, rather than an exchange of a supremum with a sum of $L^2$ norms. The bound on the mixed derivative of the potential is $\sup_l\norm{\partial_{w_l}\dot V_u}_{L^2}\le C_Jt_jr_\phi$, where $\dot V_u=\partial_uV_{u\phi}$. The covariance kernel decays exponentially and has a uniformly bounded sum at each index, in the units of the renormalization group step, because the number of fluctuation coordinates in each cell is bounded in terms of $J$. The covariance inequality then implies that
+\begin{equation}\label{ch24:eq:mean-score-covariance}
+ \abs{\Cov_u(\mathscr G_{u\phi,e},\dot V_u)}\le C_Jt_j^2r_\phi.
+\end{equation}
+To see that no volume factor appears, we sum the covariance kernel over its second index first, using the uniform bound on the mixed derivative there, and then sum the absolute row of derivatives at the fixed output $e$.
+
+The expectation of $\partial_u\mathscr G_{u\phi,e}$ has the same bound. Indeed, its series of absolute joint Taylor coefficients has positive degree in the free coordinates, and one insertion of the coarser field costs $C_Jr_\phi$. We fix a radius $R_{\mathrm{free}}>0$ in the free coordinates from the nested domains, with the segment of coarser fields in its inner domain and a fixed positive margin above every cutoff domain. The differentiated coefficient sum at this radius is bounded by $C_Jr_\phi$, and $t_jp_j/R_{\mathrm{free}}\le\eta_*<1$, with a fixed margin. For the term of degree one we use the bound $\norm{\E_uw}_\infty\le C_Jt_jr_\phi$ of \cref{ch10:thm:actual-means-and-scores}; its expectation costs $C_Jt_j^2r_\phi^2$. For degree $k\ge2$ we put two factors in $L^2$ and bound the other $k-2$ by the cutoff $p_j$. The $L^2$ factors are bounded uniformly: the Poincar\'e inequality and the bound on the mean give $\E_u\abs{w_l}^2\le2+\abs{\E_uw_l}^2\le C_J$ for scalar coordinates. After division by the radius of its coefficients, the term of degree $k$ costs at most $C_Jt_j^2R_{\mathrm{free}}^{-2}\eta_*^{k-2}$ times its absolute coefficient mass at $R_{\mathrm{free}}$. Summing this mass, and using the fixed bound on $r_\phi$, we obtain
+\begin{equation}\label{ch24:eq:mean-explicit-target-derivative}
+ \abs{\E_u\partial_u\mathscr G_{u\phi,e}}\le C_Jt_j^2r_\phi.
+\end{equation}
+Repeated coordinates are handled by the same Cauchy--Schwarz inequality for two factors; no independence is used.
+
+The derivative formula for normalized expectations of \cref{ch10:thm:actual-means-and-scores} implies that
+\[
+ \frac{d}{du}\E_u\mathscr G_{u\phi,e}=\E_u\partial_u\mathscr G_{u\phi,e}-\Cov_u(\mathscr G_{u\phi,e},\dot V_u).
+\]
+Its hypotheses hold because these maps and their derivatives are continuous on a neighborhood of the fixed compact product, so all difference quotients in finite dimensions are dominated there. At $u=0$, the conditional law at the zero coarser field and the reconstruction map are equivariant under global color rotations, so $\E_0\mathscr G_{0,e}=0$. Integrating \eqref{ch24:eq:mean-score-covariance} and \eqref{ch24:eq:mean-explicit-target-derivative}, we obtain the bound on the nonlinear mean of the reconstruction,
+\begin{equation}\label{ch24:eq:uniform-reconstructed-mean}
+ \norm{\E_\phi\mathscr R_j(\phi,w)-\mathscr R_j(\phi,0)}_\infty\le C_Jt_j^2\norm\phi_\infty.
+\end{equation}
+This is the bound of \cref{ch10:thm:actual-means-and-scores} on the mean of the reconstruction, proved here for the reconstruction maps of this section.
+
+Dividing by the mesh $a_j$ of the reconstructed field keeps the factor of the intermediate scales:
+\begin{equation}\label{ch24:eq:physical-mean}
+ \norm{m_j^{\mathrm{ph}}}_\infty\le C_J\frac{t_j^2}{a_j}\norm{\theta_{j-1}}_\infty=C_JM^{J-1}g_3^2\norm{\theta_{j-1}}_\infty\le C_Jg_3^2b_{j-1},
+\end{equation}
+where the last $C_J$ absorbs only the fixed factor $M^{J-1}$. All constants in this pointwise bound on the mean are uniform in the lattice side, in the number of preceding averaging steps, and in the coupling below $g_*$. By this bound and \eqref{ch24:eq:coarse-caps}, we have $\norm{m_j^{\mathrm{ph}}}_\infty\le C_\gamma(1+j)H^{1/2}$.
+
+\paragraph{Step 8: combination and summation.}
+Contraction of the interpolation and \eqref{ch24:eq:bounded-smoother} bound the contributions of the cubic and mean terms to $\Hnorm{\sigma}{\delta}(I_aU_j^0)$ by $C_\gamma(1+j)^3H^{1/2}$, pathwise and hence in every $L^p$. Combining this with \eqref{ch24:eq:quadratic-smoother-rate}, and using $\tau<1/2$, we obtain the bound in $L^p$ of $\Hnorm{\sigma}{\delta}(I_aU_j^0)$ in (5). The comparison $\Xnorm{\alpha}{\delta}(P_\cdot^\delta f)\le C\Hnorm{\sigma}{\delta}(f)$ of (4) then implies the bound for $u_j$ under the same law. For the sum we use the bound with $p=1$ and
+\[
+ \sum_{j\ge k}(1+j)^ca_{j-1}^\tau\le B^\tau a_k^\tau(1+k)^c\sum_{l\ge0}(1+l)^cB^{-\tau l}\le C_{B,\tau,c}(1+k)^ca_k^\tau.
+\]
+The finite sum under $\nu_K$ is bounded by this deterministic infinite series, uniformly in $K$. Finally, by the deterministic bounds on the small-field event, we have
+\[
+ \norm{U_j^0}_\infty\le C_J\bigl\{b_{j-1}^2/H+b_{j-1}^3/H+g_3^2b_{j-1}\bigr\}\le C_\gamma(1+j)^3,
+\]
+and \eqref{ch24:eq:bounded-smoother} gives the pathwise bound of (5). Only the maximal inequalities and the summations use constants depending on the fixed $\gamma$ and $n$.
+\end{proof}
+
+\begin{remark}\label{ch24:rem:product-application}
+These are the norms needed for the bilinear estimate of \cref{ch21:lem:ordered-duhamel-products}. If $x=P_\cdot^\delta f$, then $x$ and $u_j=P_\cdot^\delta I_aU_j^0$ are heat evolutions on the same lattice, $\alpha\in(1/2,2/3)$, and $\sigma\in(0,1-\alpha)$, so that lemma applies in both orders with the norm $\Hnorm{\sigma}{\delta}$ bounded in \cref{ch24:thm:full-smoother-return}. Its mesh is $\delta=L/(nB^K)$, with integer side $nB^K\ge4$. If $\delta\le1$ its clause for the heat semigroup applies, and if $\delta>1$ its clause for finitely many coarse sides applies, with a constant depending on the fixed $L$ and $T$.
+\end{remark}

@@ -1,0 +1,1110 @@
+\chapter{Large-field decompositions and conditional densities}\label{ch18:chapter}
+
+This section connects the renormalization group on unions of blocks, constructed in \cref{ch15:chapter,ch16:chapter,ch17:chapter}, with the two measures to which it is applied in \cref{ch19:chapter,ch20:chapter}: the Wilson measure and the stopped measure. All statements concern a fixed lattice and are finite-dimensional.
+
+The analytic theorems of \cref{ch17:chapter} integrate the normalized fluctuation variables of one RG step over a fixed product of balls. They work in local coordinates near the identity, on a block region from which a fixed complement has been removed, with the link variables of that complement held fixed as frozen coordinates. To apply them to the Wilson measure, we must solve three problems. The first is coverage. A fiber of the block averaging map consists of all fine configurations with a given average. It is a Borel subset of the compact configuration space, can contain many gauge-equivalent representatives, and need not lie in a coordinate chart. We show that every point of every fiber carrying mass becomes, after a gauge transformation that fixes all prescribed vertices, a point of the domain of the local inverse coordinates, and that its normalized fluctuation coordinates lie in an enclosing product domain on which the conditional fluctuation potential is uniformly convex. The second problem is the choice of a density. The later estimates evaluate densities at particular gauge representatives. These form sets of Haar measure zero, so a Radon--Nikodym derivative defined only almost everywhere does not suffice. We construct an explicit Borel density from the Haar disintegration formulas and prove that it is invariant at every point under the relevant gauge transformations. The third problem is the preservation of frozen coordinates. When the integration stops near a region of large curvature, the link variables there are kept on the lattice where they were frozen. The gauge transformations used afterward must not change them, and the analytic estimates require their logarithms to be small.
+
+\Cref{ch18:sec:local} proves locality of the iterated block averaging map (\cref{ch18:lem:finite-stencils}) and a gauge-fixing theorem on arbitrary unions of large closed cells (\cref{ch18:thm:fat-cell-admission}). The last part of that theorem is a rule that protects the endpoints of all frozen coordinates. \Cref{ch18:sec:decompositions} defines a deterministic sequence of curvature tests, partitions the configuration space according to their outcomes into large-field decompositions (\cref{ch18:thm:history-cover}), and verifies the hypotheses of the analytic theorems of \cref{ch16:chapter,ch17:chapter} on each decomposition (\cref{ch18:lem:history-input-contract}). \Cref{ch18:sec:coverage} proves the coverage of every supported fiber point and constructs, at all stages, the representatives satisfying the reconstruction identities (\cref{ch18:thm:all-point-enclosure}): they are obtained from the coarsest scale downward by the reconstruction maps, so that each reproduces the output field above it and contains the frozen values. At the first RG step under the Wilson measure, this section uses the lower bound for the constrained Hessian of \cref{ch15:lem:bare-gap}, which is uniform in the region and in the frozen variables. \Cref{ch18:sec:densities} constructs the invariant densities (\cref{ch18:thm:canonical-density}), and \cref{ch18:sec:freezing} proves the identity relating the densities before and after freezing (\cref{ch18:lem:producer-consumer}). \Cref{ch18:sec:induction} first compares an integral over a fiber with an integral over the fluctuation cutoff domain (\cref{ch18:lem:enclosure-comparison}), and then combines these results in the induction of \cref{ch18:thm:slice-induction}.
+
+The inputs are the quantitative extension of maps into $\SU$ in \cref{ch04:lem:quantitative-fillings}; the stopped measure and its coordinates on the torus (\cref{ch11:thm:all-point-torus-chart,ch11:thm:deep-buffer-law}); the Haar disintegration on block regions (\cref{ch15:lem:regional-coarea}); the gauge transformation fixed at prescribed endpoints and the perturbation theorem of \cref{ch16:lem:strict-hybrid-gauge,ch16:thm:controlled-perturbation}; and the analytic integration, the comparison of normalization constants, and the concentration estimate of \cref{ch17:thm:controlled-kernel,ch17:thm:real-scalar-ledger,ch17:lem:ambient-white-comparison}. \Cref{ch18:thm:history-cover,ch18:thm:canonical-density,ch18:thm:slice-induction} are used in \cref{ch19:chapter} for the bounds on Wilson densities and the exponential moment bounds, and \cref{ch18:thm:fat-cell-admission,ch18:thm:history-cover,ch18:thm:all-point-enclosure} are used in the choice of parameters in \cref{ch20:chapter}.
+
+The organization by nested regions, fields frozen on their complements, and effective densities on the remaining regions follows Bałaban's large-field renormalization \cite{Balaban1988Convergent,Balaban1989LargeI,Balaban1989LargeII}. Dimock's account of Bałaban's method for the scalar $\phi^4_3$ model describes the partition into small-field and large-field regions, the unintegrated complement, and localized block averaging \cite[\S\S1--2]{Dimock2013Large}; the summation of the resulting expansion is in \cite{Dimock2014Convergence}. These works concern a different model and different coordinates. The deterministic tests for the block averaging map $T_M$, the gauge construction on arbitrary unions of cells, the protection of frozen endpoints, the coverage of every fiber point, and the invariant density versions below are proved here.
+
+\paragraph{Conventions.}
+Throughout, $M\ge3$ is odd, $J\ge1$, and $B=M^J$. One application of $T_M$ (\cref{ch01:def:block-map}), including its Borel extension, is an averaging step, and an RG step consists of $J$ consecutive averaging steps. A group of $1\le s\le J$ consecutive averaging steps with output side $m$ has intermediate scales $0\le i<s$ and couplings
+\[
+ g_i=t_{\max}M^{(i-s+1)/2},\qquad t_{\max}=\sqrt{\gamma/(Mm)},\qquad \lambda_*=M^{-(J-1)/2}\le g_i/t_{\max}\le1.
+\]
+The angle of $U\in\SU$ is $\rho_G(U)$, its distance from $I$ in the bi-invariant metric of \cref{ch01:chapter}; we have $\rho_G(U_1\cdots U_l)\le\sum_j\rho_G(U_j)$ and $\abs{\Log U}=\rho_G(U)$ when $\rho_G(U)<\pi$. We write $c$ for the output field. In analytic functions and in the coordinates of \cref{ch15:def:internal-coordinates}, the coarse argument is its identity-chart logarithm $\Log c$, which we also denote by $c$ when no confusion can arise; since $\abs{\Log c_e}=\rho_G(c_e)$ for every output link $e$, bounds on the two agree. A block region $\Omega$ is a union of blocks of the output lattice of the current group of averaging steps; its complement is the fixed complement. The frozen coordinates are written $\Rec$. They consist of frozen links and of based transports of frozen links across the boundary of the block region (defined in \cref{ch18:sec:decompositions}), each kept on the lattice on which it was frozen. A link is across the boundary of the block region if exactly one of its endpoints lies in it.
+
+Fix the cutoff amplitude $A_{\mathrm w}\ge1$ at the outset. Every application of \cref{ch17:thm:controlled-kernel} below uses the coupling ceiling $g_*$ chosen after this amplitude, and $g_*$ may depend on $A_{\mathrm w}$. The analytic constants and the conditions used to choose $J$ do not depend on $A_{\mathrm w}$.
+
+Unless stated otherwise, constants written $C_J$, $c_J$, $u_J$, $\epsilon_J$, and similar depend only on $M$, $J$, the fixed larger construction and analytic domains and their radius ratios, the spatial and boundary decay rates and their margins, the bounded density of labels, and the fixed ceilings on actions and perturbations. They are independent of $L$, $\gamma$, all lattice sides, the total and the preceding depth, the number of RG steps since a coordinate was frozen, the shape, topology, and number of components of the regions, and the values of the frozen coordinates. This is the dependence described in item~(3) of \cref{ch01:conv:constants}. Where stated, these constants are also independent of the widths of boundary bands, removed bands, protected neighborhoods, and cells chosen later; such widths enter only through explicit geometric counts. No uniformity as $J\to\infty$ is asserted. The constant $C_\delta$ in \cref{ch18:thm:slice-induction} has instead the dependence described in item~(4) of \cref{ch01:conv:constants}.
+
+\section{Local path products and closed cell complexes}\label{ch18:sec:local}
+
+The full dependence set of a link of an averaged configuration is the set of links read by the block averaging map, including its Borel extension at exceptional values, by its reference path, and by every path product used to check that the logarithms involved lie in the correct branch. For an iterate we replace every link recursively by its full dependence set, and for a plaquette we take the union of the sets of its four links. These lists are treated as sets when we define excluded label sets; repetitions are kept only to estimate the lengths of path products. Geometric neighborhoods use the periodic maximum coordinate distance. Replacing it by the lattice distance used in the analytic norms changes only dimensional comparison constants.
+
+\begin{lemma}\label{ch18:lem:finite-stencils}
+Fix $M$ and $J$. There exist finite constants $D_J,L_J,v_J$, depending only on $M$ and $J$, and constants $u_J>0$ and $C_J<\infty$, with the following properties for every group of $s\le J$ averaging steps.
+\begin{enumerate}
+\item The full dependence set of a link, of a plaquette, or of a prescribed based transport of an averaged configuration is contained in the neighborhood of radius $D_J$ of its output label, in output lattice units, and contains at most $v_J$ input labels per output unit cube. The expanded hierarchical tree paths have length at most $L_J$.
+\item Suppose that every input link of such a full dependence set has angle at most $u\le u_J$. Then the links of the $i$-th iterate have angle at most $(10M)^iu$ for $i\le s$, and the relative logarithmic coordinates of the block averaging constraint, including the eliminated coordinates, have size at most $C_Ju$. After one fixed reduction of $u_J$, they belong to the domain of the local inverse of the block averaging constraint, with a fixed positive margin.
+\end{enumerate}
+These conclusions do not depend on the region or on its components.
+\end{lemma}
+
+\begin{proof}
+An ordered path from the center of an $M$-block to a vertex of the block has length at most $3(M-1)/2$. The path $F_{c,x}$ of \cref{ch01:def:block-map} has length at most $4M-3$, and $F_{c,x}C_c^{-1}$ has length at most $5M-3$. If $(5M-3)u<2\pi$, every relative transport $U(F_{c,x})U(C_c)^{-1}$ is in the identity chart, and the exponential of the average of their logarithms has angle at most $(5M-3)u$. Multiplying by $U(C_c)$, we obtain the bound $(6M-3)u\le10Mu$. Iteration is permitted when $(10M)^Ju$ is smaller than the fixed positive margin of one averaging step. The Borel extension reads the same finite list of links, so the locality of the list does not require this smallness.
+
+The based tree gauge on a block is obtained by multiplying transports along its ordered tree paths. It sets each tree link to $I$, equals $I$ at the root, and is unique with these properties, since the equation on an oriented tree edge determines the gauge at the child from the gauge at the parent. At the next intermediate scale we make the same construction and lift the new gauge as a constant on each of the previous blocks. Such a lift conjugates each previously fixed tree link and hence preserves the value $I$. The conditions at coarser scales are fixed before the finer variables are expressed. The resulting hierarchical transports are products of these tree factors at the various scales; no eliminated constraint edge is inserted into a tree. Each factor equals $I$ on the hierarchical tree gauge section. There are at most $J$ scales, each with finitely many paths in a fixed block, and by substitution we obtain a finite maximal path length $L_J$ and a finite maximal radius $D_J$ of the dependence neighborhoods. Equivalently, we may take these constants to be the maxima over the finitely many oriented dependence neighborhoods for $1\le s\le J$ on the infinite cubic lattice: restriction to a region only deletes path products, and passage to a periodic quotient only identifies labels. The maximal number of input labels in the same dependence neighborhoods gives $v_J$.
+
+After the tree gauge transformation, every link outside the trees is a product of a number, bounded in terms of $M$ and $J$, of the small links just bounded, and the coarse-field lift of the target is another such product. The relative vector is therefore bounded by $C_Ju$. The constraints have the eliminated-edge inverse and the uniqueness neighborhood, with its positive margin, used in \cref{ch15:lem:regional-coarea,ch17:thm:controlled-kernel}. We choose $u_J$ so that the preceding bound is less than half the radius of that neighborhood, taking the minimum over $s\le J$. Then the relative solution, including its eliminated entries, is the unique solution given by that inverse. This identifies the branch of a given solution; it does not solve the constraints anew. Every path used above stays in a block of at most $J$ scales, and none follows a tree spanning a whole component.
+\end{proof}
+
+The next corollary gives the initial bounds for a stopped measure; it is used in the proofs of \cref{ch18:thm:history-cover,ch18:thm:all-point-enclosure}.
+
+\begin{corollary}\label{ch18:cor:initial-joint-allowance}
+Before the bound $\beta_{\mathrm{rec}}$ for frozen coordinates and the support radius $r$ are fixed, one can fix $C_{\mathrm{ad},J}<\infty$, depending only on $M$, $J$, and the fixed tree conventions, with the following property. Let $U\in D_r$ be an initial configuration of a stopped measure on a lattice of side $M^sm$, with $s\le J$, $m\ge4$, and no previously frozen coordinates, and assume that $r$ is below the fixed margin of the finite path-product charts. Then, for every union of blocks, there exists a gauge representative in which the output field and all frozen links and based transports at the input level are bounded by $C_{\mathrm{ad},J}r$. This is a geometric existence statement, uniform in the preceding depth, the side, and the region.
+\end{corollary}
+
+\begin{proof}
+A gauge transformation taking $U$ into $B_r$ gives the bound $r$, not $r/2$, at the input. By \cref{ch18:lem:finite-stencils}, all intermediate internal links have angle at most $(10M)^Jr$. The expanded hierarchical tree paths have at most $L_J$ factors of these links. A link after the tree gauge transformation is a product of a path, a link, and an inverse path, and has angle at most $(2L_J+1)(10M)^Jr$. A based transport is a path times its link across the boundary of the block region and has the smaller bound $(L_J+1)(10M)^Jr$. Links lying entirely in the fixed complement remain below $r$, since the regional tree gauge is the identity there. The output roots are fixed by the tree gauge, and the output bound is $(10M)^Jr$. We conclude that $C_{\mathrm{ad},J}=2(2L_J+3)(10M)^J$ exceeds twice each of these bounds. We fix it now, and only afterward require $C_{\mathrm{ad},J}r$ to be below the fixed identity and inverse chart radii.
+\end{proof}
+
+We now turn to gauge fixing on large closed cells. Small curvature does not force small links: a flat configuration with nontrivial holonomy around a noncontractible cycle cannot be gauge transformed to the identity. The following theorem shows that on a union of closed cells of side about $R$, plaquette angles of order $R^{-2}$ allow a gauge in which all links have angle of order $R^{-1}$. The term $R^{-1}$ comes from distributing compact gauge values over the edges of the cell grid, which have length at least $R/2$; the curvature contributes $O(\delta R)$ through an axial gauge in each cell. Transitions between the frames of neighboring cells are compared only on common edges and are never multiplied along chains of cells, so the constants do not depend on the topology of the union. We combine standard axial frames and the extension of maps into $\SU\simeq S^3$ with the quantitative patching estimate of \cref{ch04:lem:quantitative-fillings}, preserving all prescribed vertices. The gauge fixing of lattice configurations with small plaquettes goes back to Bałaban \cite{Balaban1985Regular}; the version below, on arbitrary unions of cells and with prescribed vertex values, is proved here.
+
+\begin{theorem}\label{ch18:thm:fat-cell-admission}
+There exist universal constants $C,C',R_0<\infty$ and $c>0$ with the following properties. Work in lattice units, let $R\ge R_0$ be an integer and $n\ge8R$, and partition each coordinate circle of the periodic lattice of side $n$ into intervals of lengths in $[R/2,2R]$. Let $P$ be any union of the resulting closed three-dimensional cells, and let $U$ be a configuration on the links of $P$ such that
+\[
+ \rho_G(U_p)\le\delta\quad\text{for every plaquette of every cell of }P,\qquad \delta R^2\le1,
+\]
+including the plaquettes in the boundaries of the cells. These hypotheses are in force in all parts below.
+\begin{enumerate}
+\item There exists a gauge transformation $k$ on the vertices of $P$ with
+\[
+ \max_{e\subset P}\rho_G(U_e^k)\le C(\delta R+R^{-1})\le C'/R.
+\]
+This holds for disconnected $P$, for cells meeting only at vertices or edges, and for arbitrary holes, handles, periodic wrapping, and holonomy; the constants depend on none of these features, nor on $n$, $L$, the coupling, the depth, or $J$. If $q(U_p)<d_*$ for every such plaquette, one may take $\delta=\pi\sqrt{2d_*}$. For a fixed sufficiently large $A_8$, the choice $R=\lceil A_8/r\rceil$ together with $\pi\sqrt{2d_*}R^2\le1$ gives the bound $\rho_G(U_e^k)<r/2$ for every link.
+\item Let $\Gamma\subset P$ be a union of closed cells of the grid, and let $k_\Gamma$ be a gauge transformation on the vertices of $\Gamma$ with
+\[
+ \max_{e\subset\Gamma}\rho_G(U_e^{k_\Gamma})\le\eta,\qquad K_R=1+\eta R+\delta R^2,\qquad K_R^2/R\le c.
+\]
+Then there exists an extension $k$ equal to $k_\Gamma$ at every vertex of $\Gamma$ with
+\[
+ \max_{e\subset P}\rho_G(U_e^k)\le CK_R^{10}/R.
+\]
+Every link contained in a cell with no vertex in $\Gamma$ satisfies the stronger bound $C'/R$. In particular, this bound holds after removing two layers of cells around $\Gamma$.
+\item For fixed $M$ and $J$, let $C_B\ge(10M)^J$ also bound the lengths of the finite tree path products. Assume $\eta\le C_Br$, $r\le1$, and $R=\lceil A_8/r\rceil$, and set
+\[
+ K_B=2+C_B(A_8+1),\qquad C_{\mathrm{col}}=CK_B^{10}/A_8.
+\]
+If $K_B^2r/A_8\le c$ and $C_{\mathrm{col}}r<\beta_{\mathrm{rec}}/2$, then all links of $P$ are smaller than $\beta_{\mathrm{rec}}/2$, and, after one fixed increase of $A_8$, the links in cells with no vertex in $\Gamma$ are smaller than $r/2$. The constants in this part have the dependence described in item~(3) of \cref{ch01:conv:constants}. These statements assert the existence of gauge transformations; no configuration-dependent gauge transformation is used as a change of variables in an integral.
+\item At later scales, use the following endpoint protection rule. On the lattice on which each frozen coordinate was frozen, mark both endpoints of every frozen link, both endpoints of every based transport, and every prescribed basepoint or root. A block of the current output lattice is excluded whenever its full centered preimage on the lattice of some mark contains that mark. Then every gauge transformation supported on the remaining blocks has a lift, constant on blocks, which equals $I$ at every mark, and this lift preserves every frozen link and every based transport exactly. This holds at every finite depth, for coordinates frozen at any earlier step and at periodic seams, with no sum over the steps at which the coordinates were frozen. A newly chosen root of the Haar disintegration is fixed separately by the current based gauge. For the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge}, the current endpoints of the links across the boundary of the block region are included among the fixed vertices as well.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We give the absolute and the relative constructions on the same skeleton.
+
+\paragraph{Step 1: axial frames.}
+In each cell $Q$ of $P$, we fix a corner $o_Q$, let $\tau_x$ be the coordinate-ordered path in $Q$ from $o_Q$ to $x$, and define $q_Q(x)=U(\tau_x)$. Then $U^{q_Q}_{xy}$ is the transport around the loop $\tau_x(x,y)\tau_y^{-1}$. To bound it, we compare the ordered paths to the adjacent vertices $x$ and $y$. Moving the last elementary step through the ordered path inserts at most two rectangular strips, each of width one and length at most $2R$. After canceling consecutive inverse edges, the resulting loop is a product of conjugated elementary plaquettes. There are at most $CR$ of them, all in $Q$, including its boundary. By the product inequality for $\rho_G$, we have
+\begin{equation}\label{ch18:eq:axial-cell}
+ \rho_G(U_{xy}^{q_Q})\le C_0\delta R.
+\end{equation}
+Here $C_0$ is absolute, since the aspect ratio of a cell is at most four. This local estimate is the closed-cell clause of \cref{ch04:lem:quantitative-fillings}; the strip argument shows that it applies to a cell cut out of a torus. A cell has an injective periodic lift because $2R\le n/4$.
+
+\paragraph{Step 2: transitions.}
+For two cells $Q,Q'$ containing a common lattice edge $(x,y)$, we define $t_{QQ'}(x)=q_Q(x)q_{Q'}(x)^{-1}$. Direct multiplication gives
+\begin{equation}\label{ch18:eq:transition}
+ t_{QQ'}(y)=(U_{xy}^{q_Q})^{-1}t_{QQ'}(x)U_{xy}^{q_{Q'}},
+ \qquad
+ d(t_{QQ'}(x),t_{QQ'}(y))\le2C_0\delta R,
+\end{equation}
+where we used \eqref{ch18:eq:axial-cell} and bi-invariance. This estimate holds whether the cells share a face or only an edge. When two cells share only a vertex, only the equality of the assigned value at that vertex is required.
+
+\paragraph{Step 3: the edges of the grid.}
+We write the desired gauge in the frame of $Q$ as $s_Q(x)=k(x)q_Q(x)^{-1}$ and set $k=I$ at every vertex of the cell grid. On each edge of the grid, we fix one incident cell frame, interpolate the two endpoint values of $s_Q$ by a shortest geodesic in $\SU$, and sample it at the lattice vertices. Since the group has diameter $2\pi$ and the edge has length at least $R/2$, the speed is at most $4\pi/R$. Each edge of the grid is assigned once, regardless of the number of incident cells. By \eqref{ch18:eq:transition}, changing to another incident frame adds at most $C\delta R$ per lattice edge. Since $\delta R^2\le1$, the assigned frame values on every edge of the grid have lattice Lipschitz constant at most $C_1/R$.
+
+\paragraph{Step 4: the faces of the grid.}
+On a face of the grid, we convert the assigned boundary values into the frame of one incident cell, and we use a single consistent fine triangulation on all faces of the grid. Since the vertices of each fine simplex can be joined by a bounded number of lattice edges in the boundary, their distances are at most $C_2/R$. We take $R_0$ so large that the normalized affine interpolation clause of \cref{ch04:lem:quantitative-fillings} applies, with denominator at least $1/2$. The continuous boundary map then has Lipschitz constant $C_3/R$. The disk extension clause, rescaled to this rectangle, bounds the Lipschitz constant of its extension by $CR^{-1}(1+C_3)^2$. Sampling the extension at all lattice vertices of the face, we recover $k=s_Qq_Q$. This is done once for each face, and previously assigned vertices are preserved exactly.
+
+\paragraph{Step 5: the cells.}
+For a cell $Q$ of $P$, we convert the assigned boundary values into the frame of $Q$. On every lattice edge in the boundary their difference is at most $C_4/R$, by the face bound and \eqref{ch18:eq:transition}. The same consistent triangulation and normalized interpolation give a boundary map from the sphere with Lipschitz constant $C_5/R$; we increase $R_0$ once to satisfy its simplex margin. By the ball extension clause, we obtain a map with Lipschitz constant $CR^{-1}(1+C_5)^5$, and sampling it gives $k$ at the remaining vertices. For an edge of $Q$, the final comparison is the sum
+\begin{equation}\label{ch18:eq:final-sum}
+ \begin{split}
+ \rho_G(k_xU_{xy}k_y^{-1})
+ &=\rho_G\bigl(s_Q(x)U_{xy}^{q_Q}s_Q(y)^{-1}\bigr)\\
+ &\le \rho_G(U_{xy}^{q_Q})+d(s_Q(x),s_Q(y))
+ \le C(\delta R+R^{-1}).
+ \end{split}
+\end{equation}
+In the last inequality, we used \eqref{ch18:eq:axial-cell} and the Lipschitz bound of the extension. Since $\delta R\le R^{-1}$, this proves the absolute estimate with $C'=2C$, after enlarging $C$ to include the finitely many aspect and simplex constants. Since the assignments on the skeleton agree at every common vertex, they can be made directly on the periodic quotient and on any union of cells. Handles, the number of components, and the holonomy have not entered any constant.
+
+\paragraph{Step 6: the relative construction.}
+We keep every lattice vertex of $\Gamma$ at its prescribed value. In the frame of a cell $Q$, the prescribed values satisfy, on each prescribed lattice edge,
+\begin{equation}\label{ch18:eq:prescribed-increments}
+ d(k_\Gamma(x)q_Q(x)^{-1},k_\Gamma(y)q_Q(y)^{-1})
+       \le\eta+C_0\delta R\le C K_R/R.
+\end{equation}
+This follows by applying the first inequality in \eqref{ch18:eq:final-sum} in reverse to the two transformed link matrices, whose angles are both known; it imposes no bound on the increments of $k_\Gamma$ in the original frame. At the vertices of the grid not in $\Gamma$, we set $k=I$. An edge of the grid in $\Gamma$ is kept, and every other edge of the grid is a geodesic in one incident frame between its assigned endpoint values. Since $\Gamma$ is a union of closed cells of the grid, its intersection with an edge of the grid is either the whole edge or a subset of its endpoints, so this rule respects all prescribed values. Its lattice increments in any cell frame are bounded by $CK_R/R$.
+
+We keep each face of the grid lying in $\Gamma$. On every other face, the boundary interpolation and the disk filling give the bound $CK_R^2/R$; the interpolation is legitimate when $CK_R/R$ is below its fixed simplex margin. On the boundary of a cell not in $\Gamma$, all assigned frame increments, including those on a face kept from $\Gamma$, are now at most $CK_R^2/R$. The universal $c$ in the hypothesis is taken smaller than both required interpolation margins divided by these fixed constants. Since $K_R\ge1$, the condition $K_R^2/R\le c$ implies the first margin as well. The boundary interpolation on the sphere and the ball filling then give
+\[
+ \Lip(s_Q)\le C R^{-1}(1+C K_R^2)^5\le C K_R^{10}/R.
+\]
+All cells of $\Gamma$ are kept unchanged. Using \eqref{ch18:eq:final-sum} and $\delta R\le R^{-1}\le K_R^{10}/R$, we obtain the relative bound.
+
+\paragraph{Step 7: cells away from $\Gamma$.}
+If $Q$ has no vertex in $\Gamma$, no face or edge of $Q$ is prescribed. Each edge of the grid in the boundary of $Q$ is then a shortest geodesic of speed at most $C/R$, even if its endpoint values were assigned in the frame of another incident cell, and frame changes add at most $C/R$. The disk extensions on the faces of $Q$ then have Lipschitz constant $C/R$, and so does the ball extension in $Q$. By \eqref{ch18:eq:final-sum}, we obtain the stronger conclusion for every edge of $Q$. Removing two layers of cells around $\Gamma$ removes every cell with a vertex in $\Gamma$.
+
+\paragraph{Step 8: the choice of $\delta$ and of $A_8$.}
+If $U=e^X$ and $x=\abs X\le2\pi$, then $q(U)=2\sin^2(x/4)$ and $\sin(x/4)\ge x/(2\pi)$. Hence $x^2\le2\pi^2q(U)$, and the stated value of $\delta$ is valid. Let $A_8$ be larger than $4C'$ and $R_0$, increased by the fixed geometric factors used later in the excluded sets. Then $R\ge A_8/r\ge R_0$ and $C'/R\le(C'/A_8)r<r/2$. For part~(3) we have $A_8/r\le R\le(A_8+1)/r$, so
+\[
+ K_R\le2+C_B(A_8+1)=K_B,\qquad CK_R^{10}/R\le C_{\mathrm{col}}r,\qquad K_R^2/R\le K_B^2r/A_8.
+\]
+The two smallness conditions in part~(3) then imply the stated bounds. Since the constant $C_B$ is fixed before $r$, these conditions are upper bounds on $r$ and a lower bound on the ratio $\beta_{\mathrm{rec}}/r$, and they are not circular.
+
+\paragraph{Step 9: endpoint protection.}
+In one coordinate, the balanced-digit identity
+\[
+ \Bigl\{\sum_{j=0}^{s-1}M^ja_j:a_j\in\{-(M-1)/2,\ldots,(M-1)/2\}\Bigr\}
+ =\{-(M^s-1)/2,\ldots,(M^s-1)/2\}
+\]
+holds: existence follows by successively taking the balanced residue modulo $M$, and uniqueness by reducing two such expressions modulo $M$ and dividing their difference by $M$. Taking the product over the three coordinates and then the periodic quotient, we find that each vertex of the lattice of a mark has exactly one ancestor in any current centered partition, also at a seam. A mark in the preimage of a block would exclude that block. A gauge transformation supported on the remaining blocks is $I$ at every such ancestor, and its lift, constant on blocks, is $I$ at the mark. For any path, the gauge factors at the interior vertices cancel in order, and only the two endpoint factors remain. This proves that every marked frozen link and every based transport is preserved exactly, for all marks at once and with no sum over earlier steps. Finally, the cutoff in \cref{ch16:lem:strict-hybrid-gauge} vanishes at the prescribed endpoints of the links across the boundary of the block region as well, which proves the last statement.
+\end{proof}
+
+\section{Deterministic large-field decompositions}\label{ch18:sec:decompositions}
+
+In this section, we partition the support of the initial measure according to the outcomes of a deterministic sequence of curvature tests, and we show that on each piece every block region admits a representative with small links and small newly frozen coordinates.
+
+\paragraph{Based transports and frozen coordinates.}
+Let $e=(u_e,v_e)$ be a link across the boundary of the block region, oriented from its endpoint $u_e$ in the block region to its endpoint $v_e$ in the fixed complement, and let $\sigma_e$ be the hierarchical tree path of \cref{ch18:lem:finite-stencils} from the root $\alpha_e$ of the block containing $u_e$ to $u_e$. The based transport of $e$ is $\widehat b_e=U(\sigma_e)U_e$, the transport from $\alpha_e$ to $v_e$; its endpoints are $\alpha_e$ and $v_e$, while the endpoints of the link itself are $u_e$ and $v_e$. When integration stops at a boundary, such links are frozen through their based transports, and the other links leaving the integration are frozen as links. We write $c^\sharp$ for the analytic coordinates of newly frozen coordinates: in the coordinates we use, the logarithm $\Log b$ of the frozen group value $b$, or a fixed analytic function of finitely many such logarithms (see \eqref{ch18:eq:native-saving-coordinate}). Group values of frozen coordinates are never compared with analytic radii directly.
+
+\paragraph{Parameters.}
+We fix $M$, $J$, the construction domains of \cref{ch17:thm:controlled-kernel}, and $A_8$ sufficiently large as in \cref{ch18:thm:fat-cell-admission}. Then we fix the frozen-coordinate conversion constant $C_{\mathrm{conv},J}$ of \eqref{ch18:eq:saving-constant} below. It is computed from the relative extension of \cref{ch18:thm:fat-cell-admission}, the finite path products of the constraints and trees, the constant $C_{\mathrm{ad},J}$ of \cref{ch18:cor:initial-joint-allowance}, the constant converting the near values at the first step under the Wilson measure, and the constants converting frozen group values into analytic coordinates. It is fixed before the two radii below. Then $r>0$ and the bound $\beta_{\mathrm{rec}}>C_{\mathrm{conv},J}r$ for frozen coordinates are taken so small that every newly frozen analytic coordinate satisfies
+\[
+ \abs{c_j^\sharp}\le\min\{\beta_{\mathrm{rec}},\phi_\bullet(j)/4\},\qquad
+ C_{\mathrm{bc},\bullet}E_\bullet\beta_{\mathrm{rec}}/\rho_\bullet\le\sigma_*/4,\qquad \bullet\in\{\mathrm{cl},\mathrm q\},
+\]
+for the classical and the quantum spatially varying analytic radii $\phi_{\mathrm{cl}},\phi_{\mathrm q}$, with the radii $\rho_\bullet$, ceilings $E_\bullet$, and boundary-completion constants $C_{\mathrm{bc},\bullet}$ of \cref{ch17:thm:controlled-kernel}. These are conditions on deterministic parameters, imposed before the coupling. The deep frozen group variables at the first step under the Wilson measure are arbitrary elements of $\SU$, not small analytic logarithms; they are kept as fixed parameters and are never inserted into this analytic freezing. We set
+\[
+ R_{\mathrm{cell}}=\lceil A_8/r\rceil,\qquad
+ W=8BR_{\mathrm{cell}},\qquad
+ \pi\sqrt{2d_*}R_{\mathrm{cell}}^2\le1.
+\]
+The width $W$ is measured in output units of the current RG step; in output units of the next RG step it is $W/B=8R_{\mathrm{cell}}$. The excluded sets below also contain the band of width $s_{\mathrm{er}}$ removed at each boundary (\cref{ch17:thm:controlled-kernel}) and the protected neighborhoods of the finite path products. We may decrease $r$ initially so that $W\ge s_{\mathrm{er}}$.
+
+At each boundary between RG steps, the previous fixed complement and the earlier frozen basepoints lie outside the next block region, up to the fixed buffer of the dependence neighborhoods of the path products. Equivalently, their incoming and current boundary distances satisfy the comparison required in \cref{ch16:thm:controlled-perturbation}; this is proved as \eqref{ch18:eq:history-wall-distance}. The endpoint protection rule of \cref{ch18:thm:fat-cell-admission} contains these basepoints and the newly frozen labels, and additional excluded regions preserve the inclusion. At the first step, there is no previous fixed complement, and the condition is vacuous.
+
+\paragraph{Cell grids.}
+At each lattice side $n\ge8R_{\mathrm{cell}}$, we fix the cell grid deterministically. For example, we divide each coordinate circle into $\lceil n/R_{\mathrm{cell}}\rceil$ intervals, distributing the remainder among intervals of the two nearest integer lengths. For $R_{\mathrm{cell}}\ge2$ these lengths lie in $[R_{\mathrm{cell}}/2,2R_{\mathrm{cell}}]$. When an input grid must be aligned with the blocks, we perform the same construction in units of the blocking grid and round its scale up to a multiple of the block side. Since $B$ is fixed and $R_{\mathrm{cell}}$ may be taken larger than $B$ initially, this changes the scale by at most a fixed factor.
+
+\begin{definition}\label{ch18:def:ordered-tests}
+Fix a finite range of scales consisting of complete RG steps and an initial configuration $U$. The ordered tests are the following finite procedure.
+\begin{enumerate}
+\item Before any gauge transformation, compute the iterates $V^\ell=T_M^\ell U$ at all levels of the current RG step, with the Borel extension of $T_M$. Go through these levels in increasing order and, at each level, through the plaquettes in a fixed order.
+\item A plaquette $f$ fails if $q_f=q(V^\ell_f)\ge d_*$ and its full dependence set does not meet the current excluded label set. When $f$ fails, all variables of its full dependence set that are not yet frozen are frozen at the input of its RG step, together with those of a fixed neighborhood of the dependence set. This neighborhood is aligned with the blocks of the output lattice and has output radius $2W$. It includes the fixed margins of the dependence neighborhoods and the protected neighborhood of the endpoint protection rule. Previously frozen variables stay where they are. The neighborhood is added to the excluded label set. A plaquette whose dependence set meets the excluded label set is not tested; it is excluded, not declared good.
+\item After the tests of an RG step, retain only the closed cells of the output cell grid whose full dependence sets and protected neighborhoods avoid the excluded label set, and add every touching excluded cell to the fixed complement. Freeze the full output boundary band: the layer of retained cells next to the excluded set, its incident cells, all labels of reduced analytic radius, the removed band of width $s_{\mathrm{er}}$, and the margins of the dependence neighborhoods. Enlarge the previous fixed complement by an output neighborhood of width $W$, and then by the protected neighborhood of the endpoint protection rule of \cref{ch18:thm:fat-cell-admission}, using every endpoint and basepoint of every frozen coordinate on the lattice where it was frozen. A cell is retained only if its closure avoids all these exclusions, so a plaquette in the boundary of a cell is tested on the same terms as an interior plaquette.
+\item For the next RG step, keep only the blocks that lie, together with their full dependence neighborhoods, in the retained interior. The discarded band is frozen. Excluded regions are combined by taking unions. If the block region becomes empty, its frozen coordinates are kept and the procedure stops.
+\end{enumerate}
+When the initial measure is the Wilson measure, the first RG step is modified as in \cref{ch18:thm:history-cover}(4). The outcome of the procedure, consisting of the failing plaquettes, the excluded regions, and the label lists of the coordinates frozen at all steps, is a large-field decomposition, denoted $\mathcal X$. The values of these coordinates are variables of the stage measures and are not part of the finite index $\mathcal X$. We write $\mathcal A_{\mathcal X}$ for the set of initial configurations for which the procedure produces $\mathcal X$.
+\end{definition}
+
+\begin{theorem}\label{ch18:thm:history-cover}
+Make the parameter choices above.
+\begin{enumerate}
+\item For every finite range of scales, every initial side, every preceding depth $d_0=aJ$ with $a\ge0$, and every normalized stopped measure
+\[
+ d\widehat\nu=\widehat Z^{-1}\one_{D_r}
+       e^{-E_{d_0,\mathrm{sat}}/g_{m_{\mathrm{base}}}^2
+                       -[R_{d_0,\mathrm{sat}}-R_{d_0}(I)]}
+                         \,dH_{m_{\mathrm{base}}},
+\]
+the sets $\mathcal A_{\mathcal X}$ form a finite deterministic Borel partition of the support of $\widehat\nu$, provided that the output side of every complete RG step is at least $8R_{\mathrm{cell}}$. The same holds when the initial measure is the Wilson measure, with the first step described in part~(4). Every tested plaquette that is not excluded satisfies $q_f<d_*$. The gauge transformations used below to exhibit small representatives do not enter the tests.
+\item At every boundary between RG steps there exists a gauge representative in which the links in the interior of the block region are smaller than $r/2$, and the newly frozen links and based transports are smaller than $\beta_{\mathrm{rec}}$ on the lattice where they are frozen. All previously frozen coordinates are preserved together with their endpoints; no smallness of their later averaged images is asserted. A block region that becomes empty keeps its frozen coordinates, and the procedure stops there.
+\item Every added cell and every frozen label can be assigned to a failing plaquette by a local rule. For a failing plaquette $f$, the radius $R_t(f)$ of the neighborhood assigned to $f$, measured at the outputs of successive RG steps, satisfies
+\[
+ R_{t+1}(f)\le B^{-1}R_t(f)+C_J(W+R_{\mathrm{cell}}+1),\qquad
+ R_{\mathrm{first}}(f)\le C_J(W+R_{\mathrm{cell}}+1),
+\]
+where $R_{\mathrm{first}}(f)$ refers to the RG step in which $f$ fails. The number of scalar labels assigned to $f$ is at most $C_J(BW+R_{\mathrm{cell}}+1)^3$ in that RG step and at most $C_J(W+R_{\mathrm{cell}}+1)^3$ in each later RG step. The final plaquettes whose full dependence sets meet a neighborhood assigned to $f$ are at most
+\[
+ F_J=C_J(W+R_{\mathrm{cell}}+1)^3
+\]
+in number, with a fixed enlargement for each of the finitely many remaining numbers of averaging steps after the last RG step (\cref{ch18:thm:slice-induction}). These estimates are subadditive under unions. A set of failing plaquettes that can be produced by the ordered tests determines at most one large-field decomposition. The constants $C_J$ have the dependence stated at the beginning of this section and are independent of the later widths; the displayed polynomials exhibit the dependence of the counts on the widths.
+\item For the first RG step under the Wilson measure, the ordered tests also test the plaquettes of the input configuration, before any representative is chosen. On a fixed input cell grid of scale $S$, aligned with the blocks, with $C_J^{-1}R_{\mathrm{cell}}\le S\le C_JR_{\mathrm{cell}}$, retain only the closed cells whose full dependence sets avoid the final excluded set. Move the block region inward by one full layer of cells and by the full dependence neighborhood of the constraint, tree, and basing path products, and require
+\[
+ n_{\mathrm{input}}\ge8S,\qquad
+ \pi\sqrt{2d_*}S^2\le1.
+\]
+Then every plaquette of the resulting closed cell complex, including its boundary plaquettes, is a tested plaquette with $q<d_*$. The complex contains every plaquette whose Wilson term depends on an integration variable and every constraint and tree path product of the block region. There are no earlier frozen vertices at this step. The gauge transformation of \cref{ch18:thm:fat-cell-admission}(1) on this complex makes the integration variables and the near values small; it extends to the remaining vertices, whose links are kept as arbitrary elements of $\SU$ (the deep frozen group variables). The relative extension at the output gives the bounds of part~(2) for the newly frozen coordinates. All additional excluded sets are assigned to the same failing plaquettes and satisfy the bounds of part~(3) after one enlargement of $C_J$.
+\item For either initial measure $\nu$ define the stage measures
+\[
+ \eta_t^{\mathcal X}
+   =(\mathscr O_t^{\mathcal X})_\#
+                    (\one_{\mathcal A_{\mathcal X}}\nu),
+\]
+where $\mathscr O_t^{\mathcal X}$ maps a configuration to the field on the current block region together with all frozen links and based transports, each on the lattice where it was frozen. All the tests remain in these measures. For every Borel set $S$ (an event, not the grid scale of part~(4)), in particular for every small-field event of the form \eqref{ch01:eq:literal-event} on the same finite hierarchy,
+\[
+ \one_S=\sum_{\mathcal X}
+                \one_S\one_{\mathcal A_{\mathcal X}}
+ \quad\nu\text{-almost surely}.
+\]
+The partition does not change $S$ and imposes no additional restriction on the Wilson measure.
+\end{enumerate}
+All statements are uniform in the holonomy, the number of RG steps since coordinates were frozen, the topology of the regions, and the deep frozen group variables. A remaining group of fewer than $J$ averaging steps at the end of the range stops before the geometric conditions on the minimal side fail.
+\end{theorem}
+
+The following lemma records which changes of representative preserve the bounds on frozen coordinates; it is used in the proof of \cref{ch18:thm:history-cover} and afterward.
+
+\begin{lemma}\label{ch18:lem:frozen-preserving}
+Consider a representative as in \cref{ch18:thm:history-cover}(2) whose analytic frozen coordinates satisfy \eqref{ch18:eq:all-saved-values}.
+\begin{enumerate}
+\item Every gauge transformation supported on the current block region and lifted under the endpoint protection rule equals $I$ at the endpoints of all earlier frozen links and based transports. It fixes their group values and their logarithms exactly.
+\item A gauge transformation equal to $I$ at the roots of the block region and at the outer endpoints $v_e$ of the links across the boundary of the block region fixes every based transport $\widehat b_e$, although it may move the inner endpoint $u_e$. The gauge transformation of \cref{ch16:lem:strict-hybrid-gauge} fixes $u_e$ as well.
+\item A simultaneous conjugation $b\mapsto kbk^{-1}$ of the frozen coordinates preserves \eqref{ch18:eq:all-saved-values}.
+\item A change $b_{xy}\mapsto k_xb_{xy}k_y^{-1}$ with independent $k_x,k_y$ need not preserve \eqref{ch18:eq:all-saved-values}.
+\end{enumerate}
+In the following, analytic estimates are transported between representatives only by the changes in parts~(1)--(3). Changes as in part~(4) are used only for the invariance of densities in \cref{ch18:thm:canonical-density}. None of these conventions changes the tests or restricts the initial measure.
+\end{lemma}
+
+\begin{proof}
+Part~(1) is \cref{ch18:thm:fat-cell-admission}(4). For part~(2), the gauge factors at the interior vertices of the path $\sigma_e$ and of the link $e$ cancel, so $\widehat b_e$ changes only by the factors at $\alpha_e$ and $v_e$, which are $I$; the factor at $u_e$ cancels. The gauge transformation of \cref{ch16:lem:strict-hybrid-gauge} is $I$ at the protected endpoints of the links across the boundary of the block region, including $u_e$. For part~(3), we have $\Log(kbk^{-1})=\Ad_k\Log b$ on the identity chart, and $\Ad_k$ is an isometry of $\su$. For part~(4), take $b=I$ and $k_y=I$; then $\rho_G(k_xbk_y^{-1})=\rho_G(k_x)$ is arbitrary.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch18:thm:history-cover}]
+We first fix all margins and constants that do not depend on a configuration (Steps~1 and~2). We then show that the tested plaquettes that are not excluded are good (Step~3), construct the small representatives by induction over the RG steps (Step~4), and compare boundary distances (Step~5). Steps~6 and~7 prove the counts and the measurability, Step~8 treats the first step under the Wilson measure, and Step~9 identifies the stage measures.
+
+\paragraph{Step 1: fixed margins.}
+All excluded sets in this proof are sets of labels, chosen by their locations and dependence sets; their construction uses no link representative. We fix $D_J,L_J,v_J$ from \cref{ch18:lem:finite-stencils} and $C_{\mathrm{ad},J}$ from \cref{ch18:cor:initial-joint-allowance}. The protected neighborhoods include one full copy of each dependence neighborhood, its incident cells, and the removed band of width $s_{\mathrm{er}}$, and $A_8$ includes the factors required in \cref{ch18:thm:fat-cell-admission}. The support radius will be required to give $R_{\mathrm{cell}}\ge R_0$ and $W$ larger than $s_{\mathrm{er}}$ and than the radii of these finitely many dependence neighborhoods. The number of copies and their enlargement factors depend only on $M$, $J$, and the fixed construction domains; in particular, they are fixed before $W$ or $R_{\mathrm{cell}}$ is evaluated.
+
+\paragraph{Step 2: constants for frozen coordinates.}
+We specify the margins for frozen coordinates before using any representative. On the lattice where it is frozen, the analytic coordinate of a frozen link $b_e$ or based transport $\widehat b_e$ is its identity-chart logarithm. If its angle is below $\pi$, then
+\begin{equation}\label{ch18:eq:native-saving-coordinate}
+ \abs{\Log b_e}=\rho_G(b_e),\qquad
+ \abs{\Log\widehat b_e}=\rho_G(\widehat b_e).
+\end{equation}
+Here $\abs\cdot$ is the adjoint-invariant Euclidean norm on $\su$, and the conversion constant is one. If the fixed coordinate convention also uses a longer path product or a relative eliminated coordinate, let $C_{\mathrm{cr},J}\ge1$ bound its path length and the row sums of the first derivative of its fixed inverse chart on the larger construction domain. Such maps vanish at the configuration with all links equal to $I$. By the product inequality for angles, or by integration of the first derivative along the straight segment, their size is at most $C_{\mathrm{cr},J}$ times the bound on their inputs. This constant depends only on the fixed charts and on $M,J$, not on any width or number of steps.
+
+We fix $C_{\mathrm{conv},J}$ by \eqref{ch18:eq:saving-constant} below, after $A_8$ and before either radius; it includes $C_{\mathrm{ad},J}$ and $C_{\mathrm{cr},J}$. Let $\rho_{\partial,\mathrm{cl}}$ and $\rho_{\partial,\mathrm q}$ be the boundary values of the two spatially varying radii, and define
+\[
+ b_{\min}=\tfrac14\min\{\rho_{\mathrm{cl}},\rho,
+                  \rho_{\partial,\mathrm{cl}},\rho_{\partial,\mathrm q}\}.
+\]
+We take $\beta_{\mathrm{rec}}<\min\{\pi,\rho/4,\rho_{\mathrm{cl}}/4\}$ satisfying the two conditions $C_{\mathrm{bc},\bullet}E_\bullet\beta_{\mathrm{rec}}/\rho_\bullet\le\sigma_*/4$, and then require
+\begin{equation}\label{ch18:eq:actual-saving-gate}
+ C_{\mathrm{conv},J}r<\min\{\beta_{\mathrm{rec}},b_{\min}\}.
+\end{equation}
+These are the conditions on frozen coordinates in the choice of parameters. All quantities on the right side are fixed positive parameters, so this upper bound on $r$ is compatible with its other upper bounds.
+
+\paragraph{Step 3: the tests and the goodness of retained plaquettes.}
+We first consider a stopped measure. At the input of the first RG step, a gauge transformation into $B_r$ gives all links smaller than $r$. By \cref{ch18:cor:initial-joint-allowance}, which precedes this construction, the initial frozen coordinates at the input are bounded by $C_{\mathrm{ad},J}r$ in a common representative. Since $C_{\mathrm{conv},J}\ge C_{\mathrm{ad},J}$, their analytic coordinates satisfy \eqref{ch18:eq:actual-saving-gate} as well. At later inputs, by the induction in Step~4, the links in the interior of the block region are small, with all earlier frozen coordinates fixed. Before any gauge transformation, we compute the iterates at every level of the current RG step and perform the ordered tests of \cref{ch18:def:ordered-tests}. The tests always use the values of the iterates themselves, also when a path product that is not used has an exceptional value of the Borel extension.
+
+After the tests, the retained cells are those of \cref{ch18:def:ordered-tests}(3). A dependence set avoiding the final excluded set also avoided the smaller excluded set at the time of its test. If that plaquette had value at least $d_*$, its failure would have put the dependence set into the excluded set. This contradiction shows that every tested plaquette that is not excluded is good, that is, $q_f<d_*$. Adding excluded sets after the tests can only reduce this set of plaquettes.
+
+\paragraph{Step 4: small representatives.}
+We prove part~(2) by induction over the boundaries. Let $P$ be the retained closed cell complex. Every link read for an output link of $P$ comes from links of the current interior, before the new freezing at the input. By \cref{ch18:lem:finite-stencils}, its angle in the incoming representative is at most $C_Br$, where $C_B$ includes the finite tree path lengths. By Step~3 and Step~8 of the proof of \cref{ch18:thm:fat-cell-admission}, all plaquettes of $P$ have angle at most $\delta=\pi\sqrt{2d_*}$. Let $\Gamma$ consist of one layer of retained cells next to the excluded set, enlarged to contain all prescribed boundary vertices. We prescribe the identity gauge on $\Gamma$ in this representative; its link bound is $\eta\le C_Br$. After the initial reduction $K_B^2r/A_8\le c$, parts~(2) and~(3) of \cref{ch18:thm:fat-cell-admission} apply. The resulting gauge transformation is exactly $I$ at every prescribed lattice vertex, has link bound $C_{\mathrm{col}}r$ on $P$, and has the bound $<r/2$ in cells without prescribed vertices. It extends by $I$ outside $P$, because every boundary vertex of $P$ is prescribed. We lift it as a constant through the current RG step. By the endpoint protection rule, the lift is $I$ at all earlier marks and at the variables already frozen at the input in this RG step. Hence every earlier frozen coordinate, its endpoints, and every newly frozen input variable keep their values.
+
+We freeze the full output boundary band, including $\Gamma$, its incident cells, all labels of reduced analytic radius, the removed band, and the margins of the dependence neighborhoods. Since the remaining interior is separated from $\Gamma$ by two layers of cells, its links are smaller than $r/2$. The newly frozen links have angle at most $\max(C_B,C_{\mathrm{col}})r$. A based transport multiplies such a link by a hierarchical transport with at most $L_J$ factors, and its angle is at most the sum of their angles. As announced before the radii were chosen, we may therefore fix
+\begin{equation}\label{ch18:eq:saving-constant}
+ C_{\mathrm{conv},J}
+   >2C_{\mathrm{cr},J}(1+L_J)
+       \max\{C_B,C_{\mathrm{col}},C'/A_8,C_{\mathrm{ad},J}\},
+\end{equation}
+with any additional fixed factors of dependence neighborhoods absorbed once. Every analytic coordinate of the union of the newly frozen boundary band, boundary layer, and based transports then has size at most $C_{\mathrm{conv},J}r$. By \eqref{ch18:eq:native-saving-coordinate} and \eqref{ch18:eq:actual-saving-gate}, we have simultaneously
+\begin{equation}\label{ch18:eq:all-saved-values}
+ \abs{c_j^\sharp}<\beta_{\mathrm{rec}},\qquad
+ \abs{c_j^\sharp}\le\phi_\bullet(j)/4
+          \quad(\bullet\in\{\mathrm{cl},\mathrm q\}).
+\end{equation}
+This includes every label of reduced radius, not only the boundary links of a layer. The constant is computed from $A_8$, $C_B$, and the universal relative extension before $r$ and $\beta_{\mathrm{rec}}$ are chosen.
+
+For the next RG step, we retain only the blocks that lie, together with their full dependence neighborhoods, in the remaining interior. The discarded band has thickness at most $C_J$ in that input lattice and consists of links that were small before discarding. The fixed factor coming from its dependence neighborhood was included in $C_{\mathrm{conv},J}$ before the radii were fixed, so the band may be frozen with the same bound. The previous excluded region was enlarged by $W$ in the current output lattice. After the next RG step, this is $W/B=8R_{\mathrm{cell}}$ units, which suffices for the required layer of cells and the fixed incidences; the full dependence neighborhood is included in addition. None of these operations requires a later averaged image of a frozen coordinate to be small, since the coordinate stays on its own lattice. This completes the induction.
+
+\paragraph{Step 5: incoming and current boundary distances.}
+For the next RG step, let $D_{\mathrm{in}}$ be its list of remaining analytic input labels after the whole freezing, and let $\Omega'$ be the set of its current retained blocks. Each incoming label is kept at its location on the lattice where it was created, with its original volume factor. A current block is retained only when its full input dependence neighborhood is contained in $D_{\mathrm{in}}$. An omitted incoming label lies outside the block region, apart from the fixed displacement between the location of a chart label and its path product. A newly frozen boundary label, or a label of a link across the boundary of the block region, is omitted from $D_{\mathrm{in}}$ and satisfies the same statement. By the endpoint protection rule, an earlier frozen endpoint or basepoint has its current centered ancestor in an excluded block. By the balanced-digit identity, the difference between its rescaled position and that ancestor is less than one current unit, uniformly in the number of steps. Including the finite dependence neighborhoods of the charts, we may take $L_{\mathrm{buf},J}=3D_J+6$, so that every omitted input label $x$ satisfies
+\begin{equation}\label{ch18:eq:old-complement-inclusion}
+ \dist(x/B_s,(\Omega')^c)\le L_{\mathrm{buf},J},
+                    \qquad B_s=M^s.
+\end{equation}
+In the induction $s=J$. The same inclusion holds for a single group of $s\le J$ averaging steps when its own domain conditions are imposed. Enlarging the excluded regions can only decrease the distance to $(\Omega')^c$, so it preserves the inclusion.
+
+If the incoming fixed complement is nonempty, let $i$ be an incoming retained label and $x$ a nearest omitted input label. For a current retained label $e$ we use the same distance as in the two boundary-weighted norms; the factor $3$ in $L_{\mathrm{buf},J}$ covers the comparison with the maximum-distance convention for dependence neighborhoods. By the triangle inequality and \eqref{ch18:eq:old-complement-inclusion}, we have
+\[
+ d_{\mathrm{current}}(e)
+ \le \dist(e,i/B_s)+B_s^{-1}d_{D_{\mathrm{in}}}(i)
+                                  +L_{\mathrm{buf},J}+1,
+\]
+where the last term $1$ accounts for the choice of a cell rather than a vertex as location. Rearranging, we obtain
+\begin{equation}\label{ch18:eq:history-wall-distance}
+ d_{D_{\mathrm{in}}}(i)\ge
+ B_s d_{\mathrm{current}}(e)-B_s\dist(e,i/B_s)
+                         -C_{\mathrm{buf},J},\qquad
+ C_{\mathrm{buf},J}=B_s(L_{\mathrm{buf},J}+1).
+\end{equation}
+Rescaling coordinates in this calculation does not rescale the counting measures of the labels or discard their volume factors in a column norm; these are the same as in the incoming analytic norm. If there is no incoming fixed complement, the boundary-weighted part of the input is zero, and no nearest omitted label is needed. A new excluded region satisfies the inclusion just proved once the initial split has been made. The buffer in \eqref{ch18:eq:history-wall-distance} depends only on $M$, $J$, and the fixed charts, not on $W$, $s_{\mathrm{er}}$, the number of steps, or the number of excluded components.
+
+\paragraph{Step 6: locality and counts.}
+We verify locality and the counts without counting connected components. We label each initially added neighborhood by its failing plaquette; when neighborhoods overlap, a label in their intersection is assigned to the first incident failing plaquette in the fixed order. The enlargement of a union by a fixed neighborhood is contained in the union of the corresponding enlargements of its members. A cell meeting such an enlargement lies within a further $4R_{\mathrm{cell}}$ of it, and a full dependence neighborhood costs at most $D_J+1$ more. Projection of a mark to its current ancestor contracts distances by the blocking factor, with a rounding error of at most one current unit for the whole projection, not one for each earlier step. This follows from the balanced-digit identity in the proof of \cref{ch18:thm:fat-cell-admission}, since the whole preimage has radius less than half a block side.
+
+If $R_t(f)$ bounds all current neighborhoods and projected marks assigned to $f$, the next RG step gives, with a fixed $a_J<\infty$,
+\begin{equation}\label{ch18:eq:radius-recursion-proof}
+ R_{t+1}(f)\le B^{-1}R_t(f)
+                         +a_J(W+R_{\mathrm{cell}}+1).
+\end{equation}
+The neighborhood created when $f$ fails satisfies the same bound in the output units of its RG step. We take $C_J\ge a_J/(1-B^{-1})$ and at least the corresponding constant for the step in which $f$ fails. Iterating \eqref{ch18:eq:radius-recursion-proof}, we obtain $R_t(f)\le C_J(W+R_{\mathrm{cell}}+1)$ at every later boundary between RG steps. A remaining group of fewer than $J$ averaging steps at the end is read as a fixed finite dependence neighborhood at the last boundary; it creates no additional integrated step and no update of the normalization constant. All endpoint marks added when boundary layers are frozen lie in the same neighborhoods, so the protected neighborhoods of the endpoint protection rule obey \eqref{ch18:eq:radius-recursion-proof} too, even if the frozen coordinates contain marks on many lattices.
+
+A ball of radius $a$ in the maximum distance contains at most $(2a+3)^3$ vertices. The link direction, the color component, the intermediate scale, and the type of frozen coordinate multiply this by a fixed $C_J$. In the RG step in which $f$ fails we convert the radius into input units, which costs a factor $B$; at later RG steps we use the bound in current units just proved. We obtain the counts
+\[
+ C_J(BW+R_{\mathrm{cell}}+1)^3,
+ \qquad C_J(W+R_{\mathrm{cell}}+1)^3
+\]
+of scalar labels. The lists of missing labels, boundary-band labels, and frozen labels used in \cref{ch17:thm:real-scalar-ledger} are subsets of these lists of bounded density; deterministic images of earlier frozen coordinates are not new independent labels. A final plaquette whose full dependence set meets an excluded region lies in a further fixed dependence neighborhood of one of the assigned sets. Counting the three plaquette directions there, we obtain the bound $F_J$. The finitely many remaining numbers of averaging steps after the last RG step only enlarge the dependence neighborhood. On a periodic quotient these counts can only decrease. Since we use unions rather than hulls of components, all the bounds are subadditive, including for excluded regions that touch or wrap around the torus.
+
+\paragraph{Step 7: Borel measurability.}
+The outcome of the ordered tests is determined by its set of failing plaquettes: replaying the ordered list and adding the prescribed excluded sets at exactly those failures reproduces it. Hence there is at most one decomposition for each set of failing plaquettes that the procedure can produce. Each event $\mathcal A_{\mathcal X}$ is Borel, since it is a finite Boolean combination of tests of Borel iterates and of membership in deterministic dependence lists. These events are disjoint and exhaust the support. The small representatives were used only after these events had been specified.
+
+\paragraph{Step 8: the first step under the Wilson measure.}
+For the Wilson measure, we perform the same tests, including the plaquettes of the input configuration, without assuming a small input representative. Let $F$ be the final excluded dependence set. On the fixed input cell grid of scale $S$, aligned with the blocks, we form the initial good-cell complex $P_{\mathrm{in}}$, consisting of all closed cells whose full dependence sets avoid $F$. The blocks of the block region are chosen only after moving inward by one full layer of cells and by the full dependence neighborhood of the constraint, tree, basing, and plaquette path products. This choice implies that every input plaquette whose Wilson term depends on an integration variable, and every path product of the block region, is contained in $P_{\mathrm{in}}$. For example, a point of a retained block together with its dependence neighborhood still lies in a retained cell or in its incident layer, and that layer was retained before moving inward. The near links are the links outside the block region read by these path products and plaquettes, as in \eqref{ch15:eq:near-deep}, and their values are the near values. All remaining input links are deep links; their values are the deep frozen group variables, that is, the frozen group variables in the fixed complement that are not near values.
+
+An input plaquette of $P_{\mathrm{in}}$, including a boundary plaquette, avoids the final set $F$; by the argument of Step~3, it is good. The absolute part of \cref{ch18:thm:fat-cell-admission} applies with $n_{\mathrm{input}}\ge8S$ and $\delta S^2\le1$, and we obtain the bound $C(\delta S+S^{-1})\le C'/S$. Fixing the mesh factors when $A_8$ is chosen makes this smaller than the required fixed multiple of $r$. At this first input there are no earlier fixed vertices, and we extend the resulting gauge transformation arbitrarily to the other vertices. All transformed deep links are kept as arbitrary elements of $\SU$ in the frozen data. The finite path-product estimate and the relative construction at the output of Step~4 give the claimed bounds for the new boundary layers and based transports. The near values are small in this representative, not in the original configuration. Every additional excluded set lies within a neighborhood of radius $C_JS$ of an excluded neighborhood, and we assign it to the same failing plaquette. Since $S\le C_JR_{\mathrm{cell}}$, the radius and label counts keep their displayed forms after one fixed enlargement. After this first step, the induction of Step~4 applies.
+
+All analytically frozen adjacent variables of this first step lie in the complex $P_{\mathrm{in}}$, and hence obey the same conversion and \eqref{ch18:eq:all-saved-values}. A dependence set frozen because its averaged plaquette fails can contain arbitrary elements of $\SU$. Such deep frozen group variables are fixed parameters, not variables of the analytic freezing, and their plaquettes involving only frozen variables remain in the external Wilson factor. For a stopped measure, the corresponding initial variables lie in its gauge-invariant small-field domain, by \cref{ch18:cor:initial-joint-allowance}.
+
+\paragraph{Step 9: stage measures.}
+By \cref{ch18:lem:frozen-preserving}, every gauge transformation used in this construction fixes the earlier frozen coordinates and their logarithms; this is the form in which the representatives of part~(2) are used later. All stage maps are Borel, since they are compositions of restrictions, the block averaging map, and finite transport products; their pushforwards are the measures in part~(5). Each frozen coordinate is recorded once, as an independent link or based transport, and carries all its dependence through the density; no statement about independence under the probability measure is needed. Since the events $\mathcal A_{\mathcal X}$ partition the support of $\nu$, multiplying their pointwise sum by $\one_S$ gives the identity in part~(5), and no restriction is added to the Wilson measure. All geometric arguments were finite local constructions; no step involves $L$, $\gamma$, $d_0$, the depth, the number of steps since freezing, or the number of components. A final group of fewer than $J$ averaging steps is stopped before its minimal-side condition fails, as stated.
+\end{proof}
+
+The next lemma verifies, on every large-field decomposition, the hypotheses of \cref{ch16:thm:controlled-perturbation,ch17:thm:controlled-kernel} that concern the incoming radius, the boundary distances, the conditional forces, and the cutoff domains. We use the notation of \cref{ch16:lem:admitted-products}. For each initial segment $I$ of the integrated intermediate scales, $y=z_{I^c}$ denotes the remaining free coordinates, $\mathcal T_I$ their domain, $a_I(c,y;\xi)$ the unperturbed conditional minimizer, and $A_I$ the unperturbed conditional Hessian at $a_I$. Further, $r_I$ is the radius of the conditional coordinate neighborhood, $r_q$ the bound on the scaled fluctuations $g_iw_i$, $\varepsilon_{\mathrm{tube}}$ the fixed margin, and $C_{\mathrm{seq},J}$ the constant of the sequential construction. As in \cref{ch16:thm:controlled-perturbation}, $\Phi_0$ is the reconstruction in the target-dependent gauge and $\overline P$ is the classical perturbation adjusted by the boundary-completion difference. Here $\Phi_0(c,u;\xi)$ has the joint normalized argument $u$ used in that theorem: if $z_0$ is the unperturbed joint stationary point, $K_0$ the unperturbed Hessian there, and $S_0=K_0^{-1/2}$, then $z=z_0+S_0u$. In the lemma below, the perturbing function in the original free coordinates is
+\begin{equation}\label{ch18:eq:force-function}
+ V(c,z;b)=\overline P\bigl(\Phi_0(c,S_0^{-1}(z-z_0);\xi);b\bigr).
+\end{equation}
+Thus $V_I$ and $V_{II}$ below are derivatives in the original free coordinates $z$, at fixed $c$ and real $b$, and the constants $C_P$ and $C_P'$ include the fixed coefficient bounds of this affine change of coordinates. For a function $f$ of the labels $D$ and frozen values $c^\sharp$ on $F\subset D$, we write $T_{c^\sharp}f$ for the function of the labels $D\setminus F$ obtained by inserting these values, and $\mathcal X_D^{\phi}$ for the coefficient norm with boundary decay of \cref{ch15:def:regional-norm} with spatially varying radius $\phi$.
+
+\begin{lemma}\label{ch18:lem:history-input-contract}
+Assume the conditions on frozen coordinates and the construction conditions of \cref{ch18:thm:history-cover}.
+\begin{enumerate}
+\item Freezing at the boundary of a complete RG step removes every label of reduced analytic radius and leaves the incoming perturbation on the remaining labels with a uniform analytic input radius, separately for the classical and the quantum radius. Its incoming and current boundary distances satisfy \eqref{ch18:eq:history-wall-distance}.
+\item Fix real $b=(\xi,\Rec)$, and suppose that the adjusted classical perturbation $\overline P$ has uniform norm at most $2\sigma_*$. Then the preconditioned conditional force $\delta_V$, taken over every initial segment $I$ and every $y\in\mathcal T_I$ and defined by the first expression below with $V$ as in \eqref{ch18:eq:force-function}, satisfies
+\begin{equation}\label{ch18:eq:conditional-force-check}
+ \delta_V=\max_I\sup_{y\in\mathcal T_I}
+  \norm{A_I^{-1}V_I(c,a_I(c,y;\xi),y;b)}_{\mathrm{coeff}}
+       \le I_0C_P\sigma_*\rho_{\mathrm{cl}},
+\end{equation}
+where $I_0$ and $C_P$ are fixed bounds on the larger domains, independent of the later widths.
+\item The enclosing product domain and every conditional coordinate neighborhood lie in the domains of \cref{ch16:lem:admitted-products} when the construction conditions include
+\begin{equation}\label{ch18:eq:prefix-sequential-check}
+ \delta_V<\tfrac14\min_I r_I,\qquad
+ R_{\mathrm{en}}<r_q,\qquad
+ C_{\mathrm{seq},J}
+       (2I_0C_P\sigma_*\rho_{\mathrm{cl}}+r_q)
+                      <\tfrac12\varepsilon_{\mathrm{tube}},
+\end{equation}
+together with the fixed Hessian conditions and the two reconstruction-image conditions \eqref{ch18:eq:two-input-image-check}.
+\item The fluctuation cutoff domain with common radius $p(t)=A_{\mathrm w}\log(1/t)$ is one of the cutoff domains allowed in \cref{ch17:thm:controlled-kernel}. Its containment and expansion conditions hold below a single coupling ceiling, chosen after these fixed positive radii.
+\end{enumerate}
+None of these statements requires a derivative in $\xi$ or in $\Rec$.
+\end{lemma}
+
+\begin{proof}
+Steps~1 and~2 prove part~(1) and the bound on the new boundary-completion differences, Step~3 proves part~(2), Steps~4 and~5 verify the image and convexity conditions behind part~(3), and Step~6 proves part~(4).
+
+\paragraph{Step 1: uniform radius on the remaining labels.}
+The uniform radii are used in the freezing part of \cref{ch17:thm:controlled-kernel}. We write $D$ for the old output list, $I$ for the remaining labels, and $F=D\setminus I$. All labels of reduced radius belong to $F$, and $d_D(i)\ge s_{\mathrm{er}}$ for $i\in I$. If there is no old boundary, the boundary-weighted part of the incoming norm is zero, and the estimate below is immediate. Otherwise, since the full neighborhood of width $s_{\mathrm{er}}-1$ of the old boundary was removed, a shortest route from $i$ to the old boundary meets $F$ at least $s_{\mathrm{er}}-1$ steps earlier, and additional excluded regions can only shorten the distance to $F$. Hence
+\[
+ d_D(i)\ge d_I(i)+s_{\mathrm{er}}-1.
+\]
+For a monomial of degree $k\ge1$ in the remaining labels and degree $j\ge0$ in the frozen labels, inserting the frozen values multiplies its absolute coefficient contribution by at most $\eta^j$ with $\eta\le1/4$, by \eqref{ch18:eq:all-saved-values}. The new fraction $\nu_i/k$ contributes at most a factor $(k+j)/k\le1+j$, and the remaining connecting network is no longer than the original one. Since every remaining label had the full radius $\rho_\bullet$, the resulting series is estimated at the uniform radius $\rho_\bullet$ on $I$, not at a reduced boundary radius. Summing $\sum_{j\ge0}(1+j)\eta^j=(1-\eta)^{-2}<2$ and using the distance inequality, we obtain, including degree one,
+\begin{equation}\label{ch18:eq:uniform-survivor-bound}
+ \mathcal X_I^{\rho_\bullet}(T_{c^\sharp}f)
+ \le 2e^{-\alpha_\bullet(s_{\mathrm{er}}-1)}
+                                 \mathcal X_D^{\phi_\bullet}(f).
+\end{equation}
+Replacing the radius and rates by the classical radius and rates in this monomial calculation, we obtain the classical statement, with the same factor $(1-\eta)^{-2}$.
+
+\paragraph{Step 2: new boundary-completion differences.}
+The bound $\abs{c_j^\sharp}\le\phi_\bullet(j)/4$ controls the inherited boundary term. Freezing also inserts the frozen values into the torus functions, and this produces a new boundary-completion difference. For it we use the bound $\abs{c_j^\sharp}\le\beta_{\mathrm{rec}}$ from \eqref{ch18:eq:all-saved-values}. Every contributing monomial has frozen degree $j\ge1$ and degree $k\ge1$ in the remaining labels. For a fixed remaining index $i$, the graph connecting network joins $i$ to a frozen label, so $d_I(i)\le\Tree(\nu)$ and $\Tree(\nu_I)\le\Tree(\nu)$. Let $\mathsf t_2$ denote the Euclidean network length in the torus coefficient norm, and let $\bar a_\bullet$ be its Euclidean rate. The rate choices of \cref{ch17:thm:carried-networks} give $\bar a_\bullet\ge\sqrt3(a_\bullet+\alpha_\bullet)$. Therefore
+\[
+ a_\bullet\Tree(\nu_I)+\alpha_\bullet d_I(i)
+ \le(a_\bullet+\alpha_\bullet)\Tree(\nu)
+ \le\sqrt3(a_\bullet+\alpha_\bullet)\mathsf t_2(\nu)
+ \le\bar a_\bullet\mathsf t_2(\nu).
+\]
+With $\eta_\bullet=\beta_{\mathrm{rec}}/\rho_\bullet\le1/4$, the ratio of the new and old fractions $\nu_i/k$ is at most $1+j$. For each fixed original degree we split its absolute coefficient sum according to the frozen degree $j$, which is uniquely determined. Taking the supremum over the remaining index before the sum over degrees, we lose at most the factor
+\[
+ \sum_{j\ge1}(1+j)\eta_\bullet^j
+  =\frac{\eta_\bullet(2-\eta_\bullet)}
+              {(1-\eta_\bullet)^2}\le4\eta_\bullet.
+\]
+The normalization is $\rho_\bullet^{-2}$ in both norms, and the powers of $\rho_\bullet$ cancel against the factors of the frozen labels. This includes the new degree-one terms, and gives the bound $8E_\bullet\beta_{\mathrm{rec}}/\rho_\bullet$ for one simultaneous freezing of the union of the frozen labels. The fixed constant $C_{\mathrm{bc},\bullet}$ includes every required conversion and any finite sum of such terms. The total contribution therefore satisfies
+\begin{equation}\label{ch18:eq:total-creation-straddle}
+ z_t^\bullet\le
+ C_{\mathrm{bc},\bullet}E_\bullet
+            \beta_{\mathrm{rec}}/\rho_\bullet\le\sigma_*/4.
+\end{equation}
+The boundary band, the new boundary layers, the based transports, and the initialization are all included in this single bound. For a new excluded region in the interior, we do not claim that the removed band alone makes this difference small. Equations \eqref{ch18:eq:uniform-survivor-bound} and \eqref{ch18:eq:total-creation-straddle} imply the uniform incoming norms in the recursion of \cref{ch17:thm:controlled-kernel}. The frozen coordinates $\xi$ are parameters of those norms and need not have the full incoming analytic radius.
+
+\paragraph{Step 3: conditional forces.}
+We use the absolute coefficient bounds for the derivatives of $\overline P$ in \cref{ch16:thm:controlled-perturbation}, on its uniform input image, which lies strictly inside the input ball. By the fixed construction hypotheses, every conditional coordinate neighborhood has the same image, together with its connecting segments. Composing with the row-sum bounds of the first derivative of $\Phi_0$ and of the affine change of coordinates in \eqref{ch18:eq:force-function}, we find $\norm{V_I}_{\mathrm{coeff}}\le C_P\sigma_*\rho_{\mathrm{cl}}$, uniformly in $y\in\mathcal T_I$. Multiplying by the conditional inverse bound $I_0$, we obtain \eqref{ch18:eq:conditional-force-check}. The second derivative also contains the term $\overline P'\Phi_{0,II}$, where $\Phi_{0,II}$ is the second $z_I$-derivative of $z\mapsto\Phi_0(c,S_0^{-1}(z-z_0);\xi)$; keeping it, we obtain $\norm{V_{II}}_{\mathrm{coeff}}\le C_P'\sigma_*$. The unperturbed neighborhoods are fixed first, so that their own Hessian variation uses at most half of the preconditioned margin. Reducing the fixed ceiling for $\sigma_*$ makes $I_0C_P'\sigma_*$ fit the remaining margin and preserves the real half-gap and the complex inverse margin. At an unperturbed conditional minimizer, we have $F_{0,I}=0$, so the condition on inverse times force is precisely $\lambda\norm{A_I^{-1}V_I}\le\delta_V<r_I/4$ for $0\le\lambda\le1$. This verifies the hypothesis of the fixed-parameter contraction at every $y$, and its solution moves by at most $2\lambda\delta_V$. The uniform mixed coefficient bounds of the same theorem control its dependence on the higher parameters. The sequential conclusion of \cref{ch16:lem:admitted-products} then applies under \eqref{ch18:eq:prefix-sequential-check} to all intermediate scales. In particular, a product with $\abs{g_iw_{i,e}}\le R_{\mathrm{en}}<r_q$ stays inside every parameter and solution neighborhood with margin. This is a check of the conditional force at moving parameters, not only at the joint minimizer.
+
+\paragraph{Step 4: the image conditions.}
+Both inherited image conditions are checked with the bound $s_q=R_{\mathrm{en}}$ for the scaled fluctuations. For each radius, the four zero-fluctuation terms of \cref{ch16:lem:strict-two-radius-images} satisfy
+\[
+ \begin{gathered}
+ B^{-1}Z_\bullet(K_*\rho_\bullet)\le\rho_\bullet/16,
+ \qquad
+ C_{\Delta,\bullet}C_{a,\bullet}R_{\partial,\bullet}
+                                     \le\rho_\bullet/16,\\
+ C_{\Delta,\bullet}C_{a,\bullet}
+ e^{-a_Ww_{\mathrm{bd}}/2}K_*\rho_\bullet
+                                     \le\rho_\bullet/16,
+ \qquad C_{F,\bullet}\beta_{\mathrm{rec}}
+                                     \le\rho_\bullet/16.
+ \end{gathered}
+\]
+Their sum is $A_{0,\bullet}$. The initial good-cell complex at the first step under the Wilson measure and the endpoint protection rule change neither these analytic constants nor the bound on the current data. In the notation of the fixed construction constants of \cref{ch16:lem:strict-two-radius-images}, the image conditions are
+\begin{equation}\label{ch18:eq:two-input-image-check}
+ A_{0,\bullet}\le\rho_\bullet/4,\quad
+ 1-C_{T,\bullet}(K_*\rho_\bullet+R_{\mathrm{en}})\ge\tfrac12,
+ \quad
+ \frac{C_{T,\bullet}R_{\mathrm{en}}}
+ {1-C_{T,\bullet}(K_*\rho_\bullet+R_{\mathrm{en}})}
+      +C_{\Delta,\bullet}R_{\mathrm{en}}\le\rho_\bullet/8.
+\end{equation}
+Here $R_{\partial,\bullet}=K_*\rho_{\partial,\bullet}$. The margin in the larger construction domain of radius $R_{\mathrm{raw}}$ is, explicitly,
+\[
+ C_{\mathrm{lift},J}
+ [K_*\max(\rho,\rho_{\mathrm{cl}})+r+
+             \beta_{\mathrm{rec}}+q_{\mathrm{raw}}]
+                                      <R_{\mathrm{raw}}/8,
+\]
+where $q_{\mathrm{raw}}$ is the fixed upper bound given by the row sums of the first derivative for the sequential product of scaled fluctuations and for all its initial segments; this bound is fixed before the eventual enclosing radius. Together with this margin, the image conditions give the image $3\rho_\bullet/8$ without spatial weights. The fixed interpolation of spatial rates in \cref{ch17:thm:controlled-kernel} then gives an absolute weighted image strictly below $\rho_\bullet/2$, so all evaluations and segments used for the force estimates above lie strictly in the uniform input ball, for both the classical and the quantum radius. These conditions on the parameters are already required by \cref{ch18:thm:history-cover} and the analytic theorem, and they involve no test on the support of the measure.
+
+\paragraph{Step 5: convexity on the enclosing product domain.}
+The radius $R_W$ of the scaled fluctuations is fixed independently of the logarithmic cutoff. We first compute its constants on the fixed larger perturbation domain. Then $R_W$ is taken below the joint and sequential bounds, the bound of the larger construction domain, and the two inherited image bounds of the analytic theorem, as well as below $1/(4A)$ and $1/(16C_0)$, where $A$ and $C_0$ are the constants of \cref{ch17:lem:complete-white-potential}. The remaining deterministic choices satisfy
+\begin{equation}\label{ch18:eq:ambient-physical-gates}
+ r,\ \beta_{\mathrm{rec}},\ \sigma_*\rho_{\mathrm{cl}}
+ \le\frac{\lambda_*R_W}{6C_{\mathrm{en},J}},\qquad
+ R_{\mathrm{en}}=
+ \frac{2C_{\mathrm{en},J}
+  (r+\beta_{\mathrm{rec}}+\sigma_*\rho_{\mathrm{cl}})}{\lambda_*}
+ \le R_W.
+\end{equation}
+Here $C_{\mathrm{en},J}$ is evaluated on the fixed larger products, as in the proof of \cref{ch18:thm:all-point-enclosure}, before these radii are reduced. Then $AR_{\mathrm{en}}\le1/4$ and $C_0R_{\mathrm{en}}\le1/16$. When $C_0t^2\mathcal L_V\le1/16$, the potential estimate of \cref{ch17:thm:controlled-kernel} yields
+\[
+ \norm{D_w^2(V-\abs w^2/2)}_{\mathrm{row,col},a'}
+ \le\frac{C_0(R_{\mathrm{en}}+t^2\mathcal L_V)}
+                 {(1-AR_{\mathrm{en}})^3}
+ \le\frac{1/8}{(3/4)^3}=\frac8{27}<\frac12.
+\]
+This verifies the Hessian margin on the whole enclosing product domain, separately from any expansion on the smaller logarithmic cutoff domain.
+
+\paragraph{Step 6: the logarithmic cutoff domain.}
+Let $p(t)=A_{\mathrm w}\log(1/t)$, $c_J^{\log}=A_{\mathrm w}(J-1)(\log M)/2$, and $p^+(t)=p(t)+c_J^{\log}$. The common choice $p_i=p(t)$ lies in $[p(t),p^+(t)]$. Since $g_i/t=M^{(i-s+1)/2}$, the choice $p(g_i)$ at each intermediate scale lies in that interval as well; only the common choice is used here. With the fixed ceiling $H=1+E+\sigma_*$ and the construction constants of the analytic theorem, the relevant conditions on the coupling can be checked in the following sufficient form:
+\begin{equation}\label{ch18:eq:logarithmic-product-gates}
+ \begin{gathered}
+ t p^+(t)<R_{\mathrm{en}},\qquad C_Jt p^+(t)<\tfrac12,\\
+ \frac{C_Jt[(p^+(t))^3+p^+(t)+Hp^+(t)]}
+                   {1-C_Jt p^+(t)}\le\epsilon_J,\qquad
+ 2t[(p^+(t))^3+p^+(t)+Hp^+(t)]\le c_{z,J},\\
+ C_0t^2\mathcal L_V\le\tfrac1{16},\qquad
+ C_1t(\mathcal L_V+2)
+       <\min\{1/(4\sqrt3),p(t)/(2\sqrt3)\}.
+ \end{gathered}
+\end{equation}
+The first line ensures that the chosen radii are enclosed, and the second checks the conditions on the interaction and on the auxiliary half-disc of \cref{ch17:thm:controlled-kernel}. The last line checks the curvature and mean conditions of \cref{ch17:lem:ambient-white-comparison}, in addition to the already fixed small radius $R_W$. Any needed provisional output remainder has the form $C_Jt^2(E+\sigma_*)[(p^+)^4+(E+\sigma_*)(p^+)^2]$ and fits its fixed bound by the same reduction. Indeed, with $u=\log(1/t)$, each left side required to be small is bounded by a finite sum of terms $e^{-ku}(A_{\mathrm w}u+c_J^{\log})^l$ with $k>0$, or by such a sum divided by a denominator at least $1/2$, and these tend to zero as $u\to\infty$. With the amplitude $A_{\mathrm w}$ fixed, we choose a finite $U$ beyond all these thresholds and $g_*\le e^{-U}<e^{-1}$. Every condition then holds uniformly for $0<t\le g_*$, and $p(t)\ge1$. The ceiling may depend on $A_{\mathrm w}$; it is independent of the side, the preceding depth, the number of steps, and the frozen coordinates. No expansion is applied on the larger radii $R_{\mathrm{en}}/t$: that product is used only for the comparison of \cref{ch18:lem:enclosure-comparison}.
+\end{proof}
+
+\section{Coordinate coverage and representatives satisfying the reconstruction identities}\label{ch18:sec:coverage}
+
+We show that every supported point of every relevant fiber has small relative coordinates in a suitable gauge, and that its normalized fluctuation coordinates lie in the enclosing product domain. We also construct, from the coarsest scale downward, the representatives satisfying the reconstruction identities, at which the densities will be evaluated. The comparison of the corresponding integrals with integrals over the fluctuation cutoff domain is \cref{ch18:lem:enclosure-comparison} in \cref{ch18:sec:induction}. That comparison requires an incoming density bound, which is proved there by induction. The coverage statement proved here uses no density bound.
+
+For a group of averaging steps, the conditional minimizers, Hessians $K_i$, and reconstruction maps $C_t$ are those of \cref{ch16:thm:controlled-perturbation,ch17:thm:controlled-kernel}, with the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge}, which depends only on the target. For a supported fiber point, $z^{\mathrm{act}}$ denotes its free logarithmic coordinates and $w^{\mathrm{act}}$ its normalized fluctuation coordinates, obtained by inverting the reconstruction. The enclosing product domain is
+\[
+ \mathcal K_t=\prod_{i,e}\{\abs{w_{i,e}}\le R_{\mathrm{en}}/t_{\max}\},
+\]
+with $R_{\mathrm{en}}$ as in \eqref{ch18:eq:ambient-physical-gates}.
+
+\begin{theorem}\label{ch18:thm:all-point-enclosure}
+There exist $\epsilon_{\mathrm{en},J}>0$ and $C_{\mathrm{en},J}<\infty$, with the dependence stated at the beginning of this section and independent of all later widths of boundary bands, removed bands, protected neighborhoods, and cells, such that the following holds for every large-field decomposition of \cref{ch18:thm:history-cover}. Assume its construction conditions, the two reconstruction-image conditions \eqref{ch18:eq:two-input-image-check}, and $r+\beta_{\mathrm{rec}}<\epsilon_{\mathrm{en},J}$.
+\begin{enumerate}
+\item Let $1\le s\le J$. Let $(c,\Rec)$ be the output field and frozen coordinates of a configuration in the support of the stage measure, given either by a small representative of \cref{ch18:thm:history-cover}(2) (at the first step for a stopped measure, of \cref{ch18:cor:initial-joint-allowance}), or by a representative obtained from such a representative by an output gauge change acting on the frozen coordinates as in \cref{ch18:lem:frozen-preserving}(1)--(3). Assume that this representative and the associated fields before the target-dependent gauge transformation belong to the common larger construction domain of \cref{ch17:thm:controlled-kernel}, and that its analytic frozen coordinates satisfy \eqref{ch18:eq:all-saved-values}. Let $U$ be a configuration in the support of the fiber over $(c,\Rec)$. Then there exists a correcting gauge transformation, equal to $I$ at the roots of the block region, at the vertices of the frozen boundary layer on the side of the fixed complement (in particular at the endpoints $v_e$ of the links across the boundary of the block region), and at all protected earlier endpoints and basepoints, with the following property. After the hierarchical tree gauge fixing, every relative constraint vector $X_i$ of $U$, including its eliminated entries, and its free part $z_i$ satisfy
+\[
+ \max_{0\le i<s}(\norm{X_i}_\infty+\norm{z_i}_\infty)
+                      \le C_J(r+\beta_{\mathrm{rec}}).
+\]
+They lie in the common domain of the local inverse of the block averaging constraint, with a fixed positive margin. The correcting gauge transformation is the composition of a smallness gauge and the lift, constant on blocks, of the inverse of its root values; its factors are not separately required to fix the roots. The inner endpoint $u_e$ of a current link across the boundary of the block region may move before the tree gauge fixing, while the based transport is preserved, since its endpoints are fixed.
+\item Choose any small representative at the top of the decomposition, in the coordinate domains of part~(1), whose frozen coordinates satisfy \eqref{ch18:eq:all-saved-values}. Define the reconstruction maps on their full spatially varying radii first, and descend through them, aligning the target at each step by the accumulated output gauge change. The unperturbed coordinates, conditional minimizers, and inverse square roots of the Hessians transform by blockwise adjoint orthogonal transformations, and the perturbing force is estimated separately. This constructs representatives satisfying the reconstruction identities at all stages, with
+\[
+ (T_M^s C_t(c,\zeta;\Rec))|_{\Omega'_t}=c,
+\]
+and for every point of every fiber over every resulting output datum, its normalized fluctuation coordinates satisfy
+\[
+ \max_{i,e}g_i\abs{w_{i,e}^{\mathrm{act}}}
+ \le\delta_{\mathrm{en}}
+ =C_{\mathrm{en},J}(r+\beta_{\mathrm{rec}}+\sigma_*\rho_{\mathrm{cl}}).
+\]
+With $R_{\mathrm{en}}=2\delta_{\mathrm{en}}/\lambda_*$, each such point lies in the interior $\abs{w_{i,e}^{\mathrm{act}}}\le R_{\mathrm{en}}/(2t_{\max})$ of the enclosing product domain $\mathcal K_t$. Each gauge transformation of \cref{ch16:lem:strict-hybrid-gauge} used here is $I$ at all protected vertices, including the current endpoints of the links across the boundary of the block region. No estimate on the logarithm of the accumulated gauge transformation is used. The statement concerns every supported fiber point, including points near the boundary of the coordinate domains, not one selected point or almost every point under an auxiliary measure.
+\item At the first RG step for a stopped measure, every nonempty fiber over an output field and all input frozen coordinates that meets $D_r$ has a representative in which all output links and input frozen coordinates are at most $C_{\mathrm{ad},J}r$. The scaled fluctuations of the unperturbed objective, $K_0^{1/2}(z^{\mathrm{act}}-z_0)$, are bounded by $C_J(r+C_{\mathrm{ad},J}r)$.
+\item At the first RG step under the Wilson measure, let $b^{\mathrm{near}}$ be the near values, that is, the values on the near links of \eqref{ch15:eq:near-deep}, which are the links outside the block region read by a plaquette depending on an integration variable or by a path product of the block region in the initial good-cell complex. Let $\eta_{\mathrm{deep}}$ be the deep frozen group variables, the values on all remaining links. Then we have the exact identity
+\[
+ S_W(U)=F_{\mathrm{bare}}(U_{\mathrm{int}};b^{\mathrm{near}})
+                 +E_{\mathrm{hole}}(b^{\mathrm{near}},\eta_{\mathrm{deep}}),
+\]
+where $U_{\mathrm{int}}$ denotes the integration variables and $F_{\mathrm{bare}}$ is the constrained Wilson-action objective of the first block integration, defined in \cref{ch15:def:bare-completion} and written in these variables; in the coordinates of \cref{ch15:def:internal-coordinates} this identity is \eqref{ch15:eq:bare-split}. No smallness is imposed on $\eta_{\mathrm{deep}}$; its factor $e^{-E_{\mathrm{hole}}/g_{\mathrm{base}}^2}$ remains with its original Haar integration and the original partition function. Every conditional minimizer, derivative, square root, and Haar disintegration factor of the integration variables is independent of $\eta_{\mathrm{deep}}$. A plaquette containing only frozen links, near or deep, belongs to $E_{\mathrm{hole}}$. At this step there is no inherited effective interaction, and the scaled fluctuations are bounded by $C_J(r+\beta_{\mathrm{rec}})$. The deep frozen group variables and exceptional values of the Borel extension in them are never logarithmized or inserted into a torus analytic action.
+\end{enumerate}
+The constants have the dependence stated at the beginning of this section, and they are uniform in the deep frozen group variables.
+\end{theorem}
+
+\begin{proof}
+We first work at a small output representative and an arbitrary supported fiber point over it (Steps~1--3). Step~4 transports the estimate to the representatives produced from above, using only the unperturbed objective, and Step~5 estimates the perturbation. Step~6 constructs the representatives satisfying the reconstruction identities, Step~7 converts the bound to the enclosing product domain, and Steps~8 and~9 treat the first step for the two initial measures. For $s<J$, the image hypothesis includes the separately imposed interior image condition of that group of steps. Only its conditional local chart and force estimates are used here; for fewer than $J$ steps there is no restoration of norms and no recursion of normalization constants.
+
+\paragraph{Step 1: a smallness gauge for an arbitrary fiber point.}
+We work at a small output representative $(c,\Rec)$ supplied by \cref{ch18:thm:history-cover}, and keep this notation until Step~4. Its output links and the newly used near values and based data are bounded by $r/2$ and $\beta_{\mathrm{rec}}$, respectively, and its analytic frozen coordinates obey \eqref{ch18:eq:all-saved-values}. An arbitrary analytic background on a larger spatially varying radius need not satisfy the absolute bound on $c$ used in this step. Fix any configuration $U$ in the support of the fiber over this representative. By \cref{ch18:thm:history-cover}, there exists a smallness gauge $S$ for the input links of the block region. We restrict $S$ to the input vertices of the block region and set it equal to $I$ elsewhere; internal links are unchanged by this restriction. By the endpoint protection rule, its lifts fix every earlier endpoint and basepoint. A current based transport, which is not a frozen coordinate, can move under this intermediate operation. We write $V=U^S$ on the block region and let $u_{\mathrm{in}}$ be its bound for interior links. At the initial input for a stopped measure we use $u_{\mathrm{in}}=r$; at later inputs $u_{\mathrm{in}}\le r/2$; at the first input under the Wilson measure $u_{\mathrm{in}}\le r$, after the fixed choice of $A_8$. By \cref{ch18:lem:finite-stencils}, for internal dependence neighborhoods reading only interior links, we have
+\begin{equation}\label{ch18:eq:small-witness-iterates}
+ \max_{e\ \mathrm{internal}}\rho_G((T_M^iV)_e)
+                 \le (10M)^i u_{\mathrm{in}},\qquad 0\le i\le s.
+\end{equation}
+These dependence sets lie inside full blocks of the region. The display is not used for a path product reading a prescribed near value; such path products are bounded after the alignment below, using their frozen data as well as the interior bound.
+
+\paragraph{Step 2: the root values.}
+For each final root $a$ of the region, let $h_a=S(a)^{-1}$. On an internal final link $(a,a')$, by the gauge covariance of the block averaging constraint, we have
+\[
+ c_{aa'}=h_a(T_M^sV)_{aa'}h_{a'}^{-1}.
+\]
+Multiplying this identity by the appropriate inverse factor and using bi-invariance, we obtain
+\begin{equation}\label{ch18:eq:root-increment}
+ \rho_G(h_ah_{a'}^{-1})
+ \le \rho_G(c_{aa'})+\rho_G((T_M^sV)_{aa'})
+ \le r+\beta_{\mathrm{rec}}+(10M)^s u_{\mathrm{in}}.
+\end{equation}
+We lift $h$ as a constant on each final block of the region, with value $I$ off these blocks, and denote this lift by $L$ (a gauge transformation, not the side of the torus). The total correction is $H=LS$, since $(U^S)^L=U^{LS}$, and it equals $I$ at every final root. At the vertices of the frozen boundary layer on the side of the fixed complement both factors are $I$, and the endpoint protection rule fixes the earlier frozen endpoints after lifting to their own lattices. An intermediate internal link either stays in one final block or crosses a single boundary between adjacent final blocks. In the first case $L$ conjugates its value; in the second case its angle increases by at most the root increment in \eqref{ch18:eq:root-increment}. Together with \eqref{ch18:eq:small-witness-iterates}, this bounds all internal iterates by $C_J(r+\beta_{\mathrm{rec}})$. A component consisting of a single block has only the first case, and its root value causes no additional estimate.
+
+The bound $\rho_G(c_{aa'})\le r+\beta_{\mathrm{rec}}$ used in \eqref{ch18:eq:root-increment} belongs to this small representative. At the first step for a stopped measure, the representative of \cref{ch18:cor:initial-joint-allowance} has output bound $C_{\mathrm{ad},J}r<\beta_{\mathrm{rec}}$, by \eqref{ch18:eq:actual-saving-gate}, so the displayed bound holds with $u_{\mathrm{in}}=r$.
+
+\paragraph{Step 3: based transports and the branch.}
+The endpoints of a current based transport are a root of the region and the endpoint of its link in the fixed complement, and the factors of $H$ at both are $I$. The transport is therefore unchanged, although the endpoint $u_e$ in the region can have moved. We now apply the hierarchical based tree gauge fixing of \cref{ch18:lem:finite-stencils}. Since its paths have length at most $L_J$, all internal links after the tree gauge fixing satisfy the same bound with a larger $C_J$. A link across the boundary of the block region that is read by a path product of the region is the inverse of such a bounded path times its prescribed based transport. It is therefore bounded by $C_J(r+\beta_{\mathrm{rec}})$ as well. Every path product of the region mixing integration variables and near values has at most $L_J$ factors of these links and of its prescribed frozen data; its bound is $C_J(r+\beta_{\mathrm{rec}})$, including the contribution of the frozen data. We include the initial $C_{\mathrm{ad},J}$ and the constants for these mixed path products in this fixed $C_J$ before choosing $\epsilon_{\mathrm{en},J}$ or the final radii. At the small representative, the relative vector $X_i$ and its free part $z_i$ then satisfy the estimate in part~(1). We choose $\epsilon_{\mathrm{en},J}$ so that this bound is less than half the common uniqueness radius and all the fixed construction margins. Since the configuration solves the block averaging constraint, its eliminated entries equal the unique eliminated entries on this branch. This reasoning applies to the arbitrary point $U$ itself, not to another point of its fiber, and neither $S$ nor $L$ has to fix the roots separately.
+
+\paragraph{Step 4: transport to representatives produced from above.}
+We carry the estimate to an output datum produced from above, using only the unperturbed objective with torus input. Let $k$ be the accumulated output gauge change. Its lift, constant on blocks, preserves the tree identities, and the coarse-field lift of the target satisfies $U_0(c^k)=U_0(c)^{\widetilde k}$. Each relative factor therefore transforms as
+\begin{equation}\label{ch18:eq:relative-color}
+ e^{X_e}\longmapsto e^{\Ad_{k_a}X_e},\qquad
+ z_i\longmapsto A_{k,i}z_i,
+\end{equation}
+where $a$ is the root of its block and $A_{k,i}$ is block diagonal and orthogonal on the real color vectors. The equation for the eliminated edges transforms in the same way, as we see by conjugating the constraint and using the uniqueness of its small inverse. We repeat this over the $s\le J$ intermediate scales. Since the changes at earlier marks are the identity, the prescribed frozen data are preserved. For a comparison of two representatives that are not related by a based change, the same formula uses their correspondingly transformed output data.
+
+We apply this change separately to each fiber point and to the small representative of its gauge orbit. The given output datum and that small datum are outputs of the same configuration up to a gauge transformation, so the output change exists without choosing a different point of the fiber. Formula \eqref{ch18:eq:relative-color} transports the relative bound and the eliminated-edge inverse to every output datum as in part~(1), even if its output links are bounded only by a larger analytic radius; no absolute bound $r/2$ on its iterates is asserted. All frozen coordinates used in this comparison satisfy \eqref{ch18:eq:all-saved-values}, and only the changes of \cref{ch18:lem:frozen-preserving}(1)--(3) are used.
+
+All fields in this calculation, taken before the target-dependent gauge transformation, lie in the common larger construction domain of \cref{ch17:thm:controlled-kernel}. In particular, the backgrounds at block boundaries, which need not be of order $M^{-s}\rho_{\mathrm{cl}}$, lie in that domain. The torus classical values used there are the gauge-invariant values on their common classical chart, as in \cref{ch11:thm:all-point-torus-chart,ch11:thm:deep-buffer-law}, so their restrictions agree at such fields related by a compact gauge transformation in this chart. In a regional completion, the prescribed small frozen data transform at the endpoints of their paths. The earlier frozen coordinates that are completed by zero have both endpoints fixed by the endpoint protection rule, so appending them commutes with this change. For the unperturbed objective $F_0$ and the product color map $A_k$,
+\begin{equation}\label{ch18:eq:unperturbed-covariance}
+ F_0(c^k,A_kz;\Rec^k)=F_0(c,z;\Rec).
+\end{equation}
+This is the orthogonal transition of \cref{ch11:thm:all-point-torus-chart}, restricted to the regional constraints and the fixed frozen data. Only the torus classical restriction is transported in this way.
+
+By stationarity in $z$ and the uniqueness of the unperturbed conditional minimizer, we have
+\begin{equation}\label{ch18:eq:center-covariance}
+ z_0(c^k;\Rec^k)=A_kz_0(c;\Rec),\qquad
+ K_0(c^k;\Rec^k)=A_kK_0(c;\Rec)A_k^{-1}.
+\end{equation}
+The minimizer stays in the common uniqueness box; if boxes in scalar coordinates are used, the fixed comparison of color norms is included in the margin of the larger construction domain. An orthogonal conjugate of a positive square root is positive and squares to the conjugated matrix, so uniqueness of positive square roots gives the same identity for $K_0^{1/2}$ and $K_0^{-1/2}$. Applying this argument after each conditional minimization, we obtain it for every initial segment. At a small output representative, the unperturbed minimizers vanish when all current small parameters vanish, and the row sums of their first derivatives are bounded by the constants of \cref{ch17:thm:controlled-kernel}. Hence their size is $C_J(r+\beta_{\mathrm{rec}})$. Equations \eqref{ch18:eq:relative-color} and \eqref{ch18:eq:center-covariance} carry the bound
+\begin{equation}\label{ch18:eq:unperturbed-distance}
+ \norm{K_0^{1/2}(z^{\mathrm{act}}-z_0)}_\infty
+                  \le C_J(r+\beta_{\mathrm{rec}})
+\end{equation}
+to every output datum described in part~(1). No bound on $\Log k$ is needed, since blockwise adjoint transformations have norm one for every compact value at the roots.
+
+\paragraph{Step 5: the perturbation.}
+We treat the perturbation separately, at fixed real $b=(\xi,\Rec)$. The uniform incoming radius, the boundary-distance comparison, and the conditional force estimates are \cref{ch18:lem:history-input-contract}; the analytic norm bounds are those of the recursion of \cref{ch17:thm:controlled-kernel}, constructed without any density inequality. In the notation of \cref{ch16:thm:controlled-perturbation}, the preconditioned force is at most $C_J\sigma_*\rho_{\mathrm{cl}}$, the change of the constrained Hessian is at most $C_J\sigma_*$, and the rows of all square roots for initial segments are bounded by $C_J$. That theorem estimates the perturbation on the reconstructed field in the target-dependent gauge, including the full boundary-completion difference; it asserts no covariance of the perturbation, and none is needed. At each intermediate scale the inverse relation for the normalized fluctuations is
+\[
+ g_iw_i^{\mathrm{act}}
+   =K_{P,i}(y_i;\Rec)^{1/2}
+          \bigl(z_i^{\mathrm{act}}-z_{P,i}^*(y_i;\Rec)\bigr),
+\]
+where $y_i$ denotes the higher parameters of the fiber point, $z^*_{P,i}$ the perturbed conditional minimizer, and $K_{P,i}$ the perturbed conditional Hessian. On the smaller products for initial segments, the displacement of the minimizer from the unperturbed one is at most $2\delta_V\le C_J\sigma_*\rho_{\mathrm{cl}}$ at every $y_i$, by \eqref{ch18:eq:conditional-force-check} and \eqref{ch18:eq:prefix-sequential-check}. The higher parameters of the fiber point belong to the required domains $\mathcal T_I$. Indeed, their unperturbed deviations satisfy the geometric bound just proved, and the conditional force condition leaves the factor-two margin of the neighborhoods for all scaled fluctuations up to $R_{\mathrm{en}}$. We subtract and add the unperturbed minimizer, use \eqref{ch18:eq:unperturbed-distance}, and apply the bounded rows of the square roots and inverse square roots. The substitutions of higher parameters have at most $J$ stages. Their finite composition, including the derivatives of the higher minimizers in the integration and free higher parameters specified in \cref{ch16:thm:controlled-perturbation}, gives
+\begin{equation}\label{ch18:eq:controlled-enclosure-proof}
+ \max_{i,e}g_i\abs{w_{i,e}^{\mathrm{act}}}
+       \le C_{\mathrm{en},J}
+             (r+\beta_{\mathrm{rec}}+\sigma_*\rho_{\mathrm{cl}}).
+\end{equation}
+The construction conditions ensure that these substitutions stay inside the conditional neighborhoods of the joint branch; we do not replace these neighborhoods by arbitrary slices of a joint box of free coordinates. The constants are evaluated on the fixed larger products and on a fixed perturbation ceiling, before the eventual small radii and widths. No perturbed derivative in a frozen coordinate $\xi$ or in an earlier frozen coordinate is taken; these coordinates enter only as fixed real parameters of the uniform coefficient estimates.
+
+\paragraph{Step 6: representatives satisfying the reconstruction identities.}
+The construction downward is a finite induction. We start with any small top representative given by \cref{ch18:thm:history-cover}, including the bounds \eqref{ch18:eq:all-saved-values}. At a boundary where coordinates are frozen, the hierarchical tree transports are $I$ by \cref{ch18:lem:finite-stencils}, and the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge} is $I$ at their endpoints. Undoing the basing therefore inserts the already chosen new frozen values directly. At the next lower group of averaging steps, we lift the accumulated output change, take the free logarithmic coordinates of any configuration in its fiber, and invert the reconstruction defined beforehand. By the branch argument of Steps~1--4 and \eqref{ch18:eq:controlled-enclosure-proof}, these inverse coordinates lie in its domain. The reconstruction has the same target and the same free coordinates, and uniqueness of the eliminated-edge inverse identifies the reconstructed configuration, before the gauge transformation, with the configuration aligned by the accumulated output gauge change. We then apply the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge}, which depends only on the target; by that lemma, the target is unchanged and every protected vertex is fixed. This produces the present representative and permits the next step of the descent. By \cref{ch18:lem:frozen-preserving}(1)--(2), the subsequent lifts and the based correcting and tree gauges fix every frozen coordinate chosen at this step, so \eqref{ch18:eq:all-saved-values} holds throughout the family, and all supported points over each fixed output datum are included. Other top representatives satisfying the same bounds on frozen coordinates are treated in the same way. Each step uses only the representative above and the analytic maps defined beforehand on their full radii, so the induction assumes no completed family of representatives. Keeping all choices gives all fibers over all resulting output data and the identity for the target in part~(2).
+
+\paragraph{Step 7: the enclosing product domain.}
+At output side $m$, we have $g_i=t_{\max}M^{(i-s+1)/2}\ge\lambda_*t_{\max}$. Dividing \eqref{ch18:eq:controlled-enclosure-proof} by $g_i$, we obtain
+\[
+ \abs{w_{i,e}^{\mathrm{act}}}
+ \le \frac{\delta_{\mathrm{en}}}
+              {\lambda_*t_{\max}}
+ =\frac{R_{\mathrm{en}}}{2t_{\max}}.
+\]
+Every point of $\mathcal K_t$ has $g_i\abs{w_{i,e}}\le R_{\mathrm{en}}$. Both the classical and the quantum image conditions are imposed on the whole product $\mathcal K_t$, not only on the supported subset or on the logarithmic cutoff domain.
+
+\paragraph{Step 8: the first step for a stopped measure.}
+We fix one point of a nonempty fiber over an output field and all input frozen coordinates, and apply \cref{ch18:cor:initial-joint-allowance} to it. In the resulting representative, all output links and all based input transports are at most $C_{\mathrm{ad},J}r$, and the remaining input frozen links are smaller than $r$. For any other point of the same fiber, we take its own gauge transformation into $B_r$, cancel its root values by the lift of the inverse root values, and cancel its gauge transformation at the vertices of the fixed complement. Equations \eqref{ch18:eq:small-witness-iterates} and \eqref{ch18:eq:root-increment} hold with $u_{\mathrm{in}}=r$ and the output increment $C_{\mathrm{ad},J}r+(10M)^sr$. All input variables used analytically, including all input frozen coordinates, are small after the tree gauge fixing. The unperturbed estimate is $C_J(r+C_{\mathrm{ad},J}r)$. This is the regional form of the coordinates of \cref{ch11:thm:all-point-torus-chart} at the first step; it is uniform in the preceding depth and is not applied to frozen coordinates created at later steps.
+
+\paragraph{Step 9: the first step under the Wilson measure.}
+We use the initial good-cell complex of \cref{ch18:thm:history-cover}(4), together with the internal coordinates of \cref{ch15:def:internal-coordinates} and the completion of \cref{ch15:def:bare-completion}: the links across the boundary of the block region are completed by \eqref{ch15:eq:crossing-completion}, the other links by \eqref{ch15:eq:actual-completion}, and $\mathcal P_{\mathrm{var}}$ is a fixed list as in \eqref{ch15:eq:minimal-varying}--\eqref{ch15:eq:bare-objective}, namely the list of the split made in this step. The near links of \eqref{ch15:eq:near-deep} carry the near values $b^{\mathrm{near}}$, and the deep links carry the deep frozen group variables $\eta_{\mathrm{deep}}$. The hypothesis of \cref{ch15:def:bare-completion}(3) that the near values lie in the identity chart is the conclusion of \cref{ch18:thm:history-cover}(4), since every near link lies in the initial good-cell complex. Indeed, the links of the path products in $\mathcal E^{\mathrm{dep}}_\Omega$ lie there because of the inset by the full dependence neighborhood. The plaquettes incident to $\mathcal L_0$ lie within one input step of a block of the region, while \cref{ch18:thm:history-cover}(4) moves inward by a full layer of cells and the full dependence neighborhood. The conversion between the value on a link across the boundary and its based value is included in $C_{\mathrm{conv},J}$.
+
+In the hierarchical tree coordinates, we partition the plaquettes according to whether their Wilson term depends on an integration variable. By the definition of the near links, every term in the first class uses only integration variables and near values, and the sum of these terms is $F_{\mathrm{bare}}$. Every remaining term is a function of frozen variables only and is assigned to $E_{\mathrm{hole}}$, even if its plaquette contains both near and deep links. This partitions the sum $S_W=4\sum_pq(U_p)$, and \cref{ch15:lem:bare-gap}(1) implies the exact split \eqref{ch15:eq:bare-split}, which is the identity in part~(4). In particular, every objective of the integration variables and all its derivatives are independent of $\eta_{\mathrm{deep}}$, without any estimate of a small remainder. The Haar disintegration path products also avoid the deep links, because of the inset by the full dependence neighborhood. By \eqref{ch15:eq:bare-identification}, the objective agrees with the objective of \cref{ch15:thm:regional-gap-and-center} at preceding depth zero, up to a function constant in the integration variables. The external factor $e^{-E_{\mathrm{hole}}/g_{\mathrm{base}}^2}$ remains the one in \eqref{ch15:eq:bare-split}, with its original Haar variables and partition function.
+
+We apply \cref{ch15:lem:bare-gap}(2)--(3) to the block region of the first step, with the prescribed near completion. Its embedding of the free coordinates is $A_\Omega$ in \eqref{ch15:eq:raw-embedding}, and its extraction matrix is \eqref{ch15:eq:extraction}. Equations \eqref{ch15:eq:bare-restriction}--\eqref{ch15:eq:bare-coercive} apply to the list $\mathcal P_{\mathrm{var}}$, including every case near the boundary. By \eqref{ch15:eq:bare-hessian}, the flat joint Hessian in the free coordinates then satisfies
+\[
+ K_\Omega=\widehat A_\Omega^{\mathsf T}d_{\mathrm{var}}^{\mathsf T}
+                               d_{\mathrm{var}}\widehat A_\Omega
+       \ge\lambda_{M,J}I,
+\]
+It has uniformly bounded absolute rows and columns and the range \eqref{ch15:eq:bare-range}, independently of the region and of the deep frozen group variables. By \eqref{ch15:eq:bare-identification}, this is also the case $d_0=0$, $\kappa_*=1$ of \cref{ch15:thm:regional-gap-and-center}. Every principal free matrix and every real Schur complement of an initial segment keeps a fixed-$J$ gap, by \eqref{ch15:eq:bare-schur}. No Hessian of a field outside the region is inverted.
+
+All Wilson and constraint derivatives at this step are derivatives of finite local path products. Their absolute row sums are bounded on a fixed smaller identity chart, independently of the deep frozen group variables. We obtain the weighted inverses without a volume estimate. First let $K$ be the flat joint matrix $K_\Omega$, or one of its principal free submatrices, before the minimization over a lower scale. By \cref{ch15:lem:bare-gap}(3), $\lambda_{M,J}I\le K\le Q_{M,J}I$, and $K$ has range $D_{M,J}$. We set $a=2Q_{M,J}$ and $T=I-K/a$. Then $T$ has norm at most $q=1-\lambda_{M,J}/a<1$, and the entries of $T^k$ vanish beyond maximum distance $kD_{M,J}$, hence beyond graph distance $3kD_{M,J}$. By the bound on the density of labels in the proof of \cref{ch15:lem:bare-gap}, each row of $T^k$ has at most $C_J(k+1)^3$ nonzero entries, each of absolute value at most $q^k$. For $b>0$ with $qe^{3bD_{M,J}}<1$, the series \eqref{ch15:eq:bare-neumann} for $K^{-1}$ and $K^{-1/2}$ have uniformly summable rows and columns, weighted in the graph distance; the second is the scalar binomial series applied to $T$, whose coefficients are at most one. Small complex perturbations are inverted by the Neumann series about these matrices. For the conditional matrices obtained after minimization over lower scales, we use \eqref{ch15:eq:bare-schur} and the bounds for Schur complements in the proof of \cref{ch15:lem:bare-gap}(3), which rest on the argument of Combes and Thomas \cite{CombesThomas1973}. These matrices and their inverse square roots have uniform exponential row and column bounds, although the Schur complements need not have finite range. The factors $M^i$ are included in the corresponding matrices.
+
+The equation for the conditional minimizers is a contraction on a fixed smaller box. We first prove this at the small representative used in Steps~1--3. There, its force at zero fluctuation is $C_J(r+\beta_{\mathrm{rec}})$, and by the third-derivative bound in the proof of \cref{ch15:lem:bare-gap}(4) its derivative changes by at most $C_J$ times the radius of the box. At this representative, the coarse argument of \eqref{ch15:eq:bare-small-data} is $\Log c$, and $\norm{\Log c}_\infty$ and $\norm\xi_\infty$ are at most $C_J(r+\beta_{\mathrm{rec}})$. In the choice of $\epsilon_{\mathrm{en},J}$, we require in addition $C_J(r+\beta_{\mathrm{rec}})\le\epsilon_{M,J}$, and we require the radius of the box to be at most $\epsilon_{M,J}$, so that \eqref{ch15:eq:bare-small-data} applies on the whole box, including the coarse field. We reduce the radius of the box so that the inverse times the change of the derivative is at most $1/2$; the solution then has size $C_J(r+\beta_{\mathrm{rec}})$. The finitely many conditional products and their image margins are those required in \cref{ch16:thm:controlled-perturbation,ch17:thm:controlled-kernel}, and their specialization at this step has no inherited effective interaction. Applying the inverse formula for the normalized fluctuations, we obtain the bound on the scaled fluctuations in part~(4) at the small representative, without the perturbative term.
+
+For an output representative transported from above, we use the output gauge change of Step~4, with the frozen values transformed consistently. The Wilson terms are traces of plaquette variables, so the exact split in part~(4) gives for $F_{\mathrm{bare}}$ the same covariance identity as \eqref{ch18:eq:unperturbed-covariance}. Its conditional minimizers and Hessians therefore transform as in \eqref{ch18:eq:center-covariance}, and their square roots transform by the same orthogonal conjugations. Hence the minimizers at the transported representative are the images of those at the small representative, and each normalized fluctuation $w_{i,e}$ is rotated by an orthogonal map, so the bound on the scaled fluctuations carries over. No bound of order $r+\beta_{\mathrm{rec}}$ on the transported coarse links is needed.
+
+All constants arose from local path products, fixed construction products, and their row-sum bounds.
+\end{proof}
+
+\section{Pointwise gauge-invariant densities}\label{ch18:sec:densities}
+
+The densities of the stage measures will be evaluated at representatives satisfying the reconstruction identities, which form a set of Haar measure zero. We therefore construct an explicit Borel density and prove that it is gauge invariant at every point. The coverage hypothesis of \cref{ch15:lem:regional-coarea} is supplied by \cref{ch18:thm:all-point-enclosure}(1), which uses no density bound.
+
+\begin{theorem}\label{ch18:thm:canonical-density}
+Fix a finite lattice, a preceding depth that is a multiple of $J$, an initial measure (a stopped measure or the Wilson measure), and a large-field decomposition $\mathcal X$ of \cref{ch18:thm:history-cover}. At stage $t$, let $X_t$ be the product of the link variables of the current block region and of all independent frozen links and based transports, each on the lattice where it was frozen. Let $H_t$ be the product of the Haar probability measures on these factors, and let $\eta_t^{\mathcal X}$ be the stage measure, a subprobability measure. Let $\Gamma_t$ be the group of consistent gauge assignments on the finite multiscale transport graph formed by these endpoints: repeated physical vertices are identified, and each recorded object transforms at the endpoints of its path. In particular, $\Gamma_t$ contains arbitrary values at the output roots and their lifts, constant on the blocks of the region, together with the induced changes of earlier frozen coordinates used in \cref{ch18:thm:history-cover}. For a frozen link on the lattice of level $\ell$ and for a based transport, the action is
+\[
+ b_{xy}\longmapsto k_x^{[\ell]}b_{xy}(k_y^{[\ell]})^{-1},
+ \qquad
+ \widehat b_e\longmapsto
+ k_{\alpha_e}^{[\ell]}\widehat b_e(k_{v_e}^{[\ell]})^{-1},
+ \qquad \widehat b_e=U(\sigma_e)b_e.
+\]
+For each fixed assignment, this is a left and right multiplication in the independent group variables, and it preserves $H_t$.
+
+There exists an explicitly defined nonnegative Borel density $p_t$ such that
+\[
+ \eta_t^{\mathcal X}=p_tH_t,
+ \qquad p_t(x^k)=p_t(x)
+             \quad\text{for every }x\in X_t\text{ and }k\in\Gamma_t.
+\]
+On the gauge-invariant chart domain containing the measure, $p_t$ is given by the parameter integrals of the Haar disintegration formulas, with every indicator of the decomposition and every protected external factor retained, patched by their exact equalities on overlaps of fixed gauge translates. On the invariant complement of this domain, which has zero mass, its value is zero. In particular, the values of $p_t$ at representatives satisfying the reconstruction identities are given by these formulas pointwise.
+
+More explicitly, if $Z_{c,\Rec}$ is the domain of the free coordinates of the fiber over an output datum $(c,\Rec)$ satisfying the coordinate conditions of \cref{ch18:thm:all-point-enclosure}, then the outgoing density is
+\[
+ p_t^{\mathrm{out}}(c,\Rec)=
+ \int_{Z_{c,\Rec}}\chi_t(c,z,\Rec)
+       p_t(U_{c,\Rec}(z),\Rec)J_{\mathrm{CO}}(c,z;\Rec)\,dz,
+\]
+where $\chi_t$ is the product of the indicators of the decomposition and of the support, and the normalized integrals over the tree variables are kept until the covariance under based gauges has been applied. The factor at scale $i$ of the Haar disintegration density $J_{\mathrm{CO}}$ is exactly
+\[
+ c_{\mathrm{Haar}}^{f_i}
+ \frac{\prod_{e\ \text{outside the trees}}j_H(\Gamma_{i,e})}
+ {\prod_{a}\det D_{X_{e^*_a}}\COconstraint_a(\Gamma_i)},
+ \qquad j_H(X)=\sinc^2(\abs X/2),
+\]
+where the product in the denominator runs over the internal constraints, $f_i$ is the number of free group variables at scale $i$, and the numerator includes the Haar factors of the eliminated edges. The reference measure already contains the Haar measure of the output field; no further coarse Haar density, Gram determinant, or orbit-volume factor occurs. For the stage densities and the tests of the decomposition, the covariance under based tree gauges makes each tree Haar integral equal to one; this elimination is not valid for arbitrary noncovariant Borel densities. Basing at a fixed field on the block region is the triangular Haar translation $b_e\mapsto U(\sigma_e)b_e$, with Jacobian one.
+
+These statements concern the stage measures and the block averaging map with its Borel extension; they assert no gauge invariance or overlap identity for an auxiliary classical action or effective interaction. Deep frozen group variables, including exceptional values of the Borel extension, are allowed. All identities hold in each finite dimension and introduce no factor depending on the size, the number of steps, the shape, or the depth. The analytic chart bounds used in the construction have the dependence stated at the beginning of this section.
+\end{theorem}
+
+\begin{proof}
+We construct the density and prove its pointwise invariance together. This avoids evaluating an unspecified Radon--Nikodym derivative on a set of representatives.
+
+\paragraph{Step 1: the endpoint group.}
+We identify repeated physical vertices in the finite list of endpoints. An endpoint assignment is an element of the resulting finite product of copies of $\SU$, and any additional consistency identifications give the corresponding closed subgroup. Its action on an independent group variable is a left and a right multiplication by fixed matrices. Hence $H_t$ is preserved by each fixed assignment, with no assumption of probabilistic independence of the frozen coordinates under $\eta_t^{\mathcal X}$.
+
+\paragraph{Step 2: the initial density.}
+At the initial scale we use the pointwise density of the Wilson measure, or the gauge-invariant density of the stopped measure, multiplied by the indicator of the decomposition. The initial density is invariant: the Wilson plaquette variables transform by conjugation, and the density of the stopped measure is the gauge-invariant density of \cref{ch11:thm:deep-buffer-law}. The indicator of the decomposition is invariant as well, since the decomposition is determined by traces of plaquette variables and by deterministic dependence lists. The block averaging map is equivariant also on the exceptional set of its Borel extension: conjugation fixes $-I$, and the replacement reference transport transforms at the same two endpoints. These are pointwise statements. The first freezing is a splitting into independent variables followed by the triangular basing, treated in Step~5.
+
+\paragraph{Step 3: the outgoing density on a chart.}
+Assume that the incoming density has been constructed. At an output datum satisfying the coordinate conditions, we use \cref{ch15:lem:regional-coarea} with all indicators; its coverage hypothesis is part~(1) of \cref{ch18:thm:all-point-enclosure}. We keep the normalized tree variables $\mathfrak f$ at first. If $J_i$ denotes the factor at scale $i$, we define the local outgoing value to be
+\begin{equation}\label{ch18:eq:canonical-local-density}
+ \int dH(\mathfrak f)\int
+  \one_{Z_{c,\Rec}}(z,\mathfrak f)
+  \chi_t(c,z,\mathfrak f,\Rec)
+  p_t(U_{c,\Rec}(z,\mathfrak f),\Rec)
+                 \prod_{i=0}^{s-1}J_i\,dz.
+\end{equation}
+An indicator already contained in $p_t$ is not counted again; it may equally be written again, since indicators are idempotent. This convention keeps all tests of the decomposition, including those whose information has already been integrated. By the disintegration identity, testing \eqref{ch18:eq:canonical-local-density} against any nonnegative Borel function of the output gives the pushforward measure on this chart.
+
+\paragraph{Step 4: pointwise covariance.}
+We prove that these integrals are equal under the full group of consistent endpoint assignments. A fixed output assignment has a lift, constant on blocks, through the centered partitions of the block region; at earlier marks we use its prescribed values on the lattices of the marks. There is no conflict, since a mark in the preimage of a block of the region would have excluded that block, and repeated physical values are identified by consistency. Additional changes of the interior frames can be absorbed in the tree variables. The block averaging map and the map recording the frozen coordinates are equivariant, so the lift is a bijection of the fiber over $(c,\Rec)$ onto the fiber over $(c^k,\Rec^k)$. It preserves every test, including an equality in a threshold and every condition at earlier scales.
+
+On the hierarchical tree section, the part of the lift that is constant on blocks acts as in \eqref{ch18:eq:relative-color}. The adjoint action is orthogonal because it preserves $-2\tr(XY)$. Its determinant is $1$, since it is a continuous function on the connected group $\SU\simeq S^3$ with values in $\{-1,1\}$ and equals $1$ at $I$. Hence the change of free coordinates preserves $dz$, and uniqueness of the eliminated-edge inverse transports every eliminated coordinate as well. The factors $j_H$ are radial and unchanged. The derivative matrix of the eliminated edges is multiplied on its row and column frames by these adjoints of determinant one, so its determinant is unchanged, including its positive sign on the real branch. The constants $c_{\mathrm{Haar}}^{f_i}$ are the same. If the lift changes interior tree frames, the tree variables change by left and right Haar translations, before any tree integral is removed. Using the inductive pointwise identity for $p_t$, we obtain
+\begin{equation}\label{ch18:eq:pointwise-raw-covariance}
+ \begin{split}
+ p_t^{\mathrm{out}}(c^k,\Rec^k)
+ &=\int_{Z_{c^k,\Rec^k}}
+       \chi_t(c^k,z',\Rec^k)
+       p_t(U_{c^k,\Rec^k}(z'),\Rec^k)
+                         J_{c^k,\Rec^k}(z')\,dz'\\
+ &=\int_{Z_{c,\Rec}}
+       \chi_t(c,z,\Rec)
+       p_t(U_{c,\Rec}(z),\Rec)J_{c,\Rec}(z)\,dz
+ =p_t^{\mathrm{out}}(c,\Rec).
+ \end{split}
+\end{equation}
+The normalized tree integrals are understood in both lines when they have not yet been removed. This is an identity of explicit parameter integrals at each output datum; no uniqueness almost everywhere is used.
+
+\paragraph{Step 5: freezing.}
+Freezing has the required covariance too. We orient a link across the boundary of the block region from its endpoint $u_e$ in the region to its frozen endpoint $v_e$, and let $\alpha_e$ be the root of its hierarchical transport. Cancellation at the interior vertices gives
+\begin{equation}\label{ch18:eq:anchored-endpoint-cancellation}
+ \begin{split}
+ U_{v^k}(\sigma_e)a_e^k
+ &=k_{\alpha_e}U_v(\sigma_e)k_{u_e}^{-1}
+                 k_{u_e}a_e k_{v_e}^{-1}\\
+ &=k_{\alpha_e}\widehat b_e k_{v_e}^{-1}.
+ \end{split}
+\end{equation}
+At fixed $v$, the map from the independent variables $a_e$ to their based transports is a product of left Haar translations. Together with the unchanged $v$, this is a triangular measure-preserving bijection; its inverse multiplies by $U_v(\sigma_e)^{-1}$. Recording any other link as a frozen link is Fubini's splitting of product Haar measure. The endpoint protection rule makes these endpoint changes consistent at every later stage. Equations \eqref{ch18:eq:pointwise-raw-covariance} and \eqref{ch18:eq:anchored-endpoint-cancellation} prove the inductive covariance for arbitrary values at the output roots and for all induced changes of earlier frozen coordinates.
+
+\paragraph{Step 6: Borel patching.}
+Before inserting the tests, we take the open chart domains of small block-region variables and small near values, with the positive margins of their inverses; the deep frozen group variables need no logarithm. Their gauge saturation $\mathcal O_t$ is open and invariant, and the proofs of \cref{ch18:thm:history-cover,ch18:thm:all-point-enclosure} put all the mass in $\mathcal O_t$. A finite product of spheres is second countable and has a countable dense subset, for instance obtained by approximating quaternion coordinates by rational ones and normalizing; the finite endpoint subgroup has the same property after the consistency identifications. If a point is moved into an open chart by some fixed gauge assignment, the set of assignments doing so is open and meets this countable dense set. Hence countably many fixed gauge translates of the small charts cover $\mathcal O_t$, and their coordinate charts can be chosen countably as well.
+
+On one such chart, the integrand of \eqref{ch18:eq:canonical-local-density}, extended by zero outside its domain in a fixed box of free and tree coordinates, is a nonnegative Borel function. Indeed, the Haar disintegration denominators and the reconstruction maps are continuous on their branches, and the tests, including values of the Borel extension at the deep frozen group variables, are Borel. By Tonelli's theorem, its integral with respect to the finite product of Lebesgue and Haar measures on the box is a Borel function of $(c,\Rec)$.
+
+On an overlap, the fixed gauge assignments relating two charts give the change of variables in \eqref{ch18:eq:pointwise-raw-covariance}. Since both formulas include the same domain, they agree at every point of the overlap. We use the first chart in the countable cover containing a point to define $p_t$ there, and set $p_t=0$ on $X_t\setminus\mathcal O_t$. This function is Borel, it is a density by the disintegration identities, and it does not depend on the chart used. To check invariance under an arbitrary $k\in\Gamma_t$, we take charts containing $x$ and $x^k$ and perform the same change of variables; this proves equality of the two values also when $k$ is not in the countable dense set. The complement of $\mathcal O_t$ is invariant and has zero mass, so the zero extension is invariant there as well. Countability was used only to define a Borel function, not to sum densities or to introduce a multiplicity of charts.
+
+\paragraph{Step 7: removal of the tree integrals.}
+Finally, at fixed target and frozen coordinates, we apply a based tree gauge fixing. The pointwise covariance just proved makes the density and its tests independent of the tree variables in \eqref{ch18:eq:canonical-local-density}, so each Haar probability integral over tree variables equals one. Removing them, we obtain the formula in the statement. Its factors at the scales $i$ are exactly those of \cref{ch15:lem:regional-coarea}, in particular the numerator with the eliminated edges and the single inverse determinant of the eliminated-edge derivative. The Haar measure of the output is already the reference measure at the next scale, so this change of variables has no room for a further coarse Haar density, a Gram determinant, or an orbit-volume factor. For an arbitrary noncovariant Borel input density, the tree average would remain in \eqref{ch18:eq:canonical-local-density}, and its removal uses the covariance of the stage density. The argument uses the Haar disintegration before the change to normalized fluctuation variables. The deep frozen group variables, including exceptional values of the Borel extension, remain compact Borel data throughout.
+\end{proof}
+
+\section{Freezing and substitution of frozen coordinates}\label{ch18:sec:freezing}
+
+When integration stops on part of the region, the corresponding variables become frozen coordinates. The next lemma shows that, at the representatives of the next stage satisfying the reconstruction identities, the inverse of the freezing map inserts the frozen values directly into the old variables. This identifies the density after freezing with the density before freezing at the same configuration, also on sets of Haar measure zero, and gives the exact substitution rules for the analytic functions.
+
+\begin{lemma}\label{ch18:lem:producer-consumer}
+At every boundary of a large-field decomposition where coordinates are frozen, use the hierarchical tree transports $\sigma_e$ of \cref{ch18:lem:finite-stencils}, with the tree conditions at coarser scales fixed first. Split the old output into the remaining link variables $v$, the variables $a_e$ on the links across the boundary of the block region, and the other links to be frozen. The freezing map $\mathcal A_t$ replaces each such variable by its based transport
+\[
+ \widehat b_e=U_v(\sigma_e)a_e
+\]
+and records the other links as frozen links on that lattice. At fixed $v$ this map preserves the product Haar measure and has Jacobian one.
+
+Let $b^\sharp$ denote the new frozen group values and $\xi^\sharp=\Log b^\sharp$ their logarithms. For every reconstructed configuration of the next stage in the family of representatives satisfying the reconstruction identities,
+\[
+ v=C_{t+1}(c',\zeta';\Rec,b^\sharp),
+\]
+the hierarchical tree transport has value $I$: each of its tree factors is $I$, and the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge} is $I$ at its two endpoints. All protected earlier endpoints are fixed as well. Hence
+\[
+ a_e=U_v(\sigma_e)^{-1}\widehat b_e=\widehat b_e,
+ \qquad
+ \mathcal A_t^{-1}(v,\Rec,b^\sharp)=(v\oplus b^\sharp,\Rec),
+\]
+and the density versions of \cref{ch18:thm:canonical-density} satisfy the pointwise identity
+\[
+ p_{t+1}(v,\Rec,b^\sharp)
+                  =p_t^{\mathrm{out}}(v\oplus b^\sharp,\Rec).
+\]
+At this configuration, all omitted old variables are exactly their new frozen values, based transports or links, with the same weights and indicators. In analytic functions, $\xi^\sharp$ is inserted in the corresponding analytic arguments. In particular, the freezing of the effective interaction subtracts only the value $R^{\mathrm{out}}(0\oplus\xi^\sharp)$ and transfers it with a minus sign to $\Lambda$, and the freezing of the classical action is $E_{\mathrm{new}}(v)=E^{\mathrm{out}}(v\oplus\xi^\sharp)$. These are exact finite identities, uniform in the number of steps, the topology, the depth, and the coupling. They compare the same configuration and require no overlap identity between auxiliary functions at different gauges.
+\end{lemma}
+
+\begin{proof}
+We fix the deterministic geometry of the freezing. The remaining variables and the independent variables on the links across the boundary are different coordinates of the old output product. At fixed $v$, left multiplication by each fixed matrix $U_v(\sigma_e)$ preserves the Haar probability measure of such a variable, and the inverse multiplication is defined for every value. Integrating first in these variables, we obtain the triangular statement with Jacobian one for every nonnegative Borel integrand; earlier frozen coordinates and the other frozen links do not change.
+
+We verify the value of the transport at a reconstructed configuration. On the based section of one scale, the tree equations set each ordered tree factor to $I$, and the fixing gauges of the coarser scales, lifted as constants on the finer blocks, conjugate these factors and leave them equal to $I$. By induction over the scales, with the coarser conditions fixed first, every factor of the prescribed hierarchical transport is $I$ on the hierarchical tree section. This is the finite algorithm of \cref{ch18:lem:finite-stencils}, and it uses no path through an eliminated edge. Hence the product has value $I$ for every target and every free coordinate in the domain, not only at zero fluctuation.
+
+The reconstructed configuration is obtained from that section by the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge}. This gauge transformation multiplies a transport from $\alpha_e$ to $u_e$ by its values at exactly these two vertices, and both values are $I$ by that lemma, with the full set of protected vertices supplied by \cref{ch18:thm:history-cover}. The transport remains $I$. On the lattices of earlier frozen coordinates, the endpoint protection rule fixes all their endpoints. This proves, at this reconstructed configuration,
+\[
+ U_v(\sigma_e)^{-1}\widehat b_e=\widehat b_e.
+\]
+Inverting the freezing map therefore inserts the new based transports directly into the old variables on the links across the boundary, and every other omitted variable is its new frozen link value. At this configuration, the inverse map is $(v,\Rec,b^\sharp)\mapsto(v\oplus b^\sharp,\Rec)$.
+
+The general formula for the density after freezing is the composition of the old outgoing density with the inverse triangular map, since its Haar Jacobian is one. We use the versions of \cref{ch18:thm:canonical-density} on both sides; that construction uses the same formulas and their pointwise overlap identities. Composing with the inverse, we obtain the pointwise identity, even when the reconstructed configuration lies in a set of representatives of Haar measure zero. All weights and indicators of the decomposition are values of the same functions at the same old configuration.
+
+For a variable that was analytic before this freezing, its new group value lies in the small chart of frozen coordinates, and we insert $\xi^\sharp=\Log b^\sharp$ there. The deep frozen group variables at the first step under the Wilson measure are fixed parameters instead and are not part of this logarithmic substitution. For every old analytic function $F$ we have the exact identity
+\begin{equation}\label{ch18:eq:full-freeze-identity}
+ F(v\oplus\xi^\sharp)
+ =\bigl[F(v\oplus\xi^\sharp)
+             -F(0\oplus\xi^\sharp)\bigr]
+                  +F(0\oplus\xi^\sharp).
+\end{equation}
+Applying it to $R^{\mathrm{out}}$, the factor $e^{\Lambda^{\mathrm{out}}-R^{\mathrm{out}}}$ becomes
+\[
+ e^{\Lambda^{\mathrm{out}}
+                -R^{\mathrm{out}}(0\oplus\xi^\sharp)}
+ e^{-[R^{\mathrm{out}}(v\oplus\xi^\sharp)
+                -R^{\mathrm{out}}(0\oplus\xi^\sharp)]},
+\]
+which proves the minus sign of the transfer to $\Lambda$. For the classical function we keep the whole value $E^{\mathrm{out}}(v\oplus\xi^\sharp)$, including its constant. Centering the effective interaction changes no first derivative: the new first derivative in the remaining variables is the old one evaluated at $(0,\xi^\sharp)$, and it is kept.
+\end{proof}
+
+\section{Conditional integration and normalization on large-field decompositions}\label{ch18:sec:induction}
+
+This section proves the density bounds used in \cref{ch19:chapter}. The induction has three stages. First, the analytic effective actions, effective interactions, normalization constants, and reconstruction maps are defined from fine to coarse scales, by the recursion of \cref{ch17:thm:controlled-kernel}, for every value of the frozen coordinates and without reference to any measure. Second, representatives satisfying the reconstruction identities are chosen from coarse to fine scales, using these maps. Third, the stage densities are bounded from fine to coarse scales at exactly these representatives. The construction is not circular, since each stage uses only objects defined in the preceding ones. One step of the third stage is the following comparison, which needs an incoming density bound; the bound is supplied by the induction itself.
+
+\begin{lemma}\label{ch18:lem:enclosure-comparison}
+Assume the hypotheses of \cref{ch18:thm:all-point-enclosure}, together with the conditions \eqref{ch18:eq:ambient-physical-gates} and \eqref{ch18:eq:logarithmic-product-gates}, which give the hypotheses of \cref{ch17:lem:ambient-white-comparison} on the whole enclosing product domain. Fix a stage $t$ and an output datum $(c,\Rec)$ of the family of representatives satisfying the reconstruction identities in \cref{ch18:thm:all-point-enclosure}(2), with real frozen coordinates, and define the fluctuation cutoff domain
+\begin{equation}\label{ch18:eq:implemented-white-product}
+ \mathcal W_t=\prod_{i,e}\{\abs{w_{i,e}}\le p(t_t)\},\qquad
+ t_t=\max_i g_{t,i},\qquad p(t)=A_{\mathrm w}\log(1/t).
+\end{equation}
+Let $V=V_{c,\Rec}$ be the conditional fluctuation potential of \cref{ch17:thm:controlled-kernel} at this datum, and let $S_{c,\Rec}\subset\mathcal K_t$ be the set of normalized fluctuation coordinates of the supported fiber points over $(c,\Rec)$. For an invariant Borel function $0\le\chi\le1$, let $G_{t,\chi}(c,\Rec)$ be the outgoing density of \cref{ch18:thm:canonical-density} at $(c,\Rec)$ with $\chi$ inserted in the integrand. Suppose that there exist a finite prefactor $P_t(c,\Rec)\ge0$ and a Borel function $\chi_t$ on $S_{c,\Rec}$ with values in $[0,1]$ such that
+\begin{equation}\label{ch18:eq:comparison-hypothesis}
+ G_{t,\chi}(c,\Rec)\le P_t(c,\Rec)\int_{S_{c,\Rec}}\chi_t(w)e^{-V(w)}\,dw.
+\end{equation}
+Then $S_{c,\Rec}$ is a Borel set, $0<\int_{\mathcal K_t}e^{-V}\,dw<\infty$, and
+\[
+ G_{t,\chi}(c,\Rec)\le
+       (1-\delta_t)^{-1}\widetilde F_t(c,\Rec),\qquad
+ \widetilde F_t=P_t(c,\Rec)\int_{\mathcal W_t}e^{-V(w)}\,dw,
+\]
+with $0\le\delta_t<1$, $\delta_t\le6\mathsf b_t e^{-p(t_t)^2/48}$, and $\mathsf b_t\le C_Jm^3$, where $\mathsf b_t$ is the number of three-dimensional free blocks of fluctuation variables of the step. Factors depending only on the output datum multiply both sides. The indicators are removed only in this upper bound. The constants have the dependence stated at the beginning of this section, and they are uniform in the deep frozen group variables.
+
+At the first RG step, for either initial measure, \eqref{ch18:eq:comparison-hypothesis} holds with equality. In that case $P_t$ consists of the inverse partition function of the initial measure, the external weights, the Haar disintegration constants, the powers of the couplings, the output classical factor, and the zero-fluctuation factors, and $\chi_t$ is the product of $\chi$ and the indicators composed with the inverse coordinates. At a later stage, \eqref{ch18:eq:comparison-hypothesis} is obtained by inserting an incoming bound on the density at the representatives satisfying the reconstruction identities, with the incoming multiplicative loss included in the same prefactor $P_t$; this incoming bound is proved in \cref{ch18:thm:slice-induction}.
+\end{lemma}
+
+\begin{proof}
+At an output datum, the set $S_{c,\Rec}$ is defined with all indicators still inserted, and before any upper comparison the Haar disintegration is the exact formula of \cref{ch15:lem:regional-coarea}. The radii of $\mathcal W_t$ belong to the logarithmic family of \cref{ch17:thm:controlled-kernel} and satisfy $t_tp(t_t)<R_{\mathrm{en}}$ by \eqref{ch18:eq:logarithmic-product-gates}; for a complete RG step $t_t=t_{\max}$. The product $\mathcal K_t$ is used only in this positive comparison, never as the product for the expansion defining the analytic output. At the first step, the Haar disintegration and the change to normalized fluctuation variables give the density integral in the form
+\begin{equation}\label{ch18:eq:same-prefactor}
+ G_{t,\chi}(c,\Rec)
+  =P_t(c,\Rec)\int_{S_{c,\Rec}}\chi_t(w)e^{-V_{c,\Rec}(w)}\,dw,
+ \qquad
+ \widetilde F_t=P_t(c,\Rec)
+                 \int_{\mathcal W_t}e^{-V_{c,\Rec}(w)}\,dw,
+\end{equation}
+with the prefactor described in the statement. At a later step the equality in the first formula is replaced by the inequality \eqref{ch18:eq:comparison-hypothesis}.
+
+By \cref{ch18:thm:all-point-enclosure}(2), $S_{c,\Rec}\subset\mathcal K_t$ for every such datum. We check the measure-theoretic hypotheses of \cref{ch17:lem:ambient-white-comparison} at this fixed real datum. The finite products $\mathcal K_t$ and $\mathcal W_t$ are compact Borel sets. The map from free logarithmic coordinates to normalized fluctuation coordinates is a homeomorphism onto its open image, with the continuous inverse already constructed, so the image of the Borel set of free coordinates of supported points is Borel. Composing the Borel tests with that inverse gives a Borel function $\chi_t$, extended by zero outside $S_{c,\Rec}$, with $0\le\chi_t\le1$. The conditional fluctuation potential is analytic on a neighborhood of $\mathcal K_t$ and real at its real points, by \cref{ch17:thm:controlled-kernel}. Its finite minimum $\underline V$ and maximum $\overline V$ on this compact product give
+\begin{equation}\label{ch18:eq:ambient-finite-normalizer}
+ 0<e^{-\overline V}\operatorname{vol}(\mathcal K_t)
+ \le Z_{\mathcal K_t}=\int_{\mathcal K_t}e^{-V}\,dw
+ \le e^{-\underline V}\operatorname{vol}(\mathcal K_t)<\infty.
+\end{equation}
+The volume is finite and positive, since every ball has a finite positive radius. For an empty free product its zero-dimensional measure is one and $V=0$, so $Z_{\mathcal K_t}=1$. No uniform bound on $\underline V$ or $\overline V$ is needed here. The prefactor is finite at each real datum; if it vanishes, both sides vanish, and otherwise it is positive.
+
+The hypotheses of \cref{ch17:lem:ambient-white-comparison} on the whole product give its potential estimate and, for the normalized enclosing-product comparison measure $\nu_{\mathcal K_t}$, the bound
+\[
+ \delta_t:=\nu_{\mathcal K_t}(\mathcal K_t\setminus\mathcal W_t)
+       \le6\mathsf b_te^{-p(t_t)^2/48},\qquad\mathsf b_t\le C_Jm^3.
+\]
+Every ball of $\mathcal W_t$ has positive radius, so its volume is positive. Since $V$ is finite on $\mathcal K_t$, we have $\int_{\mathcal W_t}e^{-V}\,dw>0$, and hence $\nu_{\mathcal K_t}(\mathcal W_t)>0$ and $0\le\delta_t<1$. This strict inequality concerns the actual missing mass; the displayed union-bound majorant need not be below one under the local hypotheses. For an empty free product, $\delta_t=0$.
+
+Since $0\le\chi_t\le1$, the right side of \eqref{ch18:eq:comparison-hypothesis} is at most $P_t\int_{\mathcal K_t}e^{-V}$, and part (1) of \cref{ch17:lem:ambient-white-comparison} bounds the latter by $(1-\delta_t)^{-1}\widetilde F_t$. No inclusion of $\mathcal W_t$ in $S_{c,\Rec}$ is needed. The same reasoning applies if $P_t=0$ or if the free list is empty. All constants arose from local path products, the fixed construction products, and their row-sum bounds.
+\end{proof}
+
+In the theorem below, $E_t$, $R_t$, and $\Lambda_t$ are the effective classical action, the effective interaction, and the normalization constant at stage $t$; the last is the field-independent additive term in the log-density. Further, $W_t$ is the product of the external weights (the factors of frozen variables that are not integrated), $C_t$ is the reconstruction map, and $\ell_t$ is the level of the output of stage $t$. For the normalization comparison, $\Lambda_t^{\mathbb T}$ denotes the normalization constant of the corresponding recursion on the whole torus. Here $H_t$ denotes the set of scalar Gaussian coordinates of stage $t$ that are integrated in the corresponding renormalization group recursion on the whole torus but absent from the regional free list (it is not the Haar measure of \cref{ch18:thm:canonical-density}), and $d_i(H_t)$ is the number of its elements at scale $i$. The numbers $N_{\mathrm{missing},t}$, $N_{\mathrm{bd},t}$, and $N_{\mathrm{freeze},t}$ count, on the lattices where they were created, the missing labels of field-independent generated terms, the labels of the fixed interface band, and the newly frozen analytic labels, as in \cref{ch17:thm:real-scalar-ledger}.
+
+\begin{theorem}\label{ch18:thm:slice-induction}
+Fix a large-field decomposition of \cref{ch18:thm:history-cover}, an initial measure $\nu$ (a stopped measure or the Wilson measure), an initial scale and a stopping scale differing by a whole number $T$ of RG steps, and the cutoff domains and norm ball of \cref{ch17:thm:controlled-kernel}. Every integrated group of averaging steps is a complete RG step, $s_t=J$. A remaining number $0\le u_{\mathrm{ph}}<J$ of averaging steps within the given hierarchy is kept through the pullback $C\mapsto F(T_M^{u_{\mathrm{ph}}}C)$ of an observable $F$ at the stopping scale; this requires $m_{\mathrm{stop}}=M^{u_{\mathrm{ph}}}m_{\mathrm{rem}}$ with $m_{\mathrm{rem}}\in4\N$. For a fixed additional number $r_{\mathrm{stop}}\in\N_0$ of RG steps, the same condition is imposed with the total exponent $r_{\mathrm{stop}}J+u_{\mathrm{ph}}$, and all iterates must lie within the finite hierarchy. No recursion for normalization constants is asserted for an integrated group of fewer than $J$ averaging steps. Assume the uniform incoming radii obtained by freezing every label of reduced radius, the boundary-distance comparison \eqref{ch18:eq:history-wall-distance}, the conditional force conditions \eqref{ch18:eq:conditional-force-check} and \eqref{ch18:eq:prefix-sequential-check}, the cutoff radii of \eqref{ch18:eq:logarithmic-product-gates}, the initial norm bounds of \cref{ch17:thm:controlled-kernel}, and the bounds \eqref{ch18:eq:all-saved-values} on frozen coordinates. Let $\mathcal W_t$ be the fluctuation cutoff domain \eqref{ch18:eq:implemented-white-product}, which is the instance of \cref{ch17:thm:controlled-kernel} with common radius $p(t_t)$; the enclosing product domain $\mathcal K_t$ is used only in \cref{ch18:lem:enclosure-comparison}. Write $Z_\nu$ for the partition function of the initial measure, without centering: for a stopped measure
+\[
+ Z_\nu=\int_{D_r}e^{-E_{d_0,\mathrm{sat}}/g_{\mathrm{base}}^2
+                         -R_{d_0,\mathrm{sat}}}\,dH,
+\]
+and $Z_\nu=Z_{m_{\mathrm{base}},\gamma}$ for the Wilson measure. Use the stage measures and density versions of \cref{ch18:thm:canonical-density}. Then the following constructions and bounds hold at every finite depth and number of steps.
+\begin{enumerate}
+\item (Analytic functions, from fine to coarse.) For every real value of the frozen coordinates satisfying \eqref{ch18:eq:all-saved-values}, the functions $E_t,R_t,\Lambda_t,W_t$, the classical objectives, the reconstruction maps $C_t$, and the auxiliary fluctuation integrals are defined on the full spatially varying radii by the recursion of \cref{ch17:thm:controlled-kernel}, with the substitution of frozen coordinates of \cref{ch18:lem:producer-consumer}. This definition uses no density inequality and no choice of representatives. The effective interaction is centered only in its constant term, all its first derivatives are kept, and the full classical values are kept. For a stopped measure the normalization constant on the torus is $\Lambda_0^{\mathbb T}=-R_{d_0}(I)$, and an initial freezing subtracts in addition the frozen value of the centered effective interaction. For the Wilson measure we use the exact split of \cref{ch18:thm:all-point-enclosure}(4), with its original external factor.
+\item (Representatives satisfying the reconstruction identities, from coarse to fine.) Take all small top representatives in the coordinate domains of \cref{ch18:thm:all-point-enclosure}(1) whose frozen coordinates satisfy \eqref{ch18:eq:all-saved-values}, and construct such representatives downward with the maps of part~(1). At a boundary with freezing, let $\mathscr D_{t+1}$ be the set of these representatives at the next stage, and define the set of output data satisfying the freezing and reconstruction identities
+\[
+ \mathscr P_{t+1}=\mathcal A_t^{-1}(\mathscr D_{t+1}).
+\]
+For each such datum, include every supported fiber point:
+\[
+ \mathscr D_t=
+ \{(C_t(c,\zeta;\Rec),\Rec):
+       (c,\Rec)\in\mathscr P_{t+1},\ \zeta\in\mathcal Z_{c,\Rec}\},
+\]
+where $\mathcal Z_{c,\Rec}$ is the set of supported fiber coordinates over $(c,\Rec)$.
+At the last RG step, the set of output data consists of these small top representatives whose frozen coordinates satisfy \eqref{ch18:eq:all-saved-values}; every configuration in the support of the stage measure has such a representative by \cref{ch18:thm:history-cover}. Other representatives are compared only by the changes of \cref{ch18:lem:frozen-preserving}(1)--(3) or by the pointwise invariance of \cref{ch18:thm:canonical-density}. These sets contain all choices, and no probability law is assigned to a representative map.
+\item (Density bounds, from fine to coarse.) For every real value of the frozen coordinates, every $(c,\Rec)\in\mathscr P_{t+1}$, and every supported fiber coordinate $\zeta$ over it,
+\[
+\begin{split}
+ p_t(C_t(c,\zeta;\Rec),\Rec)\le{}&
+ A_tZ_\nu^{-1}e^{\Lambda_t(\Rec)}W_t(\Rec)\\
+ &\times\exp\{-E_t(\Log C_t(c,\zeta;\Rec);\Rec)/g_{\ell_t}^2\}\\
+ &\times\exp\{-R_t(\Log C_t(c,\zeta;\Rec);\Rec)\}.
+\end{split}
+\]
+Here $A_0=1$ and
+\[
+ A_{t+1}=A_t(1-\epsilon_t)^{-1},\qquad
+ \epsilon_t\le6\mathsf b_t e^{-p(t_t)^2/48},\quad
+ \mathsf b_t\le C_Jm_t^3,
+ \qquad \log A_T\le C_\delta,
+\]
+after the uniform choice of the minimal side in \cref{ch17:lem:ambient-white-comparison}. Every step uses the exact Haar disintegration and then a single triangular change to normalized fluctuation variables, with determinant
+\[
+ \prod_{i=0}^{s_t-1}g_i^{3f_i}
+          \det K_i(c_{i+1}(w_{>i});\Rec)^{-1/2}.
+\]
+The resulting Borel set of fluctuation coordinates of supported points is contained in the enclosing product domain, and \cref{ch18:lem:enclosure-comparison}, with identical prefactors and the smaller cutoff domain, gives the stated loss. The next stage evaluates the same configuration. The indicators are kept until this comparison, and no domination at arbitrary points of the enclosing product domain is required.
+\item (Normalization.) With $\Delta\Lambda_t=\Lambda_t-\Lambda_t^{\mathbb T}$ in the same centered renormalization group recursion on the whole torus, \cref{ch17:thm:real-scalar-ledger} gives
+\[
+ \Delta\Lambda_{t+1}\le\Delta\Lambda_t+
+       \sum_{i\ \mathrm{in}\ t}d_i(H_t)\log(1/g_i)
+       +C_J(N_{\mathrm{missing},t}+N_{\mathrm{bd},t}
+                                      +N_{\mathrm{freeze},t}),
+\]
+including the initial freezings. This comparison uses the same centered recursion on the whole torus and the same partition function $Z_\nu$ throughout.
+\item (External classical terms and the measure of frozen coordinates.) For the comparison of the output classical actions, the protected external classical exponents are recombined exactly once. At fixed frozen coordinates, with their original couplings included in $S_{\mathrm{ext}}(\Rec)$,
+\[
+ e^{-S_{\mathrm{ext}}(\Rec)}e^{-E^{\mathrm{int}}/g_t^2}
+      =e^{-E^{\mathrm{full}}/g_t^2},\qquad
+ E^{\mathrm{full}}=E^{\mathrm{int}}+g_t^2S_{\mathrm{ext}}(\Rec),
+\]
+where $E^{\mathrm{int}}$ is the effective classical action of the block region, and this factor is removed from the external weight. Under an RG step both the action and $g_t^2$ are multiplied by $M^{s_t}$, so each such exponent is preserved and counted once. At the top we keep the measure
+\[
+ \rho_{\mathcal X}(d\Rec)=w_{\mathcal X}(\Rec)H_{\mathcal X}(d\Rec)
+                  \le H_{\mathcal X}(d\Rec),\qquad
+ w_{\mathcal X}=I_{\mathcal X}^{\mathrm{act}}
+                         I_{\mathcal X}^{\mathrm{inv,end}},
+\]
+on the frozen coordinates, where $H_{\mathcal X}$ is their product Haar measure. The first indicator keeps every failure $q_f(\Rec)\ge d_*$, which is a function of the frozen coordinates since the whole dependence set of $f$ was frozen. The second keeps any chosen invariant tests depending only on the frozen coordinates at the output. There is no second copy of the frozen-coordinate terms included in the full classical action. Optional noninvariant chart restrictions may be bounded by one.
+\end{enumerate}
+All local constants have the dependence stated at the beginning of this section, including independence of the later widths, while $C_\delta$ has the dependence described in item~(4) of \cref{ch01:conv:constants}. No comparison of regional integrals from below, gauge covariance of auxiliary functions, or overlap identity for the classical action is part of this induction.
+\end{theorem}
+
+\begin{proof}
+Every integrated step has $s_t=J$, so $\ell_{t+1}=\ell_t+J$ and $g_{\ell_{t+1}}^2=Bg_{\ell_t}^2$. We reserve $z_i$ for the free logarithmic coordinates and write $\zeta_i=g_iw_i$ for the scaled fluctuation arguments of $C_t$. All analytic functions below are functions of the identity-chart variables of the block region at fixed real $(\xi,\Rec)$. We prove the five parts in order, followed by the statement on the remaining averaging steps.
+
+\paragraph{Part (1): initialization.}
+For a stopped measure, we set
+\[
+ r_{d_0}=R_{d_0}-R_{d_0}(I),\qquad
+ \Lambda_0^{\mathbb T}=-R_{d_0}(I).
+\]
+The partition function without centering then gives exactly $Z_\nu^{-1}e^{\Lambda_0^{\mathbb T}}e^{-E_{d_0}/g_{\mathrm{base}}^2-r_{d_0}}$ at a small representative in $D_r$. In particular $\widehat Z=e^{R_{d_0}(I)}Z_\nu$ for the centered partition function in \cref{ch18:thm:history-cover}; we keep $Z_\nu$ throughout this proof. For an initial freezing at $\xi^\sharp$, we set
+\begin{equation}\label{ch18:eq:initial-scalar}
+ \begin{split}
+ E_0(v;\Rec)&=E_{d_0}(v\oplus\xi^\sharp),\\
+ R_0(v;\Rec)&=r_{d_0}(v\oplus\xi^\sharp)
+                         -r_{d_0}(0\oplus\xi^\sharp),\\
+ \Lambda_0(\Rec)&=-R_{d_0}(I)
+                         -r_{d_0}(0\oplus\xi^\sharp).
+ \end{split}
+\end{equation}
+Additional frozen coordinates are held as real parameters. For the Wilson measure, we set $E_0=F_{\mathrm{bare}}$, $R_0=0$, $\Lambda_0=0$, and $W_0=e^{-E_{\mathrm{hole}}/g_{\mathrm{base}}^2}$, together with any kept indicators at the output. The exact split in \cref{ch18:thm:all-point-enclosure}(4) implies this initialization with the partition function of the Wilson measure.
+
+We verify the initial norm bounds. The initial analytic values obey \eqref{ch18:eq:all-saved-values}, because $C_{\mathrm{conv},J}\ge C_{\mathrm{ad},J}$, which was fixed before \cref{ch18:thm:history-cover}, and the near values at the first step under the Wilson measure satisfy its conversion bound. For a stopped measure, the decomposition with zero completion has classical perturbation $P_0(v)=E_{d_0}(v\oplus\xi^\sharp)-E_{d_0}(v\oplus0)$, including its constant. With the matched completion $\iota_{\xi^\sharp}$ of \cref{ch16:thm:controlled-perturbation}, this is exactly its boundary-completion difference, and the adjusted perturbation is $\overline P_0=0$. In the norm with zero completion, its nonconstant part is bounded by $C_{\mathrm{bc},\mathrm{cl}}E_{\mathrm{cl}}\beta_{\mathrm{rec}}/\rho_{\mathrm{cl}}\le\sigma_*/4$, by \eqref{ch18:eq:total-creation-straddle}. For the quantum input, splitting the centered function $r_{d_0}(v\oplus\xi^\sharp)$ into its restriction to the torus and its boundary-completion difference gives the bound $C_{\mathrm{bc},\mathrm q}E\beta_{\mathrm{rec}}/\rho\le\sigma_*/4$. The constant in \eqref{ch18:eq:initial-scalar} is kept exactly and is not bounded by this norm.
+
+At the first step under the Wilson measure, the plaquettes depending on integration variables use only the small near values of the initial good-cell complex. The zero-completed Wilson function evaluated at those data differs from the sum of these plaquette terms by plaquettes involving only frozen variables, which are constant in the integration variables. Hence the adjusted classical perturbation is constant at this step, and its nonconstant boundary-completion difference with zero completion obeys the same classical bound. These classical constants remain in $F_{\mathrm{bare}}$, and the energy of the deep frozen group variables stays in $W_0$. The quantum input is zero. This proves $x_0,x_0^{\mathrm{cl}}\le\sigma_*$ for either initial measure, on uniform radii of the remaining inputs. No deep frozen group variable has entered an analytic logarithm.
+
+\paragraph{Part (1): the analytic recursion.}
+At a later input, let $D_{\mathrm{in}}$ be the list of remaining analytic variables of the block region, with their original locations and volume factors; it does not include the frozen parameters. Since the preceding freezing of the union removed every label of reduced radius, the classical and quantum input radii are uniform by \eqref{ch18:eq:uniform-survivor-bound}. The previous fixed complement and all earlier frozen basepoints obey \eqref{ch18:eq:history-wall-distance}. The initialization satisfies the same statement, with zero boundary-weighted input when there is no incoming fixed complement, and additional excluded regions created by the tests preserve this inclusion. All completion adjustments use only newly frozen small analytic variables; previously nonintegrated torus variables remain zero, and the deep frozen group variables remain fixed external parameters.
+
+We apply \cref{ch16:thm:controlled-perturbation,ch17:thm:controlled-kernel} inductively, with the fixed amplitude $A_{\mathrm w}$ and the coupling ceiling $g_*$ chosen for it, to define the classical objective, the conditional minimizers for initial segments, their positive square roots, and the reconstruction map on the full radii. The hypotheses of each application are checked before any set of representatives is constructed. The input norm just restored bounds the adjusted perturbation by $2\sigma_*$. The images and every connecting segment lie strictly in the uniform input ball, by \eqref{ch18:eq:two-input-image-check} and the fixed margin of the larger construction domain. The force and Hessian estimates, uniformly for $y\in\mathcal T_I$ for each initial segment $I$, followed by \eqref{ch18:eq:prefix-sequential-check}, give all conditional minimizers and sequential neighborhoods; these checks are \cref{ch18:lem:history-input-contract}. All perturbation derivatives are taken in the integration and free variables at fixed real $b$. The fixed rates and spatial margins are those of the common tuple of \cref{ch17:thm:controlled-kernel} and are not changed by freezing. The torus input is the member at accumulated classical depth $d_t=d_0+tJ$ of its uniform analytic class, with ceiling $E$; a new nonconstant boundary term is accounted for by the two input norms rather than added to this ceiling. We include the exact boundary-completion difference when the unperturbed objective uses newly frozen input variables. By \Cref{ch16:thm:controlled-perturbation}, this objective agrees on the connected chart with $E_t$ evaluated at its reconstructed field; only the torus term uses compact overlap there, and the perturbation is evaluated at that field from the outset. The full outgoing action is defined to be the value at the conditional minimizer multiplied by $M^{s_t}$.
+
+We next define the update of the effective interaction by an integral; this also fixes all normalization conventions. Let $J_t^{0}(c,\Rec)$ be the product of the Haar disintegration factors of the intermediate scales evaluated along the zero-fluctuation chain, and define
+\begin{equation}\label{ch18:eq:reference-determinant}
+ D_t^{0}(c,\Rec)=J_t^{0}(c,\Rec)
+       \prod_i g_i^{3f_i}
+       \det K_i(\widehat c_{i+1};\Rec)^{-1/2},
+\end{equation}
+where $\widehat c_{i+1}$ denotes the corresponding higher argument at zero fluctuation. All field-independent constants of the Haar disintegration are included. Sequential minimization and normalization give the exact decomposition of the action: the output value divided by $g_{\ell_{t+1}}^2$, the quadratic term $\sum_i\abs{w_i}^2/2$, and the higher classical remainders add up to the input classical exponent. Indeed, at each intermediate scale we subtract the conditional minimum and its quadratic Taylor term; the latter is $\abs{w_i}^2/2$ by the definition of $K_i$, and the factor $M$ in the minimum cancels the factor $M$ in the next coupling. Repeating this over the $s_t$ scales, we obtain the decomposition, including its constants. Adding the inherited difference of effective interactions, all logarithmic differences of the Haar disintegration factors, and all logarithmic differences of the determinants that depend on the higher fluctuation variables, we obtain the conditional fluctuation potential $V_t(c,\Rec;w)$, including its quadratic part; it is the potential of \cref{ch17:thm:controlled-kernel}.
+
+In this integral, we use the fluctuation cutoff domain \eqref{ch18:eq:implemented-white-product}: every radius is $p(t_t)$ with $t_t=\max_ig_{t,i}$. This is in the allowed logarithmic family; it is not the radius $R_{\mathrm{en}}/t_t$ of the enclosing product. The containment, positive denominator, interaction, and auxiliary half-disc conditions hold by \eqref{ch18:eq:two-input-image-check} and \eqref{ch18:eq:logarithmic-product-gates}; they are deterministic conditions on the parameters and on $g_*$, not restrictions on the support of the measure. On the fixed product $\mathcal W_t$, we define
+\begin{equation}\label{ch18:eq:analytic-output-definition}
+ \begin{split}
+ \mathcal I_t(c;\Rec)
+  &=D_t^{0}(c,\Rec)
+       e^{-R_t(\Log C_t(c,0;\Rec);\Rec)}
+             \int_{\mathcal W_t}e^{-V_t(c,\Rec;w)}\,dw,\\
+ Q_t(c;\Rec)&=-\log\mathcal I_t(c;\Rec),\\
+ R_t^{\mathrm{out}}(c;\Rec)&=Q_t(c;\Rec)-Q_t(0;\Rec),\qquad
+ \Lambda_t^{\mathrm{out}}=\Lambda_t-Q_t(0;\Rec).
+ \end{split}
+\end{equation}
+The logarithm is real on real data, where it agrees with the real logarithm of the positive integral; its zero-free analytic continuation is supplied by \cref{ch17:thm:controlled-kernel}, and its sign is unrestricted. The integrand and its domain are defined on the full radii before any support set is considered. We have the exact identity
+\begin{equation}\label{ch18:eq:auxiliary-output}
+ Z_\nu^{-1}e^{\Lambda_t}W_t
+       e^{-E_t^{\mathrm{out}}(c)/g_{\ell_{t+1}}^2}
+                \mathcal I_t(c;\Rec)
+ =Z_\nu^{-1}e^{\Lambda_t^{\mathrm{out}}}W_t
+       e^{-E_t^{\mathrm{out}}(c)/g_{\ell_{t+1}}^2
+                         -R_t^{\mathrm{out}}(c;\Rec)}.
+\end{equation}
+Changing the distribution of constant factors between $D_t^0$ and the definition of $Q_t$ leaves this identity unchanged; we use the convention of \cref{ch17:thm:real-scalar-ledger}, which assigns each field-independent factor once.
+
+At a boundary we use the substitution of \cref{ch18:lem:producer-consumer}. This defines all functions at the next level for every real value of the frozen coordinates, independently of any density bound. The simultaneously frozen list is the union of the full boundary band of reduced radius, the removed band, the new boundary layers, and the based transports; the corresponding initial variables were included at the initial scale. Their analytic values satisfy \eqref{ch18:eq:all-saved-values} for both radii. At a representative of the next stage satisfying the reconstruction identities, the freezing identity inserts these values, not small values from a different frame, and the total boundary-completion difference obeys \eqref{ch18:eq:total-creation-straddle}. The resulting norm bounds are exactly those of \cref{ch17:thm:controlled-kernel}: the output ceilings before freezing are $y_t$ and $y_t^{\mathrm{cl}}$, the boundary-completion differences are at most $\sigma_*/4$, and the removed band makes each remaining term at most $\sigma_*/2$. With $\alpha_{\mathrm q}=\alpha$ and the corresponding classical rate, we have for both types
+\[
+ x_{t+1}^{\bullet}
+ \le C_{\mathrm{bc},\bullet}E_\bullet
+               \beta_{\mathrm{rec}}/\rho_\bullet
+       +2e^{-\alpha_\bullet(s_{\mathrm{er}}-1)}y_t^\bullet
+ \le\sigma_*/4+\sigma_*/2,
+\]
+so $x_{t+1},x_{t+1}^{\mathrm{cl}}\le3\sigma_*/4$ whenever the input is in its ball. The output ceilings $y_t^\bullet$ are computed on the input ball before the width $s_{\mathrm{er}}$ is chosen. By induction from the initial ball, we obtain the analytic recursion at every finite number of steps. It keeps the terms of degree one; no first derivative has been removed by recentering, and every restoration of the bounds happens at a complete RG step.
+
+It remains to verify the Borel regularity in the real parameters required at each perturbation step. The initial coefficients and chart path products are Borel functions of the protected real frozen coordinates; the deep frozen group variables at the first step under the Wilson measure enter only the Borel external factor. Suppose this holds at an input. The fixed-point iterations for the conditional minimizers use Borel coefficients and converge uniformly on their fixed neighborhoods, so their limits are Borel in $b$. The positive matrix square roots and inverses are Borel as uniform limits of the matrix-function constructions. The resulting values, Haar disintegration determinants, and coefficients are Borel. By Tonelli's theorem, integration over the fixed finite product preserves Borel dependence; we apply it to the positive and negative parts and to the real and imaginary parts, which have finite integrals. The logarithm can be chosen jointly Borel without a branch choice depending on the frozen coordinates: on the star-shaped output domain,
+\[
+ \log\mathcal I_t(c;b)
+  =\log\mathcal I_t(0;b)
+       +\int_0^1
+        \frac{D_c\mathcal I_t(sc;b)[c]}{\mathcal I_t(sc;b)}\,ds,
+\]
+where the first term is the real logarithm. Zero-freeness and holomorphy make this the required analytic branch, and the parameter integral is Borel. Finally, the substitution of frozen coordinates evaluates these Borel families at the Borel coordinates of the frozen values. This proves the Borel regularity inductively, without differentiating in a real frozen parameter.
+
+\paragraph{Part (2): representatives satisfying the reconstruction identities.}
+We start from all small representatives of top configurations, in the coordinate domains of \cref{ch18:thm:all-point-enclosure}(1), whose analytic frozen coordinates satisfy \eqref{ch18:eq:all-saved-values}; they exist by \cref{ch18:thm:history-cover}. At a boundary with freezing, we pull the next set of representatives satisfying the reconstruction identities back by the freezing bijection $\mathcal A_t$; this defines $\mathscr P_{t+1}$, which is not enlarged to an arbitrary comparison set. For each such datum, we include every supported fiber coordinate, as in the definition of $\mathscr D_t$. \Cref{ch18:thm:all-point-enclosure}, applied at this step of the descent, shows that each of them has its inverse normalized fluctuation coordinate in the interior half of the enclosing product, and that its representative has the correct target and protected frozen coordinates. This defines the whole finite family downward using only the maps defined by \eqref{ch18:eq:analytic-output-definition}. The sets integrated below are the Borel sets of free coordinates of supported fiber points at fixed output data, so no measurable representative map is needed.
+
+The bounds \eqref{ch18:eq:all-saved-values} persist along this descent, by \cref{ch18:lem:frozen-preserving}(1)--(3) and, at a new boundary, the direct insertion of \cref{ch18:lem:producer-consumer}. Changes as in \cref{ch18:lem:frozen-preserving}(4) are not used to enlarge these sets. Over each output datum in $\mathscr P_{t+1}$, the set still contains every supported fiber point.
+
+\paragraph{Part (3): density bounds.}
+We use the densities of \cref{ch18:thm:canonical-density}. For a stopped measure, the gauge-invariant density agrees with its analytic expression at each representative satisfying the reconstruction identities, and the indicators of the decomposition and of the support are between zero and one. Then \eqref{ch18:eq:initial-scalar} implies the claimed bound at the initial scale with $A_0=1$. For the Wilson measure, the exact split implies the same bound with the kept factor $W_0$. At a point outside the support, the density is zero, and no analytic identity is needed there.
+
+Suppose that the inequality holds on $\mathscr D_t$, and fix an output datum $(c,\Rec)\in\mathscr P_{t+1}$. We apply the exact Haar disintegration to the incoming density, keeping its tree variables at first. By \cref{ch18:thm:canonical-density}, the covariance under based gauges makes their normalized Haar integrals equal to one. For this fixed target, the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge} is a fixed gauge transformation, independent of the free variables and equal to $I$ at the roots of the target and at every protected vertex. The invariance of the density therefore allows us to evaluate the integrand at $C_t(c,\zeta;\Rec)$ instead of at its representative before the gauge transformation, and the tests take the same values there. This changes neither the Haar disintegration nor any determinant, and it is not a covariance statement for the auxiliary functions on the right side of the inequality.
+
+We now perform the single sequential change to normalized fluctuation variables for the classical objective. At scale $i$ its derivative with respect to $w_i$ is $g_iK_i^{-1/2}$, and its other dependence is on higher variables. Ordering the higher variables first makes the derivative block triangular, so its positive real determinant is exactly
+\begin{equation}\label{ch18:eq:one-triangular-determinant}
+ \prod_{i=0}^{s_t-1}g_i^{3f_i}
+     \det K_i(c_{i+1}(w_{>i});\Rec)^{-1/2}.
+\end{equation}
+In particular, the determinant at a varying higher argument is not replaced by its value at zero. Equation \eqref{ch18:eq:reference-determinant} and the corresponding logarithmic differences split this one determinant; they do not add a second copy. Injectivity and the inverse map on the supported domain follow from the branches for initial segments, with their positive margins, established before. As in the proof of \cref{ch18:lem:enclosure-comparison}, the image is a Borel set $S_{c,\Rec}$ in the enclosing product, and the remaining indicators composed with the inverse form a Borel function $\chi_t$ on $\mathcal K_t$ with values in $[0,1]$. The potential has a finite nonzero integral over $\mathcal K_t$ at each fixed real datum, also for an empty product.
+
+Every supported point of that domain belongs to $\mathscr D_t$. We insert the inductive bound there, and let $P_t^0(c,\Rec)$ be
+\[
+ Z_\nu^{-1}e^{\Lambda_t(\Rec)}W_t(\Rec)
+ D_t^0(c,\Rec)
+ e^{-E_t^{\mathrm{out}}(c;\Rec)/g_{\ell_{t+1}}^2
+             -R_t(\Log C_t(c,0;\Rec);\Rec)}.
+\]
+Tests depending only on the output datum are kept in this common factor. If this factor is zero, the outgoing upper bound is zero; otherwise it is finite and positive. With $\chi_t$ denoting the remaining indicators, the exact disintegration followed by the inductive bound gives
+\begin{equation}\label{ch18:eq:positive-induction-chain}
+ \begin{split}
+ p_t^{\mathrm{out}}(c,\Rec)
+ &\le A_tP_t^0(c,\Rec)
+          \int_{S_{c,\Rec}}\chi_t(w)e^{-V_t(w)}\,dw\\
+ &\le A_tP_t^0(c,\Rec)
+          \int_{\mathcal K_t}e^{-V_t(w)}\,dw\\
+ &\le \frac{A_t}{1-\epsilon_t}P_t^0(c,\Rec)
+          \int_{\mathcal W_t}e^{-V_t(w)}\,dw.
+ \end{split}
+\end{equation}
+Here $\epsilon_t$ is a common upper bound for the datum-dependent $\delta_t$ of \cref{ch18:lem:enclosure-comparison} at stage $t$, over all admitted output data, after the uniform minimum-side choice in part (3) of \cref{ch17:lem:ambient-white-comparison}. One may take $\epsilon_t=6\mathsf b_te^{-p(t_t)^2/48}\le1/2$. The first inequality is the hypothesis \eqref{ch18:eq:comparison-hypothesis} of that lemma with $\chi=1$ and $P_t=A_tP_t^0$, and the remaining two inequalities are its conclusion. The middle step uses the enclosure of \cref{ch18:thm:all-point-enclosure}, positivity on the whole larger product, and only $0\le\chi_t\le1$. The last step is \cref{ch17:lem:ambient-white-comparison} with identical prefactors; its radii are the common logarithmic radii, enclosed by $t_tp(t_t)<R_{\mathrm{en}}$, and its Hessian and mean conditions hold by \eqref{ch18:eq:logarithmic-product-gates}, in particular with mean at most $p(t_t)/(2\sqrt3)$. The larger product $\mathcal K_t$ is used only in this comparison. This verifies the hypothesis of \cref{ch18:lem:enclosure-comparison} at every later stage, with the incoming loss $A_t$ in the common prefactor.
+
+By \eqref{ch18:eq:auxiliary-output}, the last line of \eqref{ch18:eq:positive-induction-chain} is the analytic outgoing bound, defined independently, with the factor $A_{t+1}=A_t/(1-\epsilon_t)$. By \cref{ch18:lem:producer-consumer}, the inverse under freezing of a representative of the next stage is this output configuration. That lemma substitutes the based transports and frozen links directly, transfers $-R_t^{\mathrm{out}}(0\oplus\xi^\sharp)$ to the normalization constant, and keeps the full classical value. This proves the incoming inequality at stage $t+1$ on exactly $\mathscr D_{t+1}$ and completes the induction.
+
+There is one comparison per output datum, jointly over all components and scales of the step. The probability estimate used here is $\epsilon_t\le6\mathsf b_te^{-p(t_t)^2/48}$ with $\mathsf b_t\le C_Jm_t^3$. Ordering the finite list of output data along the sequence of sides and taking the uniform minimal side of \cref{ch17:lem:ambient-white-comparison}, we obtain
+\[
+ \log A_T=\sum_{t<T}-\log(1-\epsilon_t)
+       \le2\sum_{t<T}\epsilon_t\le C_\delta.
+\]
+Empty free products have determinant one, logarithmic determinant zero, and fluctuation integral one, and an empty block region has zero nonconstant norm. Such an empty step contributes no loss.
+
+\paragraph{Part (4): normalization.}
+Since $s_t=J$ and the initial and stopping scales differ by complete RG steps, every application below is within the scope of \cref{ch17:thm:real-scalar-ledger}. The recursion just constructed is the same centered recursion, with the same extraction of field-independent factors, as in that theorem. All its norm and domain hypotheses were verified in part~(1), including the common logarithmic cutoffs and the freezing of the whole union. The column bound used for the analytic norm propagation in \cref{ch17:thm:quantum-ledger} is that of the perturbed zero-fluctuation map. Indeed, the doubled output radius and the inherited half radius are part of the two image conditions, and the differences with each index fixed in \cref{ch16:thm:controlled-perturbation} give, in the same boundary-weighted sum over distinguished outputs,
+\[
+ K_{\mathrm{col},J}^{\mathrm{actual}}
+       \le K_{\mathrm{col},J}^{0}+C_J\sigma_{0,J},
+\]
+where $K_{\mathrm{col},J}^{\mathrm{actual}}$ and $K_{\mathrm{col},J}^{0}$ are the column ceilings of the perturbed and unperturbed maps. The fixed allocations of dependence neighborhoods and exponents are already included in $C_J$. More explicitly, the margin in the coefficient exponent, after the transfer of boundary distances in \eqref{ch18:eq:history-wall-distance}, leaves a positive exponent $c'$ for summing over the incoming label at a fixed output, and this sum is bounded by $v_J\sum_{q\ge0}(q+2)^3e^{-c'q}<\infty$. The volume factors of the lattices where the labels were created are kept in this column sum. Deleting labels or adding excluded regions cannot increase this bound of bounded density. This proves that the enlargement has the dependence stated at the beginning of this section. We fix this enlarged ceiling on the whole larger perturbation domain before choosing $s_{\mathrm{er}}$ or later widths. In \cref{ch17:thm:quantum-ledger}, its coefficient is $K_J=4(\log2)K_{\mathrm{col},J}$ for this enlarged ceiling; no column bound for the unperturbed map alone is substituted.
+
+Applying the generated-increment comparison of \cref{ch17:thm:real-scalar-ledger} with the incoming $\Delta\Lambda_t=\Lambda_t-\Lambda_t^{\mathbb T}$, we obtain the increment in part~(4), including the initial freezings. To check the sign of the dimension term, note that one scalar Gaussian coordinate integrated in the corresponding renormalization group recursion on the whole torus contributes a factor $g_i$. When that coordinate is absent from the regional free list, the logarithmic difference between the regional and torus terms is $-\log g_i=\log(1/g_i)$. Summing over the missing scalar coordinates, we obtain $d_i(H_t)\log(1/g_i)$, once for each scale. By that theorem, the remaining generated differences of Haar disintegration factors, minimizers, and cluster expansions, and the freezings, are bounded by $C_J$ times the three label counts, taken on the lattices where the labels were created. This comparison is additional analytic information: neither the exact disintegration, nor \eqref{ch18:eq:analytic-output-definition}, nor normalization would by itself bound these generated differences. The factor $A_t$ remains separate and is not added again to $\Lambda_t$.
+
+\paragraph{The remaining averaging steps.}
+Let $a=\ell_T-\ell_0=JT$ be the number of integrated averaging steps (here $a$ is not a mesh), and let $\ell_{\max}$ be the last level of the given finite hierarchy. A remaining number $0\le u_{\mathrm{ph}}<J$ of averaging steps is chosen only when it is available: at the stopping scale we require
+\[
+ m_{\mathrm{stop}}=M^{u_{\mathrm{ph}}}m_{\mathrm{rem}},
+ \qquad m_{\mathrm{rem}}\in4\N,\qquad
+ \ell_T+u_{\mathrm{ph}}\le\ell_{\max}.
+\]
+For a fixed additional number $r_{\mathrm{stop}}\in\N_0$ of RG steps, we set $v=r_{\mathrm{stop}}J+u_{\mathrm{ph}}$ and require
+\[
+ m_{\mathrm{stop}}=M^v m_{\mathrm{rem}},\qquad
+ m_{\mathrm{rem}}\in4\N,\qquad
+ \ell_T+v\le\ell_{\max};
+\]
+the case of $u_{\mathrm{ph}}$ alone is $r_{\mathrm{stop}}=0$. For each $0\le k\le v$, the intermediate side is $M^{v-k}m_{\mathrm{rem}}\in4\N$, which is at least four. The initial side is $M^{a}m_{\mathrm{stop}}$, and the bound on the index keeps every intermediate level in the given hierarchy. Hence both $T_M^v$ at the stopping scale and $T_M^{a+v}$ at the initial scale exist; a lower bound on $m_{\mathrm{stop}}$ alone would not give these integer conditions. We work on whole configurations, before regional coordinates are introduced. The block averaging map with its Borel extension is Borel, and its iterates are compositions of that map, so for every initial configuration $V$, we have
+\[
+ F(T_M^{a+v}V)=(F\circ T_M^v)(T_M^{a}V),
+\]
+and the function at the stopping scale is exactly $C\mapsto F(T_M^vC)$, in particular $C\mapsto F(T_M^{u_{\mathrm{ph}}}C)$ for $u_{\mathrm{ph}}$ alone. We define the measure $\mu_{a,\mathcal X}=(T_M^{a})_\#(\one_{\mathcal A_{\mathcal X}}\nu)$ on the whole configurations at the stopping scale. For every nonnegative Borel $F$ we have
+\begin{equation}\label{ch18:eq:terminal-source-pullback}
+ \int \one_{\mathcal A_{\mathcal X}}(V)
+                  F(T_M^{a+v}V)\,d\nu(V)
+       =\int (F\circ T_M^v)(C)\,d\mu_{a,\mathcal X}(C),
+\end{equation}
+by the definition of the pushforward; the identity extends to integrable $F$ through positive and negative parts. Each fixed additional number of steps uses the total exponent $v$ whose existence was just checked, together with its finite enlarged dependence neighborhood. For the local link and plaquette observables of \cref{ch18:thm:history-cover}, these iterates use its already enlarged final dependence neighborhood. The decomposition keeps this observable on each piece. There is no Haar disintegration, change of variables, restoration of bounds, or update of normalization for $v$. When the integrated part of the decomposition is empty, the identity is the initial pushforward itself.
+
+\paragraph{Part (5): external classical factors and failure indicators.}
+At fixed frozen coordinates, let $S_{\mathrm{ext}}(\Rec)$ be the sum of the protected external classical exponents with their original couplings; for the Wilson measure it includes $E_{\mathrm{hole}}/g_{\mathrm{base}}^2$. The term $g_t^2S_{\mathrm{ext}}$ is constant in all integration variables, so adding it to the full action of the block region changes no minimizer, Hessian, map, or nonconstant norm. We have the exact identity
+\[
+ e^{-S_{\mathrm{ext}}}e^{-E^{\mathrm{int}}/g_t^2}
+ =e^{-(E^{\mathrm{int}}+g_t^2S_{\mathrm{ext}})/g_t^2}.
+\]
+We delete this external factor from $W_t$ when the full classical action including the frozen-coordinate terms is used. After an RG step, the corresponding constant becomes $M^{s_t}g_t^2S_{\mathrm{ext}}=g_{t+1}^2S_{\mathrm{ext}}$, so its exponent is preserved exactly. At each classical freezing, the full value was kept. Induction over the finite decomposition shows that each frozen-coordinate term of the full classical action has one copy in the output action and none in the remaining weight of the frozen coordinates. The constants from the freezing of the effective interaction remain separate exact terms of $\Lambda$.
+
+For each failing plaquette $f$, the whole dependence set was frozen at the input of its RG step. Its value $q_f$ is therefore a Borel function of the frozen coordinates on that lattice, computed with the same path products of the block averaging map, and later operations fix its marked data exactly. Its trace is invariant under the consistent endpoint action. We keep the product of all indicators $\{q_f\ge d_*\}$ as $I_{\mathcal X}^{\mathrm{act}}$, and any chosen invariant tests depending only on the frozen coordinates at the output as $I_{\mathcal X}^{\mathrm{inv,end}}$. Every other optional coordinate restriction is between zero and one and may be removed in an upper bound. After the classical recombination, this leaves exactly the measure on frozen coordinates in part~(5), which is bounded by its product Haar measure. It contains no second copy of an energy that could be used for a lower bound on the output action or for an energy bound on failing plaquettes.
+
+Every local bound has the dependence stated at the beginning of this section on the fixed larger domains, and only $C_\delta$ has the dependence of item~(4) of \cref{ch01:conv:constants}.
+\end{proof}

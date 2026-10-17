@@ -1,0 +1,802 @@
+\chapter{Reconstruction estimates and divergence-free currents}\label{ch28:chapter}
+
+This section and \cref{ch29:chapter} prove the short-distance theorem, \cref{s2:thm:short-distance}. We study the heat-smoothed circulations defined in \cref{ch28:def:closed-current-target}: circulations, around small lattice loops of size $\varepsilon$, of the linear heat evolution of the reconstructed fine field, divided by $\sqrt{g_3^2\varepsilon}$. They are linear in the link logarithms of one fixed gauge representative; flowed Wilson loops are compared with them in \cref{ch29:lem:actual-flow-trace-reduction}.
+
+The main result of this section is an exact decomposition of the heat-smoothed circulation $I^{K,s}$ under the conditioned Wilson measure, proved in \cref{ch28:lem:top-current-and-caps}:
+\[
+ I^{K,s}=T_s+\sum_{j=1}^{K-s}\Gamma_j(\widehat\theta_{j-1})(w_j-\bar w_j)+\mathsf N_{K,s}.
+\]
+Here $T_s$ is the contribution of the coarse field on the lattice of side $n_s$; the $j$-th summand is linear in the centered normalized fluctuation variables of the $j$-th RG step, so that the sum is a martingale; and $\mathsf N_{K,s}$ collects conditional means and nonlinear terms. For $a\le\varepsilon\le\varepsilon_0(s)$ and $\eta=g_3^2\varepsilon$, we show that
+\[
+ |T_s|+\E|\mathsf N_{K,s}|\le\frac{Cr}{g_3H_s}\sqrt\varepsilon+Cg_3D_s\sqrt\varepsilon+C\sqrt\eta\,[1+\log(1/\eta)]^2,
+\]
+uniformly in the number $K$ of RG steps, where $H_s=L/n_s$ is the coarse mesh and $D_s$ is bounded uniformly in $s$. \Cref{ch28:thm:maxwell-calibration} identifies the covariance of the martingale increments at the zero field:
+\[
+ \sum_{j=1}^{K-s}\Gamma_j(0)\Gamma_j(0)^{\mathsf T}=C^{a,\varepsilon,L}\otimes I_3-C^{\rm ret}_{s,a,\varepsilon}.
+\]
+In the linearized Gaussian theory, $C^{a,\varepsilon,L}\otimes I_3$ is the covariance of the circulation of the lattice Maxwell Gaussian field, and $C^{\rm ret}_{s,a,\varepsilon}$ is the covariance of its conditional expectation given the linearized coarse field. As $a\to0$ and then $\varepsilon\to0$, with $s$ fixed, the right side converges to $\Sigma\otimes I_3$, where $\Sigma$ is the covariance in \eqref{s2:eq:circulation-covariance}. \Cref{ch29:chapter} uses these facts to show that the martingale is asymptotically Gaussian.
+
+The normalization by $\sqrt{g_3^2\varepsilon}$ comes from the Gaussian Maxwell field. If $A$ has covariance $g_3^2(-\Delta)^{-1}$ in three dimensions, then $e^{\sigma\varepsilon^2\Delta}A$ has typical size $g_3\varepsilon^{-1/2}$, and its circulation around a loop of length of order $\varepsilon$ has typical size $g_3\sqrt\varepsilon=\sqrt\eta$.
+
+Two ideas enter the proof of the decomposition. The first concerns the zero-fluctuation reconstruction, in which every fluctuation variable is set to zero. Let $\widehat L_i$ be the linearization at the zero field of the $i$-th zero-fluctuation reconstruction map; it takes link logarithms on the lattice of mesh $a_{i-1}$ to link logarithms on the lattice of mesh $a_i$. Each $\widehat L_i$ is a constrained minimization of the Maxwell quadratic form. By \cref{ch28:thm:one-shot-and-source-sum}, a product of them agrees, up to a periodic gradient, with a single constrained minimization over all the averaging steps at once:
+\[
+ a^{-1}\widehat L_k\cdots\widehat L_{j+1}v=a_j^{-1}E_j^av+d_af_j(v).
+\]
+The circulation around a closed lattice loop annihilates the gradient exactly, and $E_j^a$ obeys bounds that do not depend on $k-j$. The nonlinear Taylor remainders $\widehat{\mathcal R}_i$ of the reconstruction maps are inserted at their own scale and then propagated to the fine lattice by the linearizations:
+\[
+ \text{mesh }a_j\ \xrightarrow{\ \widehat P_{i-1}\circ\cdots\circ\widehat P_{j+1}\ }\ \text{mesh }a_{i-1}\ \xrightarrow{\ \widehat{\mathcal R}_i\ }\ \text{mesh }a_i\ \xrightarrow{\ \widehat L_k\cdots\widehat L_{i+1}\ }\ \text{mesh }a.
+\]
+Converting link logarithms at mesh $a_i$ into a potential at the scale $a_j$ introduces the factor $a_j/a_i=B^{i-j}$. Since $\widehat{\mathcal R}_i$ vanishes to second order, every monomial contains at least two inputs, each carrying a contraction factor $\alpha_*$ for every preceding step. For $i-1-j$ preceding steps, the physical rescaling is therefore controlled by
+\[
+ \frac{a_j}{a_i}\,\alpha_*^{2(i-1-j)+1}=C_*\,(B\alpha_*^2)^{i-1-j},\qquad B\alpha_*^2\le\tfrac14.
+\]
+The propagated remainders are therefore summable. The result is an analytic field $\widehat{\mathcal E}_j^a$ on the fine lattice with the same circulations as the reconstruction, whose coefficients are bounded uniformly in the number of steps; we need no such bound for the composed gauge representative itself.
+
+The second idea concerns conditional means. The conditional law of the fluctuation variables is interacting. Using its density, the local covariance estimates of \cref{ch10:chapter}, and global color-rotation symmetry, we show that the conditional means of the nonlinear terms are of order $t_j^2$ times the size of the coarse field. Their conditional variances are bounded independently of the number of fluctuation variables.
+
+We keep four kinds of variables apart. The link logarithms $\widehat\theta_j$ on the lattice of mesh $a_j$ are dimensionless; the potentials $\widehat\theta_j/a_j$ are in physical units; the normalized fluctuation variables $w_j$ are distributed according to the conditional fluctuation kernel $k_j$ of \cref{ch28:thm:predictable-rows-and-means}, which is supported on a product of balls; and independent standard Gaussian coordinates occur only in the linearized calculation of \cref{ch28:thm:maxwell-calibration}. All circulations are computed for the same gauge representative and with the componentwise heat semigroup.
+
+The inputs come from \cref{ch01:chapter,ch05:chapter,ch07:chapter,ch08:chapter,ch09:chapter,ch10:chapter,ch12:chapter,ch13:chapter,ch20:chapter}. \Cref{ch28:sec:setting} fixes notation. \Cref{ch28:sec:free} defines the circulations and computes their covariance under the lattice Maxwell Gaussian field. \Cref{ch28:sec:linear} compares linearized reconstructions and controls the nonlinear remainders. \Cref{ch28:sec:means} estimates the coefficients and the conditional means. \Cref{ch28:sec:covariance} proves the covariance identity, \cref{ch28:sec:scales} proves the decomposition and sums over scales, and \cref{ch28:sec:fixed-coupling} records that all estimates hold at every fixed positive coupling. All results are used in \cref{ch29:chapter}.
+
+\section{Setting and conventions}\label{ch28:sec:setting}
+
+Fix $L>0$, an odd integer $M\ge3$, and an upper bound $\Gamma>0$ on the dimensionless coupling. Let $J$, $B=M^J$, the parameter tuple $\Theta$, the reconstruction maps, and the minimal coarse side $n_\Gamma$ be as in \cref{ch20:thm:finite-ceiling-parameters}; they are chosen before the coupling. Fix $0<\gamma\le\Gamma$ and set $g_3^2=\gamma/L$. Fix $n_*\in4\N$ and the sequence of lattice sides $N_K=n_*B^K$. For a coarse index $s\ge0$ with $n_s\ge n_\Gamma$ and for $K\ge s$, set
+\[
+ n_s=n_*B^s,\qquad H_s=L/n_s,\qquad k=K-s,
+\]
+\[
+ a_j=H_sB^{-j}\quad(0\le j\le k),\qquad a=a_k=L/N_K,
+\]
+\[
+ d_j=J(k-j),\qquad g_j=g_3\sqrt{a_j},\qquad \lambda_B=M^{(J-1)/2},\qquad t_j=\lambda_Bg_j,\qquad p_j=A_{\rm w}\log(1/t_j).
+\]
+Here $a_j$ is the mesh of the lattice reached after $j$ RG steps of the reconstruction, starting from the coarse lattice of side $n_s$. The integer $d_j$ is the number of averaging steps between the fine lattice and the lattice of mesh $a_j$; it determines the effective classical action used at that scale. In the notation of \cref{ch23:chapter}, $d_j$ is the depth $\mathfrak d_j$, not the increment $x_j-x_{j-1}$ of the heat path. The number $t_j$ is the largest coupling among the $J$ intermediate scales of the $j$-th RG step, and $p_j$ is the fluctuation cutoff radius, with the amplitude $A_{\rm w}$ fixed in $\Theta$. The couplings $g_{j,\ell}$ of the intermediate scales satisfy $g_{j,\ell}\le t_j$, and the ratios $g_{j,\ell}/t_j$ depend only on $M$ and $J$.
+
+Let $\nu_{K,s}=\nu_{N_K,n_s,\gamma}=\mu_{N_K,\gamma}(\,\cdot\mid S_{N_K,n_s,\gamma})$ be the conditioned Wilson measure. Under $\nu_{K,s}$ the fine configuration is described by its backward reconstruction sequence (\cref{ch01:chapter,ch12:chapter}). The coarse field $\widehat\theta_0$ is the array of link logarithms, on the lattice of side $n_s$, of the chosen representative of the coarse configuration; it satisfies $\|\widehat\theta_0\|_\infty\le r$. For $1\le j\le k$,
+\[
+ \widehat\theta_j=\widehat\Phi_j(\widehat\theta_{j-1},g_{j,\cdot}w_j),
+\]
+where $\widehat\Phi_j$ is the reconstruction map of \cref{ch12:thm:replacement-family} for the $j$-th RG step, at the classical recursion index $d_j$, the $w_j=(w_{j,\ell})_\ell$ are the normalized fluctuation variables of that step, and $g_{j,\cdot}w_j$ is the vector with components $g_{j,\ell}w_{j,\ell}$. By \cref{ch01:def:heat-current}, the heat-smoothed circulation is $I^{K,s}=\mathcal I_a(\widehat\theta_k)$, with $\mathcal I_a$ as in \cref{ch28:def:closed-current-target} below. We write
+\[
+ \mathcal F_j=\sigma(\widehat\theta_0,w_1,\dots,w_j),\qquad \bar w_j=\E[w_j\mid\mathcal F_{j-1}],\qquad b_j=\|\widehat\theta_j\|_\infty.
+\]
+The zero-fluctuation reconstruction maps and their linear and nonlinear parts are
+\[
+ \widehat P_j(v)=\widehat\Phi_j(v,0),\qquad \widehat L_j=D\widehat P_j(0),\qquad \widehat{\mathcal R}_j(v)=\widehat P_j(v)-\widehat L_jv,
+\]
+and for $i\ge j$ we set $\widehat\Pi_{i\leftarrow j}=\widehat P_i\circ\cdots\circ\widehat P_{j+1}$, which is the identity if $i=j$. For $1\le j\le k$, a field $\theta$ on the lattice of mesh $a_{j-1}$, and fluctuation variables $w$ of the $j$-th step, define
+\[
+ G_j(\theta,w)=\mathcal I_a\bigl(\widehat\Pi_{k\leftarrow j}\widehat\Phi_j(\theta,g_{j,\cdot}w)\bigr),\qquad \Gamma_j(\theta)=D_wG_j(\theta,0),\qquad \omega_j=\min\{a_j/\varepsilon,\sqrt{\varepsilon/a_j}\},
+\]
+\[
+ \mathsf R_j^{\rm cur}=G_j(\widehat\theta_{j-1},w_j)-G_j(\widehat\theta_{j-1},0)-\Gamma_j(\widehat\theta_{j-1})w_j.
+\]
+The matrix $\Gamma_j(\widehat\theta_{j-1})$ is $\mathcal F_{j-1}$-measurable, and the circulation Taylor remainder $\mathsf R_j^{\rm cur}$ is the nonlinear part of the change in the circulation caused by the fluctuations of the $j$-th step.
+
+\paragraph{Coefficient norms.}
+We use the norms of \cref{ch01:def:analytic-norms}. For a matrix $T=(T_{eu})$ from link variables on a lattice of mesh $h$ to link variables on a lattice of mesh $a'$, the row norm is $\sup_e\sum_u|T_{eu}|$ and the volume-normalized column norm is $\sup_u(a'^3/h^3)\sum_e|T_{eu}|$; we write $\|T\|_{\rm row+col}$ for the larger of the two. For a tensor of higher degree, a column sum fixes one input index, called the distinguished input, sums over all outputs and all other inputs, and carries the same volume factor. Taylor coefficients are divided by the corresponding factorials, and every coefficient is weighted by $e^{\asp\Tree}$, where $\Tree$ is the length of a shortest connected network, with internal vertices allowed, joining the locations of its indices. For an analytic map $F$ vanishing at the origin and a power series $\phi$ with nonnegative coefficients, we write $F\prec\phi$ if, for every $m\ge1$, the row norm of the homogeneous degree-$m$ part of $F$ is at most the coefficient of $z^m$ in $\phi$, and each of its column norms with a distinguished input is at most the coefficient of $z^{m-1}$ in $\phi'$. These bounds on absolute values of coefficients are stronger than bounds on the values of $F$, and they allow compositions of arbitrary length below.
+
+\paragraph{Parameters and constants.}
+By \cref{ch12:lem:deterministic-prolongation-reserve,ch20:thm:finite-ceiling-parameters}, there exists a constant $C_*$ bounding the first derivative of the zero-fluctuation reconstruction maps, fixed before $J$ is chosen, such that
+\[
+ \alpha_*=C_*/B<1,\qquad q=B\alpha_*^2=C_*^2/B\le\tfrac14.
+\]
+Further, there exist a constant $\beta_J$ and radii $r_{\rm eff}$ and $r$, chosen in this order, with
+\[
+ \frac{\beta_Jr_{\rm eff}}{1-\alpha_*}<\frac18,\qquad r<\frac{r_{\rm eff}}4,
+\]
+such that all reconstructed fields $\widehat\theta_j$ and all their zero-fluctuation continuations lie in the ball $\{v:\|v\|_\infty\le r_{\rm eff}\}$, on which the bounds of \cref{ch12:lem:deterministic-prolongation-reserve} hold; we call it the reconstruction domain. The deterministic coefficient bounds below hold on this domain. The conditional fluctuation kernels, and all statements about their expectations, concern coarse fields $\theta$ with $e^\theta\in B_r$, the small-link domain of \cref{ch01:def:selected-law}, together with the product-domain and support conditions of \cref{ch10:thm:complete-white-law}. On the support of $\nu_{K,s}$ these conditions hold at every step: the coarse configurations of all RG steps lie in $D_r$, and the thresholds in \cref{ch12:thm:replacement-family} keep the images of the reconstruction maps inside $B_r$, so that $e^{\widehat\theta_j}\in B_r$ for $0\le j\le k$. We write $\mathsf E_{\rm q}$ for the bound, fixed in $\Theta$, on the weighted analytic norm of the input effective interaction, which is produced by the integrations at finer scales.
+
+Unless stated otherwise, $C$ and $c$ denote positive constants that may depend on $L$, $\gamma$, $M$, $J$, $\Theta$, $n_*$, the analytic domains of \cref{ch20:thm:finite-ceiling-parameters}, the loops, and $\sigma$; this is the dependence described in item (5) of \cref{ch01:conv:constants}. They do not depend on $K$, $j$, $d_j$, the point $x$, the lattice offset (defined below), or the coarse field. We say explicitly when a constant does not depend on $s$; otherwise it may depend on $s$ through $H_s$ and $n_s$. All estimates are on the periodic torus. In the limit statements $\gamma>0$ and $s$ are fixed, the number of steps $K$ tends to infinity first, $\varepsilon\downarrow0$ second, and no rate uniform as $\gamma\downarrow0$ is claimed.
+
+\section{Divergence-free currents and the Maxwell covariance}\label{ch28:sec:free}
+
+We define the circulations and the limiting covariance $\Sigma$, compute the covariance of the circulation of the lattice Maxwell Gaussian field, and show that it converges to $\Sigma$ when the lattice spacing and then the loop size tend to zero.
+
+\begin{definition}\label{ch28:def:closed-current-target}
+Fix $\sigma>0$ and finitely many smooth closed loops $\ell_i:[0,1]\to\R^3$, $1\le i\le m$. For $\varepsilon>0$ put $\eta=g_3^2\varepsilon$, and for $p\in\R^3$ define
+\[
+ \widehat J_i(p)=\int_0^1\dot\ell_i(v)e^{-ip\cdot\ell_i(v)}\,dv,\qquad
+ \Sigma_{ih}=\frac1{(2\pi)^3}\int_{\R^3}\frac{e^{-2\sigma|p|^2}}{|p|^2}\,\overline{\widehat J_i(p)}\cdot\widehat J_h(p)\,dp.
+\]
+Let $G=(G_i^c)_{1\le i\le m,\,1\le c\le3}$ be a centered Gaussian vector with covariance $\Sigma\otimes I_3$, write $G_i=(G_i^1,G_i^2,G_i^3)$, and set $\mathsf Z_i=|G_i|^2/8$. In \cref{s2:thm:short-distance} and \cref{ch29:chapter} this vector is denoted $C$, and $(\mathsf Z_i)_i$ is denoted $Z_G$.
+
+For a lattice mesh $a=L/N\le\varepsilon$ and $x\in\Torus$, let $\ell_{i,\varepsilon,a,x}$ be a closed oriented lattice cycle approximating the loop $x+\varepsilon\ell_i$ in $\Torus$, such that its physical length and diameter are at most $C_\ell\varepsilon$, it has zero winding when $\varepsilon\le\varepsilon_{\rm loop}$, and there is a based homotopy between it and $x+\varepsilon\ell_i$ whose swept area, counted with multiplicity, is at most $C_\ell\varepsilon a$. The constants $C_\ell$ and $\varepsilon_{\rm loop}$ depend only on the loops; they are uniform in $x$ and in the choice of rounding of the loop to the lattice, which we call the lattice offset. For a link potential $A$ on the lattice of mesh $a$, in physical units, set
+\[
+ (\mathscr C_{a,\varepsilon,x}A)_i^c=\frac a{\sqrt\eta}\sum_{e\in\ell_{i,\varepsilon,a,x}}\operatorname{sgn}(e)\,(P^a_{\sigma\varepsilon^2}A)^c_{\operatorname{dir}(e)}(x_{\rm positive}(e)),\qquad \mathcal I_a(v)=\mathscr C_{a,\varepsilon,x}(v/a),
+\]
+for $1\le i\le m$ and $1\le c\le3$. Here $P^a_t=e^{t\Delta_a}$ is the lattice heat semigroup, acting componentwise; $\operatorname{dir}(e)$ is the coordinate direction of $e$; $x_{\rm positive}(e)$ is the starting vertex of the positively oriented link underlying $e$; and $\operatorname{sgn}(e)=-1$ if $e$ is traversed against its positive orientation, so that a reversed link contributes minus the value on its positive orientation. The coefficient array $e\mapsto a\operatorname{sgn}(e)$ is a divergence-free lattice current, since the cycle is closed. We call $\mathscr C_{a,\varepsilon,x}A$ the heat-smoothed circulation of $A$, and $\mathcal I_a(v)$ that of the link logarithms $v$.
+
+Finally, for $k\in(2\pi/L)\Z^3$ (a frequency) set
+\[
+ J_{i,\varepsilon,a,x}(k)=a\sum_{e\in\ell_{i,\varepsilon,a,x}}\operatorname{sgn}(e)\,e_{\operatorname{dir}(e)}\,e^{-ik\cdot x_{\rm positive}(e)},\qquad
+ \lambda_a(k)=4a^{-2}\sum_{r=1}^3\sin^2(ak_r/2),
+\]
+\[
+ C^{a,\varepsilon,L}_{ih}=\frac1{\varepsilon L^3}\sum_{k\ne0}\frac{e^{-2\sigma\varepsilon^2\lambda_a(k)}}{\lambda_a(k)}\,\overline{J_{i,\varepsilon,a,x}(k)}\cdot J_{h,\varepsilon,a,x}(k),
+\]
+where $k$ ranges over representatives of $(2\pi/L)\Z^3$ modulo $(2\pi/a)\Z^3$ with $|ak_r|\le\pi$, and
+\[
+ C^{\varepsilon,L}_{ih}=\Bigl(\frac\varepsilon L\Bigr)^3\sum_{k\in(2\pi/L)\Z^3\setminus\{0\}}\frac{e^{-2\sigma|\varepsilon k|^2}}{|\varepsilon k|^2}\,\overline{\widehat J_i(\varepsilon k)}\cdot\widehat J_h(\varepsilon k).
+\]
+\end{definition}
+
+The matrix $\Sigma$ is the covariance of heat-smoothed circulations of a massless transverse field on $\R^3$: before smoothing, the Fourier covariance of that field is $|p|^{-2}(I-pp^{\mathsf T}/|p|^2)$ in each of three independent colors, and the transverse projection drops out against $\widehat J_i$ because $p\cdot\widehat J_i(p)=0$.
+
+\begin{lemma}\label{ch28:lem:free-current-covariance}
+In the notation of \cref{ch28:def:closed-current-target}, the following statements hold.
+\begin{enumerate}
+\item We have $p\cdot\widehat J_i(p)=0$ and $|\widehat J_i(p)|\le C_\ell\min\{|p|,1\}$. The integral defining $\Sigma$ converges, and $\Sigma$ is a real symmetric positive semidefinite matrix; it may be singular.
+\item For $v_1,\dots,v_m\ge0$, with $V=\operatorname{diag}(v_i)$,
+\[
+ \E e^{-\sum_iv_i\mathsf Z_i}=\det\bigl(I+\tfrac14\Sigma^{1/2}V\Sigma^{1/2}\bigr)^{-3/2},
+\]
+\[
+ \E\mathsf Z_i=\tfrac38\Sigma_{ii},\qquad \Cov(\mathsf Z_i,\mathsf Z_h)=\tfrac3{32}\Sigma_{ih}^2.
+\]
+\item The functional $\mathscr C_{a,\varepsilon,x}$ vanishes on every periodic lattice gradient. If $\varepsilon\le\varepsilon_{\rm loop}$, it also vanishes on every constant field. For the initial potential $A^{K,s}=a_{N_K}^{-1}\widehat\theta_{K-s}$ of \cref{ch01:def:heat-current}, we have $I^{K,s}=\mathcal I_{a_{N_K}}(\widehat\theta_{K-s})$.
+\item Let $\varepsilon\le\varepsilon_{\rm loop}$, and let $A$ be the physical Maxwell Gaussian field on the lattice of mesh $a$, in three independent colors: the centered Gaussian field on link potentials modulo gradients and constants whose density is proportional to $\exp(-\|d\theta\|_{\ell^2}^2/(2g_3^2a))$, where $\theta=aA$ and $d$ is the dimensionless plaquette coboundary. Equivalently, its covariance is $g_3^2(-\Delta_a)^+P_{{\rm tr},a}$, where $P_{{\rm tr},a}$ is the projection onto lattice divergence-free fields and $(-\Delta_a)^+$ is the inverse of $-\Delta_a$ on fields with zero mean. Then $\E[(\mathscr C_{a,\varepsilon,x}A)_i^c(\mathscr C_{a,\varepsilon,x}A)_h^{c'}]=\delta_{cc'}C^{a,\varepsilon,L}_{ih}$. The longitudinal part of the covariance drops out by the exact closedness of the cycles, before any limit is taken.
+\item For each fixed $\varepsilon\in(0,\varepsilon_{\rm loop}]$, $C^{a,\varepsilon,L}\to C^{\varepsilon,L}$ as $a\downarrow0$, uniformly in $x$ and the lattice offset. Further, $C^{\varepsilon,L}\to\Sigma$ as $\varepsilon\downarrow0$.
+\end{enumerate}
+The constants in these statements depend only on the loops, $L$, $\sigma$, $C_\ell$, and $\varepsilon_{\rm loop}$. The covariances $C^{a,\varepsilon,L}$, $C^{\varepsilon,L}$, and $\Sigma$ do not depend on $g_3$.
+\end{lemma}
+
+\begin{proof}
+We verify the statements in order.
+
+\paragraph{Step 1: the continuum current.}
+Let $l_i=\int_0^1|\dot\ell_i(v)|\,dv$, and let $y_i$ be a point on the $i$-th loop. Integrating the derivative of $v\mapsto e^{-ip\cdot\ell_i(v)}$ over the closed loop, we find $p\cdot\widehat J_i(p)=0$. Since $\int_0^1\dot\ell_i=0$, we also have
+\[
+ \widehat J_i(p)=\int_0^1\dot\ell_i(v)\bigl[e^{-ip\cdot\ell_i(v)}-e^{-ip\cdot y_i}\bigr]\,dv,\qquad |\widehat J_i(p)|\le l_i\min\{2,|p|\operatorname{diam}\ell_i\}.
+\]
+The integrand defining $\Sigma$ is therefore bounded near zero and bounded by $C|p|^{-2}e^{-2\sigma|p|^2}$ for $|p|\ge1$; both bounds are integrable in three dimensions. For real numbers $u_i$, the quadratic form of $\Sigma$ is
+\[
+ (2\pi)^{-3}\int_{\R^3}\frac{e^{-2\sigma|p|^2}}{|p|^2}\Bigl|\sum_iu_i\widehat J_i(p)\Bigr|^2\,dp\ge0.
+\]
+The substitution $p\mapsto-p$, together with $\widehat J_i(-p)=\overline{\widehat J_i(p)}$, shows that the entries are real, and interchanging $i$ and $h$ shows that $\Sigma$ is symmetric.
+
+\paragraph{Step 2: the Gaussian comparison vector.}
+Let $Z^1,Z^2,Z^3$ be independent standard Gaussian vectors in $\R^m$ and set $G^c=\Sigma^{1/2}Z^c$; this constructs $G$ also when $\Sigma$ is singular. Then $\sum_iv_i\mathsf Z_i=(1/8)\sum_c(Z^c)^{\mathsf T}\Sigma^{1/2}V\Sigma^{1/2}Z^c$. Diagonalizing the positive semidefinite matrix $\Sigma^{1/2}V\Sigma^{1/2}$ by an orthogonal matrix reduces the Laplace transform to a product, over its eigenvalues $\lambda$ and the three colors, of
+\[
+ (2\pi)^{-1/2}\int_\R e^{-(1+\lambda/4)z^2/2}\,dz=(1+\lambda/4)^{-1/2},
+\]
+which gives the determinant formula. For a centered Gaussian pair $(X,Y)$ we have $\E(X^2Y^2)=\E X^2\,\E Y^2+2(\E XY)^2$; this is Isserlis' formula \cite{Isserlis1918GaussianMoments}. Applying it to the coordinates of $G$, we obtain $\E\mathsf Z_i=(3/8)\Sigma_{ii}$ and $\Cov(\mathsf Z_i,\mathsf Z_h)=(1/64)\sum_c2\Sigma_{ih}^2=(3/32)\Sigma_{ih}^2$.
+
+\paragraph{Step 3: gradients and constants.}
+For a vertex function $f$, let $d_af$ be the field whose value on the positive link from $y$ to $y+ae_r$ is $(f(y+ae_r)-f(y))/a$. The heat semigroup commutes with $d_a$, since the lattice Laplacian is a sum of translations, which commute. The oriented sum of $a(P^a_td_af)_{\operatorname{dir}(e)}(x_{\rm positive}(e))$ around the lattice cycle telescopes to zero. The heat semigroup fixes constant fields, and the sum of the oriented displacement vectors $a\operatorname{sgn}(e)e_{\operatorname{dir}(e)}$ vanishes for a cycle of zero winding; hence the current also annihilates constants. Both assertions use the convention that a reversed link is evaluated on its positive orientation, at the starting vertex of that positive link. The identity $I^{K,s}=\mathcal I_{a_{N_K}}(\widehat\theta_{K-s})$ is the substitution $A=a_{N_K}^{-1}\widehat\theta_{K-s}$ in \cref{ch01:def:heat-current}; the gauge representative is not changed.
+
+\paragraph{Step 4: the lattice covariance.}
+We take the representatives $k$ with $|ak_r|\le\pi$ and define
+\[
+ d_r(k)=a^{-1}(e^{iak_r}-1),\qquad\text{so that}\qquad \lambda_a(k)=\sum_r|d_r(k)|^2.
+\]
+The Fourier transform of the boundary of the cycle is zero, which is the identity
+\begin{equation}\label{ch28:eq:cycle-Fourier}
+ \sum_r\overline{d_r(k)}\,J_{i,\varepsilon,a,x,r}(k)=0
+\end{equation}
+at every frequency, with repeated links counted with multiplicity. Indeed, the left side equals $\sum_e\operatorname{sgn}(e)(e^{-ik\cdot y_+(e)}-e^{-ik\cdot y_-(e)})$, where $y_\pm(e)$ are the endpoints of the positive link underlying $e$, and this sum telescopes around the closed cycle. At $k=0$, zero winding implies $J_i(0)=0$. On each nonzero frequency, the algebraic identity
+\[
+ \sum_{r<q}|d_rA_q-d_qA_r|^2=\lambda_a|A|^2-\Bigl|\sum_r\overline{d_r}A_r\Bigr|^2
+\]
+identifies the inverse of the Maxwell quadratic form, restricted to transverse fields, as $\lambda_a^{-1}P_{{\rm tr},a}$. This normalization agrees with the Wilson normalization of \cref{ch05:thm:flat-precision}: writing $\theta=aA$, the quadratic exponent is
+\[
+ \frac{\|d\theta\|_{\ell^2}^2}{2g_3^2a}=\frac{a^3}{2g_3^2}\sum_{y}\sum_{r<q}|(d_aA)_{rq}(y)|^2,
+\]
+where $d$ on the left is dimensionless and $d_a$ on the right is in physical units. With $\widehat A(k)=a^3\sum_ye^{-ik\cdot y}A(y)$, the covariance of the Fourier coefficients is $g_3^2L^3\one_{k'=-k}\lambda_a(k)^{-1}P_{{\rm tr},a}(k)$. Pairing twice with the cycle, applying the two heat factors $e^{-\sigma\varepsilon^2\lambda_a(k)}$, and dividing by $\eta$, we obtain the covariance
+\[
+ \frac{g_3^2}{\eta L^3}\sum_{k\ne0}\frac{e^{-2\sigma\varepsilon^2\lambda_a(k)}}{\lambda_a(k)}\,\overline{J_i(k)}\cdot J_h(k),
+\]
+in each color separately. Here \eqref{ch28:eq:cycle-Fourier} removed the projection $P_{{\rm tr},a}$. Since $g_3^2/\eta=1/\varepsilon$, this is the formula for $C^{a,\varepsilon,L}$.
+
+\paragraph{Step 5: the limit $a\downarrow0$.}
+We lift the small cycle and the loop $x+\varepsilon\ell_i$ to a ball of diameter $C\varepsilon$ in $\R^3$. For a $C^1$ one-form $f$, replacing its integral over each oriented link by the value at the starting vertex of the positive link changes the integral by at most $a^2\|Df\|_\infty/2$ per link; summing over at most $C_\ell\varepsilon/a$ links gives an error at most $C\varepsilon a\|Df\|_\infty$. For a piecewise smooth based homotopy $H(u,v)$ between the polygon and the loop, differentiating $\int f(H)\partial_vH\,dv$ in $u$ and integrating by parts in $v$ gives
+\[
+ \oint_{\rm polygon}f-\oint_{x+\varepsilon\ell_i}f=\int_0^1\!\!\int_0^1df(H)(\partial_uH,\partial_vH)\,du\,dv.
+\]
+The endpoint terms cancel because the paths are closed and the homotopy is based; for a piecewise smooth homotopy the formula holds piece by piece, and the internal boundaries cancel. The swept area bounds this difference by $C\varepsilon a\|df\|_\infty$. Applying both estimates to $f(y)=e^{-ik\cdot y}dy_r$, and using $\oint_{x+\varepsilon\ell_i}e^{-ik\cdot y}dy=\varepsilon e^{-ik\cdot x}\widehat J_i(\varepsilon k)$, we obtain for each fixed $\varepsilon$ and $k$
+\begin{equation}\label{ch28:eq:current-attachment-error}
+ \bigl|J_{i,\varepsilon,a,x}(k)-\varepsilon e^{-ik\cdot x}\widehat J_i(\varepsilon k)\bigr|\le C\varepsilon a|k|,
+\end{equation}
+uniformly in $x$ and the lattice offset; a rounding of the common base point is included in the same estimate. Subtracting from each exponential in the definition of $J_i$ its value at one vertex of the cycle, which is allowed since $J_i(0)=0$, and using the bounds on length and diameter, we find
+\begin{equation}\label{ch28:eq:lattice-current-bound}
+ |J_i(k)|\le C\varepsilon\min\{1,\varepsilon|k|\},\qquad \frac4{\pi^2}|k|^2\le\lambda_a(k)\le|k|^2.
+\end{equation}
+The second assertion follows in each coordinate from $2|u|/\pi\le|\sin u|\le|u|$ for $|u|\le\pi/2$. For fixed $\varepsilon>0$, we extend the summand defining $C^{a,\varepsilon,L}$ by zero outside the chosen representatives. By \eqref{ch28:eq:lattice-current-bound} its absolute value is bounded by a summable Gaussian function of $k$ on the fixed reciprocal lattice $(2\pi/L)\Z^3$, uniformly in $a$, $x$, and the offset. Given a tolerance, we first truncate this Gaussian tail. On the finitely many remaining frequencies, \eqref{ch28:eq:current-attachment-error} and $\lambda_a(k)\to|k|^2$ give uniform convergence. Substituting $J_i(k)=\varepsilon e^{-ik\cdot x}\widehat J_i(\varepsilon k)$, the two translation phases cancel and the prefactor becomes $\varepsilon^2/(\varepsilon L^3|k|^2)=(\varepsilon/L)^3|\varepsilon k|^{-2}$. This proves $C^{a,\varepsilon,L}\to C^{\varepsilon,L}$.
+
+\paragraph{Step 6: the limit $\varepsilon\downarrow0$.}
+Let $\delta=2\pi\varepsilon/L$ and, for $p\ne0$, define
+\[
+ f_{ih}(p)=\frac{e^{-2\sigma|p|^2}}{|p|^2}\,\overline{\widehat J_i(p)}\cdot\widehat J_h(p).
+\]
+By Step 1, $f_{ih}$ is bounded near zero, smooth away from zero, and has a Gaussian tail. We have $C^{\varepsilon,L}_{ih}=(2\pi)^{-3}\delta^3\sum_{v\in\Z^3\setminus\{0\}}f_{ih}(\delta v)$. For $r>0$, the contribution of the points with $|\delta v|<r$ is at most $C(r+\delta)^3$, as one sees by counting the disjoint cubes of side $\delta$ centered at these points inside the ball of radius $r+\sqrt3\delta$; the corresponding integral is at most $Cr^3$. On a fixed annulus $r\le|p|\le R$, uniform continuity bounds the difference between the integral over each cube and the sampled value by the modulus of continuity at $\sqrt3\delta$, and the boundary cubes have total volume tending to zero. The tails are uniform for $0<\delta\le1$: for $R\ge2$, the absolute sum over the shell $2^qR\le|p|<2^{q+1}R$ is at most $C(2^{q+1}R+1)^3e^{-c_\sigma(2^qR)^2}$, and these bounds are summable in $q$ with sum tending to zero as $R\to\infty$. Letting $\delta\downarrow0$, then $r\downarrow0$, and then $R\to\infty$, we obtain $C^{\varepsilon,L}_{ih}\to(2\pi)^{-3}\int f_{ih}=\Sigma_{ih}$. The constants used depend only on the stated data, and $g_3$ appeared only through $g_3^2/\eta=1/\varepsilon$.
+\end{proof}
+
+\section{Linearized reconstruction and nonlinear error terms}\label{ch28:sec:linear}
+
+This section constructs the field $\widehat{\mathcal E}_j^a$ described at the beginning of the section and proves the deterministic bounds that convert coefficient bounds into bounds for circulations. The linear comparison follows the constrained Gaussian calculations for Bałaban's averaging operation \cite[Section~A, (1.1)--(1.8), pp.~18--19, and Section~D, (1.47)--(1.49), p.~26, and (1.64)--(1.67), p.~29]{Balaban1984I}; the averaging map, the effective actions, and the gauge representatives used here are those of \cref{ch05:chapter,ch07:chapter,ch08:chapter,ch12:chapter}, and the comparison is proved below for them.
+
+\begin{theorem}\label{ch28:thm:one-shot-and-source-sum}
+Assume the setting of \cref{ch28:sec:setting} and the loop data of \cref{ch28:def:closed-current-target}. Fix a coarse index $s$ with $n_s\ge n_\Gamma$ and $K\ge s$. Then the following statements hold.
+\begin{enumerate}
+\item On the larger analytic domain fixed in \cref{ch20:thm:finite-ceiling-parameters}, the zero-fluctuation reconstruction maps satisfy
+\[
+ \widehat P_j\prec\phi(z)=\frac{\alpha_*z}{1-\beta_Jz},\qquad
+ \bigl(v\mapsto\widehat P_j(v)-D\widehat P_j(0)v\bigr)\prec\frac{\alpha_*\beta_Jz^2}{1-\beta_Jz},
+\]
+with output rows, every volume-normalized column with a distinguished input, and a fixed spatial weight. The constant $\beta_J$ is chosen on that domain before $r_{\rm eff}$ and $r$.
+\item There exist deterministic matrices $E_j^a$, $0\le j\le k$, with $E_k^a=I$, each a scalar multiple of the identity on the color factor, with rows and volume-normalized columns (with factor $a^3/a_j^3$) bounded by a constant, and with a fixed positive spatial decay rate measured in units of $a_j$, such that
+\[
+ a^{-1}\widehat L_k\cdots\widehat L_{j+1}v-a_j^{-1}E_j^av=d_af_j(v)
+\]
+for a periodic vertex function $f_j(v)$ on the fine lattice depending linearly on $v$. The difference has no constant part, because the block averaging constraint fixes the componentwise means in physical units. These bounds do not depend on $k-j$.
+\item Let $T$ be a matrix from link variables on a lattice of mesh $h$ to link variables on the fine lattice, with row norm and volume-normalized column norm at most $A_0$, and with at most a fixed number of input coordinates per cell of side $h$. Then for $0\le t\le\sigma\varepsilon_{\rm loop}^2$,
+\[
+ \sup_y\|\operatorname{row}_y(P^a_tT)\|_{\ell^2}\le CA_0\min\{1,h^{3/2}(t+a^2)^{-3/4}\},\qquad \|P^a_tT\|_{\ell^\infty\to\ell^\infty}\le A_0.
+\]
+Consequently, for $a\le\varepsilon\le\varepsilon_{\rm loop}$,
+\[
+ \Bigl\|\mathscr C_{a,\varepsilon,x}\frac{g_3\sqrt h}{h}T\Bigr\|_{\ell^2\to\R^{3m}}\le CA_0\min\{h/\varepsilon,\sqrt{\varepsilon/h}\},
+\]
+\[
+ \Bigl\|\mathscr C_{a,\varepsilon,x}\frac{g_3\sqrt h}{h}T\Bigr\|_{\ell^\infty\to\R^{3m}}\le CA_0\sqrt{\varepsilon/h},
+\]
+where $\ell^2$ and $\ell^\infty$ refer to the counting norms on the inputs.
+\item For $i>j$ put $r'=i-1-j$ and $D=\beta_J/(1-\alpha_*)$. Then
+\[
+ \bigl(v\mapsto\widehat{\mathcal R}_i(\widehat\Pi_{i-1\leftarrow j}(v))\bigr)\prec C\alpha_*^{2r'+1}\frac{z^2}{(1-Dz)^2},
+\]
+for rows and for columns with the normalization $a_i^3/a_j^3$. Derivatives with a distinguished input are bounded by derivatives of the same series, with the same spatial decay rate.
+\item Define the field on the fine lattice
+\[
+ \widehat{\mathcal E}_j^a(v)=E_j^av+\sum_{i=j+1}^k\frac{a_j}{a_i}\,E_i^a\,\widehat{\mathcal R}_i\bigl(\widehat\Pi_{i-1\leftarrow j}(v)\bigr).
+\]
+For $\|v\|_\infty\le r_{\rm eff}$, it is equivariant under global color rotations, vanishes at $v=0$, and satisfies
+\[
+ \mathcal I_a\bigl(\widehat\Pi_{k\leftarrow j}(v)\bigr)=\mathscr C_{a,\varepsilon,x}\bigl(a_j^{-1}\widehat{\mathcal E}_j^a(v)\bigr).
+\]
+Its rows and its columns with normalization $a^3/a_j^3$ are bounded by a power series independent of $k$, $j$, and $d_j$. In particular, on the reconstruction domain,
+\[
+ \|D\widehat{\mathcal E}_j^a(v)\|_{\rm row+col}\le C,\qquad \|D\widehat{\mathcal E}_j^a(v)-D\widehat{\mathcal E}_j^a(0)\|_{\rm row+col}\le C\|v\|_\infty,
+\]
+and every fixed higher derivative obeys the corresponding bound. The conversion to physical units is governed by the identities
+\[
+ \frac{a_j}{a_i}\alpha_*^{2r'+1}=B^{r'+1}\alpha_*^{2r'+1}=C_*q^{r'},\qquad \frac{a^3}{a_i^3}\cdot\frac{a_i^3}{a_j^3}=\frac{a^3}{a_j^3}.
+\]
+\end{enumerate}
+The constants in the coefficient bounds depend only on $M$, $J$, $\Theta$, the analytic domains and their ratios, the spatial decay rates, and the number of coordinates per cell; the constants in the heat and circulation bounds may in addition depend on $L$, $\sigma$, $C_\ell$, and $\varepsilon_{\rm loop}$. None depends on $K$, $s$, $j$, $d_j$, or the coarse field in the reconstruction domain.
+\end{theorem}
+
+\begin{remark}\label{ch28:rem:circulation-only}
+The identity in part (5) is an identity between circulations. It does not say that the composed nonlinear reconstruction $\widehat\Pi_{k\leftarrow j}$ coincides with a single reconstruction over all intermediate scales, and no inverse of the Maxwell operator on the coarse lattice is used.
+\end{remark}
+
+\begin{proof}
+The proof has six steps. Step 1 recalls the analytic input. Step 2 proves the linear comparison of part (2), which is the source of the exact cancellation of gradients. Step 3 proves the heat and circulation bounds of part (3). Steps 4 and 5 show that coefficient bounds survive compositions of arbitrary length and prove part (4). Step 6 assembles the field $\widehat{\mathcal E}_j^a$.
+
+\paragraph{Step 1: the analytic input.}
+The coefficient bound on the larger domain and the order in which the constants are chosen are given by \cref{ch12:lem:deterministic-prolongation-reserve}. The identification of $C_*$ with the constant $C_{\rm CP}$ of that lemma and the choice of $J$ are part of \cref{ch20:thm:finite-ceiling-parameters}; in particular we use $q\le1/4$, and no constant of an all-order bound at fixed $J$ is used to choose $J$. Restricting the joint coefficient series of \cref{ch12:lem:deterministic-prolongation-reserve} to zero fluctuation variables gives the two majorants of part (1), with the stated output and distinguished-input conventions. Its domain inclusions hold on the reconstruction domain.
+
+\paragraph{Step 2: the linear comparison.}
+For $j<k$ we apply \cref{ch08:lem:aligned-zero-white} once, with $J(k-j)$ averaging steps, preceding classical recursion index zero, coarse mesh $a_j$, and relative fine spacing $u=a/a_j$. The logarithm of the representative given by that lemma is $u\overline A_u(v)$, and we define
+\[
+ E_j^a=D\overline A_u(0).
+\]
+By the first-derivative clause of that lemma, we have the row bound and the column factor $u^3=a^3/a_j^3$, with one positive spatial decay rate in units of $a_j$, uniformly in the number $J(k-j)$ of averaging steps. We use no bound on the dependence on fluctuation variables at this growing number of steps. By global color equivariance, each $3\times3$ color block of $E_j^a$ commutes with every rotation. Commuting with the rotations by $\pi$ about the coordinate axes makes the block diagonal, and commuting with the rotations that permute the axes makes its three diagonal entries equal. Hence $E_j^a$ is a scalar multiple of the identity on the color factor. We set $E_k^a=I$.
+
+We now show that $uE_j^a$ represents the composed linearization for circulations. First let $v$ be real; all minimizations and comparisons of nonnegative quadratic forms in this paragraph are on real tangent spaces. By the quadratic part of the nested minimization identity of \cref{ch07:thm:bellman}, each linearized reconstruction minimizes the inherited nonnegative Maxwell quadratic form over the free coordinates, on which this form is positive definite. If a quadratic form $Q(x,y,z)$ has positive blocks in the constrained variables $y$ and $z$, then
+\[
+ \inf_z\inf_yQ(x,y,z)=\inf_{(y,z)}Q(x,y,z).
+\]
+Indeed, every value of the problem on the right bounds the left side from above, and for each fixed $z$ the inner minimizer realizes the infimum over $y$. Completing the squares in the positive blocks shows that both infima are attained at the classical tangents. We iterate this equality over the finitely many averaging steps. Since the indices $d_j=J(k-j)$ are compatible, the inherited forms are exactly the successive Schur complements. Thus the composed tangent $\widehat L_k\cdots\widehat L_{j+1}v$ and the tangent $uE_j^av$ minimize the same quadratic form on the fine lattice subject to the same linearized averaging constraint $v$. The gauge transformations of \cref{ch12:thm:replacement-family} depend only on the coarse field and equal the identity at the tree roots; they preserve the constraint and the gauge orbit of the minimizer. Their derivatives at zero add periodic gradients, which do not affect this conclusion.
+
+Let $X$ and $Y$ be these two minimizers, and let $Q_0$ be the Maxwell quadratic form. Since the constraint is linear, the midpoint satisfies it. By the parallelogram identity, we have
+\[
+ Q_0\Bigl(\frac{X+Y}2\Bigr)=\frac12Q_0(X)+\frac12Q_0(Y)-\frac14Q_0(X-Y).
+\]
+Minimality and nonnegativity imply $Q_0(X-Y)=0$; in particular $d(X-Y)=0$. We determine the kernel. Let $Z=X-Y$ and fix a nonzero lattice frequency, with $b_r=e^{iak_r}-1$. Zero curl says $b_r\widehat Z_q=b_q\widehat Z_r$. Choosing an index $r$ with $b_r\ne0$, we have $\widehat Z_q=b_q(\widehat Z_r/b_r)$ for every $q$; that is, every nonzero-frequency part of $Z$ is a periodic gradient. The zero-frequency part is a constant field, and its componentwise means in physical units are its constant components.
+
+This constant vanishes for $X-Y$. By \cref{ch05:lem:flat-average-semigroup}, the derivative of the composed block averaging map is the box and segment average plus a periodic gradient on the coarse lattice, and its version in physical units preserves each componentwise mean. Explicitly, if $m'=a_j/a$ is the total blocking factor and $K_{m'}$ the box and segment average, the box and segment formula counts each fine link $m'$ times before its factor $m'^{-3}$, so that
+\[
+ \sum_Y(K_{m'}Z)_r(Y)=m'^{-2}\sum_yZ_r(y),\qquad (m'a)^3\sum_Y\frac{(K_{m'}Z)_r(Y)}{m'a}=a^3\sum_y\frac{Z_r(y)}a.
+\]
+The coarse gradient has mean zero. Since $X-Y$ satisfies the homogeneous constraint, its mean in physical units is zero. The same argument applies to coarse fields with nonzero constant components, which are fixed by the constraint. We conclude that $a^{-1}(X-Y)=d_af_j(v)$ for a periodic vertex function, chosen with mean zero, which depends linearly on $v$ by the frequency formula above. This proves part (2), and by \cref{ch28:lem:free-current-covariance} the circulation annihilates the gradient. The maps in this identity are real linear; their complex-linear extensions give the same identity for complex $v$.
+
+\paragraph{Step 3: heat and circulation bounds.}
+Let $R(T)$ and $C(T)$ be the row norm and the volume-normalized column norm of $T$. For a vector $z$ of inputs, by the Cauchy--Schwarz inequality with the weights $|T_{eu}|$, we have
+\[
+ \sum_e\Bigl|\sum_uT_{eu}z_u\Bigr|^2\le R(T)\sum_{e,u}|T_{eu}||z_u|^2\le R(T)C(T)(h/a)^3\sum_u|z_u|^2,
+\]
+since $\sum_e|T_{eu}|\le(h/a)^3C(T)$. Thus $\|T\|_{\ell^2\to\ell^2}\le A_0(h/a)^{3/2}$. We use \cref{ch13:lem:heat-and-chaining} with the fixed horizon $T_{\rm heat}=\sigma\varepsilon_{\rm loop}^2$ and difference order zero. Its hypotheses hold on the periodic fine lattice of mesh $a=L/N_K$, with $N_K\ge4$, and all times considered lie in $[0,T_{\rm heat}]$. Since the heat kernel of that lemma is a density with respect to $a^3\sum_y$, the row of $P^a_t$ at $y$, as a vector in the counting norm, is $a^3p^a_t(y,\cdot)$, and its $\ell^2$ norm is at most $Ca^{3/2}(t+a^2)^{-3/4}$. Applying this row to $T$, we obtain
+\[
+ \|\operatorname{row}_y(P^a_tT)\|_{\ell^2}\le\|a^3p^a_t(y,\cdot)\|_{\ell^2}\|T\|_{\ell^2\to\ell^2}\le CA_0h^{3/2}(t+a^2)^{-3/4}.
+\]
+Since the heat kernel is positive with unit mass, the absolute row sums of $P^a_tT$ are at most $A_0$; this bounds both the $\ell^2$ norm of each row and the $\ell^\infty\to\ell^\infty$ norm, including at $t=0$. The finitely many directions and input types are absorbed into $C$. Since the horizon is fixed, the constants depend on its ratio to $L^2$, and the constant mode of the heat semigroup is included.
+
+For $\varepsilon\le\varepsilon_{\rm loop}$ the time $t=\sigma\varepsilon^2$ lies in $[0,T_{\rm heat}]$, and $a\le\varepsilon$ implies $(t+a^2)^{-3/4}\le C_\sigma\varepsilon^{-3/2}$. The circulation sums the rows over at most $C_\ell\varepsilon/a$ links with the weight $a/\sqrt\eta$, so the prefactor multiplying a single row is
+\[
+ \frac{\varepsilon}{\sqrt\eta}\cdot\frac{g_3\sqrt h}{h}=\sqrt{\varepsilon/h}.
+\]
+Multiplying it by $\min\{1,C(h/\varepsilon)^{3/2}\}$ proves the $\ell^2$ circulation bound, and multiplying it by the absolute row bound proves the $\ell^\infty$ bound. Summing over the fixed number of loop and color components gives a fixed factor.
+
+\paragraph{Step 4: compositions of coefficient bounds.}
+In the composition of two tensors, fixing an output and summing over all inputs uses the row bound of the outer tensor and a row bound of the inner tensor at every input slot of the outer tensor. If instead we fix one input of the inner tensor, we follow the chain of factors through which this input enters. Along this chain we use the column bound of the inner tensor and the column bound of the outer tensor with the corresponding distinguished input; all other factors use rows. For example, let $B$ be a bilinear tensor from mesh $a_{i-1}$ to mesh $a_i$ and $G$ a linear tensor from mesh $a_j$ to mesh $a_{i-1}$, and consider $(B(Gv,Gv))_e=\sum_{y,y',u,u'}B_{e;yy'}G_{yu}G_{y'u'}v_uv_{u'}$. Fixing $u$ in the first slot, we have
+\[
+ \sum_{e,u'}\Bigl|\sum_{y,y'}B_{e;yy'}G_{yu}G_{y'u'}\Bigr|\le\sum_y|G_{yu}|\sum_{e,y'}|B_{e;yy'}|\sum_{u'}|G_{y'u'}|\le\frac{a_j^3}{a_{i-1}^3}C(G)\cdot\frac{a_{i-1}^3}{a_i^3}C_1(B)\cdot R(G),
+\]
+where $C_1(B)$ is the column norm of $B$ with its first input distinguished. After multiplication by the volume factor $a_i^3/a_j^3$, the volume factors cancel:
+\[
+ \frac{a_i^3}{a_{i-1}^3}\cdot\frac{a_{i-1}^3}{a_j^3}=\frac{a_i^3}{a_j^3}.
+\]
+In general there is exactly one chain of factors carrying the fixed input; summing over its possible positions corresponds to differentiating the scalar power series. The Taylor coefficients $D^n/n!$ distribute the input indices among the input slots of the outer tensor with exactly the multiplicities of scalar substitution: ordering the slots first and then dividing by their factorials counts each partition once. We conclude that composition of the scalar majorants majorizes these tensor contractions, also with a distinguished input, and that no constant is lost at successive levels.
+
+The spatial weights are treated in the same contraction. We take the union of the connecting networks of the participating coefficients, joined at the contracted indices. It is a connected network joining all the external indices, so its length is at least their minimal network length. Every later input mesh is at most $a_j$, so the weight of each part of the network at its own scale dominates its weight in units of $a_j$. Multiplying the weights bounds the weight of the union with the initially fixed decay rate. This holds for compositions of arbitrary length, without a reduction of the decay rate at each step.
+
+\paragraph{Step 5: iterated majorants and the remainder bound.}
+Let $S_r=\sum_{v=0}^{r-1}\alpha_*^v$, with $S_0=0$. By induction, using the formula for $\phi$, we have the identity
+\begin{equation}\label{ch28:eq:iterated-positive-series}
+ \phi^{\circ r}(z)=\frac{\alpha_*^rz}{1-\beta_JS_rz}.
+\end{equation}
+For the inductive step, we substitute the right side into $\alpha_*y/(1-\beta_Jy)$ and use $S_{r+1}=S_r+\alpha_*^r$. By Step 4, $\widehat\Pi_{i-1\leftarrow j}\prec\phi^{\circ r'}$ with $r'=i-1-j$, and the remainder satisfies, coefficientwise,
+\begin{align}
+ \widehat{\mathcal R}_i\circ\widehat\Pi_{i-1\leftarrow j}\prec\frac{\alpha_*\beta_J(\phi^{\circ r'}(z))^2}{1-\beta_J\phi^{\circ r'}(z)}
+ &=\frac{\beta_J\alpha_*^{2r'+1}z^2}{(1-\beta_JS_{r'}z)(1-\beta_JS_{r'+1}z)}\notag\\
+ &\preceq\frac{\beta_J\alpha_*^{2r'+1}z^2}{(1-Dz)^2},\qquad D=\frac{\beta_J}{1-\alpha_*}.\label{ch28:eq:two-leg-source}
+\end{align}
+Here $\preceq$ denotes coefficientwise inequality of power series. In the equality we used $1-\beta_J\phi^{\circ r'}(z)=(1-\beta_JS_{r'+1}z)/(1-\beta_JS_{r'}z)$, and the coefficientwise inequality holds because $\beta_JS_r\le D$ for every $r$. This proves the row, column, and distinguished-derivative assertions of part (4), with $C=\beta_J$, enlarged once for the fixed convention on components. The bound $Dr_{\rm eff}<1/8$ makes all these substitutions convergent on the reconstruction domain. The two inputs that every monomial of the remainder contains each contribute a factor $\alpha_*^{r'}$; this is the origin of the exponent $2r'+1$.
+
+\paragraph{Step 6: the field $\widehat{\mathcal E}_j^a$.}
+For a finite composition we have the identity
+\begin{equation}\label{ch28:eq:finite-source-telescope}
+ \widehat\Pi_{k\leftarrow j}(v)=\widehat L_k\cdots\widehat L_{j+1}v+\sum_{i=j+1}^k\widehat L_k\cdots\widehat L_{i+1}\,\widehat{\mathcal R}_i\bigl(\widehat\Pi_{i-1\leftarrow j}(v)\bigr),
+\end{equation}
+which follows by induction on $k-j$: to pass from $k-1$ to $k$, apply $\widehat L_k$ to the identity at $k-1$ and add $\widehat{\mathcal R}_k(\widehat\Pi_{k-1\leftarrow j}(v))$. We apply the linear functional $\mathcal I_a$ to \eqref{ch28:eq:finite-source-telescope} and use the linear comparison of Step 2 on each summand, with the remainder $\widehat{\mathcal R}_i(\widehat\Pi_{i-1\leftarrow j}(v))$ as input at scale $i$. Since the circulation annihilates the gradients, we obtain
+\[
+ \mathcal I_a\bigl(\widehat\Pi_{k\leftarrow j}(v)\bigr)=\mathscr C_{a,\varepsilon,x}\Bigl(a_j^{-1}E_j^av+\sum_{i=j+1}^ka_i^{-1}E_i^a\,\widehat{\mathcal R}_i\bigl(\widehat\Pi_{i-1\leftarrow j}(v)\bigr)\Bigr),
+\]
+which is the identity of part (5). Each remainder is equivariant and vanishes at zero, and each $E_i^a$ is a scalar multiple of the identity on the color factor; hence $\widehat{\mathcal E}_j^a$ has both properties.
+
+Let $C_E$ be a common bound for the rows and volume-normalized columns of all $E_i^a$. Composing $E_i^a$ with a remainder multiplies its column normalization $a_i^3/a_j^3$ by $a^3/a_i^3$, which gives $a^3/a_j^3$. The factor $a_j/a_i$ in the definition of $\widehat{\mathcal E}_j^a$ combines with \eqref{ch28:eq:two-leg-source} to give
+\[
+ \frac{a_j}{a_i}\alpha_*^{2r'+1}=B^{r'+1}\alpha_*^{2r'+1}=C_*q^{r'}.
+\]
+Summing over $i$, a common majorant for $\widehat{\mathcal E}_j^a$ is
+\begin{equation}\label{ch28:eq:extension-majorant}
+ \Psi(z)=C_Ez+\frac{C_E\beta_JC_*}{1-q}\frac{z^2}{(1-Dz)^2}.
+\end{equation}
+By the fixed-input calculation of Step 4, its derivatives bound the columns with a distinguished input. It converges on a disk of radius larger than $r_{\rm eff}$. Its first derivative bounds $D\widehat{\mathcal E}_j^a$; its second derivative, integrated along the segment from $0$ to $v$, gives $\|D\widehat{\mathcal E}_j^a(v)-D\widehat{\mathcal E}_j^a(0)\|_{\rm row+col}\le C\|v\|_\infty$; and each fixed further derivative is bounded by the corresponding derivative of $\Psi$, since $Dr_{\rm eff}<1/8$. All constants are functions of the coefficient data listed in the theorem; only Step 3 introduced the loops, the heat horizon, and the torus. This completes the proof.
+\end{proof}
+
+\section{Conditional current coefficients and means}\label{ch28:sec:means}
+
+We now bring in the conditioned Wilson measure. The next theorem collects the properties of the conditional fluctuation kernels that we need, bounds the coefficient matrices $\Gamma_j$ and their dependence on the coarse field, and bounds the conditional mean and the conditional variance of the circulation Taylor remainders $\mathsf R_j^{\rm cur}$. The conditional kernels satisfy a uniform convexity bound on a product of balls. The resulting dimension-free Poincaré, logarithmic Sobolev, and covariance estimates are in the tradition of Brascamp and Lieb \cite{BrascampLieb1976}, Bakry and Émery \cite{BakryEmery1985}, and Helffer and Sjöstrand \cite{HelfferSjostrand1994}; their versions on products of balls are proved in \cref{ch02:chapter,ch10:chapter}.
+
+\begin{theorem}\label{ch28:thm:predictable-rows-and-means}
+Assume the setting of \cref{ch28:sec:setting} and the loop data of \cref{ch28:def:closed-current-target}, with one family of reconstruction maps on the whole sequence of lattices. There exists $s_0<\infty$ such that for every integer $s\ge s_0$, every $K\ge s$, every $1\le j\le K-s$, and every $\varepsilon$ with $a=a_{K-s}\le\varepsilon\le\varepsilon_0(s)$, the following statements hold. One may take $\varepsilon_0(s)\le\min\{cH_s,\varepsilon_{\rm loop},c/g_3^2\}$ for a fixed small $c>0$.
+\begin{enumerate}
+\item Under $\nu_{K,s}$, the conditional law of $w_j$ given $\mathcal F_{j-1}$ is $k_j(\widehat\theta_{j-1},dw)$, where
+\[
+ k_j(\theta,dw)=\frac{\one_{\Omega_j}(w)e^{-V_j(\theta,w)}\,dw}{\int_{\Omega_j}e^{-V_j(\theta,w)}\,dw},\qquad \Omega_j=\prod_{\ell=1}^{m_j}\overline B_{\R^3}(0,p_{j,\ell}),\qquad p_j\le p_{j,\ell}\le p_j+C_J.
+\]
+The potential $V_j$ contains the part of the classical action beyond its quadratic approximation, the input effective interaction, the Haar disintegration density, and the determinants of the triangular change of variables. The restrictions at coarser scales do not change this kernel once $\theta$ is fixed. On all of $\Omega_j$,
+\[
+ \|D_w^2V_j-I\|_{\rm row+col}\le\vartheta_j=C\bigl[t_jp_j+t_j^2(1+\mathsf E_{\rm q})\bigr],\qquad D_w^2V_j\ge\tfrac12I,
+\]
+\[
+ \Var_{k_j}f\le2\E_{k_j}|\nabla f|^2,\qquad \Ent_{k_j}(f^2)\le4\E_{k_j}|\nabla f|^2.
+\]
+The number of three-dimensional blocks satisfies $m_j\le C_J(L/a_j)^3\le C_{J,L,\gamma}t_j^{-6}$, and the conditional means satisfy $\sup_\ell|\E_\theta w_{j,\ell}|\le Ct_j\|\theta\|_\infty$; in particular they vanish at $\theta=0$. Here $\E_\theta$ denotes expectation under $k_j(\theta,\cdot)$, for a coarse field with $e^\theta\in B_r$ as in \cref{ch28:sec:setting}. The threshold $s_0$ can be chosen so that, in addition, $p_j\ge1$, $6m_je^{-p_j^2/192}\le1/2$, and $|\E_\theta w_{j,\ell}^c|\le p_j/(16\sqrt3)$ at all these levels, for every color component $c$ and every coarse field with $e^\theta\in B_r$.
+\item For every $\theta$ in the reconstruction domain, with $b=\|\theta\|_\infty$,
+\[
+ \|\Gamma_j(\theta)\|_{\ell^2\to\R^{3m}}\le C\omega_j,\qquad \|\Gamma_j(\theta)\|_{\ell^\infty\to\R^{3m}}\le C\sqrt{\varepsilon/a_j},
+\]
+\[
+ \|\Gamma_j(\theta)-\Gamma_j(0)\|_{\ell^2\to\R^{3m}}\le Cb\,\omega_j,\qquad \|\Gamma_j(\theta)\Gamma_j(\theta)^{\mathsf T}-\Gamma_j(0)\Gamma_j(0)^{\mathsf T}\|\le Cb\,\omega_j^2,
+\]
+where $\ell^2$ and $\ell^\infty$ refer to the counting norms on the fluctuation variables.
+\item Let $t=t_j$, and recall that the couplings $g_{j,\ell}\le t_j$ of the intermediate scales have fixed ratios to $t_j$. Let $F_e(\theta,q)$ be an analytic function of the coarse field $\theta$ and the coupling-scaled fluctuation inputs $q$ on the common larger coarse/free domain, with values in $\R^3$, equivariant under global color rotations, such that $F(0,0)=0$, such that its absolute coefficient row sum at the fixed output $e$ is at most a given constant $C_F<\infty$, and such that, after the substitution $q_\ell=g_{j,\ell}w_\ell$, every term of degree $l$ in $w$ carries a factor $t^l$, also after one derivative in $\theta$. The constants in this part may depend on $C_F$ and on the radius of the larger domain, but not on the output resolution. For $D_e(\theta,w)=F_e(\theta,g_{j,\cdot}w)-F_e(\theta,0)$ and every coarse field $\theta$ with $e^\theta\in B_r$, we have
+\[
+ |\E_\theta D_e|\le Ct^2\|\theta\|_\infty,\qquad \E_0D_e=0.
+\]
+For $\theta_u=u\theta$, $0\le u\le1$, and the potential $V_{\theta_u}=V_j(\theta_u,\cdot)$,
+\[
+ \frac d{du}\E_{\theta_u}D_e(\theta_u,w)=\E_{\theta_u}\partial_uD_e-\Cov_{\theta_u}(D_e,\partial_uV_{\theta_u}),
+\]
+and the local estimates
+\[
+ \sup_l\|\partial_{w_l}\partial_uV_{\theta_u}\|_{L^2(k_j(\theta_u,\cdot))}\le Ct\|\theta\|_\infty,\qquad \sum_l\|\partial_{w_l}D_e\|_{L^2(k_j(\theta_u,\cdot))}\le Ct
+\]
+hold. The derivative of the normalization, the input effective interaction, the Haar disintegration density, and all determinants are included in these statements. At $\theta=0$ the covariance of the fluctuation variables has the form $\E_0[w_l^aw_h^b]=S_{lh}\delta_{ab}$, with all spatial correlations $S_{lh}$ retained, and its contraction with any equivariant bilinear coefficient with values in $\R^3$ is zero. This is a consequence of global color equivariance, not of parity.
+\item With $b_{j-1}=\|\widehat\theta_{j-1}\|_\infty$,
+\[
+ \bigl|\Gamma_j(\widehat\theta_{j-1})\bar w_j+\E[\mathsf R_j^{\rm cur}\mid\mathcal F_{j-1}]\bigr|\le Ct_jb_{j-1}\sqrt{\varepsilon/a_j},
+\]
+\[
+ \E\bigl[|\mathsf R_j^{\rm cur}-\E(\mathsf R_j^{\rm cur}\mid\mathcal F_{j-1})|^2\bigm|\mathcal F_{j-1}\bigr]\le Ct_j^2p_j^2\omega_j^2.
+\]
+The same mean bound holds separately for $|\Gamma_j(\widehat\theta_{j-1})\bar w_j|$ and for $|\E[\mathsf R_j^{\rm cur}\mid\mathcal F_{j-1}]|$, and both vanish when $\widehat\theta_{j-1}=0$.
+\end{enumerate}
+All constants in parts (1)--(4) are independent of $s\ge s_0$, $K$, $j$, $d_j$, the output resolution, the point $x$, and the lattice offset. They may depend on $L$, $\gamma$, $M$, $J$, $\Theta$, the loops, $\sigma$, the analytic domains, and, in part (3), on $C_F$ and the larger domain.
+\end{theorem}
+
+\begin{proof}
+We first identify the conditional kernels and choose $s_0$. We then bound the coefficients at a general coarse field (Step 2), prove the moment and coupling bounds needed for general outputs (Steps 3--5), prove part (3) (Step 6), and apply it to the circulation (Step 7).
+
+\paragraph{Step 1: the kernels and the threshold.}
+By \cref{ch12:thm:replacement-family}, the reconstruction maps preserve the conditional law and its product of balls at every index $d_j$. We apply \cref{ch10:thm:complete-white-law} to this law; its bound on the input effective interaction is $\mathsf E_{\rm q}$, and its largest coupling is $t_j$. The finitely many cutoff radii within one RG step differ by at most a fixed $C_J$; write $p_j^+=p_j+C_J$. For $p_j\ge1$ this is at most $(1+C_J)p_j$, so replacing $p$ by $p_j^+$ in the rational estimate of that theorem changes only its constant, and choosing the coarse side large bounds its denominator away from zero. This gives the bound $\vartheta_j$, and the convexity, Poincaré, and entropy statements on the closed product. Every factor coming from coarser restrictions is a function of the coarse field and cancels in the normalized kernel, as stated in the same theorem. Neither this cancellation nor the choice of gauge representatives removes from $V_j$ a term that depends on $w$.
+
+The count of free coordinates in \cref{ch09:thm:sequential-density}, summed over the $J$ intermediate scales, bounds the number of three-dimensional blocks by $C_J(L/a_j)^3$. Since $t_j=\lambda_Bg_3\sqrt{a_j}$, we have $(L/a_j)^3=L^3(\lambda_Bg_3)^6t_j^{-6}$. The mean bound of \cref{ch10:thm:actual-means-and-scores}, applied to this product with its individual radii, implies that $\sup_\ell|\E_\theta w_{j,\ell}|\le Ct_jb$; in particular the means vanish at $\theta=0$.
+
+At coarse index $s$ the largest coupling is
+\begin{equation}\label{ch28:eq:largest-integrated-coupling}
+ t_1(s)=g_3\sqrt{H_s/M},\qquad t_j(s)=t_1(s)B^{-(j-1)/2},
+\end{equation}
+and $t_1(s)\to0$ as $s\to\infty$. All the domain, analytic, curvature, and moment conditions required here are finitely many fixed inequalities in $t$ and in its cutoff radius $p(t)=A_{\rm w}\log(1/t)$. We also require $n_s\ge n_\Gamma$ for every $s\ge s_0$. We increase $s_0$ until all these inequalities hold for every $0<t\le t_1(s_0)$. This is possible also for the condition $6m_je^{-p_j^2/192}\le1/2$, which involves the number of blocks: with $u=\log(1/t)$ its left side is at most
+\[
+ C_{J,L,\gamma}\exp\bigl(6u-A_{\rm w}^2u^2/192\bigr)\longrightarrow0\qquad(u\to\infty).
+\]
+The same reasoning bounds the quantity $(1+3m_j)(6m_j)^{1/2}e^{-p_j^2/384}$, which appears in the cutoff estimates of \cref{ch29:lem:current-telescope-and-cutoff}. As a function of $h=a_j$, we have
+\begin{equation}\label{ch28:eq:cutoff-envelope}
+ (1+3m_j)(6m_j)^{1/2}e^{-p_j^2/384}\le C\bigl(1+(L/h)^3\bigr)(L/h)^{3/2}e^{-c\log^2(1/(c'g_3\sqrt h))},
+\end{equation}
+and for every fixed $v>0$ the right side is $O(h^v)$ as $h\downarrow0$, since after taking logarithms the negative quadratic term dominates every fixed linear term. The bound on the mean in part (1) follows from $Ct_jr\le p_j/(16\sqrt3)$ after another increase of $s_0$, since $\|\theta\|_\infty<r$ when $e^\theta\in B_r$. These inequalities persist at every later $s$ and every level $j$. Finally, we choose $\varepsilon_0(s)$ as in the statement, with $c$ small enough that $\eta<1$ and the small lattice cycles have zero winding. None of these choices changes the reconstruction maps, their thresholds, or the small-field event at any side.
+
+\paragraph{Step 2: coefficients at a general coarse field.}
+We suppress $a$, $\varepsilon$, and $x$ from $\mathscr C=\mathscr C_{a,\varepsilon,x}$, and define the map to the fine lattice
+\begin{equation}\label{ch28:eq:joint-fine-output}
+ Z_j(\theta,w)=\widehat{\mathcal E}_j^a\bigl(\widehat\Phi_j(\theta,g_{j,\cdot}w)\bigr).
+\end{equation}
+By the identity of \cref{ch28:thm:one-shot-and-source-sum}(5), we have $G_j=\mathscr C(a_j^{-1}Z_j)$. We compose the joint coefficient series of \cref{ch12:thm:replacement-family} with the majorant \eqref{ch28:eq:extension-majorant}. The column bound for compositions, proved in Step 4 of the proof of \cref{ch28:thm:one-shot-and-source-sum}, applies with one fluctuation input distinguished, and we obtain
+\begin{equation}\label{ch28:eq:normalized-white-matrix}
+ D_wZ_j(\theta,0)=g_jT_j(\theta),\qquad \|T_j(\theta)\|_{\rm row+col}\le C,\qquad \|T_j(\theta)-T_j(0)\|_{\rm row+col}\le Cb.
+\end{equation}
+Here the fluctuation variables are referred to the mesh $a_j$. Their meshes differ from $a_j$ by the fixed factors $1,M,\dots,M^{J-1}$, and their couplings differ from $g_j$ by the corresponding fixed square-root factors, so converting their columns and densities to the mesh $a_j$ introduces only constants depending on $J$. A derivative in $\theta$ introduces a factor depending only on the fixed gap between the larger and the smaller domain, and integrating it from $0$ to $\theta$ proves the last bound; no depth-dependent derivative bound or new domain is used. Since $\Gamma_j(\theta)=\mathscr C\bigl((g_3\sqrt{a_j}/a_j)T_j(\theta)\bigr)$, \cref{ch28:thm:one-shot-and-source-sum}(3), applied to $T_j(\theta)$ and to $T_j(\theta)-T_j(0)$ with $h=a_j$, proves the three bounds on $\Gamma_j$ in part (2). For the Gram matrices we use, with $A=\Gamma_j(\theta)$ and $A_0=\Gamma_j(0)$,
+\[
+ \|AA^{\mathsf T}-A_0A_0^{\mathsf T}\|\le\|A-A_0\|\,(\|A\|+\|A_0\|),
+\]
+which gives the bound $Cb\,\omega_j^2$.
+
+\paragraph{Step 3: local moments.}
+We fix one of these products of balls, set $\theta_u=u\theta$, and write $\E_u$ for expectation under $k_j(\theta_u,\cdot)$. By the mean bound and the inequalities of Step 1, we have $\sup_l|\E_uw_l|\le1$. For a scalar coordinate let $\xi=w_l^c-\E_uw_l^c$. Applying the Poincaré inequality first to $\xi$ and then to $\xi^2$, we obtain
+\[
+ \E_u\xi^2\le2,\qquad \E_u\xi^4-(\E_u\xi^2)^2\le2\E_u|\nabla\xi^2|^2=8\E_u\xi^2\le16.
+\]
+Hence all fourth moments of scalar coordinates are bounded by a fixed constant, and the inequality $(x_1^2+x_2^2+x_3^2)^2\le3\sum_cx_c^4$ gives the same for each three-dimensional block. These bounds are uniform in $u$, the dimension of the product, and the output mesh.
+
+\paragraph{Step 4: coupling powers in the potential.}
+We read off the powers of the coupling in the potential from \cref{ch09:thm:sequential-density}. The first derivative of each classical action with respect to the free coordinates vanishes at its conditional constrained minimizer. Its quadratic term becomes exactly $|w_i|^2/2$, because the normalization uses $K_i^{-1/2}$, the inverse square root of the constrained Hessian. Although the minimizer and the square root depend on the fluctuation variables of the coarser intermediate scales, this quadratic expression does not. After subtracting $|w|^2/2$, the classical part has total degree at least three in $w$. The coupling-scaled fluctuation inputs are $q_i=g_iw_i=t\lambda_iw_i$, with fixed $\lambda_i$, and the free logarithmic coordinates are $z_i=z_i^*+K_i^{-1/2}q_i$, where $z_i^*$ and $K_i$ depend on the coarser fields. We expand the analytic reconstruction in the inputs $q_i$, keeping the conditional constrained minimizers and the Hessian factors inside it. Each term of total degree $r$ then contributes $t^r$ after the substitution, and the classical divisor $g_i^2$ removes two powers of $t$. The differences of the Haar disintegration density and of the determinants have positive degree and no inverse power of the coupling. Writing $H_r$ for the part of degree $r$ in $w$ of the interaction generated at the current integration step, there are tensors $A_r$ and $B_r$ (unrelated to the small-link domain $B_r$) such that
+\begin{equation}\label{ch28:eq:score-degree-decomposition}
+ H_r(\theta,w;t)=t^{r-2}A_r(\theta)[w^r]+t^rB_r(\theta)[w^r],\qquad A_1=A_2=0.
+\end{equation}
+The differences of the Haar density and of the determinants belong to the terms $B_r$, and their dependence on the fluctuation variables of the coarser intermediate scales is kept in this decomposition.
+
+\paragraph{Step 5: the mixed derivative of the potential.}
+Fix a level $j$ and condition on $\mathcal F_{j-1}$. We apply the local clause of \cref{ch10:thm:actual-means-and-scores} with
+\[
+ t=t_j,\qquad \theta=\widehat\theta_{j-1},\qquad E_*=\mathsf E_{\rm q},\qquad \theta_u=u\theta\quad(0\le u\le1),
+\]
+and check its hypotheses. The coarse field satisfies $e^\theta\in B_r$ on the support of $\nu_{K,s}$, as noted in \cref{ch28:sec:setting}; its radial segment remains in $B_r$ and in the larger analytic domain. The ratios $g_{j,\ell}/t_j$ are the fixed ratios of that theorem. The product is exactly $\Omega_j$, with its radii $p_{j,\ell}$, which depend on the level and the coupling but not on $u$. The conditions on the product, including the smallness of $t_j(p_j+C_J)^3$, were imposed in the choice of $s_0$, and the input effective interaction has norm at most $\mathsf E_{\rm q}$ at every index $d_j$. By \cref{ch12:thm:replacement-family}, the change of gauge representative preserves the fluctuation variables, the product of balls, the part of the classical action beyond its quadratic approximation, the Haar disintegration density, the determinants, the normalization constant, and the normalized conditional kernel; hence the theorem applies to this kernel. A difference between two choices of the potential that depends only on the coarse field has zero mixed derivative. We conclude that
+\begin{equation}\label{ch28:eq:rooted-score-Ltwo}
+ \sup_l\|\partial_{w_l}\partial_uV_j(\theta_u,\cdot)\|_{L^2(k_j(\theta_u,\cdot))}\le Ct_j\|\theta\|_\infty,
+\end{equation}
+with a constant independent of the side, $j$, $K$, $d_j$, and $u$. This is a bound at each fluctuation index, with a summable spatial profile; no global norm of the extensive derivative $\partial_uV$ is used. The Gaussian part, the dependence of the determinants on the coarser fluctuation variables, and the derivatives of the input effective interaction through the chain rule are included.
+
+For the mean bounds below the following weaker estimate suffices. Summing the pointwise clause for the mixed derivative in \cref{ch10:thm:actual-means-and-scores} against $\theta$, we obtain
+\begin{equation}\label{ch28:eq:available-score-bound}
+ \sup_l\|\partial_{w_l}\partial_uV_{\theta_u}\|_{L^2}\le\sup_l\|\partial_{w_l}\partial_uV_{\theta_u}\|_\infty\le Ct(p^+)^2b,\qquad p^+=p+C_J;
+\end{equation}
+the exponential decay in the coarse index is summable since the number of coordinates per cell is bounded. We increase $s_0$ once more so that $t(p^+)^2\le1$ at every level. Both estimates concern the same potential.
+
+\paragraph{Step 6: general equivariant outputs.}
+Fix $C_F$ and the larger domain, and let $F$ range over the class described in part (3). Since $F$ is bounded on the larger domain, its absolute coefficient series on the smaller domain also bounds one derivative in $\theta$. All constants in this step may depend on $C_F$, the radius, and the fixed ratios of radii, but not on the number of output sites or on the resolution. The part of degree $r$ in $w$ of $D_e=F_e(\theta,t\lambda w)-F_e(\theta,0)$ has row coefficients bounded by $C_1C_2^rt^r$, also after a derivative in $\theta$. We split $D_e=D_e^{(1)}+D_e^{(\ge2)}$ into its part of degree one and the sum of all higher degrees. By the mean bound and the absolute output row, we have
+\[
+ |\E_\theta D_e^{(1)}|\le Ct\sup_l|\E_\theta w_l|\le Ct^2b.
+\]
+For the terms of degree $r\ge2$ in $\partial_uD_e^{(\ge2)}$, we bound two of the fluctuation factors in $L^4$ and the others by $p^+$. For a derivative in one fluctuation variable instead, one factor is bounded in $L^2$ and the remaining $r-2$ by $p^+$. Summing the absolute coefficient series, we obtain
+\begin{equation}\label{ch28:eq:output-mean-derivative}
+ |\E_u\partial_uD_e^{(\ge2)}|\le Cbt^2,\qquad \sum_l\|\partial_{w_l}D_e^{(\ge2)}\|_{L^2}\le Ct^2;
+\end{equation}
+for example, the second sum is at most $C\sum_{r\ge2}rC_2^rt^r(p^+)^{r-2}\le Ct^2$. The derivative of the part of degree one has output row at most $Ct$; hence $\sum_l\|\partial_{w_l}D_e\|_{L^2}\le Ct$ for the whole increment. All sums are at the single fixed output $e$, so the number of outputs does not appear.
+
+The local covariance inequality of \cref{ch10:thm:complete-white-law} has kernel $Ce^{-b'\dist(l,h)}$. Its rows sum to a fixed constant, since the number of fluctuation coordinates per cell is bounded and $\sum_{q\ge0}(q+1)^3e^{-b'q}<\infty$. Combining it with \eqref{ch28:eq:available-score-bound} and \eqref{ch28:eq:output-mean-derivative}, we find
+\[
+ |\Cov_u(D_e^{(\ge2)},\partial_uV_{\theta_u})|\le C\sum_{l,h}e^{-b'\dist(l,h)}\|\partial_{w_l}D_e^{(\ge2)}\|_{L^2}\|\partial_{w_h}\partial_uV_{\theta_u}\|_{L^2}\le Ct^3(p^+)^2b\le Ct^2b.
+\]
+For each finite product, differentiation under the integral is justified: the domain is compact and fixed, and the functions and their derivatives in the coarse field are continuous on an open neighborhood. Differentiating the numerator and the denominator separately gives exactly
+\[
+ \frac d{du}\E_uD_e=\E_u\partial_uD_e-\Cov_u(D_e,\partial_uV_{\theta_u}).
+\]
+Thus the derivative of the normalization is present, with the minus sign in the statement, and all Haar, determinant, and effective-interaction terms are those of the same $V_j$.
+
+The same identity holds with $D_e^{(\ge2)}$ in place of $D_e$. At $\theta=0$ the conditional law is invariant under simultaneous color rotation of all blocks. Both $D_e(0,w)$ and $D_e^{(\ge2)}(0,w)$ transform as vectors in the adjoint representation, since taking a homogeneous part of fixed degree commutes with color rotations. Each of their expectations is fixed by every rotation, and a vector in $\R^3$ fixed by the rotations by $\pi$ about two perpendicular axes is zero. Hence both expectations vanish at $\theta=0$. Integrating the identity for $D_e^{(\ge2)}$ from $u=0$ to $u=1$ and using the two bounds above, we obtain $|\E_\theta D_e^{(\ge2)}|\le Ct^2b$. Adding the bound for the part of degree one, we find $|\E_\theta D_e|\le Ct^2b$ for the whole increment. This argument does not use \eqref{ch28:eq:rooted-score-Ltwo}.
+
+The same reasoning proves the cancellation at $\theta=0$ without discarding spatial correlations. Let $S_{la,hb}=\E_0[w_l^aw_h^b]$. Invariance makes each $3\times3$ color matrix $(S_{la,hb})_{a,b}$ commute with every rotation, so $S_{la,hb}=S_{lh}\delta_{ab}$ by the argument used for $E_j^a$ in Step 2 of the proof of \cref{ch28:thm:one-shot-and-source-sum}. If $B_e$ is an equivariant bilinear coefficient with values in $\R^3$, then $\sum_{l,h,a}S_{lh}B_e(e_{la},e_{ha})$ is fixed by every color rotation and hence zero. Every homogeneous equivariant term with values in $\R^3$ has zero expectation for the same reason. This proves the cancellation for the whole series, which converges absolutely on the product.
+
+\paragraph{Step 7: the remainder of the circulation.}
+We write $\E_{j-1}=\E[\,\cdot\mid\mathcal F_{j-1}]$. The map $Z_j$ in \eqref{ch28:eq:joint-fine-output} belongs to one fixed class of outputs as in part (3). Indeed, we choose its larger coarse/free domain inside the domain of \cref{ch12:thm:replacement-family}, with image in the reconstruction domain on which $\widehat{\mathcal E}_j^a$ is defined, and we compose the joint coefficient series with \eqref{ch28:eq:extension-majorant}. The composition bound fixes one constant $C_F$ and one larger radius for all $j$, $k$, and fine output sites; a distinguished coarse input costs one fixed restriction of the domain. Equivariance and the value zero at $(0,0)$ are preserved. The substitution $q_{j,\ell}=g_{j,\ell}w_\ell$ gives one factor $t_j$ for each fluctuation factor, also after a derivative in the coarse field. Thus neither $C_F$ nor the radius depends on the remaining number of steps or on the output resolution. By part (3), the increment $Z_j(\theta,w)-Z_j(\theta,0)$ has conditional mean at most $Ct_j^2b$ at each output site. Since $G_j(\theta,w)-G_j(\theta,0)=\mathscr C(a_j^{-1}(Z_j(\theta,w)-Z_j(\theta,0)))$, and since heat smoothing does not increase supremum norms while the cycle has length at most $C_\ell\varepsilon$, we obtain
+\[
+ |\Gamma_j\bar w_j+\E_{j-1}\mathsf R_j^{\rm cur}|\le C\frac{\varepsilon}{\sqrt\eta}\cdot\frac{t_j^2}{a_j}\,b=C\lambda_Bt_jb\sqrt{\varepsilon/a_j},
+\]
+and we absorb $\lambda_B$ into $C$. By the mean bound of part (1) and the $\ell^\infty$ bound of part (2), we have $|\Gamma_j\bar w_j|\le Ct_jb\sqrt{\varepsilon/a_j}$ separately, and subtracting it from the preceding bound gives the bound for $|\E_{j-1}\mathsf R_j^{\rm cur}|$. Both vanish at zero coarse field, by the color argument of Step 6 and the vanishing of the conditional mean of $w_j$.
+
+Finally, every term of $D_wZ_j(\theta,w)-D_wZ_j(\theta,0)$ has one differentiated fluctuation factor and at least one further fluctuation factor. In the joint coefficient series their sizes are $t_j$ and at most $t_jp_j^+$, respectively. Summing all remaining factors on the fixed larger domain, and using the column bound with a fluctuation input distinguished, we find
+\[
+ \|D_wZ_j(\theta,w)-D_wZ_j(\theta,0)\|_{\rm row+col}\le Ct_j^2p_j.
+\]
+We divide this matrix by $g_j$ and apply \cref{ch28:thm:one-shot-and-source-sum}(3); since $t_j/g_j=\lambda_B$, we obtain
+\[
+ \|D_w\mathsf R_j^{\rm cur}\|_{\ell^2\to\R^{3m}}\le Ct_jp_j\omega_j.
+\]
+The conditional Poincaré inequality bounds the conditional variance of each of the $3m$ components of $\mathsf R_j^{\rm cur}$ by twice its expected squared gradient. Summing over the components and using $\|D_w\mathsf R_j^{\rm cur}\|_{\rm HS}^2\le3m\|D_w\mathsf R_j^{\rm cur}\|_{\rm op}^2$ proves the variance bound of part (4), with no dependence on the number of fluctuation variables. Every constant was fixed on the common larger domains or by the choice of $s_0$; none depends on a later $s$, on $K$, $j$, $x$, the lattice offset, or $d_j$. Together with \eqref{ch28:eq:rooted-score-Ltwo}, this proves all claims.
+\end{proof}
+
+\section{Covariance identity for the linearized reconstruction}\label{ch28:sec:covariance}
+
+The coefficients $\Gamma_j(0)$ at the zero field are derivatives of the reconstruction at the origin in all its coordinates. We show that, in the Gaussian theory obtained by linearizing the reconstruction, the fluctuation variables become independent standard Gaussian vectors. Then the sum of the Gram matrices $\Gamma_j(0)\Gamma_j(0)^{\mathsf T}$ is the covariance of the fine circulation minus the covariance of its conditional mean given the coarse field. The calculation is Gaussian conditioning applied to the linearized reconstruction; the corresponding constrained Gaussian calculation for Bałaban's averaging operation is in \cite[Section~D, (1.47)--(1.49), p.~26, and (1.64)--(1.67), p.~29]{Balaban1984I}.
+
+\begin{theorem}\label{ch28:thm:maxwell-calibration}
+Assume the setting of \cref{ch28:sec:setting}, and let $s\ge s_0$, $K\ge s$, $k=K-s$, $H_s=L/n_s$, and $a=L/N_K$. Let $X_a$ be the real finite-dimensional space of link fields with three colors on the fine lattice modulo periodic gradients and constant fields, and let $\mathbb G_a$ be the Gaussian measure on $X_a$ with density proportional to $\exp(-\|d\theta\|_{\ell^2}^2/(2g_a^2))$, where $g_a^2=g_3^2a$, $d$ is the dimensionless plaquette coboundary, and the norm counts each positive plaquette once. Let $Q_{a,H_s}:X_a\to X_{H_s}$ be the derivative at the identity of the composed block averaging map from the fine lattice to the lattice of side $n_s$, on the corresponding quotients, and let $\mathcal C_{s,a}=\sigma(Q_{a,H_s}\theta)$.
+
+The differential of the reconstruction at zero coarse field and zero fluctuation variables,
+\[
+ L(z,w)=L_0z+\sum_{j=1}^kL_j^{\rm w}w_j,
+\]
+is a bijection from $X_{H_s}\times\prod_j\R^{\dim w_j}$ onto $X_a$, and it satisfies
+\[
+ \frac1{g_a^2}\|dL(z,w)\|_{\ell^2}^2=\langle z,\mathbf H_{s,a}z\rangle+\sum_{j=1}^k|w_j|^2,\qquad Q_{a,H_s}L(z,w)=z.
+\]
+Here $\mathbf H_{s,a}$ is the Schur complement of the quadratic form on the coarse lattice given by the nested minimization of \cref{ch07:thm:bellman}, including its coupling; it is positive definite on $X_{H_s}$, and its inverse is used only at this fixed $s$. For every linear map $F:X_a\to\R^d$,
+\[
+ \sum_{j=1}^k(FL_j^{\rm w})(FL_j^{\rm w})^{\mathsf T}=\Cov_{\mathbb G_a}(F\theta)-\Cov_{\mathbb G_a}\bigl(\E[F\theta\mid\mathcal C_{s,a}]\bigr).
+\]
+For the circulation $F=\mathcal I_a$ this reads
+\[
+ \sum_{j=1}^k\Gamma_j(0)\Gamma_j(0)^{\mathsf T}=C^{a,\varepsilon,L}\otimes I_3-C^{\rm ret}_{s,a,\varepsilon},\qquad C^{\rm ret}_{s,a,\varepsilon}=\Cov_{\mathbb G_a}\bigl(\E[\mathcal I_a\theta\mid\mathcal C_{s,a}]\bigr)\ge0.
+\]
+Uniformly in $K$, $x$, and the lattice offset,
+\[
+ \|C^{\rm ret}_{s,a,\varepsilon}\|\le Cn_s^2\varepsilon/H_s\qquad(a\le\varepsilon\le\varepsilon_0(s)).
+\]
+Together with \cref{ch28:lem:free-current-covariance}, this gives, for every fixed $s\ge s_0$,
+\[
+ \lim_{\varepsilon\downarrow0}\limsup_{K\to\infty}\sup_{x,\,\text{offset}}\Bigl\|\sum_{j=1}^{K-s}\Gamma_j(0)\Gamma_j(0)^{\mathsf T}-\Sigma\otimes I_3\Bigr\|=0.
+\]
+The constants may depend on $L$, $\gamma$, $M$, $J$, $\Theta$, the loops, $\sigma$, and $n_s$, but not on $K$ or $d_j$.
+\end{theorem}
+
+\begin{remark}\label{ch28:rem:linearized-only}
+The Gaussian coordinates of this theorem are independent only in the linearized calculation; the conditional fluctuation kernels $k_j$ are not Gaussian. The theorem concerns the differential of the reconstruction at the origin in all coordinates. It is not a statement about the nonlinear reconstruction conditioned on $\widehat\theta_0=0$, whose later fields would remain random. Gradients and constant fields are removed only for this Gaussian identity; they are not removed from the Wilson measure.
+\end{remark}
+
+\begin{proof}
+We first set up coordinates on the quotients and prove the energy identity, then prove that $L$ is bijective, and only then change variables in the Gaussian integral. Finally we bound the coarse contribution. All quotient spaces and Gaussian coordinates in this proof are real.
+
+\paragraph{Step 1: coordinates.}
+We choose linear coordinates on each quotient by taking the representatives with mean zero and zero lattice divergence. By the calculation of the kernel of the curl in Step 2 of the proof of \cref{ch28:thm:one-shot-and-source-sum}, these representatives identify exactly the quotient by gradients and constants. The Maxwell form is positive definite on this space: a field of zero energy has zero curl, and its gradient and constant parts have been removed. All Gaussian integrals below are proper finite-dimensional integrals.
+
+We differentiate the reconstruction at its origin and write the resulting linear map, with values in $X_a$, as $L(z,w)=L_0z+\sum_jL_j^{\rm w}w_j$. Here $z$ uses the coordinates on $X_{H_s}$ just described, and $w_j$ ranges over the space of free fluctuation coordinates of \cref{ch09:thm:sequential-density}; the factors $K_i^{-1/2}$ defining them exist by \cref{ch07:thm:bellman}. We do not yet claim that $L$ is injective. The gauge transformations of \cref{ch12:thm:replacement-family}, which depend only on the coarse field and equal the identity at the tree roots, add gradients at the identity and therefore do not change this map with values in $X_a$. The linearized averaging of \cref{ch05:lem:flat-average-semigroup} maps gradients to gradients and constant fields to constant fields, so the differential of the block averaging map descends to the map $Q_{a,H_s}$ between the quotients.
+
+\paragraph{Step 2: the energy identity.}
+We differentiate the exact classical decomposition of \cref{ch09:thm:sequential-density} at zero coarse field and zero fluctuation variables and take its homogeneous quadratic part. At every intermediate scale the normalized quadratic free action is $|w_i|^2/2$. All remaining classical terms have degree at least three in the fluctuation variables, as shown in \eqref{ch28:eq:score-degree-decomposition}, for every coarse field. They contribute nothing in total degree two, also after composition with the coarser fields. The value and the first derivative of the classical action at the identity vanish. It follows that the quadratic part of the fine action, evaluated on the nonlinear reconstruction, is its quadratic form evaluated on $L$, with no contribution from second derivatives of the reconstruction. Iterating over all RG steps, we obtain
+\begin{equation}\label{ch28:eq:tangent-quadratic-telescope}
+ \frac{\|dL(z,w)\|_{\ell^2}^2}{2g_a^2}=\frac12\langle z,\mathbf H_{s,a}z\rangle+\frac12\sum_j|w_j|^2.
+\end{equation}
+By \cref{ch07:thm:bellman}, the form $\langle z,\mathbf H_{s,a}z\rangle$ is the nonnegative Schur-complement form, including its coupling. Differentiating the identity expressing that the reconstruction has the prescribed coarse field, we find
+\begin{equation}\label{ch28:eq:tangent-target}
+ Q_{a,H_s}L(z,w)=z.
+\end{equation}
+The Haar, Haar disintegration, determinant, and effective-interaction terms enter the nonlinear conditional law of \cref{ch28:thm:predictable-rows-and-means}; they are not part of this identity for the classical quadratic form.
+
+\paragraph{Step 3: bijectivity and positivity.}
+If $L(z,w)=0$ in $X_a$, its Maxwell energy is zero. Both terms on the right of \eqref{ch28:eq:tangent-quadratic-telescope} are nonnegative, so every $w_j=0$, and \eqref{ch28:eq:tangent-target} then implies $z=0$ in $X_{H_s}$. Thus $L$ is injective. For a lattice of side $n$, the space of link fields with three colors has dimension $9n^3$, the gradients have dimension $3(n^3-1)$, and the constant fields have dimension nine, so the quotient has dimension $6n^3-6$. By \cref{ch09:thm:sequential-density}, the number of free fluctuation coordinates from side $Mn$ to side $n$ is $6(M^3-1)n^3$. Summing these numbers over all averaging steps gives $6(N_K^3-n_s^3)$, and adding the dimension $6n_s^3-6$ of $X_{H_s}$ gives exactly $\dim X_a$. Injectivity in equal finite dimensions implies surjectivity. Further, for nonzero $z$, injectivity makes $L(z,0)$ nonzero in $X_a$; positivity of its Maxwell energy and \eqref{ch28:eq:tangent-quadratic-telescope} show that $\mathbf H_{s,a}$ is positive definite on $X_{H_s}$. We do not claim a lower bound on $\mathbf H_{s,a}$ independent of the side.
+
+\paragraph{Step 4: the Gaussian change of variables.}
+We make the linear change of variables $\theta=L(z,w)$ in the normalized Gaussian integral on $X_a$. Its Jacobian is constant and cancels between numerator and denominator. By \eqref{ch28:eq:tangent-quadratic-telescope}, in these coordinates
+\[
+ z\sim N(0,\mathbf H_{s,a}^{-1}),\qquad w_j\sim N(0,I),
+\]
+and all these vectors are independent; the inverse exists on $X_{H_s}$ at this fixed side. For a linear map $F$, \eqref{ch28:eq:tangent-target} gives
+\[
+ \E[F\theta\mid\mathcal C_{s,a}]=FL_0z,\qquad F\theta=FL_0z+\sum_jFL_j^{\rm w}w_j.
+\]
+By independence, expanding the covariance of $F\theta$ proves the general covariance identity, and the subtracted covariance is positive semidefinite.
+
+For $F=\mathcal I_a$, the closed cycles and their zero winding make $F$ a well-defined functional on $X_a$, by \cref{ch28:lem:free-current-covariance}(3). By the chain rule at the origin of the reconstruction, we have
+\[
+ FL_j^{\rm w}=D_w\mathcal I_a\bigl(\widehat\Pi_{k\leftarrow j}\widehat\Phi_j(0,g_{j,\cdot}w)\bigr)\big|_{w=0}=\Gamma_j(0).
+\]
+The finite-lattice Fourier calculation of \cref{ch28:lem:free-current-covariance}(4) identifies $\Cov_{\mathbb G_a}(\mathcal I_a\theta)$ as $C^{a,\varepsilon,L}\otimes I_3$, since the density of $\mathbb G_a$ is that of the Maxwell field of that lemma written in the variable $\theta=aA$. This proves the identity for $\sum_j\Gamma_j(0)\Gamma_j(0)^{\mathsf T}$.
+
+\paragraph{Step 5: the coarse contribution.}
+We write $H=H_s$ and $n=n_s$. At $j=0$, the linear comparison of \cref{ch28:thm:one-shot-and-source-sum}(2) implies that, on circulations, $FL_0=\mathscr C_{a,\varepsilon,x}(H^{-1}E_0^a)$. Using the $\ell^2$ circulation bound of \cref{ch28:thm:one-shot-and-source-sum}(3) with input mesh $H$, dividing out the normalization $g_3\sqrt H$, and taking the branch $\sqrt{\varepsilon/H}$, we obtain
+\begin{equation}\label{ch28:eq:retained-current-row}
+ \|FL_0\|_{\ell^2\to\R^{3m}}\le\frac{C\sqrt\varepsilon}{g_3H}.
+\end{equation}
+In unitary Fourier coordinates on the coarse lattice, \cref{ch05:thm:flat-precision} bounds the covariance of the coarse link variables by $Cg_H^2/\lambda(\vartheta)$ on each nonzero transverse frequency $\vartheta$, uniformly in the number of eliminated scales; the gradient term in the linearized block averaging map disappears on the quotient by \cref{ch05:lem:flat-average-semigroup}. For a nonzero frequency on a lattice of side $n\ge4$,
+\[
+ \lambda(\vartheta)\ge4\sin^2(\pi/n)\ge16/n^2,
+\]
+where the second inequality uses $\sin u\ge2u/\pi$ for $0\le u\le\pi/2$. Since $g_H^2=g_3^2H$, this proves
+\begin{equation}\label{ch28:eq:fixed-side-covariance-bound}
+ \|\mathbf H_{s,a}^{-1}\|_{\ell^2\to\ell^2}\le Cg_3^2Hn_s^2.
+\end{equation}
+Only the factor $n_s^2$ of the fixed side has been used. Multiplying the square of \eqref{ch28:eq:retained-current-row} by \eqref{ch28:eq:fixed-side-covariance-bound}, we obtain
+\[
+ \|C^{\rm ret}_{s,a,\varepsilon}\|=\|(FL_0)\mathbf H_{s,a}^{-1}(FL_0)^{\mathsf T}\|\le Cn_s^2\varepsilon/H_s,
+\]
+uniformly in the number of eliminated scales, $x$, and the lattice offset. The factor $n_s^2$ is allowed to grow with the fixed coarse side.
+
+\paragraph{Step 6: the limits.}
+The covariance identity implies
+\[
+ \Bigl\|\sum_j\Gamma_j(0)\Gamma_j(0)^{\mathsf T}-\Sigma\otimes I_3\Bigr\|\le\|C^{a,\varepsilon,L}-C^{\varepsilon,L}\|+\|C^{\varepsilon,L}-\Sigma\|+Cn_s^2\varepsilon/H_s.
+\]
+For each fixed $\varepsilon>0$ the first term tends to zero as $K\to\infty$, uniformly in $x$ and the lattice offset, by \cref{ch28:lem:free-current-covariance}(5). After this limit, the second term tends to zero as $\varepsilon\downarrow0$ by the same lemma, and the last term tends to zero at fixed $s$. This is the iterated limit in the statement. At $k=0$ the same change of variables has no fluctuation variables and the whole covariance is the coarse covariance, so the identities also hold in that case.
+\end{proof}
+
+\section{The coarse-field contribution and summation over scales}\label{ch28:sec:scales}
+
+We now prove the decomposition stated at the beginning of the section and sum the estimates of \cref{ch28:thm:predictable-rows-and-means} over all scales. The sums are controlled by a deterministic bound on the size $b_j$ of the reconstructed fields, which we prove first; its constant does not depend on the coarse mesh $H_s$, which matters because $s$ is later sent to infinity.
+
+\begin{lemma}\label{ch28:lem:top-current-and-caps}
+Assume the setting of \cref{ch28:thm:predictable-rows-and-means}, with $s_0$ enlarged if necessary depending only on the data fixed in \cref{ch28:sec:setting}. For every $s\ge s_0$ the following deterministic bounds hold on the support of $\nu_{K,s}$, uniformly in $K\ge s$:
+\[
+ b_0\le r,\qquad b_j\le C\bigl[r\alpha_*^j+g_3\sqrt{a_j}\,p_j\bigr],
+\]
+\[
+ \sum_{j=1}^{K-s}b_{j-1}\le D_s,\qquad D_s=C\Bigl[\frac r{1-\alpha_*}+g_3\sqrt{H_s}\,(p_1(s)+1)\Bigr],\qquad \sup_{s\ge s_0}D_s<\infty,
+\]
+where $p_1(s)=p_1$ is the cutoff radius of the first RG step. Put
+\[
+ T_s=\mathcal I_a\bigl(\widehat\Pi_{k\leftarrow0}\widehat\theta_0\bigr),\qquad \mathsf N_{K,s}=\sum_{j=1}^k\bigl[\Gamma_j(\widehat\theta_{j-1})\bar w_j+\mathsf R_j^{\rm cur}\bigr].
+\]
+Then we have the exact decomposition
+\[
+ I^{K,s}=T_s+\sum_{j=1}^k\Gamma_j(\widehat\theta_{j-1})(w_j-\bar w_j)+\mathsf N_{K,s}.
+\]
+For $a\le\varepsilon\le\varepsilon_0(s)$,
+\[
+ \sup_{\|\widehat\theta_0\|_\infty\le r}|T_s|\le\frac{Cr}{g_3H_s}\sqrt\varepsilon,
+\]
+\[
+ \sup_{x,\,\text{offset}}\E_{\nu_{K,s}}|\mathsf N_{K,s}|+\sup_{\|\widehat\theta_0\|_\infty\le r}|T_s|\le\frac{Cr}{g_3H_s}\sqrt\varepsilon+Cg_3D_s\sqrt\varepsilon+C\sqrt\eta\,[1+\log(1/\eta)]^2.
+\]
+The constants $C$ and the threshold $s_0$ have the dependence stated in \cref{ch28:thm:predictable-rows-and-means}, and $C$ does not depend on $s$; the quantity $D_s$ has the displayed additional dependence on $s$. The coarse-field term is allowed to grow like $H_s^{-1}$. For each fixed $s\ge s_0$, the right side of the last display tends to zero as $\varepsilon\downarrow0$, uniformly in $K$; no limit in which $s$ and $\varepsilon$ vary together is asserted.
+\end{lemma}
+
+\begin{proof}
+We first prove the bounds on $b_j$ (Steps 1--3) and their sum (Step 4), then the decomposition (Step 5), and finally the bounds on $T_s$ and $\mathsf N_{K,s}$ (Steps 6 and 7).
+
+\paragraph{Step 1: a recurrence.}
+The inputs $q_j=g_{j,\cdot}w_j$ of the $j$-th reconstruction map satisfy $\|q_j\|_\infty\le t_j(p_j+C_J)$, since $g_{j,\ell}\le t_j$ and $|w_{j,\ell}|\le p_{j,\ell}\le p_j+C_J$. On the fixed larger coarse/free domain let $C_{{\rm fr},J}$ bound the derivative of $\widehat\Phi_j$ in the coupling-scaled fluctuation inputs; this bound does not depend on the side or on $d_j$. By the row majorant of \cref{ch28:thm:one-shot-and-source-sum}(1), we have $\|\widehat P_j(v)\|_\infty\le\phi(\|v\|_\infty)$. Integrating this derivative along the segment from $0$ to $q_j$, we obtain, with $\kappa=C_{{\rm fr},J}(1+C_J)$ and $p_j\ge1$,
+\begin{equation}\label{ch28:eq:actual-forced-recurrence}
+ b_j\le\frac{\alpha_*b_{j-1}}{1-\beta_Jb_{j-1}}+\kappa t_jp_j\le a_{\rm map}b_{j-1}+\kappa t_jp_j,
+\end{equation}
+as long as $\widehat\theta_{j-1}$ lies in the reconstruction domain. Here $a_{\rm map}=\alpha_*/(1-\beta_Jr_{\rm eff})^2$ is the bound of \cref{ch12:lem:deterministic-prolongation-reserve} on the derivative of the zero-fluctuation maps on the reconstruction domain, which satisfies $a_{\rm map}\sqrt B\le32/49<1$ by \cref{ch20:thm:finite-ceiling-parameters}.
+
+\paragraph{Step 2: a first bound and the sum.}
+Let $\rho_B=B^{-1/2}$ and $d_p=A_{\rm w}\log B/2$. Since $t_i=t_jB^{(j-i)/2}$ and $p_i\le p_j$ for $i\le j$, iterating the second inequality in \eqref{ch28:eq:actual-forced-recurrence}, we obtain
+\[
+ b_j\le ra_{\rm map}^j+\kappa't_jp_j,\qquad \kappa'=\frac\kappa{1-a_{\rm map}\sqrt B}.
+\]
+For small $t$ the function $t\mapsto tp(t)$ is increasing, so a fixed upper bound on $t_1$ with $\kappa't_1p_1\le r_{\rm eff}/4$ keeps this bound below $r+r_{\rm eff}/4<r_{\rm eff}/2$, which justifies the use of \eqref{ch28:eq:actual-forced-recurrence} at every step by induction. Increasing $s_0$ enforces this bound for every later $s$, without changing any radius of the construction. The geometric series and its derivative give
+\[
+ \sum_{l=0}^{k-1}b_l\le\frac{r_{\rm eff}}{4(1-a_{\rm map})}+\kappa't_1\Bigl[\frac{p_1}{1-\rho_B}+\frac{d_p\rho_B}{(1-\rho_B)^2}\Bigr]\le S_*.
+\]
+Here we fix $S_*$ by replacing $t_1(p_1+1)$ by its supremum over the allowed range $0<t_1\le t_1(s_0)$; this supremum is finite since $t\log(1/t)\to0$. Thus $S_*$ depends neither on $H_s$ nor on $s$.
+
+\paragraph{Step 3: the rate $\alpha_*^j$.}
+For $0\le\beta_Jb\le\beta_Jr_{\rm eff}<1/8$ we have
+\[
+ \frac{\alpha_*}{1-\beta_Jb}\le\alpha_*\exp(8\beta_Jb/7).
+\]
+This implies that every product over $h$ consecutive steps of the multiplicative coefficients $\alpha_*/(1-\beta_Jb_l)$ in the first recurrence of \eqref{ch28:eq:actual-forced-recurrence} is at most $C_{\rm mult}\alpha_*^h$, where $C_{\rm mult}=\exp(8\beta_JS_*/7)$. Unrolling that recurrence, we find
+\[
+ b_j\le C_{\rm mult}\Bigl[r\alpha_*^j+\kappa\sum_{i=1}^j\alpha_*^{j-i}t_ip_i\Bigr]\le C_{\rm mult}\Bigl[r\alpha_*^j+\frac{\kappa t_jp_j}{1-\alpha_*\sqrt B}\Bigr],
+\]
+where the denominator is positive because $\alpha_*\sqrt B=\sqrt q\le1/2$. Substituting $t_j=\lambda_Bg_3\sqrt{a_j}$, we obtain
+\begin{equation}\label{ch28:eq:uniform-forced-cap}
+ b_j\le C_{\rm cap}\bigl(r\alpha_*^j+g_3\sqrt{a_j}\,p_j\bigr),
+\end{equation}
+with $C_{\rm cap}$ independent of $H_s$ and $s$. This is the first bound of the lemma. The rate $\alpha_*^j$ does not follow from the first bound of Step 2, where the contraction factor is $a_{\rm map}$; the product argument is needed.
+
+\paragraph{Step 4: the sum of the bounds.}
+By the definition of $p_j$ and $a_j=H_sB^{-j}$,
+\begin{equation}\label{ch28:eq:affine-white-cut}
+ p_j=p_1(s)+(j-1)d_p.
+\end{equation}
+Summing \eqref{ch28:eq:uniform-forced-cap}, including the separate term $b_0\le r$, and using $\sqrt{a_l}=\sqrt{H_s}\rho_B^l$, we obtain
+\begin{align*}
+ \sum_{j=1}^kb_{j-1}&\le\frac{Cr}{1-\alpha_*}+Cg_3\sqrt{H_s}\sum_{l\ge1}\rho_B^l\bigl[p_1(s)+(l-1)d_p\bigr]\\
+ &\le C\Bigl[\frac r{1-\alpha_*}+g_3\sqrt{H_s}\,(p_1(s)+1)\Bigr].
+\end{align*}
+In the last inequality we used $\sum_{l\ge1}\rho_B^l=\rho_B/(1-\rho_B)$ and $\sum_{l\ge1}(l-1)\rho_B^l=\rho_B^2/(1-\rho_B)^2$. By \eqref{ch28:eq:largest-integrated-coupling}, $p_1(s)=A_{\rm w}\log(\sqrt M/(g_3\sqrt{H_s}))$ is affine in $s$, while $\sqrt{H_s}=\sqrt{L/n_*}\,B^{-s/2}$ decays geometrically, so their product is bounded for $s\ge s_0$. More directly, $g_3\sqrt{H_s}(p_1(s)+1)=\sqrt M\,t_1(s)(p_1(s)+1)$ is bounded by the supremum used in Step 2. Since the constant in \eqref{ch28:eq:uniform-forced-cap} does not depend on $s$, this proves $\sup_sD_s<\infty$.
+
+\paragraph{Step 5: the decomposition.}
+For $0\le j\le k$, let $F_j=\mathcal I_a(\widehat\Pi_{k\leftarrow j}\widehat\theta_j)$. Then $F_0=T_s$ and $F_k=I^{K,s}$. Since $\widehat\Pi_{k\leftarrow j-1}=\widehat\Pi_{k\leftarrow j}\circ\widehat\Phi_j(\cdot,0)$, and all fields involved lie in the reconstruction domain, we have
+\[
+ F_j-F_{j-1}=G_j(\widehat\theta_{j-1},w_j)-G_j(\widehat\theta_{j-1},0)=\Gamma_j(\widehat\theta_{j-1})w_j+\mathsf R_j^{\rm cur}.
+\]
+Summing this finite identity over $j$, and subtracting and adding $\Gamma_j(\widehat\theta_{j-1})\bar w_j$ in each summand, gives the decomposition. The coefficients $\Gamma_j(\widehat\theta_{j-1})$ are $\mathcal F_{j-1}$-measurable and the increments $w_j-\bar w_j$ are conditionally centered, so the middle sum is a martingale for the filtration $(\mathcal F_j)$.
+
+\paragraph{Step 6: the coarse-field contribution.}
+By the row bound on $D\widehat{\mathcal E}_0^a$ in \cref{ch28:thm:one-shot-and-source-sum}(5) and $\widehat{\mathcal E}_0^a(0)=0$, we have
+\[
+ \|H_s^{-1}\widehat{\mathcal E}_0^a(\widehat\theta_0)\|_\infty\le Cr/H_s.
+\]
+By the identity of \cref{ch28:thm:one-shot-and-source-sum}(5), the fact that heat smoothing does not increase supremum norms, and the length bound on the cycles, we obtain
+\begin{equation}\label{ch28:eq:fixed-coarse-top}
+ |T_s|\le\frac{C\varepsilon r}{\sqrt\eta\,H_s}=\frac{Cr}{g_3H_s}\sqrt\varepsilon.
+\end{equation}
+This bound is uniform over all coarse fields with $\|\widehat\theta_0\|_\infty\le r$ and over $K$, including $k=0$.
+
+\paragraph{Step 7: conditional means and centered remainders.}
+We write $\mathsf R_j^{\rm cur}=\E_{j-1}\mathsf R_j^{\rm cur}+\zeta_j$, where $\E_{j-1}$ denotes conditional expectation given $\mathcal F_{j-1}$. By \cref{ch28:thm:predictable-rows-and-means}(4), using $t_j\sqrt{\varepsilon/a_j}=\lambda_Bg_3\sqrt\varepsilon$, we have
+\[
+ \sum_{j=1}^k\bigl|\Gamma_j(\widehat\theta_{j-1})\bar w_j+\E_{j-1}\mathsf R_j^{\rm cur}\bigr|\le Cg_3\sqrt\varepsilon\sum_{j=1}^kb_{j-1}\le Cg_3D_s\sqrt\varepsilon.
+\]
+For the centered terms we use the triangle inequality and the conditional Cauchy--Schwarz inequality, without any independence:
+\begin{equation}\label{ch28:eq:centered-triangle-sum}
+ \E\Bigl|\sum_{j=1}^k\zeta_j\Bigr|\le C\sum_{j=1}^kt_jp_j\omega_j.
+\end{equation}
+We bound the right side uniformly in $s$. Shrinking the constant $c$ in $\varepsilon_0(s)$ if necessary, we may assume $u=\log(1/\eta)\ge1$. For a scale with $a_j>\varepsilon$,
+\[
+ t_jp_j\omega_j=\lambda_B\sqrt\eta\,p_j,\qquad p_j\le C(1+u);
+\]
+the second inequality follows from $\log(1/t_j)=(1/2)\log(1/(g_3^2a_j))-\log\lambda_B$ and $a_j>\varepsilon$. The number of such scales is at most $1+\log(L/\varepsilon)/\log B\le C(1+u)$, with a constant depending only on $L$, $g_3$, and $B$, since $H_s\le L/4$. Their contribution is at most $C\sqrt\eta(1+u)^2$. If there exists a first index $j_\varepsilon$ with $a_{j_\varepsilon}\le\varepsilon$, let $h_*=a_{j_\varepsilon}$; then $\varepsilon/B<h_*\le\varepsilon$, since $\varepsilon<cH_s$. Using \eqref{ch28:eq:affine-white-cut}, the contribution of the finer scales is at most
+\begin{align*}
+ \sum_{r\ge0}\frac{\lambda_Bg_3}{\varepsilon}(h_*B^{-r})^{3/2}\bigl(p_{j_\varepsilon}+rd_p\bigr)&\le Cg_3\sqrt\varepsilon\,(p_{j_\varepsilon}+1)\\
+ &\le C\sqrt\eta\,(1+u).
+\end{align*}
+In the last inequality we used $h_*>\varepsilon/B$ in the formula for $\log(1/t_{j_\varepsilon})$. Extending the finite sum to all $r\ge0$ is allowed since all summands are nonnegative, and if there is no such index this contribution is zero. Hence
+\[
+ \sum_jt_jp_j\omega_j\le C\sqrt\eta\,[1+\log(1/\eta)]^2.
+\]
+Combining this with \eqref{ch28:eq:centered-triangle-sum}, the bound on the conditional means, and \eqref{ch28:eq:fixed-coarse-top} proves the last estimate of the lemma, uniformly in $x$, the lattice offset, and $K$ in the stated range. For fixed $s$ the first constant is finite and $\sqrt\eta(1+\log(1/\eta))^2\to0$ as $\varepsilon\downarrow0$ at fixed $g_3>0$.
+\end{proof}
+
+\begin{remark}\label{ch28:rem:forced-cap-alternative}
+The bound \eqref{ch28:eq:uniform-forced-cap} also follows from the forced-recursion estimate of \cref{ch12:lem:deterministic-prolongation-reserve}, which applies to inputs of size at most $tp(t)$, $t=\lambda_Bg\sqrt{a_j}$, for all $t$ up to a fixed threshold $\tau$, with constants uniform in the coarse mesh and in the coupling $g$ in this range. To apply it, we increase $s_0$ so that $p_1\ge1+C_J+2A_{\rm w}\log2$ and $2t_1\le\tau$, and set $\widetilde t_j=2t_j$ and $\widetilde p_j=A_{\rm w}\log(1/\widetilde t_j)=p_j-A_{\rm w}\log2$. Then $\widetilde p_j\ge1$ and
+\begin{equation}\label{ch28:eq:cap-input-enclosure}
+ t_j(p_j+C_J)\le\widetilde t_j\widetilde p_j\qquad\text{for every }j\ge1,
+\end{equation}
+since the difference divided by $t_j$ is $p_j-C_J-2A_{\rm w}\log2\ge1$. This is only a deterministic upper bound for the same inputs; the coupling, the measure, the maps, the fluctuation variables, and the cutoff radii are unchanged. Since the constant of that lemma is uniform in $H$ and for the auxiliary coupling in the stated range, the lemma applies with $g=2g_3$; as $\widetilde p_j\le p_j$, it gives \eqref{ch28:eq:uniform-forced-cap}. Steps 1--3 above verify the independence of $H_s$ directly. No stochastic estimate with a constant depending on a fixed coarse mesh is used.
+\end{remark}
+
+\section{Validity at each fixed positive coupling}\label{ch28:sec:fixed-coupling}
+
+\begin{lemma}\label{ch28:lem:finite-ceiling-current-suppliers}
+Let the parameters be as in \cref{ch20:thm:finite-ceiling-parameters}. Fix $0<\gamma\le\Gamma$ and one sequence $N_K=n_*B^K$ with its reconstruction maps, and let $n_s$, $H_s$, $a_j$, and $t_j$ be as in \cref{ch28:sec:setting}. There exists $s_0<\infty$ such that every $s\ge s_0$ satisfies all conclusions of \cref{ch28:lem:free-current-covariance,ch28:thm:one-shot-and-source-sum,ch28:thm:predictable-rows-and-means,ch28:lem:top-current-and-caps,ch28:thm:maxwell-calibration}, with the same quantifiers and the same dependence of the constants. The constants in the bounds on coefficients, potential derivatives, conditional means, reconstructed fields, and conditional remainders do not depend on $s\ge s_0$, while the factor $1/(g_3H_s)$ in the bound on the coarse-field contribution and the factor $n_s^2/H_s$ in the bound on the coarse covariance remain explicit.
+\end{lemma}
+
+\begin{proof}
+We check that each argument of this section uses only the smallness of $t_j$ and never an upper bound on $\gamma$ such as $\gamma\le1$.
+
+\paragraph{Deterministic estimates.}
+The zero-fluctuation maps, their coefficient series, the identities expressing that they have the prescribed coarse field, and their column bounds are those of \cref{ch20:thm:finite-ceiling-parameters,ch12:lem:deterministic-prolongation-reserve}. The proof of \cref{ch28:thm:one-shot-and-source-sum} uses \cref{ch08:lem:aligned-zero-white,ch13:lem:heat-and-chaining} and the majorant $\alpha_*z/(1-\beta_Jz)$, with $B\alpha_*^2<1$; no step uses $\gamma\le1$. In each circulation coefficient the factor $g_3$ cancels against $\sqrt{g_3^2\varepsilon}$, and the only remaining scale is $\omega_j=\min\{a_j/\varepsilon,\sqrt{\varepsilon/a_j}\}$. Thus the deterministic coefficient bounds and the expansion in nonlinear remainders hold on the same domains.
+
+\paragraph{Probabilistic estimates.}
+The conditional potential is that of \cref{ch10:thm:complete-white-law}, and \cref{ch12:thm:replacement-family} preserves its coordinates, its balls, and its density. \Cref{ch10:thm:actual-means-and-scores}, applied to this product and to the radial segment of the coarse field, gives the conditional means of order $t_jb$ and the local bound $\sup_l\|\partial_{w_l}\partial_uV\|_{L^2}\le Ct_jb$, with all effective-interaction, determinant, and Haar disintegration terms included. The class of outputs used for the circulation is fixed by the coefficient series on one larger domain (Step 7 of the proof of \cref{ch28:thm:predictable-rows-and-means}), so its constant $C_F$ depends neither on the remaining number of steps, nor on the output resolution, nor on $s$. The differentiation formula and the local covariance bound therefore give the mean and remainder conclusions of \cref{ch28:thm:predictable-rows-and-means}. Global color equivariance at zero coarse field gives the vanishing mean and the cancellation of equivariant bilinear terms. The Poincaré and logarithmic Sobolev inequalities hold for the same conditional kernel, with dimension-free constants.
+
+\paragraph{The threshold.}
+We have exactly
+\[
+ t_1(s)^2=\frac\gamma{Mn_s},\qquad t_j=t_1(s)B^{-(j-1)/2},
+\]
+so $t_1(s)\downarrow0$ as $s\to\infty$ for fixed $\gamma>0$. Every analytic, domain, Hessian, potential-derivative, and moment condition is a fixed inequality of the form $t[p(t)+c_J]^v\le c'$ or $t^2(1+\mathsf E_{\rm q})\le c'$, with a fixed finite $v$, and all of them hold on an interval $0<t\le\tau_*$. We also require $n_s\ge n_\Gamma$. There are at most $m_j\le C_J(L/a_j)^3=C_JL^3(\lambda_Bg_3)^6t_j^{-6}$ three-dimensional blocks, and with $u=\log(1/t)$ the quantity $6m_je^{-p_j^2/192}$ is at most $C_{J,L,\gamma}\exp(6u-A_{\rm w}^2u^2/192)$, which tends to zero as $u\to\infty$. Thus a single $s_0$ enforces $p_j\ge1$, $6m_je^{-p_j^2/192}\le1/2$, and $Ct_jr\le p_j/(16\sqrt3)$ for all $j$ and all later $s$, as in Step 1 of the proof of \cref{ch28:thm:predictable-rows-and-means}. The cutoff error $(1+3m_j)(6m_j)^{1/2}e^{-p_j^2/384}$, which retains the number of blocks, satisfies \eqref{ch28:eq:cutoff-envelope}; as a function of $h=a_j$ it is $O(h^v)$ for every fixed $v>0$, and in particular it is summable over the scales.
+
+\paragraph{The bounds on the reconstructed fields.}
+The recurrence \eqref{ch28:eq:actual-forced-recurrence} and Steps 1--4 of the proof of \cref{ch28:lem:top-current-and-caps} use only the smallness of $t_1(s)$; equivalently, by \cref{ch28:rem:forced-cap-alternative}, the forced-recursion estimate of \cref{ch12:lem:deterministic-prolongation-reserve} applies with the auxiliary input bound \eqref{ch28:eq:cap-input-enclosure}, without changing the measure. They give
+\[
+ b_j\le C\bigl[r\alpha_*^j+g_3\sqrt{a_j}\,p_j\bigr],\qquad \sum_{j=1}^{K-s}b_{j-1}\le D_s=C\Bigl\{\frac r{1-\alpha_*}+g_3\sqrt{H_s}\,(p_1(s)+1)\Bigr\},
+\]
+with a constant independent of $H_s$ and of $s$. Since $p_1(s)$ is affine in $s$ and $\sqrt{H_s}$ decays geometrically, $\sup_{s\ge s_0}D_s<\infty$.
+
+\paragraph{The covariance identity.}
+The identity of \cref{ch28:thm:maxwell-calibration} is the exact quadratic part of \cref{ch07:thm:bellman,ch09:thm:sequential-density} at the origin of the reconstruction, and the bound on $\mathbf H_{s,a}^{-1}$ comes from \cref{ch05:thm:flat-precision}. The independent Gaussian coordinates and the coarse Schur complement therefore give
+\[
+ \sum_j\Gamma_j(0)\Gamma_j(0)^{\mathsf T}=C^{a,\varepsilon,L}\otimes I_3-C^{\rm ret}_{s,a,\varepsilon},\qquad \|C^{\rm ret}_{s,a,\varepsilon}\|\le Cn_s^2\varepsilon/H_s,
+\]
+and the coupling cancels in the normalized covariance.
+
+All results of this section have now been checked at every $s\ge s_0$.
+\end{proof}

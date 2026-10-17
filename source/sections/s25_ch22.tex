@@ -1,0 +1,968 @@
+\chapter{Consistency and continuation of the Wilson flow}\label{ch22:chapter}
+
+This section completes the deterministic theory of the Wilson flow used in the rest of the paper. It turns bounds on the flow data of a lattice initial potential, which the stochastic estimates of \cref{part:stochastic} provide, into statements about flowed Wilson loops at fixed positive times. \Cref{ch21:chapter} solved the damped Wilson equation on a short time interval for initial potentials with bounded flow data (\cref{ch21:thm:enhanced-local-flow}). For a compact set of smooth initial data, it also constructed a continuation of the Yang--Mills heat flow using a finite reference family: finitely many smooth DeTurck solutions on consecutive time intervals, joined by fixed gauge transformations (\cref{ch21:thm:continuum-atlas}). At a fixed mesh the Wilson flow exists for all times, since it is the gradient flow of a smooth function on a compact manifold. The problem is to obtain estimates in physical units that are uniform as $a\to0$, together with logarithmic representatives of the flowed configuration in which these estimates hold.
+
+We prove that every initial potential with bounded flow data can be continued to any fixed time interval $[\tau,T]$ with $\tau>0$, uniformly in the mesh. We also prove that the based holonomy matrices and the characters of flowed Wilson loops are Lipschitz functions of the flow data (\cref{ch22:lem:bounded-input-continuation,ch22:thm:root-matrix-modulus,ch22:cor:bounded-input-trace-stability}). For initial potentials depending on finitely many real parameters, we bound two parameter derivatives of the based holonomy matrices of the coordinate cycles uniformly in the mesh. For fixed smooth families of initial data, we identify the limits of these matrices and their derivatives (\cref{ch22:thm:real-flow-variations}). Finally, we show that the flows of the plaquette potentials $q+cq^2$, $0\le c\le C_0$, give asymptotically the same flowed loops as the Wilson flow (\cref{ch22:lem:alternative-uniform-handoff}). The main tools are the consistency of the lattice vector field on smooth fields (\cref{ch22:rem:full-smooth-coefficients,ch22:thm:sampled-smooth-stability}), stability in $C^1_a$ near smooth solutions (\cref{ch22:lem:physical-volterra}), and smoothing after a positive time together with compactness (\cref{ch22:thm:positive-window-bootstrap,ch22:lem:fixed-time-compactness}).
+
+The section contains three kinds of comparison, with different kinds of error.
+\begin{center}
+\begin{tabular}{p{0.3\textwidth}p{0.28\textwidth}p{0.32\textwidth}}
+\toprule
+Comparison & Hypothesis & Conclusion\\
+\midrule
+Wilson flow from the exponentials of a sampled smooth solution, versus that solution & initial link-logarithm error $O(a^2)$ & link-logarithm error $O(a^2)$; error $O(a)$ for loops of bounded length\\
+Lattice solution versus a selected smooth DeTurck solution & initial error $\eta$ in $C^1_a$ & error $C(\eta+a)$ in $C^1_a$\\
+Two lattice solutions on the same lattice & difference $d_a$ of the flow data & difference $Cd_a$ in $C^1_a$ after a waiting time, and in the based holonomy matrices\\
+\bottomrule
+\end{tabular}
+\end{center}
+Only the last comparison has no additive error in the mesh; this makes the flowed loops Lipschitz functions of the flow data. For matrices, as opposed to characters, we must track every gauge transformation applied at the basepoint.
+
+Two observations organize the proofs. First, we expand the lattice vector field completely before taking the continuum limit. The contributions of the two plaquettes on either side of a link cancel at order $a^2$, and their common part also cancels at order $a^3$; what remains at order $a^3$ is the DeTurck vector field. Second, after smoothing for a positive time, all solutions whose flow data obey a fixed bound are uniformly close to a compact set of smooth connections. Finitely many selected smooth DeTurck solutions then give continuation and stability uniformly over these solutions, without assuming that the initial potentials converge as the mesh varies. We work both in dimensionless units, with link logarithms $\theta=aA$ and time $s=t/a^2$, where the lattice structure is simplest, and in physical units. Since $\partial_s\theta=a^3\partial_tA$, a dimensionless error $O(a^4)$ is a physical error $O(a)$, which explains the factors $a^{-3}$ below.
+
+We use the local formulas for the Wilson vector field, the local solution, the sampled gauge transformations, and the continuation of the smooth flow from \cref{ch21:lem:wilson-local-algebra,ch21:def:two-grade-datum,ch21:thm:enhanced-local-flow,ch21:lem:local-matrix-gauge-and-loops,ch21:thm:continuum-atlas}; the estimates for the modified plaquette potential in \cref{ch21:lem:quartic-plaquette-force,ch21:thm:common-enhancement-alternative-flow}; and the heat estimates \cref{ch13:lem:cardinal-columns,ch13:lem:fixed-prefix-heat}. All existence statements for the continuum flow used here are contained in \cref{ch21:thm:continuum-atlas}, which rests on the deterministic smooth-data results of Cao and Chatterjee \cite{CCHeat2022v4,CCState2023v4}; no result about random initial data is used. The Wilson flow was introduced by L\"uscher \cite{Luscher2010WilsonFlow}. The damping gauge transformation that turns it into a parabolic equation is in the spirit of the method of Zwanziger \cite{Zwanziger1981}, DeTurck \cite{DeTurck1983}, and Donaldson \cite{Donaldson1985}, and for the Wilson flow it is described in \cite[Section~2]{Luscher2010WilsonFlow}. The arguments are standard parabolic ones (weakly singular Volterra estimates, a bootstrap for higher differences, and compactness by the Arzel\`a--Ascoli theorem), carried out on the exact lattice equation with constants independent of the mesh. The results are used in \cref{ch25:chapter,ch26:chapter} for the convergence of flowed loops and energies and for the construction of the limiting measure, in \cref{ch29:chapter} for macroscopic loops in the short-distance analysis, and in \cref{ch30:chapter,ch31:chapter,ch32:chapter} for holonomy matrices and their parameter derivatives at weak coupling.
+
+\section{Conventions and heat estimates}\label{ch22:sec:conventions}
+
+Throughout this section $a=L/n$, with $n\ge4$, is a lattice mesh, and $\Lambda_{L/a}$ is the corresponding periodic lattice. For a continuous field $f$ on $\Torus$ we write $S_af=f|_{\Lambda_{L/a}}$ for its sample on this lattice. A link field $A$ has components $A_i(x)\in\su$ on the positively oriented links $(x,x+ae_i)$. We locate each component at the starting vertex $x$ of its link, and we write $T_i$ for translation by $ae_i$. We write $D_a$ for any physical forward or backward difference $D^\pm_{a,j}$, and $D_a^\nu$ for an ordered composition of such differences. In a norm, $D_a^m$ stands for the maximum over all ordered compositions of order $m$ and over all link and color components. For a composition $\nu$ we write $\partial^\nu$ for the corresponding composition of partial derivatives. As in \cref{ch21:thm:enhanced-local-flow}, we use the norm
+\[
+ \|A\|_{C_a^1}=\|A\|_\infty+\max_{j,\epsilon\in\{+,-\}}\|D_{a,j}^{\epsilon}A\|_\infty .
+\]
+Translations do not change these norms, since they permute the sites of the periodic lattice. In dimensionless coordinates we write $\nabla_i=T_i-I$ and $H_0=\sum_i\nabla_i^*\nabla_i$, so that $\Delta_a=-a^{-2}H_0$, and $S_s^a=e^{-sH_0}=P_{a^2s}^a$ for the heat semigroup in dimensionless time. This semigroup differs from the sampling $S_a$.
+
+\paragraph{Flow data.}
+As in \cref{ch21:def:two-grade-datum}, the flow data of a lattice initial potential $A_0$ on mesh $a$ are the linear heat evolution and the quadratic Picard term
+\[
+ x_a(t)=P_t^aA_0,\qquad
+ y_a(t)=\mathcal Q_a(x_a,x_a)(t)=\int_0^tP_{t-r}^a\mathcal N_a(x_a(r),x_a(r))\,dr .
+\]
+Here $\mathcal N_a$ is the ordered bilinear map fixed in \cref{ch21:lem:wilson-local-algebra}; it is not symmetric, and we always take its arguments in the displayed order. On a time interval $[0,T_0]$ we write
+\[
+ \|(x_a,y_a)\|_{\mathrm{fl},a}=\Xnorm{\alpha}{a}(x_a)+\Ynorm{\alpha}{a}(y_a),
+\]
+with the norms of \cref{ch01:def:enhancement} taken on $[0,T_0]$. These norms contain the weighted first differences, with all translated components. Differences of flow data on the same lattice are measured by the same norms applied to the difference. Throughout, $1/2<\alpha<2/3$, and we write
+\[
+ \beta=\alpha-\tfrac12,\qquad \kappa=1-\tfrac32\alpha,\qquad v_a(t)=t+a^2 .
+\]
+The remainder norm of \cref{ch21:thm:enhanced-local-flow} is
+\[
+ \|r\|_{\mathsf R_a}=\sup_{0\le t\le T_R}\bigl\{v_a(t)^{-\kappa}\|r(t)\|_\infty+v_a(t)^{1/2-\kappa}\|D_ar(t)\|_\infty\bigr\}.
+\]
+
+\paragraph{The chart and damped representatives.}
+Let $r_*$ be the radius of the link-logarithm chart in \cref{ch21:lem:wilson-local-algebra}. A potential $A$ on mesh $a$ lies in the chart if $a\|A\|_\infty<r_*$. All local analytic bounds below are used on a fixed smaller chart $\{a\|A\|_\infty\le r'\}$ with $r'<r_*$, and the corresponding constants may depend on $r_*-r'$. In the chart, the damped Wilson equation in physical units reads
+\[
+ \partial_tA=\Delta_aA+\mathcal N_a(A,A)+a^{-3}R_3(aA),
+\]
+with the analytic remainder $R_3$ of \cref{ch21:lem:wilson-local-algebra}. By that lemma, a solution in the chart is related to the Wilson flow by
+\[
+ e^{aA_i(x,t)}=k(x,t)\,\bigl(\Psi_t^{(n)}U\bigr)_i(x)\,k(x+ae_i,t)^{-1},\qquad U=e^{aA(0)},
+\]
+where the damping gauge transformation $k$ solves $\partial_tk\,k^{-1}=a^{-2}\phi(aA(t))$ with $k(0)=I$, and $\phi$ is the damping parameter of \cref{ch21:lem:wilson-local-algebra}. As in \cref{ch21:chapter}, we call $A$ the damped representative of the Wilson flow. The Wilson flow is used at physical time $t$, that is, at time $4t/a^2$ for the vector field $-\nabla\sum_pq(U_p)$; there is no coupling factor in this conversion. When the flow is restarted at a time $t_0$ from a gauge-transformed configuration, the new damping gauge transformation has value $I$ at $t_0$.
+
+\paragraph{Constants.}
+A constant that comes only from the finite local formulas (the finitely many terms of $\mathcal N_a$, the analytic remainder $R_3$, and their derivatives) depends only on the chart radius $r'$ and on the order of differentiation, as in item~(1) of \cref{ch01:conv:constants}. Other constants may in addition depend on $L$, on the displayed bounds, waiting times, and horizons, and on finitely many smooth DeTurck solutions selected in the proofs; this is the dependence described in item~(7) of \cref{ch01:conv:constants}. No constant in this section depends on the coupling, on a probability measure, on the number of averaging steps, or on $M$ and $J$. When applying the local results of \cref{ch21:chapter}, we may decrease the chart radius and the local existence time, and increase the minimal lattice side; we do this once, before choosing the constants below. Every restriction $a\le a_*$ on the mesh is chosen after the displayed data and before the particular initial potentials to which it is applied.
+
+\begin{lemma}\label{ch22:lem:heat-calculus}
+Fix $L,H_1>0$ and an integer $q\ge0$. The lattice heat semigroup $P_u^a$ is positivity preserving, preserves constants, is a contraction for the supremum norm, and commutes with every translation and every difference. Further,
+\[
+ \|D_a^qP_u^af\|_\infty\le C_{q,H_1/L^2}(u+a^2)^{-q/2}\|f\|_\infty,\qquad 0\le u\le H_1 .
+\]
+In particular, for $a\le1$ and $0\le s\le H_1/a^2$,
+\[
+ \|S_s^a\|_{\infty\to\infty}\le1,\qquad
+ \|\nabla S_s^a\|_{\infty\to\infty}\le C_{H_1/L^2}(1+s)^{-1/2}.
+\]
+For $p<1$, $0\le q<1$, and $\epsilon>0$,
+\begin{equation}\label{ch22:eq:beta-bound}
+ \int_0^t(r+\epsilon)^{-p}(t-r+\epsilon)^{-q}\,dr\le C_{p,q}(t+\epsilon)^{1-p-q},
+\end{equation}
+and the same bound holds for $\epsilon=0$ and $t>0$.
+\end{lemma}
+
+\begin{proof}
+We have $\Delta_a=a^{-2}(\sum_i(T_i+T_i^{-1})-6I)$. Factoring out $e^{-6u/a^2}$ and expanding the exponential of the remaining sum of translations shows that $P_u^a$ is positivity preserving and preserves constants; in particular it is a contraction for the supremum norm. It commutes with translations and differences, since all translations commute. For the difference bound we apply \cref{ch13:lem:cardinal-columns} with equal input and output meshes, physical horizon $T=H_1$, and refinement ratio one. The cardinal interpolation is then the identity, and the heat estimate of that lemma is the displayed bound for every lattice array. (Where the lemma is used below for fixed smooth interpolants, the refinement ratio is the integer $H/a$, and the horizon is the displayed finite $T$.) Multiplying by $a$ and setting $u=a^2s$, we obtain the dimensionless bounds.
+
+We now prove \eqref{ch22:eq:beta-bound}. Suppose first that $p<0$. Then $(r+\epsilon)^{-p}\le(t+\epsilon)^{-p}$, and the integral of the remaining factor is at most $(t+\epsilon)^{1-q}/(1-q)$, which gives the bound. Suppose now that $p\ge0$. If $t\ge\epsilon$, we bound the integrand by $r^{-p}(t-r)^{-q}$ and substitute $r=tv$. The integral of $v^{-p}(1-v)^{-q}$ over $[0,1]$ is finite, as we see by bounding $(1-v)^{-q}$ by $2^{q}$ on $[0,1/2]$ and $v^{-p}$ by $2^p$ on $[1/2,1]$. Since $t\le t+\epsilon\le2t$, we obtain the bound, and the same argument proves the case $\epsilon=0$. If $t<\epsilon$, the integral is at most $t\epsilon^{-p-q}\le\epsilon^{1-p-q}$, which is at most a constant times $(t+\epsilon)^{1-p-q}$ because $\epsilon\le t+\epsilon\le2\epsilon$. These arguments apply for either sign of $1-p-q$.
+\end{proof}
+
+We use the ordered expansion of $\mathcal N_a$ fixed in \cref{ch21:lem:wilson-local-algebra}: a fixed finite sum of brackets of translated components, with one physical difference in the second argument of each bracket. Differences of brackets obey the exact product rules
+\begin{equation}\label{ch22:eq:shifted-product}
+ D_{a,k}^+[u,v]=[D_{a,k}^+u,T_kv]+[u,D_{a,k}^+v],\qquad
+ D_{a,k}^-[u,v]=[D_{a,k}^-u,T_k^{-1}v]+[u,D_{a,k}^-v].
+\end{equation}
+Repeated application distributes a fixed number of differences among the factors and produces finitely many terms with bounded translations. Whenever we take differences of a discrete nonlinearity, we use these identities and never differentiate an interpolated product.
+
+\section{Consistency for fixed smooth interpolants}\label{ch22:sec:fixed-interpolants}
+
+The first consistency statement concerns the flow data of a fixed finite family of smooth cardinal interpolants. Such families arise in \cref{ch25:chapter} from finite-scale reconstructions, the fields reconstructed from finitely many RG steps. The point is that the constants do not depend on the finer mesh on which the flow is computed.
+
+\begin{lemma}\label{ch22:lem:fixed-prefix-coefficients}
+Fix $L,T,H>0$ with $L/H\in\N$, and $M_H<\infty$. Let $f=I_Hv$ and $g=I_Hw$ be the smooth cardinal interpolants, as in \cref{ch13:lem:cardinal-columns}, of link fields $v,w$ on the lattice of mesh $H$ with $\|v\|_\infty+\|w\|_\infty\le M_H$. For every mesh $a=H/m$ with $m\in\N$, set
+\[
+ x_a=P_\cdot^a(S_af),\qquad z_a=P_\cdot^a(S_ag),\qquad x=P_\cdot f,\qquad z=P_\cdot g .
+\]
+Let $\mathcal N_0$ be the continuum bilinear map obtained from the fixed expansion of $\mathcal N_a$ by replacing every translation by the identity and every physical difference by the corresponding partial derivative. Then
+\[
+ (\mathcal N_0(b,b))_i=\sum_j\bigl\{2[b_j,\partial_jb_i]-[b_j,\partial_ib_j]\bigr\}.
+\]
+Uniformly over this family of inputs and over $0\le t\le T$, the values and all first differences of $\mathcal N_a(x_a,z_a)$ differ from the samples of $\mathcal N_0(x,z)$ and of its corresponding first derivatives by at most $C_{H,M_H,L,T}\,a$, and the same holds for $\mathcal N_a(z_a,x_a)$ and $\mathcal N_0(z,x)$. The same estimate holds for
+\[
+ \mathcal Q_a(x_a,z_a)(t)-S_a\int_0^tP_{t-s}\mathcal N_0(x(s),z(s))\,ds
+\]
+and its first differences, and for the reversed order of the arguments. Consequently, for every bounded finite sum $f$ of such interpolants, the flow data of $S_af$ converge, after separate interpolation of value and difference arrays, to the continuum pair $(x,\int_0^tP_{t-s}\mathcal N_0(x(s),x(s))\,ds)$ in the four weighted uniform norms of \cref{ch21:def:two-grade-datum}, whose weights are powers of $t$, and $\|(x_a,y_a)\|_{\mathrm{fl},a}$ is bounded uniformly in $a$. The constants are deterministic, do not depend on $a$, and may grow arbitrarily as $H\downarrow0$. The lemma compares two discretizations of the same smooth input on the mesh $a$; it does not compare the quadratic term $\mathcal Q_H$ on the mesh $H$ with $\mathcal Q_a$.
+\end{lemma}
+
+The diagonal formula for $\mathcal N_0$ is the quadratic part of the DeTurck form of the Yang--Mills heat flow, written in \cref{ch21:thm:continuum-atlas}; compare the gauge-fixed flow of L\"uscher \cite[Section~2.2]{Luscher2010WilsonFlow}. We verify it from the lattice formula, since its sign and the factor two must match the lattice map exactly.
+
+\begin{proof}
+\emph{Step 1: bounds on the inputs.} For each integer $q\ge0$, by the bounds for cardinal interpolants in \cref{ch13:lem:cardinal-columns}, we have
+\[
+ \|f\|_{C^q}+\|g\|_{C^q}\le C_q(1+H^{-q})M_H .
+\]
+By heat contraction on differentiated smooth data, and its discrete counterpart, every fixed spatial difference of the input fields is bounded uniformly in $a$ and $t\le T$. Applying \cref{ch13:lem:fixed-prefix-heat} through order two, and not only through order one, we obtain
+\begin{equation}\label{ch22:eq:prefix-two-differences}
+ \max_{0\le q\le2}\sup_{t\le T}
+ \bigl(\|D_a^qx_a-S_a\partial^qx\|_\infty+\|D_a^qz_a-S_a\partial^qz\|_\infty\bigr)\le C_{H,M_H,L,T}\,a .
+\end{equation}
+The maximum includes every ordered choice of differences; for $q=0$ the stronger error $O(a^2)$ is available. A translation by any vector of the fixed stencil changes a sampled smooth $q$th derivative by at most $Ca\|\partial^{q+1}x\|_\infty$, and the same holds for $z$.
+
+\emph{Step 2: the diagonal of $\mathcal N_0$.} Recall that $\mathcal N_0$ is defined by the termwise replacement in the statement. To identify its diagonal, let $(Cb)_{ij}=\partial_ib_j-\partial_jb_i$ and $Q(b)_{ij}=[b_i,b_j]$, extended antisymmetrically in $i,j$. At zero translation the logarithms of the four factors of the plaquette in \cref{ch21:lem:wilson-local-algebra} are $b_i,b_j,-b_i,-b_j$, and half the sum of their pairwise brackets is $Q(b)_{ij}$. By the adjoint formula in \cref{ch21:lem:wilson-local-algebra}, we have
+\[
+ (C^*Q(b))_i=\sum_j\partial_j[b_i,b_j],\qquad
+ (DQ(b)^*Cb)_i=\sum_j[b_j,\partial_ib_j-\partial_jb_i].
+\]
+For the second identity, note that a variation $h_i$ of $b_i$ changes $[b_i,b_j]$ by $[h_i,b_j]$, and invariance of the inner product moves this bracket to $[b_j,(Cb)_{ij}]$. Combining the two orientations of each plaquette, we obtain the displayed formula. Further, since $d_0^*(ab)/a^2$ tends to $\sum_j\partial_jb_j$, the quadratic gauge term $G_2$ of \cref{ch21:lem:wilson-local-algebra}, divided by $a^3$, tends to $[b_i,\sum_j\partial_jb_j]$. The diagonal coefficient is therefore
+\[
+ -C^*Q(b)-DQ(b)^*Cb+[b,\operatorname{div}b]
+ =\Bigl(\sum_j\bigl\{2[b_j,\partial_jb_i]-[b_j,\partial_ib_j]\bigr\}\Bigr)_i,
+\]
+where we used $[\partial_jb_i,b_j]=-[b_j,\partial_jb_i]$, and the terms $[b_i,\partial_jb_j]$ cancel. This verifies the sign and the factor two without symmetrizing the ordered map.
+
+\emph{Step 3: the nonlinearity.} Every summand of $\mathcal N_a(x_a,z_a)$ is a bracket of a factor of order zero and a factor of order one. Applying \eqref{ch22:eq:shifted-product} once, we obtain factors of orders $(1,1)$ or $(0,2)$, with the corresponding translations. By \eqref{ch22:eq:prefix-two-differences} and Step 1, each factor differs from its continuum counterpart by $O(a)$, and every other factor is bounded by a constant depending on the family. Using the inequality $|[u,v]|\le|u||v|$ and subtracting the two products, we obtain the asserted $O(a)$ errors for the values and the first differences. Reversing the inputs replaces the factors by $z_a,x_a$ in the same list; their bounds through order two and their errors are again those in \eqref{ch22:eq:prefix-two-differences}, which gives the estimate for the reversed order.
+
+\emph{Step 4: the Duhamel integrals.} Let $h(t)=\mathcal N_0(x(t),z(t))$, a uniformly bounded smooth family at every fixed spatial order. In the value of the Duhamel integral we first replace $\mathcal N_a(x_a,z_a)$ by $S_ah$; by contraction this costs at most $CTa$. Then we replace $P_{t-r}^aS_ah(r)$ by $S_aP_{t-r}h(r)$. By the general smooth-input bound of \cref{ch13:lem:fixed-prefix-heat}, applied separately at each $r$, this costs at most $CT^2a^2\sup_r\|h(r)\|_{C^4}$. For a first difference of the integral, we commute the difference through $P_{t-r}^a$ onto the source. The replacement of the source difference by $S_a\partial h$ costs $CTa$, and the heat comparison on $\partial h(r)$ together with the comparison of $D_aS_a$ with $S_a\partial$ cost at most $C_{H,M_H,L,T}\,a$ after integration. This order of comparisons avoids dividing a value error by $a$. Replacing $h$ by $\mathcal N_0(z,x)$ gives the assertion for the reversed order.
+
+\emph{Step 5: weighted norms and convergence.} We first bound the flow data near time zero, without using any convergence. Let $B=\|f\|_\infty+\|g\|_\infty$. By \cref{ch22:lem:heat-calculus} and the bound $\|\mathcal N_a(u,v)\|_\infty\le C\|u\|_\infty\|D_av\|_\infty$, we have
+\[
+ \|x_a(t)\|_\infty+\|z_a(t)\|_\infty\le B,\qquad
+ \|D_ax_a(t)\|_\infty+\|D_az_a(t)\|_\infty\le CB(t+a^2)^{-1/2},
+\]
+\[
+ \|\mathcal Q_a(x_a,z_a)(t)\|_\infty\le CB^2\sqrt t,\qquad
+ \|D_a\mathcal Q_a(x_a,z_a)(t)\|_\infty\le CB^2 .
+\]
+In the last inequality we used $\int_0^t(t-r+a^2)^{-1/2}(r+a^2)^{-1/2}\,dr\le\pi$. For a fixed family one can instead bound all input and source differences by its smooth bounds, which also covers $t=0$. Since $a\le H$ and all four weights $v_a^{\alpha/2}$, $v_a^{(\alpha+1)/2}$, $v_a^{\beta}$, $v_a^{\alpha}$ have positive exponents, multiplying by them we obtain a bound on $\|(x_a,y_a)\|_{\mathrm{fl},a}$ depending only on the data of the family. Interpolation of each array separately is a contraction, since the cardinal weights are nonnegative and sum to one. Because of its support radius, it has error at most $Ca\|\partial F\|_\infty$ for a smooth $F$. Then the uniform errors already proved imply convergence in all four weighted uniform norms. For the quadratic Picard term we take $g=f$, and for a finite sum of interpolants we use the corresponding bounded smooth family. All constants have the asserted dependence, and $\mathcal Q_H$ is never compared with $\mathcal Q_a$.
+\end{proof}
+
+\section{Consistency and stability for smooth initial data}\label{ch22:sec:smooth-data}
+
+We now expand the exact lattice vector field on sampled smooth potentials. This vector field consists of the Riemannian gradient of the plaquette action for the bi-invariant product metric and the damping term, written in logarithmic coordinates by means of the inverse differential of the exponential. All three parts enter the term of order $a^3$.
+
+\begin{lemma}\label{ch22:rem:full-smooth-coefficients}
+Let $\mathcal F$ be the dimensionless damped logarithmic vector field of \cref{ch21:lem:wilson-local-algebra}, so that the damped Wilson equation reads
+\[
+ \partial_s\theta=\mathcal F(\theta)=-H_0\theta+N_2(\theta)+R_3(\theta)
+\]
+in dimensionless time $s=t/a^2$. Let $K_0>0$, and let $b$ be a smooth periodic connection with $\|b\|_{C^3}\le K_0$. If $a$ is so small that $K_0a$ lies in a fixed smaller chart, then
+\[
+ a^{-3}\mathcal F(aS_ab)=S_a\bigl\{\Delta b+\mathcal N_0(b,b)+\mathscr N_3(b)\bigr\}+O_{K_0}(a),
+ \qquad (\mathscr N_3(b))_i=\sum_j[b_j,[b_j,b_i]],
+\]
+and
+\[
+ a^{-3}R_3(aS_ab)=S_a\mathscr N_3(b)+O(a).
+\]
+More generally, for every integer $q\ge0$ the errors in both identities remain $O(a)$ after any $q$ physical differences, compared with the samples of the corresponding derivatives, uniformly over families of $b$ bounded in $C^{q+4}$. The constants depend only on $q$, on the smooth bounds, and on the chart.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1: the exact vector field.} For $i\ne j$, let
+\[
+ P_{ij}(x)=U_i(x)U_j(x+ae_i)U_i(x+ae_j)^{-1}U_j(x)^{-1},
+ \qquad
+ p(V)^c=-2\tr(\tau_cV),
+\]
+and identify the color vector $p(V)$ with its Lie-algebra element. For $V=e^f$ in the plaquette chart, $p(e^f)=2\sin(|f|/2)f/|f|=f+O(|f|^3)$. When $j<i$ we have $P_{ij}(x)=P_{ji}(x)^{-1}$ and $q(V^{-1})=q(V)$, so each unoriented plaquette is counted once. Varying $U_i(x)$ by $e^{\varepsilon w}U_i(x)$ in $4\sum_pq(U_p)$ gives $\langle w,p(P_{ij}(x))\rangle$ from the plaquette $P_{ij}(x)$ and
+\[
+ -\bigl\langle w,\Ad(U_j(x-ae_j)^{-1})\,p(P_{ij}(x-ae_j))\bigr\rangle
+\]
+from the plaquette $P_{ij}(x-ae_j)$; the second formula follows by moving the varied inverse factor cyclically inside the trace. The negative gradient for the bi-invariant metric, in left trivialization, is therefore
+\begin{equation}\label{ch22:eq:staple-force}
+ V_{{\rm W},i}(x)=\sum_{j\ne i}\bigl\{\Ad(U_j(x-ae_j)^{-1})\,p(P_{ij}(x-ae_j))-p(P_{ij}(x))\bigr\}.
+\end{equation}
+This is an identity at every configuration. By \cref{ch21:lem:wilson-local-algebra}, with $U_i(x)=e^{\theta_i(x)}$, the damping parameter, the damping velocity, and the logarithmic vector field are
+\begin{equation}\label{ch22:eq:full-log-force}
+ \begin{gathered}
+ \phi(x)=\sum_j\bigl(\theta_j(x-ae_j)-\theta_j(x)\bigr),\\
+ V_{{\rm g},i}=\phi(x)-\Ad(e^{\theta_i(x)})\phi(x+ae_i),\qquad
+ \mathcal F_i(\theta)=\mathcal J(\theta_i)^{-1}\bigl(V_{{\rm W},i}+V_{{\rm g},i}\bigr),
+ \end{gathered}
+\end{equation}
+where $\mathcal J(\theta)=(e^{\ad\theta}-I)/\ad\theta$ is the differential of the exponential in left trivialization.
+
+\emph{Step 2: expansion of one plaquette.} Let $\theta=aS_ab$, that is, $U_i(x)=e^{ab_i(x)}$, and write
+\[
+ F_{ij}=\partial_ib_j-\partial_jb_i+[b_i,b_j],\qquad v=\sum_j\partial_jb_j .
+\]
+By Taylor expansion at $x$ through order $a^3$, the logarithms of the four factors of $P_{ij}(x)$ are
+\[
+ \begin{split}
+ ab_i,&\quad ab_j+a^2\partial_ib_j+\tfrac12a^3\partial_i^2b_j+O_{K_0}(a^4),\\
+ &-ab_i-a^2\partial_jb_i-\tfrac12a^3\partial_j^2b_i+O_{K_0}(a^4),\quad -ab_j .
+ \end{split}
+\]
+Taking the finite analytic product and the logarithm, we obtain
+\begin{equation}\label{ch22:eq:face-sample-expansion}
+ p(P_{ij}(x))=a^2F_{ij}(x)+a^3B_{ij}(x)+O_{K_0}(a^4),\qquad \|B_{ij}\|_{C^1}\le C_{K_0}.
+\end{equation}
+Here $B_{ij}$ is the homogeneous coefficient of $a^3$ in the product of the four factors, with their logarithms replaced by the displayed jets. It is a fixed polynomial in the two-jets of $b$, and its first derivative involves only three-jets. Taylor's integral remainder for each translated $b$ and the analytic remainder of fourth order of the finite product are bounded by $C_{K_0}a^4$. The coefficient of $a^2$ is $F_{ij}$: these logarithms add up to $a^2(\partial_ib_j-\partial_jb_i)$ modulo $O(a^3)$, and half the sum of their pairwise brackets is $a^2[b_i,b_j]$ modulo $O(a^3)$, as in Step 2 of the proof of \cref{ch22:lem:fixed-prefix-coefficients}. Replacing the logarithm by $p$ changes the result only by $O_{K_0}(a^6)$. This proves \eqref{ch22:eq:face-sample-expansion} without computing the polynomial $B_{ij}$.
+
+\emph{Step 3: cancellation between the two plaquettes.} At the neighboring basepoint, $F_{ij}(x-ae_j)=F_{ij}(x)-a\partial_jF_{ij}(x)+O_{K_0}(a^2)$ and $B_{ij}(x-ae_j)=B_{ij}(x)+O_{K_0}(a)$, and the adjoint in \eqref{ch22:eq:staple-force} is $I-a\ad(b_j(x))+O_{K_0}(a^2)$. Subtracting the contribution of $P_{ij}(x)$, we obtain
+\[
+ V_{{\rm W},i}(aS_ab)=-a^3\sum_j\bigl(\partial_jF_{ij}+[b_j,F_{ij}]\bigr)+O_{K_0}(a^4).
+\]
+The terms of order $a^2$ and the common terms $a^3B_{ij}$ cancel before the inverse differential $\mathcal J^{-1}$ is applied. For the damping parameter we have
+\[
+ \phi=-a^2v+a^3w+O_{K_0}(a^4),\qquad w=\tfrac12\sum_j\partial_j^2b_j,\qquad \|w\|_{C^1}\le C_{K_0}.
+\]
+The translated terms $a^3w$ cancel in $V_{\rm g}$, and expanding the adjoint gives $V_{{\rm g},i}=a^3(\partial_iv+[b_i,v])+O_{K_0}(a^4)$. Then the total group velocity is $O_{K_0}(a^3)$. Since $\mathcal J(ab_i)^{-1}=I+O_{K_0}(a)$, applying this inverse changes it only by $O_{K_0}(a^4)$. Finally,
+\[
+ -\sum_j\bigl(\partial_jF_{ij}+[b_j,F_{ij}]\bigr)+\partial_iv+[b_i,v]
+ =\Delta b_i+\sum_j\bigl\{2[b_j,\partial_jb_i]-[b_j,\partial_ib_j]+[b_j,[b_j,b_i]]\bigr\},
+\]
+and by \cref{ch22:lem:fixed-prefix-coefficients} the right side is $(\Delta b+\mathcal N_0(b,b)+\mathscr N_3(b))_i$. This proves the first identity. The only condition on $a$ is that $K_0a$ lie in a fixed smaller chart, and all spatial remainders used at most three derivatives of $b$.
+
+\emph{Step 4: the analytic remainder.} By \cref{ch21:lem:wilson-local-algebra},
+\[
+ a^{-3}\mathcal F(aS_ab)=\Delta_aS_ab+\mathcal N_a(S_ab,S_ab)+a^{-3}R_3(aS_ab).
+\]
+Central-difference consistency gives $\Delta_aS_ab=S_a\Delta b+O(a)$, and the calculation of Step 3 of the proof of \cref{ch22:lem:fixed-prefix-coefficients}, applied to the smooth field $b$, implies that $\mathcal N_a(S_ab,S_ab)=S_a\mathcal N_0(b,b)+O(a)$. Subtracting these from the first identity, we obtain the second.
+
+\emph{Step 5: differences.} For a first difference, we regard the finite sampled formula for $a^{-3}\mathcal F(aS_ab)$ as a smooth function $B_a(u)$ of a continuous basepoint $u\in\Torus$, evaluating every stencil entry at $u+a\xi$ instead of $x+a\xi$ for the corresponding stencil vector $\xi$. Differentiating the Taylor calculation of Steps 2 and 3 in $u$, we find that $\partial_kB_a$ differs from $\partial_k\{\Delta b+\mathcal N_0(b,b)+\mathscr N_3(b)\}$ by $O(a)$, since this calculation uses one additional bounded spatial derivative of $b$. Using the exact identity
+\[
+ D_{a,k}^+B_a(x)=\int_0^1\partial_kB_a(x+rae_k)\,dr
+\]
+we compare the difference with the sampled continuum derivative, at error $O(a)$; for a backward difference we integrate over $x-rae_k$ instead. Repeating this argument at a fixed order $q$, we obtain the assertion through order $q$ on families bounded in $C^{q+4}$. The same argument applies to $a^{-3}R_3(aS_ab)$. There is no negative power of $a$ in the remainder: its term of degree $d$ in the analytic series has coefficient $a^{d-3}$, $d\ge3$, by \cref{ch21:lem:wilson-local-algebra}. On a smaller chart, the derivatives of this series converge absolutely after multiplication by polynomial factors in $d$ of fixed order. Hence the product-rule argument applies to the whole analytic remainder, not only to its cubic truncation.
+\end{proof}
+
+\begin{theorem}\label{ch22:thm:sampled-smooth-stability}
+Fix $L,T,K_0,C_{\rm init}>0$. Let $b$ be a smooth periodic solution on $[0,T]$ of the DeTurck equation of \cref{ch21:thm:continuum-atlas}, continuously differentiable in time, with $\sup_{t\le T}\|b(t)\|_{C^3}\le K_0$. For $a=L/n$ write $s=t/a^2$, $S=T/a^2$, and $\theta^{\rm ref}(s,x)=ab(a^2s,x)$. There is $a_*>0$ such that the following statements hold for all $a\le a_*$.
+\begin{enumerate}
+\item The residual of $\theta^{\rm ref}$ for the exact vector field $\mathcal F$ of \cref{ch21:lem:wilson-local-algebra} satisfies
+\[
+ \sup_{s\le S}\|\partial_s\theta^{\rm ref}(s)-\mathcal F(\theta^{\rm ref}(s))\|_\infty\le C_{K_0}a^4 .
+\]
+Here $\mathcal F$ contains the Riemannian gradient of the plaquette action, the damping term, and the inverse differential of the exponential.
+\item Let $\vartheta(s)$ be a path on $[0,S]$, not necessarily a solution, with $\|\vartheta\|_\infty\le K_0a$ and $\|\nabla\vartheta\|_\infty\le K_0a^2$. Its linearized lower-order operator $\mathsf A_\vartheta=D\mathcal F(\vartheta)+H_0$ satisfies
+\[
+ \|\mathsf A_\vartheta z\|_\infty\le C_{K_0}\bigl(a\|\nabla z\|_\infty+a^2\|z\|_\infty\bigr).
+\]
+Define
+\[
+ \|z\|_{\mathsf R_{\rm sm}}=\sup_{s\le S}\|z(s)\|_\infty+\sup_{s\le S}\sqrt{1+s}\,\|\nabla z(s)\|_\infty
+\]
+and
+\[
+ \mathsf L_\vartheta z(s)=\int_0^se^{-(s-r)H_0}\mathsf A_\vartheta(r)z(r)\,dr .
+\]
+Then $\|(I-\mathsf L_\vartheta)^{-1}\|_{\mathsf R_{\rm sm}\to\mathsf R_{\rm sm}}\le C_{L,T,K_0}$, uniformly in $a$. A forcing $F$ enters through its whole Volterra integral, and if $\sup_s\|F(s)\|_\infty\le c$, then
+\[
+ \Bigl\|\int_0^\cdot e^{-(\cdot-r)H_0}F(r)\,dr\Bigr\|_{\mathsf R_{\rm sm}}\le C_{L,T}\,c\,(1+S).
+\]
+\item If $\|\theta(0)-\theta^{\rm ref}(0)\|_\infty\le C_{\rm init}a^2$, then the damped lattice solution $\theta$ with this initial value exists in the chart on $[0,S]$, is a damped representative of the Wilson flow, and satisfies
+\[
+ \|\theta-\theta^{\rm ref}\|_{\mathsf R_{\rm sm}}\le C_{L,T,K_0,C_{\rm init}}\,a^2 .
+\]
+\item Let $b_0$ be smooth, and let the partition $0=t_0<\cdots<t_Q=T$, the DeTurck solutions $b_i$ on $[0,t_{i+1}-t_i]$, and the fixed smooth gauge transformations $k_i$ be those given by \cref{ch21:thm:continuum-atlas} for the initial value $b_0$. Start the Wilson flow from $\exp(aS_ab_0)$, and at each time $t_{i+1}$ apply the gauge transformation $k_i$, sampled at the lattice sites, to the links before restarting the damped equation. Then at each time $t\in[t_i,t_{i+1}]$ the link logarithms differ from $aS_ab_i(t-t_i)$ by $O(a^2)$, and hence the links differ from $\exp(aS_ab_i(t-t_i))$ by $O(a^2)$.
+\end{enumerate}
+The constants and $a_*$ depend only on $L,T,K_0,C_{\rm init}$, and in (4) also on the smooth bounds and margins of the continuation. The hypothesis of (3) is an initial error of order $a^2$; an initial link error that is only $o(a)$ is not covered.
+\end{theorem}
+
+The proof follows the usual pattern for semilinear parabolic equations: a consistency estimate for the residual, a bound on the linearized Volterra operator in a weighted norm, and a contraction argument for the error. The only delicate point is the scaling. In dimensionless units the coefficient of the first difference in $\mathsf A_\vartheta$ is $O(a)$, the time interval has length $T/a^2$, and the weight $e^{-\lambda s}$ must be taken with $\lambda$ of order $a^2$.
+
+\begin{proof}
+\emph{Step 1: the residual.} By \cref{ch22:rem:full-smooth-coefficients},
+\[
+ \mathcal F(\theta^{\rm ref}(s))=a^3S_a\bigl\{\Delta b+\mathcal N_0(b,b)+\mathscr N_3(b)\bigr\}(a^2s)+O_{K_0}(a^4).
+\]
+By the DeTurck equation the bracket is $\partial_tb$, and $\partial_s\theta^{\rm ref}=a^3S_a\partial_tb$. This proves (1). The threshold only requires that $K_0a$ lie in a fixed smaller chart.
+
+\emph{Step 2: the linearized operator.} Let $\vartheta$ satisfy the two bounds in (2). We have $\mathsf A_\vartheta=DN_2(\vartheta)+DR_3(\vartheta)$. By \cref{ch21:lem:wilson-local-algebra}, the quadratic part $N_2$ is a fixed sum of translated products of the form $[u,\nabla v]$. In $DN_2(\vartheta)z$, the terms with the difference on $z$ are bounded by $CK_0a\|\nabla z\|_\infty$, and the terms with the difference on $\vartheta$ by $CK_0a^2\|z\|_\infty$. The derivative of the remainder satisfies $\|DR_3(\vartheta)z\|_\infty\le C\|\vartheta\|_\infty^2\|z\|_\infty$. This proves the bound for $\mathsf A_\vartheta$.
+
+\emph{Step 3: the Volterra inverse.} Let $k(u)=(1+u)^{-1/2}$, and for $\lambda>0$ consider the equivalent weighted norm
+\[
+ \|z\|_\lambda=\sup_{s\le S}e^{-\lambda s}\|z(s)\|_\infty+\sup_{s\le S}e^{-\lambda s}\sqrt{1+s}\,\|\nabla z(s)\|_\infty .
+\]
+For every $\lambda>0$,
+\begin{equation}\label{ch22:eq:weighted-kernels}
+ \int_0^\infty e^{-\lambda u}k(u)\,du\le C\lambda^{-1/2},\qquad
+ \sup_s\int_0^se^{-\lambda(s-r)}k(r)\,dr\le C\lambda^{-1/2}.
+\end{equation}
+The first bound follows from $k(u)\le u^{-1/2}$ and rescaling. For the second, if $s\le\lambda^{-1}$ we discard the exponential and integrate $r^{-1/2}$. If $s>\lambda^{-1}$, the intervals $r\le s/2$ and $r\ge s/2$ contribute at most $C\sqrt se^{-\lambda s/2}$ and $C/(\lambda\sqrt s)$ respectively, and each of these is at most $C\lambda^{-1/2}$. We also use the elementary inequality
+\[
+ \sqrt{1+s}\,k(s-r)k(r)\le k(s-r)+k(r),\qquad 0\le r\le s,
+\]
+which follows from $\sqrt{1+s}\le\sqrt{1+r}+\sqrt{1+s-r}$. We insert the bound for $\mathsf A_\vartheta$ into the Volterra integral. For the value we use that $e^{-(s-r)H_0}$ is a contraction, and for the first difference the bound $\|\nabla e^{-(s-r)H_0}\|_{\infty\to\infty}\le Ck(s-r)$ of \cref{ch22:lem:heat-calculus} with $H_1=T$. Using \eqref{ch22:eq:weighted-kernels} and the elementary inequality for the term with $a\|\nabla z\|_\infty$ in the differentiated estimate, we obtain
+\begin{equation}\label{ch22:eq:resolvent-contraction}
+ \|\mathsf L_\vartheta\|_{\lambda\to\lambda}\le C_{L,T,K_0}\Bigl\{\frac a{\sqrt\lambda}+\frac{a^2}{\lambda}+\frac{a^2\sqrt{1+S}}{\sqrt\lambda}\Bigr\}.
+\end{equation}
+The last term comes from the coefficient of order zero in the differentiated estimate. We take $\lambda=\kappa_0a^2$ with $\kappa_0=\kappa_0(L,T,K_0)$ so large that the right side is at most $1/2$; here we used $a\sqrt{1+S}=\sqrt{a^2+T}\le\sqrt{1+T}$ for $a\le1$. The series $\sum_{j\ge0}\mathsf L_\vartheta^j$ then converges, with weighted norm at most two, and removing the weight costs at most $e^{\lambda S}=e^{\kappa_0T}$. This proves the bound on $(I-\mathsf L_\vartheta)^{-1}$ in $\mathsf R_{\rm sm}$.
+
+\emph{Step 4: the forcing.} An initial heat term $e^{-sH_0}z_0$ has $\mathsf R_{\rm sm}$ norm at most $C_{L,T}\|z_0\|_\infty$. A forcing of uniform norm $c$ has a value integral at most $cs$, and its weighted first difference is at most
+\[
+ Cc\sqrt{1+s}\int_0^s(1+s-r)^{-1/2}\,dr\le2Cc(1+s).
+\]
+This proves the forcing bound in (2), including the constant Fourier mode, on which the heat semigroup does not decay.
+
+\emph{Step 5: the error.} Let $\theta$ be the damped solution with the initial value in (3), set $z=\theta-\theta^{\rm ref}$, and let $\mathcal R=\partial_s\theta^{\rm ref}-\mathcal F(\theta^{\rm ref})$ be the residual of (1). Since $N_2$ is quadratic, the difference satisfies the exact equation
+\begin{equation}\label{ch22:eq:smooth-error-equation}
+ z'=-H_0z+\mathsf A_{\theta^{\rm ref}}z+N_2(z)+Q_{\theta^{\rm ref}}(z)-\mathcal R,
+ \qquad
+ Q_\vartheta(z)=R_3(\vartheta+z)-R_3(\vartheta)-DR_3(\vartheta)z .
+\end{equation}
+By analytic Taylor expansion on a smaller chart, we have
+\[
+ \|Q_\vartheta(z)\|_\infty\le C\bigl(K_0a\|z\|_\infty^2+\|z\|_\infty^3\bigr),
+\]
+and the difference of $Q_\vartheta$ at two points of a ball of radius $\delta$ has the corresponding factor $K_0a\delta+\delta^2$. If $\|z\|_{\mathsf R_{\rm sm}}\le\delta$, the quadratic source $N_2(z)$ has size at most $C\delta^2k(s)$. Its Volterra integral has $\mathsf R_{\rm sm}$ norm at most $C\delta^2\sqrt{1+S}$; for the differentiated component we use $\int_0^sk(s-r)k(r)\,dr\le\pi$ and multiply by $\sqrt{1+s}$. By Step 4, the integral of $Q_{\theta^{\rm ref}}(z)$ costs at most $C(K_0a\delta^2+\delta^3)(1+S)$. After the Volterra inverse, the Lipschitz constant of these nonlinear terms on the ball of radius $\delta$ is at most
+\begin{equation}\label{ch22:eq:smooth-nonlinear-gain}
+ C_{L,T,K_0}\bigl\{\delta\sqrt{1+S}+K_0a\delta(1+S)+\delta^2(1+S)\bigr\}.
+\end{equation}
+The initial heat term and the residual in \eqref{ch22:eq:smooth-error-equation} have $\mathsf R_{\rm sm}$ norm at most $C_{L,T,K_0,C_{\rm init}}(a^2+a^4(1+S))\le Ca^2$, by Step 4 and (1). Let $D$ be twice this constant multiplied by the bound for the Volterra inverse, and set $\delta=Da^2$. Every term in \eqref{ch22:eq:smooth-nonlinear-gain} then tends to zero: the first two are $O_{L,T,K_0,D}(a)$ and the last is $O_{T,D}(a^2)$. For $a$ small enough, the mild form of \eqref{ch22:eq:smooth-error-equation} defines a map of the ball of radius $\delta$ into itself which is a contraction with factor at most $1/2$. Iteration from zero converges in the complete space defined by the norm $\mathsf R_{\rm sm}$; this proves existence of the mild solution and the error bound in (3). The mild solution solves the finite-dimensional differential equation. Since its amplitude is at most $K_0a+Da^2<r_*$, it does not leave the chart. Local uniqueness for the differential equation and the gauge identification of \cref{ch21:lem:wilson-local-algebra} show that it is the damped representative of the Wilson flow.
+
+\emph{Step 6: continuation by restarts.} We use the continuation of \cref{ch21:thm:continuum-atlas} with $r=3$ and its fixed margins. On one interval, Step 5 gives an error $O(a^2)$ for the link logarithms, and thus $O(a^2)$ for the links. At a restart time we apply the fixed sampled gauge transformation to the links. Left and right multiplication are isometries, and the logarithm is Lipschitz on the next smaller chart. By \cref{ch21:lem:local-matrix-gauge-and-loops}, applying the gauge transformation to the exponentials of a sample differs from sampling the transformed smooth connection by $O(a^2)$ per link. Then the initial error on the next interval is again of the form $C_{{\rm init},i}a^2$, which is the hypothesis of (3). Iterating over the finite partition preserves this order, with the maximum of finitely many constants and the minimum of finitely many restrictions on the mesh. This proves (4).
+\end{proof}
+
+\section{Continuation near smooth solutions}\label{ch22:sec:reference}
+
+We now pass to physical units and to the norm $C^1_a$, and we write $S_ab=b|_a$. In physical time, the damped equation of \cref{ch21:lem:wilson-local-algebra} reads
+\[
+ \partial_tB=\Delta_aB+N_a(B),\qquad
+ N_a(B)=\mathcal N_a(B,B)+\mathscr C_a(B),\qquad
+ \mathscr C_a(B)=a^{-3}R_3(aB).
+\]
+We write
+\[
+ \mathscr B_a(B)V=\mathcal N_a(B,V)+\mathcal N_a(V,B)+D\mathscr C_a(B)V
+\]
+for the linearization of $N_a$ at $B$. Here $D$ on the cubic-and-higher remainder $\mathscr C_a$ differentiates in the field, and $D_a$ is a physical spatial difference. On the smaller chart,
+\begin{equation}\label{ch22:eq:cubic-variation-bounds}
+ \|D^j\mathscr C_a(B)[V_1,\ldots,V_j]\|_\infty\le C\|B\|_\infty^{3-j}\prod_{i=1}^j\|V_i\|_\infty,\qquad 0\le j\le3,
+\end{equation}
+where for $j=0$ the empty product is one. Indeed, the derivative is $a^{j-3}D^jR_3(aB)$, and since the Taylor coefficients of $R_3$ vanish through order two, $D^jR_3(aB)$ has a factor $(a\|B\|_\infty)^{3-j}$; for $j=3$ we use the bounded analytic third derivative on the smaller chart. All translated components are included. We use these bounds to show that, on a bounded set of the norm $C^1_a$, say $\|B\|_{C^1_a},\|B'\|_{C^1_a}\le K$ in the chart,
+\begin{equation}\label{ch22:eq:smooth-reference-force-lipschitz}
+ \|N_a(B)-N_a(B')\|_\infty\le C_K\|B-B'\|_{C_a^1}.
+\end{equation}
+For the quadratic term, we write the difference as $\mathcal N_a(B,B-B')+\mathcal N_a(B-B',B')$ and use $\|\mathcal N_a(u,v)\|_\infty\le C\|u\|_\infty\|D_av\|_\infty$ from \cref{ch21:lem:wilson-local-algebra}. For the remainder we use the Lipschitz bound for $R_3$ in that lemma, rescaled to physical units. No interpolation enters \eqref{ch22:eq:smooth-reference-force-lipschitz}.
+
+\begin{lemma}\label{ch22:lem:physical-volterra}
+The following statements hold.
+\begin{enumerate}
+\item Fix $L,h,K>0$. Let $B_a(t)$ be a damped lattice solution on $[0,h]$ in the smaller chart with $\sup_{t\le h}\|B_a(t)\|_{C_a^1}\le K$. Then the solution of
+\[
+ V(t)=P_t^aV_0+\int_0^tP_{t-r}^a\bigl\{\mathscr B_a(B_a(r))V(r)+f(r)\bigr\}\,dr
+\]
+satisfies
+\begin{equation}\label{ch22:eq:physical-volterra-bound}
+ \sup_{t\le h}\|V(t)\|_{C_a^1}\le C_{L,h,K}\bigl(\|V_0\|_{C_a^1}+\sup_{r\le h}\|f(r)\|_\infty\bigr).
+\end{equation}
+The same bound holds if the right side is replaced by $C_{L,h,K}$ times the norm in $C([0,h];C^1_a)$ of the whole inhomogeneous term $P_t^aV_0+\int_0^tP^a_{t-r}f(r)\,dr$. The constant is uniform in small meshes, and no derivative of $f$ is needed.
+\item Let $b$ be a fixed smooth DeTurck solution on $[0,h]$ whose spatial derivatives through order five are bounded by $K_b$. There are $\eta_b,a_b>0$ and $C_b<\infty$, depending only on $L,h,K_b$, and the chart, such that every lattice initial field with $\|B_a(0)-S_ab(0)\|_{C_a^1}\le\eta\le\eta_b$, on a mesh $a\le a_b$, has a damped solution through time $h$ with
+\begin{equation}\label{ch22:eq:reference-C1-stability}
+ \sup_{t\le h}\|B_a(t)-S_ab(t)\|_{C_a^1}\le C_b(\eta+a),\qquad
+ \sup_{t\le h}\|B_a(t)\|_{C_a^1}\le C_b .
+\end{equation}
+The same holds on each time interval of a fixed continuation as in \cref{ch21:thm:continuum-atlas}, when the flow is restarted with its fixed sampled gauge transformations. In particular, this comparison supplies the $C^1_a$ bound that is the hypothesis of the smoothing on later time intervals in \cref{ch22:thm:positive-window-bootstrap}.
+\item If two initial fields satisfy the hypothesis of (2) with respect to the same solution $b$, and their solutions are restarted with the same fixed sampled gauge transformations, then
+\begin{equation}\label{ch22:eq:paired-C1-stability}
+ \max_i\ \sup_{t\in I_i}\|B_a^{(i)}(t)-B_a'{}^{(i)}(t)\|_{C_a^1}\le C_b\|B_a(0)-B'_a(0)\|_{C_a^1}.
+\end{equation}
+Here $I_i$ are the finitely many time intervals of the continuation (or the single interval $[0,h]$), $B_a^{(i)}$ and $B_a'{}^{(i)}$ are the representatives on $I_i$, and the constant may also depend on the continuation.
+\item Fix $L,h>0$ and a set $\mathscr K\subset C^\infty(\Torus;\su^3)$ that is compact in the $C^3$ topology. There are $\eta_{\mathscr K},a_{\mathscr K}>0$, $C_{\mathscr K}<\infty$, and finitely many continuations as in \cref{ch21:thm:continuum-atlas} with the following property. For every $b_0\in\mathscr K$, every $a\le a_{\mathscr K}$, and any two lattice initial fields with
+\[
+ \max\bigl(\|B_a(0)-S_ab_0\|_{C_a^1},\|B'_a(0)-S_ab_0\|_{C_a^1}\bigr)\le\eta_{\mathscr K},
+\]
+one of these continuations gives the bound $\sup\|B_a(t)\|_{C^1_a}\le C_{\mathscr K}$ through time $h$ for both solutions, and \eqref{ch22:eq:paired-C1-stability} with constant $C_{\mathscr K}$. The constants depend on $L,h,\mathscr K$, on the bounds of the finitely many selected smooth DeTurck solutions, and on the margins of the chart and of the continuations. Higher derivatives are only bounded for these finitely many selected solutions, not on a $C^3$ neighborhood of $\mathscr K$.
+\end{enumerate}
+In (2)--(4), every representative is gauge equivalent to the Wilson flow from its initial links.
+\end{lemma}
+
+\begin{proof}
+\emph{Part (1).} By the bound on $\mathcal N_a$ and \eqref{ch22:eq:cubic-variation-bounds}, we have $\|\mathscr B_a(B)V\|_\infty\le C_K\|V\|_{C_a^1}$. We use \cref{ch22:lem:heat-calculus} with physical horizon $h$. The heat semigroup is a contraction for $C_a^1$, since it commutes with differences, and for $t>0$
+\[
+ \|P_t^af\|_{C_a^1}\le C_{L,h}\bigl(1+(t+a^2)^{-1/2}\bigr)\|f\|_\infty\le C_{L,h}(1+t^{-1/2})\|f\|_\infty .
+\]
+In the weighted norm $\|V\|_\lambda=\sup_{t\le h}e^{-\lambda t}\|V(t)\|_{C_a^1}$, the integral operator $V\mapsto\int_0^tP^a_{t-r}\mathscr B_a(B_a(r))V(r)\,dr$ has norm at most
+\[
+ C_{L,h,K}\int_0^\infty e^{-\lambda v}(1+v^{-1/2})\,dv=C_{L,h,K}\bigl(\lambda^{-1}+\sqrt\pi\lambda^{-1/2}\bigr).
+\]
+We choose $\lambda$, independently of the mesh, so that this is at most $1/2$. The Neumann series then gives an inverse of weighted norm at most two, and removing the weight costs $e^{\lambda h}$. The initial heat term has norm at most $\|V_0\|_{C_a^1}$, and the integral of the forcing has unweighted norm at most $C_{L,h}(h+2\sqrt h)\sup\|f\|_\infty$. This proves both linear assertions.
+
+\emph{Part (2).} Set $b_a=S_ab$ and $e_a=\partial_tb_a-\Delta_ab_a-N_a(b_a)$. The residual in \cref{ch22:thm:sampled-smooth-stability}(1) is $O(a^4)$ in dimensionless link-logarithm units. Since $\theta=ab$ and physical time is $a^2$ times dimensionless time, we divide by $a^3$ and obtain $\sup_t\|e_a(t)\|_\infty\le C_{K_b}a$. For $Z=B_a-b_a$ the mild difference equation is
+\[
+ Z(t)=P_t^aZ(0)+\int_0^tP_{t-u}^a\bigl\{N_a(b_a(u)+Z(u))-N_a(b_a(u))-e_a(u)\bigr\}\,du .
+\]
+Up to the first time at which $\|Z\|_{C_a^1}=1$, the difference of the nonlinear terms is at most $C_{K_b}\|Z\|_{C_a^1}$ by \eqref{ch22:eq:smooth-reference-force-lipschitz}. Using the weighted estimate of Part (1) on every such interval, we obtain
+\[
+ \sup_t\|Z(t)\|_{C_a^1}\le C_b(\eta+a).
+\]
+We choose the constants in the following order: first the reference solution and the horizon; then $\lambda$ and $C_b$; then $\eta_b$ and $a_b$ so small that $C_b(\eta_b+a_b)\le1/2$ and $a_b(\sup\|b\|_\infty+1)$ is strictly below the radius of the smaller chart. No first time with $\|Z\|_{C^1_a}=1$ exists, since it would contradict the bound $1/2$. At fixed mesh, the finite-dimensional analytic differential equation can be continued as long as the solution stays in a compact part of the chart, which gives existence through time $h$. The gauge identification of \cref{ch21:lem:wilson-local-algebra} applies through time $h$. This proves \eqref{ch22:eq:reference-C1-stability}.
+
+\emph{Part (3) and continuations.} For two solutions we subtract their exact equations. The source is $N_a(B_a)-N_a(B'_a)$, and there is no residual. Using the common bound in $C_a^1$ already proved and the estimate of Part (1), we obtain \eqref{ch22:eq:paired-C1-stability} on one interval. By \cref{ch21:lem:local-matrix-gauge-and-loops}, at a restart with the fixed smooth gauge transformation $k$ of the continuation, we have
+\[
+ \begin{gathered}
+ \|\mathscr G_{a,k}(B_a)-S_a(b^k)\|_{C_a^1}\le C_k\|B_a-S_ab\|_{C_a^1}+C_{k,b}\,a,\\
+ \|\mathscr G_{a,k}(B_a)-\mathscr G_{a,k}(B'_a)\|_{C_a^1}\le C_k\|B_a-B'_a\|_{C_a^1},
+ \end{gathered}
+\]
+where $\mathscr G_{a,k}(A)_i(x)=a^{-1}\Log(k(x)e^{aA_i(x)}k(x+ae_i)^{-1})$. Let $L_i$ be the constant of \eqref{ch22:eq:reference-C1-stability} or \eqref{ch22:eq:paired-C1-stability} on the $i$th interval, let $C_i,C'_i$ be the Lipschitz constants of the restart, and let $d_i=C_{k_i,b_i}$ be the coefficient of $a$ in the first restart estimate. For the errors $e_i$ relative to the selected DeTurck solution at the restart times, we have the finite affine recurrence $e_{i+1}\le L_iC_i(e_i+a)+d_ia$. For the differences $\delta_i$ of a pair at the restart times, we have the homogeneous recurrence $\delta_{i+1}\le L_iC'_i\delta_i$. Their finite products and sums give the asserted constants. We choose the initial error and the mesh only afterwards, below the threshold of every interval divided by the resulting finite multiplier. This proves the assertions for continuations. It also provides the $C^1_a$ bound needed for the later smoothing, without using that smoothing.
+
+\emph{Part (4).} For each $c\in\mathscr K$ we take one continuation through time $h$ from \cref{ch21:thm:continuum-atlas}. Its finitely many DeTurck solutions are smooth on their closed time intervals and have finite $C^5$ bounds, and its gauge transformations are fixed and smooth. Parts (2) and (3) give an initial radius $\varepsilon_c>0$, a threshold $a_c>0$, and finite constants for this continuation. The sets $\{b_0:\|b_0-c\|_{C^1}<\varepsilon_c/4\}$ are open in the $C^3$ topology and cover $\mathscr K$; we select a finite subcover. By the fundamental theorem of calculus along coordinate segments, sampling is a contraction from the norm of values and first derivatives into $C_a^1$. Thus, if $\eta_{\mathscr K}\le\min_c\varepsilon_c/4$ and $\|b_0-c\|_{C^1}<\varepsilon_c/4$ for a selected $c$, both lattice initial fields are within $\varepsilon_c/2$ of $S_ac$. We apply Parts (2) and (3) with this $c$ and take the maximum of the finitely many constants and the minimum of the finitely many thresholds. This proves Part (4).
+\end{proof}
+
+\section{Smoothing after a positive waiting time}\label{ch22:sec:smoothing}
+
+In the statements about loops below, a closed lattice path $\ell_a$ approximating a continuum loop $\ell$ is required to have bounded physical length. It must also be joined to $\ell$ by a based piecewise smooth homotopy whose swept area, counted with multiplicity, tends to zero, as in \cref{s2:def:approx}. An area bound $O(a)$ suffices, and coordinate polygons whose vertices lie on the lattice can be taken exactly. The following estimate for a smooth connection $b$ explains this condition.
+
+Let $\Gamma(h,r)$, $h,r\in[0,1]$, be a smooth homotopy with $\Gamma(h,0)$ and $\Gamma(h,1)$ equal to a fixed basepoint, and let $V(h,r)$ be the parallel transport along $\Gamma(h,\cdot)$ up to $r$, so that $\partial_rV=V\,b(\partial_r\Gamma)$ and $V(h,0)=I$, where $b(\xi)=\sum_ib_i\xi^i$. We define $X=\partial_hV-V\,b(\partial_h\Gamma)$. Differentiating the transport equation in $h$ and subtracting the $r$-derivative of $V\,b(\partial_h\Gamma)$, we find $\partial_rX=X\,b(\partial_r\Gamma)+V\,F_b(\partial_h\Gamma,\partial_r\Gamma)$, where $F_b(\xi,\zeta)=\sum_{i,j}F_{ij}\xi^i\zeta^j$ and $F_{ij}=\partial_ib_j-\partial_jb_i+[b_i,b_j]$. Since the basepoint is fixed, $X(h,0)=0$ and $\partial_hV(h,1)=X(h,1)$. Solving for $XV^{-1}$, we obtain that $\partial_hV(h,1)V(h,1)^{-1}$ is the integral over $r\in[0,1]$ of the conjugate $VF_b(\partial_h\Gamma,\partial_r\Gamma)V^{-1}$. Since conjugation by unitary matrices has norm one and $\|X\|_{\rm op}=|X|/2$ for $X\in\su$, this proves
+\begin{equation}\label{ch22:eq:smooth-path-area}
+ \|\Hol_b(\Gamma(1,\cdot))-\Hol_b(\Gamma(0,\cdot))\|_{\rm op}\le C\|F_b\|_\infty\int\!\!\int|\partial_h\Gamma\wedge\partial_r\Gamma|\,dr\,dh,
+\end{equation}
+where $C$ only converts the componentwise curvature norm into the norm of a two-form. Subdivision gives the same estimate for piecewise smooth homotopies. A moving basepoint only adds a conjugation, which does not change traces. The approximation error therefore tends to zero uniformly on each bounded set of smooth connections.
+
+The next lemma is a compactness statement for lattice arrays with bounded differences. In its proof, limits of difference arrays are identified with derivatives by discrete summation by parts, not by differentiating an interpolation of the arrays.
+
+\begin{lemma}\label{ch22:lem:fixed-time-compactness}
+Let $a_k\to0$ be meshes, and let $A_k$ be $\su$-valued link fields on $\Lambda_{L/a_k}$. Suppose that for every integer $m\ge0$ there are $K_m<\infty$ and $k_m$ such that $\max_{|\nu|\le m}\|D_{a_k}^\nu A_k\|_\infty\le K_m$ for all $k\ge k_m$, where $\nu$ ranges over ordered compositions of forward and backward differences.
+\begin{enumerate}
+\item There are a subsequence $(k_j)$ and a smooth $b\in C^\infty(\Torus;\su^3)$ with $\|\partial^\nu b\|_\infty\le K_{|\nu|}$ for all $\nu$ such that, for every $\nu$,
+\[
+ \|D_{a_{k_j}}^\nu A_{k_j}-S_{a_{k_j}}\partial^\nu b\|_\infty\longrightarrow0 .
+\]
+Equivalently, the cardinal interpolants of \cref{ch13:lem:cardinal-columns}, applied separately to each difference array $D^\nu_{a_{k_j}}A_{k_j}$, converge to $\partial^\nu b$ uniformly on $\Torus$.
+\item Let $\mathscr K$ be the set of all $b\in C^\infty(\Torus;\su^3)$ with $\|\partial^\nu b\|_\infty\le K_{|\nu|}$ for every $\nu$. Then $\mathscr K$ is compact in the $C^3$ topology, and it contains $0$.
+\item Suppose that for each mesh $a$ a set $\mathcal F_a$ of link fields on $\Lambda_{L/a}$ is given such that, for every $m$, the bound $\max_{|\nu|\le m}\|D_a^\nu A\|_\infty\le K_m$ holds for all $A\in\mathcal F_a$ whenever $a\le a_m$. Then
+\[
+ \sup_{A\in\mathcal F_a}\inf_{b\in\mathscr K}\|A-S_ab\|_{C_a^1}\longrightarrow0\qquad(a\to0).
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Part (1).} An array $g$ on mesh $a$ whose first differences are bounded by $K$ has oscillation at most $CK(|x-y|+a)$ between two lattice sites $x,y$, as we see by following a shortest coordinate path on the torus. Since cardinal interpolation is a convex combination of samples within distance $Ca$, the interpolated array has the same modulus of continuity, up to a fixed constant and an additional $CKa$. It also takes the given values at the lattice sites. Applying this to $D^\nu A_k$ with the bound $K_{|\nu|+1}$, we find that the interpolants of the arrays of order $|\nu|$ are bounded by $K_{|\nu|}$ and have modulus $CK_{|\nu|+1}(|x-y|+a_k)$. We choose finite nets of $\Torus$ with spacing tending to zero. The bounded values at the points of one net have a convergent subsequence, and the modulus of continuity extends the convergence uniformly over the torus up to an error that vanishes as the spacing and $a_k$ tend to zero. By successive extractions and a diagonal subsequence, we obtain, for every one of the countably many $\nu$, a continuous limit $b_\nu$ of the interpolants of $D^\nu A_{k_j}$, with $\|b_\nu\|_\infty\le K_{|\nu|}$. Since the interpolants take the given values at the lattice sites, $\|D^\nu A_{k_j}-S_{a_{k_j}}b_\nu\|_\infty\to0$.
+
+Let $b=b_\emptyset$ be the limit of the arrays themselves. For a smooth periodic test function $\varphi$, discrete summation by parts gives
+\[
+ a^3\sum_xD_a^\nu A(x)\varphi(x)=(-1)^{|\nu|}a^3\sum_xA(x)\widetilde D_a^\nu\varphi(x),
+\]
+where $\widetilde D_a^\nu$ reverses the order of the differences and exchanges forward and backward differences. By Taylor expansion of $\varphi$ and Riemann sums, along the subsequence the left side tends to $\int b_\nu\varphi$ and the right side to $(-1)^{|\nu|}\int b\,\partial^\nu\varphi$. We conclude that $b_\nu=\partial^\nu b$ in the sense of distributions, for every forward or backward choice in $\nu$. Further, the left side is bounded by $K_{|\nu|}a^3\sum_x|\varphi(x)|$, which gives
+\begin{equation}\label{ch22:eq:distributional-bound}
+ |\langle\partial^\nu b,\varphi\rangle|\le K_{|\nu|}\|\varphi\|_{L^1},
+\end{equation}
+with all direction and color components included. To see that these derivatives are classical, we convolve $b$ with a nonnegative smooth periodic approximate identity $\chi_\epsilon$ of mass one. Then $\partial^\nu(b*\chi_\epsilon)=b_\nu*\chi_\epsilon$ is bounded by $K_{|\nu|}$ by \eqref{ch22:eq:distributional-bound}, and it converges uniformly to $b_\nu$ as $\epsilon\to0$, because $b_\nu$ is continuous; also $b*\chi_\epsilon\to b$ uniformly. By the fundamental theorem of calculus along coordinate segments, when a sequence of functions and their first derivatives converge uniformly, the limit is continuously differentiable with the limiting derivatives. Applying this order by order, we conclude that $b$ is smooth, with $\partial^\nu b=b_\nu$ and $\|\partial^\nu b\|_\infty\le K_{|\nu|}$. The equivalence with uniform convergence of the interpolants follows from the modulus of continuity and the fact that the interpolants take the sampled values at the lattice sites.
+
+\emph{Part (2).} The bounds on the derivatives of order four imply that the derivatives of order at most three of the elements of $\mathscr K$ are bounded and equicontinuous. By the Arzel\`a--Ascoli theorem, $\mathscr K$ is relatively compact in $C^3$. Let $b_n\in\mathscr K$ converge in $C^3$ to $b$. The uniform bounds at every higher order allow a diagonal subsequence along which every derivative of $b_n$ converges uniformly. The fundamental theorem of calculus along coordinate segments identifies the limits with the derivatives of $b$. Hence $b$ is smooth and satisfies the same bounds, and $\mathscr K$ is closed in $C^3$. This uses the bounds at every order; a family controlled at only one finite order need not have a closure consisting of smooth fields.
+
+\emph{Part (3).} If the assertion fails, there are $\epsilon>0$, meshes $a_k\to0$, and $A_k\in\mathcal F_{a_k}$ with $\inf_{b\in\mathscr K}\|A_k-S_{a_k}b\|_{C^1_{a_k}}\ge\epsilon$. Part (1) implies that a subsequence satisfies $\|A_k-S_{a_k}b\|_\infty\to0$ and $\|D_{a_k}A_k-S_{a_k}\partial b\|_\infty\to0$ for some $b\in\mathscr K$. Since $\|D_aS_ab-S_a\partial b\|_\infty\le Ca\|b\|_{C^2}\le CaK_2$, it follows that $\|A_k-S_{a_k}b\|_{C^1_{a_k}}\to0$, a contradiction.
+\end{proof}
+
+\begin{theorem}\label{ch22:thm:positive-window-bootstrap}
+Fix $L$, $1/2<\alpha<2/3$, and $R$, and let $T_R$ be the local existence time of \cref{ch21:thm:enhanced-local-flow}. For every integer $m\ge0$ and every $0<s<T_R$ there are $a_{m,R,s}>0$ and $C_{m,L,R,s,T_R}<\infty$ such that
+\[
+ \sup_{a\le a_{m,R,s}}\ \sup_{s\le t\le T_R}\ \max_{|\nu|\le m}\|D_a^\nu A_a(t)\|_\infty\le C_{m,L,R,s,T_R}
+\]
+for all solutions $A_a$ given by \cref{ch21:thm:enhanced-local-flow} whose flow data satisfy $\|(x_a,y_a)\|_{\mathrm{fl},a}\le R$ on $[0,T_R]$. All ordered compositions of forward and backward differences and all translated components are included. More generally, the same conclusion holds on any smaller interval that begins after a positive waiting time inside a time interval on which a restarted damped representative is used, provided that this representative lies in the smaller chart and a uniform bound in $C_a^1$ on the preceding interval is given. The constant then depends on that bound, on the waiting time, on the length of the interval, and on $m$.
+
+Suppose that $b$ is a continuous periodic field and that such solutions, along meshes $a_k\to0$, satisfy $\|A_{a_k}(s)-S_{a_k}b\|_{C^1_{a_k}}\to0$ at a fixed time $s\in(0,T_R)$. Then $b$ is smooth, with bounds on its derivatives of every order depending only on the order and on $L,R,s,T_R$. The closure in $C^3$ of the set of all such limits is compact and consists of smooth connections, so \cref{ch21:thm:continuum-atlas} applies to it for every finite horizon. For each such limit $b$, the Wilson flow started from $\exp(aS_ab)$ has link error $O(a^2)$ on every time interval of a continuation as in \cref{ch21:thm:continuum-atlas}, including the restarts with the sampled fixed gauge transformations. The normalized traces of its holonomies around closed lattice paths of bounded length that approximate continuum loops, in the sense described before \cref{ch22:lem:fixed-time-compactness}, converge to the corresponding continuum traces.
+
+On each later time interval of a continuation by restarts with fixed smooth gauge transformations, the first paragraph applies as soon as a uniform $C^1_a$ bound for the restarted representative is known, for example from \cref{ch22:lem:physical-volterra}. Then every fixed difference order is bounded at every fixed positive later time. The $C^1_a$ bound is a hypothesis of this statement; it is not deduced from the smoothing. The constants are deterministic and do not depend on the mesh below the stated thresholds. No bound is claimed as the waiting time tends to zero, and no bound on high norms at time zero follows from the compactness in $C^3$.
+\end{theorem}
+
+The proof of the first assertion is the standard parabolic bootstrap, carried out on the lattice equation. In a difference of order $m-1$ of the nonlinearity, the only difference of order $m$ of the solution appears linearly, with a bounded factor in front. The heat semigroup gains one difference at the integrable cost $(t-r)^{-1/2}$, and the resulting term can be absorbed on a short interval.
+
+\begin{proof}
+\emph{Step 1: the base case.} By \cref{ch21:thm:enhanced-local-flow}, on $[s/2,T_R]$ we have
+\begin{equation}\label{ch22:eq:bootstrap-base}
+ \|A_a(t)\|_\infty+\|D_aA_a(t)\|_\infty\le K_1(L,R,s,T_R).
+\end{equation}
+This proves the cases $m=0,1$. In the smaller chart the equation is
+\begin{equation}\label{ch22:eq:bootstrap-equation}
+ \partial_tA_a=\Delta_aA_a+\mathcal N_a(A_a,A_a)+a^{-3}R_3(aA_a).
+\end{equation}
+
+\emph{Step 2: the highest difference.} Let $m\ge2$, and suppose that all differences through order $m-1$ are bounded on a preceding interval, by $K_1,\ldots,K_{m-1}$. We show that
+\begin{equation}\label{ch22:eq:highest-difference}
+ \bigl\|D_a^{m-1}\bigl\{\mathcal N_a(A_a,A_a)+a^{-3}R_3(aA_a)\bigr\}\bigr\|_\infty\le B_m(K_1,\ldots,K_{m-1})+C_mK_1\|D_a^mA_a\|_\infty .
+\end{equation}
+Each summand of $\mathcal N_a$ contains exactly one physical difference. When we apply \eqref{ch22:eq:shifted-product} $m-1$ times, a factor of order $m$ occurs only when all these differences fall on the factor that already carries a difference; its companion is then a value of $A_a$, bounded by $K_1$. If at least one difference falls on the companion, both factors have orders at most $m-1$ and are bounded by the $K_j$. The number of terms and all translations depend only on $m$ and on the fixed stencil. In the analytic remainder, the term of degree $d$ in physical units has the factor $a^{d-3}$, $d\ge3$, and a difference of order $m-1$ of a product involves differences of $A_a$ of order at most $m-1$ only. To see that the series converges uniformly, we shrink the threshold so that $aK_1$ lies in a fixed smaller chart. A differentiated term of degree $d$ is bounded by a fixed polynomial in $d$ times its coefficient in the series times products of the finitely many $K_j$. The remaining undifferentiated factors keep a geometric factor from the smaller chart. The resulting series, even multiplied by the polynomial, is summable uniformly in $a$. This proves that the remainder contributes only to $B_m$, with no negative power of the mesh. These observations prove \eqref{ch22:eq:highest-difference} for every ordered choice of forward and backward differences and all translated components.
+
+\emph{Step 3: absorption.} We start the mild equation at a time $u_0$ in the preceding interval, and define
+\[
+ Z_m(d)=\sup_{0<v\le d}\sqrt v\,\|D_a^mA_a(u_0+v)\|_\infty .
+\]
+At each fixed mesh this number is finite, since the arrays are finite dimensional. We commute $m-1$ differences onto the initial value and onto the source, and place one difference on the heat semigroup, whose bound is $C(v+a^2)^{-1/2}\le Cv^{-1/2}$. Multiplying the resulting mild estimate by $\sqrt v$ and using \eqref{ch22:eq:highest-difference}, we obtain
+\begin{equation}\label{ch22:eq:window-absorption}
+ Z_m(d)\le C_mK_{m-1}+C_mB_md+C_mK_1\sqrt d\,Z_m(d).
+\end{equation}
+For the last term we used $\int_0^v(v-r)^{-1/2}r^{-1/2}\,dr=\pi$, together with the additional factor $\sqrt v\le\sqrt d$; for the bounded source the corresponding factor is $2v\le2d$. We choose $d\le1$ such that $C_mK_1\sqrt d\le1/2$ and such that $[u_0,u_0+d]$ lies in the preceding interval. Then \eqref{ch22:eq:window-absorption} implies that $Z_m(d)\le2C_m(K_{m-1}+B_md)$, and hence a uniform bound on $D_a^mA_a$ at time $u_0+d$.
+
+\emph{Step 4: the whole interval.} For a given finite $m\ge2$ we choose times $s/2=s_1<s_2<\cdots<s_m=s$. At stage $j\ge2$ we take $d_j>0$ less than $s_j-s_{j-1}$ and satisfying the absorption condition of Step 3 for order $j$. For any $t\in[s_j,T_R]$ we apply Step 3 with $u_0=t-d_j\ge s_{j-1}$ and evaluate at $v=d_j$. This gives one bound $K_j$ for all such $t$. Since there are finitely many orders, the restrictions $a\le a_{j,R,s}$ have a positive minimum, and the constants are finite. This proves the first assertion. On a restarted time interval, the same proof starts from the given chart and the given $C_a^1$ bound on the preceding interval instead of \eqref{ch22:eq:bootstrap-base}. Inspection of the choices shows the stated dependence of the constant.
+
+\emph{Step 5: limits at a positive time.} Let $A_{a_k}(s)$ satisfy $\|A_{a_k}(s)-S_{a_k}b\|_{C^1_{a_k}}\to0$. The first assertion implies that the arrays $A_{a_k}(s)$ satisfy the hypotheses of \cref{ch22:lem:fixed-time-compactness}, with bounds $K_m=C_{m,L,R,s,T_R}$. By part (1) of that lemma, a subsequence converges, together with all its difference arrays, to a smooth field with these bounds. This field is $b$, since the arrays converge to $S_{a_k}b$. Hence every limit belongs to the set $\mathscr K$ of part (2) of that lemma, which is compact in $C^3$ and consists of smooth connections, and so does the $C^3$ closure of the limits.
+
+\emph{Step 6: continuation and loops.} We apply \cref{ch21:thm:continuum-atlas} with $r=3$ to this compact set and a fixed horizon. Its open neighborhood contains every smooth connection sufficiently close to the compact set in $C^3$. Indeed, for each point of the compact set we choose a $C^3$ ball whose doubled radius lies in the neighborhood, take a finite subcover, and use the minimum of the finitely many radii. \Cref{ch22:thm:sampled-smooth-stability}(4), applied on the finitely many time intervals, yields link error $O(a^2)$ for the Wilson flow started from $\exp(aS_ab)$, including the restarts with the sampled gauge transformations. The Wilson flow and its damped representatives have the same traces of holonomies around closed paths. Since a closed lattice path of length at most $\ell$ has at most $\ell/a$ links, unitary telescoping turns the link error $O(a^2)$ into an error $O(\ell a)$ for the holonomy. By \cref{ch21:lem:local-matrix-gauge-and-loops}, the product of the exponentials $e^{ab_i}$ along the path differs from the smooth parallel transport along the same path by an error of the same order. Finally, \eqref{ch22:eq:smooth-path-area} bounds the difference between the smooth transport along the lattice path and along the continuum loop. This proves the assertion on loops.
+
+\emph{Step 7: later restarts.} Suppose that lattice differences of $A$ of order up to $m$ are bounded and that $k$ is a fixed smooth periodic gauge transformation. Then
+\[
+ Y_i(x)=k(x)e^{aA_i(x)}k(x+ae_i)^{-1}=I+O(a),
+\]
+and every difference of fixed order of $Y-I$ keeps this factor $a$. To verify this, we split $Y-I$ into $k(x)(e^{aA_i(x)}-I)k(x+ae_i)^{-1}$ and $k(x)k(x+ae_i)^{-1}-I$. We handle the first part with the convergent exponential series and the exact product rule, and the second with $k(x+ae_i)-k(x)=\int_0^a\partial_ik(x+re_i)\,dr$. Both give $a$ times a polynomial in the given bounds and in smooth norms of $k$. In the analytic composition $a^{-1}\Log Y$, a term with $j\ge1$ differentiated factors carries $a^{j-1}$, and the value is $a^{-1}O(a)$. The bounds for the composition are therefore uniform in the mesh, and such a gauge transformation preserves the bounds on lower differences. On each restarted interval, a given uniform $C^1_a$ bound in the common gauge restarts the induction of Step 2, and waiting intervals before each given later time give every given finite order. At a restart time we use a preceding interval and the bound for the composition just proved to transfer the bounds on the differences. This proves the last assertion.
+\end{proof}
+
+The next lemma is the space-time version of \cref{ch22:lem:fixed-time-compactness}, together with the passage to the limit in the Wilson equation.
+
+\begin{lemma}\label{ch22:lem:array-compactness}
+Let $a_k\downarrow0$, and let $J\subset(0,\infty)$ be a closed interval. Let $B_{a_k}$ be time-dependent link fields on $J$ such that, for every $m$, all differences of order at most $m$ of $B_{a_k}$ and their time derivatives are bounded on $J$ uniformly in $k$. We interpolate each difference array separately by the cardinal interpolation of \cref{ch13:lem:cardinal-columns}. Then every subsequence has a further subsequence along which these interpolated arrays converge, uniformly on $J\times\Torus$ at every fixed order, to the corresponding derivatives of one field $B$ that is smooth in space for each time; by a diagonal argument the same holds for countably many intervals simultaneously. If, in addition, each $B_{a_k}$ is a damped representative of the Wilson flow on $J$, that is, solves $\partial_tB=\Delta_aB+\mathcal N_a(B,B)+\mathscr C_a(B)$ in the smaller chart, then the limit $B$ solves the DeTurck equation $\partial_tB=\Delta B+\mathcal N_0(B,B)+\mathscr N_3(B)$ on $J$. The same holds for the mild form of the equation with a fixed lower integration endpoint in $J$.
+\end{lemma}
+
+The passage to the limit in the equation uses three properties of the Wilson equation. Its quadratic part is a fixed finite sum of translated brackets containing one difference (\cref{ch21:lem:wilson-local-algebra}). The remainder $\mathscr C_a$ has local Lipschitz bounds that are uniform on bounded sets (\eqref{ch22:eq:cubic-variation-bounds}). Finally, $\mathscr C_a$ is consistent, uniformly on bounded families of smooth fields (\cref{ch22:rem:full-smooth-coefficients}). The same proof applies to any equation with these three properties.
+
+\begin{proof}
+We obtain the spatial modulus of continuity of each interpolated difference array from the bound on the next difference, as in the proof of \cref{ch22:lem:fixed-time-compactness}(1). The bounds on the time derivatives give a uniform Lipschitz modulus in time. Using finite nets in space and time, successive subsequences of the bounded finite-dimensional values at their points, and a diagonal argument, we obtain uniform convergence on $J\times\Torus$, first for one array and then for the countable list of orders and positive intervals. As in the proof of \cref{ch22:lem:fixed-time-compactness}(1), summation by parts against smooth test functions, mollification, and the fundamental theorem of calculus identify the limits with the corresponding classical derivatives.
+
+For the nonlinear terms, every summand of $\mathcal N_a$ involves finitely many translations and one difference, and these converge to the corresponding untranslated value and derivative. For the analytic remainder, the uniform bound on $B_a$ on $J$ implies that the analytic composition converges uniformly on the smaller chart. Its local Lipschitz constants are bounded by \eqref{ch22:eq:cubic-variation-bounds}, and its values on the sample of the smooth limit converge to $S_a\mathscr N_3(B)$ by \cref{ch22:rem:full-smooth-coefficients}. Subtracting the value at the sample, we obtain the convergence at $B_a$ itself. The same reasoning applies after any fixed difference for which bounds are given. The lattice Laplacian is a sum of second differences and converges to $\Delta B$. Integrating the differential equations in time, and using uniform convergence to pass every term through the integral, we obtain the limiting equation.
+
+For the mild form, the heat semigroup applied to a sampled smooth family converges by the explicit bounds for general smooth inputs in \cref{ch13:lem:fixed-prefix-heat}. For a convergent array, we first replace it by the sample of its smooth limit; the replacement error is controlled by contraction. For a first difference of the output, we either commute it onto a convergent difference of the source, or use the integrable heat bound of \cref{ch22:lem:heat-calculus}. These arguments pass each term of the mild equation with a positive lower endpoint to the limit.
+\end{proof}
+
+\section{Continuation and stability for bounded flow data}\label{ch22:sec:bounded-data}
+
+We now apply smoothing and compactness to bounded flow data. After a short positive time $u$, \cref{ch22:thm:positive-window-bootstrap} bounds all lattice differences of the solution, and \cref{ch22:lem:fixed-time-compactness} shows that the solutions at time $u$ are uniformly close to samples of a compact set $\mathscr K$ of smooth connections. This compact set depends only on the bound $R$ on the flow data, not on any convergence of the initial potentials. Part (4) of \cref{ch22:lem:physical-volterra} then provides finitely many continuations, chosen before the initial potential. Along them we compare every solution with a selected smooth DeTurck solution, and two solutions with each other.
+
+\begin{lemma}\label{ch22:lem:bounded-input-continuation}
+Fix $L,T_0,R>0$, $1/2<\alpha<2/3$, and $0<\tau\le T<\infty$. Let $T_R$ be the local existence time of \cref{ch21:thm:enhanced-local-flow} for flow data of norm at most $R$, replaced by $\min(T_R,T_0)$, and choose $0<u<\min(T_R,T_0,\tau)/4$. There are $a_*,K,C,\delta>0$ and finitely many continuations as in \cref{ch21:thm:continuum-atlas}, all chosen after these data, with the following properties. For every mesh $a=L/n\le a_*$ and every lattice initial potential whose flow data satisfy $\|(x_a,y_a)\|_{\mathrm{fl},a}\le R$ on $[0,T_0]$, the Wilson flow on $[u,T]$ has damped representatives, restarted at the times of one of these continuations with its sampled gauge transformations, whose $C_a^1$ norms are at most $K$. If two such initial potentials on the same lattice, compared without any gauge transformation, satisfy
+\[
+ d_a=\Xnorm{\alpha}{a}(x_a-x'_a)+\Ynorm{\alpha}{a}(y_a-y'_a)\le\delta,
+\]
+with both norms taken on $[0,T_0]$ and including all first differences and translated components, then the two flows can use the same continuation with the same sampled gauge transformations, and on each of its time intervals
+\[
+ \sup_t\|B_a(t)-B'_a(t)\|_{C_a^1}\le C\,d_a .
+\]
+Each representative is gauge equivalent to the Wilson flow $\Psi^{(n)}_t$. The constants and $a_*$ depend only on $L,T_0,R,\alpha,\tau,T,u$, and the chart. In particular they do not depend on higher derivatives of the initial potentials, nor on any finite approximation from which these potentials are constructed. Only the finitely many selected smooth DeTurck solutions need bounds on higher derivatives.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1: bounds at time $u$.} By the individual bounds and the bound on differences in \cref{ch21:thm:enhanced-local-flow}, we have
+\[
+ \|A_a(u)-A'_a(u)\|_{C_a^1}\le L_ud_a,\qquad \sup_{u/2\le t\le2u}\|A_a(t)\|_{C_a^1}\le K_1,
+\]
+and the same individual bound holds for the second initial potential. \Cref{ch22:thm:positive-window-bootstrap}, applied with a preceding interval after a positive waiting time, yields for every fixed $m$ a bound $K_m$ on all differences of order $m$ at time $u$, for all sufficiently small meshes. The restriction on the mesh may depend on $m$; along every sequence $a_j\to0$ it is eventually satisfied at each fixed order.
+
+\emph{Step 2: compactness.} Let $\mathscr K$ be the set of smooth connections $b$ with $\|\partial^\nu b\|_\infty\le K_{|\nu|}$ for all $\nu$. By \cref{ch22:lem:fixed-time-compactness}(2), $\mathscr K$ is compact in $C^3$ and contains $0$; by part (1) of that lemma, it contains every possible limit of the endpoints $A_a(u)$. Applying part (3) of that lemma to the set $\mathcal F_a$ of all endpoints $A_a(u)$ of initial potentials with flow data bounded by $R$, we obtain
+\[
+ \sup\inf_{b\in\mathscr K}\|A_a(u)-S_ab\|_{C_a^1}\longrightarrow0\qquad(a\to0),
+\]
+where the supremum is over all such initial potentials.
+
+\emph{Step 3: choice of the continuations.} We apply part (4) of \cref{ch22:lem:physical-volterra} to $\mathscr K$ with horizon $T-u$. Its neighborhood radius $\eta_{\mathscr K}$, its restriction $a\le a_{\mathscr K}$, its uniform bound, and its finitely many continuations are fixed before we choose either initial potential. We decrease $a_*$ until every endpoint $A_a(u)$ lies within $\eta_{\mathscr K}/4$ of $S_ab_0$ for some $b_0\in\mathscr K$, and we choose $\delta\le\eta_{\mathscr K}/(4\max(1,L_u))$. If $d_a\le\delta$, then $A'_a(u)$ lies within $\eta_{\mathscr K}/4+L_u\delta\le\eta_{\mathscr K}/2$ of the same $S_ab_0$. Thus both endpoints lie in the neighborhood of one common element of $\mathscr K$.
+
+\emph{Step 4: conclusion.} The paired part of \cref{ch22:lem:physical-volterra}(4) propagates the initial difference $L_ud_a$ at time $u$ through the finite continuation, using the same sampled gauge transformations for both flows. Its individual part bounds the representative of every initial potential, whether or not it is paired with another. All representatives are gauge equivalent to the Wilson flow by \cref{ch21:lem:wilson-local-algebra}. Since the two compared equations are exact lattice equations, their difference has no consistency residual. This proves the asserted bounds and their dependence.
+\end{proof}
+
+For matrices, we must also compare the gauge transformations used to define the representatives. On the early interval the damping gauge transformation solves $\partial_tk=\lambda_ak$ with an anti-Hermitian generator. Since such equations have unitary propagators, the difference of two solutions is bounded by the integral of the difference of the generators, without any exponential of the size of the generators. By the estimates of \cref{ch21:lem:local-matrix-gauge-and-loops}, the difference of the generators has an integrable singularity at time zero.
+
+\begin{theorem}\label{ch22:thm:root-matrix-modulus}
+Fix $L,T_0,R>0$, $1/2<\alpha<2/3$, $0<t_-\le t_+\le T<\infty$, and $\mathfrak l_1,\ldots,\mathfrak l_b>0$. For each mesh $a=L/N$, let $\ell_{1,a},\ldots,\ell_{b,a}$ be closed paths in $\Lambda_N$ with given basepoints and with physical lengths $aN_{\ell_{i,a}}\le\mathfrak l_i$, where $N_\ell$ is the number of links of $\ell$. Let $A_0,A'_0$ be lattice initial potentials on $\Lambda_N$ whose flow data $(x,y)$, $(x',y')$ satisfy $\|(x,y)\|_{\mathrm{fl},a},\|(x',y')\|_{\mathrm{fl},a}\le R$ on $[0,T_0]$, put $U=e^{aA_0}$ and $U'=e^{aA'_0}$, and let $d_a=\Xnorm{\alpha}{a}(x-x')+\Ynorm{\alpha}{a}(y-y')$, with both norms on $[0,T_0]$. Then
+\[
+ \sup_{t_-\le t\le t_+}\max_i\bigl\|\Hol_{\ell_{i,a}}\Psi_t^{(N)}U-\Hol_{\ell_{i,a}}\Psi_t^{(N)}U'\bigr\|_{\rm op}\le C\,d_a .
+\]
+The holonomies are compared as matrices: no gauge transformation is applied to either configuration, and no conjugation at the basepoints is optimized. The constant depends only on $L,T_0,R,\alpha,t_\pm,T$, the lengths $\mathfrak l_i$, the chart, and the finitely many smooth DeTurck solutions selected in the proof. It holds for every mesh $a=L/N$ with $N\ge4$, and it does not depend on the position or shape of the paths beyond their lengths, nor on higher derivatives of the initial potentials.
+
+Let $h_R=\min(T_R,T_0)$, where $T_R$ is the local existence time of \cref{ch21:thm:enhanced-local-flow}. After decreasing the mesh bound $a_R$ of that theorem if necessary, the following holds for $a\le a_R$ and $0\le s\le h_R$. The damped representatives $A,A'$ and their damping gauge transformations $k,k'$ with initial value $I$ satisfy, at every vertex,
+\[
+ \|D_a(A-A')(s)\|_\infty\le C_Rd_a\bigl\{v_a(s)^{-(\alpha+1)/2}+v_a(s)^{-\alpha}+v_a(s)^{\kappa-1/2}\bigr\},
+\]
+\[
+ \|k(s)-k'(s)\|_\infty\le C\int_0^s\|D_a(A-A')(v)\|_\infty\,dv\le C_Rd_a .
+\]
+For $a\le a_*$ and $d_a\le\delta$, where $a_*$ and $\delta$ are the constants of \cref{ch22:lem:bounded-input-continuation} with $\tau=t_-$, both flows can use the same continuation and the same sampled gauge transformations on the later intervals. The matrices are always expressed in the gauges of the initial configurations. For other pairs and meshes, the matrix bound follows from the diameter bound for unitary matrices or from the finite-dimensional Wilson flow, as in the proof.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1: the early interval.} Fix $u<\min(T_R,T_0,t_-)/4$. Since the flow data are bounded by $R$ only on $[0,T_0]$, we apply \cref{ch21:thm:enhanced-local-flow} on $[0,h_R]$. Adding the bound on the difference of the remainders in \cref{ch21:thm:enhanced-local-flow} to the differences of the linear heat evolutions and of the quadratic Picard terms, we obtain exactly the three powers in the bound for $D_a(A-A')$. This bound is also stated in \cref{ch21:lem:local-matrix-gauge-and-loops}. By the formula for the generator in that lemma, the damping generator in physical units is the signed lattice divergence of the potential, which gives $\|\lambda_a-\lambda'_a\|_\infty\le C\|D_a(A-A')\|_\infty$. The damping gauge transformations solve $\dot k=\lambda_ak$ and $\dot k'=\lambda'_ak'$ with $k(0)=k'(0)=I$. Since the generators are anti-Hermitian, the propagators are unitary, and variation of constants gives, at every vertex,
+\begin{equation}\label{ch22:eq:root-gauge-Duhamel}
+ \|k(s)-k'(s)\|_\infty\le\int_0^s\|\lambda_a(v)-\lambda'_a(v)\|_\infty\,dv .
+\end{equation}
+Indeed, $\partial_s(k^{-1}k')=k^{-1}(\lambda'_a-\lambda_a)k'$, and $\|k'-k\|=\|k^{-1}k'-I\|$. All three powers in the bound for $D_a(A-A')$ are integrable uniformly in the mesh, since $(\alpha+1)/2<1$, $\alpha<1$, and $1/2-\kappa<1$; for $0<p<1$ we have $\int_0^{h_R}(v+a^2)^{-p}\,dv\le h_R^{1-p}/(1-p)$. This proves the estimate for the gauge transformations on the early interval $[0,h_R]$. The representatives remain in the chart, since \cref{ch21:thm:enhanced-local-flow}, applied on $[0,h_R]$, bounds the contribution of the remainder to the link angles by $C_Ra(h_R+a^2)^\kappa$.
+
+\emph{Step 2: later intervals and the composed gauge transformations.} We apply \cref{ch22:lem:bounded-input-continuation} at time $u$. If $d_a\le\delta$, the paired estimate implies that $\sup\|B_a-B'_a\|_{C_a^1}\le Cd_a$ on every later time interval. Let $g,g'$ be the composed gauge transformations, from the initial configurations to the current damped representatives. At time $u$ their difference is $O(d_a)$ by Step 1. On a time interval $I_i$ of the continuation, $g=k_ig_i$, where $g_i$ is the value at the start of $I_i$ and $k_i$ solves the damping equation with initial value $I$. The generators of $k_i$ and $k'_i$ differ by at most a constant times the $C_a^1$ difference of the representatives. The inhomogeneous version of \eqref{ch22:eq:root-gauge-Duhamel} therefore carries the incoming difference $\|g_i-g'_i\|$ with coefficient one and adds at most $C|I_i|d_a$. At a restart both composed gauge transformations are multiplied on the left by the same fixed unitary gauge transformation, which does not change the norm of their difference. By induction over the finitely many intervals, we obtain $\sup\|g-g'\|_\infty\le Cd_a$ through time $T$, including the possibly different damping gauge transformations of the two flows.
+
+\emph{Step 3: the matrices.} On a common time interval, the exponential $e^{aB_{a,e}}$ of each link $e$ changes by at most $Ca\|B_a-B'_a\|_\infty$, and unitary telescoping along a path with at most $\mathfrak l_i/a$ links gives
+\[
+ \|H_i(B_a)-H_i(B'_a)\|_{\rm op}\le C\mathfrak l_i\|B_a-B'_a\|_\infty,
+\]
+where $H_i(B_a)$ is the holonomy of $e^{aB_a}$ around $\ell_{i,a}$. The holonomy of the Wilson flow is $g(x_0)^{-1}H_i(B_a)g(x_0)$, where $x_0$ is the basepoint, and undoing the composed gauge transformation at $x_0$ adds at most $2\|g(x_0)-g'(x_0)\|_{\rm op}$. This proves the estimate for $d_a\le\delta$, in the gauge of the initial configurations. For $d_a>\delta$, the distance between the two matrices is at most two, and it suffices to take $C\ge2/\delta$.
+
+\emph{Step 4: coarse meshes.} Only finitely many lattice sides have $a>a_*$. On each of them the Wilson vector field is smooth on the compact manifold $\SU^{\Links N}$, and its solution map over a finite time is Lipschitz. To see this, we subtract the two integral equations, apply the integral form of Gronwall's inequality, and concatenate up to time $4T/a^2$. At $t=0$ the first weighted norm implies that $\|A_0-A'_0\|_\infty\le a^{-\alpha}d_a$. Then the initial links differ by at most $Ca^{1-\alpha}d_a$. Telescoping after the finite-dimensional flow, with $N_{\ell_{i,a}}\le\mathfrak l_i/a$, gives a finite constant on each such side, and we take the maximum over these finitely many sides. This proves the estimate for all meshes. The assertions about the early damped representatives concern the interval $[0,h_R]$ and the mesh threshold of \cref{ch21:thm:enhanced-local-flow}, as stated, and the common continuation is used only when $a\le a_*$ and $d_a\le\delta$.
+\end{proof}
+
+\begin{corollary}\label{ch22:cor:bounded-input-trace-stability}
+Fix $L,T_0,R>0$, $1/2<\alpha<2/3$, $0<\tau\le T<\infty$, lengths $\mathfrak l_1,\ldots,\mathfrak l_b>0$, and characters $\chi_1,\ldots,\chi_b$ of finite-dimensional representations of $\SU$. Let $T_R$ be the local existence time of \cref{ch21:thm:enhanced-local-flow}, replaced by $\min(T_R,T_0)$, and choose
+\[
+ 0<u<\tfrac14\min\{T_R,T_0,\tau\}.
+\]
+There are $a_*>0$ and $C<\infty$, chosen after these data, such that the following holds for every mesh $a=L/n\le a_*$. Let $(x_a,y_a)$ and $(x'_a,y'_a)$ be the flow data of two lattice initial potentials $A_a(0),A'_a(0)$ on the same lattice, with $\|(x_a,y_a)\|_{\mathrm{fl},a},\|(x'_a,y'_a)\|_{\mathrm{fl},a}\le R$ on $[0,T_0]$. Write
+\[
+ d_a=\Xnorm{\alpha}{a}(x_a-x'_a)+\Ynorm{\alpha}{a}(y_a-y'_a),
+\]
+with both norms on $[0,T_0]$ and including all first differences, and put $U_a=e^{aA_a(0)}$, $U'_a=e^{aA'_a(0)}$. Then for every choice of closed lattice paths $\ell_{r,a}$ with $aN_{\ell_{r,a}}\le\mathfrak l_r$ and every choice of times $t_r\in[\tau,T]$,
+\begin{equation}\label{ch22:eq:bounded-enhancement-trace-stability}
+ \Bigl(\sum_{r=1}^b\bigl|\chi_r\bigl(\Hol_{\ell_{r,a}}\Psi_{t_r}^{(n)}U_a\bigr)-\chi_r\bigl(\Hol_{\ell_{r,a}}\Psi_{t_r}^{(n)}U'_a\bigr)\bigr|^2\Bigr)^{1/2}\le C\,d_a .
+\end{equation}
+The threshold and the constant depend only on the displayed data, the chart, and the finitely many smooth DeTurck solutions selected in the proof. They do not depend on the position or shape of the paths beyond their lengths, nor on higher derivatives of the initial potentials or on any finite approximation from which they are constructed. No convergence of the flow data as the mesh varies is assumed, and there is no additive error in the mesh. For normalized fundamental traces, take $\chi_r(V)=(1/2)\tr V$.
+\end{corollary}
+
+\begin{proof}
+We apply \cref{ch22:thm:root-matrix-modulus} with the given lengths and with $t_-=\tau$, $t_+=T$. Every character $\chi$ of a finite-dimensional representation of $\SU$ is a polynomial $p_\chi$ in $(1/2)\tr V$. Indeed, on the diagonal matrices $\mathrm{diag}(e^{i\theta},e^{-i\theta})$ the character is $\sum_km_ke^{ik\theta}$ with integer weights $k$ and multiplicities $m_k=m_{-k}$, which is a combination of the functions $\cos(k\theta)$. The recurrence for $\cos(k\theta)$ expresses these as polynomials in $\cos\theta=(1/2)\tr V$. Then $\sup_{[-1,1]}|p'_\chi|$ bounds the Lipschitz constant of $\chi$ as a function of the normalized trace, and the normalized trace is Lipschitz in the matrix norm. Summing the finitely many bounds in Euclidean norm, we obtain \eqref{ch22:eq:bounded-enhancement-trace-stability}.
+\end{proof}
+
+\section{Parameter derivatives in a fixed initial gauge}\label{ch22:sec:parameters}
+
+In the weak-coupling analysis of \cref{ch30:chapter,ch31:chapter,ch32:chapter}, the initial potential depends on finitely many real parameters, and we need two parameter derivatives of the flowed holonomy matrices, uniformly in the mesh. We first treat a single time interval on which the representative is bounded in $C^1_a$, and then the singular initial interval and the continuation.
+
+\begin{lemma}\label{ch22:lem:patch-variations}
+Assume the hypothesis of \cref{ch22:lem:physical-volterra}(1) for every value of a finite-dimensional real parameter, and suppose that the initial field depends twice continuously differentiably on the parameter. For unit directions $v,w$ write $V_v=\partial_vB_a$ and $W_{vw}=\partial_v\partial_wB_a$. If the initial $C_a^1$ norms of $V_v$ and $W_{vw}$ are bounded by $b_1$ and $b_2$, then
+\begin{equation}\label{ch22:eq:patch-C2-bounds}
+ \sup_{t\le h}\|V_v(t)\|_{C_a^1}\le C_{L,h,K}\,b_1,\qquad
+ \sup_{t\le h}\|W_{vw}(t)\|_{C_a^1}\le C_{L,h,K}(b_2+b_1^2).
+\end{equation}
+These estimates persist through finitely many restarts with fixed sampled smooth gauge transformations. After positive waiting times they also give bounds on every given fixed order of spatial differences of $B_a$, $V_v$, and $W_{vw}$. The corresponding assertions hold for smooth continuum solutions on the time intervals of a continuation as in \cref{ch21:thm:continuum-atlas}.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1: differentiability.} At each fixed mesh, the initial fields and the finite-dimensional analytic vector field have two continuous derivatives. Difference quotients in the integral equation converge to the solutions of the differentiated linear integral equations. Indeed, Taylor's integral formula for the vector field leaves a remainder that tends to zero uniformly on compact sets of parameters and times, and the linear Volterra inverse of \cref{ch22:lem:physical-volterra}(1) bounds the effect of this remainder. Applying this first to the fields and then to their first derivatives, we obtain the differentiability. The uniform bounds below do not depend on the fixed mesh.
+
+\emph{Step 2: the equations.} The derivatives satisfy
+\begin{equation}\label{ch22:eq:patch-variation-equations}
+ \begin{split}
+ \partial_tV_v&=\Delta_aV_v+\mathscr B_a(B_a)V_v,\\
+ \partial_tW_{vw}&=\Delta_aW_{vw}+\mathscr B_a(B_a)W_{vw}+f_{vw},\\
+ f_{vw}&=\mathcal N_a(V_v,V_w)+\mathcal N_a(V_w,V_v)+D^2\mathscr C_a(B_a)[V_v,V_w].
+ \end{split}
+\end{equation}
+The Volterra estimate \eqref{ch22:eq:physical-volterra-bound} implies the first bound in \eqref{ch22:eq:patch-C2-bounds}. By the bound on $\mathcal N_a$ and \eqref{ch22:eq:cubic-variation-bounds}, we have $\|f_{vw}\|_\infty\le C_K\|V_v\|_{C_a^1}\|V_w\|_{C_a^1}$, and applying the Volterra estimate to the inhomogeneous second equation gives the second bound. Note that the second variation satisfies an inhomogeneous equation, and the forcing $f_{vw}$ must be kept.
+
+\emph{Step 3: restarts.} For a fixed smooth gauge transformation $k$, the map $\mathscr G_{a,k}(B)_i(x)=a^{-1}\Log(k(x)e^{aB_i(x)}k(x+ae_i)^{-1})$ satisfies, on a bounded set of the norm $C_a^1$,
+\begin{equation}\label{ch22:eq:handoff-C2}
+ \|D^j\mathscr G_{a,k}(B)[Z_1,\ldots,Z_j]\|_{C_a^1}\le C_{k,K}\prod_{i=1}^j\|Z_i\|_{C_a^1},\qquad j=1,2,
+\end{equation}
+where $D$ differentiates in the field. The case $j=1$ is the Lipschitz bound of \cref{ch21:lem:local-matrix-gauge-and-loops}; we check the case $j=2$ directly. For $Y=k(x)e^{aB_i(x)}k(x+ae_i)^{-1}$ we have $Y-I=O_K(a)$, and the $j$th field derivative of $Y$ has a factor $a^j$ for $j=1,2$. By the exact product rule, the given $C_a^1$ norms, and the bounded smooth differences of $k$, a further spatial difference keeps these factors. Since the derivatives of $\Log$ are bounded near $I$, a differentiated term in $a^{-1}\Log Y$ keeps at least one factor $a$ to compensate the factor $a^{-1}$, also after one spatial difference. Terms with more differentiated factors carry further nonnegative powers of $a$. This proves \eqref{ch22:eq:handoff-C2}, using only fixed smooth norms of $k$ and a margin of the chart. Counting factors in the same way, with three field arguments, we bound $D^3\mathscr G_{a,k}$ on this set: it has the factor $a^3$ before the division by $a$, and products of derivatives of the logarithm have at least the same total number of field arguments; one spatial difference again keeps these factors. Hence the first two field derivatives in \eqref{ch22:eq:handoff-C2} are locally Lipschitz on this set, with uniform constants, which we use below to subtract second derivatives at restarts. The chain rule at a restart gives
+\[
+ V_v^+=D\mathscr G_{a,k}(B)V_v,\qquad
+ W_{vw}^+=D\mathscr G_{a,k}(B)W_{vw}+D^2\mathscr G_{a,k}(B)[V_v,V_w].
+\]
+These bounds and \eqref{ch22:eq:patch-C2-bounds} can be composed finitely many times. Since the gauge transformations $k$ are fixed, no parameter dependence of a gauge choice is differentiated in these formulas.
+
+\emph{Step 4: higher differences.} We apply \cref{ch22:thm:positive-window-bootstrap} to $B_a$, whose $C_a^1$ bound is given. After $m-1$ differences of the first equation in \eqref{ch22:eq:patch-variation-equations}, computed with the product rules \eqref{ch22:eq:shifted-product}, the only unknown term of highest order is bounded by $C_K\|D_a^mV_v\|_\infty$. The term containing $D_a^mB_a$ has the companion $V_v$, whose value is already bounded, and it belongs to the known forcing. Every other term contains only lower differences of $V_v$ and bounded differences of $B_a$. The field derivative of the remainder involves no difference of order larger than $m-1$ and no negative power of the mesh. This estimate has the form of \eqref{ch22:eq:highest-difference}, with a known bounded forcing. As in \eqref{ch22:eq:window-absorption}, the weighted quantity $\sup_v\sqrt v\|D^m_aV_v(u_0+v)\|_\infty$ and the integral $\int_0^v(v-r)^{-1/2}r^{-1/2}\,dr=\pi$ then bound $D_a^mV_v$ after a positive waiting time. In the second equation the unknown term of highest order is bounded by $C_K\|D_a^mW_{vw}\|_\infty$. Its additional forcing involves differences of $V_v$ and $V_w$ of order at most $m$, which are already bounded by the argument for the first derivatives, and the same absorption gives order $m$ for $W_{vw}$. Finitely many successive waiting intervals give any given finite list of orders, and the argument for restarts extends to these orders by the exact product rule.
+
+\emph{Step 5: continuum solutions.} For smooth continuum solutions on the time intervals of a continuation, the same proof applies, with the ordinary product rule and the heat estimates stated in \cref{ch21:thm:continuum-atlas}, on a fixed physical horizon subdivided if necessary. Starting from a smooth finite-dimensional family of initial data, we take difference quotients of the continuum mild equation. The same Volterra inverse and Taylor's integral remainder give their convergence, first at order one and then at order two. If bounds through a fixed order are needed up to the initial time, they hold for the smooth family at the initial time. We then apply the product rule one order below the highest desired derivative and the same Volterra estimate; the highest term is linear, with a bounded undifferentiated companion. Induction gives the required mixed bounds in space and in the parameters, down to the initial time of each such smooth solution.
+\end{proof}
+
+\begin{theorem}\label{ch22:thm:real-flow-variations}
+Fix $L>0$, $1/2<\alpha<2/3$, $T_0>0$, a finite horizon $T>0$, and $t_*\in(0,T]$, and consider the holonomies around the three coordinate cycles of $\Torus$, based at a fixed vertex $x_0$, at times in $[t_*,T]$. Let $U_0\Subset U_1\subset\R^d$ be bounded parameter domains, covered by finitely many smooth input charts with fixed positive margins; changes between these charts act on the initial potentials by gauge transformations equal to the identity at the basepoint. For each mesh $a=L/n$, let $u\mapsto\mathcal E_a(u)=(x_a(u),y_a(u))$ be the flow data of a lattice initial potential $A_{0,a}(u)$, twice continuously differentiable on $U_1$, with
+\[
+ \sup_{a,u\in U_1}\sum_{r=0}^2\|D_u^r\mathcal E_a(u)\|_{\mathrm{fl},a}\le R_2<\infty,
+\]
+where the norms are taken on $[0,T_0]$ and contain both components and all their first physical differences, and the parameter derivatives are measured in a fixed Euclidean operator norm. For every $u$, start the damping gauge transformation at $I$, in the gauge of the initial configuration $e^{aA_{0,a}(u)}$. Let $T_{R_2}$ be the local existence time of \cref{ch21:thm:enhanced-local-flow} for the bound $R_2$, replaced by $\min(T_{R_2},T_0)$.
+\begin{enumerate}
+\item There is $a_*>0$, chosen after the displayed data and below the restrictions on the mesh in \cref{ch21:thm:enhanced-local-flow}, such that the following holds for every mesh $a\le a_*$. On the early interval $[0,T_{R_2}]$, the remainder $r_a(u)$ and the damped representative $A_a(u,t)$ satisfy, for $r=1,2$,
+\[
+ \sup_{a\le a_*,\,u\in U_0}\|D_u^rr_a(u)\|_{\mathsf R_a}\le C_{R_2},
+\]
+\[
+ \|D_u^rD_aA_a(u,t)\|_\infty\le C_{R_2}\bigl\{(t+a^2)^{-(\alpha+1)/2}+(t+a^2)^{-\alpha}+(t+a^2)^{\kappa-1/2}\bigr\}.
+\]
+All three powers of $t+a^2$ are integrable at zero, uniformly in the mesh. The first and second parameter derivatives of the damping gauge transformation are bounded uniformly at every vertex on this interval. The representatives remain in the chart, by the bound
+\[
+ a\sup_{t\le T_{R_2}}\|A_a(t)\|_\infty\le C_{R_2}\bigl\{a^{1-\alpha}+a^{2-2\alpha}+a(T_{R_2}+a^2)^\kappa\bigr\}\longrightarrow0 .
+\]
+\item At a positive restart time, the solutions are smoothed by \cref{ch22:thm:positive-window-bootstrap}, and the continuations of \cref{ch21:thm:continuum-atlas} are used on a neighborhood of the compact closure of their possible limits; on each restart, the same fixed sampled gauge transformation is applied to all parameters in a neighborhood. The first and second parameter derivatives of the resulting based holonomy matrices of the three coordinate cycles on $[t_*,T]$, expressed in the gauge of the initial configuration, are bounded by a constant $C_{R_2,U_0,U_1,t_*,T}$ uniformly in the mesh. These matrices therefore have a uniform $C^{1,1}$ bound on smaller convex parameter charts. The conjugation at the basepoint by all damping and restart gauge transformations is included; this is a statement about matrices, not only about their traces.
+\item Let $f(u)$, $u\in U_1$, be a fixed compact family of finite sums of smooth cardinal interpolants, twice continuously differentiable in $u$, and let $A_{0,a}(u)=S_af(u)$. Then the matrices of (2) converge, uniformly in $u\in U_0$ and $t\in[t_*,T]$, to the holonomy matrices, based at $x_0$, of the solution of $\partial_tA_i=\sum_jD_jF_{ji}$ with initial value $f(u)$; the proof shows that their first two parameter derivatives converge as well. The divergence generators of the damping gauge transformations converge on positive time intervals and in $L^1$ down to time zero, and the damping gauge transformations with initial value $I$ converge at the basepoint. The same conclusions hold when the finitely many coefficients of the family depend on $a$ and converge together with their first two parameter derivatives. No rate that is uniform over growing families is asserted.
+\end{enumerate}
+The constants in (1) and (2) depend only on $d$, $U_0$, $U_1$, and the margins of the input charts, on $R_2$, $L$, $\alpha$, $T_0$, $t_*$, $T$, and on the chart and the margins of the continuations. The bounds for the based holonomy matrices in (2) hold for every mesh $a=L/n$, $n\ge4$. The assertions about logarithmic representatives and their damping gauge transformations hold for $a\le a_*$; finitely many additional meshes can be included when the corresponding representatives remain in the fixed smaller chart. The constants in (3) may also depend on the fixed family. The derivatives are real derivatives of the Wilson flow; neither a complex continuation of the flow nor a derivative of a Borel selection is involved.
+\end{theorem}
+
+We outline the proof. On the early interval, where the flow data are singular, we differentiate the fixed-point equation for the remainder $r=A-x-y$ of \cref{ch21:thm:enhanced-local-flow} twice in the parameters. The second derivative of the quadratic term contains products of two differentiated linear heat evolutions, whose singularity $v_a^{-\alpha-1/2}$ is not integrable. These products cancel against the corresponding products in the definition of $r$, and the remaining terms have the integrable singularity $v_a^{-3\alpha/2}$. We control the parameter derivatives of the damping gauge transformation by unitary variation of constants. After a positive time, the solutions are smooth uniformly in the mesh, and we continue them by comparison with finitely many selected smooth DeTurck solutions, as in \cref{ch22:lem:bounded-input-continuation}. Along this continuation, \cref{ch22:lem:patch-variations} controls the parameter derivatives. Finally we return to the gauge of the initial configuration by conjugating with the composed gauge transformation at the basepoint, and differentiate this conjugation as well. For a fixed smooth family, the consistency results of \cref{ch22:sec:fixed-interpolants,ch22:sec:smooth-data}, differentiated twice in the parameters, identify the limit.
+
+\begin{proof}
+\emph{Step 0: setup.} We work first in one of the finitely many input charts. Since changes between these charts are gauge transformations equal to the identity at the basepoint, they do not change the gauge in which the matrices are expressed. We choose an intermediate parameter domain $V$ with $\overline U_0\subset V\Subset U_1$. We take all difference quotients inside $U_1$ and first establish all bounds on $V$; the minimal parameter margin and the constants of the charts and of the conversion of Euclidean norms enter the final constant. In formulas involving directions, $v,w$ have Euclidean norm at most one. Set
+\[
+ h_0=T_{R_2},\qquad p=\tfrac32\alpha<1 ,
+\]
+and recall $\beta=\alpha-1/2$, $\kappa=1-3\alpha/2=1-p$, and $v_a(t)=t+a^2$. Using the contraction proof of \cref{ch21:thm:enhanced-local-flow}, we may decrease the local existence time while restricting the horizon of the flow data. All weighted norms and all the gains of the contraction then only decrease, and none of the bounds on the early remainder becomes larger. We choose $h_0$ small enough for the contractions below, and take $a^2\le h_0$ and $a\le1$. All heat integrals in the early argument have physical horizon $h_0$.
+
+\emph{Step 1: the differentiated equation on the early interval.} We write $x=x_a(u)$, $y=y_a(u)$, and $A=x+y+r$, and let
+\[
+ (\mathcal T_af)(t)=\int_0^tP_{t-s}^af(s)\,ds,
+ \qquad
+ F_a((x,y),r)=\mathcal T_a\bigl\{\mathcal N_a(A,A)-\mathcal N_a(x,x)+\mathscr C_a(A)\bigr\}.
+\]
+The remainder satisfies the fixed-point equation $r=F_a((x,y),r)$ exactly, with no term of the vector field truncated. By \cref{ch21:thm:enhanced-local-flow}, $r$ lies in a ball of fixed radius $D=D(R_2)$ in the norm $\mathsf R_a$. Using the estimates of the local contraction on a slightly larger fixed ball, we obtain
+\begin{equation}\label{ch22:eq:early-A-profiles}
+ \|A(t)\|_\infty\le C_{R_2,D}v_a(t)^{-\alpha/2},\qquad
+ \|D_aA(t)\|_\infty\le C_{R_2,D}v_a(t)^{-(\alpha+1)/2}.
+\end{equation}
+Indeed, the exponents $\beta,\alpha$ of $y$ are smaller than the corresponding exponents $\alpha/2,(\alpha+1)/2$ of $x$, the remainder has exponents $\kappa,\kappa-1/2$, and $v_a\le2$. The derivative in the remainder variable is
+\[
+ \mathsf L_a\rho=D_rF_a((x,y),r)\rho=\mathcal T_a\{\mathscr B_a(A)\rho\}.
+\]
+If $\|\rho\|_{\mathsf R_a}\le1$, its source is bounded by
+\[
+ C_{R_2,D}\bigl\{v_a^{\kappa-(\alpha+1)/2}+v_a^{\kappa-\alpha}\bigr\};
+\]
+the first term comes from the two ordered quadratic products and the second from $D\mathscr C_a(A)\rho$. Both exponents exceed $-1$. Bounding the value of the convolution and one difference of the heat semigroup, and then applying \eqref{ch22:eq:beta-bound}, we obtain
+\begin{equation}\label{ch22:eq:variation-inverse}
+ \|\mathsf L_a\|_{\mathsf R_a\to\mathsf R_a}\le C_{R_2,D}\bigl\{(h_0+a^2)^{(1-\alpha)/2}+(h_0+a^2)^{1-\alpha}\bigr\}\le\tfrac12,
+ \qquad
+ \|(I-\mathsf L_a)^{-1}\|\le2 .
+\end{equation}
+We choose $h_0$, and then the restriction $a\le a_*$ on the mesh, so that this holds on the slightly larger ball. The inverse is given by the norm-convergent Neumann series, and it acts on the whole Volterra integral.
+
+For a direction $(\xi,\eta)$ in the flow data, the derivative of the source with $r$ fixed is
+\begin{equation}\label{ch22:eq:variation-input-source}
+ \begin{split}
+ J_a(\xi,\eta)={}&\mathcal N_a(x,\eta)+\mathcal N_a(\eta,x)\\
+ &+\mathcal N_a(y+r,\xi+\eta)+\mathcal N_a(\xi+\eta,y+r)+D\mathscr C_a(A)(\xi+\eta);
+ \end{split}
+\end{equation}
+the products $\mathcal N_a(x,\xi)$ and $\mathcal N_a(\xi,x)$ cancel against the derivative of $\mathcal N_a(x,x)$. If $b=\|\xi\|_{\mathsf X_\alpha^a}+\|\eta\|_{\mathsf Y_\alpha^a}$, then
+\begin{equation}\label{ch22:eq:variation-source-integrable}
+ \|J_a(\xi,\eta)(t)\|_\infty\le C_{R_2,D}\,b\,v_a(t)^{-p},\qquad
+ \|\mathcal T_aJ_a(\xi,\eta)\|_{\mathsf R_a}\le C_{R_2,D}\,b .
+\end{equation}
+To verify the time exponents, recall that $\|\mathcal N_a(u,v)\|_\infty\le C\|u\|_\infty\|D_av\|_\infty$. The products of one factor $x$ or $\xi$ with one factor $y$ or $\eta$ have worst exponents $-\alpha/2-\alpha=-p$ and $-\beta-(\alpha+1)/2=-p$. Two factors of the type $y,\eta$ give the exponent $1/2-2\alpha$. A remainder factor against a factor of type $x,\xi$ gives the same exponent $1/2-2\alpha$, and against a factor of type $y,\eta$ the exponent $\kappa-\alpha$. All of these are at least $-p$ for $\alpha<2/3$. Finally, \eqref{ch22:eq:cubic-variation-bounds} bounds the last term by $C\|A\|_\infty^2\|\xi+\eta\|_\infty$, again with exponent $-p$. Since $\kappa=1-p$, the convolutions have exactly the powers $v_a^{\kappa}$ and $v_a^{\kappa-1/2}$ of the norm $\mathsf R_a$.
+
+For fixed $a$, the initial value $A_0(u)=x_a(u,0)$ is twice continuously differentiable in $u$. The differential equation in the chart, or difference quotients of its contracting integral equation, allow us to differentiate $r=F_a((x,y),r)$ twice. To justify the second route, we subtract two fixed-point identities and integrate the derivative in the field along the segment joining them. The difference of the remainders is then obtained by applying an inverse of norm at most two to the difference in the flow data. By Taylor's integral remainder and \eqref{ch22:eq:variation-source-integrable}, the first difference quotient converges. Repeating this with the first differentiated equation, and using the second field derivatives of the analytic vector field, we obtain the convergence of the second difference quotient. This justifies the differentiation before we derive the uniform bounds below.
+
+We write $\xi_v=\partial_vx$, $\eta_v=\partial_vy$, $\rho_v=\partial_vr$, and $Z_v=\partial_vA$. The first derivative satisfies
+\begin{equation}\label{ch22:eq:first-enhanced-variation}
+ (I-\mathsf L_a)\rho_v=\mathcal T_aJ_a(\xi_v,\eta_v),\qquad Z_v=\xi_v+\eta_v+\rho_v .
+\end{equation}
+By hypothesis, $b\le R_2$ here, and \eqref{ch22:eq:variation-inverse} and \eqref{ch22:eq:variation-source-integrable} imply that $\|\rho_v\|_{\mathsf R_a}\le C_{R_2}$. The second derivative satisfies, with all inhomogeneous terms,
+\begin{equation}\label{ch22:eq:second-enhanced-variation}
+ \begin{split}
+ (I-\mathsf L_a)\rho_{vw}&=\mathcal T_a\{J_a(\xi_{vw},\eta_{vw})+K_{vw}\},\\
+ K_{vw}&=\mathcal N_a(Z_v,Z_w)+\mathcal N_a(Z_w,Z_v)-\mathcal N_a(\xi_v,\xi_w)-\mathcal N_a(\xi_w,\xi_v)\\
+ &\hspace{12mm}+D^2\mathscr C_a(A)[Z_v,Z_w].
+ \end{split}
+\end{equation}
+The two subtracted products of differentiated linear heat evolutions must be kept: bounding the two unsubtracted products separately would produce the exponent $-\alpha-1/2$, which is not integrable for $\alpha>1/2$. We write $Z_v=\xi_v+\delta_v$ with $\delta_v=\eta_v+\rho_v$. Each ordered quadratic difference in $K_{vw}$ then contains at least one factor $\delta$; for instance,
+\[
+ \mathcal N_a(Z_v,Z_w)-\mathcal N_a(\xi_v,\xi_w)=\mathcal N_a(\xi_v,\delta_w)+\mathcal N_a(\delta_v,\xi_w)+\mathcal N_a(\delta_v,\delta_w).
+\]
+The part $\eta$ of $\delta$ has the exponents of the quadratic Picard term, and the part $\rho$ has the exponents of the remainder, which were bounded above. By the exponent calculation for \eqref{ch22:eq:variation-source-integrable}, the sum of these terms is bounded by $C_{R_2}v_a^{-p}$. For the last term we use $\|D^2\mathscr C_a(A)[Z_v,Z_w]\|_\infty\le C\|A\|_\infty\|Z_v\|_\infty\|Z_w\|_\infty$; each factor has the value bound $Cv_a^{-\alpha/2}$, which again gives the exponent $-p$. In total, the second forcing has, before inversion, $\mathsf R_a$ norm at most $C_{R_2}$, and by \eqref{ch22:eq:variation-inverse} we have $\|\rho_{vw}\|_{\mathsf R_a}\le C_{R_2}$. These directional estimates give the asserted bounds on both parameter derivatives in Euclidean operator norm, with all directions and all first physical differences included.
+
+Adding the differentiated flow data to these two estimates for the remainder, we find, for $r=1,2$,
+\begin{equation}\label{ch22:eq:integrable-variation-profile}
+ \|D_u^rD_aA(u,t)\|_\infty\le C_{R_2}\bigl\{v_a(t)^{-(\alpha+1)/2}+v_a(t)^{-\alpha}+v_a(t)^{\kappa-1/2}\bigr\}.
+\end{equation}
+The same bound, with a possibly larger $C_{R_2}$, holds for $r=0$. All three negative exponents are smaller than one in absolute value. In particular, the integrals of the right side over $[0,\epsilon]$ are at most
+\begin{equation}\label{ch22:eq:early-generator-modulus}
+ C_{R_2}\,\omega(\epsilon),\qquad \omega(\epsilon)=\epsilon^{(1-\alpha)/2}+\epsilon^{1-\alpha}+\epsilon^{\kappa+1/2},
+\end{equation}
+uniformly in $a$, for $0<\epsilon\le h_0$. Finally, the representatives remain in the chart because
+\[
+ a\sup_{t\le h_0}\|A(t)\|_\infty\le C_{R_2}\bigl\{a^{1-\alpha}+a^{2-2\alpha}+a(h_0+a^2)^\kappa\bigr\}<r_* ;
+\]
+in the last term we used the maximum of the remainder over the interval, which is attained at the end and not at time zero. The differentiated mild solution is therefore, for every parameter, the damped representative of the Wilson flow.
+
+\emph{Step 2: the damping gauge transformation on the early interval.} The generator in physical units is linear in the potential:
+\begin{equation}\label{ch22:eq:linear-divergence-generator}
+ \lambda_a=a^{-2}\phi(aA)=-\sum_iD_{a,i}^-A_i,\qquad \partial_tk_a=\lambda_ak_a,\qquad k_a(0)=I .
+\end{equation}
+It is anti-Hermitian. Its parameter derivatives of order zero, one, and two are bounded in $L^1([0,h_0];\ell^\infty)$ by \eqref{ch22:eq:integrable-variation-profile}, and their integrals over $[0,\epsilon]$ are bounded by \eqref{ch22:eq:early-generator-modulus}. At any vertex write $l_v=\partial_vk_a$ and $m_{vw}=\partial_v\partial_wk_a$. Direct differentiation gives
+\begin{equation}\label{ch22:eq:gauge-two-variations}
+ \begin{aligned}
+ \partial_tl_v&=\lambda_al_v+(\partial_v\lambda_a)k_a,\qquad l_v(0)=0,\\
+ \partial_tm_{vw}&=\lambda_am_{vw}+(\partial_v\lambda_a)l_w+(\partial_w\lambda_a)l_v+(\partial_{vw}\lambda_a)k_a,\qquad m_{vw}(0)=0.
+ \end{aligned}
+\end{equation}
+The homogeneous propagator is unitary. If $B_j=\int_0^{h_0}\|D_u^j\lambda_a\|_\infty\,dt$ for $j=1,2$, variation of constants gives
+\[
+ \sup_t\|l_v(t)\|_\infty\le B_1,\qquad \sup_t\|m_{vw}(t)\|_\infty\le B_2+2B_1^2 .
+\]
+These bounds hold at every vertex, uniformly in the mesh, with no exponential of the size of $\lambda_a$, and they include the two products of first derivatives in the second equation. Differentiating $k_a^{-1}k_a=I$, we also bound both derivatives of $k_a^{-1}$. This completes the proof of (1).
+
+\emph{Step 3: bounds on later intervals.} Fix $0<s<\min(h_0/2,t_*/2)$, which leaves room for a positive waiting time before $s$. By the early estimates we have uniform $C_a^1$ bounds on $A$, $Z_v$, and $Z_{vw}$ on $[s/2,h_0]$. We apply \cref{ch22:thm:positive-window-bootstrap} to $A$, and then \cref{ch22:lem:patch-variations} on intervals after positive waiting times inside the early interval. At time $s$ these give bounds on every given fixed order of differences of the three fields, with constants depending on that order, on $L,R_2,s$, and on the parameter data.
+
+Next, we justify the use of finitely many selected smooth DeTurck solutions, although we have not assumed that the flow data converge as the mesh varies. Let $\mathscr K$ be the set of smooth connections whose derivatives of every order satisfy the bounds just obtained for $A_a(s,u)$; it depends only on $L,R_2,s$. By \cref{ch22:lem:fixed-time-compactness}, it is compact in $C^3$, it contains every limit of a sequence $A_{a_j}(s,u_j)$ with $a_j\to0$, and
+\begin{equation}\label{ch22:eq:endpoint-near-smooth-compact}
+ \sup_u\inf_{b\in\mathscr K}\|A_a(s,u)-S_ab\|_{C_a^1}\longrightarrow0\qquad(a\to0).
+\end{equation}
+Only the spatial bounds at time $s$ are needed here.
+
+We apply part (4) of \cref{ch22:lem:physical-volterra} to $\mathscr K$ with horizon $T-s$. It provides $\eta_{\mathscr K}>0$ and finitely many continuations, built from the DeTurck solutions of \cref{ch21:thm:continuum-atlas} with $r=3$, whose needed $C^5$ norms are finite. It also provides one restriction $a\le a_{\mathscr K}$ and one $C_a^1$ bound for all comparisons with lattice fields within $\eta_{\mathscr K}$ of the sample of an element of $\mathscr K$. Then \eqref{ch22:eq:endpoint-near-smooth-compact} implies that for every sufficiently small mesh and every $u$ there exists $b\in\mathscr K$ with $\|A_a(s,u)-S_ab\|_{C_a^1}\le\eta_{\mathscr K}/4$. By the early bound on the first parameter derivative, we have
+\[
+ \|A_a(s,u')-A_a(s,u)\|_{C_a^1}\le C_{R_2,s}|u'-u|
+\]
+on every segment in $V$. Hence, for $|u'-u|$ smaller than the input margin and smaller than $\eta_{\mathscr K}/(4C_{R_2,s})$, the field $A_a(s,u')$ lies within $\eta_{\mathscr K}/2$ of the same $S_ab$. Then all parameters in this neighborhood of $u$ can use the same continuation, with the same fixed sampled gauge transformations. Then the individual estimate \eqref{ch22:eq:reference-C1-stability} gives the $C_a^1$ bound for the representatives through time $T$. This estimate applies to an incoming small discrepancy in $C^1_a$; it does not require a link error of order $a^2$.
+
+The two initial parameter derivatives at time $s$ already have uniform $C_a^1$ bounds. Applying \eqref{ch22:eq:patch-C2-bounds} and \eqref{ch22:eq:handoff-C2} along this finite continuation, we obtain one uniform $C_a^1$ bound for the first and second parameter derivatives on every time interval, including its endpoints. Only after the $C_a^1$ bound for the representative has been obtained in this way do we apply the last part of \cref{ch22:thm:positive-window-bootstrap}. Together with the last part of \cref{ch22:lem:patch-variations}, it gives further spatial orders at every given positive waiting time.
+
+\emph{Step 4: composed gauge transformations and matrices.} On a later time interval $I_j$, let $g_j(t)$ be the damping gauge transformation with initial value $I$ at the start of $I_j$. By \eqref{ch22:eq:linear-divergence-generator} and the $C_a^1$ bounds just proved, its generator and the first two parameter derivatives of the generator are bounded. Then the equations \eqref{ch22:eq:gauge-two-variations} bound the first two parameter derivatives of $g_j$ on $I_j$. We keep track of the whole gauge transformation at every vertex, and not only of its value modulo a conjugation at the basepoint. If $Q_j$ is the composed gauge transformation at the start of $I_j$, then
+\begin{equation}\label{ch22:eq:accumulated-root-gauge}
+ Q(t)=g_j(t)Q_j,\qquad Q_{j+1}=k_j\,g_j(h_j)Q_j,\qquad Q_0=k_a(s),
+\end{equation}
+where $h_j$ is the length of $I_j$ and $k_j$ is the fixed sampled gauge transformation applied at its end. The order of these products follows from $(U^k)^l=U^{lk}$. Since all factors are unitary, the $k_j$ do not depend on the parameter, and there are finitely many of them, the first and second product rules bound $D_uQ$ and $D_u^2Q$ at every vertex. This includes the early damping gauge transformation with its initial value $I$.
+
+Let $H_a^{\rm rep}(t,u)$ be the holonomy of one of the coordinate cycles in the current damped representative. If the cycle has $N$ links and $aN\le\ell$, differentiating a single exponential gives
+\[
+ \|\partial_ve^{aA_e}\|_{\rm op}\le Ca\|Z_v\|_\infty,\qquad
+ \|\partial_{vw}e^{aA_e}\|_{\rm op}\le Ca\|Z_{vw}\|_\infty+Ca^2\|Z_v\|_\infty\|Z_w\|_\infty ;
+\]
+these follow by integrating the derivative of the exponential once and twice along its unitary factors. An inverse factor satisfies bounds of the same type, by differentiating the identity for the inverse. The product rule over the links of the cycle gives
+\begin{equation}\label{ch22:eq:matrix-product-variations}
+ \begin{split}
+ \|\partial_vH_a^{\rm rep}\|_{\rm op}&\le C\ell\|Z_v\|_\infty,\\
+ \|\partial_{vw}H_a^{\rm rep}\|_{\rm op}&\le C\ell\|Z_{vw}\|_\infty+C(\ell a+\ell^2)\|Z_v\|_\infty\|Z_w\|_\infty .
+ \end{split}
+\end{equation}
+The term $\ell a$ counts the $N$ second derivatives of a single factor, and the term $\ell^2$ counts the at most $N(N-1)$ products of two first derivatives. Since every observation time is later than $s$, the fields in these estimates are uniformly bounded by Step 3. At the basepoint $x_0$, the holonomy matrix of the Wilson flow in the gauge of the initial configuration is
+\begin{equation}\label{ch22:eq:matrix-in-initial-frame}
+ H_a(t,u)=Q(t,x_0)^{-1}H_a^{\rm rep}(t,u)\,Q(t,x_0).
+\end{equation}
+Its two derivatives include the derivatives of both factors $Q(t,x_0)^{\pm1}$. By the bounds for $Q$ and $Q^{-1}$ and \eqref{ch22:eq:matrix-product-variations}, all these terms are bounded uniformly. At a restart time both representations describe the same holonomy matrix of the Wilson flow, so their parameter derivatives agree there. The choice of a reference neighborhood was used only to prove a bound for the map $u\mapsto H_a(t,u)$, which is defined independently of this choice. The choice is constant on the parameter neighborhood where the derivatives were computed, and we take no derivative of it. Taking the maximum over the finitely many possible continuations, we obtain the uniform bounds on the first and second derivatives on $U_0$. On a smaller convex chart, the fundamental theorem of calculus along segments and the bound on the second derivative imply that $\|DH_a(u)-DH_a(u')\|\le C|u-u'|$. Together with $\|H_a\|_{\rm op}=1$, this is the uniform $C^{1,1}$ bound in (2).
+
+\emph{Step 5: smooth families, consistency of the fields.} Let $f(u)$ be a fixed compact family as in (3), with its two parameter derivatives on the larger domain. Its spatial derivatives of every fixed order, and its mixed derivatives with up to two parameter derivatives, have uniform finite bounds. The same holds if its finitely many coefficients depend on $a$ and converge together with their first two parameter derivatives. \Cref{ch22:lem:fixed-prefix-coefficients} and \cref{ch13:lem:fixed-prefix-heat} apply to $f$, to its parameter derivatives, and to their ordered products. On meshes that do not refine the fixed input lattices, we use the general smooth-input bounds of \cref{ch13:lem:fixed-prefix-heat} in place of its bounds for interpolants. The proof of \cref{ch22:lem:fixed-prefix-coefficients} uses only these bounds and the fixed smooth norms of the inputs, so its conclusions hold on those meshes as well. In particular, the quadratic Picard term satisfies the exact identities
+\[
+ \begin{split}
+ \partial_vy_a&=\mathcal Q_a(\partial_vx_a,x_a)+\mathcal Q_a(x_a,\partial_vx_a),\\
+ \partial_{vw}y_a&=\mathcal Q_a(\partial_{vw}x_a,x_a)+\mathcal Q_a(x_a,\partial_{vw}x_a)
+ +\mathcal Q_a(\partial_vx_a,\partial_wx_a)+\mathcal Q_a(\partial_wx_a,\partial_vx_a).
+ \end{split}
+\]
+Hence the bounds on the flow data through two parameter derivatives, and the consistency of both components of the flow data, hold for this family, with a constant $R_2$ depending on the family. All heat comparisons are on the same fixed physical horizon. This also covers coefficients that converge as described.
+
+\Cref{ch21:thm:continuum-atlas} with $r=3$ applies to the compact family of smooth initial data, and on each of its continuations the gauge transformations do not depend on $u$. By the continuum part of \cref{ch22:lem:patch-variations}, the DeTurck solutions $b_j(u)$ on the time intervals have two parameter derivatives, with all the spatial bounds needed below. The bounds of the smooth initial family and the finitely many fixed gauge transformations give these bounds also at the left endpoints of the intervals. This verifies the regularity needed to differentiate the residual of the sampled smooth solution, without deducing it from the Lipschitz statement of \cref{ch21:thm:continuum-atlas} alone.
+
+Let $B_a$ be the lattice representative and $b_a=S_ab$ the sample of the selected DeTurck solution on a common time interval. Expanding the vector field, we obtain for $r=0,1,2$
+\begin{equation}\label{ch22:eq:twice-differentiated-residual}
+ \sup_{u,t}\bigl\|D_u^r\bigl\{\partial_tb_a-\Delta_ab_a-\mathcal N_a(b_a,b_a)-\mathscr C_a(b_a)\bigr\}\bigr\|_\infty\le Ca .
+\end{equation}
+This follows by differentiating the finite analytic expression and its Taylor remainder with respect to $u$. The integral remainder is bounded by the corresponding mixed spatial and parameter derivatives of the fixed smooth family. The linear part is central-difference consistency, the quadratic part is the calculation for $\mathcal N_a$ in \cref{ch22:lem:fixed-prefix-coefficients}, and the remaining terms form the analytic remainder treated in \cref{ch22:rem:full-smooth-coefficients}. The first physical difference of the residual is consistent as well, since the smooth spatial derivatives of one more order are bounded.
+
+We now prove stability of the derivatives. For the value we use \eqref{ch22:eq:reference-C1-stability}. Recall that $\mathscr B_a(B)V$ is the linearization, and let $f_a(B;V,W)$ be defined by the last line of \eqref{ch22:eq:patch-variation-equations}, with $V,W$ as the two first-derivative arguments. On a common bounded set of the norm $C_a^1$, the displayed products and \eqref{ch22:eq:cubic-variation-bounds} imply
+\[
+ \|(\mathscr B_a(B)-\mathscr B_a(C))V\|_\infty\le C_K\|B-C\|_{C_a^1}\|V\|_{C_a^1},
+\]
+and the difference of $f_a$ at two triples is at most
+\[
+ C_K\bigl(\|B-C\|_{C_a^1}\|V\|_{C_a^1}\|W\|_{C_a^1}+\|V-V'\|_{C_a^1}\|W\|_{C_a^1}+\|V'\|_{C_a^1}\|W-W'\|_{C_a^1}\bigr)
+\]
+when the remaining fields are bounded by $K$. For the remainder, this uses the bound on the third derivative in \eqref{ch22:eq:cubic-variation-bounds}. We subtract the equations for the first derivatives, keep the linear operator at $B_a$, and place the difference of the coefficients and the differentiated residual in the forcing. By the Volterra inverse of \cref{ch22:lem:physical-volterra}(1), the $C_a^1$ difference of the first derivatives is at most the initial difference plus $C(a+\sup\|B_a-b_a\|_{C_a^1})$. We subtract the equations for the second derivatives in the same way. By the bound for $f_a$, the additional forcing is at most a constant times the errors of the fields and of the first derivatives already controlled, plus the second differentiated residual. Applying the Volterra inverse again, we obtain the convergence of this difference as well. At a fixed sampled gauge transformation, the consistency error and its first two parameter derivatives are $O(a)$ in $C_a^1$. To see this, we expand $k(x+ae_i)$ to first order in the formula for $\mathscr G_{a,k}$ and differentiate twice in the bounded smooth family. The remainder of second order, before division by $a$, is $O(a^2)$, and one spatial difference uses one more smooth derivative. Together with \eqref{ch22:eq:handoff-C2}, this propagates the three error bounds across the finite continuation.
+
+For initial values that are exact samples, the three initial errors vanish. For converging finite coefficients they are $O(\delta_a)$ with $\delta_a\to0$, in all needed fixed spatial norms. The preceding argument then gives, on every common time interval,
+\begin{equation}\label{ch22:eq:C2-smooth-family-convergence}
+ \sup_{u,t}\|D_u^r(B_a-S_ab)\|_{C_a^1}\le C(a+\delta_a),\qquad r=0,1,2 .
+\end{equation}
+For $r=0$, the sharper link consistency of \cref{ch22:thm:sampled-smooth-stability} is also available, since its hypothesis of an initial link error $O(a^2)$ holds at every restart from an exact sample. The estimate in $C^1_a$ above is used for the parameter derivatives and for the generators.
+
+\emph{Step 6: smooth families, generators, gauge transformations, and matrices.} We verify the convergence of the generators in $L^1$ on the early interval directly from the weighted estimates, without a uniform unweighted estimate at time zero. Let $\lambda=-\sum_i\partial_ib_i$, with the sign fixed by \eqref{ch22:eq:linear-divergence-generator}. On every interval $[\epsilon,h_0]$, by the consistency of the values and first differences, we have
+\[
+ \sup_u\|D_u^r\lambda_a-S_aD_u^r\lambda\|_\infty\longrightarrow0,\qquad r=0,1,2 .
+\]
+By \eqref{ch22:eq:early-generator-modulus}, the integral of each lattice term over $[0,\epsilon]$ is at most $C_{R_2}\omega(\epsilon)$. The limiting continuum bound has the same property, by the limit of the same estimates at positive times or by the stronger smooth bounds of the fixed family. Taking first $a\to0$ at fixed $\epsilon$ and then $\epsilon\downarrow0$, we obtain
+\begin{equation}\label{ch22:eq:L1-generator-convergence}
+ \sup_u\int_0^{h_0}\|D_u^r\lambda_a-S_aD_u^r\lambda\|_\infty\,dt\longrightarrow0,\qquad r=0,1,2 .
+\end{equation}
+On later time intervals the generators and their two parameter derivatives are bounded by the $C_a^1$ estimates of Step 3, and \eqref{ch22:eq:C2-smooth-family-convergence} implies the analogous convergence in $L^1$ on each whole interval.
+
+Let $k$ solve $\partial_tk=\lambda k$ with $k(0)=I$ in the continuum. Then $\partial_t(k^{-1})=k^{-1}\sum_i\partial_ib_i$, and $k^{-1}$ is the gauge transformation that undoes the damping in \cref{ch21:thm:continuum-atlas}, with the convention used there. At every vertex, unitary variation of constants gives
+\begin{equation}\label{ch22:eq:root-ODE-consistency}
+ \sup_{t,u}\|k_a(t,u)-S_ak(t,u)\|_{\rm op}\le\sup_u\int\|\lambda_a-S_a\lambda\|_\infty\,dt\longrightarrow0 .
+\end{equation}
+For the first derivative we use its integral formula from \eqref{ch22:eq:gauge-two-variations}. Its homogeneous propagators $k_a(t)k_a(r)^{-1}$ converge uniformly by \eqref{ch22:eq:root-ODE-consistency}, its source generators converge in $L^1$ by \eqref{ch22:eq:L1-generator-convergence}, and $k_a$ converges uniformly. Subtracting the two integrals, we bound the difference by the $L^1$ error of the generators plus a uniform error of the factors times a bounded $L^1$ norm, which proves the convergence of the first derivative. For the second derivative, the two additional sources are $(\partial_v\lambda_a)l_w$ and $(\partial_w\lambda_a)l_v$. Since the first derivatives just treated converge uniformly and the generators converge in $L^1$, the same subtraction proves the convergence of the second derivative; the term $(\partial_{vw}\lambda_a)k_a$ is handled by its own $L^1$ convergence. Since the fixed sampled gauge transformation at a restart has the same value at the basepoint as its continuum counterpart, the finite products \eqref{ch22:eq:accumulated-root-gauge} converge at the basepoint, together with their first two parameter derivatives.
+
+On each of the three coordinate cycles, the physical path is the same coordinate circle, of length $L$ and with the same basepoint, for every mesh. Using the estimate for smooth edge transport in \cref{ch21:lem:local-matrix-gauge-and-loops} and unitary telescoping, we compare the product of the exponentials of the sampled selected DeTurck solution with its smooth holonomy. To include derivatives, we regard this product as the parallel transport, along the same coordinate circle, for a piecewise constant coefficient. This coefficient and its two parameter derivatives differ from the corresponding smooth coefficients by $O(a)$, using one smooth spatial derivative. Differentiating the one-dimensional transport equation once and twice, we find the same linear and quadratic forcing structure as in \eqref{ch22:eq:gauge-two-variations}, now over the fixed interval of arclength $L$. By unitary variation of constants and subtraction, the products and their two parameter derivatives converge at rate $O(a)$. The errors between the lattice fields and the samples in \eqref{ch22:eq:C2-smooth-family-convergence} add $O(a+\delta_a)$, by the same transport argument or by \eqref{ch22:eq:matrix-product-variations} and its version for differences. Finally we undo the gauge transformations at the basepoint by \eqref{ch22:eq:matrix-in-initial-frame}. The convergence at the basepoint proved above identifies the holonomy matrices of the Wilson flow with the holonomy matrices of the covariant continuum flow, in the gauge of the initial configuration, uniformly over the compact smooth family. This proves (3).
+
+\emph{Step 7: dependence of the constants and coarse meshes.} All restrictions on the mesh and all constants in Steps 5 and 6 may depend on the fixed smooth family and on the displayed bounds. All bounds in Steps 1--4 used only $R_2$, the parameter domains, the waiting times, the horizon, the torus, and the margins of the finitely many continuations. For the finitely many meshes with $a>a_*$, the initial fields and their two parameter derivatives are bounded by the weighted norm at time zero, since these meshes are bounded below. Since the Wilson vector field and its first two derivatives are bounded on the corresponding compact products of copies of $\SU$, the real integral equations for the derivatives give finite uniform bounds on the fixed horizon. This gives the bounds for the based holonomy matrices on these meshes, and we take a maximum over this finite set. For any additional meshes on which the damped representatives remain in the fixed smaller chart, the positive chart margin also gives bounds for their logarithms and for the equations of their gauge transformations.
+\end{proof}
+
+\section{Flows with the modified plaquette potential}\label{ch22:sec:modified}
+
+We now treat the flows of the plaquette potential $q+cq^2$ with $0\le c\le C_0$, which are used in \cref{ch26:chapter} to show that the limit does not depend on the choice of smoothing within this family. As in \cref{ch21:thm:common-enhancement-alternative-flow}, let
+\[
+ \mathcal A_c(U)=\sum_{p\in\Faces N}\bigl\{q(U_p)+c\,q(U_p)^2\bigr\},\qquad \Psi_t^{(N,c)}=\Phi^{\mathcal A_c}_{4t/a^2},\qquad a=L/N,
+\]
+where $\Phi^{\mathcal A_c}$ is the flow of the vector field $-\nabla\mathcal A_c$ for the product metric; thus $\Psi^{(N,0)}=\Psi^{(N)}$. By \cref{ch21:lem:quartic-plaquette-force}, the damped representatives of this flow solve
+\[
+ \partial_tA=\Delta_aA+\mathcal N_a(A,A)+F_a(A)+E_{a,c}(A)
+\]
+in a smaller chart, where $F_a(A)=a^{-3}R_3(aA)=\mathscr C_a(A)$ is the cubic-and-higher remainder and $E_{a,c}$ is the additional analytic term coming from $cq^2$. Since the linear and quadratic parts are the same as for the Wilson flow, the flow data are unchanged. The additional term satisfies the bounds on field derivatives \eqref{ch21:eq:quartic-field-jets}, the bounds on differences \eqref{ch21:eq:quartic-shifted-jets}, and the stronger bound \eqref{ch21:eq:quartic-curvature-gain}, which makes it $O(a^3)$ on bounded sets of the norm $C_a^1$. Only bounded $c\ge0$ is considered.
+
+\begin{lemma}\label{ch22:lem:alternative-smooth-reference}
+Fix $L>0$, $0\le C_0<\infty$, and a smaller chart.
+\begin{enumerate}
+\item For flow data bounded by $R$, the solutions of \cref{ch21:thm:common-enhancement-alternative-flow} have bounds on every fixed order of physical differences on every interval after a positive waiting time, uniformly in $a$ and $c\in[0,C_0]$. The same holds on any restarted time interval for which a uniform $C_a^1$ bound is given, with the dependence stated in \cref{ch22:thm:positive-window-bootstrap} and an additional dependence on $C_0$.
+\item Let $b$ be a fixed smooth periodic DeTurck solution on $[0,h]$ whose spatial derivatives through order five are bounded by $K_b$. There are $\eta_b,a_b>0$ and $K_b'<\infty$, depending only on $L$, $h$, $K_b$, $C_0$, and the chart, such that, whenever
+\[
+ \|B_a(0)-S_ab(0)\|_{C_a^1}\le\eta\le\eta_b,\qquad a\le a_b,
+\]
+the damped flow for $\mathcal A_c$ exists in the chart through time $h$ and
+\begin{equation}\label{ch22:eq:alternative-reference-bound}
+ \sup_{t\le h}\|B_a(t)-S_ab(t)\|_{C_a^1}\le K_b'(\eta+a),\qquad \sup_{t\le h}\|B_a(t)\|_{C_a^1}\le K_b' .
+\end{equation}
+This holds uniformly for $c\in[0,C_0]$, and also on each time interval of a fixed continuation as in \cref{ch21:thm:continuum-atlas}, with its fixed sampled gauge transformations at the restarts. In particular, every sufficiently small initial discrepancy in $C_a^1$ is allowed.
+\end{enumerate}
+The constants are deterministic and do not depend on the mesh below the thresholds.
+\end{lemma}
+
+\begin{proof}
+\emph{Part (1).} The local solution of \cref{ch21:thm:common-enhancement-alternative-flow} gives the initial $C_a^1$ bound after a positive waiting time. Suppose that differences through order $m-1$ have been bounded by $K_1,\ldots,K_{m-1}$ on a preceding interval. By the product rules \eqref{ch22:eq:shifted-product}, we have
+\[
+ \|D_a^{m-1}\mathcal N_a(B,B)\|_\infty\le P_m(K_1,\ldots,K_{m-1})+C_mK_1\|D_a^mB\|_\infty ,
+\]
+since the only factor of order $m$ occurs when all additional differences fall on the factor that already carries a difference, and its companion is a bounded value of $B$. By the composition rule of \cref{ch21:lem:wilson-local-algebra} and by \eqref{ch21:eq:quartic-shifted-jets}, both analytic terms $F_a$ and $E_{a,c}$ contribute only a bounded function of $K_1,\ldots,K_{m-1}$. Indeed, their arguments carry no difference to begin with, and all their powers of the mesh are nonnegative. We start the mild equation at the left endpoint $u_0$ of the preceding interval, commute $m-1$ differences onto the initial value and onto the source, and place one difference on the heat semigroup. For $Z_m(d)=\sup_{0<v\le d}\sqrt v\|D_a^mB(u_0+v)\|_\infty$, using the bound for one difference of the heat semigroup, we obtain
+\[
+ Z_m(d)\le C_mK_{m-1}+C_mP_m\,d+C_mK_1\sqrt d\,Z_m(d),
+\]
+where for the highest term we used $\int_0^v(v-r)^{-1/2}r^{-1/2}\,dr=\pi$. At fixed mesh, $Z_m(d)$ is finite before the absorption. We choose $d$ so that the last coefficient is at most $1/2$, and cover the smaller interval by intervals of this length. By induction, every fixed order is bounded, with uniform constants of the stated dependence.
+
+\emph{Part (2).} Let $b_a=S_ab$, and define
+\[
+ e_{a,c}=\partial_tb_a-\Delta_ab_a-\mathcal N_a(b_a,b_a)-F_a(b_a)-E_{a,c}(b_a).
+\]
+The residual of \cref{ch22:thm:sampled-smooth-stability}(1) bounds the residual for the Wilson flow in physical units by $K_{K_b}a$, after dividing the dimensionless residual $O(a^4)$ of the link logarithms by $a^3$. By \eqref{ch21:eq:quartic-curvature-gain}, the additional term is at most $K_{K_b,C_0}a^3$. Hence $\sup_t\|e_{a,c}\|_\infty\le Ka$, and no difference of this residual will be needed. Let $Z=B_a-b_a$, and stop at the first time at which $\|Z\|_{C_a^1}=1$. Apart from $-e_{a,c}$, the source of order zero in the equation for $Z$ is
+\[
+ \mathcal N_a(b_a,Z)+\mathcal N_a(Z,b_a)+\mathcal N_a(Z,Z)+(F_a+E_{a,c})(b_a+Z)-(F_a+E_{a,c})(b_a).
+\]
+By the bound on $\mathcal N_a$ and the bounds on the cubic field derivatives, its supremum norm is at most $K_{K_b,C_0}\|Z\|_{C_a^1}$ on this interval. The stopped comparison with the smooth DeTurck solution $b$ and the induction over restarts in the proof of \cref{ch22:lem:physical-volterra} apply with this larger local Lipschitz constant and the residual just bounded. They prove \eqref{ch22:eq:alternative-reference-bound}, remove the stopping condition, and give the assertion for continuations, with the additional dependence on $C_0$.
+\end{proof}
+
+\begin{lemma}\label{ch22:lem:alternative-uniform-handoff}
+Fix $L>0$, $1/2<\alpha<2/3$, $0\le R,C_0<\infty$, $0<t_*\le T<\infty$, and $0\le\ell<\infty$. There is a deterministic function $\omega(a)$ with $\omega(a)\to0$ as $a\downarrow0$ with the following property. Let $A_{0,a}$ be a lattice initial potential whose flow data on the common early interval $[0,T_{R,C_0}]$ of \cref{ch21:thm:common-enhancement-alternative-flow} have norm at most $R$, and let $U_a^c(t)=\Psi_t^{(N,c)}(e^{aA_{0,a}})$. Then, for every sufficiently small mesh,
+\begin{equation}\label{ch22:eq:alternative-uniform-loops}
+ \sup_{0\le c\le C_0}\ \sup_{t_*\le t\le T}\ \sup_{\substack{\ell_a\text{ closed path}\\ aN_{\ell_a}\le\ell}}
+ \bigl|\tfrac12\tr\Hol_{\ell_a}U_a^c(t)-\tfrac12\tr\Hol_{\ell_a}U_a^0(t)\bigr|\le\omega(a).
+\end{equation}
+The same holds for any fixed finite collection of characters of finite-dimensional representations of $\SU$. No approximation or area hypothesis on the closed paths is needed, since paths in the same lattice are compared. The function $\omega$ may depend on the displayed data, on the representations, and on the chart; no rate is asserted.
+\end{lemma}
+
+\begin{proof}
+Fix $0<s<\min(t_*,T_{R,C_0})$ such that there is a positive waiting time before $s$. The early comparison \eqref{ch21:eq:quartic-early-comparison}, evaluated at time $s$, gives
+\[
+ \sup_c\|A_a^c(s)-A_a^0(s)\|_{C_a^1}\longrightarrow0
+\]
+uniformly over the initial potentials considered. We prove the remaining uniform assertion by contradiction, which avoids the need for a single smooth continuation that is uniform over arbitrary families with bounds of finite order. Suppose that the assertion fails. Then there exist meshes $a_j\downarrow0$, initial potentials with flow data bounded by $R$, parameters $c_j$, closed paths, and times that exhibit a fixed positive discrepancy. On a fixed interval before $s$, all fixed differences of the Wilson fields $A_{a_j}^0$ are bounded by \cref{ch22:thm:positive-window-bootstrap}.
+
+By \cref{ch22:lem:fixed-time-compactness}, applied at time $s$, there exist a subsequence and a smooth periodic $b_s$ such that
+\[
+ \|A_{a_j}^0(s)-S_{a_j}b_s\|_{C_{a_j}^1}\longrightarrow0 .
+\]
+Only the spatial bounds at time $s$ are needed here. (Since the time derivatives of all differences are bounded by the equation and the bounds on the next two differences, \cref{ch22:lem:array-compactness} would give convergence on the whole interval before $s$ as well.)
+
+We use the continuation of \cref{ch21:thm:continuum-atlas} for the single initial value $b_s$, with $r\ge5$, through the horizon $T-s$. Its finitely many DeTurck solutions have finite smooth bounds, and its gauge transformations are fixed and smooth. The endpoints at time $s$ of the Wilson flow and of the flows for $\mathcal A_c$ approach the sample of $b_s$ in $C_a^1$, the latter uniformly in $c$. We apply \cref{ch22:lem:alternative-smooth-reference} on each time interval of the continuation (for $c=0$ this is also \cref{ch22:lem:physical-volterra}). In the gauges of the continuation, both flows approach the sample of the same selected DeTurck solution uniformly in $C_a^1$ on the finite continuation, with error $K(\eta_j+a_j)$, where $\eta_j\to0$, uniformly over $c\in[0,C_0]$.
+
+For anti-Hermitian $X,Y$, the integral formula for the derivative of the exponential implies that $\|e^{aX}-e^{aY}\|\le Ka|X-Y|$. We telescope over the $N_{\ell_a}\le\ell/a$ unitary factors of a closed path, including the inverse factors. The matrix error is then at most $K\ell\|B_a-S_ab\|_\infty$, where $b$ is the selected DeTurck solution at the given time. Since a conjugation at the basepoint does not change the character, each of the two character values approaches the character of the product of the exponentials $e^{aS_ab}$ along the same path, uniformly in the path and in the time. For a fixed representation, the same calculation in its unitary matrices involves in addition the norm of the corresponding representation of $\su$ and its dimension. This contradicts the fixed positive discrepancy. The supremum of the bounded left side of \eqref{ch22:eq:alternative-uniform-loops} over the initial potentials considered defines a function of $a$ that tends to zero, which proves the lemma.
+\end{proof}

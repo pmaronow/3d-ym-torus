@@ -1,0 +1,774 @@
+\chapter{Heat-kernel estimates, interpolation, and concentration}\label{ch13:chapter}
+
+This section proves the analytic and probabilistic estimates through which the conditional fluctuation kernels of \cref{ch10:chapter,ch12:chapter} control the reconstructed field in norms of negative regularity. The main result is \cref{ch13:thm:centered-shell}. It concerns one renormalization group step, from a coarse field $c$ to the lattice of mesh $a$, and the lattice potential $A=a^{-1}\Phi$, where $\Phi$ is the logarithm of the reconstructed fine field in a gauge that depends only on $c$. Conditionally on $c$, the fluctuation $F=A-\E[A\mid c]$ of $A$ about its conditional expectation satisfies, for $0<\alpha<3/2$ and every $p\ge1$,
+\[
+ \Bigl(\E\Bigl[\Bigl(\sup_{0<s\le T_0}s^{\alpha/2}\norm{P_sF}_\infty\Bigr)^p\Bigm|c\Bigr]\Bigr)^{1/p}
+ \le C_pg_3a^{\alpha-1/2}\sqrt{\log(2+L/a)},
+\]
+where $P_s$ is the continuum heat semigroup applied to $F$, viewed as a function that is constant on lattice cells. The bound is uniform in $c$ and in the number of averaging steps that precede the step. For $\alpha>1/2$ it tends to zero with the mesh and is summable over a geometric sequence of meshes. It controls only the fluctuation about the conditional expectation; the conditional expectation itself is estimated in \cref{ch14:lem:backward-caps-and-means}.
+
+The auxiliary results are deterministic heat and interpolation estimates and probabilistic maximal inequalities. We prove bounds for the heat kernel on the periodic lattice and on the torus (\cref{ch13:lem:heat-and-chaining}), and we construct a smooth cardinal interpolation between lattices whose meshes have an integer ratio, which preserves the integral of every column exactly (\cref{ch13:lem:cardinal-columns}). We also prove an elementary chaining lemma (\cref{ch13:lem:coefficient-metric-chaining}), estimates for time convolutions (\cref{ch13:lem:weighted-convolution}), and the convergence of the discrete heat evolution of a fixed bounded finite-dimensional family of smooth fields to the continuum heat evolution (\cref{ch13:lem:fixed-prefix-heat}). All heat estimates are stated on a fixed finite time interval and keep the constant mode.
+
+\paragraph{The scale in the main estimate.}
+The factor $g_3a^{\alpha-1/2}$ has a simple origin. Let $g^2=g_3^2a$ be the coupling at mesh $a$. The Jacobian of the map from the normalized fluctuation variables $w$ to the lattice potential $A$ has counting $\ell^2$ operator norm at most $C_Jg/a=C_Jg_3a^{-1/2}$. At a time $s\ge a^2$, the heat kernel averages over about $(\sqrt s/a)^3$ cells, and a linear function of $w$ with this averaging has Lipschitz constant smaller by the factor $a^{3/2}s^{-3/4}$. When $\alpha<3/2$, the product $s^{\alpha/2}a^{3/2}s^{-3/4}$ is largest at $s\asymp a^2$, where it equals $a^\alpha$. By the concentration inequality for the conditional fluctuation kernel, the fluctuations at each point have size $g_3a^{\alpha-1/2}$, and the maximum over space and time costs the factor $\sqrt{\log(2+L/a)}$.
+
+\paragraph{Three linear operations.}
+Three linear operations on lattice arrays occur in this and the following sections.
+\begin{center}
+\small
+\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+\toprule
+Operation & Input and output & Use\\
+\midrule
+Continuum heat semigroup $P_s$ applied to the cell embedding & An array on the lattice of mesh $a$, extended as a constant on each half-open cell; a smooth function on $\Torus$ & Negative-regularity norms of reconstructed fields (\cref{ch13:thm:centered-shell}, \cref{ch14:chapter})\\
+Discrete heat semigroup $P_t^a$ & An array on the lattice of mesh $a$; an array on the same lattice & Heat bounds for the lattice flow (\cref{ch13:lem:heat-and-chaining,ch13:lem:fixed-prefix-heat})\\
+Cardinal interpolation $I_{a_0\to a}$ & An array on the lattice of mesh $a_0$; an array on the finer lattice of mesh $a=a_0/m$ & Comparison of fields from different scales on a common lattice; values and difference arrays are interpolated separately (\cref{ch13:lem:cardinal-columns,ch13:lem:fixed-prefix-heat})\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Two points that need care.}
+First, the conditional fluctuation kernel is supported on a product of balls, but it is not a product measure: the normalized fluctuation variables interact, and they are not Gaussian. We use only that its potential $V$ satisfies $D_w^2V\ge I/2$ on the convex support. This implies a logarithmic Sobolev inequality and Gaussian concentration for Lipschitz functions, with constants independent of the dimension. Second, the column sums of the reconstruction Jacobian must be normalized by the cell volume of the lattice on which each fluctuation variable lives. A uniform bound on the row sums alone does not imply the $\ell^2$ operator bound used in the concentration argument, and the column bound with the correct input volume produces the factor $a^{3/2}$ above.
+
+\paragraph{Inputs, uses, and attribution.}
+The conventions for meshes, heat semigroups, analytic norms, and flow norms are those of \cref{ch01:chapter}. The probabilistic input is the concentration theorem on convex products of balls, \cref{ch02:thm:reflecting-concentration}. It rests on the variance inequality of Brascamp and Lieb \cite{BrascampLieb1976}, the logarithmic Sobolev inequality of Gross \cite{Gross1975}, and the curvature criterion of Bakry and \'Emery \cite{BakryEmery1985}, with the boundary of the product treated in \cref{ch02:chapter}. The conditional fluctuation kernel and the bounds on the reconstruction and its derivatives come from \cref{ch10:thm:complete-white-law,ch10:thm:whole-image-gauge}; the reconstruction maps and the preservation of the kernels under them come from \cref{ch12:thm:replacement-family,ch12:thm:representative-prefixes}. The concentration theorem is used in \cref{ch14:chapter}; the heat bounds, the interpolation, and the chaining lemma are used in \cref{ch14:chapter,ch21:chapter,ch23:chapter,ch24:chapter,ch26:chapter,ch28:chapter,ch30:chapter}; the convolution estimates in \cref{ch21:chapter}; and the consistency lemma in \cref{ch22:chapter}.
+
+The heat-kernel bounds are standard; we prove them by Fourier analysis because the normalizations matter. The maximal inequalities use chaining in the sense of Dudley \cite{Dudley1967}. For general tail bounds by generic chaining, see Dirksen \cite[Theorems~3.2 and~3.5]{Dirksen2015}; the second of these theorems treats increments with mixed sub-Gaussian and exponential tails. Those results are stated for semimetrics satisfying the triangle inequality. Our version assumes only the covering and continuity properties that we use, and we include its short proof. Only the verification that the conditional fluctuation kernel and the reconstruction satisfy the hypotheses of these general estimates, uniformly in the coarse field and in the depth, depends on the construction.
+
+\paragraph{Notation.}
+Throughout this section, $L>0$ is the side length of the torus $\Torus$. For a mesh $a=L/n$ with an integer $n\ge4$, we write $\Gamma_a=(a\Z/L\Z)^3$ for the vertex set of $\Lat n$ in physical units, and we use the measure $a^3\sum_{x\in\Gamma_a}$ in all norms $L^r_a$. Arrays on positive links are identified with arrays on vertices by attaching the link $(x,x+ae_i)$ to its starting vertex $x$; the direction $i$ and the color form a fixed finite set of components, and all operators below act componentwise. For a direction $i$, we write $D_{a,i}^+f(x)=(f(x+ae_i)-f(x))/a$ and $D_{a,i}^-f(x)=(f(x)-f(x-ae_i))/a$ for the physical forward and backward differences, $\Delta_a=\sum_iD_{a,i}^-D_{a,i}^+$, and $P_t^a=e^{t\Delta_a}$; this semigroup keeps the constant mode. For an integer $q\ge0$, we write $D_a^q$ for any ordered product of $q$ physical forward or backward differences (the identity if $q=0$). When the particular product matters, we write $D_a^{\boldsymbol\epsilon}$, and $\partial^{\boldsymbol\epsilon}$ for the corresponding product of partial derivatives; bounds stated for $D_a^q$ hold uniformly over the finitely many products of order $q$. The continuum heat semigroup is $P_t=e^{t\Delta}$ on $\Torus$, with kernel $p_t(x-y)$. The cell embedding of an array $f$ on $\Gamma_a$ is the function on $\Torus$ equal to $f_y$ on the half-open cell $Q_y=y+[0,a)^3$. In this section, the letter $q$ denotes an order of differentiation or an exponent; it is unrelated to the plaquette energy. Constants $C$ may change from line to line, and depend only on the parameters listed in the statement being proved.
+
+\section{Heat-kernel bounds}\label{ch13:sec:heat}
+
+The following lemma collects the bounds on the discrete and continuum heat kernels used in the rest of the paper. Its last assertion is a maximal inequality for sub-Gaussian processes. We state it here because it is applied to processes built from the heat kernel; it is a special case of \cref{ch13:lem:coefficient-metric-chaining}. For a set $I$, a nonnegative symmetric function $d$ on $I\times I$, and $v>0$, we write $N(I,d,v)$ for the smallest cardinality of a set $\mathcal N\subset I$ such that every $i\in I$ has some $i'\in\mathcal N$ with $d(i,i')\le v$.
+
+\begin{lemma}\label{ch13:lem:heat-and-chaining}
+Fix $L,T>0$. Let $a=L/n$ with an integer $n\ge4$, and let $p_t^a(x,y)$ be the density of $P_t^a$ with respect to the measure $a^3\sum_y$. Then $p_0^a(x,y)=a^{-3}\one_{x=y}$, $p_t^a\ge0$, and $a^3\sum_yp_t^a(x,y)=1$. For every integer $q\ge0$, every product $D_a^{\boldsymbol\epsilon}$ of $q$ physical forward or backward differences acting on the variable $y$, every $x\in\Gamma_a$, and every $0\le t\le T$,
+\begin{equation}\label{ch13:eq:discrete-heat-bounds}
+ \begin{split}
+ \norm{D_a^{\boldsymbol\epsilon}p_t^a(x,\cdot)}_{L^1_a}&\le C_q(t+a^2)^{-q/2},\\
+ \norm{D_a^{\boldsymbol\epsilon}p_t^a(x,\cdot)}_{L^2_a}&\le C_q(t+a^2)^{-3/4-q/2},\\
+ \norm{D_a^{\boldsymbol\epsilon}p_t^a(x,\cdot)}_\infty&\le C_q(t+a^2)^{-(3+q)/2}.
+ \end{split}
+\end{equation}
+The continuum heat kernel $p_t$ is smooth for $t>0$ and satisfies the same three bounds with $a=0$, for $0<t\le T$, with $D_a^{\boldsymbol\epsilon}$ replaced by a product of $q$ partial derivatives. The constants depend only on $q$, the fixed sets of directions and colors, and $T/L^2$.
+
+For $y\in\Gamma_a$, $0<t\le T$, and $x\in\Torus$ let
+\[
+ \omega_y(t,x)=\int_{Q_y}p_t(x-z)\,dz.
+\]
+Then
+\[
+ \norm{\omega(t,x)}_{\ell^2}\le C\min\{1,a^{3/2}t^{-3/4}\}\qquad(0<t\le T),
+\]
+and
+\[
+ \norm{\omega(t,x)-\omega(t,x')}_{\ell^2}\le Ca^{3/2}t^{-3/4}\min\{1,\dist(x,x')/\sqrt t\}\qquad(a^2\le t\le T).
+\]
+More generally, for every multi-index $\nu$ and every integer $r\ge0$, the array of cell integrals of $\partial^\nu\partial_t^rp_t(x-\cdot)$ has $\ell^2$ norm at most $C_{\nu,r}a^{3/2}t^{-3/4-\abs\nu/2-r}$ for $0<t\le T$. Thus every additional spatial derivative costs a factor $t^{-1/2}$ and every time derivative a factor $t^{-1}$, and the corresponding increment bounds follow; for example, with $v=\min\{s,t\}$,
+\[
+ \norm{\omega(t,x)-\omega(s,x)}_{\ell^2}\le Ca^{3/2}v^{-3/4}\min\{1,\abs{t-s}/v\}\qquad(0<s,t\le T).
+\]
+For $0<t\le a^2$ we use instead that $\norm{P_tf}_\infty\le\max_y\abs{f_y}$ for the cell embedding of an array $f$.
+
+Finally, let $(X_i)_{i\in I}$ be a centered real process and let $d$ be a nonnegative symmetric function on $I\times I$ with $\sup d\le\sigma$. Suppose that
+\[
+ \E e^{zX_i}\le e^{z^2\sigma^2/2},\qquad\E e^{z(X_i-X_j)}\le e^{z^2d(i,j)^2/2}\qquad(z\in\R,\ i,j\in I),
+\]
+that $N(I,d,\eta\sigma)\le A\eta^{-v}$ for every $0<\eta<1$, where $A\ge1$ and $v\ge0$, and that the process has a version which is continuous with respect to $d$ and whose supremum equals its supremum over a countable $d$-dense subset of $I$ (this holds automatically if $I$ is finite). Then there is a universal constant $C$ such that, for $u\ge0$,
+\[
+ \begin{gathered}
+ \Prob\Bigl\{\sup_{i\in I}\abs{X_i}>C\sigma\bigl[\sqrt{\log(2A)}+\sqrt v+\sqrt u\bigr]\Bigr\}\le2e^{-u},\\
+ \E\sup_{i\in I}\abs{X_i}\le C\sigma\bigl[\sqrt{\log(2A)}+\sqrt v\bigr].
+ \end{gathered}
+\]
+No Gaussian or independence assumption is made.
+\end{lemma}
+
+\begin{remark}\label{ch13:rem:horizon}
+The finite horizon $T$ cannot be removed, because the semigroups keep the constant mode. For instance, as $t\to\infty$ the density $p_t^a(x,\cdot)$ tends to the constant $L^{-3}$, whose $L^2_a$ norm is $L^{-3/2}$, while $(t+a^2)^{-3/4}\to0$. In the same way, for $E_\theta=\Id$ and $a=a_0$ in \cref{ch13:lem:cardinal-columns} below, the undifferentiated row of $W_t$ tends to the constant row $n^{-3}$, whose counting $\ell^2$ norm is $n^{-3/2}$. The bound $Ca_0^{3/2}(t+a_0^2)^{-3/4}$ therefore cannot hold with a fixed constant on an unbounded time interval. For this reason, all row and covering estimates in this section are stated for times in $[0,T]$, and their constants depend on $T/L^2$.
+\end{remark}
+
+\begin{proof}[Proof of \cref{ch13:lem:heat-and-chaining}]
+We use Euclidean norms on the fixed spaces of directions and colors; changing between equivalent norms costs a fixed factor. All heat times below lie in $[0,T]$, and they are positive for the continuum kernel and the cell integrals. 
+
+\paragraph{The discrete kernel and its $L^1$ bounds.}
+We begin with unit spacing on $\Z$. Let $S_+$ and $S_-$ be the two shifts. The kernel $r_s$ of
+\[
+ e^{s(S_++S_--2\Id)}=e^{-2s}\sum_{k,l\ge0}\frac{s^{k+l}}{k!\,l!}S_+^kS_-^l
+\]
+is nonnegative and has sum one; the series converges in operator norm on bounded arrays. Its Fourier multiplier on $[-\pi,\pi]$ is $e^{-4s\sin^2(\theta/2)}$. Let $\nabla^{\boldsymbol\epsilon}$ be a product of $r$ unit forward or backward differences in this coordinate, and set $h_s=\nabla^{\boldsymbol\epsilon}r_s$. Up to a sign, the multiplier of $h_s$ is
+\[
+ m_s(\theta)=e^{-il\theta}(e^{i\theta}-1)^re^{-4s\sin^2(\theta/2)},\qquad0\le l\le r,
+\]
+where $l$ is the number of backward differences. For $s\le1$, we have $\sum_j\abs{h_s(j)}\le2^r$ by the difference stencil. For $s\ge1$, the inequalities $\abs{e^{i\theta}-1}\le\abs\theta$ and $\sin^2(\theta/2)\ge\theta^2/\pi^2$ on $[-\pi,\pi]$ imply
+\begin{equation}\label{ch13:eq:line-fourier}
+ \int_{-\pi}^{\pi}\abs{m_s}^2\,d\theta\le C_rs^{-r-1/2},\qquad
+ \int_{-\pi}^{\pi}\abs{m_s'}^2\,d\theta\le C_rs^{-r+1/2}.
+\end{equation}
+Here and below, the finitely many sign patterns are included in $C_r$. To verify the second bound, note that $m_s'$ is a sum of terms bounded by
+\[
+ C_r\bigl(\abs\theta^r+\one_{r\ge1}\abs\theta^{r-1}+s\abs\theta^{r+1}\bigr)e^{-cs\theta^2};
+\]
+the first term is absent when $l=0$, and only the last term is present when $r=0$. Squaring, integrating, and substituting $v=\sqrt s\,\theta$, we obtain \eqref{ch13:eq:line-fourier}, since $\int_\R\abs v^me^{-cv^2}\,dv<\infty$ for every $m\ge0$. For this finiteness, we split $[0,\infty)$ into the intervals $[k,k+1]$, $k\ge0$; on each of them, $\abs v^me^{-cv^2}\le(k+1)^me^{-ck^2}$, and these bounds form a summable sequence. The negative half-line is treated by symmetry. The Fourier coefficients of $m_s'$ are $ijh_s(j)$. By Parseval's identity, we have
+\[
+ \sum_j\abs{h_s(j)}^2\le C_rs^{-r-1/2},\qquad\sum_jj^2\abs{h_s(j)}^2\le C_rs^{-r+1/2}.
+\]
+These identities may be applied first to the absolutely convergent kernel series, or obtained by approximation with trigonometric polynomials in $L^2$. For $s\ge1$, we have $\sum_{j\in\Z}(1+j^2/s)^{-1}\le C\sqrt s$; to see this, we separate $\abs j\le\sqrt s$ from $\abs j>\sqrt s$ and use $s\sum_{j>\sqrt s}j^{-2}\le C\sqrt s$. Then the weighted Cauchy--Schwarz inequality implies
+\begin{equation}\label{ch13:eq:line-lone}
+ \sum_j\abs{h_s(j)}
+ \le\Bigl(\sum_j(1+j^2/s)^{-1}\Bigr)^{1/2}\Bigl(\sum_j(1+j^2/s)\abs{h_s(j)}^2\Bigr)^{1/2}
+ \le C_rs^{-r/2}.
+\end{equation}
+
+The kernel on $\Z^3$ is the product of three copies of $r_s$. A product of $q$ differences puts $r_i$ differences on coordinate $i$, with $r_1+r_2+r_3=q$, and the absolute counting $L^1$ norm of the differentiated kernel is the product of the three one-dimensional norms. By \eqref{ch13:eq:line-lone}, it is at most $C_q(1+s)^{-q/2}$ for every $s\ge0$. Periodizing with period $n$ does not increase this norm, by the triangle inequality, and it preserves positivity and mass. At spacing $a$, the time is $s=t/a^2$, the density carries the factor $a^{-3}$, and a product of $q$ physical differences carries the factor $a^{-q}$. We obtain
+\[
+ a^3\sum_y\abs{D_a^{\boldsymbol\epsilon}p_t^a(x,y)}\le C_qa^{-q}(1+t/a^2)^{-q/2}=C_q(t+a^2)^{-q/2}.
+\]
+The periodized kernel solves the finite heat equation with initial density $a^{-3}\one_{x=y}$, and by uniqueness for this finite linear system it equals $p_t^a$. This proves the $L^1$ bound and the assertions on positivity and mass, including at $t=0$.
+
+\paragraph{The $L^2$ and supremum bounds.}
+Fix one representative of each $k\in(\Z/n\Z)^3$ with $\abs{k_i}\le n/2$. Then
+\begin{equation}\label{ch13:eq:finite-heat-fourier}
+ p_t^a(x,y)=L^{-3}\sum_ke^{-t\lambda_a(k)}e^{2\pi ik\cdot(x-y)/L},\qquad
+ \lambda_a(k)=4a^{-2}\sum_i\sin^2(\pi k_i/n).
+\end{equation}
+Indeed, these exponentials are eigenfunctions of $\Delta_a$, and their orthogonality on $\Gamma_a$ yields the required initial density at $t=0$. For these representatives,
+\[
+ c\abs k^2/L^2\le\lambda_a(k)\le C\abs k^2/L^2,
+\]
+and the multiplier of $D_a^{\boldsymbol\epsilon}$ has absolute value at most $C_q(\abs k/L)^q$. If $0\le t\le a^2$, we obtain the supremum bound $2^qa^{-3-q}$ and the $L^2_a$ bound $2^qa^{-3/2-q}$ from the difference stencil and the mass identity; since $t+a^2\le2a^2$, these are the asserted bounds. If $t\ge a^2$, we extend the sum over nonzero frequencies to $\Z^3\setminus\{0\}$. For every $r\ge0$ and $c>0$,
+\begin{equation}\label{ch13:eq:frequency-sum}
+ L^{-3}\sum_{k\ne0}(\abs k/L)^re^{-ct\abs k^2/L^2}\le C_{r,c}t^{-(3+r)/2}.
+\end{equation}
+To check this estimate, we set $u=t/L^2$ and group the frequencies with $j\le\abs k<j+1$. There are at most $C(j+1)^2$ of them, since the disjoint unit cubes centered at these points lie in an annulus of fixed extra width. For $u\le1$, the sum of $(j+1)^{r+2}e^{-cuj^2}$ over $j\ge1$ is at most $C_{r,c}u^{-(r+3)/2}$: on the interval $[j,j+1]$, we may replace $j^2$ by $x^2/4$ and $(j+1)^{r+2}$ by $C_rx^{r+2}$, and then integrate. For $u\ge1$, we have $e^{-cuj^2}\le e^{-cu/2}e^{-cj^2/2}$ for $j\ge1$, and $e^{-cu/2}\le C_{r,c}u^{-(r+3)/2}$. Rescaling gives \eqref{ch13:eq:frequency-sum}.
+
+The triangle inequality in \eqref{ch13:eq:finite-heat-fourier}, together with \eqref{ch13:eq:frequency-sum} for $r=q$, implies the supremum bound. By orthogonality on $\Gamma_a$, the square of the $L^2_a$ norm equals $L^{-3}$ times the sum over $k$ of the squared multipliers times $e^{-2t\lambda_a(k)}$, and \eqref{ch13:eq:frequency-sum} with $r=2q$ bounds it. For $q=0$, the frequency $k=0$ contributes $L^{-3}$ both to the supremum and to the square of the $L^2_a$ norm. On the horizon, we have $L^{-3}\le(T/L^2)^{3/2}t^{-3/2}$, and this contribution is at most $C(T/L^2)t^{-3/2}$ in both cases; every difference of positive order annihilates it. Since $t+a^2\le2t$ in this range, these are the asserted bounds, with constants depending only on $q$ and $T/L^2$.
+
+\paragraph{The continuum kernel and the cell integrals.}
+The continuum kernel is the periodization of
+\[
+ G_t(z)=(4\pi t)^{-3/2}e^{-\abs z^2/(4t)},
+\]
+which has mass one. For each multi-index $\nu$, the derivative $\partial^\nu G_t$ equals $t^{-(3+\abs\nu)/2}$ times a fixed polynomial in $z/\sqrt t$ times $e^{-\abs z^2/(4t)}$. A change of variables yields $\norm{\partial^\nu G_t}_1\le C_\nu t^{-\abs\nu/2}$, and periodization does not increase the absolute $L^1$ norm. The periodic Fourier coefficients are $L^{-3}e^{-4\pi^2t\abs k^2/L^2}$, obtained by integrating the periodized Gaussian over one period. The other two bounds follow from \eqref{ch13:eq:frequency-sum}, with the term $k=0$ treated as before. For $t>0$, all these series and their derivatives converge absolutely; multiplying Fourier coefficients then verifies the heat equation and the semigroup property.
+
+By positivity and mass, we have $\sum_y\omega_y(t,x)=1$, and hence $\norm{\omega(t,x)}_2\le1$. Using the Cauchy--Schwarz inequality on each cell, we find
+\begin{equation}\label{ch13:eq:cell-derivatives}
+ \sum_y\Bigl\lvert\int_{Q_y}\partial^\nu\partial_t^rp_t(x-z)\,dz\Bigr\rvert^2
+ \le a^3\norm{\partial^\nu\Delta^rp_t}_2^2
+ \le C_{\nu,r}a^3t^{-3/2-\abs\nu-2r},
+\end{equation}
+where we used the heat equation $\partial_tp_t=\Delta p_t$ and, in the last inequality, the continuum $L^2$ bound with $q=\abs\nu+2r$. The case $\nu=0$, $r=0$ is the second bound on $\norm{\omega(t,x)}_2$. Integrating one spatial derivative along a shortest segment in $\Torus$ from $x$ to $x'$, we bound the difference of the two cell arrays by $Ca^{3/2}t^{-5/4}\dist(x,x')$. The value bound, used twice, bounds it by $Ca^{3/2}t^{-3/4}$, and the minimum of the two is the increment bound. In the same way, \eqref{ch13:eq:cell-derivatives} controls every fixed spatial and time derivative. For the time increment, we integrate the time derivative over $[v,v+\abs{t-s}]$ when $\abs{t-s}\le v$, and we use the two value bounds otherwise. The same reasoning, applied to a differentiated array of cell integrals, yields its increment bounds, with the additional factors displayed in \eqref{ch13:eq:cell-derivatives}. Finally, for $t\le a^2$, positivity and unit mass imply $\norm{P_tf}_\infty\le\max_y\abs{f_y}$ for every cell embedding $f$; this needs no regularity across cell boundaries.
+
+The chaining assertion is a special case of \cref{ch13:lem:coefficient-metric-chaining}; we deduce it at the end of \cref{ch13:sec:chaining}.
+\end{proof}
+
+\section{Cardinal interpolation and volume-normalized columns}\label{ch13:sec:cardinal}
+
+We next define the cardinal interpolation used to compare arrays on different lattices.
+
+Fix an even nonnegative function $b\in C_c^\infty([-1,1])$ that is positive on $(-1,1)$; all its derivatives vanish at $\pm1$. Set
+\[
+ \zeta(v)=\frac{b(v)}{\sum_{m\in\Z}b(v-m)}\quad(v\in\R),\qquad\zeta_3(u)=\prod_{i=1}^3\zeta(u_i)\quad(u\in\R^3).
+\]
+Let $a_0=L/n$ with $n\ge4$, let $m\ge1$ be an integer, and let $a=a_0/m$. For $x\in\Gamma_{a_0}$ let
+\[
+ \psi_x(z)=\sum_{l\in\Z^3}\zeta_3((z-x+Ll)/a_0)\qquad(z\in\Torus)
+\]
+be the periodization of the translated function $\zeta_3((\cdot-x)/a_0)$. The cardinal interpolation of an array $f$ on $\Gamma_{a_0}$ is the array on $\Gamma_a$ defined componentwise by
+\begin{equation}\label{ch13:eq:cardinal-map}
+ (I_{a_0\to a}f)_i(y)=\sum_{x\in\Gamma_{a_0}}\psi_x(y)f_i(x)\qquad(y\in\Gamma_a),
+\end{equation}
+where, as above, each positive link is attached to its starting vertex. The continuous interpolant is $I_{a_0}f(z)=\sum_x\psi_x(z)f(x)$ for $z\in\Torus$. In \eqref{ch13:eq:cardinal-map} we also write $\zeta_3((y-x)/a_0)$ for $\psi_x(y)$.
+
+For a matrix $K$ from scalar variables $\xi$ attached to the cells of the lattice of mesh $a_0$ to arrays on the lattice of mesh $a$, we use the row sums $\sup_y\sum_\xi\abs{K(y,\xi)}$ and the volume-normalized column sums $\sup_\xi(a^3/a_0^3)\sum_y\abs{K(y,\xi)}$, as in \cref{ch01:def:analytic-norms}. Throughout, a column is normalized by the cell volume $a_0^3$ of its input.
+
+\begin{lemma}\label{ch13:lem:cardinal-columns}
+Fix $L,T>0$ and the function $b$. Let $a_0=L/n$ with $n\ge4$, let $m\ge1$ be an integer, and let $a=a_0/m$. All times below lie in $[0,T]$.
+\begin{enumerate}
+\item The map $I_{a_0\to a}$ is local within distance $\sqrt3a_0$, commutes with constant color rotations, preserves constants, satisfies $(I_{a_0\to a}f)(x)=f(x)$ for $x\in\Gamma_{a_0}$, and $I_{a\to a}$ is the identity. For every integer $q\ge0$,
+\[
+ \norm{D_a^qI_{a_0\to a}f}_\infty\le C_qa_0^{-q}\norm f_\infty,\qquad a^3\sum_y\psi_x(y)=a_0^3,
+\]
+\[
+ a^3\sum_y\dist(y,x)\psi_x(y)\le Ca_0^4,\qquad\norm{D_a^qP_t^aI_{a_0\to a}f}_\infty\le C_q(t+a_0^2)^{-q/2}\norm f_\infty.
+\]
+The continuous interpolant $I_{a_0}f$ satisfies the corresponding derivative bounds, and $\int_{\Torus}\psi_x(z)\,dz=a_0^3$.
+\item Let $E_\theta$ be a deterministic matrix, depending on a parameter $\theta$, from scalar variables $\xi$ attached to the cells of the lattice of mesh $a_0$, at most $v_J$ of them per cell, to arrays on that lattice. Suppose that, uniformly in $\theta$, its row sums and volume-normalized column sums are at most $C_J$, that is,
+\begin{equation}\label{ch13:eq:coefficient-hypotheses}
+ \sup_x\sum_\xi\abs{E_\theta(x,\xi)}\le C_J,\qquad\sup_\xi a_0^3\sum_x\abs{E_\theta(x,\xi)}\le C_Ja_0^3,
+\end{equation}
+and that its columns decay exponentially at scale $a_0$, with fixed rate and amplitude. Set $W_t=P_t^aI_{a_0\to a}E_\theta$. Then for every integer $q\ge0$,
+\[
+ \begin{gathered}
+ \sup_{x,\theta}\norm{D_a^qW_t(x,\cdot)}_{\ell^2}\le C_{J,q}a_0^{3/2}(t+a_0^2)^{-3/4-q/2},\\
+ \norm{D_a^qW_t}_{\ell^2\to L^2_a}\le C_{J,q}a_0^{3/2}(t+a_0^2)^{-q/2},
+ \end{gathered}
+\]
+where $\ell^2$ refers to the variables $\xi$. For $q\in\{0,1\}$, put $A_q(t)=a_0^{3/2}(t+a_0^2)^{-3/4-q/2}$ and $v=\min\{s,t\}$. Then
+\[
+ \begin{split}
+ \norm{D_a^qW_t(x,\cdot)-D_a^qW_s(x,\cdot)}_{\ell^2}&\le C_{J,q}A_q(v)\min\{1,\abs{t-s}/(v+a_0^2)\},\\
+ \norm{D_a^qW_t(x,\cdot)-D_a^qW_t(y,\cdot)}_{\ell^2}&\le C_{J,q}A_q(t)\min\{1,\dist(x,y)/\sqrt{t+a_0^2}\}.
+ \end{split}
+\]
+At fixed $\theta$, for $q\in\{0,1\}$ and $0<\eta<1$, the set $\Gamma_a\times[0,T]$ with the distance $a_0^q\norm{D_a^qW_t(x,\cdot)-D_a^qW_s(y,\cdot)}_{\ell^2}$ between $(x,t)$ and $(y,s)$ has an $\eta$-net with at most
+\[
+ C_{J,q}(1+L/(\eta a_0))^3(1+T/(\eta a_0^2))
+\]
+points. For the normalized rows $D_a^qW_t(x,\cdot)/A_q(t)$ the same holds, up to a factor which is a fixed power of $1+T/a_0^2$.
+\item Let $u$ be an array on the lattice of mesh $a_1$ with $a_1/a\in\N$. Then, componentwise,
+\[
+ a^3\sum_{y\in\Gamma_a}I_{a_1\to a}u(y)=a_1^3\sum_{x\in\Gamma_{a_1}}u(x).
+\]
+Hence, if arrays originating on lattices of different meshes are interpolated separately from their own lattices to a common finer lattice before they are added or subtracted, every componentwise integral is preserved exactly; in particular every prescribed zero integral is preserved.
+\end{enumerate}
+All the estimates are uniform in the ratio $m=a_0/a$, in $n$, and in $\theta$, at fixed $J$ and fixed coefficient constants. The constants depend only on $b$, $q$, $T/L^2$, $v_J$, $C_J$, and the decay constants of the columns. The hypotheses of the second part hold, with a constant $C_J$ depending only on $J$, the fixed construction domains, and the order of differentiation, for the normalized Jacobian of the reconstruction and for each of its mixed derivatives of fixed order in the coarse field and the fluctuation variables, uniformly in the coarse field and in the depth; see \cref{ch13:lem:reconstruction-domain}.
+\end{lemma}
+
+\begin{proof}
+All matrices in this proof are written in counting coordinates, and all times lie in $[0,T]$; we apply \cref{ch13:lem:heat-and-chaining} with the same $L$ and $T$.  The parameter $\theta$ is fixed during the construction of each net, and the constants are uniform in $\theta$; the covering assertion is not an entropy estimate for the family indexed by $\theta$.
+
+\paragraph{The basis functions and their masses.}
+Let $d_b(u)=\sum_{m\in\Z}b(u-m)$. Since only finitely many terms are nonzero near any point, $d_b$ is smooth and one-periodic. It is strictly positive, since some integer has distance at most $1/2$ from $u$, and its minimum over one period is positive. The function $\zeta=b/d_b$ is smooth, nonnegative, even, and supported in $[-1,1]$; all its derivatives vanish at $\pm1$, and
+\begin{equation}\label{ch13:eq:partition}
+ \zeta(k)=\one_{k=0}\quad(k\in\Z),\qquad\sum_{k\in\Z}\zeta(u-k)=1.
+\end{equation}
+The first identity holds because $b(k)=0$ for integers $k\ne0$ and $d_b(0)=b(0)$; the second follows by replacing every $d_b(u-k)$ by $d_b(u)$. The periodization in $\psi_x$ accounts for every periodic seam. These functions sum to one as $x$ ranges over $\Gamma_{a_0}$, they are supported within torus distance $\sqrt3a_0$ of $x$, and $\psi_x(x')=\one_{x=x'}$ for $x'\in\Gamma_{a_0}$. The map preserves constants and samples, and it is the identity when $a=a_0$. Since it acts by the same scalar coefficients on each direction and color, it commutes with every constant color rotation.
+
+Since at any point of $\Torus$ at most a fixed number of the functions $\psi_x$ are nonzero, we have
+\[
+ \norm{\partial^{\boldsymbol\epsilon}I_{a_0}f}_\infty\le C_qa_0^{-q}\norm f_\infty
+\]
+for every product $\partial^{\boldsymbol\epsilon}$ of $q$ partial derivatives. For a smooth periodic function $h$, each physical forward or backward difference is an average of the corresponding derivative,
+\begin{equation}\label{ch13:eq:difference-average}
+ D_{a,i}^{\pm}h(z)=\int_0^1\partial_ih(z\pm rae_i)\,dr.
+\end{equation}
+Applying this identity repeatedly, we write a product of $q$ differences as an average of the corresponding derivative of order $q$. The preceding bound therefore implies the bound on $D_a^qI_{a_0\to a}f$, uniformly in $m$.
+
+For the mass, we write an integer $l$ as $l=mk+r$ with $0\le r<m$. By \eqref{ch13:eq:partition}, we have
+\[
+ \sum_{l\in\Z}\zeta(l/m)=\sum_{r=0}^{m-1}\sum_{k\in\Z}\zeta(k+r/m)=m.
+\]
+Taking the product over the three coordinates and regrouping the periodization, we obtain
+\begin{equation}\label{ch13:eq:exact-cardinal-mass}
+ a^3\sum_{y\in\Gamma_a}\psi_x(y)=a^3m^3=a_0^3.
+\end{equation}
+Since $\psi_x\ge0$ is supported within distance $\sqrt3a_0$ of $x$, the first moment is at most $\sqrt3a_0^4$. Integrating the second identity in \eqref{ch13:eq:partition} over $[0,1]$, we find $\int_\R\zeta(u)\,du=1$, and the product over the coordinates gives $\int_{\Torus}\psi_x(z)\,dz=a_0^3$. These arguments also prove the assertions on the continuous interpolant.
+
+\paragraph{Heat smoothing.}
+If $t\le a_0^2$, we commute the differences with the discrete heat semigroup and use that $P_t^a$ contracts the supremum norm, together with the bound on $D_a^qI_{a_0\to a}f$; this gives $C_qa_0^{-q}\norm f_\infty$. If $t\ge a_0^2$, we move the differences onto the heat kernel and use its $L^1_a$ bound from \cref{ch13:lem:heat-and-chaining}, together with $\norm{I_{a_0\to a}f}_\infty\le\norm f_\infty$; since $a\le a_0$, we obtain $C_qt^{-q/2}\norm f_\infty$. Both bounds are at most $C_q(t+a_0^2)^{-q/2}\norm f_\infty$. The same argument, with continuous derivatives and the continuum heat kernel, proves the corresponding continuous estimate.
+
+\paragraph{Row sums and volume-normalized column sums.}
+We write $\xi$ for the scalar input variables. The finitely many variables per cell and the color components are included in $C_J$. The estimates below use only \eqref{ch13:eq:coefficient-hypotheses}, and they apply to every matrix obeying \eqref{ch13:eq:coefficient-hypotheses}. The interpolation, whose range is $\sqrt3a_0$, preserves the exponential decay of the columns, but this decay is not needed for the numerical bounds.
+
+Let $K=I_{a_0\to a}E_\theta$. For every product of $q$ differences,
+\begin{equation}\label{ch13:eq:interpolated-schur}
+ \sup_y\sum_\xi\abs{D_a^qK(y,\xi)}\le C_{J,q}a_0^{-q},\qquad\sup_\xi a^3\sum_y\abs{D_a^qK(y,\xi)}\le C_{J,q}a_0^{3-q}.
+\end{equation}
+For the first bound, we expand $K$ over the coarse vertices. By \eqref{ch13:eq:difference-average} and the bounded overlap of the differentiated continuous basis functions, we have $\sum_x\abs{D_a^q\psi_x(y)}\le C_qa_0^{-q}$, and the row bound in \eqref{ch13:eq:coefficient-hypotheses} implies the claim. For the second bound, each differentiated basis function has magnitude at most $C_qa_0^{-q}$ and support within distance $C_qa_0$ of its vertex, which contains at most $C_q(a_0/a)^3$ fine vertices. This also holds if the support wraps around the torus, by summing over its lifts. We conclude that $a^3\sum_y\abs{D_a^q\psi_x(y)}\le C_qa_0^{3-q}$, and summing over $x$ with the column bound in \eqref{ch13:eq:coefficient-hypotheses} gives the second bound.
+
+For $t\le a_0^2$, the heat semigroup is a contraction on absolute row sums and on volume-normalized column sums, and \eqref{ch13:eq:interpolated-schur} holds for $D_a^qW_t$. In particular, the $\ell^2$ norm of a row of $D_a^qW_t$ is at most its absolute row sum $C_{J,q}a_0^{-q}=C_{J,q}A_q(0)$. For $t\ge a_0^2$, we use the undifferentiated $K$ in the heat convolution and move all differences to the heat kernel. The $L^1_a$ bound and the supremum bound of \cref{ch13:lem:heat-and-chaining} yield, respectively,
+\begin{equation}\label{ch13:eq:late-rows}
+ \sup_x\sum_\xi\abs{D_a^qW_t(x,\xi)}\le C_{J,q}t^{-q/2},\qquad\sup_{x,\xi}\abs{D_a^qW_t(x,\xi)}\le C_{J,q}a_0^3t^{-(3+q)/2}.
+\end{equation}
+The square of the $\ell^2$ norm of a row is at most the product of these two quantities, that is, at most $C_{J,q}a_0^3t^{-3/2-q}$. Together with the bound for $t\le a_0^2$, this proves the row bound with $t+a_0^2$ on the whole interval.
+
+For the operator norm, we use Schur's test with the volume weights of the output lattice,
+\begin{equation}\label{ch13:eq:physical-schur}
+ a^3\sum_x\Bigl\lvert\sum_\xi H(x,\xi)u_\xi\Bigr\rvert^2
+ \le\Bigl(\sup_x\sum_\xi\abs{H(x,\xi)}\Bigr)\Bigl(\sup_\xi a^3\sum_x\abs{H(x,\xi)}\Bigr)\sum_\xi\abs{u_\xi}^2,
+\end{equation}
+which follows from the Cauchy--Schwarz inequality in each row and an interchange of two finite sums. For $t\le a_0^2$, we use \eqref{ch13:eq:interpolated-schur}. For $t\ge a_0^2$, the first factor is bounded by \eqref{ch13:eq:late-rows}, and the second is at most $C_{J,q}a_0^3t^{-q/2}$, by the $L^1_a$ bound on the heat kernel and the undifferentiated column bound for $K$. Taking the square root gives $C_{J,q}a_0^{3/2}(t+a_0^2)^{-q/2}$. The volume in this computation is the input cell volume $a_0^3$; refining the output lattice does not change it.
+
+\paragraph{Increments and nets.}
+Let $R_q(t,x)$ denote the row $D_a^qW_t(x,\cdot)$. The bounds already proved hold for every order of differentiation. Since $\partial_tW_t=\Delta_aW_t$, they imply
+\[
+ \norm{\partial_tR_q(t,x)}_{\ell^2}\le C_{J,q}\frac{A_q(t)}{t+a_0^2},\qquad
+ \norm{D_{a,i}^{\pm}R_q(t,x)}_{\ell^2}\le C_{J,q}\frac{A_q(t)}{\sqrt{t+a_0^2}}.
+\]
+Since $A_q$ is decreasing, integrating the first bound between $s$ and $t$ gives $C_{J,q}\abs{t-s}A_q(v)/(v+a_0^2)$; the sum of the two row norms is at most $C_{J,q}A_q(v)$, and the minimum of the two bounds is the time increment. For the spatial increment, we join two fine vertices by a shortest periodic path along coordinate directions, of total physical length at most $\sqrt3\dist(x,y)$. Summing the second bound along this path gives the distance times the displayed derivative bound; the sum of the two value bounds is the alternative without the distance.
+
+For the distance $d_q((x,t),(y,s))=a_0^q\norm{R_q(t,x)-R_q(s,y)}_{\ell^2}$, these estimates imply
+\[
+ d_q((x,t),(y,s))\le C_{J,q}\Bigl(\frac{\dist(x,y)}{a_0}+\frac{\abs{t-s}}{a_0^2}\Bigr).
+\]
+We choose spatial points at physical separation at most $c_{J,q}\eta a_0$ and times at separation at most $c_{J,q}\eta a_0^2$. If $a$ exceeds the proposed spatial separation, we use all vertices, whose number is then smaller than the bound below; otherwise, we round a continuum cubic covering to fine vertices, which at most doubles its radius. The resulting net has at most $C_{J,q}(1+L/(\eta a_0))^3(1+T/(\eta a_0^2))$ points, independently of the number of fine vertices. For the normalized rows $R_q(t,x)/A_q(t)$, differentiation in time produces the additional term $A_q'(t)/A_q(t)=-(3/4+q/2)/(t+a_0^2)$. The same estimates give a spatial Lipschitz bound $C_{J,q}/a_0$ and a time Lipschitz bound $C_{J,q}/a_0^2$ for the normalized rows, and the same net works. Alternatively, using only the global bounds costs powers of $a_0^{-q}/A_q(T)=(1+T/a_0^2)^{3/4+q/2}$. 
+
+\paragraph{Column integrals.}
+Let $u$ be an array on the lattice of mesh $a_1$ with $a_1/a\in\N$. Interchanging finite sums and using \eqref{ch13:eq:exact-cardinal-mass} with $a_1$ in place of $a_0$, we obtain
+\[
+ a^3\sum_yI_{a_1\to a}u(y)=\sum_xu(x)\,a^3\sum_y\psi_x(y)=a_1^3\sum_xu(x).
+\]
+Applying this identity to each array on its own lattice before adding or subtracting arrays from different lattices preserves every signed componentwise integral exactly. This is an identity for arrays of components, not for lattice cochains or holonomies. All the constants above depend only on $b$, the order of differentiation, $T/L^2$, and the coefficient constants.
+\end{proof}
+
+\section{Supremum bounds from covering numbers}\label{ch13:sec:chaining}
+
+The maximal inequalities of this paper are obtained by elementary chaining. We consider a process indexed by a set $\mathcal T$ with a nonnegative symmetric function $d$ that controls the tails of the increments. We do not assume that $d$ satisfies the triangle inequality; the proof uses only the covering numbers of $d$ and the continuity of the process with respect to $d$. As in \cref{ch13:sec:heat}, for $v>0$, a $v$-net is a set $\mathcal N\subset\mathcal T$ such that every $z\in\mathcal T$ has some $z'\in\mathcal N$ with $d(z,z')\le v$, and $N(\mathcal T,d,v)$ is the smallest cardinality of a $v$-net. A process $(F_z)_{z\in\mathcal T}$ is continuous with respect to $d$ if $F_{z_k}\to F_z$ whenever $d(z_k,z)\to0$.
+
+\begin{lemma}\label{ch13:lem:coefficient-metric-chaining}
+Let $\mathcal T$ be a nonempty set and $d:\mathcal T\times\mathcal T\to[0,\infty)$ a symmetric function. Let $(F_z)_{z\in\mathcal T}$ be a real process which has a version that is continuous with respect to $d$ and whose supremum equals its supremum over a countable $d$-dense subset of $\mathcal T$. Let $z_0\in\mathcal T$, $s,b\ge0$, $D<\infty$, $A\ge1$, and $q_{\mathrm{ent}}\ge0$, and assume that
+\[
+ \sup_{z,z'\in\mathcal T}d(z,z')\le D,\qquad N(\mathcal T,d,v)\le Av^{-q_{\mathrm{ent}}}\quad(0<v\le1),
+\]
+and that for every $u>0$ and all $z,z'\in\mathcal T$,
+\[
+ \Prob\{\abs{F_{z_0}}>s\sqrt u+bu\}\le2e^{-u},\qquad
+ \Prob\{\abs{F_z-F_{z'}}>d(z,z')(s\sqrt u+bu)\}\le2e^{-u}.
+\]
+Put $D_1=\max\{1,D\}$ and $H=\log(2A)+q_{\mathrm{ent}}$. There is a universal constant $C$ such that, for $u\ge0$ and $1\le p<\infty$,
+\[
+ \begin{split}
+ \Prob\Bigl\{\sup_z\abs{F_z}>CD_1\bigl[s(\sqrt H+\sqrt u)+b(H+u)\bigr]\Bigr\}&\le2e^{-u},\\
+ \Bigl\lVert\sup_z\abs{F_z}\Bigr\rVert_{L^p}&\le CD_1\bigl[s(\sqrt H+\sqrt p)+b(H+p)\bigr].
+ \end{split}
+\]
+No Gaussian or independence assumption is made; in particular the lemma applies to centered processes.
+
+Further, let $Y_1,\dots,Y_N$, $N\ge1$, be real random variables with $\Prob\{\abs{Y_i}>s\sqrt u+bu\}\le2e^{-u}$ for every $u>0$, and let $M\ge0$ be a random variable with $M\le\max_{i\le N}\abs{Y_i}+e$ almost surely, for a deterministic $e\ge0$. Then, for $u\ge0$ and $1\le p<\infty$,
+\[
+ \begin{gathered}
+ \Prob\bigl\{M>e+s\sqrt{\log(2N)+u}+b(\log(2N)+u)\bigr\}\le e^{-u},\\
+ \norm M_{L^p}\le e+C\bigl\{s\bigl[\sqrt{\log(2N)}+\sqrt p\bigr]+b\bigl[\log(2N)+p\bigr]\bigr\}.
+ \end{gathered}
+\]
+
+Every assertion holds under a fixed conditional probability kernel, with the same constants, if all the hypotheses hold for each fixed value of the conditioning variable. The constant $C$ does not depend on the dimension, the meshes, the radii, the couplings, or the conditioning value. A bound which is uniform in the conditioning value requires that the parameters $s,b,D,A,q_{\mathrm{ent}}$ (and $e$) be bounded uniformly in that value.
+\end{lemma}
+
+\begin{proof}
+We first normalize. Dividing $d$ by $D_1$ gives a function of supremum at most one. At the radii $2^{-k}$, $k\ge1$, it has nets $\mathcal T_k$ with at most $A2^{kq_{\mathrm{ent}}}$ points: if $D_12^{-k}\le1$, we use the given net for $d$ at radius $D_12^{-k}$, and otherwise we use the net at radius one. In the normalized function, the increment parameters become at most $D_1s$ and $D_1b$, while the parameters of the point $z_0$ are unchanged and are at most $D_1s$ and $D_1b$. If a net of minimal cardinality does not exist at some radius, we enlarge the radius by a factor two; the universal constant absorbs this factor. It therefore suffices to consider $D_1=1$ and nets $\mathcal T_k$ of radius at most $2^{1-k}$.
+
+We choose the nets and the connections deterministically. We connect every point of $\mathcal T_1$ to $z_0$, and each point of $\mathcal T_k$, $k\ge2$, to one point of $\mathcal T_{k-1}$ within distance $2^{2-k}$; such a point exists because $\mathcal T_{k-1}$ is a net of radius $2^{2-k}$ for all of $\mathcal T$. There are at most $A2^{kq_{\mathrm{ent}}}$ connections at level $k$. Set
+\[
+ h_0=u+\log8,\qquad h_k=u+\log(2A)+kq_{\mathrm{ent}}\log2+(k+3)\log2\quad(k\ge1).
+\]
+The point $z_0$ violates the bound $s\sqrt{h_0}+bh_0$ with probability at most $e^{-u}/4$. By a union bound over the connections at level $k$, the probability that one of them violates its bound is at most $e^{-u}2^{-k-3}$. The sum of these probabilities is less than $2e^{-u}$. 
+
+On the complementary event, we follow the connections from a point of $\mathcal T_k$ back to $z_0$. The value of the process at every net point is then bounded by the bound at $z_0$, plus the bound for its connection at level one, plus
+\[
+ \sum_{k\ge2}2^{2-k}(s\sqrt{h_k}+bh_k).
+\]
+Since the sums of $2^{-k}$, $k2^{-k}$, and $\sqrt k2^{-k}$ converge, and $\sqrt{x+y}\le\sqrt x+\sqrt y$, this expression is at most
+\[
+ C\bigl\{s\bigl[\sqrt{\log(2A)+q_{\mathrm{ent}}}+\sqrt u\bigr]+b\bigl[\log(2A)+q_{\mathrm{ent}}+u\bigr]\bigr\}.
+\]
+Every $z\in\mathcal T$ is the limit, with respect to $d$, of net points $z_k\in\mathcal T_k$, since $d(z,z_k)\le2^{1-k}$. On the event where the given version is continuous, we have $F_{z_k}\to F_z$, and the bound extends to every point. The supremum equals a countable supremum and is therefore measurable. Restoring $D_1$ proves the tail bound. If $s=b=0$, the same countable argument applies: the value at $z_0$ and every increment along a connection vanish almost surely. This also covers points at distance zero.
+
+For the moments, we use that a nonnegative random variable $X$ with $\Prob\{X>\alpha_0+c\sqrt u+d_0u\}\le2e^{-u}$ for all $u\ge0$ satisfies $\norm X_{L^p}\le\alpha_0+C(c\sqrt p+d_0p)+C(c+d_0)$. To see this, let $E$ be an exponential random variable with $\Prob(E>v)=e^{-v}$. Since $\min\{1,2e^{-u}\}=\Prob(E+\log2>u)$, the variable $X$ is stochastically dominated by $\alpha_0+c\sqrt{E+\log2}+d_0(E+\log2)$. Minkowski's inequality and
+\[
+ \E E^r=\int_0^\infty t^re^{-t}\,dt\le2(2r/e)^r\qquad(r>0)
+\]
+imply the claim; the last inequality follows by maximizing $t^re^{-t/2}$ and integrating the remaining factor $e^{-t/2}$, and we apply it with $r=p/2$ and $r=p$. In our case, $\alpha_0=CD_1(s\sqrt H+bH)$, $c=CD_1s$, and $d_0=CD_1b$, and $H\ge\log2$ absorbs the term $C(c+d_0)$. This proves the $L^p$ bound, including the bound on the expectation at $p=1$.
+
+For the finite family, we apply the tail bound for each $Y_i$ with $u+\log(2N)$ in place of $u$ and sum the $N$ probabilities of failure; then we add the deterministic error $e$. The same comparison with an exponential random variable yields the moment bound.
+
+Every step above is an inequality under one fixed probability measure, and we may therefore apply it separately under each conditional kernel. In the applications, the supremum is over rational times and a finite spatial grid, or over a set on which the process is continuous; its measurability is part of the hypotheses. The nets are constructed for the fixed value of the conditioning variable and require no random choice. Bounds on the parameters that are uniform in the conditioning value give bounds that are uniform in that value.
+\end{proof}
+
+\begin{proof}[Proof of the chaining assertion in \cref{ch13:lem:heat-and-chaining}]
+If $\sigma>0$, we apply \cref{ch13:lem:coefficient-metric-chaining} to the function $d/\sigma$, with $s=\sqrt2\sigma$, $b=0$, $D=1$, $q_{\mathrm{ent}}=v$, the given $A$, and an arbitrary point $i_0\in I$. The moment generating function bounds imply the required tails. Indeed, for a variable $Y$ with $\E e^{zY}\le e^{z^2r^2/2}$ for all real $z$, minimizing $e^{-zx}\E e^{zY}$ at $z=\pm x/r^2$ gives $\Prob\{\abs Y>x\}\le2e^{-x^2/(2r^2)}$, which is the required tail with $u=x^2/(2r^2)$. Since the one-point variance proxy is at most $\sigma$ at every point, the choice of $i_0$ is arbitrary. The hypothesis on nets concerns radii $\eta<1$; at radius one, a single point is a net, since $d/\sigma\le1$. The lemma then gives the displayed tail and expectation bounds, where we use $\sqrt{\log(2A)+v}\le\sqrt{\log(2A)}+\sqrt v$. If $\sigma=0$, every value of the process on the countable dense set vanishes almost surely by its moment generating function bound, and the claim follows from the continuity of the version.
+\end{proof}
+
+\section{Concentration of conditionally centered reconstructions}\label{ch13:sec:concentration}
+
+\paragraph{One renormalization group step.}
+Fix an odd integer $M\ge3$, an integer $J\ge1$, $B=M^J$, and the parameters of \cref{ch10:thm:complete-white-law,ch12:thm:representative-prefixes}: the analytic radii, the cutoff amplitude $A_{\mathrm w}$, the bound $E_*$ on the effective interaction, and the larger construction domains. Fix $L>0$ and the continuum coupling $g_3>0$. Let $a=L/n$ be a mesh such that $n/B\ge4$ is an integer. We consider the renormalization group step from the lattice of mesh $Ba$, which we call the coarse lattice, to the lattice of mesh $a$, preceded by $d\ge0$ averaging steps; we call $d$ the depth. Its intermediate scales are indexed by $0\le i\le J-1$. The intermediate scale $i$ has mesh $a_i=M^ia$ and coupling $g_i=g_3\sqrt{a_i}=M^{i/2}g$, where $g=g_3\sqrt a$, so that $g^2=g_3^2a$. The largest coupling of the step is $t=g_{J-1}=M^{(J-1)/2}g$. The normalized fluctuation variables $w=(w_{i,e})$ take values in the fluctuation cutoff domain $\Omega_p=\prod_{i,e}\{w_{i,e}\in\R^3:\abs{w_{i,e}}\le p_i\}$, whose radii satisfy $p_i\le p(t)=A_{\mathrm w}\log(1/t)$. We write $q_i=g_iw_i$ for the corresponding coupling-scaled fluctuation inputs, which range over a product of balls of radius at most $Q=\max_ig_ip_i\le tp(t)$.
+
+\paragraph{The conditional fluctuation kernel.}
+Let $R_{\mathrm{supp}}$ be a support radius, either $R_{\mathrm{supp}}=r$ or $R_{\mathrm{supp}}=\rho$ as described below, and let $c\in B_{R_{\mathrm{supp}}}$ be a coarse field, with $\theta=\Log c$. Its conditional fluctuation kernel is
+\begin{equation}\label{ch13:eq:two-support-kernels}
+ \begin{split}
+ V_{d,c}^{[R_{\mathrm{supp}}]}(w)={}&\tfrac12\abs w^2+H_{d,J}(\theta,w)
+ +R_{\mathrm{in}}^{[R_{\mathrm{supp}}]}(e^{\varphi_\theta(w)})-R_{\mathrm{in}}^{[R_{\mathrm{supp}}]}(e^{\varphi_\theta(0)}),\\
+ Z_{d,c}^{[R_{\mathrm{supp}}]}={}&\int_{\Omega_p^{[R_{\mathrm{supp}}]}}e^{-V_{d,c}^{[R_{\mathrm{supp}}]}(w)}\,dw,\\
+ d\mu_{d,c}^{[R_{\mathrm{supp}}]}(w)={}&\frac{\one_{\Omega_p^{[R_{\mathrm{supp}}]}}(w)e^{-V_{d,c}^{[R_{\mathrm{supp}}]}(w)}}{Z_{d,c}^{[R_{\mathrm{supp}}]}}\,dw.
+ \end{split}
+\end{equation}
+Here $\varphi_\theta(w)=\Phi_{d,J}(\theta,(g_iw_i)_i)$ is the reconstruction of \cref{ch10:thm:whole-image-gauge}, at which the effective interaction is evaluated, and $R_{\mathrm{in}}^{[R_{\mathrm{supp}}]}$ is the effective interaction produced by the $d$ preceding averaging steps. The function $H_{d,J}(\theta,w)$ collects the remaining terms of the conditional fluctuation potential: the part of the effective classical action beyond its quadratic approximation, the Haar disintegration densities, and the logarithms of the Jacobian determinants of the conditional Hessian normalizations. The density in \eqref{ch13:eq:two-support-kernels} is exactly the kernel $k(c,dw)$ of \cref{ch10:thm:complete-white-law} (compare \eqref{ch01:eq:complete-white-kernel}). The subtraction of $R_{\mathrm{in}}^{[R_{\mathrm{supp}}]}(e^{\varphi_\theta(0)})$ depends only on $c$ and cancels in the normalized kernel. The domain $\Omega_p^{[R_{\mathrm{supp}}]}$ does not depend on $c$. Since the potential is smooth on the compact closed product and the exponential is positive, $0<Z_{d,c}^{[R_{\mathrm{supp}}]}<\infty$. When no confusion can arise, we write $\mu_{d,c}$, $V_c$, and $\Omega_p$.
+
+For $R_{\mathrm{supp}}=r$, the coarse field ranges over the small-link domain $B_r$, and $\mu_{d,c}$ is the conditional law, given the coarse field, of the fluctuation variables of the step under the conditioned Wilson measure. Indeed, once the coarse field is fixed, the restrictions at coarser scales are fixed factors and cancel in the normalized kernel (\cref{ch10:thm:complete-white-law}). For $R_{\mathrm{supp}}=\rho$, we assume that a separate instance of \cref{ch10:thm:complete-white-law} with support radius $\rho$ is given. It has its own incoming effective interaction $R_{\mathrm{in}}^{[\rho]}$, its own fluctuation cutoff domain, normalized kernel, and change-of-gauge identity, and the image conditions of \cref{ch10:thm:whole-image-gauge} hold for all coarse fields in $B_\rho$, including the margins of \cref{ch13:lem:reconstruction-domain} below. This instance is a different conditional measure; it is not obtained by evaluating the auxiliary integral of \cref{ch11:chapter} at coarse fields in $B_\rho\setminus B_r$, and we make no statement about that integral there. In \cref{ch14:chapter}, only the case $R_{\mathrm{supp}}=r$ is used.
+
+\paragraph{The reconstruction.}
+Let $\Phi(c,q)$ be the logarithm of a reconstruction of the fine field, in a gauge transformation that depends only on the coarse field $c$. We require the following properties on the whole product of coarse fields $c\in B_{R_{\mathrm{supp}}}$ and coupling-scaled fluctuation inputs of radius at most $Q$. The image of the reconstruction lies in the domain prescribed by \cref{ch10:thm:whole-image-gauge}. Its derivatives in $q$ satisfy the absolute row bounds and the volume-normalized column bounds of that theorem, with each variable of the intermediate scale $i$ normalized by its own cell volume $a_i^3$. The map $\Phi_{d,J}$ of \cref{ch10:thm:whole-image-gauge} and the logarithmic form $\widehat\Phi_d$ of the reconstruction maps $\RepMap$ of \cref{ch12:thm:replacement-family} have these properties; see \cref{ch13:lem:reconstruction-domain}. We set
+\[
+ A(w)=a^{-1}\Phi(c,(g_iw_i)_i),
+\]
+the lattice potential of the reconstructed field, and we view it as a cell function: the component of $A$ on a positive link $(y,y+ae_i)$ is extended as a constant on the cell $Q_y$.
+
+\paragraph{The domain conditions.}
+The next lemma collects the conditions under which the whole product of fluctuation variables lies in the domain where the coefficient bounds of \cref{ch10:thm:whole-image-gauge} and the Hessian bound of \cref{ch10:thm:complete-white-law} hold. It fixes the order of choices: the larger construction domains and coefficient constants first, then the support radius, and the coupling bound $g_*$ last; $J$ is fixed throughout.
+
+\begin{lemma}\label{ch13:lem:reconstruction-domain}
+Let $K_*\ge2$, $\rho$, $s_J$, $r_J$, $C_J$, and the coefficientwise majorant series
+\[
+ \mathfrak M_J(u,v)=B^{-1}Z(u)+\frac{C_Jv}{1-C_J(u+v)}
+\]
+for the absolute row sums of the reconstruction, be as in \cref{ch10:thm:whole-image-gauge}. Thus $Z$ has nonnegative coefficients and no constant term, and
+\[
+ 4K_*\rho<r_J,\qquad C_J4K_*(\rho+s_J)<1,\qquad\mathfrak M_J(4K_*\rho,4K_*s_J)<\rho/2.
+\]
+For the reconstruction and conditional-potential assertions, fix a support radius $0<R_{\mathrm{supp}}\le\rho$ and a conditional-kernel instance on $B_{R_{\mathrm{supp}}}$. Assume that this ball of coarse fields satisfies the coordinate-domain conditions of that instance, and that its product with the coupling-scaled fluctuation inputs lies in the domain of the chosen reconstruction, with the fixed radius ratios; for the reconstruction maps of \cref{ch12:thm:replacement-family}, assume that this product lies in their common inner domain. In the application below $R_{\mathrm{supp}}=r$, or $R_{\mathrm{supp}}=\rho$ with the separately hypothesized instance and its own domains. For this fixed ball and instance, choose $Q_\circ$ with $0<Q_\circ\le s_J$ and $Q_\circ<(r_J-\rho)/2$, inside every further domain of coarse fields and coupling-scaled fluctuation inputs used by the reconstruction, and set $\eta_\circ=1-C_J(\rho+s_J)$. Then the following statements hold.
+\begin{enumerate}
+\item We have $\eta_\circ>0$ and
+\begin{equation}\label{ch13:eq:reserved-product}
+ 0<R\le\rho,\quad0\le Q\le Q_\circ\quad\Longrightarrow\quad R+Q<r_J,\quad1-C_J(R+Q)\ge\eta_\circ.
+\end{equation}
+\item For $0\le u\le\rho$ and $0\le v\le Q_\circ$,
+\[
+ \partial_v\mathfrak M_J(u,v)=\frac{C_J(1-C_Ju)}{[1-C_J(u+v)]^2}\le C_J\eta_\circ^{-2}.
+\]
+On the fixed product of coarse fields $c\in B_{R_{\mathrm{supp}}}$ and coupling-scaled fluctuation inputs of radius at most $Q_\circ$, the normalized Jacobian $g^{-1}D_w\Phi(c,(g_iw_i)_i)$, with each fluctuation variable attached to a cell of the lattice of mesh $a$, and each of its mixed derivatives of fixed order in the coarse field and the fluctuation variables, satisfy \eqref{ch13:eq:coefficient-hypotheses} with $a_0=a$ and a constant depending only on $J$, the fixed construction domains, the order of differentiation, and $\eta_\circ$.
+\item For $0<R\le\rho$ put $Q_{\mathrm{gate}}(R)=\min\{Q_\circ,R\eta_\circ/(8C_J)\}$. If $0\le Q\le Q_{\mathrm{gate}}(R)$, then $\mathfrak M_J(R,Q)<3R/16<R/2$.
+\item Fix $0<R\le\rho$. There is $g_*>0$, depending only on the fixed construction data and on $R$, such that for all $0<t\le g_*$,
+\begin{equation}\label{ch13:eq:actual-shell-gates}
+ \begin{gathered}
+ tp(t)\le Q_{\mathrm{gate}}(R),\qquad1-Ctp(t)>0,\\
+ \frac{C[tp(t)+t^2(1+E_*)]}{[1-Ctp(t)]^3}\le\frac12,
+ \end{gathered}
+\end{equation}
+where $p(t)=A_{\mathrm w}\log(1/t)$ and $C$ is the constant in the Hessian bound of \cref{ch10:thm:complete-white-law} (not the row constant $C_J$).
+\end{enumerate}
+In particular, for the fixed support radius and instance specified above, let $g_*$ be as in the fourth part with $R=R_{\mathrm{supp}}$, let $0<t\le g_*$, and let the radii of the fluctuation cutoff domain satisfy $p_i\le p(t)$. Then for every coarse field in $B_{R_{\mathrm{supp}}}$ the whole product of fluctuation variables, and not only the point $w=0$, is mapped into the product of the first part; the image condition $\mathfrak M_J(R,Q)<R/2$ of \cref{ch10:thm:whole-image-gauge} holds with $Q=\max_ig_ip_i$; and the conditional fluctuation potential satisfies $D_w^2V_c\ge I/2$ on the closed product.
+\end{lemma}
+
+\begin{proof}
+Since $K_*\ge2$, we have $C_J(\rho+s_J)<1/(4K_*)<1$, and hence $\eta_\circ>0$. If $0<R\le\rho$ and $0\le Q\le Q_\circ$, then $R+Q\le\rho+Q_\circ<\rho+(r_J-\rho)/2<r_J$ and $1-C_J(R+Q)\ge1-C_J(\rho+s_J)=\eta_\circ$. This proves \eqref{ch13:eq:reserved-product}. The choice of $Q_\circ$ is possible because $r_J-\rho>0$, and it can be made strictly inside every further domain used by the map, since these domains are open and have fixed radius ratios. For the reconstruction maps of \cref{ch12:thm:replacement-family}, the required room comes from the hypothesis that the fixed product of coarse fields and coupling-scaled fluctuation inputs lies in their common inner domain with fixed radius ratios. We use their coefficient bound for mixed derivatives at fixed $J$ and their uniform interior-domain conditions, rather than a majorant uniform in $J$.
+
+Every product in \eqref{ch13:eq:reserved-product} is contained in the product with radii $4K_*\rho$ and $4K_*s_J$. By \cref{ch10:thm:whole-image-gauge}, the image of this larger product lies in $B_{\rho/2}$, with interior margins for the intermediate classical, logarithm, and Haar disintegration conditions; subsets inherit these margins. On this product, the formula for $\partial_v\mathfrak M_J$ follows by differentiation, and the bound follows from $1-C_Ju\le1$ and $1-C_J(u+v)\ge\eta_\circ$. The derivatives of the column majorants with respect to one fixed input give the volume-normalized column sums, with the same lower bound $\eta_\circ$ on the denominator. Each further derivative of fixed order costs only a factorial, the order, and inverse powers of $\eta_\circ$; it does not depend on the number of lattice points. These are derivatives of the absolute coefficient series, not consequences of a bound on the values of a holomorphic function. It remains to convert the normalizations. A fluctuation variable of the intermediate scale $i$ lives on the lattice of mesh $a_i=M^ia$, and its column is normalized by $a_i^3$. Attaching it to a cell of the lattice of mesh $a$ changes the normalization by the factor $M^{3i}\le B^3$, and replacing $q_i$ by $g_iw_i$ and dividing by $g$ multiplies the derivative by $g_i/g=M^{i/2}$. At most a number of variables depending only on $J$ is attached to each cell. These conversions only enlarge $C_J$ by a factor depending on $J$, and they yield \eqref{ch13:eq:coefficient-hypotheses} for the normalized Jacobian and its mixed derivatives of fixed order. This proves the second part.
+
+For the third part, the coefficients of $Z$ are nonnegative and $Z(0)=0$. Comparing term by term and using $(R/(4K_*\rho))^k\le R/(4K_*\rho)$ for every degree $k\ge1$, we find $Z(R)\le(R/(4K_*\rho))Z(4K_*\rho)$ for $0<R\le\rho$. Since $B^{-1}Z(4K_*\rho)\le\mathfrak M_J(4K_*\rho,4K_*s_J)<\rho/2$, we obtain
+\[
+ B^{-1}Z(R)\le\frac{R}{4K_*\rho}B^{-1}Z(4K_*\rho)<\frac{R}{8K_*}\le\frac R{16}.
+\]
+If $Q\le Q_{\mathrm{gate}}(R)$, then by \eqref{ch13:eq:reserved-product},
+\[
+ \mathfrak M_J(R,Q)\le B^{-1}Z(R)+C_JQ/\eta_\circ<\frac R{16}+\frac R8=\frac{3R}{16}<\frac R2.
+\]
+
+For the fourth part, let $x=\log(1/t)$. Then $tp(t)=A_{\mathrm w}xe^{-x}\to0$ as $t\downarrow0$, since $e^x\ge x^3/6$ for $x>0$, and $t^2(1+E_*)\to0$. By the definition of a limit, the three conditions in \eqref{ch13:eq:actual-shell-gates} hold for all $t$ in an interval $(0,g_*]$, not only for one value of $t$. This is a single reduction of the upper bound on the coupling, which uses only the fixed construction data and $R$; it introduces no dependence on the lattice side, the depth, or the coarse field.
+
+Finally, let $R=R_{\mathrm{supp}}$, let $t\le g_*$, and let $p_i\le p(t)$. Since $g_i\le t$, we have $Q=\max_ig_ip_i\le tp(t)\le Q_{\mathrm{gate}}(R)\le Q_\circ$. Hence, for every coarse field in $B_{R_{\mathrm{supp}}}$, the whole product of fluctuation variables lies in the fixed product on which the reconstruction and the conditional potential of the chosen instance are defined, and in the product of the first part. The third part gives $\mathfrak M_J(R,Q)<R/2$. Shrinking $Q$ does not enlarge the domain of coarse fields; the ball $B_{R_{\mathrm{supp}}}$ and its conditional kernel are given by the hypothesis. In particular, the majorant of \cref{ch10:thm:whole-image-gauge} is never evaluated beyond this product or across its pole, and both the image condition and the domain conditions under which it is stated hold. The last condition in \eqref{ch13:eq:actual-shell-gates} is the hypothesis of the Hessian bound in \cref{ch10:thm:complete-white-law}, which implies $D_w^2V_c\ge I/2$ on the closed product.
+\end{proof}
+
+\begin{theorem}\label{ch13:thm:centered-shell}
+Fix $M$, $J$, and the parameters of \cref{ch10:thm:complete-white-law,ch12:thm:representative-prefixes}, and fix $L,T_0>0$. Let $R_{\mathrm{supp}}=r$, or $R_{\mathrm{supp}}=\rho$ under the additional hypothesis on the separate instance described above, and let $g_*$ be as in \cref{ch13:lem:reconstruction-domain} with $R=R_{\mathrm{supp}}$. Let $a=L/n$ be a mesh with $n/B\ge4$, let $d\ge0$, let $g^2=g_3^2a$, and assume that $t=M^{(J-1)/2}g\le g_*$. Let $c\in B_{R_{\mathrm{supp}}}$, let $\mu_{d,c}$ be the conditional fluctuation kernel \eqref{ch13:eq:two-support-kernels}, and let $\Phi$ be a reconstruction with the properties described above; the reconstruction maps of \cref{ch12:thm:replacement-family} are an example. Put $A(w)=a^{-1}\Phi(c,(g_iw_i)_i)$, viewed as a cell function, and
+\[
+ F=A-\E_{\mu_{d,c}}A,\qquad\norm F_{-\alpha;T_0}=\sup_{0<s\le T_0}s^{\alpha/2}\norm{P_sF}_\infty,
+\]
+where $P_s$ is the continuum heat semigroup acting componentwise. Then for every $0<\alpha<3/2$ and $u\ge0$,
+\[
+ \mu_{d,c}\Bigl\{\norm F_{-\alpha;T_0}>Cg_3a^{\alpha-1/2}\sqrt{\log(2+L/a)+u}\Bigr\}\le Ce^{-u}.
+\]
+For every $p\ge1$ and $\lambda\ge0$, with $\tau_a=Cg_3a^{\alpha-1/2}$,
+\[
+ \begin{gathered}
+ \bigl(\E_{\mu_{d,c}}\norm F_{-\alpha;T_0}^p\bigr)^{1/p}\le C_pg_3a^{\alpha-1/2}\sqrt{\log(2+L/a)},\\
+ \E_{\mu_{d,c}}e^{\lambda\norm F_{-\alpha;T_0}}\le\exp\Bigl\{C\lambda\tau_a\sqrt{\log(2+L/a)}+C\lambda^2\tau_a^2\Bigr\}.
+ \end{gathered}
+\]
+In particular, if $1/2<\alpha<3/2$ and $a\downarrow0$ with $g_3$ fixed (equivalently, with $L$ and $\gamma=g_3^2L$ fixed), then for each fixed $p$ the conditional $L^p$ norms of $\norm F_{-\alpha;T_0}$ tend to zero, for each fixed $\lambda$ the exponential moments $\E_{\mu_{d,c}}e^{\lambda\norm F_{-\alpha;T_0}}$ tend to one, and the bounds on $\E_{\mu_{d,c}}\norm F_{-\alpha;T_0}$ are summable along every geometric sequence of meshes; these statements are uniform in $c$ and $d$.
+
+For every deterministic real $\varphi\in L^2(\Torus)$, paired componentwise with $A$,
+\[
+ \Var_{\mu_{d,c}}\langle A,\varphi\rangle\le C_Jg_3^2a^2\norm\varphi_2^2,\qquad
+ \log\E_{\mu_{d,c}}e^{z\langle F,\varphi\rangle}\le C_Jz^2g_3^2a^2\norm\varphi_2^2\qquad(z\in\R).
+\]
+For finitely many real $\varphi_1,\dots,\varphi_m\in L^2(\Torus)$ and every compact set $\mathcal K\subset\C^m$,
+\[
+ \sup_{z\in\mathcal K}\Bigl\lvert\E_{\mu_{d,c}}\exp\Bigl(\sum_{j=1}^mz_j\langle F,\varphi_j\rangle\Bigr)-1\Bigr\rvert\longrightarrow0
+\]
+as $a\downarrow0$ with $g_3$ fixed.
+
+If $c\in D_{R_{\mathrm{supp}}}$, choose a gauge transformation $k$ on the vertices of the coarse lattice with $c^k\in B_{R_{\mathrm{supp}}}$, and transport the conditional fluctuation kernel by the corresponding change of coordinates. Then all the above estimates hold for the reconstruction evaluated at $c^k$, uniformly in $c$ and in the choice of $k$.
+
+The constants depend only on $M$, $J$, the fixed construction domains and their margins, the Hessian bound, the row and column constants of the derivatives of $\Phi$, $\alpha$, $L$, $T_0$, and, where displayed, $p$. They do not depend on $n$, $d$, or $c$, and they do not depend on the coupling below $g_*$, except through the displayed factors of $g_3$.
+\end{theorem}
+
+\begin{remark}\label{ch13:rem:scope}
+\Cref{ch13:thm:centered-shell} bounds the fluctuation $F$ about the conditional expectation under the conditional fluctuation kernel. It gives no bound on $\E_{\mu_{d,c}}A$, which is estimated in \cref{ch14:lem:backward-caps-and-means}. The norm $\norm\cdot_{-\alpha;T_0}$ is not invariant under gauge transformations that vary in space, and the estimates refer to the chosen gauge representative of the reconstruction.
+\end{remark}
+
+\begin{proof}[Proof of \cref{ch13:thm:centered-shell}]
+We fix $c$ and the kernel $\mu=\mu_{d,c}$ for the whole proof; all expectations and probabilities are taken with respect to $\mu$, and nothing in the proof differentiates in $c$. The constants have the dependence stated in the theorem, and $C_J$ may increase by factors depending on $M$, $J$, and the fixed construction domains. The proof has seven steps. We verify the hypotheses of the concentration theorem and bound the Jacobian of $w\mapsto A(w)$. We then bound $P_sF$ at a fixed time by chaining over space, using the cell integrals of the heat kernel, take the supremum over times by a dyadic decomposition, and derive the moments, the exponential moments, and the limits. Finally, we estimate deterministic source pairings and their generating functions, and we transport the conclusions to coarse fields in $D_{R_{\mathrm{supp}}}$.
+
+\paragraph{Step 1: the kernel and its convexity.}
+Let $R_{\mathrm{supp}}$ and $g_*$ be as in the statement. We apply \cref{ch13:lem:reconstruction-domain} to this support radius and to the corresponding instance of the conditional kernel: for $R_{\mathrm{supp}}=r$ the kernel of \cref{ch10:thm:complete-white-law} on $B_r$, and for $R_{\mathrm{supp}}=\rho$ the separately hypothesized instance on $B_\rho$, each with its own domains. By that lemma, for every $c\in B_{R_{\mathrm{supp}}}$, the whole product $\Omega_p$ is mapped into the fixed product on which the reconstruction and the potential are defined, and the image condition of \cref{ch10:thm:whole-image-gauge} holds. For the reconstruction of \cref{ch10:thm:whole-image-gauge}, each intermediate classical, logarithm, and Haar disintegration input lies in the enlarged product of that theorem, and its interior margin remains valid. For the reconstruction maps of \cref{ch12:thm:replacement-family}, the same inputs lie in their inner domain, where that theorem preserves the uniform interior-domain conditions and the normalized conditional kernels. We use only the joint coefficient bound of that family at fixed $J$. In the case $R_{\mathrm{supp}}=\rho$, the image condition is required on all of $B_\rho$, including the margins of \cref{ch13:lem:reconstruction-domain}, and not only on $B_r$; the analytic radius and the coefficient constants of that instance cover $B_\rho$ by hypothesis.
+
+By the last condition in \eqref{ch13:eq:actual-shell-gates}, \cref{ch10:thm:complete-white-law} gives $D_w^2V_c\ge I/2$ on the closed convex product, with a $C^2$ extension to an open neighborhood. Then $\mu$ satisfies the hypotheses of \cref{ch02:thm:reflecting-concentration} with $m=1/2$; that theorem includes the faces and corners of the product of balls. We use only the following two of its conclusions: for every function $H$ of $w$ in $H^1(\mu)$ and every real Euclidean-Lipschitz function $H$,
+\begin{equation}\label{ch13:eq:shell-product-inequalities}
+ \Var_\mu H\le2\E_\mu\abs{\nabla_wH}^2,\qquad
+ \log\E_\mu e^{z(H-\E_\mu H)}\le z^2\Lip_w(H)^2\quad(z\in\R).
+\end{equation}
+These inequalities require no independence under $\mu$.
+
+The kernel does not depend on the gauge in which the observable $A$ is computed: another gauge transformation depending only on $c$ changes $A$ but not $V_c$. The reconstruction maps of \cref{ch12:thm:replacement-family} are obtained from the same reconstruction before gauge transformation by a gauge transformation depending only on the coarse field. By \cref{ch12:thm:replacement-family,ch12:thm:representative-prefixes}, they preserve the fluctuation cutoff domain, the free logarithmic coordinates, the effective classical action, the Haar disintegration density, the Jacobian determinants of the conditional Hessian normalizations, the incoming effective interaction, the coarse field, and the normalization constant. Hence \eqref{ch13:eq:two-support-kernels} defines the same conditional measure for the reconstruction maps, and its Hessian is that of the same potential.
+
+\paragraph{Step 2: the Jacobian.}
+We write $\xi$ for a scalar fluctuation coordinate, $e$ for a scalar component of the output on a positive link, and $\varphi(w)=\Phi(c,(g_iw_i)_i)$. By the derivative bounds of \cref{ch10:thm:whole-image-gauge} on the whole product, converted as in the second part of \cref{ch13:lem:reconstruction-domain}, we have
+\begin{equation}\label{ch13:eq:shell-counting-jacobian}
+ \sup_{w,e}\sum_\xi\abs{\partial_{w_\xi}\varphi_e(w)}\le C_Jg,\qquad
+ \sup_{w,\xi}\sum_e\abs{\partial_{w_\xi}\varphi_e(w)}\le C_Jg.
+\end{equation}
+We convert the normalizations as in the proof of \cref{ch13:lem:reconstruction-domain}. The column of a variable of the intermediate scale $i$ is normalized by $a_i^3$, and the column bound of \cref{ch10:thm:whole-image-gauge} reads $a^3\sum_e\abs{\partial_{q_\xi}\Phi_e}\le C_Ja_i^3$. The substitution $q_\xi=g_iw_\xi$ contributes the factor $g_i=M^{i/2}g$, and the passage to counting coordinates costs the factor $M^{3i}$; the row bound is converted with the same bounded ratios of couplings. These factors, and the number of variables per cell, depend only on $J$, and \eqref{ch13:eq:shell-counting-jacobian} holds with no factor depending on the number of cells or on $d$. The gauge transformation depends only on $c$ and has no derivative in $w$, and the derivatives of the conditional Hessian normalizations and of the reconstruction before gauge transformation are included in \eqref{ch13:eq:shell-counting-jacobian}. For the reconstruction maps of \cref{ch12:thm:replacement-family}, that theorem provides the joint coefficient bound, every volume-normalized column, and the image conditions on their common domains, uniformly in the depth and with deterministic thresholds that do not depend on the coupling or on the sample. The same computation applies, with the constant of that family at fixed $J$.
+
+By Schur's test \eqref{ch13:eq:physical-schur} in counting coordinates, we have
+\begin{equation}\label{ch13:eq:shell-jacobian}
+ \sup_w\norm{D_wA(w)}_{\ell^2\to\ell^2}\le K_a,\qquad K_a=C_Jg/a=C_Jg_3a^{-1/2},
+\end{equation}
+where the norm is from the fluctuation variables to the components of $A$ on the links. Since the product is convex, integrating the derivative along the segment from $w$ to $w'$ gives
+\begin{equation}\label{ch13:eq:global-array-lipschitz}
+ \norm{A(w)-A(w')}_{\ell^2}\le K_a\norm{w-w'}_2.
+\end{equation}
+
+\paragraph{Step 3: a fixed time.}
+Fix one scalar component, given by a direction and a color, and let $X_s(x)=P_sF(x)$. Since $F$ is constant on the half-open cells, we have
+\begin{equation}\label{ch13:eq:embedded-heat}
+ X_s(x)=\sum_y\omega_y(s,x)\bigl(A_y(w)-\E_\mu A_y\bigr),
+\end{equation}
+by integration of the cell function against the continuum heat kernel. As a function of $w$, the right side is a linear combination of the components of $A$. By \eqref{ch13:eq:shell-jacobian}, its Lipschitz constant is at most $K_a\norm{\omega(s,x)}_2$, and the Lipschitz constant of $X_s(x)-X_s(y)$ is at most $K_a\norm{\omega(s,x)-\omega(s,y)}_2$. Both have mean zero, because the subtracted mean is the conditional expectation under $\mu$. By \eqref{ch13:eq:shell-product-inequalities} and \cref{ch13:lem:heat-and-chaining} with horizon $T_0$, their sub-Gaussian parameters, in the normalization $e^{z^2\sigma^2/2}$, can be taken as
+\begin{equation}\label{ch13:eq:shell-sigma}
+ \sigma_s=C_JK_a\min\{1,a^{3/2}s^{-3/4}\}
+\end{equation}
+and, when $s\ge a^2$,
+\begin{equation}\label{ch13:eq:shell-metric}
+ d_s(x,y)=C_JK_aa^{3/2}s^{-3/4}\min\{1,\dist(x,y)/\sqrt s\}.
+\end{equation}
+The constants include the factor $\sqrt2$ that converts \eqref{ch13:eq:shell-product-inequalities} to this normalization. The function $d_s$ is nonnegative and symmetric, and after enlarging the constants we have $\sup d_s\le\sigma_s$ for $s\ge a^2$.
+
+For $s\ge a^2$, a cubic grid on $\Torus$ of spacing at most $c\eta\sqrt s$ is an $\eta\sigma_s$-net for $d_s$, which gives
+\[
+ N(\Torus,d_s,\eta\sigma_s)\le C(1+L/\sqrt s)^3\eta^{-3}\qquad(0<\eta<1).
+\]
+For each $w$, the function $x\mapsto P_sF(x)$ is smooth for $s>0$. Its supremum is determined by a countable dense set, and the process is continuous with respect to $d_s$. We set $\ell_a=\log(2+L/a)$. Applying the chaining assertion of \cref{ch13:lem:heat-and-chaining} with $A=C(1+L/\sqrt s)^3$ and $v=3$, we obtain
+\begin{equation}\label{ch13:eq:fixed-time-max}
+ \Prob_\mu\Bigl\{\norm{P_sF}_\infty>CK_aa^{3/2}s^{-3/4}\sqrt{\ell_a+u}\Bigr\}\le Ce^{-u},\qquad
+ \E_\mu\norm{P_sF}_\infty\le CK_aa^{3/2}s^{-3/4}\sqrt{\ell_a}.
+\end{equation}
+Here we used $\log(2+C(1+L/\sqrt s)^3)\le C\ell_a$, which holds because $s\ge a^2$. There are nine scalar components; a union bound over them and the equivalence of norms on the components change only $C$.
+
+\paragraph{Step 4: the supremum over times.}
+Each scalar cell variable $A_y-\E_\mu A_y$ is centered and $K_a$-Lipschitz. The exponential bound in \eqref{ch13:eq:shell-product-inequalities}, applied to it and to its negative, yields
+\[
+ \Prob_\mu\{\abs{A_y-\E_\mu A_y}>2K_a\sqrt h\}\le2e^{-h}\qquad(h\ge0).
+\]
+There are $9n^3$ scalar cell variables. Choosing $h=u+\log(18n^3)$ and summing, we obtain
+\begin{equation}\label{ch13:eq:cell-max}
+ \Prob_\mu\Bigl\{\norm F_\infty>CK_a\sqrt{\ell_a+u}\Bigr\}\le Ce^{-u}.
+\end{equation}
+Since the heat semigroup contracts the supremum norm, we have, for $0<s\le\min\{a^2,T_0\}$,
+\[
+ s^{\alpha/2}\norm{P_sF}_\infty\le a^\alpha\norm F_\infty.
+\]
+Together with \eqref{ch13:eq:cell-max}, this implies the required bound at all these times, including the case $T_0<a^2$.
+
+Suppose now that $T_0\ge a^2$. Let $s_j=2^ja^2$ for $0\le j\le r$, where $r$ is the largest integer with $s_r\le T_0$. By the semigroup property and the contraction of the supremum norm, we have, for $s_j\le s\le\min\{2s_j,T_0\}$,
+\begin{equation}\label{ch13:eq:dyadic-heat}
+ s^{\alpha/2}\norm{P_sF}_\infty\le2^{\alpha/2}s_j^{\alpha/2}\norm{P_{s_j}F}_\infty.
+\end{equation}
+The weighted scale at the time $s_j$ satisfies
+\begin{equation}\label{ch13:eq:weighted-sigma}
+ K_aa^{3/2}s_j^{\alpha/2-3/4}=K_aa^\alpha2^{-j(3/4-\alpha/2)}\le K_aa^\alpha,
+\end{equation}
+where we used $\alpha<3/2$. Further, $r+1\le1+\log_2(T_0/a^2)\le C_{T_0/L^2}\ell_a$, since $n=L/a\ge4$. We use \eqref{ch13:eq:fixed-time-max} at every $s_j$ with $u+\log(r+2)$ in place of $u$, and \eqref{ch13:eq:cell-max} with the same parameter. The sum of the probabilities of failure is at most $Ce^{-u}$. Since $\log(r+2)\le C_{T_0/L^2}\ell_a$, all the thresholds in \eqref{ch13:eq:dyadic-heat} and \eqref{ch13:eq:weighted-sigma} are bounded by
+\[
+ CK_aa^\alpha\sqrt{\ell_a+u}=Cg_3a^{\alpha-1/2}\sqrt{\ell_a+u}.
+\]
+This proves the tail bound for all meshes in the statement. The time supremum is measurable, because the heat field is continuous in $(s,x)$ for $s>0$ and a countable dense subset of $(0,T_0]\times\Torus$ determines it. For each finite lattice, the field is bounded, and the norm is finite.
+
+\paragraph{Step 5: moments, exponential moments, and limits.}
+Let $\tau_a=Cg_3a^{\alpha-1/2}$, with $C$ large enough for the preceding bounds, and let $Z=\norm F_{-\alpha;T_0}$. Since $\sqrt{\ell_a+u}\le\sqrt{\ell_a}+\sqrt u$, the positive part of $Z-C\tau_a\sqrt{\ell_a}$ has tail at most $C\exp[-x^2/(C\tau_a^2)]$ at height $x$. Multiplying this tail by $px^{p-1}$, integrating over $x>0$, and substituting $x=\tau_av$, we obtain $C_p\tau_a^p$. By the triangle inequality in $L^p$ and $\ell_a\ge\log2$, we have
+\[
+ \E_\mu Z\le C\tau_a\sqrt{\ell_a},\qquad(\E_\mu Z^p)^{1/p}\le C_p\tau_a\sqrt{\ell_a}.
+\]
+
+The norm $Z$ is itself a Lipschitz function of $w$, with constant at most $C\tau_a$. Indeed, by \eqref{ch13:eq:global-array-lipschitz} and the bound on the cell integrals of the heat kernel, the difference of its values at $w$ and $w'$ is at most
+\[
+ CK_a\norm{w-w'}_2\sup_{0<s\le T_0}s^{\alpha/2}\min\{1,a^{3/2}s^{-3/4}\}\le CK_aa^\alpha\norm{w-w'}_2,
+\]
+where in the last inequality we used $s^{\alpha/2}\le a^\alpha$ for $s\le a^2$, and that $s^{\alpha/2-3/4}$ is decreasing for $s\ge a^2$. The subtracted conditional mean does not depend on $w$. Applying \eqref{ch13:eq:shell-product-inequalities} to $Z$, we obtain
+\[
+ \E_\mu e^{\lambda Z}\le\exp\{\lambda\E_\mu Z+C\lambda^2\tau_a^2\}\le\exp\Bigl\{C\lambda\tau_a\sqrt{\ell_a}+C\lambda^2\tau_a^2\Bigr\}.
+\]
+Since the concentration theorem applies to every real Lipschitz function, no smoothness of $Z$ is needed.
+
+All limits and summability statements are at fixed $L$ and $g_3$, equivalently at fixed $L$ and $\gamma=g_3^2L$. If $\beta=\alpha-1/2>0$, then $a^\beta\sqrt{\log(2+L/a)}\to0$ as $a\downarrow0$, and every fixed conditional $L^p$ norm therefore tends to zero, uniformly in $c$ and $d$. The exponential moment is at least one because $Z\ge0$, and its upper bound tends to one for fixed $\lambda$. For a geometric sequence of meshes $a_k=a_*\mathfrak b^{-k}$ with a fixed $\mathfrak b>1$, we have
+\[
+ a_k^\beta\sqrt{\log(2+L/a_k)}\le a_*^\beta\mathfrak b^{-k\beta}\Bigl\{\sqrt{\log(2+L/a_*)}+\sqrt{k\log\mathfrak b}\Bigr\},
+\]
+and both resulting series converge; the ratio of consecutive terms in the second tends to $\mathfrak b^{-\beta}<1$. This proves the summability of the bounds on the expected norms, without any independence between different meshes.
+
+\paragraph{Step 6: deterministic sources and generating functions.}
+For a real test field $\varphi$, let $q_y=\int_{Q_y}\varphi(x)\,dx$, with the pairing of directions and colors included. By the Cauchy--Schwarz inequality on each cell, we have
+\begin{equation}\label{ch13:eq:source-cell-weights}
+ \sum_y\abs{q_y}^2\le a^3\norm\varphi_2^2.
+\end{equation}
+Combining this with \eqref{ch13:eq:shell-jacobian}, we find that the pairing $H_\varphi=\langle A,\varphi\rangle$ has Lipschitz constant at most
+\[
+ K_aa^{3/2}\norm\varphi_2=C_Jg_3a\norm\varphi_2,
+\]
+and its gradient satisfies the same bound pointwise. The two inequalities in \eqref{ch13:eq:shell-product-inequalities} then imply
+\[
+ \Var_\mu H_\varphi\le C_Jg_3^2a^2\norm\varphi_2^2,\qquad\log\E_\mu e^{z\langle F,\varphi\rangle}\le C_Jz^2g_3^2a^2\norm\varphi_2^2\quad(z\in\R).
+\]
+Next, fix finitely many real sources $\varphi_1,\dots,\varphi_m$ and a compact set $\mathcal K\subset\C^m$, and let $Y_z=\sum_jz_j\langle F,\varphi_j\rangle$. By the variance bound and the triangle inequality in $L^2$, we have
+\[
+ (\E_\mu\abs{Y_z}^2)^{1/2}\le C_Jg_3a\sum_j\abs{z_j}\norm{\varphi_j}_2.
+\]
+Since the real part of $Y_z$ is the pairing of $F$ with the real source $\sum_j\Re(z_j)\varphi_j$, the exponential bound gives
+\[
+ \E_\mu e^{2\abs{\Re Y_z}}\le\E_\mu e^{2\Re Y_z}+\E_\mu e^{-2\Re Y_z}\le2\exp\Bigl\{C_Jg_3^2a^2\Bigl(\sum_j\abs{z_j}\norm{\varphi_j}_2\Bigr)^2\Bigr\}.
+\]
+By the identity $e^y-1=y\int_0^1e^{\varrho y}\,d\varrho$ and the Cauchy--Schwarz inequality, uniformly for $z\in\mathcal K$,
+\[
+ \abs{\E_\mu e^{Y_z}-1}\le(\E_\mu\abs{Y_z}^2)^{1/2}(\E_\mu e^{2\abs{\Re Y_z}})^{1/2}\longrightarrow0
+\]
+as $a\downarrow0$ with $g_3$ fixed. For each finite lattice, these functions of $z$ are entire. Indeed, the domain of the fluctuation variables is compact and the reconstruction is continuous on a neighborhood of it; hence the exponential of the source pairing has a uniformly convergent power series on every compact set of sources. Complex test fields are handled by including their real and imaginary parts among the real sources.
+
+\paragraph{Step 7: coarse fields in $D_{R_{\mathrm{supp}}}$.}
+Let $R_{\mathrm{supp}}$ be as in \eqref{ch13:eq:two-support-kernels}. For $c\in D_{R_{\mathrm{supp}}}$, choose a gauge transformation $k$ on the vertices of the coarse lattice with $c'=c^k\in B_{R_{\mathrm{supp}}}$. The change-of-gauge identity of \cref{ch12:thm:representative-prefixes}, together with the corresponding identity for the reconstruction in \cref{ch10:thm:whole-image-gauge}, uses a triangular change $\mathcal T_k$ of the fluctuation variables whose diagonal blocks are orthogonal. It preserves each ball of the fluctuation cutoff domain and has Jacobian of absolute value one, and
+\[
+ (\mathcal T_k)_*\mu_{d,c}^{[R_{\mathrm{supp}}]}=\mu_{d,c'}^{[R_{\mathrm{supp}}]}.
+\]
+For $R_{\mathrm{supp}}=\rho$, this is the change-of-gauge identity of the separate instance, not an extension of the auxiliary integral. Since $\mathcal T_k$ preserves the radii of all the balls, the radius $Q$ and all the domain conditions verified above are the same at $c'$. The transported representative is therefore exactly the case $c'\in B_{R_{\mathrm{supp}}}$ already treated, and the bounds are uniform in $c$ and in the choice of $k$. Evaluating the transported reconstruction at $c'$ gives the last assertion of the theorem.
+\end{proof}
+
+\section{Weighted heat convolutions}\label{ch13:sec:convolution}
+
+The Duhamel integrals for the Wilson flow in \cref{ch21:chapter} lead to time convolutions of two powers, each regularized by the same positive parameter $\epsilon$; in the applications, $\epsilon=a_0^2$ for a mesh $a_0$. The following lemma estimates these scalar integrals.
+
+\begin{lemma}\label{ch13:lem:weighted-convolution}
+Let $\epsilon>0$, $t\ge0$, $0\le p<1$, and $q\ge0$, and define
+\[
+ I_{p,q}^\epsilon(t)=\int_0^t(s+\epsilon)^{-p}(t-s+\epsilon)^{-q}\,ds.
+\]
+For fixed $p$ and $q$, uniformly in $\epsilon$ and $t$,
+\[
+ I_{p,q}^\epsilon(t)\le C_{p,q}
+ \begin{cases}
+ (t+\epsilon)^{1-p-q},&0\le q<1,\\
+ (t+\epsilon)^{-p}[1+\log(1+t/\epsilon)],&q=1,\\
+ \epsilon^{1-q}(t+\epsilon)^{-p},&q>1.
+ \end{cases}
+\]
+For $0\le t\le\epsilon$ we also have $I_{p,q}^\epsilon(t)\le t\epsilon^{-p-q}$, and for $p=q=1/2$ we have $I_{1/2,1/2}^\epsilon(t)\le\pi$.
+
+In particular, let $1/2<\alpflow<2/3$, $p=(\alpflow+1)/2$, and $\epsilon=a_0^2$ with $a_0>0$. Then
+\[
+ I_{p,3/4}^{a_0^2}(t)\le C(t+a_0^2)^{-\alpflow/2-1/4},\qquad I_{p,5/4}^{a_0^2}(t)\le Ca_0^{-1/2}(t+a_0^2)^{-p},
+\]
+\[
+ \sup_{t\ge0}\Bigl\{(t+a_0^2)^{\alpflow-1/2}I_{p,3/4}^{a_0^2}(t)+(t+a_0^2)^{\alpflow}I_{p,5/4}^{a_0^2}(t)\Bigr\}\le C_{\alpflow}a_0^{\alpflow-3/2}.
+\]
+The same bound holds if either of the two weights $(t+a_0^2)^{\alpflow-1/2}$ and $(t+a_0^2)^{\alpflow}$ is replaced by the same power of $t+a^2$, for some $0<a\le a_0$. For $p=3\alpflow/2$, the integrals with $q=0$ and $q=1/2$, which correspond to the value and to one spatial difference of a heat convolution, are bounded by $C(t+\epsilon)^{1-3\alpflow/2}$ and $C(t+\epsilon)^{1/2-3\alpflow/2}$, respectively. The constants depend only on the displayed exponents.
+\end{lemma}
+
+\begin{proof}
+All integrands are nonnegative. If $t=0$, the integral is zero. If $0<t\le\epsilon$, each factor of the integrand is at most its value with $s$ or $t-s$ replaced by zero, which gives
+\begin{equation}\label{ch13:eq:short-convolution}
+ I_{p,q}^\epsilon(t)\le t\epsilon^{-p-q}.
+\end{equation}
+Since $\epsilon\le t+\epsilon\le2\epsilon$ in this range, this implies the three general bounds, with a constant depending only on $p$ and $q$; in the case $q=1$, we use $1+\log(1+t/\epsilon)\ge1$.
+
+For $t\ge\epsilon$, we split the integral at $t/2$. On the first half, $t-s+\epsilon\ge(t+\epsilon)/2$, which gives
+\[
+ \int_0^{t/2}(s+\epsilon)^{-p}(t-s+\epsilon)^{-q}\,ds\le2^q(t+\epsilon)^{-q}\int_0^{t/2}(s+\epsilon)^{-p}\,ds\le\frac{2^q}{1-p}(t+\epsilon)^{1-p-q}.
+\]
+On the second half, we set $r=t-s$ and use $s+\epsilon\ge(t+\epsilon)/2$; this half is at most
+\[
+ 2^p(t+\epsilon)^{-p}\int_0^{t/2}(r+\epsilon)^{-q}\,dr.
+\]
+The last integral is at most $(t+\epsilon)^{1-q}/(1-q)$ if $q<1$, it equals $\log(1+t/(2\epsilon))$ if $q=1$, and it is at most $\epsilon^{1-q}/(q-1)$ if $q>1$. The first half is absorbed in the bounds for the second half: for $q=1$, it is of order $(t+\epsilon)^{-p}$, and for $q>1$ we use $(t+\epsilon)^{1-q}\le\epsilon^{1-q}$. This proves the general estimate for all $t$ and $\epsilon$.
+
+For $p=q=1/2$ and $t>0$, we decrease the two positive shifts to zero and obtain
+\[
+ I_{1/2,1/2}^\epsilon(t)\le\int_0^ts^{-1/2}(t-s)^{-1/2}\,ds=\int_0^{\pi/2}2\,d\vartheta=\pi,
+\]
+where we substituted $s=t\sin^2\vartheta$. At $t=0$, the bound is trivial.
+
+Now let $\alpha=\alpflow$ and $p=(\alpha+1)/2$. Then $p<1$, and the cases $q=3/4$ and $q=5/4$ of the general estimate yield
+\[
+ I_{p,3/4}^\epsilon(t)\le C_\alpha(t+\epsilon)^{-\alpha/2-1/4},\qquad I_{p,5/4}^\epsilon(t)\le C_\alpha\epsilon^{-1/4}(t+\epsilon)^{-(\alpha+1)/2}.
+\]
+Multiplying by the two weights, we obtain
+\begin{equation}\label{ch13:eq:weighted-powers}
+ \begin{split}
+ (t+\epsilon)^{\alpha-1/2}I_{p,3/4}^\epsilon(t)&\le C_\alpha(t+\epsilon)^{\alpha/2-3/4},\\
+ (t+\epsilon)^{\alpha}I_{p,5/4}^\epsilon(t)&\le C_\alpha\epsilon^{-1/4}(t+\epsilon)^{(\alpha-1)/2}.
+ \end{split}
+\end{equation}
+Since both powers of $t+\epsilon$ on the right are negative for $\alpha$ in the stated range, both right sides are at most $C_\alpha\epsilon^{\alpha/2-3/4}$, which equals $C_\alpha a_0^{\alpha-3/2}$ for $\epsilon=a_0^2$. Replacing either weight by the corresponding power of $t+a^2$ decreases it, since $a\le a_0$ and both powers are positive. The short-time bound \eqref{ch13:eq:short-convolution} remains available; in particular, none of these bounds replaces an integral that vanishes at $t=0$ by a singular expression.
+
+Finally, $p=3\alpha/2<1$, and the cases $q=0$ and $q=1/2$ of the general estimate give $(t+\epsilon)^{1-3\alpha/2}$ and $(t+\epsilon)^{1/2-3\alpha/2}$, respectively. All constants in this proof are built from $2^p$, $2^q$, $(1-p)^{-1}$, $\abs{1-q}^{-1}$ (when $q\ne1$), and fixed powers of two; they do not depend on any mesh ratio, coupling, lattice side, or depth.
+\end{proof}
+
+\section{Heat consistency for finite-scale reconstructions}\label{ch13:sec:consistency}
+
+The last lemma of this section compares the discrete heat evolution of a sampled smooth field with the continuum heat evolution. It is applied in \cref{ch22:chapter} to the cardinal interpolation of a finite-scale reconstruction, that is, of a field reconstructed from a fixed finite number of renormalization group steps. The family of fields is fixed before the mesh tends to zero, and no uniformity is claimed as the number of scales grows. The comparison concerns the linear heat evolution only; the corresponding statement for the quadratic Picard term is proved in \cref{ch22:chapter}.
+
+For a smooth periodic function $f$ we write $\norm f_{C^r}$ for the maximum of the supremum norms of its derivatives of order at most $r$. For a mesh $a=L/n$ we write $S_af=f|_{\Gamma_a}$ for the restriction of $f$ to the vertices.
+
+\begin{lemma}\label{ch13:lem:fixed-prefix-heat}
+Fix $L,T,H>0$ with $L/H\in\N$, a finite collection of meshes $a_1,\dots,a_l$ commensurate with $H$, and a deterministic bound $M_H$. Let $\mathscr F_H$ be the set of functions $f=\sum_{j=1}^lI_{a_j}u^{(j)}$, where each $u^{(j)}$ is an array of link variables on the lattice of mesh $a_j$ with $\norm{u^{(j)}}_\infty\le M_H$; it is a bounded finite-dimensional family of smooth periodic functions. Let $a\downarrow0$ run through meshes $a=L/n$ such that $a_j/a\in\N$ for every $j$. Then, uniformly in $f\in\mathscr F_H$ and $0\le t\le T$,
+\[
+ \norm{P_t^aS_af-S_aP_tf}_\infty\le C_Ha^2,
+\]
+and for every ordered product $D_a^{\boldsymbol\epsilon}$ of $q\ge1$ forward or backward differences, with corresponding product of partial derivatives $\partial^{\boldsymbol\epsilon}$,
+\[
+ \norm{D_a^{\boldsymbol\epsilon}P_t^aS_af-S_a\partial^{\boldsymbol\epsilon}P_tf}_\infty\le C_{H,q}a.
+\]
+For a general smooth periodic function $f$ the two right sides may be replaced by $CTa^2\norm f_{C^4}$ and $C_q\bigl[a\norm f_{C^{q+1}}+Ta^2\norm f_{C^{q+4}}\bigr]$, respectively. These bounds include $t=0$, the periodic seams, and the constant mode.
+
+Let $u_a(t)=P_t^aS_af$ and $u_a^{\boldsymbol\epsilon}(t)=D_a^{\boldsymbol\epsilon}P_t^aS_af$, and let $I_au_a(t)$ and $I_au_a^{\boldsymbol\epsilon}(t)$ be their cardinal interpolations on $\Torus$, each array being interpolated separately. Then $I_au_a\to P_tf$ and $I_au_a^{\boldsymbol\epsilon}\to\partial^{\boldsymbol\epsilon}P_tf$ uniformly on $[0,T]\times\Torus$, and the same convergence holds after multiplying the discrete and the continuum quantities by the weights $(t+a^2)^\delta$ and $t^\delta$, respectively, for any $\delta>0$. In particular, the separately interpolated value and difference arrays converge in the positive-time weighted heat norms of \cref{ch01:def:enhancement}.
+
+The constants depend on $L$, $T$, $q$, the meshes $a_1,\dots,a_l$, the function $b$, and $M_H$, but not on the finer mesh $a$, the coupling, the depth, or the number of steps of the whole reconstruction.
+\end{lemma}
+
+\begin{remark}\label{ch13:rem:interpolant-derivative}
+The convergence in \cref{ch13:lem:fixed-prefix-heat} concerns the value array and each difference array, interpolated separately. It is not a statement about the derivatives of the interpolated value field, and such a statement would be false. Indeed, $\zeta'(k)=0$ for every integer $k$: at $k=0$ because $\zeta$ is even, at $k=\pm1$ because all derivatives of $\zeta$ vanish there, and elsewhere because $\zeta$ vanishes near $k$. It follows that $\partial_i(I_au)$ vanishes at every vertex of $\Gamma_a$ for every array $u$, and it cannot converge uniformly to $\partial_if$ even when $u=S_af$. The proof below uses no identity between $D_a^{\boldsymbol\epsilon}$ and derivatives of $I_a$.
+\end{remark}
+
+\begin{proof}[Proof of \cref{ch13:lem:fixed-prefix-heat}]
+The fields are deterministic. By \cref{ch13:lem:cardinal-columns}, for every integer $r\ge0$, the functions in $\mathscr F_H$ satisfy
+\begin{equation}\label{ch13:eq:prefix-smooth-bounds}
+ \sup_{f\in\mathscr F_H}\norm f_{C^r}\le C_{b,r}M_H\sum_{j=1}^l(1+a_j^{-r}),
+\end{equation}
+and we denote the right side by $K_{H,r}$. Since there are only finitely many link variables on the meshes $a_j$, the family $\mathscr F_H$ is bounded and finite-dimensional; no compactness argument is needed for the uniform estimates below.
+
+Taylor's formula with integral remainder in the coordinate $i$ gives, for a smooth periodic function $f$,
+\[
+ \norm{D_{a,i}^-D_{a,i}^+S_af-S_a\partial_i^2f}_\infty\le Ca^2\norm{\partial_i^4f}_\infty.
+\]
+To see the cancellation, we expand $f(x+ae_i)$ and $f(x-ae_i)$ to order three at $x$; the odd terms cancel, and the two remainders of order four, divided by $a^2$, are at most $Ca^2\norm{\partial_i^4f}_\infty$. Summing over $i$, we obtain
+\begin{equation}\label{ch13:eq:generator-error}
+ \norm{\Delta_aS_af-S_a\Delta f}_\infty\le Ca^2\norm f_{C^4}.
+\end{equation}
+The Taylor expansions are carried out on the periodic lift of $f$ to $\R^3$, so they apply at every seam with the same constants.
+
+The discrete and the continuum semigroups both commute with their own constant-coefficient derivatives, and both contract the supremum norm; for the continuum semigroup, this follows from its convolution kernel in \cref{ch13:lem:heat-and-chaining}. Differentiating $P_{t-s}^aS_aP_sf$ in $s$ and integrating, we obtain the identity
+\begin{equation}\label{ch13:eq:heat-duhamel}
+ P_t^aS_af-S_aP_tf=\int_0^tP_{t-s}^a(\Delta_aS_a-S_a\Delta)P_sf\,ds.
+\end{equation}
+The differentiation is legitimate because $f$ is smooth and the discrete space is finite. Since $\norm{P_sf}_{C^4}\le\norm f_{C^4}$, inserting \eqref{ch13:eq:generator-error} into \eqref{ch13:eq:heat-duhamel}, we obtain the bound $CTa^2\norm f_{C^4}$, uniformly on $[0,T]$.
+
+Fix an ordered product of $q$ differences $D_a^{\boldsymbol\epsilon}$ and the corresponding product of derivatives $\partial^{\boldsymbol\epsilon}$. Using \eqref{ch13:eq:difference-average} repeatedly, we write $D_a^{\boldsymbol\epsilon}S_af(x)$ as an average of $\partial^{\boldsymbol\epsilon}f$ over shifts of $x$ of total length at most $qa$. The fundamental theorem of calculus along these shifts then gives
+\begin{equation}\label{ch13:eq:differentiated-data}
+ \norm{D_a^{\boldsymbol\epsilon}S_af-S_a\partial^{\boldsymbol\epsilon}f}_\infty\le C_qa\norm f_{C^{q+1}}.
+\end{equation}
+We commute the differences with $P_t^a$ and compare the differentiated initial data:
+\[
+ D_a^{\boldsymbol\epsilon}P_t^aS_af-S_a\partial^{\boldsymbol\epsilon}P_tf
+ =P_t^a\bigl(D_a^{\boldsymbol\epsilon}S_af-S_a\partial^{\boldsymbol\epsilon}f\bigr)
+ +\bigl(P_t^aS_a\partial^{\boldsymbol\epsilon}f-S_aP_t\partial^{\boldsymbol\epsilon}f\bigr).
+\]
+The first term is bounded by \eqref{ch13:eq:differentiated-data}, and the second by the value estimate already proved, applied to $\partial^{\boldsymbol\epsilon}f$, and we obtain $C_q\{a\norm f_{C^{q+1}}+Ta^2\norm f_{C^{q+4}}\}$. This argument does not divide an error in the values by $a$. It includes $t=0$, and both errors vanish identically for constant $f$. Together with \eqref{ch13:eq:prefix-smooth-bounds}, this proves the two estimates for the family $\mathscr F_H$; since $a\le L$, the term of order $a^2$ is absorbed into $C_{H,q}a$.
+
+For the interpolation statement, we use the nonnegative partition of unity and its support radius: for every smooth periodic $g$ and every array $u$,
+\begin{equation}\label{ch13:eq:sampling-interpolation}
+ \norm{I_aS_ag-g}_\infty\le Ca\norm{\nabla g}_\infty,\qquad\norm{I_au}_\infty\le\norm u_\infty.
+\end{equation}
+We apply the first bound to $g=P_tf$ and $g=\partial^{\boldsymbol\epsilon}P_tf$, and the second to the differences between the discrete arrays and the sampled continuum functions. The smooth norms of these continuum functions are bounded uniformly by \eqref{ch13:eq:prefix-smooth-bounds} and heat contraction. Then the interpolated value array and each separately interpolated difference array converge uniformly on $[0,T]\times\Torus$ to the corresponding continuum functions.
+
+For a positive power $\delta$, the weights $(t+a^2)^\delta$ are bounded by $(T+L^2)^\delta$ and converge to $t^\delta$ uniformly on $[0,T]$ as $a\downarrow0$, by the uniform continuity of $v\mapsto v^\delta$ on $[0,T+L^2]$. Multiplying the uniform errors in the values and the differences by the weights of \cref{ch01:def:enhancement} therefore preserves the convergence, also when one compares the weighted discrete and the weighted continuum functions themselves. All constants depend only on the meshes $a_j$, $M_H$, $b$, $L$, $T$, and $q$.
+\end{proof}

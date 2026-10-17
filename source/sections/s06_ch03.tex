@@ -1,0 +1,565 @@
+\chapter{Block averaging and chessboard estimates}\label{ch03:chapter}
+
+In this section, we prove the finite-dimensional properties of the block averaging map $T_M$ of \cref{ch01:def:block-map} that are used throughout the renormalization group analysis, and the reflection positivity estimates for the Wilson measure on which the bound on large fields rests. \Cref{ch03:sec:map} shows that $T_M$ is Borel, gauge covariant, and covariant under the translations and reflections preserving the coarse lattice, also where its logarithm is not defined, and that its iterates have nested local dependence sets (\cref{ch03:prop:map-properties}). \Cref{ch03:sec:coordinates} constructs local constraint coordinates near the coarse-field lift $U_0(b)$ for every coarse configuration $b$, restores the block gauge variables, and computes Haar measure on the resulting coordinate domain exactly (\cref{ch03:lem:relative-coarea}); this formula is the starting point of every fluctuation integral in \cref{part:rg,part:largefield}. \Cref{ch03:sec:coercivity} proves that the curl bounds the $\ell^2$ norm on the linearized constrained fluctuation space, uniformly in the volume (\cref{ch03:lem:free-curl-gap}); this is an input of \cref{ch05:chapter}. \Cref{ch03:sec:reflection-observables} contains reflection positivity and chessboard estimates for the Wilson measure and its images under $T_M^\ell$, and exponential moment bounds for plaquette energies on the finest lattice (\cref{ch03:thm:original-chessboard}); these are used in \cref{ch04:chapter,ch19:chapter,ch20:chapter}. The inputs are the conventions of \cref{ch01:def:ensemble,ch01:def:block-map}, the Haar measure, tree gauge, and finite-word estimates of \cref{ch02:lem:haar-and-forests}, and the coefficient calculus of \cref{ch02:lem:coefficient-algebra}. No later result is used.
+
+Throughout this section, we measure distances and dependence sets in fine lattice units; physical rescaling multiplies every spatial coordinate by the fine mesh. Unless a more specific dependence is stated, constants depend only on $M$, on the stated coordinate radii, and, for derivative estimates, on the prescribed finite derivative order. They are independent of $L$, the lattice side, the coupling, and the number of preceding averaging steps; this is the dependence described in item (1) of \cref{ch01:conv:constants}.
+
+\section{The block averaging map}\label{ch03:sec:map}
+
+The block averaging map is an instance of Bałaban's averaging operation for lattice gauge fields \cite[eq.~(15)]{Balaban1985Averaging}: the fine link variables of a block are transported to a common reference path, their logarithms are averaged, and the average is exponentiated. It is defined in \cref{ch01:def:block-map}; we fix the additional notation used in this section and the next.
+
+\begin{definition}\label{ch03:def:centered-map}
+Let $M=2R_M+1\ge3$ be odd, let the fine periodic lattice have side $Mm$ with $m\ge4$, work in fine lattice units, and let $T_M$ be the block averaging map of \cref{ch01:def:block-map}, with the centered blocks $\mathsf B_M(v)$, $v\in M\Z^3$, the root paths $\sigma_{v,x}$, the reference paths $C_c$, and the paths
+\[
+ F_{c,x}=\sigma_{v,x}\,[x,x+Me_i]\,\sigma_{v+Me_i,x+Me_i}^{-1},\qquad c=(v,v+Me_i),\ x\in\mathsf B_M(v),
+\]
+defined there; we call the $F_{c,x}$ translated paths with endpoint connectors. The logarithm in the first clause of \eqref{ch01:eq:ordinary-map} is the principal logarithm on $\SU\setminus\{-I\}$, with $\abs{\Log V}<2\pi$, and we call the second clause, $(T_MU)_c=U(C_c)$ when some based loop holonomy $U(F_{c,x})U(C_c)^{-1}$ equals $-I$, the Borel extension of $T_M$. For odd $s\ge1$ and a vertex $v$ set
+\[
+ \mathsf B_s(v)=v+\{-(s-1)/2,\dots,(s-1)/2\}^3,
+\]
+so that $\mathsf B_1(v)=\{v\}$. The links of the paths $\sigma_{v,x}$, $x\in\mathsf B_M(v)$, form a spanning tree of the block (\cref{ch03:prop:map-properties}), which we call the block tree, with root $v$. For $\ell\ge1$, $T_M^\ell$ denotes the $\ell$-fold composition of $T_M$; one renormalization group step is the composition $T_M^J$, not an average over blocks of side $M^J$. For a configuration $b$ on the coarse lattice, the coarse-field lift $U_0(b)$ is the fine configuration that equals $I$ on every link with both endpoints in one block, and equals $b_c$ on every link from $\mathsf B_M(v)$ to $\mathsf B_M(v+Me_i)$, where $c=(v,v+Me_i)$.
+\end{definition}
+
+\Cref{ch03:fig:blocks} shows these paths for two neighboring blocks.
+
+\begin{figure}[ht]
+\centering
+\setlength{\unitlength}{5mm}
+\begin{picture}(13,11)(-5,-3)
+\multiput(-2,-2)(1,0){5}{\multiput(0,0)(0,1){10}{\circle*{0.14}}}
+\put(-2.4,-2.4){\dashbox{0.2}(4.8,4.8){}}
+\put(-2.4,2.6){\dashbox{0.2}(4.8,4.8){}}
+\thinlines
+\put(-2,0){\line(1,0){4}}
+\multiput(-2,-2)(1,0){5}{\line(0,1){4}}
+\put(-2,5){\line(1,0){4}}
+\multiput(-2,3)(1,0){5}{\line(0,1){4}}
+\linethickness{1.6pt}
+\put(0,0){\line(0,1){5}}
+\linethickness{0.9pt}
+\put(0,-0.12){\line(-1,0){2.12}}
+\put(-2.12,-0.12){\line(0,1){5.24}}
+\put(-2.12,5.12){\line(1,0){2.12}}
+\thinlines
+\put(0,0){\circle{0.45}}
+\put(0,5){\circle{0.45}}
+\multiput(-4,2.5)(0.4,0){22}{\line(1,0){0.2}}
+\put(0.25,-0.75){$v$}
+\put(0.25,5.3){$v+Me_2$}
+\put(0.15,2.62){$\scriptstyle e^*_c$}
+\put(-3.0,-0.75){$x$}
+\put(-4.6,3.6){$F_{c,x}$}
+\put(0.18,1.2){$C_c$}
+\put(5.0,2.35){$\mathsf r$}
+\end{picture}
+\caption{Two neighboring centered blocks for $M=5$, in the plane spanned by $e_1$ and $e_2$, with $c=(v,v+Me_2)$. Dashed squares: the blocks $\mathsf B_M(v)$ and $\mathsf B_M(v+Me_2)$. Thin lines: the block trees. Thick line: the reference path $C_c$; it contains the eliminated edge $e^*_c$ of \cref{ch03:sec:coordinates}. Medium line: the translated path with endpoint connectors $F_{c,x}$ for $x=v-2e_1$. Dotted line: the plane of a reflection $\mathsf r$ bisecting the links between the two blocks; each block lies on one side of it.}
+\label{ch03:fig:blocks}
+\end{figure}
+
+\begin{proposition}\label{ch03:prop:map-properties}
+Let $M$ and $m$ be as in \cref{ch03:def:centered-map}. Then the following statements hold.
+\begin{enumerate}
+\item The centered blocks partition the fine vertices. In each block the links of the paths $\sigma_{v,x}$ form a spanning tree with $M^3-1$ links, and the paths from the root $v$ in this tree are the $\sigma_{v,x}$.
+\item $T_M$ is a Borel map on the whole configuration space $\Conf{Mm}$.
+\item For every periodic gauge transformation $k$, $T_M(U^k)=(T_MU)^{k|_{M\Z^3}}$.
+\item $T_M$ commutes with the translations by vectors of $M\Z^3$ and with every coordinate reflection $x_j\mapsto a_j-x_j$ with $a_j\in M\Z$, in particular with the spatial inversion $x\mapsto-x$. This includes the configurations at which the Borel extension is used. These reflections map block trees onto block trees; no invariance under permutations of the coordinates is needed or claimed.
+\item For every coarse configuration $b$, without any restriction on its holonomies, $T_MU_0(b)=b$.
+\item Let $\ell\ge0$, $m_\ell=M^\ell$, and let the fine side be $N=m_\ell n$ with $n\ge4$. The value of $T_M^\ell U$ on the coarse link $(v,v+m_\ell e_i)$ depends only on the fine links with both endpoints in
+\[
+ \mathsf B_{m_\ell}(v)\cup\mathsf B_{m_\ell}(v+m_\ell e_i).
+\]
+For $\ell\ge1$ the blocks are nested:
+\begin{equation}\label{ch03:eq:nesting}
+ \bigcup_{\delta\in\{-R_M,\dots,R_M\}^3}\mathsf B_{M^{\ell-1}}\bigl(v+M^{\ell-1}\delta\bigr)=\mathsf B_{M^\ell}(v).
+\end{equation}
+\end{enumerate}
+All statements are deterministic. The sets in (6) do not depend on $L$, the coupling, the number of preceding averaging steps, or the fields outside them.
+\end{proposition}
+
+\begin{proof}
+\emph{Blocks and trees.} In one coordinate, the intervals $Mk+\{-R_M,\dots,R_M\}$, $k\in\Z$, consist of $M$ consecutive integers and have centers at distance $M$. They therefore partition $\Z$, and also $\Z/Mm\Z$. Taking products, we see that the blocks partition the vertices, including across the periodic identifications. For a vertex $x\ne v$ of $\mathsf B_M(v)$, we define the parent of $x$ by decreasing the absolute value of the last nonzero component of $x-v$ by one. Since the $\ell^1$ distance to $v$ decreases strictly along parents and every vertex reaches $v$, the links from vertices to their parents form a tree with $M^3-1$ links. Read from $v$, the path to $x$ in this tree changes first the first coordinate, then the second, then the third; it is $\sigma_{v,x}$. This proves (1).
+
+\emph{Measurability and gauge covariance.} Every transport along a translated path with endpoint connectors or a reference path is a finite product of link matrices and their inverses. The set of configurations at which none of the finitely many based loop holonomies equals $-I$ is open. Since the principal logarithm is continuous on $\SU\setminus\{-I\}$, the first clause of \eqref{ch01:eq:ordinary-map} defines a continuous map on this open set. On its closed complement, $(T_MU)_c=U(C_c)$ is continuous. This proves (2); no value of $\Log(-I)$ is used. Let $k$ be a periodic gauge transformation. The paths $F_{c,x}$ and $C_c$ both start at $v$ and end at $v+Me_i$, so each based loop holonomy $U(F_{c,x})U(C_c)^{-1}$ is conjugated by $k_v$. On $\SU\setminus\{-I\}$ the principal logarithm satisfies $\Log(kVk^{-1})=\Ad(k)\Log V$, since both sides exponentiate to $kVk^{-1}$ and lie in the ball of radius $2\pi$ on which the exponential map is injective. The condition that some based loop holonomy equals $-I$ is invariant under conjugation. Multiplying by the reference transport $k_vU(C_c)k_{v+Me_i}^{-1}$ gives (3), in both cases of the definition.
+
+\emph{Translations and reflections.} A translation by a vector of $M\Z^3$ maps blocks, root paths, translated paths with endpoint connectors, and reference paths to the corresponding objects. For reflections we use the following identity. Let $F_x$, $x\in\mathsf B_M(v)$, and $C$ be elements of $\SU$ with $F_xC^{-1}\ne-I$ for all $x$, and let $A=M^{-3}\sum_x\Log(F_xC^{-1})$. Then
+\begin{equation}\label{ch03:eq:reverse-average}
+ \begin{split}
+ \Log(F_x^{-1}C)&=-\Ad(C^{-1})\Log(F_xC^{-1}),\\
+ \exp\Bigl(M^{-3}\sum_x\Log(F_x^{-1}C)\Bigr)C^{-1}&=C^{-1}e^{-A}=(e^AC)^{-1}.
+ \end{split}
+\end{equation}
+The first line follows from $F_x^{-1}C=C^{-1}(F_xC^{-1})^{-1}C$, the conjugation property of $\Log$ just used, and $\Log(V^{-1})=-\Log V$; the second follows from the first. If one of the elements $F_xC^{-1}$ equals $-I$, then its conjugated inverse $F_x^{-1}C$ also equals $-I$, and the two values given by the Borel extension are $C$ and $C^{-1}$, which are again inverse to each other.
+
+We write a coordinate reflection preserving $M\Z^3$ as $x_j\mapsto a_j-x_j$ with $a_j\in M\Z$. It maps blocks to blocks and centers to centers, and it changes the signs of the steps of a path without changing the order in which the coordinates are changed. In particular, it maps each block tree and each root path $\sigma_{v,x}$ to the corresponding block tree and root path. If $j\ne i$, it maps $F_{c,x}$ and $C_c$ to the corresponding paths of the reflected positive link. If $j=i$, let $s$ denote the reflection, let $c'=(s(v+Me_i),s(v))$ be the positive link associated with the image of $c$, and let $y=s(x+Me_i)$, which lies in the initial block of $c'$. Substituting the reflected endpoint paths, we find
+\[
+ sF_{c,x}=F_{c',y}^{-1},\qquad sC_c=C_{c'}^{-1},
+\]
+and $x\mapsto y$ is a bijection between the two initial blocks. Then \eqref{ch03:eq:reverse-average}, including its exceptional case, implies reflection covariance. Products of the three coordinate reflections give the spatial inversion. This proves (4).
+
+\emph{Right inverse.} Each straight segment $[x,x+Me_i]$ passes from the initial block of $c$ into the final block exactly once; its transverse coordinates stay in the common transverse range of the two blocks, and both root paths stay in their blocks. The same holds for the reference path. For $U_0(b)$, every link inside a block has transport $I$ and the single interface link crossed has transport $b_c$. This gives $U_0(b)(F_{c,x})=U_0(b)(C_c)=b_c$ for every $x$. Every based loop holonomy then equals $I$, and $(T_MU_0(b))_c=b_c$. This proves (5).
+
+\emph{Nesting and dependence sets.} Let $s=M^{\ell-1}$. In one coordinate, the intervals $s\delta+\{-(s-1)/2,\dots,(s-1)/2\}$, $-R_M\le\delta\le R_M$, are consecutive disjoint integer intervals, with extreme endpoints $\pm(sR_M+(s-1)/2)=\pm(Ms-1)/2$. Taking products in three coordinates yields \eqref{ch03:eq:nesting}, including the case $s=1$. For $\ell=1$, the dependence statement in (6) follows from the description of the three pieces of each translated path with endpoint connectors in the previous paragraph, and from the fact that the reference path lies in the two blocks. Suppose that it holds for $\ell-1$. The last averaging step reads only intermediate links with both endpoints in the two centered blocks of intermediate vertices around the final endpoints. By the induction hypothesis, each of these intermediate links depends only on fine links in the blocks of side $M^{\ell-1}$ around its endpoints. By \eqref{ch03:eq:nesting} the union of these blocks lies in the two claimed blocks of side $M^\ell$. The decision whether the Borel extension is used reads the same based loop holonomies and does not enlarge the dependence set. By induction, this proves (6) for the composition $T_M^\ell$. Since $n\ge4$, the union of two blocks of side $M^\ell$ has extent $2M^\ell<M^\ell n$ in each coordinate, and all these sets lift to boxes in the covering lattice $\Z^3$, also across the periodic identifications.
+\end{proof}
+
+\section{Local constraint coordinates and Haar measure}\label{ch03:sec:coordinates}
+
+We now parametrize the configurations near a level set $\{T_MU=b\}$. In each block we fix the gauge by the block tree, with gauge transformations equal to $I$ at the block centers; we call this the block axial gauge. For each positive coarse link $c=(v,v+Me_i)$ we then eliminate one link variable, on the central interface link
+\[
+ e^*_c=\bigl(v+R_Me_i,\,v+(R_M+1)e_i\bigr),
+\]
+by solving the equation $(T_MU)_c=b_c$. This edge, which we call the eliminated edge, lies on the reference path $C_c$ (\cref{ch03:fig:blocks}), and $C_c$ consists of $e^*_c$ and of links of the two block trees.
+
+The equation can be solved with radii independent of $b$. To see this, write $U=e^XU_0(b)$ on the links not in the block trees, and suppose that only $X_{e^*_c}=\omega$ is nonzero. Exactly $M$ of the $M^3$ paths $F_{c,x}$ cross $e^*_c$, namely those with $x-v\in\Z e_i$, while the reference path always crosses it. Then $M^3-M$ of the based loop holonomies equal $e^{-\omega}$, the others equal $I$, and
+\[
+ (T_MU)_c=e^{-(1-M^{-2})\omega}e^\omega b_c=e^{M^{-2}\omega}b_c.
+\]
+The derivative of the constraint in the eliminated variable is therefore $M^{-2}I_3$ at every real coarse field $b$, including coarse fields with large holonomies. We construct the local inverse in a neighborhood of $U_0(b)$ rather than of the identity configuration.
+
+The variables are counted as follows; here $f$ denotes the number of remaining $\SU$ variables.
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+fine links & $3(Mm)^3$\\
+links of the block trees & $(Mm)^3-m^3$\\
+links not in the block trees & $2(Mm)^3+m^3$\\
+eliminated edges $e^*_c$, one for each positive coarse link & $3m^3$\\
+remaining $\SU$ variables & $f=2((Mm)^3-m^3)$\\
+real dimension of the free logarithmic coordinates $z$ & $3f$\\
+\bottomrule
+\end{tabular}
+\end{center}
+We obtain the Haar formula in \cref{ch03:lem:relative-coarea} by two successive changes of variables. First, with the free link matrices fixed, we replace the eliminated link matrices by the coarse output $T_MU$. Then we translate the free link matrices on the right by $U_0(b)^{-1}$ and pass to their logarithms. In the first change, the constant $c_{\mathrm{Haar}}$ of the output chart cancels that of the eliminated edges, but their Haar density $j_H$ remains. For this reason the numerator of the Haar disintegration density $\mathscr J_b$ below contains $j_H$ for every link not in the block trees. Recall from \cref{ch02:lem:haar-and-forests} that $dH(e^X)=c_{\mathrm{Haar}}\,j_H(X)\,d^3X$ for $\abs X<2\pi$, with $c_{\mathrm{Haar}}=(16\pi^2)^{-1}$ and $j_H(X)=\sinc^2(\abs X/2)$.
+
+\begin{lemma}\label{ch03:lem:relative-coarea}
+Let $M$, $m$, and the block trees be as in \cref{ch03:def:centered-map}, and fix the block axial gauge. For a coarse configuration $b$ write $U_e=e^{X_e}U_{0,e}(b)$ on the links $e$ not in the block trees, and $U_e=I$ on the links of the block trees. For each positive coarse link $c$ define
+\[
+ \mathsf C_{b,c}(X)=\Log\bigl((T_M(e^XU_0(b)))_c\,b_c^{-1}\bigr).
+\]
+Call the variables $X_e$ with $e$ not in the block trees and not an eliminated edge the free logarithmic coordinates, and denote their vector by $z$.
+\begin{enumerate}
+\item Among the eliminated variables $X_{e^*_{c'}}$, the function $\mathsf C_{b,c}$ depends only on $X_{e^*_c}$. It depends on at most $6M^3$ links, all with both endpoints in the two blocks of $c$, and each link enters at most six of the functions $\mathsf C_{b,c}$. For every real $b$,
+\[
+ \mathsf C_{b,c}(0)=0,\qquad D_{X_{e^*_c}}\mathsf C_{b,c}(0)=M^{-2}I_3.
+\]
+\item There exist $r_M,\widetilde r_M>0$, depending only on $M$, with the following property. For every real $b$ and every vector $z$ of free logarithmic coordinates with $\max_e\abs{z_e}<r_M$, there exists a unique $X$ whose free entries equal $z$, whose eliminated entries have norm less than $\widetilde r_M$, and which satisfies $\mathsf C_{b,c}(X)=0$ for all $c$. Writing $X=\Gamma_b(z)$, we have
+\[
+ \Gamma_b(0)=0,\qquad (\Gamma_b(z))_{\mathrm{free}}=z,\qquad T_M\bigl(e^{\Gamma_b(z)}U_0(b)\bigr)=b.
+\]
+The map $\Gamma_b$ is real analytic and has a holomorphic extension, jointly in the free logarithmic coordinates and in local complex coordinates of the target around every real $b$. The eliminated entry of $\Gamma_b$ at $e^*_c$ depends only on the free logarithmic coordinates in the two blocks of $c$. For each order $s\ge1$, the derivatives of order $s$ of $\Gamma_b$ on a fixed smaller complex polydisc have absolute row and column sums bounded in terms of $M$, $s$, and the ratio of the radii of the two polydiscs. These bounds do not depend on $m$, on $b$, or on the number of preceding averaging steps. All determinants $\det D_{X_{e^*_c}}\mathsf C_{b,c}(\Gamma_b(z))$ are positive.
+\item Let $f=2((Mm)^3-m^3)$ be the number of free $\SU$ variables, and set
+\[
+ \mathscr J_b(z)=c_{\mathrm{Haar}}^f\,
+ \frac{\prod_{e\notin\text{block trees}}j_H\bigl((\Gamma_b(z))_e\bigr)}{\prod_c\det D_{X_{e^*_c}}\mathsf C_{b,c}(\Gamma_b(z))}.
+\]
+For a Borel set $\mathcal Z\subset\{\max_e\abs{z_e}<r_M\}$, let $\mathcal D_{\mathcal Z}$ be the set of configurations $(e^{\Gamma_b(z)}U_0(b))^k$ with $b$ a coarse configuration, $z\in\mathcal Z$, and $k$ a gauge transformation equal to $I$ at every block center. Then for every nonnegative Borel function $F$ on $\Conf{Mm}$,
+\[
+ \int_{\mathcal D_{\mathcal Z}}F(U)\,dH_{Mm}(U)
+ =\int dH_m(b)\int_{\mathcal Z}\mathscr J_b(z)\,dz\int F\bigl((e^{\Gamma_b(z)}U_0(b))^k\bigr)\,dH_{\mathrm{for}}(k),
+\]
+where $dz$ is Lebesgue measure on $\R^{3f}$ and $H_{\mathrm{for}}$ is the product Haar probability measure on the values of $k$ at the vertices other than block centers. For gauge-invariant $F$ the inner integral equals $F(e^{\Gamma_b(z)}U_0(b))$. The numerator of $\mathscr J_b$ contains the Haar density of every eliminated edge, and no further factor (no density in a coarse logarithm, no Gram determinant, and no volume of a gauge orbit) occurs.
+\item Let $g>0$. The substitution $z=g\eta$ turns $\mathscr J_b(z)\,dz$ into $g^{3f}\mathscr J_b(g\eta)\,d\eta$. If $F$ is the Wilson weight $\exp[-4g^{-2}\sum_pq(U_p)]$ times the indicator of an event, the integrand in $\eta$ is $g^{3f}\mathscr J_b(g\eta)\exp[-4g^{-2}\sum_pq((e^{\Gamma_b(g\eta)}U_0(b))_p)]$ times that indicator and the indicator of $\{g\eta\in\mathcal Z\}$. After integrating over $\eta$ and normalizing, one obtains the image under $T_M$ of the restricted measure; in general it differs from the image of the unrestricted Wilson measure, since the mass of the restriction depends on the target.
+\item At fixed real $b$, a coarse gauge transformation $h$, extended to be constant on each block, acts on the free logarithms by $X_e\mapsto\Ad(h_v)X_e$, where $v$ is the center of the block containing the initial vertex of $e$. The spatial inversion acts, together with the induced permutation of links, by
+\[
+ X'_{e'}=-\Ad\bigl(U_{0,e}(b)^{-1}\bigr)X_e.
+\]
+These orthogonal maps commute with $\Gamma$ and preserve the Wilson action and $\mathscr J$ exactly. They map products of three-dimensional Euclidean balls to the products with permuted radii; products of balls with a common radius are invariant. Although the maps depend on $b$, the joint change of variables $(b,z)$ has a block-triangular derivative whose diagonal block in $z$ has absolute determinant one.
+\end{enumerate}
+All constants depend only on $M$, the stated coordinate radii, and, where applicable, the prescribed derivative order. The only restriction involving $g$ is that $g\eta$ lies in the coordinate domain of (2).
+\end{lemma}
+
+The uniqueness in (2) holds in the stated neighborhood of $U_0(b)$, not on the whole level set $\{T_MU=b\}$, and the formula in (3) concerns only the set $\mathcal D_{\mathcal Z}$. We construct $\Gamma_b$ by a contraction argument in one coarse link at a time; this is why the radii do not depend on the number of blocks.
+
+\begin{proof}
+We proceed in six steps.
+
+\paragraph{Step 1: locality of the constraints.}
+We apply the block version of the tree identity of \cref{ch02:lem:haar-and-forests}, with every block center fixed; the block trees have $(Mm)^3-m^3$ links. In this gauge every reference path has exactly one link not in a block tree, namely its eliminated edge. Since a straight segment crosses only the interface of $c$ and a root path never crosses an interface, no constraint contains the eliminated variable of another constraint. The remaining variables of $\mathsf C_{b,c}$ are links in the two blocks of $c$ and on their common interface, at most $6M^3$ positive links. A free link inside a block can affect only the constraints of the six coarse links incident to the center of that block, and a free interface link affects only its own constraint. In particular, every variable enters at most six constraints.
+
+\paragraph{Step 2: the linear coefficient.}
+If all free variables vanish and only $X_{e^*_c}=\omega$ is varied, then exactly $M$ of the $M^3$ straight segments cross $e^*_c$: their two transverse offsets vanish and their longitudinal offset has $M$ possible values. The translated paths with endpoint connectors that contain them, and the reference path, have transport $e^\omega b_c$; all other such paths have transport $b_c$. For $\omega$ small every based loop holonomy different from $I$ equals $e^{-\omega}$. Hence
+\begin{equation}\label{ch03:eq:distinguished-exact}
+ (T_M(e^XU_0(b)))_c=e^{-(1-M^{-2})\omega}e^\omega b_c=e^{M^{-2}\omega}b_c,\qquad \mathsf C_{b,c}(\omega,0)=M^{-2}\omega.
+\end{equation}
+This gives the value and the derivative in (1) at every real $b$, including coarse fields whose holonomies do not commute.
+
+\paragraph{Step 3: analytic neighborhoods.}
+In local target coordinates we write $b'_c=e^{\theta_c}b_c$ with $b_c$ real. The word $F_{c,x}C_c^{-1}$ has at most $5M-3$ fine factors, and at $X=0$ it equals $I$, also for the complex target $b'$, since the identity $U_0(b)(F_{c,x})=U_0(b)(C_c)$ is algebraic. There exists $\epsilon_M>0$, depending only on $M$, such that for $\max_e\abs{X_e}<\epsilon_M$ and $\max_c\abs{\theta_c}<\epsilon_M$ all these words and the outer transport $T_M(e^XU_0(b'))_cb_c'^{-1}$ have matrix distance less than $1/4$ from $I$. Indeed, we insert the factors $e^{X_e}$ one at a time into the fixed word: real compact factors have operator norm one, the complex target factors and their inverses have norm at most $e^{\abs{\theta_c}}$, and $\norm{e^Y-I}\le e^{\abs Y}-1$. The resulting bound tends to zero uniformly in the real background. The outer transport tends to $I$ by the same bound applied to the finite sum of inner logarithms. On this domain every logarithm is given by the convergent series $\sum_{k\ge1}(-1)^{k+1}(V-I)^k/k$. By the finite-word estimates of \cref{ch02:lem:haar-and-forests}, we have first and second derivative bounds there, uniform in the real background.
+
+\paragraph{Step 4: construction of the inverse.}
+We solve one constraint at a time. In one constraint let $\omega=X_{e^*_c}$ and let $z$ denote its free logarithmic coordinates, with $\norm z_\infty$ the maximum of their norms. After decreasing $\epsilon_M$, we fix $A_M^{\mathrm{an}},K_M^{\mathrm{an}}\ge1$ such that, for all local targets with $\max\abs\theta<\epsilon_M/2$ and $\abs \omega,\norm z_\infty<\epsilon_M/2$,
+\begin{equation}\label{ch03:eq:implicit-bounds}
+ \begin{split}
+ \abs{\mathsf C_{b',c}(0,z)}&\le A_M^{\mathrm{an}}\norm z_\infty,\\
+ \norm{D_\omega \mathsf C_{b',c}(\omega,z)-M^{-2}I}&\le K_M^{\mathrm{an}}\bigl(\abs\omega +\norm z_\infty\bigr).
+ \end{split}
+\end{equation}
+The first line follows from the first derivative bound and $\mathsf C_{b',c}(0,0)=0$. The identity \eqref{ch03:eq:distinguished-exact} continues to the complex target coordinates, so $D_\omega \mathsf C_{b',c}(0,0)=M^{-2}I$, and the second line follows from the second derivative bound. All these norms concern at most $6M^3$ links, independently of $m$. Fix
+\[
+ \delta_M\le\min\bigl\{\epsilon_M/4,\ (8M^2K_M^{\mathrm{an}})^{-1},\ 1/4\bigr\},\qquad
+ \widetilde r_M=\delta_M,\qquad
+ r_M=\frac{\delta_M}{4M^2A_M^{\mathrm{an}}}.
+\]
+For $\norm z_\infty<r_M$, the second line of \eqref{ch03:eq:implicit-bounds} implies that the map $\Psi(\omega)=\omega -M^2\mathsf C_{b',c}(\omega,z)$ has Lipschitz constant at most $1/4$ on $\{\abs\omega \le\delta_M\}$, and by the first line we have $\abs{\Psi(0)}\le\delta_M/4$. Then $\Psi$ maps this closed ball into the ball of radius $\delta_M/2$. Starting from $\omega_0=0$, the iterates satisfy $\abs{\omega_{j+1}-\omega_j}\le4^{-j}\delta_M/4$ and converge uniformly to a solution of $\mathsf C_{b',c}(\omega,z)=0$. Two solutions in the ball of radius $\delta_M$ differ by at most a quarter of their distance, so they coincide. We define $\Gamma_b$ by solving these independent equations, one for each $c$, and keeping the free entries $z$.
+
+Each iterate is holomorphic. On every strictly smaller polydisc in the free logarithmic coordinates and the target variables the uniform limit is holomorphic, since the one-variable Cauchy formula in each coordinate passes to the uniform limit. Iterated Cauchy formulas give the derivative bounds. If the margins between the two polydiscs are $d_z,d_\theta>0$, a coefficient of order $s$ in one constraint is bounded by $\delta_Ms!\,(C_M/\min(d_z,d_\theta))^s$, after enlarging $C_M$ to account for the at most $3(6M^3+1)$ scalar variables of the constraint. The free entries of $\Gamma_b$ are coordinate functions. Each eliminated entry uses only the variables of its own constraint, and each variable belongs to at most six constraints, by Step 1. This proves the row and column bounds of every fixed order in (2); it is also the finite-range case of \cref{ch02:lem:coefficient-algebra}. Real coefficients and uniqueness imply real analyticity in real variables. The same construction applies in target coordinates centered at every real $b$, with the radii just chosen. On the solution, $\norm{M^2D_\omega \mathsf C-I}\le1/4$, so the determinant does not vanish; by continuity from $X=0$ it is positive for real data, and it lies between $M^{-6}(3/4)^3$ and $M^{-6}(5/4)^3$. This proves (2).
+
+\paragraph{Step 5: the Haar formula.}
+There are $d_{\mathrm{nf}}=3(Mm)^3-((Mm)^3-m^3)=2(Mm)^3+m^3$ links not in the block trees, of which $3m^3$ are eliminated edges, so $f=d_{\mathrm{nf}}-3m^3=2((Mm)^3-m^3)$ and $dz$ is Lebesgue measure in dimension $3f$.
+
+We first keep the untranslated free link matrices $V_e$ fixed and replace the matrices on the eliminated edges by the output $T_MV$. At a configuration with output $b$ we use the output chart $y_c=\Log((T_MV)_cb_c^{-1})$. Since $y_c=0$ at that point, the coarse Haar measure has density $c_{\mathrm{Haar}}\,d^3y_c$ there. In the input chart $V_{e^*_c}=e^{X_{e^*_c}}b_c$ the Haar measure of the eliminated edge has density $c_{\mathrm{Haar}}\,j_H(X_{e^*_c})\,d^3X_{e^*_c}$. With the free matrices fixed, the derivative $D_{X_{e^*}}y$ is block diagonal with blocks $D_{X_{e^*_c}}\mathsf C_{b,c}$, by Step 1, and its determinant is positive. This gives the density factor
+\begin{equation}\label{ch03:eq:distinguished-haar}
+ \prod_c\frac{j_H(X_{e^*_c})}{\det D_{X_{e^*_c}}\mathsf C_{b,c}(X)}
+\end{equation}
+relative to the coarse Haar probability measure and the Haar measure of the untranslated free matrices. The constants $c_{\mathrm{Haar}}$ of the eliminated edges cancel against those of the output chart, not against the factors $j_H$.
+
+At fixed $b$ we next write $V_eU_{0,e}(b)^{-1}=e^{z_e}$ for the free links. Right translation preserves Haar measure. Made jointly with $b$, this change of variables is triangular, so the derivatives of $z$ in $b$ do not affect its determinant. Passing to logarithms gives the factor $c_{\mathrm{Haar}}^f\prod_{e\text{ free}}j_H(z_e)\,dz$. Combining this with \eqref{ch03:eq:distinguished-haar}, we obtain $\mathscr J_b$, with the factor $j_H$ of every link not in the block trees in its numerator. Since no coarse logarithm has been integrated against Lebesgue measure, there is no additional coarse factor $j_H$. Since we used independent coordinates throughout, no surface measure or Gram determinant occurs.
+
+The parametrization is injective: the target is recovered by applying $T_M$, and then the free logarithms are recovered from the free links. The image of a Borel set $\mathcal Z$ is Borel. Indeed, with $b=T_MV$, a configuration in the block axial gauge belongs to the image if and only if its logarithms relative to $U_0(b)$ on the links not in the block trees exist in the neighborhoods above, its free logarithms belong to $\mathcal Z$, and its eliminated logarithms have norm less than $\widetilde r_M$. The constraint then holds, and uniqueness identifies these logarithms with $\Gamma_b$; each condition is Borel. The pointwise Jacobian computation therefore gives the integral formula, first on coordinate neighborhoods and then on a disjoint measurable refinement of countably many of them. Countably many suffice, since a finite product of matrix groups has a countable base of coordinate neighborhoods. By monotone approximation, the formula holds for all nonnegative Borel $F$. Finally we restore the block-tree links by the tree identity of \cref{ch02:lem:haar-and-forests}; they contribute the integral over $k$ against $H_{\mathrm{for}}$. For a gauge-invariant integrand this integral equals the value at $k=I$. Since the tree gauge and its inverse are finite products of transports, restoring it preserves the Borel description. This proves (3).
+
+The substitution $z=g\eta$ multiplies Lebesgue measure in dimension $3f$ by $g^{3f}$, and multiplication by the Wilson weight gives the stated factor together with every indicator. Integrating out $\eta$ and normalizing gives the image of the restricted measure. This proves (4).
+
+\paragraph{Step 6: symmetries.}
+We extend a coarse gauge transformation $h$ to be constant on each block. The coarse-field lift transforms into the lift of $b^h$, the block-tree links remain equal to $I$, and the relative logarithm on a link whose initial vertex lies in the block of $v$ becomes $\Ad(h_v)X_e$. This is an orthogonal map of $\R^3$ with determinant one. It acts in the same way on an eliminated input and on the output of its constraint, so $D_{X_{e^*_c}}\mathsf C_{b,c}$ is conjugated and its determinant is unchanged; uniqueness implies the equivariance of $\Gamma$.
+
+Under the spatial inversion, let $e'$ be the positive link representing the reversed image of $e$. The lift is covariant under inversion, and
+\[
+ \bigl(e^{X_e}U_{0,e}\bigr)^{-1}=e^{-\Ad(U_{0,e}^{-1})X_e}\,U_{0,e}^{-1},
+\]
+which gives the formula in (5). At fixed real $b$ this is an orthogonal signed permutation of the free and the eliminated variables. The reflected constraint for the reversed coarse link is
+\[
+ \Log\bigl((T_MV)_c^{-1}b_c\bigr)=-\Ad(b_c^{-1})\,\mathsf C_{b,c}(X),
+\]
+and its eliminated input is transformed by the same orthogonal map, because $U_{0,e^*_c}=b_c$. Its derivative is therefore conjugated, and its determinant is unchanged. Norms and the Haar factors $j_H$ are unchanged, and so is the Wilson action, since a reflection changes a plaquette transport only by conjugation and possibly inversion, both of which preserve $q$. Uniqueness implies the intertwining of $\Gamma$. A product of three-dimensional balls is mapped to the product with relabeled radii, and a product with a common radius is invariant. Although these orthogonal matrices depend on the target, the joint transformation of $(b,z)$ has a triangular derivative, and its diagonal block in $z$ has absolute determinant one. This proves (5).
+\end{proof}
+
+\section{Coercivity on the constrained fluctuation space}\label{ch03:sec:coercivity}
+
+At the identity configuration the constraint $T_MU=I$ linearizes to $DT_M(I)a=0$, where $a$ is a real one-cochain with values in $\su\simeq\R^3$. On this space, after the block axial gauge fixing, the curl controls the $\ell^2$ norm with a constant depending only on $M$, for a local reason. The value of a gauge-fixed cochain on a link $e$ not in a block tree is the circulation of $a$ around the short loop formed by $e$ and two root paths. On interface links, the loop has to be closed through the reference path $C_c$ and therefore also involves the eliminated edge $e^*_c$. The constraint $DT_M(I)a=0$ expresses $a_{e^*_c}$ as an average of circulations around the short loops $F_{c,x}C_c^{-1}$. Each circulation around a short loop is bounded by the curl in a small box, by an explicit filling (\cref{ch03:lem:box-filling}). The tree gauge and the constraint remove the directions in which the curl vanishes; the coarse field itself is not controlled.
+
+\begin{lemma}\label{ch03:lem:box-filling}
+Let $P$ be a box in $\Z^3$ with side lengths $d_1,d_2,d_3$, measured in links. Every closed lattice path $\xi$ of length $h$ in $P$ is the boundary of an integer combination $\sum_pn_pp$ of oriented elementary plaquettes of $P$ with
+\[
+ \sum_p\abs{n_p}\le h(d_1+d_2+d_3).
+\]
+In particular, every real $\su$-valued one-cochain $a$ satisfies
+\[
+ \abs{a(\xi)}\le h(d_1+d_2+d_3)\Bigl(\sum_{p\subset P}\abs{(\mathrm da)_p}^2\Bigr)^{1/2},
+\]
+where $a(\xi)$ is the signed sum of $a$ along $\xi$ and $(\mathrm da)_p$ is the signed sum of $a$ around $p$.
+\end{lemma}
+
+\begin{proof}
+Let $o$ be the lower corner of $P$ and let $\tau_x$ be the path from $o$ to $x$ that changes the coordinates in the order $1,2,3$. For a positive link $e=(x,y)$ in direction $i$, we move the final step of $\tau_xe$ backwards through the steps of $\tau_x$ in the directions $j>i$. Each interchange crosses one elementary $ij$ plaquette inside $P$; the result is $\tau_y$, and the number of plaquettes crossed is $\sum_{j>i}(x_j-o_j)\le d_1+d_2+d_3$. This gives an integer filling of the closed chain $\tau_x+e-\tau_y$ with that mass bound. For a negatively oriented step we use the negative of the filling of the reversed positive link. When we sum over all steps of a closed path, the terms $\tau_x$ cancel and the oriented edge chain of $\xi$ remains. Adding the mass bounds, we obtain the first assertion, also for paths that retrace links or repeat plaquettes. Pairing the chain identity with $a$ gives $a(\xi)=\sum_pn_p(\mathrm da)_p$, and the second assertion follows from the triangle inequality and $\max_p\abs{(\mathrm da)_p}\le(\sum_{p\subset P}\abs{(\mathrm da)_p}^2)^{1/2}$. The constant does not depend on the components of $a$.
+\end{proof}
+
+\begin{lemma}\label{ch03:lem:free-curl-gap}
+Fix an odd $M\ge3$. There exist $0<c_M\le C_M<\infty$, depending only on $M$, with the following properties. Let $m\ge4$, and let $a$ be a real $\su$-valued one-cochain on the periodic fine lattice of side $Mm$ that vanishes on the block trees and satisfies $DT_M(I)a=0$. Then
+\[
+ \sum_e\abs{a_e}^2\le C_M\sum_p\abs{(\mathrm da)_p}^2,
+\]
+where $\mathrm da$ is the signed elementary curl in fine lattice units. Further, let $\Gamma_I$ be the map of \cref{ch03:lem:relative-coarea}(2) at the coarse configuration all of whose links equal $I$, and let $E_0=D_z\Gamma_I(0)$ be the induced linear embedding of the free logarithmic coordinates. Then
+\[
+ c_MI\le E_0^{\mathsf T}\mathrm d^{\mathsf T}\mathrm dE_0\le C_MI.
+\]
+The rows and columns of $E_0$ have finite range and absolute sums bounded in terms of $M$. These estimates include all periodic identifications and all three components of $\su$, and the constants do not depend on $m$ or on the number of preceding averaging steps.
+\end{lemma}
+
+\begin{proof}
+\emph{The linearized constraint.} We differentiate \eqref{ch01:eq:ordinary-map} at $I$. The contribution of the reference path to the mean of the logarithms of the based loop holonomies cancels the derivative of the final reference factor, and we find
+\begin{equation}\label{ch03:eq:flat-constraint}
+ (DT_M(I)a)_c=M^{-3}\sum_{x\in\mathsf B_M(v)}a(F_{c,x}).
+\end{equation}
+Since $a$ vanishes on the block trees, $a(C_c)=a_{e^*_c}$, and the constraint gives
+\begin{equation}\label{ch03:eq:control-distinguished}
+ a_{e^*_c}=-M^{-3}\sum_x\bigl(a(F_{c,x})-a(C_c)\bigr).
+\end{equation}
+
+\emph{Local bounds.} The closed path $F_{c,x}C_c^{-1}$ lies in the box $P_c$ formed by the two blocks of $c$, and its length is at most $5M-3$: each root path has at most $3R_M$ links, the straight segment has $M$ links, and $C_c$ has $M$ links. The side lengths of $P_c$, in links, sum to $(2M-1)+2(M-1)=4M-3$. By \cref{ch03:lem:box-filling} and \eqref{ch03:eq:control-distinguished}, with the common constant $A_M^{\mathrm{fill}}=20M^2\ge(5M-3)(4M-3)$, we have
+\begin{equation}\label{ch03:eq:pointwise-free-gap}
+ \abs{a_{e^*_c}}\le A_M^{\mathrm{fill}}\Bigl(\sum_{p\subset P_c}\abs{(\mathrm da)_p}^2\Bigr)^{1/2}.
+\end{equation}
+A link $e=(x,y)$ not in the block tree with both endpoints in the block of $v$ has the closed path $\sigma_{v,x}e\sigma_{v,y}^{-1}$, of length at most $3M-2$. Its circulation is $a_e$, since $a$ vanishes on the tree. The side lengths of the block sum to $3M-3$, and $(3M-2)(3M-3)\le A_M^{\mathrm{fill}}$, so the same filling bound controls $\abs{a_e}$ by the curl in this single block. For an interface link $e=(x,y)$ from the block of $v$ to the block of $v+Me_i$, the closed path $\sigma_{v,x}e\sigma_{v+Me_i,y}^{-1}C_c^{-1}$ has length at most $4M-2$ and circulation $a_e-a_{e^*_c}$, and $(4M-2)(4M-3)\le A_M^{\mathrm{fill}}$. Combining these bounds with \eqref{ch03:eq:pointwise-free-gap}, we find, for every fine link $e$,
+\begin{equation}\label{ch03:eq:edge-curl-bound}
+ \abs{a_e}^2\le4\bigl(A_M^{\mathrm{fill}}\bigr)^2\sum_{p\subset P_e}\abs{(\mathrm da)_p}^2,
+\end{equation}
+where $P_e$ is the block containing $e$ or, for an interface link, the box of the two blocks. Links of the block trees satisfy the same inequality, since $a$ vanishes on them.
+
+\emph{Summation.} A plaquette has its vertices in at most four blocks. A box of one or two blocks containing the plaquette contains one of these blocks, and for each block there are at most seven such boxes: the block itself, or its union with one of its six neighbors. Each such box has at most $2M^3$ vertices and hence at most $6M^3$ positive links to which it is assigned. When \eqref{ch03:eq:edge-curl-bound} is summed over $e$, a fixed plaquette is counted at most $D_M^{\mathrm{ov}}=4\cdot7\cdot6M^3=168M^3$ times, and
+\begin{equation}\label{ch03:eq:gap-constant}
+ \sum_e\abs{a_e}^2\le C_M^{\mathrm{gap}}\sum_p\abs{(\mathrm da)_p}^2,\qquad C_M^{\mathrm{gap}}=4\bigl(A_M^{\mathrm{fill}}\bigr)^2D_M^{\mathrm{ov}}.
+\end{equation}
+Since a box of two blocks has longest side $2M-1<Mm/2$ for $m\ge4$, it lifts to a box in the covering lattice even when it meets the periodic identifications. The fillings above are therefore valid with the same bounds. All arguments are identities for chains, applied to each of the three components of $a$, with the Euclidean norm on $\su$.
+
+\emph{The embedding.} In the block axial gauge we write \eqref{ch03:eq:flat-constraint} as
+\[
+ M^{-2}a_{e^*_c}+\sum_{e\text{ free}}q_{ce}a_e=0.
+\]
+The coefficient of $a_{e^*_c}$ is $M^{-2}$, since $e^*_c$ occurs in exactly $M$ of the paths $F_{c,x}$. The sum of the absolute values of the other coefficients is at most $M^{-3}\sum_x\operatorname{length}(F_{c,x})\le4M$. Differentiating the identity $\mathsf C_{I,c}(\Gamma_I(z))=0$ of \cref{ch03:lem:relative-coarea} at $z=0$, we find that the free rows of $E_0$ are the identity and that the eliminated rows are
+\[
+ (E_0z)_{e^*_c}=-M^2\sum_eq_{ce}z_e,
+\]
+with absolute row sums at most $4M^3$; in particular each entry of an eliminated row is at most $4M^3$ in absolute value. A free link inside a block occurs only in the six constraints incident to its block, and a free interface link only in its own constraint. Hence the absolute row and column sums of $E_0$ are at most $1+4M^3$ and $1+24M^3$, respectively, and its rows and columns have finite range. For any matrix $A$, by the weighted Cauchy--Schwarz inequality, we have
+\[
+ \sum_x\Bigl\lvert\sum_yA_{xy}z_y\Bigr\rvert^2\le\Bigl(\sup_x\sum_y\abs{A_{xy}}\Bigr)\Bigl(\sup_y\sum_x\abs{A_{xy}}\Bigr)\sum_y\abs{z_y}^2,
+\]
+and this also applies to scalar coefficients tensored with the identity on $\R^3$. In particular, $\norm{E_0}_2^2\le(1+4M^3)(1+24M^3)$. Since the curl matrix has four signed entries in each row and each link lies in four plaquettes, we have $\norm{\mathrm d}_2\le4$. This proves the upper bound with the constant $16(1+4M^3)(1+24M^3)$.
+
+For the lower bound, note that the free entries of $E_0z$ are the entries of $z$, and that $E_0z$ vanishes on the block trees and satisfies the linearized constraints. Applying \eqref{ch03:eq:gap-constant} to $a=E_0z$, we obtain
+\[
+ \norm{\mathrm dE_0z}_2^2\ge\bigl(C_M^{\mathrm{gap}}\bigr)^{-1}\norm{E_0z}_2^2\ge\bigl(C_M^{\mathrm{gap}}\bigr)^{-1}\norm z_2^2.
+\]
+We take $c_M=(C_M^{\mathrm{gap}})^{-1}$ and let $C_M$ be the larger of $C_M^{\mathrm{gap}}$ and $16(1+4M^3)(1+24M^3)$. Both depend only on $M$.
+\end{proof}
+
+\section{Reflection positivity and chessboard estimates}\label{ch03:sec:reflection-observables}
+
+Osterwalder and Seiler proved in \cite{OsterwalderSeiler1978} that the Wilson measure is reflection positive. The chessboard estimate is the consequence of reflection positivity developed by Fr\"ohlich, Israel, Lieb, and Simon in \cite{FILS1978,FILS1980}; we follow the formulation and proof of Biskup in \cite[Theorem~5.8 and (5.34)--(5.35)]{Biskup2009}. We need these results for the images of the Wilson measure under $T_M^\ell$, for gauge-invariant observables, for reflections through planes bisecting links, and for disjoint cells of two sites in each direction. The treatment in \cite{Biskup2009} concerns spin systems with blocks that share boundary sites. We therefore verify reflection positivity directly for the observables we need, show that it survives the block averaging map because the blocks are centered and nested, and give the chessboard argument in full. At the end of the section, we prove exponential moment bounds for plaquette energies under the Wilson measure by combining the chessboard estimate with elementary bounds on partition functions.
+
+\paragraph{Reflections and observables.}
+Let $n\in4\N$ and consider the periodic lattice of side $n$, in its own lattice units. A bond reflection is a map $\mathsf r$ of the vertices of the form $x_j\mapsto2b+1-x_j$ for one coordinate $j$ and some $b\in\Z$, with the other coordinates unchanged. It fixes the two planes $x_j=b+1/2$ and $x_j=b+1/2+n/2$, which bisect links, and these planes divide the vertices into two open halves of width $n/2$ that are exchanged by $\mathsf r$. It acts on configurations by $(\mathsf rU)_{(x,y)}=U_{(\mathsf rx,\mathsf ry)}$, with the convention $U_{(y,x)}=U_{(x,y)}^{-1}$, and on functions by $(F\circ\mathsf r)(U)=F(\mathsf rU)$. All observables below are bounded complex-valued Borel functions of the link variables. An observable supported in a reflection half of $\mathsf r$ is such a function that is invariant under all periodic gauge transformations and depends only on links with both endpoints in one of the two open halves of $\mathsf r$. In particular, it does not depend on the links crossing the two planes.
+
+We tile the vertices by the cells $Q_t=2t+\{0,1\}^3$, $t\in(\Z/(n/2)\Z)^3$. There are $\mathfrak m=n^3/8$ cells, and the cell indices form a torus of side $n/2$, which is even. An observable supported in $Q_t$ is a bounded Borel function, invariant under all periodic gauge transformations, of the links with both endpoints in $Q_t$. For a cell index $t$, let $g_t$ be the map of the vertices with coordinate maps
+\[
+ g_{t,j}(x_j)=x_j+2t_j\quad\text{if $t_j$ is even},\qquad g_{t,j}(x_j)=2t_j+1-x_j\quad\text{if $t_j$ is odd},
+\]
+modulo $n$. It maps $Q_0$ onto $Q_t$, and in each coordinate $j$ it is the composition of the $t_j$ reflections $x_j\mapsto4k+3-x_j$, $0\le k<t_j$, through the planes $x_j=2k+3/2$ between consecutive cells; since $n/2$ is even, $g_t$ depends only on $t$ modulo $n/2$. For an observable $f$ supported in $Q_0$, the reflected translate $\vartheta_tf$ is the observable supported in $Q_t$ defined by $\vartheta_tf(U)=f(U\circ g_t)$, where $(U\circ g_t)_{(x,y)}=U_{(g_tx,g_ty)}$ for the links $(x,y)$ of $Q_0$. If $\mathsf r$ is the reflection through the planes between two consecutive cells and $t'$ is the image of the cell index $t$ under $\mathsf r$, a direct computation gives $\mathsf r\circ g_t=g_{t'}$, and hence $(\vartheta_tf)\circ\mathsf r=\vartheta_{t'}f$. For a shift $\eta\in\{0,1\}^3$ we use in the same way the shifted tiling by the cells $\eta+2t+\{0,1\}^3$, with $g_{t,j}(x_j)=x_j+2t_j$ if $t_j$ is even and $g_{t,j}(x_j)=2\eta_j+2t_j+1-x_j$ if $t_j$ is odd.
+
+For $\beta\ge0$ and an even side $N\ge4$, let
+\[
+ Z_N(\beta)=\int e^{-\beta\sum_{p\in\Faces N}q(U_p)}\,dH_N(U),\qquad d\mu_N^\beta=Z_N(\beta)^{-1}e^{-\beta\sum_{p\in\Faces N}q(U_p)}\,dH_N.
+\]
+The Wilson measure of \cref{ch01:def:ensemble} is $\mu_{N,\gamma}=\mu_N^{\beta}$ with $\beta=4N/\gamma$.
+
+\begin{theorem}\label{ch03:thm:original-chessboard}
+Let $M\ge3$ be odd, $\ell\ge0$, $n\in4\N$, and $N=M^\ell n$. For $\beta\ge0$ let $\mu^{(\ell)}=(T_M^\ell)_*\mu_N^\beta$ be the image of $\mu_N^\beta$ on the coarse lattice of side $n$; for $\ell=0$ this is $\mu_n^\beta$.
+\begin{enumerate}
+\item\emph{Reflection positivity.} For every bond reflection $\mathsf r$ of the coarse lattice and every observable $F$ supported in a reflection half of $\mathsf r$,
+\[
+ \E_{\mu^{(\ell)}}\bigl[F\,\overline{F\circ\mathsf r}\bigr]\ge0.
+\]
+The same holds under $\mu_N^\beta$ for every bounded Borel function on $\Conf N$ that is invariant under all periodic gauge transformations and depends only on fine links with both endpoints in the union of the blocks $\mathsf B_{M^\ell}(v)$ over the coarse vertices $v$ of one open half; this class contains $F\circ T_M^\ell$ for every observable $F$ supported in a reflection half of $\mathsf r$. The configurations at which the Borel extension of $T_M$ is used are included.
+\item\emph{Chessboard estimates.} For nonnegative observables $f_1,\dots,f_k$ supported in $Q_0$ and distinct cell indices $t_1,\dots,t_k$,
+\[
+ \E_{\mu^{(\ell)}}\prod_{j=1}^k\vartheta_{t_j}f_j\le\prod_{j=1}^k\Bigl[\E_{\mu^{(\ell)}}\prod_t\vartheta_tf_j\Bigr]^{1/\mathfrak m}.
+\]
+The same holds for each of the eight shifted tilings, and every coarse plaquette lies in a cell of at least one of them. In particular, writing $V=T_M^\ell U$ and $D_t(u)=\{\max_{p\subset Q_t}\groupdist(V_p)>u\}$ for $u\ge0$, where the maximum is over the plaquettes with all vertices in $Q_t$, we have for every set $T$ of cell indices
+\[
+ \mu^{(\ell)}\Bigl(\bigcap_{t\in T}D_t(u)\Bigr)\le\mu^{(\ell)}\Bigl(\bigcap_tD_t(u)\Bigr)^{\abs T/\mathfrak m},
+\]
+and
+\[
+ \mu_N^\beta\Bigl\{\max_p\groupdist\bigl((T_M^\ell U)_p\bigr)>u\Bigr\}\le n^3\Bigl[\frac{1}{Z_N(\beta)}\int e^{-\beta\sum_pq(U_p)}\one_{\cap_tD_t(u)}(T_M^\ell U)\,dH_N(U)\Bigr]^{8/n^3}.
+\]
+More generally, the chessboard inequality holds under $\mu_N^\beta$ for the cells $C^\eta_t=\bigcup_{\zeta\in\{0,1\}^3}\mathsf B_{M^\ell}(M^\ell(\eta+2t+\zeta))$ of the fine lattice, for every shift $\eta$, and for nonnegative observables supported in $C^\eta_0$, with the reflected translates defined in \cref{ch03:sec:chessboard-proof}. The inequality for $\mu^{(\ell)}$ is the special case of the functions $f\circ T_M^\ell$.
+\item\emph{Plaquette energies under the Wilson measure.} Let $\ell=0$ and $C_0=48+24\log(1/c_{\mathrm{ball}})$, where $c_{\mathrm{ball}}=\sinc^2(1/2)/(12\pi)$ is the constant of \cref{ch02:lem:haar-and-forests}. For $\beta\ge2$ and $0<s\le1/2$ set
+\[
+ A_s(n,\beta)=C_0+24\log\frac1{1-s}+\frac{36\log\beta}{n}.
+\]
+Then for every deterministic set $S$ of plaquettes,
+\[
+ \E_{\mu_n^\beta}\exp\Bigl(\frac s8\sum_{p\in S}\beta q(U_p)\Bigr)\le e^{A_s(n,\beta)\abs S/8}.
+\]
+For $K\ge0$ and a cell $Q$ let $D_Q(K)=\{\max_{p\subset Q}\beta q(U_p)\ge K\}$. For distinct cells $Q_{t_1},\dots,Q_{t_k}$ of one tiling,
+\[
+ \mu_n^\beta\Bigl(\bigcap_{j=1}^kD_{Q_{t_j}}(K)\Bigr)\le\bigl[6e^{A_s(n,\beta)-sK}\bigr]^k
+\]
+and
+\[
+ \mu_n^\beta\Bigl\{\max_p\beta q(U_p)\ge K\Bigr\}\le\min\bigl\{1,6n^3e^{A_s(n,\beta)-sK}\bigr\}.
+\]
+If $\beta\le b_+n$ for some $b_+>0$, then $36\log\beta/n\le36b_+/\mathrm e$.
+\item\emph{Conditioning.} If $D$ is an event with $\mu_n^\beta(D)\ge1-\varepsilon_D>0$, then $\E_{\mu_n^\beta}[X\mid D]\le(1-\varepsilon_D)^{-1}\E_{\mu_n^\beta}X$ for every nonnegative random variable $X$.
+\end{enumerate}
+The constant $C_0$ is absolute; no constant in (1)--(4) depends on $L$, $\beta$, $n$, $N$, or $\ell$.
+\end{theorem}
+
+\begin{remark}\label{ch03:rem:chessboard-scope}
+Reflection positivity is asserted here for the Wilson measure and its images. For $\ell>0$, the integral in part (2) is estimated in \cref{ch19:chapter,ch20:chapter}. The term $36\log\beta/n$ in $A_s$ comes from the comparison of the periodic lattice with the open cube in \cref{ch03:lem:partition-ratio}. After tree gauge fixing, the periodic lattice has $r_P=2n^3+1$ independent link variables and the open cube with $n$ vertices per side has $r_O=2n^3-3n^2+1$. Each variable contributes a factor of order $\beta^{-3/2}$, and the chessboard exponent is $1/\mathfrak m=8/n^3$, so that
+\[
+ \frac8{n^3}\cdot\frac32\,(r_P-r_O)\log\beta=\frac{36\log\beta}{n}.
+\]
+This term cannot be absorbed into $C_0$ when $n$ and $\beta$ vary independently, so we keep it.
+\end{remark}
+
+We prove part (1) in \cref{ch03:sec:rp-proof}, part (2) in \cref{ch03:sec:chessboard-proof}, and parts (3) and (4) in \cref{ch03:sec:energy-proof}.
+
+\subsection{Reflection positivity}\label{ch03:sec:rp-proof}
+
+\begin{lemma}\label{ch03:lem:fine-reflection-positivity}
+Let $N\ge4$ be even, $\beta\ge0$, and let $\mathsf r$ be a bond reflection of the periodic lattice of side $N$. Then $\mu_N^\beta$ is invariant under $\mathsf r$, and $\E_{\mu_N^\beta}[F\,\overline{F\circ\mathsf r}]\ge0$ for every observable $F$ supported in a reflection half of $\mathsf r$.
+\end{lemma}
+
+\begin{proof}
+Since the two planes of $\mathsf r$ divide the vertices into halves of width $N/2\ge2$, a vertex is an endpoint of at most one link crossing the planes, and the crossing links form a matching. We write the integral of the gauge-invariant function $G(U)=F(U)\overline{F(\mathsf rU)}e^{-\beta\sum_pq(U_p)}$ against $H_N$ as an iterated integral, first over the links not crossing the planes and then over the crossing links. For fixed values of the crossing links, let $k$ be the gauge transformation with $k_y=U_e$ at the endpoint $y$ in the plus half of each crossing link $e$, oriented from the minus half to the plus half, and $k=I$ at all other vertices. It is well defined because the crossing links form a matching. Then $(U^k)_e=I$ on every crossing link, while every other link undergoes a left or right translation by a matrix depending only on the crossing links. These translations preserve the product Haar measure of the noncrossing links, and $G(U^k)=G(U)$. Hence the integral equals the integral of $G$ with all crossing links set to $I$, against the Haar measure of the noncrossing links. The integrals over the crossing links give one. No cycle around the torus is removed by this gauge fixing.
+
+A plaquette either has all its vertices in one half or crosses one of the planes. After the crossing links are set to $I$, the transport around a crossing plaquette is, up to conjugation and inversion, $UV^{-1}$, where $U$ is a link of the plus half parallel to the plane and adjacent to it, and $V$ is the reflected link of the minus half. We identify $\SU$ with the unit quaternions, $U\leftrightarrow u\in S^3\subset\R^4$ and $V\leftrightarrow v$. Then $\tr(UV^{-1})/2=u\cdot v$, so
+\begin{equation}\label{ch03:eq:positive-crossing-kernel}
+ e^{-\beta q(UV^{-1})}=e^{-\beta}\sum_{r=0}^\infty\frac{\beta^r}{r!}\sum_{a_1,\dots,a_r=1}^4u_{a_1}\cdots u_{a_r}\,v_{a_1}\cdots v_{a_r}.
+\end{equation}
+For each $r$ the sum of the absolute values of the terms is at most $(\sum_a\abs{u_av_a})^r\le1$. The series and its finite products over the crossing plaquettes therefore converge absolutely and uniformly, and every coefficient is nonnegative for $\beta\ge0$. The plaquettes inside the minus half and the Haar measure of its links are the reflected copies of those of the plus half. Integrating $F\overline{F\circ\mathsf r}$ against the expanded weight, we obtain
+\begin{equation}\label{ch03:eq:reflection-squares}
+ Z_N(\beta)\,\E_{\mu_N^\beta}\bigl[F\,\overline{F\circ\mathsf r}\bigr]
+ =e^{-\beta\abs{\mathcal P_{\mathrm{cross}}}}\sum_\alpha c_\alpha\Bigl\lvert\int F(U_+)e^{-\beta A_+(U_+)}\phi_\alpha(U_+)\,dH_+(U_+)\Bigr\rvert^2\ge0.
+\end{equation}
+Here $\mathcal P_{\mathrm{cross}}$ is the set of crossing plaquettes, $\alpha$ runs over the degrees and component indices in \eqref{ch03:eq:positive-crossing-kernel} for all crossing plaquettes, $c_\alpha$ is the product of the corresponding coefficients $\beta^r/r!$, $U_+$ denotes the links with both endpoints in the plus half, $H_+$ their product Haar measure, $A_+$ the sum of $q(U_p)$ over the plaquettes in the plus half, and $\phi_\alpha$ the product of the corresponding real quaternion components of the plus links adjacent to the planes. Absolute convergence justifies the interchange of sum and integral for bounded Borel $F$. The partition function $Z_N(\beta)$ is positive by \cref{ch02:lem:haar-and-forests}, and the term $r=0$ covers $\beta=0$. Finally, $\mu_N^\beta$ is invariant under $\mathsf r$, since Haar measure is preserved by permutations of links and by inversion, and $q$ is preserved by conjugation and inversion.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch03:thm:original-chessboard}(1)]
+For $\ell=0$ this is \cref{ch03:lem:fine-reflection-positivity}. Let $\ell\ge1$ and $a=M^\ell$, so that $N=an$. In fine units, a bond reflection of the coarse lattice acts in the reflected coordinate by $x\mapsto(2b+1)a-x$ for some $b\in\Z$. Since $a$ is odd, both planes are bond planes of the fine lattice. For $0\le k<\ell$, the intercept divided by the mesh $M^k$ of the lattice after $k$ averaging steps is $(2b+1)M^{\ell-k}$, an odd multiple of $M$. By \cref{ch03:prop:map-properties}(4), each averaging step therefore commutes with this reflection, including at the configurations where the Borel extension is used, and so does $T_M^\ell$. By \cref{ch03:prop:map-properties}(6), a coarse link with both endpoints in one open half depends only on fine links in the union of the blocks of side $a$ of that half. Since the block nearest a plane ends half a fine lattice spacing before it, these fine links do not cross the fine planes. Since $T_M^\ell$ is Borel, the composition with $T_M^\ell$ of an observable supported in a reflection half is bounded and Borel. By gauge covariance (\cref{ch03:prop:map-properties}(3)), it is invariant under all periodic gauge transformations of the fine lattice. Applying \cref{ch03:lem:fine-reflection-positivity} to $F\circ T_M^\ell$ and to the other functions in the stated class proves (1). By the same covariance, $\mu^{(\ell)}$ is invariant under the translations of the coarse lattice and under its bond reflections, since $\mu_N^\beta$ is invariant under the corresponding fine maps.
+\end{proof}
+
+\subsection{The chessboard estimate}\label{ch03:sec:chessboard-proof}
+
+For an odd integer $a\ge1$, $n\in4\N$, and a shift $\eta\in\{0,1\}^3$, consider the periodic lattice of side $an$ and the cells
+\[
+ C^\eta_t=\bigcup_{\zeta\in\{0,1\}^3}\mathsf B_a\bigl(a(\eta+2t+\zeta)\bigr),\qquad t\in(\Z/(n/2)\Z)^3.
+\]
+They are cubes with $2a$ vertices in each direction, and they partition the vertices, since the blocks $\mathsf B_a(av)$, $v\in\Z^3$, do; for $a=1$ they are the cells $\eta+2t+\{0,1\}^3$ above. In the coordinate $j$, the plane between the cells with indices $k$ and $k+1$ is $x_j=(2\eta_j+4k+3)a/2$. It bisects links, since $a$ is odd, and the reflection through it, $x_j\mapsto(2\eta_j+4k+3)a-x_j$, maps each cell onto a cell. The second fixed plane of this reflection lies at distance $an/2=2a\cdot(n/4)$ from the first, which is a multiple of the side $2a$ of the cells. It is also a plane between consecutive cells, and every cell lies in one open half of the reflection. Observables supported in $C^\eta_t$ are defined as for $a=1$; they depend only on the links with both endpoints in $C^\eta_t$. The maps $g_t$ now have the coordinate maps $g_{t,j}(x_j)=x_j+2at_j$ if $t_j$ is even and $g_{t,j}(x_j)=(2\eta_j+2t_j+1)a-x_j$ if $t_j$ is odd, modulo $an$; they map $C^\eta_0$ onto $C^\eta_t$ and are compositions of $t_j$ reflections through planes between consecutive cells in each coordinate $j$. Reflected translates are defined by $\vartheta_tf(U)=f(U\circ g_t)$ for observables $f$ supported in $C^\eta_0$. If $\mathsf r$ is the reflection through the plane between the cells with indices $k$ and $k+1$ in the coordinate $j$, it maps the index $t$ to the index $t'$ with $t'_j=2k+1-t_j$ and the other components unchanged. Further, $\mathsf r\circ g_t=g_{t'}$, since for even $t_j$, $(2\eta_j+4k+3)a-(x_j+2at_j)=(2\eta_j+2t'_j+1)a-x_j$, and for odd $t_j$, $(2\eta_j+4k+3)a-((2\eta_j+2t_j+1)a-x_j)=x_j+2at'_j$. This implies $(\vartheta_tf)\circ\mathsf r=\vartheta_{t'}f$.
+
+\begin{lemma}\label{ch03:lem:chessboard}
+Let $a\ge1$ be odd, $n\in4\N$, and $\eta\in\{0,1\}^3$. Let $\nu$ be a probability measure on $\Conf{an}$ such that, for every bond reflection $\mathsf r$ through the planes between consecutive cells $C^\eta_t$, $\nu$ is invariant under $\mathsf r$ and $\E_\nu[F\,\overline{F\circ\mathsf r}]\ge0$ for every observable $F$ supported in a reflection half of $\mathsf r$. Then for nonnegative observables $f_1,\dots,f_k$ supported in $C^\eta_0$ and distinct cell indices $t_1,\dots,t_k$,
+\[
+ \E_\nu\prod_{j=1}^k\vartheta_{t_j}f_j\le\prod_{j=1}^k\Bigl[\E_\nu\prod_t\vartheta_tf_j\Bigr]^{1/\mathfrak m},\qquad\mathfrak m=n^3/8.
+\]
+\end{lemma}
+
+The hypotheses concern only the reflections between the cells of the given tiling. In the applications below, all bond reflections are available.
+
+\begin{proof}
+\emph{The Schwarz inequality.} Let $\mathsf r$ be a reflection through planes between consecutive cells, and call one of its open halves the plus half. For observables $G,H$ supported in the plus half, let $B_{\mathsf r}(G,H)=\E_\nu[G\,\overline{H\circ\mathsf r}]$. Since $\nu$ is invariant under the involution $\mathsf r$, we have $B_{\mathsf r}(H,G)=\E_\nu[(H\circ\mathsf r)\,\overline G]=\overline{B_{\mathsf r}(G,H)}$, so $B_{\mathsf r}$ is Hermitian, and by assumption it is positive semidefinite. Expanding $B_{\mathsf r}(G+zH,G+zH)\ge0$ for complex $z$, we find $\abs{B_{\mathsf r}(G,H)}^2\le B_{\mathsf r}(G,G)B_{\mathsf r}(H,H)$. If a diagonal entry vanishes, varying the real and imaginary parts of $z$ shows that the mixed entry vanishes as well, so no nondegeneracy is needed. For an assignment $\boldsymbol f=(f_t)_t$ of nonnegative observables supported in $C^\eta_0$ to the cell indices, we set
+\begin{equation}\label{ch03:eq:cell-schwarz}
+ \mathcal F(\boldsymbol f)=\E_\nu\prod_t\vartheta_tf_t,\qquad \mathcal F(\boldsymbol f)^2\le\mathcal F(R_+\boldsymbol f)\,\mathcal F(R_-\boldsymbol f),
+\end{equation}
+where $R_+\boldsymbol f$ assigns $f_t$ both to each index $t$ of the plus half and to its image $t'$ under $\mathsf r$, and $R_-\boldsymbol f$ is defined in the same way from the minus half. To prove the inequality, let $G=\prod_t\vartheta_tf_t$ and $H=\prod_t\vartheta_tf_{t'}$, both products over the indices $t$ of the plus half. Since every cell lies in one open half of $\mathsf r$, the functions $G$ and $H$ are observables supported in the plus half: they are bounded, Borel, gauge invariant, and depend only on links with both endpoints in that half. Since $(\vartheta_tf_{t'})\circ\mathsf r=\vartheta_{t'}f_{t'}$, the product $H\circ\mathsf r$ is the product over the minus half, so that $\mathcal F(\boldsymbol f)=B_{\mathsf r}(G,H)$, $\mathcal F(R_+\boldsymbol f)=B_{\mathsf r}(G,G)$, and $\mathcal F(R_-\boldsymbol f)=B_{\mathsf r}(H,H)$. These identities show that \eqref{ch03:eq:cell-schwarz} is the Schwarz inequality.
+
+\emph{One direction.} Consider first a cyclic array of $q$ positions, $q$ even, in which the object at each position may be an entire product over a transverse slab of cells, and reflections through the planes between positions act as above. Fix a finite collection of strictly positive bounded functions, and for its assignments $(f_0,\dots,f_{q-1})$ set
+\[
+ \mathcal G(f_0,\dots,f_{q-1})=\frac{\mathcal F(f_0,\dots,f_{q-1})}{\prod_{j=0}^{q-1}\mathcal F(f_j,\dots,f_j)^{1/q}},
+\]
+where $\mathcal F(f_j,\dots,f_j)$ is the value at the assignment that places $f_j$ at every position. The denominator is positive. Under each of the two copies in \eqref{ch03:eq:cell-schwarz} every function of one half appears twice. The product of the two new denominators therefore equals the square of the old one, and $\mathcal G$ satisfies \eqref{ch03:eq:cell-schwarz}. Let $\mathcal G_*$ be the maximum of $\mathcal G$ over the finite set of assignments; $\mathcal G_*\ge1$, since a constant assignment gives the value one. Among the maximizers we choose one with a longest cyclic run of one function, of length $k$. If $k<q$, we cut just before this run and at the opposite position; these two planes are the two fixed planes of one reflection through planes between cells. We copy the half that begins with the run to the other half. If $k<q/2$, the new array has a run of length at least $2k$; if $k\ge q/2$, that half is constant and the new array is constant. The two copied arrays have values at most $\mathcal G_*$, and \eqref{ch03:eq:cell-schwarz} at the maximizer forces both values to equal $\mathcal G_*>0$. This contradicts the maximality of the run unless $k=q$. Hence a constant assignment is a maximizer, and $\mathcal G_*=1$. This proves the one-dimensional inequality $\mathcal F(f_0,\dots,f_{q-1})\le\prod_j\mathcal F(f_j,\dots,f_j)^{1/q}$ for every even $q$, without assuming that $q$ is a power of two.
+
+\emph{Three directions.} Let $q=n/2$. We group the cell functions into the $q$ products over the transverse slabs with fixed first cell index and apply the one-dimensional inequality. Each resulting expectation repeats one slab, by reflected translates, in the first direction, and carries the exponent $1/q$. We apply the inequality in the second direction to each of these expectations, grouping over the first and third indices. Now the first two directions are homogeneous, and each exponent is $1/q^2$. Applying it in the third direction, grouping over the first two, leaves the products over all reflected translates of single cell functions, with exponent $1/q^3=1/\mathfrak m$. Every slab product used is bounded, nonnegative, gauge invariant, and supported in a reflection half of the reflections in question. To allow functions with zeros, we replace each $f$ by $f+\varepsilon$ and let $\varepsilon\downarrow0$; the finite products converge boundedly. For partial assignments, we place the constant function one in the unused cells. This proves the inequality for the tiling with shift $\eta$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch03:thm:original-chessboard}(2)]
+We apply \cref{ch03:lem:chessboard} in two ways.
+
+\emph{Coarse cells.} For every shift $\eta$, the reflections through the planes between consecutive cells $\eta+2t+\{0,1\}^3$ are bond reflections of the coarse lattice. By part (1) and the invariance proved with it, $\nu=\mu^{(\ell)}$ is invariant under every bond reflection of the coarse lattice and reflection positive for observables supported in its reflection halves. Then the lemma with $a=1$ implies the functional inequality for $\mu^{(\ell)}$ and every shifted tiling.
+
+\emph{Fine cells.} Let $a=M^\ell$. For every shift $\eta$, the planes between consecutive cells $C^\eta_t$ are $x_j=(2\eta_j+4k+3)M^\ell/2$, and the reflections through them are bond reflections of the fine lattice, since $(2\eta_j+4k+3)M^\ell$ is odd. An observable supported in a reflection half of such a reflection is a bounded Borel gauge-invariant function of the fine links with both endpoints in one open half. Since the blocks partition the vertices and the planes run between blocks, these are the fine links with both endpoints in the union of the blocks $\mathsf B_{M^\ell}(v)$ over the coarse vertices $v$ of that half. By \cref{ch03:lem:fine-reflection-positivity}, $\nu=\mu_N^\beta$ is invariant under every bond reflection of the fine lattice and reflection positive for these observables. By the lemma with $a=M^\ell$, the inequality holds for nonnegative observables supported in $C^\eta_0$, for every shift $\eta$.
+
+\emph{The coarse inequality as a special case.} Let $f$ be an observable supported in the coarse cell $\eta+\{0,1\}^3$. By \cref{ch03:prop:map-properties}(2), (3), and (6), $f\circ T_M^\ell$ is bounded, Borel, invariant under all periodic gauge transformations of the fine lattice, and depends only on fine links with both endpoints in the union of the blocks $\mathsf B_{M^\ell}(M^\ell v)$ over the vertices $v$ of the coarse cell, that is, in $C^\eta_0$. Written in fine units, the coarse map $g_t$ is the fine map $g_t$ with $a=M^\ell$: in each coordinate it is a translation by $2M^\ell t_j$ or a reflection $x_j\mapsto(2\eta_j+2t_j+1)M^\ell-x_j$. After $k<\ell$ averaging steps these are, in the units of that lattice, a translation by a multiple of $M$ or a reflection with intercept $(2\eta_j+2t_j+1)M^{\ell-k}\in M\Z$. By \cref{ch03:prop:map-properties}(4), each averaging step commutes with them, and so does $T_M^\ell$. We conclude that $(\vartheta_tf)\circ T_M^\ell=\vartheta_t(f\circ T_M^\ell)$ and
+\[
+ \E_{\mu^{(\ell)}}\prod_j\vartheta_{t_j}f_j=\E_{\mu_N^\beta}\prod_j\vartheta_{t_j}\bigl(f_j\circ T_M^\ell\bigr),
+\]
+so the inequality for $\mu^{(\ell)}$ is the special case of the functions $f\circ T_M^\ell$ of the fine inequality.
+
+\emph{Bad cells.} The reflections permute the six plaquettes of a cell and conjugate or invert their transports, which preserves $\groupdist$; hence the reflected translate of $\one_{D_0(u)}$ is $\one_{D_t(u)}$. As a function of $V$, this indicator is a nonnegative observable supported in $Q_0$, since $\groupdist$ is continuous and invariant under conjugation. Its composition with $T_M^\ell$ is Borel and gauge invariant by \cref{ch03:prop:map-properties}(2) and (3). Taking $f_j=\one_{D_0(u)}$ for the cells of $T$ gives the bound for $\bigcap_{t\in T}D_t(u)$. A coarse $ij$ plaquette is contained in a cell of the tiling whose shift matches the parities of its starting vertex in the directions $i$ and $j$, with either shift in the third direction. The eight tilings therefore cover all plaquettes, with $8\mathfrak m=n^3$ cells in total. The event that all cells of a shifted tiling are bad is a translate of the corresponding event for $\eta=0$, and $\mu^{(\ell)}$ is invariant under translations of the coarse lattice. The bound for a single cell and a union bound over the $n^3$ cells give the maximum inequality, since
+\[
+ \mu^{(\ell)}\Bigl(\bigcap_tD_t(u)\Bigr)=\frac{1}{Z_N(\beta)}\int e^{-\beta\sum_pq(U_p)}\one_{\cap_tD_t(u)}(T_M^\ell U)\,dH_N(U).
+\]
+\end{proof}
+
+\subsection{Partition functions and plaquette energy moments}\label{ch03:sec:energy-proof}
+
+We now derive the moment bounds of part (3). We combine the chessboard estimate with bounds on partition functions obtained by tree gauge fixing, by integrating independent plaquette variables, and by dropping nonnegative plaquette terms. Elementary bounds of this kind are in the tradition of the stability estimates of Faria da Veiga and O'Carroll in \cite{FariaVeigaOCarroll2019,FariaVeigaOCarroll2025}; we derive the precise periodic correction needed here.
+
+\begin{lemma}\label{ch03:lem:open-normalization}
+For every $\beta>0$,
+\[
+ \begin{aligned}
+ z_1(\beta)&=\int_{\SU}e^{-\beta q(U)}\,dH(U)=\frac2\pi\int_0^\pi e^{-\beta(1-\cos t)}\sin^2t\,dt\\
+ &=\frac{2e^{-\beta}I_1(\beta)}\beta\le c_G\beta^{-3/2},\qquad c_G=\sqrt{2/\pi},
+ \end{aligned}
+\]
+where $I_1(\beta)=\sum_{k\ge0}(\beta/2)^{2k+1}/(k!(k+1)!)$, and $z_1(0)=1$ by continuous extension. If $S$ is a random variable with density $s^{1/2}e^{-s}/\Gamma(3/2)$ on $s>0$, then
+\[
+ \frac{z_1(\beta)}{c_G\beta^{-3/2}}=\E\sqrt{(1-S/(2\beta))_+}.
+\]
+For an integer $n\ge1$ let $O_n$ be the open cube with vertices $\{0,\dots,n\}^3$, all links and plaquettes between them, and no prescribed boundary links, and let $Z_{O_n}(\beta)$ be its partition function with respect to the product Haar probability measure. Let $r_n=2n^3+3n^2$ be the number of links of $O_n$ not in a spanning tree, and let $P_n=3n^2(n+1)$ be the number of its plaquettes. Then for every $\beta\ge1$,
+\[
+ -\tfrac32r_n\log\beta+r_n\log c_{\mathrm{ball}}-2P_n\le\log Z_{O_n}(\beta)\le r_n\log z_1(\beta)\le-\tfrac32r_n\log\beta+r_n\log c_G,
+\]
+where $c_{\mathrm{ball}}=\sinc^2(1/2)/(12\pi)$. The constants are absolute and the inequalities hold uniformly in $n$ and $\beta$; the bound $Z_{O_n}(\beta)\le z_1(\beta)^{r_n}$ holds for every $\beta>0$. For an open cube with $n$ vertices in each direction the number of links not in a spanning tree is $2n^3-3n^2+1$. Finally, the partition function of the periodic lattice of side $n+1$ at any $\beta>0$ is at most $Z_{O_n}(\beta)$.
+\end{lemma}
+
+The last statement compares unnormalized integrals. It bounds a periodic partition function from above, but it does not replace that partition function in the denominator of a normalized expectation.
+
+\begin{proof}
+\emph{One plaquette.} By the radial form of Haar measure in \cref{ch02:lem:haar-and-forests}, with $t=\abs X/2$, we have $z_1(\beta)=(2/\pi)\int_0^\pi e^{-\beta(1-\cos t)}\sin^2t\,dt$. To compute the series, let $J_k=\int_0^\pi\sin^2t\cos^{2k}t\,dt$, so $J_0=\pi/2$. For $k\ge1$, integrating the derivative of $\sin^3t\cos^{2k-1}t$, whose boundary values vanish, gives $(2k+2)J_k=(2k-1)J_{k-1}$, and therefore $J_k=\pi(2k)!/(2\cdot4^kk!(k+1)!)$. Odd powers of $\cos t$ integrate to zero against $\sin^2t$, by the substitution $t\mapsto\pi-t$. Since the exponential series converges uniformly on $[0,\pi]$, integrating termwise, we find
+\[
+ z_1(\beta)=e^{-\beta}\sum_{k\ge0}\frac{(\beta/2)^{2k}}{k!(k+1)!}=\frac{2e^{-\beta}I_1(\beta)}\beta.
+\]
+The integral is at most one and tends to one as $\beta\downarrow0$, which gives the continuous extension. For $\beta>0$, we substitute $s=\beta(1-\cos t)$. Since $\sin t=(2s/\beta)^{1/2}(1-s/(2\beta))^{1/2}$ and $ds=\beta\sin t\,dt$, we obtain
+\begin{equation}\label{ch03:eq:gamma-one-face}
+ z_1(\beta)=\frac{2\sqrt2}\pi\,\beta^{-3/2}\int_0^{2\beta}s^{1/2}e^{-s}\sqrt{1-\frac s{2\beta}}\,ds.
+\end{equation}
+Dividing by $c_G\beta^{-3/2}$ and using $\Gamma(3/2)=\sqrt\pi/2$ gives the identity with the Gamma variable $S$. The integrand $\sqrt{(1-S/(2\beta))_+}$ lies between zero and one, which proves $z_1(\beta)\le c_G\beta^{-3/2}$ for every $\beta>0$.
+
+\emph{Counting.} The open cube has $(n+1)^3$ vertices, $3n(n+1)^2$ links, and $P_n=3n^2(n+1)$ plaquettes, and $3n(n+1)^2-(n+1)^3+1=r_n$. The following links form a spanning tree: all links in direction 1, the links in direction 2 in the plane $x_1=0$, and the links in direction 3 on the line $x_1=x_2=0$. Indeed every vertex reaches $(0,0,0)$ by decreasing first $x_1$, then $x_2$, then $x_3$, and there are $n(n+1)^2+n(n+1)+n=(n+1)^3-1$ such links. By \cref{ch02:lem:haar-and-forests}, integrating out the gauge in this tree gives the factor one. In this gauge we write $Y_{x,y,z}$ and $Z_{x,y,z}$ for the links in directions 2 and 3 at the vertex $(x,y,z)$; then $Y_{0,y,z}=I$ and $Z_{0,0,z}=I$.
+
+\emph{Upper bound.} Consider the set of plaquettes consisting of all $12$ plaquettes, all $13$ plaquettes, and the $23$ plaquettes in the plane $x_1=0$. With positive orientations, their transports are
+\[
+ A_{x,y,z}=Y_{x+1,y,z}Y_{x,y,z}^{-1},\qquad B_{x,y,z}=Z_{x+1,y,z}Z_{x,y,z}^{-1},\qquad D_{y,z}=Z_{0,y+1,z}Z_{0,y,z}^{-1}.
+\]
+For $A$ and $B$ the coordinate $x$ runs from $0$ to $n-1$ and the other coordinates over their full ranges, so there are $n^2(n+1)$ plaquettes of each of these two kinds, and there are $n^2$ plaquettes $D$; in total $r_n$. From the $D$ variables we reconstruct the links $Z_{0,y,z}$ successively in $y$, starting from $Z_{0,0,z}=I$. From the $A$ variables we reconstruct every $Y$ successively in $x$, starting from $Y_{0,y,z}=I$. From the $B$ variables, with $Z_{0,y,z}$ already known, we reconstruct the remaining $Z$ successively in $x$. In each step a new link equals a new plaquette variable times a link already fixed. By invariance of Haar measure and iterated integration, these plaquette variables are independent and Haar distributed. The plaquettes not in this set contribute factors at most one, since $q\ge0$. Dropping them, we find $Z_{O_n}(\beta)\le z_1(\beta)^{r_n}$ for every $\beta>0$.
+
+\emph{Lower bound.} Let $\beta\ge1$. We restrict each of the $r_n$ links not in the tree to $\{\groupdist(U_e)<\beta^{-1/2}\}$, where $\beta^{-1/2}\le1$. By \cref{ch02:lem:haar-and-forests} each such ball has Haar measure at least $c_{\mathrm{ball}}\beta^{-3/2}$. A plaquette contains at most four links not in the tree, so by the triangle inequality for $\groupdist$ we have $\groupdist(U_p)\le4\beta^{-1/2}$, and $q(U_p)\le\groupdist(U_p)^2/8\le2/\beta$; the first inequality is an inequality between group distances and holds even if its right side exceeds the radius of the logarithm chart. Hence the Boltzmann factor is at least $e^{-2P_n}$ on this set, whose product Haar measure is at least $(c_{\mathrm{ball}}\beta^{-3/2})^{r_n}$. Taking logarithms gives the lower bound, and the bound of the previous paragraph together with $z_1(\beta)\le c_G\beta^{-3/2}$ gives the remaining inequality. Since the boundary spheres of the balls have Haar measure zero, open and closed balls give the same estimate.
+
+Replacing $n$ by $n-1$, we find that the number of links not in a spanning tree of an open cube with $n$ vertices in each direction is $2(n-1)^3+3(n-1)^2=2n^3-3n^2+1$. Finally, deleting from the periodic lattice of side $n+1$ the plaquettes that contain a link joining the vertex layers $x_j=n$ and $x_j=0$, for some $j$, leaves the open cube $O_n$ and the links joining those layers, which no remaining plaquette uses. The integrals of the latter against Haar probability measure equal one, and deleting plaquettes with nonnegative cost can only increase the integral. This proves the last statement.
+\end{proof}
+
+\begin{lemma}\label{ch03:lem:partition-ratio}
+Let $n\in4\N$, put $V=n^3$ and $\mathfrak m=V/8$, and let $Z_P(n,\beta)=Z_n(\beta)$ be the partition function of the periodic lattice of side $n$. Put $r_P=2V+1$ and $r_O=2V-3n^2+1$. Then
+\begin{equation}\label{ch03:eq:periodic-lower}
+ \log Z_P(n,\beta)\ge-\tfrac32r_P\log\beta+r_P\log c_{\mathrm{ball}}-6V,\qquad\beta\ge1,
+\end{equation}
+\begin{equation}\label{ch03:eq:periodic-upper}
+ Z_P(n,\beta')\le Z_{O_{n-1}}(\beta')\le\bigl(c_G(\beta')^{-3/2}\bigr)^{r_O},\qquad\beta'>0.
+\end{equation}
+As a consequence, for $\beta\ge2$ and $0<s\le1/2$,
+\begin{align}
+ \frac1{\mathfrak m}\log\frac{Z_P(n,(1-s)\beta)}{Z_P(n,\beta)}
+ &\le\frac{12(r_P-r_O)}V\log\beta+\frac{12r_O}V\log\frac1{1-s}\notag\\
+ &\quad+\frac8V\bigl(r_O\log c_G-r_P\log c_{\mathrm{ball}}+6V\bigr)\label{ch03:eq:ratio-bound}\\
+ &\le\frac{36\log\beta}n+24\log\frac1{1-s}+C_0=A_s(n,\beta),\notag
+\end{align}
+with
+\begin{equation}\label{ch03:eq:C0-choice}
+ C_0=48+24\log(1/c_{\mathrm{ball}}).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+A spanning tree of the periodic lattice has $V-1$ links, so $3V-(V-1)=r_P$ links are not in it; by \cref{ch02:lem:haar-and-forests} the gauge in the tree integrates to one. We restrict all links not in the tree, including those carrying the holonomies around the torus, to balls $\{\groupdist(U_e)<\beta^{-1/2}\}$ with $\beta^{-1/2}\le1$. As in the proof of \cref{ch03:lem:open-normalization}, each ball has Haar measure at least $c_{\mathrm{ball}}\beta^{-3/2}$ and each plaquette costs at most $q(U_p)\le2/\beta$. There are $3V$ plaquettes, which gives \eqref{ch03:eq:periodic-lower}. By the last statement of \cref{ch03:lem:open-normalization}, applied with side $n=(n-1)+1$, the periodic partition function is at most that of the open cube with $n$ vertices in each direction, which has $r_O$ links not in a spanning tree. The upper bound of \cref{ch03:lem:open-normalization} then implies \eqref{ch03:eq:periodic-upper}. This upper bound needs only $\beta'>0$; below we use it with $\beta'=(1-s)\beta\ge1$, where every inequality of the lemma applies.
+
+Subtracting \eqref{ch03:eq:periodic-lower} from the logarithm of \eqref{ch03:eq:periodic-upper} with $\beta'=(1-s)\beta$ and multiplying by $1/\mathfrak m=8/V$, we obtain the first inequality in \eqref{ch03:eq:ratio-bound}. For the second we use $r_P-r_O=3n^2$, $r_O/V\le2$, $r_P/V\le3$, $\log\beta\ge0$, and $\log c_G<0$: the first term equals $36\log\beta/n$, the second is at most $24\log(1/(1-s))$, and the third is at most $(8/V)(3V\log(1/c_{\mathrm{ball}})+6V)=C_0$. We keep the surface term $36\log\beta/n$ in this form, before any relation between $n$ and $\beta$ is imposed.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch03:thm:original-chessboard}(3) and (4)]
+We write $Y_p=\beta q(U_p)\ge0$ and $\mathfrak m=n^3/8$. For a cell $Q_0$ let $f=\exp(s\sum_{p\subset Q_0}Y_p)$, the sum running over the six plaquettes of the cell. This is a nonnegative bounded observable supported in $Q_0$. The product of its reflected translates over all cells uses each plaquette inside a cell exactly once, so its exponent is at most $s\sum_pY_p$, the sum over all plaquettes. By \cref{ch03:lem:partition-ratio}, we have
+\[
+ \E_{\mu_n^\beta}\prod_t\vartheta_tf\le\frac{Z_P(n,(1-s)\beta)}{Z_P(n,\beta)}\le e^{A_s(n,\beta)\mathfrak m}.
+\]
+By part (2), the product of $f$ over $h$ distinct cells of one tiling has expectation at most $e^{A_s(n,\beta)h}$. Now let $S$ be a deterministic set of plaquettes. We assign each $p\in S$, by a fixed rule, to a cell containing it in one of the eight shifted tilings. Let $S_a$ be the plaquettes assigned to the tiling $a$, and let $h_a$ be the number of cells of that tiling to which some plaquette is assigned. Enlarging each assigned sum to all six plaquettes of the cell, we find $\E\exp(s\sum_{p\in S_a}Y_p)\le e^{A_s(n,\beta)h_a}$. By H\"older's inequality with eight exponents equal to eight, we have
+\[
+ \E e^{(s/8)\sum_{p\in S}Y_p}\le\prod_{a=1}^8\Bigl[\E e^{s\sum_{p\in S_a}Y_p}\Bigr]^{1/8}\le e^{A_s(n,\beta)\sum_ah_a/8}\le e^{A_s(n,\beta)\abs S/8}.
+\]
+In the last inequality we used $\sum_ah_a\le\abs S$ and $A_s(n,\beta)\ge0$.
+
+For the bad cells, note the pointwise bound $\one_{D_Q(K)}\le\sum_{p\subset Q}e^{s(Y_p-K)}$. Multiplying over the $\mathfrak m$ cells of a tiling and expanding, we obtain $6^{\mathfrak m}$ terms, one for each choice of a plaquette in every cell. The chosen plaquettes are distinct, and the sum of their energies is at most the sum over all plaquettes. Therefore
+\[
+ \mu_n^\beta\Bigl(\bigcap_tD_{Q_t}(K)\Bigr)\le6^{\mathfrak m}e^{-sK\mathfrak m}\,\frac{Z_P(n,(1-s)\beta)}{Z_P(n,\beta)}\le\bigl[6e^{A_s(n,\beta)-sK}\bigr]^{\mathfrak m}.
+\]
+Applying part (2) to the indicator of $D_{Q_0}(K)$ in $k$ distinct cells, we obtain the joint bound. A union bound over the $n^3$ cells of the eight tilings, together with the trivial bound by one, gives the bound for the maximum. All constants in these bounds are absolute.
+
+If $\beta\le b_+n$, then
+\[
+ \frac{\log\beta}n=\frac\beta n\cdot\frac{\log\beta}\beta\le\frac{b_+}{\mathrm e},
+\]
+since $(\log x)/x$ attains its maximum at $x=\mathrm e$; this simplification uses the additional relation between $\beta$ and $n$. Finally, for a nonnegative $X$ and an event $D$ with $\mu_n^\beta(D)\ge1-\varepsilon_D>0$,
+\[
+ \E[X\mid D]=\frac{\E[X\one_D]}{\mu_n^\beta(D)}\le(1-\varepsilon_D)^{-1}\E X.
+\]
+This bound does not depend on the number of factors in $X$, and it does not use reflection positivity of the conditioned measure. This completes the proof of \cref{ch03:thm:original-chessboard}.
+\end{proof}

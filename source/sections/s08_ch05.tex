@@ -1,0 +1,775 @@
+\chapter{Linearized averaging and effective quadratic forms}\label{ch05:chapter}
+
+This section proves deterministic estimates for the block averaging map $T_M$ of \cref{ch01:def:block-map}. We compute the derivative of $T_M^d$ at the identity, the transverse Gaussian covariance that it induces from an auxiliary Maxwell field, and the effective Maxwell quadratic form (\cref{ch05:thm:flat-precision}). We also bound small translation-invariant kernels that annihilate gradients and commute with spatial inversion by the lattice Maxwell form (\cref{ch05:lem:ward-parity}). We then construct the gauge-corrected iteration near a background with small curvature and prove locality and absolute derivative bounds at each fixed order, including volume-normalized column sums, uniformly in the number of averaging steps (\cref{ch05:lem:modified-average,ch05:lem:physical-jets}). The Gaussian fields in this section are auxiliary, and no statement concerns the Wilson measure. The estimates are used to construct the background fields in \cref{part:background}.
+
+We distinguish two statements with different proofs. The first is linear and exact: the derivative of $T_M^d$ at the identity is the average $K_{M^d}$ along straight segments of length $M^d$ plus a lattice gradient,
+\[
+ D(T_M^d)(I)=K_{M^d}+\nabla\mathsf R_d
+\]
+(\cref{ch05:lem:flat-average-semigroup}). The second is nonlinear. Near a background configuration $U_0$ whose plaquettes are close to the identity, we multiply the output of each averaging step by gauge transformations at the two endpoints of each coarse link. In logarithmic coordinates divided by the lattice spacing, the resulting gauge-corrected step is a transported segment average plus errors that are summable over scales. The gauge-corrected iteration coincides with the iterated block averaging map after an explicit composed gauge transformation (\cref{ch05:lem:modified-average}). The gradient in the first statement and the gauge transformations in the second play analogous roles, but neither statement implies the other.
+
+The inputs are the Hodge decomposition and Schur complement identities of \cref{ch02:lem:hodge-schur}, the weighted product and inverse estimates of \cref{ch02:lem:coefficient-algebra}, the coercivity of the curl on the constrained fluctuation space in \cref{ch03:lem:free-curl-gap}, and the curvature iteration of \cref{ch04:thm:energy-near-contraction}. The lattice, the norms, and the conventions for constants are those of \cref{ch01:def:ensemble,ch01:def:analytic-norms,ch01:conv:constants}. The results are used in \cref{ch06:chapter} to construct coordinates on the constraint fibers (\cref{ch06:thm:matched-flat-extension,ch06:thm:nonlinear-section,ch06:thm:projected-landau-slice}), in \cref{ch07:thm:bellman} to identify the Hessian of the effective classical action, in \cref{ch08:lem:two-differences} to factor perturbations of that Hessian, and in \cref{ch28:chapter} for the normalization of the heat-smoothed circulations (\cref{ch28:thm:maxwell-calibration}).
+
+The linear theory is part of Bałaban's analysis of Gaussian block integration for lattice gauge fields. The averages with and without endpoint paths, their action on gradients, their composition, and their Fourier representation appear in \cite[(1.8)--(1.13), p.~19, Section~B, and (1.29)--(1.32), p.~23]{Balaban1984I}. We use centered blocks, a fixed order of coordinate paths, and a Borel extension at the singularity of the logarithm, and we prove the estimates below for these choices. Two points require care. First, the meromorphic formula for the inverse of the projected covariance has apparent singularities on the complex characteristic set $\Lambda_m(z)=0$, which meets every neighborhood of the origin. We cancel these singularities before deducing exponential decay of the kernel. Second, the nonnegative scalar kernel of the transported segment average has row sums exactly one and counting column sums exactly $M^{-3}$. These masses must be kept exactly, since a fixed factor larger than one at each scale would destroy the uniformity in the number of averaging steps.
+
+\section{Linearized block averaging}\label{ch05:sec:linear}
+
+\paragraph{Conventions.}
+Unless physical units are displayed, a Fourier calculation in this section uses lattice coordinates with spacing one. For a finite matrix whose entries are color blocks, the row norm is the supremum over outputs of the sum over inputs of the operator norms of the blocks. The column norm is the supremum over inputs of the sum over outputs. Both use counting measure, and the subscript $\mathrm{row}+\mathrm{col}$ denotes their sum, which is at least their maximum and at most twice it. A rate in the subscript, as in $\norm{\cdot}_{a,\mathrm{row}+\mathrm{col}}$, means that the entry with indices $x,y$ is multiplied by $e^{a\dist(x,y)}$ before summing. Distances between links are periodic $\ell^1$ distances between their initial vertices. Moving the location of a link from its initial vertex to its midpoint changes these distances by at most one, and it changes any fixed exponentially weighted bound by at most a fixed factor. For the nonlinear maps in \cref{ch05:sec:corrected,ch05:sec:columns}, distances are measured in the physical units stated there.
+
+\paragraph{Paths in the block averaging map.}
+We recall the paths of \cref{ch01:def:block-map}. We write $M=2R_M+1$. For a vertex $v\in M\Z^3$ of the coarse lattice, its block is $\mathsf B_M(v)=v+([-R_M,R_M]^3\cap\Z^3)$, and for $x\in\mathsf B_M(v)$ the coordinate path $\sigma_{v,x}$ from $v$ to $x$ changes the coordinates in the order $1,2,3$. For a coarse link $c=(v,v+Me_i)$, the reference path $C_c$ is the straight path from $v$ to $v+Me_i$, and for $x\in\mathsf B_M(v)$ the translated path with endpoint connectors is
+\[
+ F_{c,x}=\sigma_{v,x}\,[x,x+Me_i]\,\sigma_{v+Me_i,x+Me_i}^{-1};
+\]
+see \cref{ch05:fig:paths}. The block averaging map is
+\[
+ (T_MU)_c=\exp\Bigl\{M^{-3}\sum_{x\in\mathsf B_M(v)}\Log\bigl(U(F_{c,x})U(C_c)^{-1}\bigr)\Bigr\}U(C_c),
+\]
+where $U(\eta)$ is the transport along a path $\eta$, and $(T_MU)_c=U(C_c)$ if one of the based loop holonomies $U(F_{c,x})U(C_c)^{-1}$ equals $-I$.
+
+\begin{figure}[ht]
+\centering
+\setlength{\unitlength}{1.25cm}
+\begin{picture}(6.2,3.2)(-1.6,-1.6)
+\multiput(-1,-1)(1,0){6}{\multiput(0,0)(0,1){3}{\circle*{0.09}}}
+\put(-1.45,-1.45){\framebox(2.9,2.9){}}
+\put(1.55,-1.45){\framebox(2.9,2.9){}}
+\linethickness{1.6pt}
+\put(0,-0.12){\line(1,0){3}}
+\thinlines
+\put(0,0){\vector(-1,0){0.95}}
+\put(-1,0){\vector(0,1){0.95}}
+\put(-1,1){\vector(1,0){2.95}}
+\put(2,1){\vector(0,-1){0.95}}
+\put(2,0){\vector(1,0){0.95}}
+\put(-0.15,-0.45){$v$}
+\put(2.7,-0.45){$v+Me_1$}
+\put(-1.3,1.12){$x$}
+\put(2.08,1.12){$x+Me_1$}
+\end{picture}
+\caption{A two-dimensional slice of two neighboring blocks for $M=3$. The thick line is the reference path $C_c$ of the coarse link $c=(v,v+Me_1)$. The arrows show the translated path with endpoint connectors $F_{c,x}$: the coordinate path $\sigma_{v,x}$, the segment $[x,x+Me_1]$, and the reversed coordinate path $\sigma_{v+Me_1,x+Me_1}^{-1}$. At the identity the derivatives of the two connectors produce the gradient term in \eqref{ch05:eq:one-step-endpoint}; in the gauge-corrected average of \cref{ch05:sec:corrected} they are canceled by gauge transformations at $v$ and $v+Me_1$.}
+\label{ch05:fig:paths}
+\end{figure}
+
+\begin{lemma}\label{ch05:lem:flat-average-semigroup}
+Fix an odd integer $M\ge3$ and integers $d\ge0$ and $n\ge4$, and set $m=M^d$. On the fine torus of side $mn$, with coarse coordinates $Y$, let $\mathsf I_m=\{-(m-1)/2,\ldots,(m-1)/2\}^3$ and define, for a one-cochain $x$ and a scalar function $f$,
+\[
+ \begin{aligned}
+ (K_mx)_i(Y)&=m^{-3}\sum_{r\in\mathsf I_m}\sum_{s=0}^{m-1}x_i(mY+r+se_i),\\
+ (\mathsf A_mf)(Y)&=m^{-3}\sum_{r\in\mathsf I_m}f(mY+r).
+ \end{aligned}
+\]
+For $d=0$ both maps are the identity. Then the following statements hold.
+\begin{enumerate}
+\item With the forward gradient $\nabla f(x,x+e_i)=f(x+e_i)-f(x)$,
+\[
+ K_m\nabla_{\mathrm{fine}}f=\nabla_{\mathrm{coarse}}\mathsf A_mf,\qquad
+ K_{m_2}K_{m_1}=K_{m_1m_2},\qquad
+ \mathsf A_{m_2}\mathsf A_{m_1}=\mathsf A_{m_1m_2},
+\]
+where in the last two identities $m_1$ and $m_2$ are odd, the first map averages by the factor $m_1$, and the second acts on the resulting lattice.
+\item There exists a linear map $\mathsf R_d$ from fine one-cochains to periodic scalar functions on the coarse torus such that
+\[
+ D(T_M^d)(I)x=K_mx+\nabla_{\mathrm{coarse}}\mathsf R_dx.
+\]
+In particular $\langle J,D(T_M^d)(I)x\rangle=\langle J,K_mx\rangle$ for every divergence-free coarse current $J$, that is, for every one-chain with zero signed incidence at each vertex.
+\item In units in which the coarse spacing is one, so that the fine spacing is $\epsilon=M^{-d}$, define the average of physical potentials by
+\[
+ Q_d=\frac1mK_m.
+\]
+Then $Q_d$ maps every constant vector field to itself, $Q_d\nabla_{\mathrm{phys,fine}}=\nabla_{\mathrm{phys,coarse}}Q'_d$ with the scalar average $Q'_d=\mathsf A_m$, and if $d=d_1+d_2$, then $Q_d$ is the composition of the physical averages with factors $M^{d_1}$ and $M^{d_2}$ on the corresponding lattices.
+\item Translating the averaging box from $\{0,\ldots,m-1\}^3$ to the centered box $\mathsf I_m$ multiplies the Fourier multiplier of $K_m$ by the common phase $\exp[-i(m-1)\sum_jk_j/2]$, which is the same for all output directions and cancels in every product of the multiplier with its adjoint.
+\end{enumerate}
+These are identities for the derivative of $T_M^d$ at the identity connection $U=I$; they do not identify a nonlinear average with factor $m$ with $T_M^d$. They involve no coupling constant and no volume factor.
+\end{lemma}
+
+\begin{proof}
+For a path $\sigma$, let $p_\sigma(x)$ be the signed sum of the one-cochain $x$ along $\sigma$, so that a reversed link contributes the negative of the value on the positively oriented link. At the identity, the derivative of a path transport is the path sum. In the formula for $T_M$, the derivative of the final factor $U(C_c)$ cancels the reference-path sums inside the mean of the logarithms. The derivative on $c=(v,v+Me_i)$ is
+\[
+ M^{-3}\sum_{r\in\mathsf I_M}\Bigl\{p_{\sigma_{v,v+r}}(x)+\sum_{s=0}^{M-1}x_i(v+r+se_i)-p_{\sigma_{v+Me_i,v+Me_i+r}}(x)\Bigr\}.
+\]
+Let $p_v(x)=M^{-3}\sum_rp_{\sigma_{v,v+r}}(x)$. In the forward gradient convention of the statement we obtain
+\begin{equation}\label{ch05:eq:one-step-endpoint}
+ DT_M(I)x=K_Mx-\nabla p(x).
+\end{equation}
+The scalar $p$ is periodic and linear in $x$. Its sign matters only for the definition of $\mathsf R_d$ and is fixed by \eqref{ch05:eq:one-step-endpoint}.
+
+For a scalar $f$, the inner sum over $s$ in $K_m\nabla f$ telescopes to $f(mY+r+me_i)-f(mY+r)$, and averaging over $r$ proves the gradient identity. For two successive odd factors, we expand both sums. The offsets in the box are $m_1r_2+r_1$, and the offsets along the segment are $m_1s_2+s_1$. The latter run once through $0,\ldots,m_1m_2-1$. In one coordinate, the former run once through the centered interval of length $m_1m_2$: the intervals of length $m_1$ centered at the points $m_1r_2$ are adjacent, and their extreme endpoints are $\pm(m_1m_2-1)/2$. Taking products over the three coordinates and multiplying the weights gives both composition identities, including across the periodic seams.
+
+Let $F_j=D(T_M^j)(I)$, and let $\mathsf R_0=0$. Suppose that $F_j=K_{M^j}+\nabla\mathsf R_j$. Since $T_M^j(I)=I$, using the chain rule, \eqref{ch05:eq:one-step-endpoint} at the next lattice, and the gradient identity, we obtain
+\[
+ F_{j+1}=K_{M^{j+1}}+\nabla\{\mathsf A_M\mathsf R_j-pF_j\}.
+\]
+This defines the periodic linear map $\mathsf R_{j+1}$. If $J$ has zero signed incidence at every vertex, then $\nabla^{\mathsf T}J=0$ and $\langle J,\nabla\mathsf R_dx\rangle=\langle\nabla^{\mathsf T}J,\mathsf R_dx\rangle=0$.
+
+A constant link-angle cochain is multiplied by $m$ under $K_m$. If a physical potential on the fine lattice of spacing $a/m$ is $A$, its link angles are $(a/m)A$, and dividing the coarse angles by $a$, we obtain $Q_dA=K_mA/m$. For a physical scalar gradient, the fine difference is multiplied by $m/a$ and the coarse difference by $1/a$; the gradient identity becomes $Q_d\nabla_{\mathrm{phys,fine}}=\nabla_{\mathrm{phys,coarse}}\mathsf A_m$. The composition identity, with these divisions by the lattice spacings, gives the composition rule for $Q_d$.
+
+Finally, moving the averaging box from the lower-corner position to the centered position translates each of its three coordinates by $-(m-1)/2$. Its Fourier multiplier is multiplied by $\exp[-i(m-1)\sum_jk_j/2]$, independently of the output direction, and multiplication by the adjoint cancels this phase at each frequency. All identities were obtained by differentiating at the identity or by finite sums, and no coupling or volume enters their coefficients.
+\end{proof}
+
+\section{The effective Maxwell quadratic form}\label{ch05:sec:maxwell}
+
+Fix $L>0$, $\gamma>0$, an odd integer $M\ge3$, and integers $d\ge0$ and $n\ge4$. Set $m=M^d$, let $a=L/n$ be the coarse spacing, so that the fine spacing is $a/m$, and write $g_n^2=g_3^2a=\gamma/n$ and $g_{mn}^2=\gamma/(mn)=g_n^2/m$ for the couplings at the coarse and fine lattices. For one color, let $x$ be the centered Gaussian field of link angles on the fine torus of side $mn$ with covariance $g_{mn}^2(\mathrm d_{\mathrm{fine}}^{\mathsf T}\mathrm d_{\mathrm{fine}})^\dagger$, where $\mathrm d_{\mathrm{fine}}$ is the elementary curl from links to plaquettes and $^\dagger$ denotes the Moore--Penrose inverse. By \cref{ch02:lem:hodge-schur}, the kernel of $\mathrm d_{\mathrm{fine}}$ consists of gradients and constant link fields, and this covariance vanishes on gradients and on constant fields. We push $x$ forward by $D(T_M^d)(I)$ and project orthogonally onto the coarse transverse space, the orthogonal complement of the gradients and constant fields on the coarse torus. By \cref{ch05:lem:flat-average-semigroup}, the projection removes the gradient term $\nabla\mathsf R_dx$, and the projected field is the projection of $K_mx$. By \cref{ch02:lem:hodge-schur}, the inverse covariance of a linear image of a Gaussian field is obtained by minimizing the quadratic form of the field under the corresponding linear constraint. This is why the inverse covariance computed below reappears as the Hessian at the identity of the effective classical action in \cref{ch07:thm:bellman}.
+
+\begin{definition}\label{ch05:def:flat-symbols}
+Let $m=M^d$ with $M$ and $d$ as fixed above. For $z\in\C^3$ set
+\[
+ d_i(z)=1-e^{iz_i},\qquad d_i^-(z)=1-e^{-iz_i},\qquad
+ \Lambda_m(z)=4m^2\sum_j\sin^2\bigl(z_j/(2m)\bigr),
+\]
+and regard $d=(d_i)_i$ as a column vector and $d^-=(d^-_i)_i$ as a row vector; for real $z$ we have $d^-=d^*$. For real $\theta\notin2\pi\Z^3$ set
+\[
+ \lambda(\theta)=\sum_i\abs{d_i(\theta)}^2,\qquad P(\theta)=I-\frac{d(\theta)d(\theta)^*}{\lambda(\theta)},
+\]
+and for real $k$
+\[
+ b_{m,i}(k)=m^{-1}\sum_{s=0}^{m-1}e^{isk_i},\qquad B_m(k)=\prod_jb_{m,j}(k).
+\]
+For real $\theta\notin2\pi\Z^3$ define
+\[
+ D_{m,i}(\theta)=\sum_r\frac{\abs{B_m(k)}^2\abs{b_{m,i}(k)}^2}{\Lambda_m(\theta+2\pi r)},\qquad k=\frac{\theta+2\pi r}m,
+\]
+where $r$ runs over a complete set of representatives of $\Z^3/m\Z^3$; the points $k$ are the $m^3$ fine frequencies with $mk\equiv\theta$ modulo $2\pi$, called the aliases of $\theta$, and each summand depends only on the class of $r$. Write $D=\operatorname{diag}(D_{m,i})$. Let
+\[
+ \beta_m(w)=\Bigl[\frac{\sin(w/2)}{m\sin(w/(2m))}\Bigr]^2,
+\]
+extended by continuity at its removable singularities, let $\mathsf I_m^{(1)}=\{-(m-1)/2,\ldots,(m-1)/2\}$, and define for $z\in\C^3$, wherever the denominators do not vanish,
+\begin{equation}\label{ch05:eq:holomorphic-alias}
+ D_{m,i}(z)=\sum_{r\in(\mathsf I_m^{(1)})^3}\frac{\prod_j\beta_m(z_j+2\pi r_j)\,\beta_m(z_i+2\pi r_i)}{\Lambda_m(z+2\pi r)},
+\end{equation}
+and let $R_i(z)$ be the same sum restricted to $r\ne0$. Finally set
+\[
+ \begin{aligned}
+ \Lambda_0&=\Lambda_m(z),\qquad q_m(z)=\prod_j\beta_m(z_j),\qquad c_i(z)=q_m(z)\beta_m(z_i),\\
+ A_i(z)&=c_i(z)+\Lambda_0R_i(z),\qquad
+ \omega_m(z)=q_m(z)^{-1}-\sum_i\frac{d_i^-(z)d_i(z)R_i(z)}{c_i(z)A_i(z)},
+ \end{aligned}
+\]
+and $c_{\mathrm{av}}=(2/\pi)^{10}$, $C_{\mathrm{av}}=1+3(1+\pi^2/3)^3$.
+\end{definition}
+
+For real $\theta\notin2\pi\Z^3$ the two definitions of $D_{m,i}(\theta)$ agree; this is checked in Step~4 of the proof below. In the following theorem the coarse curl is denoted $\mathrm d$, and $\mathrm d^{\mathsf T}\mathrm d$ is the lattice Maxwell form on the coarse torus.
+
+\begin{theorem}\label{ch05:thm:flat-precision}
+Let $L>0$, $\gamma>0$, let $M\ge3$ be odd, let $d\ge0$ and $n\ge4$ be integers, and let $m$, $a$, $g_n$, and the Gaussian field $x$ be as above. Then the following statements hold.
+\begin{enumerate}
+\item \emph{Covariance.} In unitary discrete Fourier coordinates on the coarse torus, at every nonzero frequency $\theta\in(2\pi/n)\Z^3/(2\pi\Z)^3$, the covariance of the projected coarse field is
+\[
+ g_n^2P(\theta)\operatorname{diag}_i\bigl(D_{m,i}(\theta)\bigr)P(\theta),
+\]
+and its zero-frequency component vanishes. For all values of the parameters, all $i$, and all $\theta\ne0$,
+\[
+ \frac{c_{\mathrm{av}}}{\lambda(\theta)}\le D_{m,i}(\theta)\le\frac{C_{\mathrm{av}}}{\lambda(\theta)}.
+\]
+\item \emph{Inverse covariance.} Let $\mathsf H_m(\theta)$ be the inverse covariance of the projected coarse field after dividing the field by $g_n$, taken on the nonzero transverse space and extended by zero on gradients and constant fields. For $\theta\ne0$,
+\[
+ \mathsf H_m=D^{-1}-D^{-1}d\Bigl(\sum_id_i^-d_i/D_{m,i}\Bigr)^{-1}d^-D^{-1}.
+\]
+There exist absolute constants $\delta,a_0,C_0>0$ such that, for every $m$, this symbol has a $2\pi$-periodic holomorphic continuation to the strip $\{z\in\C^3:\abs{\operatorname{Im}z_i}<\delta\}$, including a neighborhood of $z=0$, bounded uniformly in $m$. On a neighborhood of the origin that does not depend on $m$, we have $A_i(z)=1+O(\abs z^2)$ and $\omega_m(z)=1+O(\abs z^2)$ uniformly in $m$, and
+\[
+ \mathsf H_m(z)=\Lambda_0\operatorname{diag}(A_i^{-1})-\frac{\operatorname{diag}(A_i^{-1})\,d\,d^-\operatorname{diag}(A_i^{-1})}{\omega_m(z)}.
+\]
+The continuation satisfies $\mathsf H_m(z)d(z)=0$ and $d^-(z)\mathsf H_m(z)=0$, and $\mathsf H_m(0)=0$. We call the corresponding periodic kernel $\mathsf H_{m,n}$ on the coarse torus the effective Maxwell quadratic form; it satisfies
+\[
+ \sup_x\sum_ye^{a_0\dist_n(x,y)}\norm{\mathsf H_{m,n}(x,y)}+\sup_y\sum_xe^{a_0\dist_n(x,y)}\norm{\mathsf H_{m,n}(x,y)}\le C_0.
+\]
+As quadratic forms on coarse link fields,
+\[
+ C_{\mathrm{av}}^{-1}\mathrm d^{\mathsf T}\mathrm d\le\mathsf H_{m,n}\le c_{\mathrm{av}}^{-1}\mathrm d^{\mathsf T}\mathrm d,
+\]
+both sides vanishing on gradients and constant fields. With $\mathsf H_{\mathrm{Max}}=\lambda I-dd^-$ there exist absolute constants $\theta_0,C>0$ such that $\norm{\mathsf H_m(\theta)-\mathsf H_{\mathrm{Max}}(\theta)}\le C\abs\theta^4$ for $\abs\theta\le\theta_0$ and all $m$.
+\item \emph{Next constrained fluctuation space.} Suppose that $n=Mn_+$ with $n_+\ge4$, and let $E_0$ be the embedding of the next constrained fluctuation space of \cref{ch03:lem:free-curl-gap}, on the torus of side $n$. Then
+\[
+ \mathsf K_{m,n}=E_0^{\mathsf T}\mathsf H_{m,n}E_0
+\]
+satisfies
+\[
+ c_MI\le\mathsf K_{m,n}\le C_MI,\qquad
+ \norm{\mathsf K_{m,n}}_{a_M,\mathrm{row}+\mathrm{col}}+\norm{\mathsf K_{m,n}^{-1}}_{a_M,\mathrm{row}+\mathrm{col}}\le C_M
+\]
+for constants $a_M,c_M,C_M>0$ that depend only on $M$.
+\item \emph{Normalization.} Let $A$ be a smooth periodic connection on $\Torus$, and let $U^{(a)}$ be its link transports on the lattice of spacing $a$. Then
+\[
+ \frac{S_W(U^{(a)})}{g_3^2a}\longrightarrow\frac1{2g_3^2}\int_{\Torus}\sum_{i<j}\abs{F_{ij}(A)}^2\,dx\qquad(a\downarrow0).
+\]
+Let $A=g_3\mathcal A$ be the centered Gaussian transverse random distribution with zero constant mode, constructed by requiring that each finite symmetric Fourier truncation have density proportional to the exponential of minus the quadratic part of this action at $A=0$, restricted to its real transverse coordinates. With the Fourier convention $\widehat{\mathcal A}(k)=\int_{\Torus}e^{-ik\cdot x}\mathcal A(x)\,dx$, the three colors of $\mathcal A$ are independent and
+\[
+ \E\widehat{\mathcal A}^\alpha_i(k)\widehat{\mathcal A}^\beta_j(k')=L^3\one_{\{k'=-k\}}\delta_{\alpha\beta}\abs k^{-2}\Bigl(\delta_{ij}-\frac{k_ik_j}{\abs k^2}\Bigr),\qquad k,k'\in(2\pi/L)\Z^3\setminus\{0\}.
+\]
+\end{enumerate}
+The constants $c_{\mathrm{av}},C_{\mathrm{av}},\delta,a_0,C_0,\theta_0$, and $C$ are absolute, and $a_M,c_M,C_M$ depend only on $M$; none of them depends on $L$, $\gamma$, $n$, or $d$.
+\end{theorem}
+
+\begin{remark}\label{ch05:rem:constant-modes}
+The constant modes are set to zero only in the auxiliary Gaussian field. In the classical minimization of \cref{ch07:chapter}, coarse fields with nonzero constant modes are allowed, and the Schur complement identities of \cref{ch02:lem:hodge-schur} apply to them. Accordingly, an inverse of $\mathsf H_{m,n}$ is asserted in part (3) only on the next constrained fluctuation space, where the averaging constraint removes the constant modes; no bound on an inverse of $\mathsf H_{m,n}$ on all transverse coarse fields, uniform in $n$, is asserted.
+\end{remark}
+
+\begin{remark}\label{ch05:rem:infinite-depth}
+At each fixed nonzero $\theta$, the alias sums have the limit
+\[
+ \lim_{d\to\infty}D_{M^d,i}(\theta)=D_{\infty,i}(\theta)=\sum_{r\in\Z^3}\frac{\prod_j\sinc^2\bigl((\theta_j+2\pi r_j)/2\bigr)\,\sinc^2\bigl((\theta_i+2\pi r_i)/2\bigr)}{\abs{\theta+2\pi r}^2}.
+\]
+Indeed, choose $\theta_j\in[-\pi,\pi)$ and aliases with $\kappa_j=\theta_j+2\pi r_j\in[-\pi m,\pi m)$. For a fixed integer vector $r$, as $m=M^d\to\infty$, the four squared averaging factors $\abs{b_{m,j}(k)}^2=\sin^2(\kappa_j/2)/(m^2\sin^2(\kappa_j/(2m)))$ converge to the four squared $\sinc$ factors, and $\Lambda_m(\kappa)\to\abs\kappa^2$; each fixed alias is present for large $m$. By Step~2 of the proof below, after extension by zero outside the finite set of aliases, every nonzero-alias summand is bounded by $\prod_jw(r_j)/4$, where $w(0)=1$ and $w(r)=r^{-2}$ for $r\ne0$, and this bound is summable over $\Z^3$. Fix a finite cube of aliases outside which the sum of these bounds is less than a given $\eta>0$, pass to the limit on that cube, and let $\eta\downarrow0$. The zero alias is nonsingular at the fixed $\theta\ne0$. This proves the limit.
+\end{remark}
+
+\begin{proof}[Proof of \cref{ch05:thm:flat-precision}]
+We begin with an outline. Part (1) is a Fourier computation followed by elementary bounds on the alias sums. For part (2), the formula for $\mathsf H_m$ is the inverse of the projected covariance on its range, and the comparison with the Maxwell form follows by inverting the bounds of part (1). The main point is the holomorphic continuation of $\mathsf H_m$ to a strip whose width does not depend on $m$; exponential decay of the kernel then follows by shifting contours. Near the origin, $D_{m,i}=A_i/\Lambda_0$, and the second term in the formula for $\mathsf H_m$ contains the inverse of $\sum_id_i^-d_i/D_{m,i}=\Lambda_0\sum_id_i^-d_i/A_i$. The zero set of the holomorphic function $\Lambda_0=\Lambda_m(z)$ near the origin is a complex hypersurface through $0$, and it contains nonreal points arbitrarily close to the origin. Although $\mathsf H_m(\theta)\to0$ as real $\theta\to0$, this does not show that $\mathsf H_m$ is holomorphic near $0$. We rewrite $\mathsf H_m$ exactly so that its only denominators are $A_i$ and $\omega_m$, which equal $1+O(\abs z^2)$ uniformly in $m$. Part (3) combines the Maxwell comparison with \cref{ch03:lem:free-curl-gap} and the weighted inverse estimate of \cref{ch02:lem:coefficient-algebra}, and part (4) is a direct calculation.
+
+\paragraph{Step 1: Fourier conventions and the covariance.}
+On a torus of side $N$ we use the unitary transform
+\[
+ \widehat x_i(k)=N^{-3/2}\sum_{z\in\Z_N^3}e^{-ik\cdot z}x_i(z),\qquad x_i(z)=N^{-3/2}\sum_ke^{ik\cdot z}\widehat x_i(k).
+\]
+The gradient has symbol $-d(k)$, and the elementary curl has symbol
+\[
+ (\mathrm dx)^\wedge_{ij}(k)=-d_i(k)\widehat x_j(k)+d_j(k)\widehat x_i(k),\qquad i<j.
+\]
+Expanding the three squares, we find for $k\ne0$ that
+\begin{equation}\label{ch05:eq:curl-symbol}
+ \mathrm d(k)^*\mathrm d(k)=\lambda(k)I-d(k)d(k)^*=\lambda(k)P(k).
+\end{equation}
+This identifies the null modes used in the Gaussian convention: the multiples of $d(k)$ at $k\ne0$, which are the gradients, and all of $k=0$, which are the constant fields, in agreement with \cref{ch02:lem:hodge-schur}.
+
+For the lower-corner box, before restriction to the coarse lattice, the operator $K_m$ is diagonal in Fourier space with multiplier $T_i(k)=mB_m(k)b_{m,i}(k)$. The centered box adds the common phase computed in \cref{ch05:lem:flat-average-semigroup}. We substitute the inverse fine transform into $K_mx(Y)$ and take the coarse transform. Only the frequencies with $mk\equiv\theta$ modulo $2\pi$ survive the sum over coarse vertices, and the restriction to the coarse lattice contributes a factor $m^{-3/2}$ for each of these $m^3$ aliases. Summing the finite geometric series, we obtain
+\[
+ mb_{m,i}(k)d_i(k)=d_i(\theta).
+\]
+Then $T(k)d(k)=B_m(k)d(\theta)$, with the same common phase in the centered convention, and $P(\theta)T(k)d(k)=0$. The longitudinal part of the fine covariance vanishes after the projections on both sides, alias by alias.
+
+The fine coupling is $g_{mn}^2=g_n^2/m$. The fine frequency $k=(\theta+2\pi r)/m$ has $\lambda(k)=\Lambda_m(\theta+2\pi r)/m^2$, and the inverse of the fine Laplacian at $k$ is $m^2/\Lambda_m(\theta+2\pi r)$. Combining the coupling, the factor from the restriction to the coarse lattice, the square of the segment multiplier $m$, and the inverse Laplacian, we obtain
+\[
+ \frac{g_n^2}m\cdot m^{-3}\cdot m^2\cdot m^2=g_n^2.
+\]
+Since $P(\theta)$ removes the gradient term $\nabla\mathsf R_dx$ of \cref{ch05:lem:flat-average-semigroup}, this is the covariance of the projection of $D(T_M^d)(I)x$, which proves the covariance formula. At $\theta=0$, every alias with $r\not\equiv0$ modulo $m$ has a vanishing factor in $B_m$, since $\sum_{s=0}^{m-1}e^{2\pi ir_js/m}=0$ when $r_j\not\equiv0$ modulo $m$. The remaining alias is the fine constant mode, which has zero covariance. This shows that the zero-frequency component vanishes.
+
+\paragraph{Step 2: Real bounds for the alias sums.}
+We take $\theta_j\in[-\pi,\pi)$ and aliases with $\kappa_j=\theta_j+2\pi r_j\in[-\pi m,\pi m)$. For the alias $r=0$ we have
+\[
+ \abs{b_{m,j}(\theta/m)}=\frac{\abs{\sin(\theta_j/2)}}{m\abs{\sin(\theta_j/(2m))}}\ge\frac2\pi,\qquad
+ \lambda(\theta)\le\Lambda_m(\theta)\le\abs\theta^2\le\frac{\pi^2}4\lambda(\theta),
+\]
+where the value at a zero coordinate is understood by continuity. The first inequality for $\Lambda_m$ follows from the concavity of the sine, $\sin(t/m)\ge\sin(t)/m$ for $0\le t\le\pi/2$, and the last from $\abs{\sin t}\ge2\abs t/\pi$ for $\abs t\le\pi/2$. These inequalities, together with the factor $(2/\pi)^8$ from the four squared averaging factors, prove the lower bound. The contribution of $r=0$ to the upper bound is at most $1/\lambda(\theta)$.
+
+For every other alias, the same chord inequality implies that
+\[
+ \abs{b_{m,j}(k)}\le\min\{1,\pi/\abs{\kappa_j}\},\qquad\Lambda_m(\kappa)\ge(4/\pi^2)\abs\kappa^2.
+\]
+If $r_j\ne0$, then $\abs{\kappa_j}\ge\pi\abs{r_j}$. With $w(0)=1$ and $w(r)=r^{-2}$ for $r\ne0$, the numerator without its extra factor $\abs{b_{m,i}(k)}^2$ is at most $\prod_jw(r_j)$, the extra factor is at most one, and the denominator is at least four. Since $\sum_{r\ge1}r^{-2}=\pi^2/6$, we have $\sum_{r\in\Z}w(r)=1+\pi^2/3$, and the nonzero aliases contribute at most $(1+\pi^2/3)^3/4$. Since $\lambda\le12$, this is at most $3(1+\pi^2/3)^3/\lambda$, and the upper bound with the constant $C_{\mathrm{av}}$ follows.
+
+\paragraph{Step 3: The transverse inverse and the Maxwell comparison.}
+Fix real $\theta\ne0$, write $D^{-1}=\operatorname{diag}(D_{m,i}^{-1})$, and set $s=d^-D^{-1}d=\sum_id_i^-d_i/D_{m,i}$, which is positive. The matrix
+\[
+ H=D^{-1}-D^{-1}d\,s^{-1}d^-D^{-1}
+\]
+is Hermitian, satisfies $Hd=0$ and $d^-H=0$, and $HD=I-D^{-1}ds^{-1}d^*$, so that $HDP=P$ since $d^*P=0$. Since $HP=PH=H$, the matrix $H$ is the inverse of $PDP$ on $\operatorname{ran}P$. This proves the inverse formula. Note that we invert the projected covariance $PDP$, not the diagonal matrix $D$. Inverting the inequalities
+\[
+ \frac{c_{\mathrm{av}}}{\lambda}I_{\operatorname{ran}P}\le(PDP)|_{\operatorname{ran}P}\le\frac{C_{\mathrm{av}}}{\lambda}I_{\operatorname{ran}P}
+\]
+from part (1) and using \eqref{ch05:eq:curl-symbol}, we obtain the comparison with the Maxwell form at each nonzero frequency. Both sides vanish on gradients and at zero frequency, which proves the comparison of quadratic forms.
+
+\paragraph{Step 4: Uniform bounds for the continued alias sums.}
+The identity
+\[
+ \beta_m(w)=\Bigl(m^{-1}\sum_{s=0}^{m-1}e^{isw/m}\Bigr)\Bigl(m^{-1}\sum_{t=0}^{m-1}e^{-itw/m}\Bigr)
+\]
+shows that the singularities of $\beta_m$ are removable and that $\beta_m$ is entire and even; no complex conjugation enters. For real $\theta$ each squared modulus in the real alias sum is the product of the multipliers at opposite frequencies, $\abs{b_{m,j}(k)}^2=\beta_m(\theta_j+2\pi r_j)$, and \eqref{ch05:eq:holomorphic-alias}, with the residue set $(\mathsf I_m^{(1)})^3$, agrees with the real formula. Increasing a coordinate of $z$ by $2\pi$ permutes the aliases; the alias that leaves the residue set changes its coordinate by $2\pi m$, and both $\beta_m$ and $\Lambda_m$ are invariant under this change. This shows that \eqref{ch05:eq:holomorphic-alias} is $2\pi$-periodic in each coordinate.
+
+Let $z=x+iy$ with $\abs{x_j}\le\pi$ and $\abs{y_j}\le\delta_0$, for a sufficiently small absolute $\delta_0>0$. For our residue set, $\abs{x_j+2\pi r_j}/(2m)\le\pi/2$. Using $\abs{\sin(u+iv)}^2=\sin^2u+\sinh^2v$, we find for $r_j\ne0$ that
+\[
+ \abs{m\sin\bigl((z_j+2\pi r_j)/(2m)\bigr)}\ge m\abs{\sin\bigl((x_j+2\pi r_j)/(2m)\bigr)}\ge\abs{x_j+2\pi r_j}/\pi\ge\abs{r_j}.
+\]
+The numerator $\sin((z_j+2\pi r_j)/2)$ is bounded on this tube, and for $r_j=0$ the finite-sum representation shows that $\beta_m$ is uniformly bounded there. We obtain
+\begin{equation}\label{ch05:eq:beta-bound}
+ \abs{\beta_m(z_j+2\pi r_j)}\le Cw(r_j).
+\end{equation}
+The extra factor $\beta_m(z_i+2\pi r_i)$ is bounded by the same finite-sum formula. Since $\operatorname{Re}\sin^2(u+iv)=\sin^2u-\cos(2u)\sinh^2v$ and $\sinh\abs v\le2\abs v$ for $\abs v\le1$, we have
+\[
+ \operatorname{Re}\Lambda_m(z+2\pi r)\ge(4/\pi^2)\abs{x+2\pi r}^2-4\abs y^2.
+\]
+For $r\ne0$ this is at least $2\abs r^2$ after choosing $\delta_0$ small. In particular no denominator of a nonzero alias vanishes on the tube, and its summand is bounded by $C\prod_jw(r_j)/\abs r^2$. Summing and using \eqref{ch05:eq:beta-bound}, we obtain a uniform bound for every $R_i$ on the whole tube over the real cube, with holomorphy in its interior. Bounds for derivatives on smaller neighborhoods follow from Cauchy's formula on fixed circles in each coordinate. For $m=1$ these remainders vanish. For the zero alias the lower bound reads
+\[
+ \operatorname{Re}\Lambda_m(z)\ge(4/\pi^2)\abs x^2-4\abs y^2.
+\]
+On any real region $\abs x\ge\rho>0$, the functions $D_{m,i}$ and their first derivatives are bounded and holomorphic, uniformly in $m$, in a tube whose width depends only on $\rho$.
+
+\paragraph{Step 5: Cancellation on the complex characteristic set.}
+On a small polydisc about zero that does not depend on $m$, the finite-sum formula and evenness imply that $\beta_m(z_j)=1+O(\abs{z_j}^2)$ uniformly in $m$. We obtain
+\[
+ q_m=1+O(\abs z^2),\qquad c_i=1+O(\abs z^2),\qquad\Lambda_0=O(\abs z^2),\qquad A_i=1+O(\abs z^2);
+\]
+for the last assertion we used the bounds for $R_i$ from Step~4. Since $d_i^-(z)d_i(z)=4\sin^2(z_i/2)$ and $\beta_m(z_i)=\sin^2(z_i/2)/(m^2\sin^2(z_i/(2m)))$, we have the exact identity
+\[
+ \sum_i\frac{d_i^-d_i}{c_i}=q_m^{-1}\sum_i\frac{4\sin^2(z_i/2)}{\beta_m(z_i)}=\frac{\Lambda_0}{q_m},
+\]
+valid also at the removable values. Using $A_i^{-1}=c_i^{-1}-\Lambda_0R_i/(c_iA_i)$, we obtain
+\begin{equation}\label{ch05:eq:characteristic-cancellation}
+ \sum_i\frac{d_i^-d_i}{A_i}=\Lambda_0\omega_m,\qquad\omega_m=q_m^{-1}-\sum_i\frac{d_i^-d_iR_i}{c_iA_i}=1+O(\abs z^2).
+\end{equation}
+We fix an absolute radius $\rho>0$ such that $q_m$, $c_i$, $A_i$, and $\omega_m$ have modulus at least $1/2$ on the polydisc $\abs{z_j}<2\rho$; this is possible uniformly in $m$ by the preceding quadratic estimates. The zero alias of \eqref{ch05:eq:holomorphic-alias} is $c_i/\Lambda_0$. Where the alias sum is regular, we have
+\[
+ D_{m,i}=\frac{A_i}{\Lambda_0},\qquad\sum_i\frac{d_i^-d_i}{D_{m,i}}=\Lambda_0^2\omega_m.
+\]
+Substituting these identities into the inverse formula, we obtain exactly the expression for $\mathsf H_m(z)$ in part (2). Its denominators $A_i$ and $\omega_m$ do not vanish on the polydisc, including the points where $\Lambda_0=0$. This proves holomorphy there and the bound $\norm{\mathsf H_m(z)}\le C\abs z^2$, since $\Lambda_0$ and $dd^-$ are $O(\abs z^2)$. Multiplying by $d$ on the right and by $d^-$ on the left and using \eqref{ch05:eq:characteristic-cancellation}, we obtain $\mathsf H_md=0$ and $d^-\mathsf H_m=0$; the value at zero is zero.
+
+\paragraph{Step 6: The strip, the periodic kernel, and the comparison at low frequency.}
+On the real complement of the smaller neighborhood $\abs{z_j}<\rho$, part (1) implies that $D_{m,i}\ge c_{\mathrm{av}}/12$ and
+\[
+ \sum_id_i^-d_i/D_{m,i}\ge\lambda^2/C_{\mathrm{av}}\ge c_\rho>0.
+\]
+By the bounds of Step~4, the first derivatives there have a common bound $C_\rho$. We shrink the tube so that $D_{m,i}$ changes by less than $c_{\mathrm{av}}/24$ from its real value; its reciprocal then has bounded value and bounded first derivatives. After one more shrinking, we may assume that $\sum_id_i^-d_i/D_{m,i}$ changes by less than $c_\rho/2$. The inverse formula of part (2) is then holomorphic and uniformly bounded on this tube. Across the faces of the real cube we use the periodicity of \eqref{ch05:eq:holomorphic-alias}; the same real lower bounds hold there.
+
+We fix an absolute width $\delta>0$ below these widths and so small that points whose real parts lie in $\abs{x_j}<\rho$ remain in the polydisc $\abs{z_j}<2\rho$. The two expressions for $\mathsf H_m$ agree on their common regular set; multiplying by their nonvanishing denominators shows that they agree throughout each overlap, including removable points. They define one bounded periodic holomorphic function on the strip of width $\delta$.
+
+Let its Fourier coefficients be
+\[
+ h_m(\zeta)=(2\pi)^{-3}\int_{[-\pi,\pi]^3}e^{i\theta\cdot\zeta}\mathsf H_m(\theta)\,d\theta,\qquad\zeta\in\Z^3.
+\]
+For $0<\delta_1<\delta$, shift the three integration contours by $\pm i\delta_1$, with the signs chosen according to the signs of the components of $\zeta$ so as to decrease the exponential factor. The vertical sides cancel by periodicity, and from the uniform bound on the strip we obtain
+\[
+ \norm{h_m(\zeta)}\le Ce^{-\delta_1\abs\zeta_1}.
+\]
+The Fourier series of $\mathsf H_m$ converges absolutely. Sampling it at the frequencies of the torus of side $n$ and using the orthogonality of the finite characters, we obtain
+\[
+ \mathsf H_{m,n}(x,y)=\sum_{\zeta\equiv x-y\ (\mathrm{mod}\ n)}h_m(\zeta).
+\]
+For each representative, $\dist_n(x,y)\le\abs\zeta_1$. For any $0<a_0<\delta_1$, each of the two weighted sums in part (2) is at most
+\[
+ C\sum_{\zeta\in\Z^3}e^{-(\delta_1-a_0)\abs\zeta_1}=C\Bigl(\frac{1+e^{-(\delta_1-a_0)}}{1-e^{-(\delta_1-a_0)}}\Bigr)^3,
+\]
+which gives the kernel bound with a constant $C_0$ independent of $n$ and $d$.
+
+The comparison at low frequency follows from the same identities. On the real axis near zero, $\operatorname{diag}(A_i^{-1})=I+O(\abs\theta^2)$ and $\omega_m^{-1}=1+O(\abs\theta^2)$. Since the Taylor remainder of the sine is uniform in $m\ge1$, we have $\Lambda_m(\theta)-\lambda(\theta)=O(\abs\theta^4)$. Since $dd^-=O(\abs\theta^2)$, the two terms in the formula of part (2) differ from $\lambda I$ and $dd^-$, respectively, by $O(\abs\theta^4)$. This proves $\norm{\mathsf H_m(\theta)-\mathsf H_{\mathrm{Max}}(\theta)}\le C\abs\theta^4$.
+
+\paragraph{Step 7: Restriction to the next constrained fluctuation space.}
+Let $a=E_0z$. The embedding of \cref{ch03:lem:free-curl-gap} vanishes on the links of the centered block trees, which are the links of the coordinate paths $\sigma_{v,x}$, and every path sum $p_{\sigma_{v,x}}(a)$ in \eqref{ch05:eq:one-step-endpoint} vanishes. The linearized constraint $DT_M(I)a=0$ says $K_Ma=0$. A fixed input link occurs exactly $M$ times in the straight segments of the coarse sum, each time with weight $M^{-3}$. Summing over the coarse links, we find
+\[
+ \sum_Y(K_Ma)_i(Y)=M^{-2}\sum_xa_i(x).
+\]
+This shows that $a$ has zero spatial mean in each component and has no constant mode. By the comparison with the Maxwell form in part (2) and the lower bound of \cref{ch03:lem:free-curl-gap}, we have
+\[
+ \langle z,E_0^{\mathsf T}\mathsf H_{m,n}E_0z\rangle\ge C_{\mathrm{av}}^{-1}\norm{\mathrm dE_0z}_2^2\ge c_M\norm z_2^2,
+\]
+after renaming the constant. The upper comparison and the upper bound of the same lemma imply that $\mathsf K_{m,n}\le C_MI$. The rows and columns of $E_0$ have finite range and bounded sums depending only on $M$, by the same lemma. They transfer the weighted bounds for $\mathsf H_{m,n}$ to $\mathsf K_{m,n}$: each endpoint of a contributing stencil moves by at most a distance depending on $M$. The index set of the free coordinates has counting growth $\#\{z:\dist(z,z_0)\le R\}\le D_M(1+R)^3$. We now apply the inverse estimate of \cref{ch02:lem:coefficient-algebra}. Its hypotheses are a self-adjoint matrix with a positive lower bound, bounded off-diagonal row and column sums with an exponential weight, and polynomial counting growth of the index set. We have verified them with lower bound $c_M$, rate $a_0$, a bound on the weighted sums depending only on $M$, and growth exponent three. The lemma gives exponentially weighted bounds for $\mathsf K_{m,n}^{-1}$ at a smaller rate. Taking $a_M$ to be the smaller of the two rates and enlarging $C_M$ proves part (3).
+
+\paragraph{Step 8: Normalization.}
+Let $U_i^{(a)}(x)$ be the transport of the smooth connection $A$ along the link $(x,x+ae_i)$. Iterating the integral equation of the transport twice, we find uniformly in $x$ that
+\[
+ U_i^{(a)}(x)=I+aA_i(x)+\tfrac12a^2\{\partial_iA_i(x)+A_i(x)^2\}+O_A(a^3).
+\]
+The remaining ordered integrals are bounded by $C_Aa^3$, uniformly in $x$. We insert the four expansions, with the shifted arguments on the two shifted sides, into the plaquette product. The terms of degree one cancel, and the terms of degree two are $\partial_iA_j-\partial_jA_i+[A_i,A_j]$; hence $\Log U_{p_{ij}(x)}=a^2F_{ij}(x)+O_A(a^3)$. For real $X=x^a\tau_a$, the Pauli identity implies that $X^2=-\abs x^2I/4$. Then $\tr(e^X)/2=\cos(\abs x/2)$ and $4q(e^X)=\abs X^2/2+O(\abs X^4)$. We obtain
+\[
+ \frac{S_W(U^{(a)})}{g_3^2a}=\frac1{2g_3^2}a^3\sum_x\sum_{i<j}\abs{F_{ij}(x)}^2+O_{A,L,g_3}(a),
+\]
+and the Riemann sum converges because the integrand is smooth on the fixed torus. This proves the first assertion of part (4).
+
+The quadratic part of the continuum action at $A=0$ is $(2g_3^2)^{-1}\int\sum_{i<j}\abs{\partial_iA_j-\partial_jA_i}^2\,dx$. With the Fourier convention of the statement, we have $A(x)=L^{-3}\sum_ke^{ik\cdot x}\widehat A(k)$. Integrating the products of exponentials, we find that on any finite symmetric set of nonzero frequencies the quadratic part is
+\[
+ \frac1{2g_3^2L^3}\sum_{k\ne0}\widehat A(k)^*\bigl(\abs k^2I-kk^{\mathsf T}\bigr)\widehat A(k).
+\]
+We restrict to $\widehat A(k)\perp k$ and impose the reality condition $\widehat A(-k)=\overline{\widehat A(k)}$. For one representative of each pair $\{k,-k\}$, the corresponding term is $\abs k^2\abs{\widehat A(k)}^2/(g_3^2L^3)$. For a transverse real or imaginary coordinate $u$, the one-variable density is therefore proportional to $\exp[-\abs k^2u^2/(g_3^2L^3)]$, and differentiating the Gaussian integral gives the variance $g_3^2L^3/(2\abs k^2)$; different coordinates, pairs, and colors are independent. We realize the field by independent centered real Gaussian variables with these variances, one for each transverse real and imaginary coordinate of one representative of each pair and each color. The remaining coordinates are defined by the reality condition. Then $A=g_3\mathcal A$ has exactly the covariance displayed in part (4); in particular $\E\widehat{\mathcal A}(k)\widehat{\mathcal A}(k)^{\mathsf T}=0$ for $k'=k\ne-k$, since the real and imaginary parts have equal variances.
+
+These coordinates define a random distribution almost surely. Indeed,
+\[
+ \E\sum_{k\ne0}(1+\abs k^2)^{-2}\abs{\widehat{\mathcal A}(k)}^2<\infty:
+\]
+the summands are nonnegative with expectations at most $C_L(1+\abs k)^{-6}$, and the number of frequencies in the shell $R\le\abs k<R+1$ is at most $C_L(1+R)^2$, as one sees by covering their disjoint cubes of fixed volume by a shell of fixed extra thickness. Markov's inequality applied to the increasing partial sums shows that their supremum is finite almost surely, and on that event the Cauchy--Schwarz inequality pairs the Fourier sequence continuously with every smooth test function. Alternatively, each such pairing converges in mean square, since repeated integration by parts bounds the Fourier coefficients of a smooth test function $f$ by $C_{f,s}(1+\abs k)^{-s}$ for every $s$. Limits of the characteristic functions of the finite truncations show that these pairings are jointly Gaussian with the stated covariance, and the covariance identity for arbitrary pairs of frequencies already holds at every finite truncation. The three colors are independent because their quadratic forms add.
+
+The constants in Steps~1--6 are absolute; only the stencils, the lower bound, and the counting growth in Step~7 introduce dependence on $M$. No step used $L$, $\gamma$, $n$, or $d$ in a constant. This completes the proof.
+\end{proof}
+
+\section{Gradient annihilation and spatial inversion}\label{ch05:sec:ward}
+
+The effective Maxwell quadratic form of \cref{ch05:thm:flat-precision} vanishes identically on the constant modes because of the convention for the auxiliary Gaussian field. The Hessians that occur later are perturbations of such forms by small translation-invariant kernels that annihilate gradients (by gauge invariance) and commute with spatial inversion, but need not vanish on the constant modes. The following lemma shows that such a kernel is bounded by the lattice Maxwell form, with an exponentially small error from its zero-frequency block. It is used in \cref{ch08:lem:two-differences}.
+
+\paragraph{Spatial inversion and midpoint coordinates.}
+Spatial inversion maps the vertex $x$ of the periodic lattice of side $n$ to $-x$. It maps the positive link $(x,x+e_i)$ to the reversed link of $(-x-e_i,-x)$, so it acts on link fields by
+\[
+ (\mathsf Iv)_i(x)=-v_i(-x-e_i).
+\]
+Let $H$ be a translation-invariant kernel on link fields, written $H_{ij}(x,y)=h_{ij}(y-x)$, where $h_{ij}(t)$ is the block from a $j$-link with initial vertex $y$ to an $i$-link with initial vertex $x$. The midpoint displacement of this entry is
+\[
+ t=y-x+(e_j-e_i)/2\quad\bmod n\Z^3.
+\]
+We lift it to $\R^3$ by choosing in each coordinate a representative of smallest absolute value. If a coordinate has two such representatives, which happens when it equals $n/2$ modulo $n$, we divide the coefficient equally between them. With several such coordinates, we take the product of these equal divisions. For example, in one dimension with $n=4$ a coefficient at displacement $2$ is split into two halves placed at $2$ and $-2$. Denote the lifted coefficients by $\widetilde h_{ij}(t)$, $t\in\R^3$, and define the midpoint interpolation
+\[
+ \widetilde H_{ij}(k)=\sum_t\widetilde h_{ij}(t)e^{ik\cdot t},\qquad k\in\R^3.
+\]
+At a frequency $k\in(2\pi/n)\Z^3$ of the torus, lifts differing by elements of $n\Z^3$ have the same phase. Then $\widetilde H(k)$ is the Fourier block of $H$ in midpoint coordinates, which differs from the Fourier block in initial-vertex coordinates by diagonal unitary phases on the links.
+
+\begin{lemma}\label{ch05:lem:ward-parity}
+Fix a rate $a>0$ and a finite color dimension. For every periodic side $n\ge4$, let $H$ be a real, self-adjoint, translation-invariant kernel on link fields of the torus of side $n$ such that
+\[
+ H\nabla=0=\nabla^{\mathsf T}H,\qquad H\mathsf I=\mathsf IH,\qquad\norm H_{a,\mathrm{row}+\mathrm{col}}\le\varepsilon.
+\]
+Then there exist $C(a),c(a)>0$, depending only on $a$ and the color dimension, such that with $w_n=(1+n)^3e^{-c(a)n}$ the following hold.
+\begin{enumerate}
+\item The zero-frequency block satisfies $\norm{\widehat H(0)}\le C(a)\varepsilon w_n$.
+\item For every real or complex link field $v$, with the Hermitian pairing for complex $v$,
+\[
+ \abs{\langle v,Hv\rangle}\le C(a)\varepsilon\norm{\mathrm dv}_2^2+C(a)\varepsilon w_n\norm v_2^2.
+\]
+\item The midpoint interpolation is even, $\widetilde H(-k)=\widetilde H(k)$ for $k\in\R^3$, and at every frequency $k$ of the torus, represented with $k_j\in[-\pi,\pi]$,
+\[
+ \norm{\widetilde H(k)}\le C(a)\varepsilon\Bigl(\sum_i4\sin^2(k_i/2)+w_n\Bigr).
+\]
+\end{enumerate}
+\end{lemma}
+
+The proof uses inversion in all three coordinates; a reflection in a single coordinate would not make the first derivative of $\widetilde H$ vanish at zero. The zero-frequency block is estimated, not assumed to vanish.
+
+\begin{proof}
+Let $r$ be the color dimension; constants below may depend on $r$. The weighted hypothesis bounds each row sum and each column sum of $H$ by $\varepsilon$.
+
+We first estimate the zero-frequency block, without using inversion. Let $n\ge32$, represent vertex coordinates in $[-n/2,n/2)^3$, and fix a Lipschitz function $\chi$ on $\R$ with $0\le\chi\le1$, equal to one on $[-1/8,1/8]$, and vanishing outside $(-1/4,1/4)$. The periodic function
+\[
+ f_j(x)=x_j\prod_{\ell=1}^3\chi(x_\ell/n)
+\]
+has discrete first differences bounded by a fixed constant. The difference of $x_j$ contributes at most one, and a difference of a cutoff contributes at most $\Lip(\chi)/n$ times a coordinate of size at most $n/2$. Its gradient coincides with the constant $j$-directed link field $\one_j$ on links whose initial vertices have $\ell^\infty$ norm at most $n/8-1$. For a color vector $b$ with $\abs b=1$, applying the identity $H\nabla=0$ to $f_jb$ in the row of an $i$-link with initial vertex zero, we obtain
+\[
+ (H(\one_jb))_i(0)=\bigl(H(\one_jb-\nabla(f_jb))\bigr)_i(0).
+\]
+Every nonzero input on the right is at periodic distance at least $n/16$ from this row and is bounded by a fixed constant. By the weighted row bound, the right side is at most $C\varepsilon e^{-an/16}$. The left side is the $ij$ block of $\widehat H(0)b$. Summing over the finitely many blocks, we obtain $\norm{\widehat H(0)}\le C\varepsilon e^{-an/16}$. For $4\le n<32$, the unweighted row bound implies that $\norm{\widehat H(0)}\le\varepsilon$, and enlarging the constant covers these finitely many sides. With $c(a)=a/32$ both ranges give part (1).
+
+We next use inversion. Both oriented links of an entry acquire a minus sign, and their initial vertices become $-x-e_i$ and $-y-e_j$. In terms of the entries, $H\mathsf I=\mathsf IH$ reads
+\[
+ h_{ij}(y-x)=h_{ij}(-y+x+e_i-e_j),
+\]
+and the midpoint displacement of the right side is $-t$. Since ties were split symmetrically, we have $\widetilde h_{ij}(t)=\widetilde h_{ij}(-t)$. Then $\widetilde H$ is even and $D\widetilde H(0)=0$. The lifts of each coefficient sum to that coefficient, and the weighted absolute sums of the lifted coefficients are at most $C_a\varepsilon$, since the shortest midpoint distance exceeds the vertex distance by at most one. All representatives have $\abs{t_\ell}\le n/2$. Since $\sup_{u\ge0}u^2e^{-au}<\infty$, the second derivatives satisfy
+\[
+ \sup_{k\in\R^3}\norm{D^2\widetilde H(k)}\le C\sum_{i,j,t}\abs t_1^2\norm{\widetilde h_{ij}(t)}\le C(a)\varepsilon.
+\]
+At $k=0$ all phases are one, and $\widetilde H(0)=\widehat H(0)$. By Taylor's formula along the segment from $0$ to $k$ and part (1), we have $\norm{\widetilde H(k)}\le C(a)\varepsilon(w_n+\abs k^2)$. For $k_j\in[-\pi,\pi]$ we have $\abs k^2\le(\pi^2/4)\sum_j4\sin^2(k_j/2)$, which proves part (3).
+
+To pass to quadratic forms, set $q_i(k)=2\sin(k_i/2)$ and $\lambda_q=\sum_iq_i^2$. After we move the phases from the initial vertices to the midpoints of the links and plaquettes, the gradient becomes multiplication by $iq$, and the curl from links to plaquettes becomes
+\[
+ (D(k)u)_{ij}=i(q_iu_j-q_ju_i),\qquad D(k)^*D(k)=\lambda_qI-qq^{\mathsf T}.
+\]
+At a frequency $k\ne0$, the identities $H\nabla=0=\nabla^{\mathsf T}H$ say that $\widetilde H(k)$ vanishes on $q$ and maps into $q^\perp$. If $u_T$ is the component of $u$ orthogonal to $q$, then Hermitian symmetry and part (3) imply that
+\[
+ \abs{\langle u,\widetilde H(k)u\rangle}\le C(a)\varepsilon\lambda_q\abs{u_T}^2+C(a)\varepsilon w_n\abs u^2=C(a)\varepsilon\abs{D(k)u}^2+C(a)\varepsilon w_n\abs u^2.
+\]
+At $k=0$ we use part (1). The unitarity of the finite Fourier transform and the triangle inequality over the frequencies imply part (2) for real and complex link fields.
+\end{proof}
+
+\begin{remark}\label{ch05:rem:curl-factor}
+On the transverse fields with nonzero frequency, the quadratic form of $H$ factors through the curl with a bounded factor: there is an operator $T$ on plaquette fields, diagonal in Fourier space, with $\norm T_{\mathrm{op}}\le C(a)\varepsilon$ uniformly in $n$, such that $\langle v,Hv\rangle=\langle\mathrm dv,T\mathrm dv\rangle$ for every $v$ orthogonal to the gradients and the constant fields. Indeed, at each frequency $k\ne0$ set
+\[
+ T(k)=\lambda_q^{-2}D(k)\widetilde H(k)D(k)^*,
+\]
+and set $T(0)=0$. Since $D^*D=\lambda_qP_q$, where $P_q$ is the orthogonal projection onto $q^\perp$, and $\widetilde H(k)=P_q\widetilde H(k)P_q$, we have $D(k)^*T(k)D(k)=\widetilde H(k)$, and $T(k)$ vanishes on the plaquette directions orthogonal to the range of $D(k)$. Since $\norm{D(k)}=\lambda_q^{1/2}$, part (3) implies that $\norm{T(k)}\le C(a)\varepsilon(1+w_n/\lambda_q)$. Every nonzero frequency has $\lambda_q\ge4\sin^2(\pi/n)\ge16/n^2$ by the chord inequality, and $\sup_{n\ge4}n^2(1+n)^3e^{-c(a)n}<\infty$, so $\norm T_{\mathrm{op}}\le C(a)\varepsilon$ uniformly in $n$. The zero-frequency block of $H$ is not part of this factorization; it is estimated separately in part (1). This construction controls only the operator norm of $T$, and no exponential decay of the kernel of $T$ follows from it. A factorization with exponentially local factors and an exponentially small remainder is proved separately in \cref{ch08:lem:two-differences}.
+\end{remark}
+
+\section{The gauge-corrected block average}\label{ch05:sec:corrected}
+
+In this section and the next we study the iterated block averaging map near a background configuration with small curvature. The background is fixed, and all derivatives are taken with respect to a fluctuation. Gauge-corrected averages, in which the output of each averaging step is multiplied by gauge transformations at the endpoints of the coarse links, occur in Bałaban's averaging construction \cite[(61)--(63), p.~28]{Balaban1985Averaging}, and their composition is treated in \cite[(78)--(92), pp.~30--31; (97)--(100), p.~32]{Balaban1985Averaging}. We use the centered blocks of \cref{ch01:def:block-map}, and we derive below the derivative of the corrected step, its endpoint terms, and the order of the composed gauge transformations.
+
+We explain why the estimates are uniform in the number $d$ of averaging steps. We use units in which the coarse spacing after $d$ steps is one, so that the spacing at level $j$ is $\epsilon_j=M^{j-d}$. If $\delta(U_0)\le\varepsilon\epsilon_0^2$, then by \cref{ch04:thm:energy-near-contraction} the plaquette angles $\delta_j$ of $T_M^jU_0$ satisfy $\delta_j\le2\varepsilon\epsilon_j^2$; they scale like the square of the spacing, as for a smooth field. One gauge-corrected step, written for the potential $A_j=\epsilon_j^{-1}\Log V_j$, has the form
+\[
+ A_{j+1}=Q_{U_j}A_j+O_M\bigl(\epsilon_{j+1}\abs{A_j}^2\bigr),
+\]
+where the row sums of $Q_{U_j}$ are at most $1+C_M\delta_j$. The relative errors at level $j$ are of order $\delta_j+\epsilon_{j+1}\abs{A_j}$, and
+\[
+ \sum_{j<d}\delta_j\le\frac{2\varepsilon}{M^2-1},\qquad\sum_{j<d}\epsilon_{j+1}\le\frac M{M-1}
+\]
+are bounded independently of $d$. This is why the constants below do not depend on $d$, and why the scalar weights of the transported segment average must sum to exactly one in each row, rather than to $1+c$ for a fixed $c>0$. All smallness assumptions concern plaquettes and holonomies of contractible closed paths; the background may have arbitrary holonomies around the cycles of the torus.
+
+\begin{definition}\label{ch05:def:corrected-step}
+Let $U$ be an $\SU$-valued configuration on a periodic lattice of side $Mn'$ with $n'\ge4$, and let $V=(V_e)_e$ be a link field with values in $\SL$. For a coarse vertex $v$ set
+\[
+ \mathsf h_{v;U}(V)=\exp\Bigl[-M^{-3}\sum_{x\in\mathsf B_M(v)}\Log\bigl((VU)(\sigma_{v,x})U(\sigma_{v,x})^{-1}\bigr)\Bigr],
+\]
+where $VU=(V_eU_e)_e$, and write $\mathsf h_U(V)$ for the gauge transformation $(\mathsf h_{v;U}(V))_v$ on the coarse vertices. For a coarse link $c=(v,s)$, $s=v+Me_i$, define the gauge-corrected block average
+\[
+ (\mathscr M_U(V))_c=\mathsf h_{v;U}(V)\,(T_M(VU))_c\,\mathsf h_{s;U}(V)^{-1}\,(T_MU)_c^{-1}.
+\]
+For a fine spacing $\epsilon>0$ and a link field $A$ of potentials, set
+\[
+ \Psi_{U,\epsilon}(A)=(M\epsilon)^{-1}\Log\mathscr M_U(e^{\epsilon A}).
+\]
+All logarithms are identity-chart logarithms; \cref{ch05:lem:word-bounds} shows that they are defined in the domains used below.
+\end{definition}
+
+In other words, $\mathscr M_U(V)\,T_MU$ is the gauge transform of $T_M(VU)$ by $\mathsf h_U(V)$, and $\mathscr M_U(V)$ is its transport relative to the background output $T_MU$. The endpoint gauge transformation at $v$ is chosen so that its derivative cancels the contribution of the connectors $\sigma_{v,x}$ in \cref{ch05:fig:paths}. For a gauge transformation $k$ on the vertices of a lattice, we write $k|_{\mathrm{roots}}$ for its restriction to the vertices of the next coarser lattice, which are the centers of the blocks.
+
+\begin{lemma}\label{ch05:lem:word-bounds}
+Fix an odd $M\ge3$, a radius $0<\rho_{\log}<2\pi$ inside the real identity chart of $\SU$, and a radius $0<r_{\log}<1$ for the matrix logarithm series. There exist $b_M,\delta_M>0$ and $q_M,C_M<\infty$, depending only on these data, such that the following holds for every application of $T_M$ from a periodic lattice of side $Mn'$ to the lattice of side $n'$, $n'\ge4$.
+\begin{enumerate}
+\item For each coarse link $c=(v,v+Me_i)$, the paths $C_c$, $F_{c,x}$, $\sigma_{v,x}$, and $\sigma_{v+Me_i,x+Me_i}$, $x\in\mathsf B_M(v)$, have at most $q_M$ links and lie in a neighborhood of $c$ of radius depending only on $M$, and each fine link belongs to at most a number depending only on $M$ of these neighborhoods.
+\item If $U$ is $\SU$-valued and $\delta(U)=\max_p\groupdist(U_p)\le\delta$ with $0\le\delta<\delta_M$, then every based loop holonomy $U(F_{c,x})U(C_c)^{-1}$ has an identity-chart logarithm of norm at most $C_M\delta$.
+\item For such $U$ and complex link variables with $\max_e\abs{X_e}<b_M$, the path products with links $e^{X_e}U_e$, their relative logarithms, and the logarithm $\Log\mathscr M_U(e^X)$ of the gauge-corrected average are holomorphic in $X$. On a fixed smaller ball, each partial derivative of fixed order in the finitely many relevant $X_e$ is bounded by a constant depending only on $M$, the order, and the radii $\rho_{\log}$, $r_{\log}$. The logarithm $\Log\mathscr M_U(e^X)$ vanishes at $X=0$.
+\end{enumerate}
+These bounds are independent of the holonomies of $U$ around the cycles of the torus and of $n'$, and they include reversed links.
+\end{lemma}
+
+\begin{proof}
+Each coordinate path has length at most $3(M-1)/2$, and the middle segment has length $M$. The union of the two adjacent centered blocks has extent $2M-1$ in the direction of the link and $M-1$ in the other two. Since the fine side is $Mn'\ge4M$, this union lifts to a box in $\Z^3$ without winding. All occurrences of a fixed fine link lie in a bounded number of such neighborhoods: their coarse vertices are within a distance depending on $M$, and there are three orientations and boundedly many paths.
+
+We next prove a filling estimate. In a lifted box of maximal extent $D$, we choose its lower corner and the coordinate paths, ordered $1,2,3$, from it to every vertex. For a positive link in direction $i$, we append the link to the ordered path of its initial vertex and move it to the left past the portions of the path in directions greater than $i$. Each interchange replaces two adjacent perpendicular links by the other two links of their elementary square. There are at most $3D$ interchanges, all within the box. Inserting a square changes the transport by a conjugate of the plaquette transport or its inverse. Hence, in the frame given by the ordered paths, the transport of this link is a product of at most $3D$ conjugated plaquette transports. For a reversed link we take the inverse. Along a closed path of length $q$ the frames cancel at successive vertices, and the transport around the path is, up to one conjugation, a product of at most $3Dq$ conjugated plaquette transports. We apply this to $F_{c,x}C_c^{-1}$ in the box above, with $D\le2M-1$ and $q\le q_M$, which gives at most $s_M=3(2M-1)q_M$ plaquette factors. A product of $s$ elements of $\SU$, each within group distance $\delta$ of the identity, is within group distance $s\delta$ of the identity, as one sees by concatenating the shortest one-parameter subgroups and using the bi-invariance of the metric. Let $0<\delta_M\le\rho_{\log}/(2s_M)$. For $0\le\delta<\delta_M$, every based loop holonomy is within group distance $s_M\delta<\rho_{\log}$ of the identity, so its identity-chart logarithm exists and has norm at most $s_M\delta$. This proves part (2), and further decreases of $\delta_M$ below preserve it.
+
+For the complex bounds, write a positive link as $e^{X_e}U_e$ and a reversed link as $U_e^{-1}e^{-X_e}$. For a path product $W$, moving the fixed $\SU$-valued factors to the right writes $W(X)W(0)^{-1}$ as a product of at most $q_M$ exponentials of $\pm X_e$, each conjugated by an $\SU$-valued partial transport. On the complexified color space these conjugations are unitary, so in a fixed matrix norm
+\[
+ \norm{W(X)W(0)^{-1}-I}\le\exp\bigl(Cq_M\max_e\abs{X_e}\bigr)-1,
+\]
+as one sees by expanding each exponential absolutely and multiplying the bounds. For a based loop holonomy, the value at $X=0$ is within $C_M\delta$ of the identity by part (2). Choosing $b_M$ and $\delta_M$ small puts all these matrices in the ball $\norm{Z-I}<r_{\log}$, on which $\Log Z=\sum_{\ell\ge1}(-1)^{\ell+1}(Z-I)^\ell/\ell$ converges absolutely. Its derivatives on smaller balls are bounded by the differentiated series, and the exponential series has the same property everywhere. The endpoint gauge transformations equal the identity at $X=0$, and there the output of $T_M$ equals the background output, so $\mathscr M_U(e^0)=I$. After decreasing $b_M$, its logarithm lies in the same chart. At most $q_M$ distinct link variables enter, even when a link occurs repeatedly. Bounds for every partial derivative of fixed order follow by differentiating these finite products and series, or by Cauchy's formula on fixed circles in these finitely many complex variables. Neither method introduces a dependence on the side or the depth.
+\end{proof}
+
+\begin{lemma}\label{ch05:lem:modified-average}
+Fix an odd $M\ge3$ and the radii $\rho_{\log},r_{\log}$ of \cref{ch05:lem:word-bounds}. There exist $\varepsilon_*,a_*,\delta_{\mathrm{av}},C_M>0$, depending only on these data, with $2\varepsilon_*\le\delta_{\mathrm{av}}<\delta_M$, such that the following holds for all integers $d\ge0$ and $n\ge4$. Use units in which the spacing of the coarse lattice of side $n$ is one, so that the lattice at level $j$ has side $M^{d-j}n$ and spacing $\epsilon_j=M^{j-d}$, $0\le j\le d$.
+\begin{enumerate}
+\item \emph{One step.} Let $U$ be an $\SU$-valued configuration on a periodic lattice of side $Mn'$, $n'\ge4$, with $\delta(U)=\delta\le\delta_{\mathrm{av}}$, and let $0<\epsilon\le1/M$. On the complex ball $\norm A_\infty<2a_*$,
+\[
+ \begin{aligned}
+ \Psi_{U,\epsilon}(A)&=Q_UA+\mathscr E_{U,\epsilon}(A),&\norm{Q_U}_{\mathrm{row}}&\le1+C_M\delta,\\
+ \norm{\mathscr E_{U,\epsilon}(A)}_\infty&\le C_MM\epsilon\norm A_\infty^2,&\norm{D\mathscr E_{U,\epsilon}(A)}_{\mathrm{row}}&\le C_MM\epsilon\norm A_\infty,
+ \end{aligned}
+\]
+where $Q_U=D\Psi_{U,\epsilon}(0)$ does not depend on $\epsilon$. Its principal part is the transported segment average
+\[
+ (Q_U^{\mathrm{main}}A)_c=M^{-4}\sum_{x\in\mathsf B_M(v)}\sum_{e\in[x,x+Me_i]}\Ad\bigl(U(\sigma_{v,x}[x,e^-])\bigr)A_e,\qquad c=(v,v+Me_i),
+\]
+where $e^-$ is the initial vertex of $e$ and $\sigma_{v,x}[x,e^-]$ is the path $\sigma_{v,x}$ followed by the segment from $x$ to $e^-$. The scalar averaging weights in each row of $Q_U^{\mathrm{main}}$ sum to exactly one, the norms of its color blocks in each row sum to at most one, and $Q_U-Q_U^{\mathrm{main}}$ has row norm at most $C_M\delta$.
+\item \emph{Iteration.} Let $U_0$ be an $\SU$-valued configuration on the lattice of side $M^dn$ with $\delta(U_0)\le\varepsilon\epsilon_0^2$ for some $0\le\varepsilon\le\varepsilon_*$, and set $U_j=T_M^jU_0$. Then $\delta_j=\delta(U_j)\le2\varepsilon\epsilon_j^2$ for $0\le j\le d$. For $\norm A_\infty<a_*$ define
+\[
+ V_0=e^{\epsilon_0A},\qquad V_{j+1}=\mathscr M_{U_j}(V_j),\qquad A_j=\epsilon_j^{-1}\Log V_j.
+\]
+The recursion is defined and holomorphic on this ball, and for $0\le j\le d$
+\[
+ \norm{A_j}_\infty\le2\norm A_\infty,\qquad
+ \norm{D_AA_j}_{\mathrm{row}}\le\exp\Bigl[C_M\sum_{\ell<j}\bigl(\delta_\ell+\epsilon_{\ell+1}\norm{A_\ell}_\infty\bigr)\Bigr]\le C_M.
+\]
+The coordinate $(A_j)_c$ depends only on the variables $A_e$ with $\dist(c,e)\le C_M\epsilon_j$, where distances are measured in the units above, in which the coarse spacing is one. For every fixed $\asp\ge0$ we have $\norm{D_AA_j}_{\asp,\mathrm{row}}\le C_{M,\asp}$ on the same ball. For every fixed $s\ge1$, on the ball $\norm A_\infty<a_*/2$, every coarse link $c$ and all link fields $B_1,\ldots,B_s$,
+\[
+ \bigl\lvert\bigl(D_A^sA_j(A)[B_1,\ldots,B_s]\bigr)_c\bigr\rvert\le C_{M,s,\asp}\prod_{\ell=1}^s\sup_ee^{-\asp\dist(c,e)}\abs{(B_\ell)_e}.
+\]
+\item \emph{Composed gauge transformation.} Define gauge transformations on the vertices of the lattice at level $j$ by
+\[
+ \mathsf G_0=I,\qquad\mathsf G_{j+1}=\mathsf h_{U_j}(V_j)\,(\mathsf G_j|_{\mathrm{roots}}).
+\]
+Then
+\[
+ V_jU_j=\bigl(T_M^j(e^{\epsilon_0A}U_0)\bigr)^{\mathsf G_j},\qquad0\le j\le d.
+\]
+For real $A$ the gauge transformations $\mathsf G_j$ are $\SU$-valued. On a fixed smaller complex ball they and their inverses have uniformly bounded holomorphic logarithms; the factors satisfy $\norm{\Log\mathsf h_{U_j}(V_j)}\le C_M\epsilon_j\norm{A_j}_\infty$, whose sum over $j$ is bounded.
+\end{enumerate}
+The constants in parts (1)--(3) do not depend on $n$, $n'$, $d$, $j$, the holonomies of the background around the cycles of the torus, $L$, or $\gamma$; the constants $C_{M,\asp}$ and $C_{M,s,\asp}$ depend in addition only on $\asp$ and $s$.
+\end{lemma}
+
+\begin{proof}
+We begin with the curvature along the background trajectory. Let $0<\varepsilon_*\le\varepsilon_M$, with $\varepsilon_M$ as in \cref{ch04:thm:energy-near-contraction}. At level $j$ the background has side $M^{d-j}n$, and every step $j<d$ goes from side $M\cdot M^{d-j-1}n$ to side $M^{d-j-1}n\ge n\ge4$, with the factor $M$ and spacings $\epsilon_j=M^{j-d}$. For $0<\varepsilon\le\varepsilon_*$, the hypothesis $\delta(U_0)\le\varepsilon\epsilon_0^2$ is the hypothesis of the curvature iteration in \cref{ch04:thm:energy-near-contraction}, which shows that $T_M$ is given by its logarithmic formula at every step and yields the curvature bounds below. If $\varepsilon=0$, then $\delta(U_0)=0$, and for every $\eta\in(0,\varepsilon_M]$ the same background satisfies $\delta(U_0)\le\eta\epsilon_0^2$. We apply the same theorem with $\eta$ in place of $\varepsilon$. The iterates $U_j=T_M^jU_0$ do not depend on $\eta$, and each application bounds the same fields by $\delta_j\le2\eta\epsilon_j^2$; letting $\eta\downarrow0$, we obtain $\delta_j=0$ for every $j$, and any one application with positive $\eta$ shows that the logarithmic formula applies. When $d=0$ the bound is the hypothesis and the sums below are empty. In all cases, for $0\le\varepsilon\le\varepsilon_*$,
+\begin{equation}\label{ch05:eq:curvature-sum}
+ \delta_j\le2\varepsilon\epsilon_j^2,\qquad\sum_{j<d}\delta_j\le\frac{2\varepsilon}{M^2-1}.
+\end{equation}
+We fix $0<\delta_{\mathrm{av}}<\delta_M$, with $\delta_M$ from \cref{ch05:lem:word-bounds}, and impose $2\varepsilon_*\le\delta_{\mathrm{av}}$. Every application below with $0\le\delta\le\delta_{\mathrm{av}}$ then satisfies the curvature hypothesis $\delta<\delta_M$ of that lemma. We decrease $\varepsilon_*$, $\delta_{\mathrm{av}}$, and the fluctuation radius finitely many times below.
+
+\paragraph{Step 1: The one-step differential and its endpoint terms.}
+Fix an $\SU$-valued $U$ with $\delta(U)=\delta\le\delta_{\mathrm{av}}$, and write $X$ for a link field of infinitesimal fluctuations. For a path $\eta$, the product rule and $(e^{tX_e}U_e)^{-1}=U_e^{-1}e^{-tX_e}$ give the left-trivialized derivative of the transport,
+\[
+ p_\eta(X)=\sum_{\substack{\text{positive}\\\text{occurrences }e}}\Ad\bigl(U(\eta_{\text{before }e})\bigr)X_e-\sum_{\substack{\text{negative}\\\text{occurrences }\bar e}}\Ad\bigl(U(\eta_{\text{before }\bar e})U_e^{-1}\bigr)X_e,
+\]
+where $\eta_{\text{before }e}$ is the part of $\eta$ preceding the occurrence. All transports in this formula are $\SU$-valued, hence orthogonal on colors.
+
+To differentiate $T_M$ without discarding a term, let $F_x=U(F_{c,x})$, $C=U(C_c)$, $L_x=F_xC^{-1}$, $Z=M^{-3}\sum_x\Log L_x$, and $O=e^ZC=(T_MU)_c$. Let $f_x=\dot F_xF_x^{-1}$ and $c_0=\dot CC^{-1}$, where the dot denotes the derivative in the direction $X$, and introduce the left-trivialized differentials
+\[
+ \mathcal E_Z(Y)=(D\exp_ZY)e^{-Z},\qquad\mathcal L_{L_x}(Y)=D\Log_{L_x}(YL_x).
+\]
+By the product rule, we have
+\begin{equation}\label{ch05:eq:ordinary-differential}
+ \dot OO^{-1}=\mathcal E_Z\Bigl[M^{-3}\sum_x\mathcal L_{L_x}\bigl(f_x-\Ad(L_x)c_0\bigr)\Bigr]+\Ad(e^Z)c_0.
+\end{equation}
+By \cref{ch05:lem:word-bounds}, $\abs{\Log L_x}\le C_M\delta$ and $\abs Z\le C_M\delta$. Using the convergent exponential and logarithm series, we obtain $\mathcal E_Z=I+O_M(\delta)$, $\mathcal L_{L_x}=I+O_M(\delta)$, $\Ad(L_x)=I+O_M(\delta)$, and $\Ad(e^Z)=I+O_M(\delta)$ as operators. Their absolute local coefficient sums have the same bounds, because at most $q_M$ local labels occur. Replacing these four operators by $I$ in \eqref{ch05:eq:ordinary-differential} cancels the two terms containing $c_0$ and leaves $M^{-3}\sum_xf_x$. The replacement error, as a linear map of $X$, has absolute row norm at most $C_M\delta$.
+
+We split the derivative along the path at its two endpoint connectors:
+\[
+ f_x=p_{\sigma_{v,x}}(X)+p^{\mathrm{seg}}_{v,x}(X)-\Ad(F_x)p_{\sigma_{s,x+Me_i}}(X),\qquad s=v+Me_i.
+\]
+The middle term is the sum of the variations of the $M$ links of the segment $[x,x+Me_i]$, transported first along $\sigma_{v,x}$ and then along the segment up to the link. Differentiating the endpoint gauge transformation, we find
+\[
+ \dot{\mathsf h}_{v;U}(I)=-M^{-3}\sum_xp_{\sigma_{v,x}}(X).
+\]
+The left-trivialized derivative of the gauge-corrected output is the derivative of $T_M$ minus this mean over the initial connectors, plus $\Ad(O)$ times the corresponding mean over the terminal connectors. The terms of the initial connectors cancel exactly. The remaining terminal terms are
+\[
+ M^{-3}\sum_x\{\Ad(O)-\Ad(F_x)\}p_{\sigma_{s,x+Me_i}}(X);
+\]
+here the average over $x+Me_i$ is exactly the average over $\mathsf B_M(s)$ in the definition of $\mathsf h_{s;U}$, with the same paths. These terms have absolute row norm at most $C_M\delta$, since $OF_x^{-1}=e^ZL_x^{-1}$ is within $C_M\delta$ of the identity and $\SU$-valued transports have norm one.
+
+The remaining segment derivative is
+\[
+ M^{-3}\sum_{x\in\mathsf B_M(v)}\sum_{e\in[x,x+Me_i]}\Ad\bigl(U(\sigma_{v,x}[x,e^-])\bigr)X_e.
+\]
+For $X=\epsilon A$, division by the coarse length $M\epsilon$ gives $Q_U^{\mathrm{main}}$. There are $M^4$ occurrences of weight $M^{-4}$, each an orthogonal map on colors. The scalar weights in each row therefore sum to one, and the norms of the color blocks in each row sum to at most one. The endpoint and coefficient errors above, divided by $M$, are still bounded by $C_M\delta$. We conclude that $Q_U=D\Psi_{U,\epsilon}(0)$ does not depend on $\epsilon$ and satisfies the row estimates of part (1).
+
+\paragraph{Step 2: The one-step remainder.}
+Let $F_U(X)=\Log\mathscr M_U(e^X)$, which vanishes at $X=0$. By \cref{ch05:lem:word-bounds}, its second derivative has absolute row norm at most $C_M$ on a fixed complex ball of $X$, uniformly in $U$. Here the row sums over both inputs, and the bounded size of the stencils justifies this absolute bound. Since $\Psi_{U,\epsilon}(A)=(M\epsilon)^{-1}F_U(\epsilon A)$, on a fixed complex ball of $A$ with $\epsilon\le1/M$,
+\[
+ \norm{D_A^2\Psi_{U,\epsilon}}_{\mathrm{row}}\le C_M\frac{\epsilon^2}{M\epsilon}=C_M\epsilon/M\le C_MM\epsilon.
+\]
+The quadratic bound for $\mathscr E_{U,\epsilon}$ follows from Taylor's formula along the segment $tA$, $0\le t\le1$. Integrating the second derivative along the same segment gives the bound for its first derivative. This proves part (1) on $\norm A_\infty<2a_*$, after choosing $2a_*$ inside that ball.
+
+\paragraph{Step 3: Uniform iteration.}
+Let $C$ dominate the constants of part (1). Since $A_{j+1}=\Psi_{U_j,\epsilon_j}(A_j)$, $M\epsilon_j=\epsilon_{j+1}$, and $\epsilon_j\le1/M$ for $j<d$, the norms $b_j=\norm{A_j}_\infty$ satisfy, whenever the iteration is defined,
+\[
+ b_{j+1}\le b_j\bigl(1+C\delta_j+C\epsilon_{j+1}b_j\bigr),\qquad\sum_{j<d}\epsilon_{j+1}\le\frac M{M-1}.
+\]
+We choose the radii so small that
+\begin{equation}\label{ch05:eq:bootstrap-choice}
+ C\Bigl(\frac{2\varepsilon_*}{M^2-1}+\frac{2a_*M}{M-1}\Bigr)<\log(3/2).
+\end{equation}
+For an input with $\norm A_\infty=t<a_*$, as long as $b_\ell\le2t$ for $\ell<j$, multiplying the inequalities and using $\log(1+u)\le u$, we obtain
+\[
+ b_j\le t\exp\Bigl[C\sum_{\ell<j}\delta_\ell+2Ct\sum_{\ell<j}\epsilon_{\ell+1}\Bigr]<\tfrac32t.
+\]
+In particular $b_j$ never reaches $2t$, so the bound holds for all $j\le d$, and each step stays in the domain $b_j<2a_*$ of part (1). Since a finite composition of holomorphic maps is holomorphic, the recursion is holomorphic on the input ball at every finite depth. For $t=0$ it vanishes identically, and for $d=0$ it is the identity.
+
+The derivative of one step at $A_j$, including the nonlinear remainder, has row norm at most $1+C_M(\delta_j+\epsilon_{j+1}b_j)$. By the submultiplicativity of absolute row sums, we obtain the bound for $D_AA_j$ in part (2). By \eqref{ch05:eq:curvature-sum} and the bootstrap, its exponent is at most
+\[
+ C_M\Bigl(\frac{2\varepsilon_*}{M^2-1}+\frac{2a_*M}{M-1}\Bigr),
+\]
+which does not depend on $d$, $n$, or $j$.
+
+\paragraph{Step 4: Locality and directional derivatives.}
+An output of one step depends only on inputs within a neighborhood of radius $r_M^{\mathrm{loc}}\epsilon_j$, where $r_M^{\mathrm{loc}}<\infty$ is a fixed stencil radius. If $r_j$ is the dependence radius at level $j$, measured in the units in which the coarse spacing is one, then $r_{j+1}\le r_j+r_M^{\mathrm{loc}}\epsilon_j$ and $r_0=0$. Summing the geometric series, we find $r_j\le C_M\epsilon_j$. The same recursion bounds the background links on which the coefficients depend, since each preceding application of $T_M$ has a neighborhood of the same scale. The assertion holds on the torus, since each neighborhood can be lifted to a box before returning to the torus. Inserting the weight $e^{\asp\dist(c,e)}$ multiplies the bound for the first derivative by at most $e^{\asp C_M\epsilon_j}\le e^{\asp C_M}$.
+
+For the higher derivatives, take the smaller ball $\norm A_\infty<a_*/2$. For link fields $B_1,\ldots,B_s$ with $\norm{B_\ell}_\infty\le1$, the map $(t_1,\ldots,t_s)\mapsto A_j(A+\sum_\ell t_\ell B_\ell)$ is bounded by $2a_*$ for $\abs{t_\ell}<a_*/(4s)$. Cauchy's formula on these circles bounds its mixed coefficient, and hence $\norm{D_A^sA_j(A)[B_1,\ldots,B_s]}_\infty$, by $2a_*(4s/a_*)^s$. This bounds a multilinear operator norm; absolute sums of coefficients over the inputs are treated in \cref{ch05:lem:physical-jets}. For the weighted bound, restrict each $B_\ell$ to the dependence neighborhood of the fixed output $c$, which does not change the derivative by locality. On that neighborhood $\abs{(B_\ell)_e}\le e^{\asp C_M}\sup_{e'}e^{-\asp\dist(c,e')}\abs{(B_\ell)_{e'}}$, so the multilinear bound acquires at most the factor $e^{s\asp C_M}$.
+
+\paragraph{Step 5: The composed gauge transformation.}
+For a gauge transformation $k$, a transport along a path from $v$ to $s$ transforms as $k_vU(\eta)k_s^{-1}$. The based loop holonomies $U(F_{c,x})U(C_c)^{-1}$ are conjugated by $k_v$. Within the identity chart the logarithm series and the exponential are equivariant under conjugation, and substituting into the formula for $T_M$, we obtain
+\[
+ T_M(W^k)=(T_MW)^{k|_{\mathrm{roots}}}.
+\]
+For $\SU$-valued gauge transformations this also holds at the configurations where the Borel extension is used, since the exceptional matrix $-I$ is central. For complex gauge transformations we use only the domain where all logarithms are given by their series. Let $Z_j=T_M^j(e^{\epsilon_0A}U_0)$. If $V_jU_j=Z_j^{\mathsf G_j}$, then by the definition of $\mathscr M$ and the gauge identity we have
+\[
+ V_{j+1}U_{j+1}=\bigl(T_M(V_jU_j)\bigr)^{\mathsf h_{U_j}(V_j)}=(T_MZ_j)^{\mathsf h_{U_j}(V_j)(\mathsf G_j|_{\mathrm{roots}})},
+\]
+where we used $(W^k)^l=W^{lk}$. Starting at $j=0$, induction proves the identity of part (3) with the stated order of the factors. For real $A$, every relative transport in an endpoint gauge transformation is $\SU$-valued with small logarithm in $\su$. Then every factor and every $\mathsf G_j$ is $\SU$-valued.
+
+For complex $A$, \cref{ch05:lem:word-bounds} and the definition of $\mathsf h$ imply that
+\[
+ \norm{\Log\mathsf h_{U_j}(V_j)}\le C_M\epsilon_jb_j,\qquad\sum_{j<d}\epsilon_jb_j\le\frac{2\norm A_\infty}{M-1}.
+\]
+It follows that all partial products and their inverses have norm at most $\exp(C_M\norm A_\infty)$ and differ from the identity by at most $\exp(C_M\norm A_\infty)-1$. We decrease $a_*$ once so that the last quantity is less than $1/2$. The logarithms then exist by the same convergent series and are holomorphic and uniformly bounded.
+
+It remains to check that the gauge identities do not leave the logarithm chart. At level $j$, every based loop holonomy of $V_jU_j$ differs from the identity by at most $C_M(\delta_j+\epsilon_jb_j)$, by \cref{ch05:lem:word-bounds}. The corresponding based loop holonomy of $Z_j$ is its conjugate by $\mathsf G_j^{-1}$, and its distance to the identity in matrix norm is larger by at most the factor $\exp(C_M\norm A_\infty)$. The bounds $\delta_j\le2\varepsilon_*\epsilon_j^2$ and $b_j\le2a_*$ allow one further decrease of $\varepsilon_*$ and $a_*$ after which both based loop holonomies lie strictly inside the chart. The conjugation identity for the logarithm series then holds term by term, and the induction above applies at every level on this ball. This shows that the complex gauge relation is an identity of holomorphic maps, not only of Taylor coefficients. All choices involved only $M$ and the radii $\rho_{\log}$, $r_{\log}$.
+\end{proof}
+
+\section{Volume-normalized column sums and derivative bounds}\label{ch05:sec:columns}
+
+We now prove bounds on absolute sums of derivative coefficients of the iterates $A_j=\Phi_j(A)$ of \cref{ch05:lem:modified-average}, with either the output or any one input held fixed. Two normalizations of column sums occur. For a matrix $P$ from link fields at spacing $\epsilon_0$ to link fields at spacing $\epsilon_j$, the counting column norm is $\sup_e\sum_c\norm{P(c,e)}$. The volume-normalized column norm of \cref{ch01:def:analytic-norms}, with $a_{\mathrm{out}}=\epsilon_j$ and $a_{\mathrm{in}}=\epsilon_0$, is $(\epsilon_j/\epsilon_0)^3$ times the counting column norm. A fine link contributes to few coarse links, each time with a small weight. The counting column sums of $D\Phi_j$ are therefore of order $(\epsilon_0/\epsilon_j)^3=M^{-3j}$, and the volume-normalized column sums are bounded. For derivatives of higher order with one input fixed, exactly one such volume factor appears. For example, with one fixed input $e_1$,
+\[
+ D^2(\Psi\circ\Phi)[e_1,e_2]=D^2\Psi\bigl[D\Phi\,e_1,D\Phi\,e_2\bigr]+D\Psi\,D^2\Phi[e_1,e_2];
+\]
+in the first term, the branch that contains $e_1$ is summed with a column sum of $D\Phi$ and the other branch with a row sum, and only one factor $(\epsilon_0/\epsilon_j)^3$ is produced. The proof below organizes this observation by an induction over the order, using the set-partition form of the chain rule.
+
+\begin{lemma}\label{ch05:lem:physical-jets}
+Assume the hypotheses of part (2) of \cref{ch05:lem:modified-average}, and let $A$ range over a fixed smaller complex ball on which the bounds of \cref{ch05:lem:word-bounds,ch05:lem:modified-average} hold with a fixed margin. Write $\Phi_j(A)=A_j$ and, for $j<d$, $e_j=\delta_j+\epsilon_{j+1}\norm{A_j}_\infty$. The derivative of one step decomposes as
+\[
+ L_j=D\Psi_{U_j,\epsilon_j}(A_j)=K_j+E_j,\qquad K_j=Q^{\mathrm{main}}_{U_j},
+\]
+and the nonnegative scalar kernel of occurrences
+\[
+ k_M(c,e)=M^{-4}\#\bigl\{(x,s):x\in\mathsf B_M(v),\ 0\le s<M,\ e=(x+se_i,x+(s+1)e_i)\bigr\}
+\]
+for $c=(v,v+Me_i)$,
+has row sums exactly $1$ and column sums exactly $M^{-3}$; the sums of the norms of the color blocks of $K_j$ are no larger. With counting column norms,
+\[
+ \begin{aligned}
+ \norm{L_j}_{\mathrm{row}}&\le1+C_Me_j,&\norm{L_j}_{\mathrm{col}}&\le M^{-3}(1+C_Me_j),\\
+ \norm{E_j}_{\mathrm{row}}&\le C_Me_j,&\norm{E_j}_{\mathrm{col}}&\le M^{-3}C_Me_j.
+ \end{aligned}
+\]
+Set $S_j=\sum_{\ell<j}e_\ell$, $P_j=L_{j-1}\cdots L_0=D\Phi_j$, and $P_j^0=K_{j-1}\cdots K_0$, empty products being the identity. Then
+\[
+ \begin{aligned}
+ \norm{P_j}_{\mathrm{row}}&\le e^{C_MS_j},&\norm{P_j}_{\mathrm{col}}&\le(\epsilon_0/\epsilon_j)^3e^{C_MS_j},\\
+ \norm{P_j-P_j^0}_{\mathrm{row}}&\le C_MS_je^{C_MS_j},&\norm{P_j-P_j^0}_{\mathrm{col}}&\le C_M(\epsilon_0/\epsilon_j)^3S_je^{C_MS_j},
+ \end{aligned}
+\]
+and these bounds follow from the identity
+\[
+ P_j-P_j^0=\sum_{\ell<j}K_{j-1}\cdots K_{\ell+1}E_\ell L_{\ell-1}\cdots L_0.
+\]
+For every fixed $\asp\ge0$, the coefficients of the last iterate satisfy
+\[
+ \norm{D_{A_e}\Phi_d(c)}\le C_{M,\asp}\epsilon_0^3e^{-\asp\dist(c,e)},
+\]
+and $D\Phi_j$ is bounded from $\ell^2$ with weight $\epsilon_0^3$ to $\ell^2$ with weight $\epsilon_j^3$, uniformly. For every fixed $s\ge1$ and $0\le j\le d$, with $\Tree(c,e_1,\ldots,e_s)$ the length of a shortest connecting network of the locations of $c,e_1,\ldots,e_s$, measured in the units in which the coarse spacing is one,
+\[
+ \begin{aligned}
+ \sup_c\sum_{e_1,\ldots,e_s}e^{\asp\Tree(c,e_1,\ldots,e_s)}\norm{D_{A_{e_1}}\cdots D_{A_{e_s}}\Phi_j(c)}&\le C_{M,s,\asp},\\
+ \sup_{e_1}\sum_{c,e_2,\ldots,e_s}e^{\asp\Tree(c,e_1,\ldots,e_s)}\norm{D_{A_{e_1}}\cdots D_{A_{e_s}}\Phi_j(c)}&\le C_{M,s,\asp}(\epsilon_0/\epsilon_j)^3.
+ \end{aligned}
+\]
+In the second bound any one input may be fixed, and multiplying by $(\epsilon_j/\epsilon_0)^3$ gives a bounded volume-normalized column sum in the sense of \cref{ch01:def:analytic-norms}. All orientations, repeated inputs, and periodic identifications are included. The constants may depend on $M$, $s$, $\asp$, the radii of \cref{ch05:lem:word-bounds}, and the ratio of the nested balls, but not on $j$, $d$, $n$, $L$, $\gamma$, or the holonomies of the background. The bounds hold for each fixed order $s$; no bound uniform in $s$, such as a factorial bound, and no factor $\epsilon_0^{3s}$ for individual coefficients of order $s$, is asserted.
+\end{lemma}
+
+\begin{proof}
+The background configurations $U_0,\ldots,U_d$ are fixed and are not differentiated. We shrink the ball of fluctuations inside the ball of \cref{ch05:lem:modified-average}, so that the derivative bounds of \cref{ch05:lem:word-bounds} hold with a fixed margin.
+
+\paragraph{Step 1: Exact incidence and the first derivative of one step.}
+A coarse $i$-link has $M^3$ segment starts and $M$ positively oriented links in each segment, and its scalar row sum is $M^4M^{-4}=1$. For a fixed fine link $e=(z,z+e_i)$, the segment starts whose segments contain $e$ are exactly $x=z-se_i$, $0\le s<M$. Each start lies in exactly one centered block, and the vertex of that block determines exactly one coarse link in direction $i$. There are exactly $M$ occurrences, and the scalar column sum is $MM^{-4}=M^{-3}$. If several occurrences share a coefficient block, combining their orthogonal transports cannot increase the sum of the norms, so the color-block sums of $K_j$ obey the same upper bounds. The count also holds across the periodic seams: the fine side of a single averaging step is at least $4M$; the $M$ starts are distinct, and the centered blocks partition the vertices. No reversed link occurs in $K_j$; reversed links and mixed orientations in the other paths are covered by the bound on overlaps in \cref{ch05:lem:word-bounds}.
+
+By the proof of \cref{ch05:lem:modified-average}, we have $\norm{E_j}_{\mathrm{row}}\le C_M(\delta_j+\epsilon_{j+1}\norm{A_j}_\infty)=C_Me_j$. Let $J_M$ be the largest number of coarse output stencils that contain a given fine input link, counting all orientations and repetitions. Each coefficient norm is bounded by the row sum of its output, so $\norm{E_j}_{\mathrm{col}}\le J_MC_Me_j$. Since $M$ is fixed, we replace the constant by $M^3J_MC_M$ and write this as $\norm{E_j}_{\mathrm{col}}\le M^{-3}C_Me_j$, which keeps the factor $M^{-3}$ of the column sum of $K_j$. Adding the bounds for $K_j$ proves the four one-step estimates. This also applies for complex $A_j$, since orthogonality was used only for $K_j$, whose transports are those of the background.
+
+\paragraph{Step 2: Products and the ordered telescope.}
+For counting norms, $\norm{(AB)_{xz}}\le\sum_y\norm{A_{xy}}\norm{B_{yz}}$ gives submultiplicativity of row sums and of column sums. As in Step~3 of the proof of \cref{ch05:lem:modified-average}, we obtain
+\[
+ \norm{P_j}_{\mathrm{row}}\le\prod_{\ell<j}(1+C_Me_\ell)\le e^{C_MS_j},\qquad\norm{P_j}_{\mathrm{col}}\le M^{-3j}e^{C_MS_j},
+\]
+and $M^{-3j}=(\epsilon_0/\epsilon_j)^3$. For the telescope, we replace the leftmost factor $L_{j-1}$ by $K_{j-1}+E_{j-1}$ and keep the term with $E_{j-1}$; then we make the same replacement in the next factor of the remaining product of factors $K$, and so on. After the last replacement the remaining product is $P_j^0$, which gives the identity in the statement. Its summand with index $\ell$ has row norm at most $C_Me_\ell e^{C_MS_j}$. Its column norm contains exactly $j$ factors $M^{-3}$, including the one in $E_\ell$, and is at most $M^{-3j}C_Me_\ell e^{C_MS_j}$. Summing over $\ell$ proves the bounds for $P_j-P_j^0$; the error is proportional to $S_j$ rather than to the number of levels. We also recall from the proof of \cref{ch05:lem:modified-average} the uniform bound
+\begin{equation}\label{ch05:eq:error-sum}
+ S_j\le\frac{2\varepsilon_*}{M^2-1}+\frac{2a_*M}{M-1}.
+\end{equation}
+
+\paragraph{Step 3: Pointwise and $\ell^2$ bounds.}
+Each coefficient $D_{A_e}\Phi_d(c)$ is bounded by the counting column sum containing it, hence by $C_M\epsilon_0^3$, since $\epsilon_d=1$. It vanishes unless $e$ is within distance $C_M$ of $c$, by the locality in \cref{ch05:lem:modified-average}. Multiplying by $e^{\asp C_M}$ proves the pointwise exponential bound for every fixed $\asp\ge0$. For a block matrix $P$ with row bound $R$ and column bound $C$, the weighted Cauchy--Schwarz inequality at each output implies that
+\[
+ \sum_c\Bigl\lvert\sum_eP_{ce}u_e\Bigr\rvert^2\le R\sum_{c,e}\norm{P_{ce}}\abs{u_e}^2\le RC\sum_e\abs{u_e}^2.
+\]
+For $P=P_j$ we have $RC\le C_M(\epsilon_0/\epsilon_j)^3$. Multiplying the left side by $\epsilon_j^3$, we find that it is at most $C_M\epsilon_0^3\sum_e\abs{u_e}^2$, as required.
+
+\paragraph{Step 4: Absolute bounds for higher derivatives of one step.}
+For $r\ge2$, we apply the derivative bounds of \cref{ch05:lem:word-bounds} to $\Psi_{U_j,\epsilon_j}(A)=\epsilon_{j+1}^{-1}F_{U_j}(\epsilon_jA)$. Every partial derivative of order $r$ carries the factor $\epsilon_j^r/\epsilon_{j+1}=\epsilon_j^{r-1}/M$, which is at most $\epsilon_{j+1}$ since $\epsilon_j\le1/M$. Summing over the at most $q_M^r$ tuples of local inputs, we obtain, with $\Psi_j=\Psi_{U_j,\epsilon_j}$ evaluated at $A_j$,
+\begin{equation}\label{ch05:eq:one-step-higher-jets}
+ \begin{split}
+ \sup_c\sum_{b_1,\ldots,b_r}\norm{D_{b_1}\cdots D_{b_r}\Psi_j(c)}&\le C_{M,r}\epsilon_{j+1},\\
+ \sup_{b_1}\sum_{c,b_2,\ldots,b_r}\norm{D_{b_1}\cdots D_{b_r}\Psi_j(c)}&\le M^{-3}C_{M,r}\epsilon_{j+1}.
+ \end{split}
+\end{equation}
+The second estimate uses the bound $J_M$ on output stencils and absorbs $M^3J_M$ into the constant, as in Step~1. These absolute sums use only that finitely many local variables enter, not directional Cauchy estimates. By symmetry of derivatives, any input may be the fixed one in the second line.
+
+\paragraph{Step 5: Induction over the order.}
+We first omit the spatial weights and set
+\[
+ R_s(j)=\sup_c\sum_{e_1,\ldots,e_s}\norm{D_{e_1}\cdots D_{e_s}\Phi_j(c)},\qquad
+ C_s(j)=\sup_{e_1}\sum_{c,e_2,\ldots,e_s}\norm{D_{e_1}\cdots D_{e_s}\Phi_j(c)},
+\]
+and $\widehat C_s(j)=(\epsilon_j/\epsilon_0)^3C_s(j)$. Step~2 bounds $R_1$ and $\widehat C_1$. For $s\ge2$ both vanish at $j=0$, since $\Phi_0(A)=A$. By the set-partition form of the chain rule (Faà di Bruno's formula), the derivatives of $\Phi_{j+1}=\Psi_j\circ\Phi_j$ are
+\begin{equation}\label{ch05:eq:partition-chain}
+ D^s\Phi_{j+1}[u_1,\ldots,u_s]=\sum_\pi D^{\abs\pi}\Psi_j(A_j)\Bigl[D^{\abs B}\Phi_j(A)[u_\ell:\ell\in B]:B\in\pi\Bigr],
+\end{equation}
+where $\pi$ runs over the set partitions of $\{1,\ldots,s\}$. The formula follows by induction on $s$: a further derivative either differentiates the outer tensor, creating a new block, or differentiates exactly one inner tensor, enlarging its block, and these alternatives produce each partition once.
+
+For the sums with the output fixed, the partition with one block contributes at most $(1+C_Me_j)R_s(j)$. Every other partition has at least two blocks, and all inner orders are smaller than $s$. Summing the inner coefficients at each fixed intermediate label uses $R_{\abs B}(j)$, and summing the outer coefficients then uses the first line of \eqref{ch05:eq:one-step-higher-jets}. By induction on $s$ we obtain, with a constant $B_{M,s}$ determined by the lower orders,
+\[
+ R_s(j+1)\le(1+C_Me_j)R_s(j)+B_{M,s}\epsilon_{j+1}.
+\]
+
+For the sums with one input fixed, fix $e_1$ and, in each partition, let $B_*$ be the block containing it. We sum the inner tensor of $B_*$ using $C_{\abs{B_*}}(j)$ and every other inner tensor using $R_{\abs B}(j)$. With the intermediate input of $B_*$ fixed, the remaining outer sum uses the second line of \eqref{ch05:eq:one-step-higher-jets}. This is the rule for contractions with a fixed input in \cref{ch02:lem:coefficient-algebra}, applied with counting volumes. The partition with one block contributes at most $M^{-3}(1+C_Me_j)C_s(j)$, and, by the induction bounds for the lower orders, the other partitions contribute at most
+\[
+ M^{-3}B_{M,s}\epsilon_{j+1}(\epsilon_0/\epsilon_j)^3.
+\]
+Multiplying the recurrence by $(\epsilon_{j+1}/\epsilon_0)^3=M^3(\epsilon_j/\epsilon_0)^3$ cancels the factor $M^{-3}$ exactly, and we find
+\[
+ \widehat C_s(j+1)\le(1+C_Me_j)\widehat C_s(j)+B_{M,s}\epsilon_{j+1}.
+\]
+This is why exactly one volume factor appears.
+
+Both recurrences start at zero. Expanding the products of their first-order factors and using \eqref{ch05:eq:error-sum}, we find that their solutions are bounded by
+\[
+ B_{M,s}\sum_{\ell<j}\epsilon_{\ell+1}\exp\Bigl(C_M\sum_{\ell<j}e_\ell\Bigr)\le B_{M,s}\frac M{M-1}\exp\Bigl[C_M\Bigl(\frac{2\varepsilon_*}{M^2-1}+\frac{2a_*M}{M-1}\Bigr)\Bigr].
+\]
+There are finitely many partitions for each fixed $s$, so the induction closes at every fixed order and gives bounds for $R_s(j)$ and $\widehat C_s(j)$ that are uniform in $j$, $d$, and $n$. The same argument applies with any fixed input, either by selecting its block or by the symmetry of derivatives.
+
+\paragraph{Step 6: Spatial weights.}
+A nonzero derivative coefficient of $\Phi_j(c)$ has all its inputs within distance $C_M\epsilon_j$ of $c$, by the locality in \cref{ch05:lem:modified-average}. Joining each input to $c$ by a shortest periodic path gives a connected network of length at most $sC_M\epsilon_j\le sC_M$, and the length of a shortest connecting network is no larger. Inserting the weight $e^{\asp\Tree}$ multiplies each of the sums above by at most $e^{\asp sC_M}$, which proves the two weighted bounds. Repeated inputs are ordinary terms of these ordered sums, and all orientations and periodic identifications were included in the one-step bounds. Multiplying the column bound by $\epsilon_j^3/\epsilon_0^3$ gives the volume-normalized column sum of \cref{ch01:def:analytic-norms}. This completes the proof.
+\end{proof}

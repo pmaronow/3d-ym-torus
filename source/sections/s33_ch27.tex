@@ -1,0 +1,988 @@
+\chapter{Laplace asymptotics near flat connections}\label{ch27:chapter}
+
+This section begins the analysis of weak coupling. We fix the side $n$ of the coarse lattice and let $\gamma\to0$. Then every scale of the renormalization group is weakly coupled. The law of the coarsest field $V^{JK}$ under the conditioned Wilson measure is the stopped measure $\widehat\nu$ of \cref{ch11:thm:terminal-anchor}, and it concentrates near the flat configurations on $\Lat n$. We study $\widehat\nu$ by Laplace's method on the finite-dimensional space $\Conf n$, uniformly in the number of averaging steps that precede the coarse lattice. The results are used in \cref{ch30:chapter,ch31:chapter,ch32:chapter} to prove \cref{s2:thm:flat,s2:thm:regular,s2:thm:central}; nothing in \cref{ch28:chapter,ch29:chapter} depends on this section.
+
+We prove four main results. Throughout, $g^2=\gamma/n$ and $E_0=4\sum_pq(V_p)$ is the Wilson action on $\Lat n$.
+\begin{enumerate}
+\item \Cref{ch27:thm:sharp-normalizer} shows that the partition function of $\widehat\nu$ is comparable to $\gamma^{3n^3-1}$, uniformly in the depth, for sufficiently small $\gamma\in(0,\gamma_0]$, and that the integral of $e^{-\kappa E_0/g^2}$ over all of $\Conf n$ is $O(g^{6n^3-2})$.
+\item \Cref{ch27:thm:central-stiff-chart} constructs coordinates near the trivial connection in which the $6n^3-6$ nonconstant directions transverse to the gauge orbits are nondegenerate for the effective classical action $E_d$, uniformly in $d$, and integrates these directions out by Laplace's method. What remains is an integral over the nine constant coordinates in the Lie algebra, in which $E_d$ has no positive quadratic part; this integral is analyzed in \cref{ch32:chapter}.
+\item \Cref{ch27:thm:flowed-log-covariance} computes, in the continuum and on the lattice, the covariance $\Sigma_\theta$ of the linearization of the flowed cycle logarithms at a regular flat connection, under the Gaussian measure defined by the quadratic part of the Yang--Mills action.
+\item \Cref{ch27:lem:terminal-gaussian-telescope} shows that, transverse to a compact patch of regular flat configurations, $\widehat\nu$ is Gaussian up to errors of order $\sqrt\gamma$. It also shows that the lattice covariance $\Sigma_\theta^N$ decomposes exactly into a contribution of the coarse lattice and contributions of the normalized fluctuation variables of each RG step.
+\end{enumerate}
+The tools are an analysis of the cone of commuting triples in $\su^3$ (\cref{ch27:lem:commuting-cone}) and a Laplace estimate in normal coordinates that is uniform in an arbitrary tangential weight (\cref{ch27:lem:uniform-tube-laplace,ch27:cor:weighted-tube-density}).
+
+The inputs from earlier sections are the stopped density and its estimates (\cref{ch11:thm:terminal-anchor}), the description of flat configurations and of their refinements (\cref{ch11:lem:flat-lifts}), bounds and symmetries of the effective classical actions (\cref{ch07:thm:all-root-classical,ch07:lem:classical-symmetries,ch08:thm:classical-cutoff}), the triangular change of variables of one RG step (\cref{ch09:thm:sequential-density}), and the reconstruction maps $\RepMap$ (\cref{ch12:thm:replacement-family}).
+
+\paragraph{The exponent.}
+We work modulo based gauge transformations, that is, lattice gauge transformations equal to the identity at a fixed root. This quotient still carries the simultaneous conjugation of the cycle holonomies; see \cref{ch27:sec:preliminaries}. The exponent $6n^3-2$ in \cref{ch27:thm:sharp-normalizer} comes from the following count of directions.
+\begin{center}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Directions & Dimension & Factor in $\widehat Z$\\
+\midrule
+Based gauge quotient of $\Conf n$ & $6n^3+3$ & ambient space\\
+Regular flat configurations & $5=3+2$ & tangential volume\\
+Normal to a regular flat configuration & $6n^3-2$ & $g^{6n^3-2}$\\
+Nonconstant transverse directions near $I$ & $6n^3-6$ & $g^{6n^3-6}$\\
+Normal to a nonzero commuting triple & $4$ & $g^4$\\
+Constant modes with $\abs X\le\sqrt g$ & $9$ & $g^{9/2}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The five flat directions are the three holonomy angles and the two directions in which simultaneous conjugation moves the common axis of the holonomies. Near a regular flat configuration the normal integral directly gives $g^{6n^3-2}$. Near the trivial connection the count is less direct. We write the constant modes as $X\in\su^3\simeq\R^9$. On the constant configurations $e^{X/n}$ the Wilson action is comparable to $Q(X)/n$, where $Q(X)=2^{-1}\sum_{i<j}\abs{x_i\times x_j}^2$, and $Q$ vanishes exactly on the cone $\CommMan$ of commuting triples. Near a commuting triple of radius $\varrho$, the volume element of $\CommMan$ is proportional to $\varrho^4\,d\varrho$, and in each of the four normal directions $Q$ grows like $\varrho^2\abs b^2/2$ (\cref{ch27:lem:commuting-cone}). Each normal Gaussian width is then of order $g/\varrho$, and the product $\varrho^4(g/\varrho)^4\,d\varrho=g^4\,d\varrho$ integrates to $O(g^4)$ over a bounded range of radii. The ball of radius $\sqrt g$ contributes only $O(g^{9/2})$. With the factor $g^{6n^3-6}$ from the nonconstant directions, we again obtain $g^{6n^3-2}=(\gamma/n)^{3n^3-1}$. The same count indicates that the measure $e^{-Q(Y)}dY$ on $\R^9$ has infinite total mass. This divergence of the bosonic three-matrix $\SU$ integral is known \cite{KrauthNicolaiStaudacher1998,KrauthStaudacher1998FiniteIntegrals,AustingWheater2001Convergence}; see also \cref{ch32:chapter}. In this section $e^{-Q}$ is only integrated over bounded sets.
+
+\paragraph{Two normalizations.}
+Two normalizations of the exponent occur. In \cref{ch27:sec:central} we write the exponent of $\widehat\nu$ as $E_d/g^2$ and use the Laplace parameter $g^2=\gamma/n$. In \cref{ch27:sec:normalizer,ch27:sec:terminal} we write it as $nE_d/\gamma$ and use the Laplace parameter $\gamma$. These are the same exponent, since
+\[
+ \frac{E_d}{g^2}=\frac{nE_d}{\gamma}.
+\]
+Accordingly the normal Hessians $H_d$ in \cref{ch27:lem:regular-flat-tube,ch27:lem:terminal-gaussian-telescope} are Hessians of $nE_d$.
+
+\paragraph{Constants.}
+Constants in results about $\widehat\nu$ may depend on $n$, $L$, $M$, $J$, the parameter tuple $\Theta$, the coupling bound $\gamma_0$, and on fixed patches, charts, and test functions, all chosen before $\gamma$; this is the dependence described in item~(6) of \cref{ch01:conv:constants}. They do not depend on the depth $d$ or on $\gamma\in(0,\gamma_0]$. All spectral gaps are proved at the fixed side $n$, and we prove no bound that is uniform in $n$. The general Laplace estimates of \cref{ch27:sec:laplace} state their own finite-dimensional dependence, as in item~(1) of \cref{ch01:conv:constants}.
+
+\paragraph{Earlier work.}
+Laplace's method in the directions normal to a manifold of critical points is rooted in Bott's theory of nondegenerate critical manifolds \cite{Bott1954CriticalManifolds}; see Wong \cite{Wong2001AsymptoticIntegrals} for the asymptotic analysis of integrals. We use no specific theorem from these works. The estimates we need are uniform in the depth, the coupling, and an arbitrary tangential weight; they are proved in \cref{ch27:sec:laplace}, and the singular tip of the cone of commuting triples is treated separately. The special role of the constant modes on a finite periodic torus in weak-coupling analysis is well known in the physics literature; see L\"uscher \cite{Luscher1983Torus} and the computation of the zero-momentum contribution to Wilson loops by Coste, Gonz\'alez-Arroyo, Jurkiewicz, and Korthals Altes \cite{CosteEtAl1985ZeroMomentum}. For the gradient flow on a four-dimensional periodic torus, Fodor, Holland, Kuti, N\'ogr\'adi, and Wong \cite{FodorEtAl2012FiniteVolumeFlow} separate constant and nonconstant modes and their flowed observables. These works do not treat the fixed-side three-dimensional normalization or the covariance of flowed based cycle logarithms. The decomposition of the covariance across scales in \cref{ch27:lem:terminal-gaussian-telescope} is completion of squares for Gaussian measures; the work lies in matching it with the constrained coordinates of the renormalization group.
+
+\section{Preliminaries}\label{ch27:sec:preliminaries}
+
+\paragraph{Lie-algebra conventions.}
+We use the conventions of \cref{ch01:chapter}. Let $\tau_a=-i\sigma_a/2$, where $\sigma_a$ are the Pauli matrices, and write $X=x^a\tau_a\in\su$. Then $[\tau_a,\tau_b]=\epsilon_{abc}\tau_c$, $\ip XY=-2\tr(XY)$, and $\abs X=\abs x$, so that the bracket corresponds to the cross product in $\R^3$. We identify $\su^3$ with $\R^9$ by $X=(x_1,x_2,x_3)$ and use the Euclidean norm $\abs X$. In exponential coordinates
+\begin{equation*}
+ dH(e^X)=\frac1{16\pi^2}\sinc^2(\abs X/2)\,d^3X,\qquad q(e^X)=1-\cos(\abs X/2)=\frac{\abs X^2}8+O(\abs X^4),
+\end{equation*}
+by \eqref{ch01:eq:haar-coordinates}. The logarithm $\Log$ is the inverse of $\exp$ on $\{\abs X<2\pi\}$.
+
+\paragraph{Based gauge transformations.}
+Fix a root $x_*\in\Lat n$. A lattice gauge transformation $k$ is \emph{based} if $k_{x_*}=I$. The group of based gauge transformations acts freely on $\Conf n$, and we call the quotient the based quotient. Constant gauge transformations are not divided out: they act on the based quotient, and on the holonomies around the three coordinate cycles based at $x_*$ they act by simultaneous conjugation. In the proof of \cref{ch27:thm:central-stiff-chart} we show, using a spanning tree, that the based quotient is diffeomorphic to $\SU^{2n^3+1}$, of dimension $6n^3+3$, and that the based gauge transformations carry Haar measure of total mass one. A configuration $V$ is flat if $V_p=I$ for every plaquette $p$.
+
+\paragraph{Smooth charts.}
+We use the following routine facts about local coordinates several times. We include the short proofs because the dependence of the constants matters below.
+
+\begin{lemma}\label{ch27:lem:smooth-charts}
+\begin{enumerate}
+\item Let $F$ be a smooth map from a neighborhood of $p\in\R^k$ into $\R^k$ such that $T=DF(p)$ is invertible. Then there exist a closed ball $\overline B$ about $p$ and an open neighborhood $W$ of $F(p)$ such that $F$ maps an open subset of $\overline B$ diffeomorphically onto $W$. The radii of $\overline B$ and $W$ and the bounds for every fixed derivative of the inverse depend only on $\norm{T^{-1}}$ and on bounds for the derivatives of $F$ on a fixed neighborhood of $p$.
+\item Let $\mathcal Q$ be a smooth Riemannian manifold, for instance an open subset of $\R^k$ with the Euclidean metric or a compact Lie group with a bi-invariant metric, and let $\operatorname{Exp}$ be its exponential map. Let $\Sigma\subset\mathcal Q$ be a smooth embedded submanifold and let $P\subset\Sigma$ be compact. Then there exists $r_0>0$ such that the normal exponential map $(y,v)\mapsto\operatorname{Exp}_y(v)$, defined for $y$ in a compact neighborhood of $P$ in $\Sigma$ and $v\perp T_y\Sigma$ with $\abs v<r_0$, is injective and is a local diffeomorphism with smooth positive Jacobian. Further, there exist finitely many open sets $W_l\Subset W_l^+\subset\Sigma$ with $P\subset\bigcup_lW_l$ and smooth orthonormal frames $(\nu_{l,1},\dots,\nu_{l,k'})$ of the normal bundle over $W_l^+$ such that all derivatives of fixed order of the maps $(y,v)\mapsto\operatorname{Exp}_y(\sum_\alpha v_\alpha\nu_{l,\alpha}(y))$, $v\in\R^{k'}$, and of their inverses are bounded on the closures of $\{(y,v):y\in W_l,\ \abs v\le r_0/2\}$. The transitions between these trivializations preserve $y$ and are orthogonal in $v$, so integrals over the tube $\{\operatorname{Exp}_y(v):y\in P,\ \abs v<r_0/2\}$ can be computed with a partition of unity depending only on $y$. In $\R^k$ with the Euclidean metric, $\operatorname{Exp}_y(v)=y+v$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (1), we translate $p$ to zero and write $T^{-1}(F(h)-F(0))=h+r(h)$, where $Dr(0)=0$. On a sufficiently small closed ball $\overline B$ we have $\norm{Dr}\le1/2$. For $\abs z$ less than half the radius of $\overline B$, the iterates $h_{k+1}=z-r(h_k)$, $h_0=0$, stay in $\overline B$, and their successive differences decrease by the factor $1/2$. Their limit is the unique solution $h$ in $\overline B$ of $h+r(h)=z$. Differentiating this identity, we find that the inverse is smooth with $\norm{Dh}\le2$, and repeated differentiation bounds every fixed derivative in terms of those of $r$.
+
+For (2), we take a point of $P$, an orthonormal tangent frame of $\Sigma$ near it, and fixed smooth vector fields of $\mathcal Q$ whose projections onto the normal spaces are linearly independent at this point. The Gram--Schmidt formulas applied to these projections give a smooth orthonormal normal frame, since their denominators stay positive near the point. Since the differential of $\operatorname{Exp}_y$ at $0$ is the identity, the derivative of $(y,v)\mapsto\operatorname{Exp}_y(\sum_\alpha v_\alpha\nu_\alpha(y))$ at $v=0$ consists of the tangent and normal frames. It is invertible, with determinant one in orthonormal coordinates. By (1), applied in a chart of $\mathcal Q$, the map is a local diffeomorphism near $v=0$, and its Jacobian is smooth and positive. Since $P$ is compact, finitely many such charts cover a compact neighborhood $P'$ of $P$ in $\Sigma$, and we choose open sets $W_l\Subset W_l^+$ inside them, covering $P$, and a common normal radius. All maps extend smoothly past the closures of the smaller sets, and their derivatives of every fixed order are bounded there. It remains to prove injectivity for a common radius. If it failed on $\{(y,v):y\in P',\ \abs v<1/k\}$ for every $k$, there would be distinct points $(y_k,v_k)$ and $(y_k',v_k')$ of the normal bundle with $\abs{v_k},\abs{v_k'}<1/k$ and $\operatorname{Exp}_{y_k}(v_k)=\operatorname{Exp}_{y_k'}(v_k')$. Passing to subsequences, $y_k\to y$ and $y_k'\to y'$ in $P'$, and the common image converges both to $y$ and to $y'$. Then $y=y'$, and both preimages converge to $(y,0)$, near which the map is a local diffeomorphism and hence injective; this is a contradiction. Thus, for a small $r_0$, the base point $y$ is a function on the tube, the transitions between the orthonormal frames act on $v$ by orthogonal matrices depending on $y$, and a partition of unity in $y$ handles overlaps.
+\end{proof}
+
+\section{The stopped measure at a fixed side}\label{ch27:sec:stopped}
+
+Fix $L>0$, $n\in4\N$, an odd integer $M\ge3$, an integer $J\ge1$, and the tuple $\Theta$ of construction parameters of \cref{ch20:thm:common-parameters}. Let $\rho$, $r$, and $E_*$ be the analytic radius, the radius of the small-field domains $B_r\subset D_r$, and the bound for the effective interactions in \cref{ch11:thm:terminal-anchor}. For a depth $d=kJ$, $k\ge0$, and $\gamma>0$, we set $g^2=\gamma/n$ and consider the stopped measure
+\begin{equation}\label{ch27:eq:stopped-density}
+ d\widehat\nu_{n,d,\gamma}(V)=\widehat Z_{n,d,\gamma}^{-1}\one_{D_r}(V)\exp\Bigl(-\frac{E_{d,\mathrm{sat}}(V)}{g^2}-\overline R_{d,\gamma}(V)\Bigr)dH_n(V),\qquad \overline R_{d,\gamma}=R_{d,\gamma}-R_{d,\gamma}(I),
+\end{equation}
+of \cref{ch11:thm:terminal-anchor}, with the indicator of $D_r$ and the Haar disintegration factors of the construction. Here $E_{d,\mathrm{sat}}$ and the subscript $\mathrm{sat}$ in general denote the gauge-invariant extension from $B_r$ to $D_r$, $R_{d,\gamma}$ is the effective interaction, $\overline R_{d,\gamma}$ is the centered effective interaction, and $\widehat Z_{n,d,\gamma}$ is the partition function. The depths $d=kJ$ are those at which the recursion of \cref{ch11:thm:terminal-anchor} defines an effective interaction. Subtracting $R_{d,\gamma}(I)$ fixes the normalization constant. If $Z^{\mathrm{raw}}$ denotes the partition function before centering, that is, the integral with $R_{d,\gamma}$ in place of $\overline R_{d,\gamma}$, then $\widehat Z_{n,d,\gamma}=e^{R_{d,\gamma}(I)}Z^{\mathrm{raw}}$ (\cref{ch27:thm:sharp-normalizer}).
+
+For $d=JK$ and $N=nB^K$, the measure $\widehat\nu_{n,JK,\gamma}$ is the law of the stopping field $V^{JK}$ under the conditioned Wilson measure $\nu_{N,n,\gamma}$ (\cref{ch11:thm:terminal-anchor}). For a stopped measure at an intermediate side this identification fails, since the conditioned Wilson measure also imposes the remaining coarser restrictions (\cref{ch01:def:selected-law}). Our results concern the density \eqref{ch27:eq:stopped-density} and make no identification of the latter kind.
+
+We use the following properties. All constants and domains in them are independent of $d$ and of $\gamma\in(0,\gamma_0]$.
+\begin{enumerate}
+\item[(P1)] There exists $\kappa>0$ such that $E_{d,\mathrm{sat}}\ge\kappa E_0$ on $D_r$ for every integer $d\ge0$, whether or not an effective interaction is attached to $d$ (\cref{ch11:thm:terminal-anchor}; see also \cref{ch08:thm:classical-cutoff}).
+\item[(P2)] The effective classical action satisfies $E_d\ge0$ (\cref{ch08:thm:classical-cutoff}). It is invariant under lattice gauge transformations and exactly invariant under lattice translations on a fixed chart (\cref{ch07:lem:classical-symmetries}). It vanishes at constant commuting configurations satisfying the smallness condition of \cref{ch27:lem:local-flat-admission}, as proved there. Its derivatives through order five are bounded uniformly in $d$ on a fixed larger link chart (\cref{ch07:thm:all-root-classical}).
+\item[(P3)] The centered effective interaction satisfies $\abs{\overline R_{d,\gamma}}\le C_n$ on $D_r$ (\cref{ch11:thm:terminal-anchor}), and its first derivatives in fixed charts are bounded on the larger chart (\cref{ch27:lem:residual-derivatives}).
+\item[(P4)] The coupling bound $\gamma_0>0$ satisfies $\sqrt{\gamma_0/n}\le g_*$, where $g_*$ is the coupling bound of \cref{ch11:thm:terminal-anchor}, and, with $t_0=\sqrt{\gamma_0/(Mn)}$ and $p(t)=A_{\mathrm w}\log(1/t)$,
+\begin{equation}\label{ch27:eq:common-coupling-gates}
+ p(t)\ge p_0,\qquad C_Jtp(t)<\frac12,\qquad\frac{C_J(tp(t)^3+tp(t))}{1-C_Jtp(t)}\le\sigma_0\qquad(0<t\le t_0),
+\end{equation}
+where $p_0$, $C_J$, and $\sigma_0$ are the constants of \cref{ch09:thm:sequential-density}.
+\end{enumerate}
+Since the largest coupling of an RG step with output side $m\ge n$ is $\sqrt{\gamma/(Mm)}\le t_0$, the conditions \eqref{ch27:eq:common-coupling-gates} contain the coupling conditions of \cref{ch09:thm:sequential-density} for all these steps. Once $n$, $M$, $J$, and $\Theta$ are fixed, (P4) holds for all sufficiently small $\gamma_0>0$: the function $p$ is decreasing, $t\log^a(1/t)\to0$ as $t\to0$ for $a=1,3$, and these two functions are increasing in $t$ when $\log(1/t)>a$. Thus $\gamma_0$ is chosen after $n$, $M$, $J$, and $\Theta$, and before $\gamma$, and no separate condition is imposed for an individual coupling or depth.
+
+\section{The cone of commuting triples}\label{ch27:sec:cone}
+
+Since two elements of $\su$ commute if and only if they are parallel, the commuting triples in $\su^3\simeq\R^9$ are the triples $(\vartheta_1u,\vartheta_2u,\vartheta_3u)$ with $\bm\vartheta\in\R^3$ and $u\in S^2$. If we regard $X\in\R^9$ as the real $3\times3$ matrix with columns $x_1,x_2,x_3$, these are exactly the matrices of rank at most one. The following lemma collects the geometry of this cone and the behavior of the quartic $Q$ near it. The distance to the set of matrices of rank at most one is computed from the singular values, as in the rank-one case of the theorem of Eckart and Young \cite{EckartYoung1936}.
+
+\begin{lemma}\label{ch27:lem:commuting-cone}
+Set
+\[
+ Q(X)=\tfrac12\sum_{i<j}\abs{x_i\times x_j}^2,\qquad\CommMan=\{(\vartheta_iu)_{i=1}^3:\bm\vartheta\in\R^3,\ u\in S^2\}.
+\]
+Then the following statements hold.
+\begin{enumerate}
+\item The set $\CommMan\setminus\{0\}$ is a smooth submanifold of $\R^9$ of dimension five. The map $(\bm\vartheta,u)\mapsto(\vartheta_iu)_i$ identifies exactly $(\bm\vartheta,u)$ with $(-\bm\vartheta,-u)$. At $y=(\vartheta_iu)_i$ with $\varrho=\abs{\bm\vartheta}>0$ and $\omega=\bm\vartheta/\varrho$, the normal space and the induced volume are
+\begin{gather*}
+ \NormalFiber y=\Bigl\{b=(b_1,b_2,b_3):b_i\perp u,\ \sum_i\vartheta_ib_i=0\Bigr\},\qquad\dim\NormalFiber y=4,\\
+ d\mathrm{vol}_{\CommMan}=\tfrac12\varrho^4\,d\varrho\,d\Omega_\omega\,d\Omega_u.
+\end{gather*}
+Note that $\abs y=\varrho$.
+\item There exists an absolute constant $c\in(0,1)$ such that $(y,b)\mapsto y+b$, for $y\in\CommMan\setminus\{0\}$, $b\in\NormalFiber y$, and $\abs b\le c\varrho$, is injective and is a local diffeomorphism (a normal tube), with Euclidean Jacobian $1+O(\abs b/\varrho)$. The implicit constant is absolute; in particular it is uniform in the directions $\omega$ and $u$.
+\item For $y\in\CommMan\setminus\{0\}$ and $b\in\NormalFiber y$,
+\[
+ Q(y+b)=\tfrac12\varrho^2\abs b^2+\tfrac12\sum_{i<j}\abs{b_i\times b_j}^2,
+\]
+and for every $X\in\R^9$,
+\[
+ Q(X)\ge\tfrac16\abs X^2\dist(X,\CommMan)^2.
+\]
+\item Let $f$ be a nonnegative $C^5$ function on a fixed ball about $0$ that vanishes on $\CommMan$ in that ball. Then $Df(0)=0$, $D^2f(0)=0$, and $D^3f(0)=0$. On a smaller fixed ball,
+\[
+ \norm{D^2f(X)}\le C\abs X^2,\qquad\norm{D^3f(X)}\le C\abs X,
+\]
+and, for $y\in\CommMan\setminus\{0\}$ and $b\in\NormalFiber y$ with $y+b$ in the smaller ball,
+\[
+ f(y+b)=\tfrac12b^{\mathsf T}D^2_\perp f(y)b+O(\varrho\abs b^3+\abs b^4),
+\]
+where $D^2_\perp f(y)$ is the Hessian of $f$ at $y$ restricted to $\NormalFiber y$. If $f_4$ is the homogeneous quartic Taylor polynomial of $f$ at $0$ and $y=\varrho\widehat y$ with $\abs{\widehat y}=1$, then $D^2_\perp f(\varrho\widehat y)=\varrho^2D^2_\perp f_4(\widehat y)+O(\varrho^3)$. If, in addition, $f\ge c_0Q$ on the ball, then $D^2_\perp f_4(\widehat y)\ge c_0I_4$. The constants depend only on the radii of the two balls, on $\norm f_{C^5}$, and, in the last assertion, on $c_0$.
+\end{enumerate}
+\end{lemma}
+
+The last hypothesis $f\ge c_0Q$ cannot be omitted: the function $Q^2$ is nonnegative and vanishes on $\CommMan$, but its normal Hessian vanishes on all of $\CommMan$.
+
+\begin{proof}
+We begin with part (1). The tangent vectors at $y_i=\vartheta_iu\ne0$ have the form
+\[
+ t_i=\eta_iu+\vartheta_iv,\qquad\eta\in\R^3,\ v\perp u.
+\]
+These five parameters are independent, and orthogonality to every $\eta$ and every $v$ gives exactly the asserted normal space. In the parameters $(\bm\vartheta,u)$ the induced metric is
+\[
+ \sum_i\abs{d(\vartheta_iu)}^2=\abs{d\bm\vartheta}^2+\varrho^2\abs{du}^2.
+\]
+Each nonzero matrix of rank one has exactly two preimages: a nonzero column determines the common line, and the two unit vectors on this line determine all three coefficients. We obtain the volume element $\varrho^2\,d^3\bm\vartheta\,d\Omega_u/2$, which is the displayed formula after polar coordinates in $\bm\vartheta$.
+
+For part (2), the tube is taken over the nonzero stratum, and its radius is proportional to $\abs y$. We first restrict to $1/2<\abs y<2$. By \cref{ch27:lem:smooth-charts}(2), finitely many coordinate patches of this compact piece of $\CommMan$ carry smooth orthonormal normal frames with bounded first derivatives on smaller patches. In such a frame the derivative of $(y,b)\mapsto y+b$ at $b=0$ is the orthogonal sum of the tangent and normal frames, and its volume determinant is one. At $b\ne0$ its tangent columns differ by $O(\abs b)$, and the determinant is $1+O(\abs b)$. We now check that the base point is unique. If $b\in\NormalFiber y$, the matrix $X=y+b$ satisfies
+\[
+ XX^{\mathsf T}=\varrho^2uu^{\mathsf T}+bb^{\mathsf T},\qquad bb^{\mathsf T}u=0,
+\]
+since $\sum_i\vartheta_ib_i=0$ and $b_i\perp u$. If $\abs b<c\varrho$ with $c<1$, the largest eigenvalue $\varrho^2$ of $XX^{\mathsf T}$ is simple, and its eigenline is exactly $\R u$. Projecting the columns of $X$ onto this line recovers $y$, and the two choices of sign of $u$ give the same matrix $y$. Together with the local invertibility of the derivative, this proves that the map is a normal tube. Since the map commutes with the dilations $(y,b)\mapsto(\lambda y,\lambda b)$, the bound on the unit stratum implies the Jacobian bound $1+O(\abs b/\varrho)$ with an absolute constant.
+
+For part (3), let $b\in\NormalFiber y$ and expand
+\[
+ (\vartheta_iu+b_i)\times(\vartheta_ju+b_j)=u\times(\vartheta_ib_j-\vartheta_jb_i)+b_i\times b_j.
+\]
+The first summand is perpendicular to $u$ and the second is parallel to $u$, so they are orthogonal. Since $\vartheta_ib_j-\vartheta_jb_i\perp u$, we have $\abs{u\times(\vartheta_ib_j-\vartheta_jb_i)}=\abs{\vartheta_ib_j-\vartheta_jb_i}$, and the Lagrange identity gives
+\[
+ \sum_{i<j}\abs{\vartheta_ib_j-\vartheta_jb_i}^2=\abs{\bm\vartheta}^2\abs b^2-\Bigl|\sum_i\vartheta_ib_i\Bigr|^2=\varrho^2\abs b^2.
+\]
+This proves the formula for $Q(y+b)$. For the global bound, let $\sigma_1\ge\sigma_2\ge\sigma_3\ge0$ be the singular values of $X$. Since $\abs{x_i\times x_j}^2$ is the sum of the squares of the $2\times2$ minors in the columns $i$ and $j$, the quantity $2Q(X)$ is the sum of the squares of all $2\times2$ minors of $X$. This sum is invariant under left and right multiplication by orthogonal matrices, and evaluating it on a diagonal matrix gives
+\[
+ 2Q(X)=\sigma_1^2\sigma_2^2+\sigma_1^2\sigma_3^2+\sigma_2^2\sigma_3^2.
+\]
+For a fixed unit vector $u$, the closest matrix with all columns parallel to $u$ has columns $(u\cdot x_i)u$, and its squared distance to $X$ is $\abs X^2-u^{\mathsf T}XX^{\mathsf T}u$. Diagonalizing $XX^{\mathsf T}$, we see that the minimum over $u$ is $\sigma_2^2+\sigma_3^2=\dist(X,\CommMan)^2$. Since $\sigma_1^2\ge\abs X^2/3$, we obtain
+\[
+ Q(X)\ge\tfrac12\sigma_1^2(\sigma_2^2+\sigma_3^2)\ge\tfrac16\abs X^2\dist(X,\CommMan)^2.
+\]
+
+For part (4), since the origin is a minimum of $f$, we have $Df(0)=0$, and $D^2f(0)$ is positive semidefinite. Since $\CommMan$ is a cone, the restriction of $f$ to every line through a matrix of rank one vanishes near zero, and the quadratic form $D^2f(0)$ vanishes on every matrix of rank one. If a positive semidefinite form $H$ satisfies $v^{\mathsf T}Hv=0$, then $Hv=0$, as one sees by diagonalizing $H$. Since the matrices with a single nonzero entry have rank one and span $\R^9$, we conclude that $D^2f(0)=0$. The cubic Taylor term vanishes as well, that is, $D^3f(0)=0$: on each line through the origin it would otherwise take opposite signs on the two sides of zero, contradicting nonnegativity, and a cubic form that vanishes on every line is zero.
+
+By Taylor's formula with integral remainder, we have, on a smaller concentric ball,
+\[
+ \norm{D^2f(X)}\le C\abs X^2,\qquad\norm{D^3f(X)}\le C\abs X,\qquad D^2f(X)=D^2f_4(X)+O(\abs X^3).
+\]
+For example, the last error is at most $\sup\norm{D^5f}\abs X^3/6$; the other constants use the bounds for the fourth and fifth derivatives on the larger ball. Since $f(y)=0$ is a minimum at every $y\in\CommMan$ in the ball, we have $Df(y)=0$. Using Taylor's formula on the segment from $y$ to $y+b$ and the bound for $D^3f$, we find a cubic remainder at most $C(\varrho+\abs b)\abs b^3$, which proves the normal expansion. The Hessian of the quartic $f_4$ is homogeneous of degree two, and $\NormalFiber{\varrho\widehat y}=\NormalFiber{\widehat y}$; this proves the expansion at $y=\varrho\widehat y$. If $f\ge c_0Q$, the function $f-c_0Q$ is nonnegative and vanishes at $y$, and its Hessian at this point is positive semidefinite. By the exact normal formula in part (3), the normal Hessian of $Q$ at $y$ is $\varrho^2I_4$, and we obtain
+\[
+ D^2_\perp f(\varrho\widehat y)\ge c_0\varrho^2I_4.
+\]
+Dividing by $\varrho^2$ and letting $\varrho\downarrow0$, we obtain $D^2_\perp f_4(\widehat y)\ge c_0I_4$. This completes the proof.
+\end{proof}
+
+\section{Laplace asymptotics in normal coordinates}\label{ch27:sec:laplace}
+
+We now prove the Laplace estimates used in the normal directions of the regular flat configurations and in the nonconstant directions near the trivial connection. The main point is uniformity. The phase, the amplitude, and the tangential weight may depend on an arbitrary index, which in the applications records the depth and the coupling, and the tangential weight need not converge or have any regularity. We therefore prove the estimates for each fixed tangential point and then integrate them against the tangential marginal of the measure itself.
+
+\begin{lemma}\label{ch27:lem:uniform-tube-laplace}
+Let $P$ be a compact patch of a smooth manifold with a smooth volume measure $d\mathrm{vol}$, and let a Euclidean vector bundle of rank $d\ge1$ over $P$ be given with a finite atlas of smooth orthonormal trivializations. Fix $0<b_1<b_0$ and a cutoff $\chi_y(b)$ with $0\le\chi\le1$, jointly Borel in every trivialization, equal to one for $\abs b\le b_1$ and supported in a compact subset of the tube $\{\abs b<b_0\}$. Let $\iota$ range over an arbitrary index set and let $0<\delta\le\delta_0$. For each $\iota$ and $\delta$ let $V_\iota(y,b)$ and $a_{\iota,\delta}(y,b)$ be real functions on the tube, jointly Borel in every trivialization, and assume that the Hessian $L_\iota(y)=D_b^2V_\iota(y,0)$ exists and is a measurable function of $y$. Assume that on the support of $\chi$
+\begin{gather*}
+ V_\iota(y,0)=D_bV_\iota(y,0)=0,\qquad c_0I\le L_\iota(y)\le C_0I,\\
+ \abs{V_\iota(y,b)-\tfrac12b^{\mathsf T}L_\iota(y)b}\le C_0\abs b^3,\qquad V_\iota(y,b)\ge c_0\abs b^2,\\
+ c_0\le a_{\iota,\delta}(y,b)\le C_0,\qquad\abs{a_{\iota,\delta}(y,b)-a_{\iota,\delta}(y,0)}\le C_0\abs b.
+\end{gather*}
+The amplitude $a_{\iota,\delta}$ includes the Jacobian of the tube coordinates, so that the reference measure is $d\mathrm{vol}(y)\,db$, where $db$ is Lebesgue measure in an orthonormal trivialization. Let $h_{\iota,\delta}\ge0$ be any measurable function on $P$ with $0<\int_Ph_{\iota,\delta}\,d\mathrm{vol}<\infty$; no regularity in $y$ and no convergence as $\iota$ or $\delta$ varies is assumed. Let
+\[
+ d\mathsf P_{\iota,\delta}=Z_{\iota,\delta}^{-1}h_{\iota,\delta}(y)\chi_y(b)a_{\iota,\delta}(y,b)e^{-V_\iota(y,b)/\delta}\,d\mathrm{vol}(y)\,db
+\]
+be the normalized measure, and set
+\[
+ z=\delta^{-1/2}L_\iota(y)^{1/2}b,\qquad\alpha_{\iota,\delta}(y)=\frac{a_{\iota,\delta}(y,0)}{\sqrt{\det L_\iota(y)}}.
+\]
+Let $G_d$ be a standard Gaussian vector in $\R^d$. Then for every family $P_y(z)$ of polynomials of a fixed degree whose coefficients are bounded measurable functions of $y$, and every bounded measurable function $f$ on $P$,
+\begin{equation}\label{ch27:eq:global-laplace}
+\begin{gathered}
+ Z_{\iota,\delta}\E_{\mathsf P_{\iota,\delta}}[f(y)P_y(z)]=(2\pi\delta)^{d/2}\Bigl[\int_Pf\,h_{\iota,\delta}\,\alpha_{\iota,\delta}\,\E P_y(G_d)\,d\mathrm{vol}+\mathcal R_{\iota,\delta}(f,P)\Bigr],\\
+ \abs{\mathcal R_{\iota,\delta}(f,P)}\le C_P\sqrt\delta\int_P\abs f\,h_{\iota,\delta}\,d\mathrm{vol}.
+\end{gathered}
+\end{equation}
+The error is additive, also when $\E P_y(G_d)=0$. For $y\in P$ let $\mathsf P_{\iota,\delta}(\cdot\mid y)$ be the probability measure on the fiber with density proportional to $\chi_y(b)a_{\iota,\delta}(y,b)e^{-V_\iota(y,b)/\delta}$. It is defined for every $y$, also where $h_{\iota,\delta}(y)=0$, and it is a version of the conditional law of $b$ given $y$ under $\mathsf P_{\iota,\delta}$. Moreover, the following hold.
+\begin{enumerate}
+\item For every $y\in P$, $\abs{\E_{\mathsf P_{\iota,\delta}}[P_y(z)\mid y]-\E P_y(G_d)}\le C_P\sqrt\delta$, and $\E_{\mathsf P_{\iota,\delta}}[\abs z^k\mid y]\le C_k$ for every fixed real $k\ge0$.
+\item Let $d=4$ and $q_\iota=b^{\mathsf T}L_\iota(y)b/2$. Then for $j=0,1,2$,
+\[
+ \abs{\E_{\mathsf P_{\iota,\delta}}[f(y)(q_\iota/\delta)^j]-m_j\E_{\mathsf P_{\iota,\delta}}f(y)}\le C_j\norm f_\infty\sqrt\delta,\qquad(m_0,m_1,m_2)=(1,2,6).
+\]
+\item Let $d=4$, let $L_\infty$ be a measurable field of symmetric matrices with $c_0I\le L_\infty(y)\le C_0I$, and let $q_\infty=b^{\mathsf T}L_\infty(y)b/2$. Then the estimate in (2) holds with $q_\infty$ in place of $q_\iota$, up to the additional error $C_j\norm f_\infty\norm{L_\iota-L_\infty}_\infty$.
+\end{enumerate}
+The constants depend only on $d$, on $b_0$, $b_1$, and the atlas, on $c_0$ and $C_0$, and on the degree and the coefficient bounds of $P_y$ (respectively on $k$ and $j$). They are independent of $\iota$, $\delta$, and $\delta_0$, and of $h_{\iota,\delta}$, its total mass, and its variation. In applications at a fixed side $n$, the geometric data may depend on $n$.
+\end{lemma}
+
+\begin{corollary}\label{ch27:cor:weighted-tube-density}
+Assume the hypotheses of \cref{ch27:lem:uniform-tube-laplace}. For $y\in P$ let $r_{\iota,\delta,y}$ be the Lebesgue density of $z=\delta^{-1/2}L_\iota(y)^{1/2}b$ under $\mathsf P_{\iota,\delta}(\cdot\mid y)$, and let $\phi_d(z)=(2\pi)^{-d/2}e^{-\abs z^2/2}$. For every real $s\ge0$ there exists $C_s<\infty$ such that, for all $0<\delta\le\delta_0$,
+\begin{equation}\label{ch27:eq:weighted-density}
+ \sup_{\iota,y}\int_{\R^d}(1+\abs z^s)\abs{r_{\iota,\delta,y}(z)-\phi_d(z)}\,dz\le C_s\sqrt\delta.
+\end{equation}
+The density $r_{\iota,\delta,y}$ is defined by its normal integral at every $y$, also where the tangential weight vanishes, and assertions integrated against the tangential marginal of $\mathsf P_{\iota,\delta}$ hold almost everywhere with respect to that marginal; no assumption on the behavior of this marginal as $\iota$ and $\delta$ vary is made. The constant $C_s$ has the dependence described in \cref{ch27:lem:uniform-tube-laplace}, and in addition depends on $s$.
+
+Suppose in addition that $V_\iota(y,b)\ge c\abs b^2$ and $c\le a_{\iota,\delta}(y,b)\le C$ for all $\abs b<b_0$, with $c,C>0$ independent of $\iota$, $y$, and $\delta$. In the following whole-tube conclusions, the constants $C_s$ may additionally depend on $c$ and $C$; they remain independent of $\iota$, $y$, $\delta$, $\delta_0$, and the tangential weight. Then there exists $c'>0$, depending only on the data of \cref{ch27:lem:uniform-tube-laplace} and on $c$ and $C$, such that for $0<\delta\le1$
+\begin{equation}\label{ch27:eq:tube-tail}
+ \int_{\abs b<b_0}(1+\abs z^s)(1-\chi_y(b))a_{\iota,\delta}(y,b)e^{-V_\iota(y,b)/\delta}\,db\le C_s\delta^{d/2}e^{-c'/\delta}.
+\end{equation}
+Let $r^{\mathrm{tube}}_{\iota,\delta,y}$ be defined as $r_{\iota,\delta,y}$, but with $\chi_y$ replaced by the indicator of the tube $\{\abs b<b_0\}$. Then $\int(1+\abs z^s)\abs{r^{\mathrm{tube}}_{\iota,\delta,y}-r_{\iota,\delta,y}}\,dz\le C_se^{-c'/\delta}$ for $0<\delta\le1$, and \eqref{ch27:eq:weighted-density} holds for $r^{\mathrm{tube}}_{\iota,\delta,y}$ for all $0<\delta\le\delta_0$.
+
+In the application of \cref{ch27:lem:terminal-gaussian-telescope}, the rank is $6n^3-2$, $\delta=\gamma$, the phase is $nE_{JK}(V(y,v))$, and $L=H_K^{\mathrm{act}}(y)=D_v^2[nE_{JK}(V(y,v))]|_{v=0}$. In this application the additional hypotheses on the whole tube hold, and all constants are independent of $K$.
+\end{corollary}
+
+Both results follow from an estimate at a fixed tangential point, which we prove first.
+
+\begin{lemma}\label{ch27:lem:pointwise-laplace}
+Assume the hypotheses of \cref{ch27:lem:uniform-tube-laplace}. Fix a trivialization of the atlas, a point $y$ in its domain, and the parameters $\iota$ and $\delta$. Write $L=L_\iota(y)$ and $a_0=a_{\iota,\delta}(y,0)$. Let
+\[
+ u_y(z)=\chi_y(b)a_{\iota,\delta}(y,b)e^{-V_\iota(y,b)/\delta},\qquad b=\delta^{1/2}L^{-1/2}z,
+\]
+extended by zero outside the tube, and let $Z_y=\int u_y(z)\,dz$ and $r_y=u_y/Z_y$. Then $Z_y>0$, and for every real $s\ge0$ there exist $C_s<\infty$ and $c>0$, with the dependence described in \cref{ch27:lem:uniform-tube-laplace} and additionally on $s$, such that the following hold for all $0<\delta\le\delta_0$.
+\begin{enumerate}
+\item $\int(1+\abs z^s)\abs{u_y(z)-a_0e^{-\abs z^2/2}}\,dz\le C_s\sqrt\delta$.
+\item If $\delta\le1$, then $Z_y\ge c$.
+\item $\int(1+\abs z^s)\abs{r_y(z)-\phi_d(z)}\,dz\le C_s\sqrt\delta$.
+\item $\int\abs z^sr_y(z)\,dz\le C_s$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $\varepsilon=\sqrt\delta$. On the support of $\chi$ we set
+\[
+ A(z)=V_\iota(y,\varepsilon L^{-1/2}z)/\delta,\qquad B(z)=\abs z^2/2.
+\]
+Since $\abs b\le\varepsilon\abs z/\sqrt{c_0}$ and $\abs z^2=b^{\mathsf T}Lb/\delta$, the hypotheses imply, with constants determined by $c_0$ and $C_0$, that
+\[
+ A(z)\ge c\abs z^2,\qquad B(z)\ge c\abs z^2,\qquad\abs{A(z)-B(z)}\le C\varepsilon\abs z^3,\qquad\abs{a_{\iota,\delta}(y,b)-a_0}\le C\varepsilon\abs z.
+\]
+The identity $e^{-A}-e^{-B}=-(A-B)\int_0^1e^{-[(1-t)B+tA]}\,dt$ yields
+\begin{equation}\label{ch27:eq:exponential-difference}
+ \abs{e^{-A}-e^{-B}}\le\abs{A-B}e^{-\min(A,B)}.
+\end{equation}
+This bound does not require $\abs{A-B}$ to be small. Here the lower bound $V_\iota\ge c_0\abs b^2$ on the whole support of $\chi$ enters, since the cubic Taylor bound alone would not control the integrand far from $b=0$. On the support of $\chi$ we obtain
+\[
+ \abs{a_{\iota,\delta}e^{-A}-a_0e^{-B}}\le a_{\iota,\delta}\abs{e^{-A}-e^{-B}}+\abs{a_{\iota,\delta}-a_0}e^{-B}\le C\varepsilon(\abs z+\abs z^3)e^{-c\abs z^2}.
+\]
+We have $u_y-a_0e^{-B}=\chi(a_{\iota,\delta}e^{-A}-a_0e^{-B})-(1-\chi)a_0e^{-B}$, and the last term is supported where $\abs b>b_1$, hence where $\abs z\ge\sqrt{c_0}\,b_1/\varepsilon$. For $0<\delta\le1$ we have
+\begin{align*}
+ \int(1+\abs z^s)\abs{u_y-a_0e^{-B}}\,dz&\le C\varepsilon\int(1+\abs z^s)(\abs z+\abs z^3)e^{-c\abs z^2}\,dz\\
+ &\quad+C_0\int_{\abs z\ge\sqrt{c_0}b_1/\varepsilon}(1+\abs z^s)e^{-\abs z^2/2}\,dz\le C_s\varepsilon.
+\end{align*}
+In the last inequality, we used polar coordinates and $\int_0^\infty\varrho^me^{-c\varrho^2}\,d\varrho<\infty$ for $m>-1$ for the first integral; for the second, we absorbed half of the exponential into the polynomial to obtain the bound $C_se^{-c'/\delta}$, and we used that $u^{-1}e^{-c'/u^2}$ is bounded for $u\in(0,1]$. This proves (1) for $\delta\le1$. If $\delta>1$, then $u_y$ is supported in $\abs z\le C_0^{1/2}b_0$ and $0\le u_y\le C_0$, since $V_\iota\ge0$ on the support of $\chi$. Both $\int(1+\abs z^s)u_y\,dz$ and $a_0\int(1+\abs z^s)e^{-\abs z^2/2}\,dz$ are then bounded by a constant $C_s$, and $C_s\le C_s\sqrt\delta$. This proves (1) in general. Note that no dependence on $\delta_0$ enters.
+
+For (2), let $0<\delta\le1$ and set $\varrho_0=\min(b_1/2,\sqrt\delta)$. On the ball $\abs b\le\varrho_0$ we have $\chi=1$, $a_{\iota,\delta}\ge c_0$, and $V_\iota\le C_0\abs b^2/2+C_0\abs b^3\le C_0(1/2+b_0)\delta$. Changing variables, we obtain
+\[
+ Z_y=\delta^{-d/2}(\det L)^{1/2}\int\chi_ya_{\iota,\delta}e^{-V_\iota/\delta}\,db\ge\delta^{-d/2}c_0^{d/2}\,c_0\,e^{-C_0(1/2+b_0)}\,\omega_d\varrho_0^d\ge c,
+\]
+where $\omega_d$ is the volume of the unit ball and we used $\varrho_0^d\delta^{-d/2}\ge\min(b_1/2,1)^d$. The same integral over $\abs b\le b_1/2$ shows that $Z_y>0$ for every $\delta$.
+
+For (3) with $\delta\le1$, let $A_0=a_0(2\pi)^{d/2}$, so that $a_0e^{-\abs z^2/2}=A_0\phi_d(z)$. Then
+\[
+ r_y-\phi_d=\frac{u_y-a_0e^{-\abs z^2/2}}{Z_y}+a_0e^{-\abs z^2/2}\Bigl(\frac1{Z_y}-\frac1{A_0}\Bigr).
+\]
+By (1) with $s=0$ we have $\abs{Z_y-A_0}\le C\sqrt\delta$, and $Z_y\ge c$ by (2) and $A_0\ge c_0(2\pi)^{d/2}$. Inserting these bounds and (1) into the last display, we obtain (3). For $\delta>1$, we use that $r_y$ and $\phi_d$ are probability densities and that $r_y$ is supported in $\abs z\le C_0^{1/2}b_0$. Then the left side of (3) is at most $1+(C_0^{1/2}b_0)^s+\int(1+\abs z^s)\phi_d\le C_s\le C_s\sqrt\delta$. Finally, (4) follows from (3) for $\delta\le1$, and from the bound on the support of $r_y$ for $\delta>1$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch27:lem:uniform-tube-laplace}]
+We first check that all densities and conditional laws are well defined. On the spectral interval $[c_0,C_0]$ the maps $L\mapsto L^{1/2}$ and $L\mapsto L^{-1/2}$ are continuous: their binomial series in $I-L/C_0$ converge uniformly because $\norm{I-L/C_0}\le1-c_0/C_0<1$, and all partial sums are polynomials in the matrix entries. Since the Hessian is measurable, so are $z$, $\det L_\iota$, and $\alpha_{\iota,\delta}$. Since $V_\iota$, $a_{\iota,\delta}$, and $\chi$ are jointly Borel, every normal integrand below is jointly measurable. Integrals over the fiber of nonnegative integrands are measurable functions of $y$, by integration of nonnegative simple functions followed by monotone limits; signed polynomial integrands are treated through their positive and negative parts, once the bounds below establish absolute integrability. Thus Fubini's theorem applies to the weight $h_{\iota,\delta}$ without any continuity in $y$.
+
+Next we prove the formula at a fixed tangential point. Fix a trivialization and $y$, and let $u_y$, $Z_y$, and $r_y$ be as in \cref{ch27:lem:pointwise-laplace}. The change of variables $b=\delta^{1/2}L^{-1/2}z$ has Jacobian $\delta^{d/2}(\det L)^{-1/2}$, so with
+\[
+ I_y(P)=\int\chi_y(b)a_{\iota,\delta}(y,b)e^{-V_\iota(y,b)/\delta}P_y(z)\,db
+\]
+we have $I_y(P)=\delta^{d/2}(\det L)^{-1/2}\int u_yP_y\,dz$. Since $\abs{P_y(z)}\le C_P(1+\abs z^{\deg P})$, part (1) of \cref{ch27:lem:pointwise-laplace} implies that $\abs{\int u_yP_y\,dz-a_0(2\pi)^{d/2}\E P_y(G_d)}\le C_P\sqrt\delta$. Since $(\det L)^{-1/2}\le c_0^{-d/2}$, we obtain, uniformly in $y$ and $\iota$,
+\begin{equation}\label{ch27:eq:pointwise-laplace}
+ I_y(P)=(2\pi\delta)^{d/2}\bigl[\alpha_{\iota,\delta}(y)\E P_y(G_d)+\mathcal E_y(P)\bigr],\qquad\abs{\mathcal E_y(P)}\le C_P\sqrt\delta.
+\end{equation}
+
+We multiply \eqref{ch27:eq:pointwise-laplace} by $f(y)h_{\iota,\delta}(y)$ and integrate. By Fubini's theorem, the left side becomes $Z_{\iota,\delta}\E_{\mathsf P_{\iota,\delta}}[fP_y(z)]$ on the domain of the trivialization, and the error is bounded by $C_P\sqrt\delta\int\abs fh_{\iota,\delta}$, also when the Gaussian mean vanishes. Orthogonal changes of the normal frame preserve $db$, the law of $G_d$, and the positive square root, and they act on $z$ by orthogonal maps. Hence the formula does not depend on the trivialization, and a finite nonnegative partition of unity on $P$ subordinate to the atlas proves \eqref{ch27:eq:global-laplace}. We obtain such a partition by choosing coordinate balls whose smaller concentric balls cover $P$, placing a smooth bump equal to one on each smaller ball, and dividing by the positive sum of the bumps; only the atlas enters its constants. No derivative or convergence of $h_{\iota,\delta}$ has been used.
+
+For the conditional statements, note that $I_y(1)>0$ for every $y$ by \cref{ch27:lem:pointwise-laplace}(2). The density $\chi_ya_{\iota,\delta}e^{-V_\iota/\delta}/I_y(1)$ of $\mathsf P_{\iota,\delta}(\cdot\mid y)$ is jointly Borel, and its product with the tangential density $Z_{\iota,\delta}^{-1}h_{\iota,\delta}(y)I_y(1)$ is the joint density of $\mathsf P_{\iota,\delta}$. Thus $\mathsf P_{\iota,\delta}(\cdot\mid y)$ is a version of the conditional law, including on the set where $h_{\iota,\delta}$ vanishes. Since $z$ has density $r_y$ under this law, we have
+\[
+ \abs{\E[P_y(z)\mid y]-\E P_y(G_d)}\le C_P\int(1+\abs z^{\deg P})\abs{r_y-\phi_d}\,dz\le C_P\sqrt\delta
+\]
+by \cref{ch27:lem:pointwise-laplace}(3), and the moment bound in (1) is \cref{ch27:lem:pointwise-laplace}(4).
+
+For (2), let $d=4$. Then $q_\iota/\delta=\abs z^2/2$ exactly. For independent one-dimensional standard Gaussians, integration by parts gives $\E G_i^2=1$ and $\E G_i^4=3$. This implies
+\[
+ \E(\abs{G_4}^2/2)=2,\qquad\E(\abs{G_4}^2/2)^2=\tfrac14(4\cdot3+12)=6.
+\]
+By (1), the conditional expectations of $(q_\iota/\delta)^j$ given $y$ differ from $m_j$ by at most $C_j\sqrt\delta$, uniformly in $y$. Integrating against the tangential marginal of $\mathsf P_{\iota,\delta}$, multiplied by $f$, we obtain (2).
+
+For (3), let $\eta=\norm{L_\iota-L_\infty}_\infty$. Since $\abs b^2\le\delta\abs z^2/c_0$, we have pointwise
+\[
+ \abs{q_\iota-q_\infty}/\delta\le C\eta\abs z^2,\qquad\abs{q_\iota}/\delta+\abs{q_\infty}/\delta\le C\abs z^2,
+\]
+and both constants depend only on $c_0$ and $C_0$, because $L_\infty$ obeys the same spectral bounds as $L_\iota$. The case $j=0$ is trivial. For $j=1$ the first bound and the bounded second moment give the additional error $C\norm f_\infty\eta$. For $j=2$ we write $x^2-y^2=(x-y)(x+y)$ and use the bounded fourth moment from (1). All constants have the stated dependence. This completes the proof.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch27:cor:weighted-tube-density}]
+In a trivialization of the atlas, the density of $z$ under $\mathsf P_{\iota,\delta}(\cdot\mid y)$ is $r_{\iota,\delta,y}=r_y$ of \cref{ch27:lem:pointwise-laplace}, and \eqref{ch27:eq:weighted-density} is part (3) of that lemma. Since orthogonal changes of the normal frame act on $z$ by orthogonal maps and preserve $\phi_d$ and $\abs z$, the left side of \eqref{ch27:eq:weighted-density} does not depend on the trivialization. The density is jointly measurable by the Borel hypotheses and integration over the fiber, as in the proof of \cref{ch27:lem:uniform-tube-laplace}. Since the estimate holds at every $y$, integrating it against the tangential marginal of $\mathsf P_{\iota,\delta}$ requires no assumption on this marginal. We note that the constant in part (3) of \cref{ch27:lem:pointwise-laplace} does not depend on $\delta_0$: for $\delta\le1$ the proof uses the lower bound $Z_y\ge c$, valid on all of $(0,1]$, and for $\delta>1$ it uses only that $r_y$ is supported in a fixed ball.
+
+We turn to the additional statements on the whole tube. Let $0<\delta\le1$, and let $Z^{\mathrm{tube}}$ and $Z^\chi$ be the integrals of $a_{\iota,\delta}e^{-V_\iota/\delta}$ over $\abs b<b_0$, without and with the factor $\chi_y$. By the proof of \cref{ch27:lem:pointwise-laplace}(2) we have $Z^{\mathrm{tube}}\ge Z^\chi\ge c\delta^{d/2}$. On the region where $\chi_y(b)\ne1$ we have $\abs b\ge b_1$, and the lower bound $V_\iota\ge c\abs b^2$ on the whole tube bounds the integrand by $C(1+\abs z^s)e^{-c\abs b^2/\delta}$, with $\abs z\le C\abs b/\sqrt\delta$. Absorbing half of the exponential, we obtain
+\begin{align*}
+ \int_{b_1\le\abs b<b_0}(1+C\delta^{-s/2}\abs b^s)Ce^{-c\abs b^2/\delta}\,db&\le C(1+\delta^{-s/2})e^{-cb_1^2/(2\delta)}\int e^{-c\abs b^2/(2\delta)}\,db\\
+ &\le C_s\delta^{d/2}e^{-c'/\delta},
+\end{align*}
+which is \eqref{ch27:eq:tube-tail}. Let $p^{\mathrm{tube}}$ and $p^\chi$ be the two normalized fiber densities. Then
+\[
+ \int w\abs{p^{\mathrm{tube}}-p^\chi}\le\frac1{Z^{\mathrm{tube}}}\int w(1-\chi_y)a_{\iota,\delta}e^{-V_\iota/\delta}+\frac{\abs{Z^{\mathrm{tube}}-Z^\chi}}{Z^{\mathrm{tube}}}\int wp^\chi,
+\]
+with $w=1+\abs z^s$. By \eqref{ch27:eq:tube-tail}, the lower bound for $Z^{\mathrm{tube}}$, and the bounded moments of $p^\chi$ from \cref{ch27:lem:pointwise-laplace}(4), the right side is at most $C_se^{-c'/\delta}$. Since $e^{-c'/\delta}\le C\sqrt\delta$ for $\delta\le1$, \eqref{ch27:eq:weighted-density} holds for $r^{\mathrm{tube}}$ when $\delta\le1$. When $\delta>1$, the density $r^{\mathrm{tube}}$ is supported in $\abs z\le C_0^{1/2}b_0$, and the argument for part (3) of \cref{ch27:lem:pointwise-laplace} with $\delta>1$ applies.
+
+The final assertion concerns the stopped measures near a compact patch of regular flat configurations. We prove it at the end of \cref{ch27:sec:terminal}, after the normal coordinates of that application have been constructed. That proof uses \cref{ch27:lem:uniform-tube-laplace}, but not the present corollary.
+\end{proof}
+
+\section{Based coordinates near the trivial connection}\label{ch27:sec:central}
+
+In this section we construct coordinates on the based quotient near the class of the identity, separate the nine constant directions from the $6n^3-6$ nonconstant directions transverse to the gauge orbits, and integrate out the latter by \cref{ch27:lem:uniform-tube-laplace}. We first record the derivative bounds for the effective interaction and the domain conditions for small commuting configurations that the integration requires.
+
+\begin{lemma}\label{ch27:lem:residual-derivatives}
+Let $R=R_{d,\gamma}$ be the effective interaction in \eqref{ch27:eq:stopped-density}, at a depth $d=kJ$ and with $0<\gamma\le\gamma_0$, and let $\overline R=R-R(I)$. Fix $r<r_1<\min(\rho,\pi)$ and put $\eta=1-r_1/\rho$. There exist constants $C_j$, independent of $d$ and $\gamma$, such that in link logarithm coordinates $\xi=(\xi_e)$ with $\max_e\abs{\xi_e}\le r_1$,
+\begin{equation}\label{ch27:eq:residual-interior-derivatives}
+ \norm{D_\xi^j\overline R(e^\xi)}_{\mathrm{root}}\le C_jE_*\rho^{2-j}\eta^{-j},\qquad j\ge1,
+\end{equation}
+where $\norm\cdot_{\mathrm{root}}$ is the weighted absolute coefficient norm of \cref{ch01:def:analytic-norms} with one index fixed, followed by the supremum over the fixed index. In particular, let $K_1=C_1E_*\rho\eta^{-1}$. Then at every point of the coordinates $V(X,s)=e^{X/n+s}$ of \cref{ch27:thm:central-stiff-chart} whose link logarithms lie in $B_{r_1}$,
+\begin{equation}\label{ch27:eq:residual-central-derivatives}
+ \abs{D_X\overline R(e^{X/n+s})}\le3n^2K_1,\qquad\abs{D_s\overline R(e^{X/n+s})}\le3n^{3/2}K_1,
+\end{equation}
+where both norms are Euclidean and the derivative in $s$ is taken in the subspace $\mathcal S_n$.
+
+Further, let $\mathcal K\subset D_r$ be compact. There exist finitely many based gauge transformations and an open cover of $\mathcal K$ such that each member of the cover, together with a larger neighborhood, is mapped into $B_{r_1}$ by one of these gauge transformations. Let $W\Subset W^+$ be open sets of parameters and let $\Psi:W^+\to\Conf n$ be smooth, extend smoothly to a neighborhood of $\overline W$, and satisfy $\Psi(\overline W)\subset\mathcal K$. Then for every $j\ge1$,
+\begin{equation}\label{ch27:eq:residual-chart-transfer}
+ \norm{D^j(\overline R_{\mathrm{sat}}\circ\Psi)}_{L^\infty(W)}\le C_{n,j,\mathcal K,\Psi,r_1,\rho,\eta}E_*,
+\end{equation}
+where the constant depends on the suprema over $\overline W$ of the derivatives of $\Psi$ through order $j$, which are finite by smooth extension and compactness, but not on $d$ or $\gamma$. The gauge transformations, the subcharts, and the constants are chosen independently of $d$ and $\gamma$. For charts of the based quotient, $\Psi$ denotes a fixed smooth lift to configurations. These bounds concern only the effective interactions $R_{d,\gamma}$, $d=kJ$, of the stopped densities \eqref{ch27:eq:stopped-density}.
+\end{lemma}
+
+\begin{proof}
+By \cref{ch11:thm:terminal-anchor}, the effective interaction of \eqref{ch27:eq:stopped-density} satisfies $\Anorm\rho\asp R\le E_*$ and $DR(I)=0$, and its local expressions in different gauges agree on the overlaps of their domains in the common outer ball. That theorem also contains the bounds \eqref{ch27:eq:residual-interior-derivatives} and their transfer to fixed charts. We recall the argument and verify the conditions on the charts in the form used below. The constant $R(I)$ does not enter derivatives of positive order. Set
+\[
+ A_k=\frac{\rho^{k-2}}{k!}\norm{D^kR(0)}_{\asp,\mathrm{root}},\qquad\sum_{k\ge2}A_k\le E_*,\qquad q=r_1/\rho=1-\eta.
+\]
+We fix one index of a differentiated coefficient, sum over the contracted indices, and use $\abs{\xi_e}\le r_1$. The spatial weights are at least one, and deleting contracted indices does not increase the length of a shortest connecting network of the remaining indices. By the absolute Taylor expansion, we have
+\[
+ \norm{D^jR(e^\xi)}_{\mathrm{root}}\le C_j\rho^{2-j}\sum_{k\ge\max(2,j)}A_k\frac{k!}{(k-j)!}q^{k-j},
+\]
+where the fixed conventions for color coordinates contribute only the factor $C_j$. For $k\ge j$ the binomial identity implies
+\[
+ \binom kj\eta^jq^{k-j}\le\sum_{l=0}^k\binom kl\eta^lq^{k-l}=1,
+\]
+so that $k!q^{k-j}/(k-j)!\le j!\eta^{-j}$. This summable majorant also justifies differentiating the series term by term in the interior, and it proves \eqref{ch27:eq:residual-interior-derivatives}.
+
+There are $9n^3$ scalar link and color coordinates, and each first partial derivative of $\overline R$ is at most $K_1$, by \eqref{ch27:eq:residual-interior-derivatives} with $j=1$. Then the Euclidean gradient is at most $3n^{3/2}K_1$, and its restriction to the subspace $\mathcal S_n$ has no larger norm. In the coordinates $(X,s)$ we have $\xi_i(x)=X_i/n+s_i(x)$. For each of the nine components of $X$, the chain rule expresses the derivative as a sum of $n^3$ partial derivatives with coefficient $1/n$, which is at most $n^2K_1$ in absolute value. The Euclidean norm of the gradient in $X$ is then at most $3n^2K_1$. This proves \eqref{ch27:eq:residual-central-derivatives}.
+
+For the transfer, let $U_0\in\mathcal K$ and choose a lattice gauge transformation $k_0$ with $U_0^{k_0}\in B_r$. It can be taken based: replacing $k_0(x)$ by $k_0(x_*)^{-1}k_0(x)$ conjugates the transformed configuration by one constant matrix, which preserves every link logarithm norm. We keep this gauge transformation fixed. By continuity there exist neighborhoods $O_0\Subset O_0^+$ of $U_0$, with closures inside an ambient smooth coordinate chart, whose images under $k_0$ lie in $B_{r_1}$ even on $\overline{O_0^+}$. To find them, we take an open neighborhood with image in $B_{r_1}$ and then two smaller coordinate balls with closures inside it. Finitely many of the sets $O_0$ cover $\mathcal K$. They depend on $\mathcal K$ and on $r<r_1$, but not on the effective interaction. The action of a fixed gauge transformation is smooth on all of $\Conf n$ and an isometry for the product metric; in particular, it extends past each of these closures.
+
+By the agreement of the local expressions, we have, on the larger neighborhood $O_l^+$ of a member of this cover,
+\[
+ \overline R_{\mathrm{sat}}(U)=R\bigl(e^{\xi^{(l)}(U)}\bigr)-R(I),\qquad\xi^{(l)}(U)_e=\Log\bigl((U^{k_l})_e\bigr).
+\]
+Since $r_1<\pi$, the logarithm and all its derivatives of fixed order are bounded on $\{\abs{\Log}\le r_1\}$. Indeed, the transverse eigenvalue of the differential of the exponential map has modulus $2\sin(\abs\xi/2)/\abs\xi$, which is bounded away from zero on this closed ball. Repeated differentiation of the inverse function identity then bounds every higher derivative. We refine the parameter subcharts so that the closure of each is contained in $W^+\cap\Psi^{-1}(O_l^+)$ for one $l$; this is possible because the sets $O_l$ cover $\Psi(\overline W)$ and $\overline W$ is compact. The maps $\xi^{(l)}\circ\Psi$ then extend smoothly past these closures, and for every fixed $j$ their derivatives through order $j$ are bounded there. This verifies, at each use, the condition on compact subcharts in \cref{ch11:thm:terminal-anchor}. By the chain rule, the derivative of order $j$ of $\overline R_{\mathrm{sat}}\circ\Psi$ is a finite sum of contractions of $D^aR$, $1\le a\le j$, with derivatives of $\xi^{(l)}\circ\Psi$. The bound \eqref{ch27:eq:residual-interior-derivatives} and the conversion from the norm $\norm\cdot_{\mathrm{root}}$ to Euclidean norms at the fixed side $n$ bound every term. Since the local expressions agree on overlaps, these bounds concern one smooth function $\overline R_{\mathrm{sat}}$ on a neighborhood of $\mathcal K$. This proves \eqref{ch27:eq:residual-chart-transfer}. We note that no derivative of a gauge transformation chosen as a function of $U$ was taken.
+\end{proof}
+
+The next lemma is a local version of \cref{ch11:lem:flat-lifts} for small constant commuting configurations. Unlike that result, it requires no condition on the side $m$. It is used for the chart of \cref{ch27:thm:central-stiff-chart} and for the lower bound in \cref{ch27:thm:sharp-normalizer}.
+
+\begin{lemma}\label{ch27:lem:local-flat-admission}
+There exists $\epsilon_{\mathrm{loc}}>0$, depending only on the fixed domains of the classical background fields, of the local constraint coordinates and Haar disintegration densities, and of the based gauge transformations used in \cref{ch09:thm:sequential-density}, and in particular independent of the preceding depth and of $\gamma$, with the following property. Let $m\ge4$, let $H_1,H_2,H_3\in\su$ commute, and suppose that $\epsilon=\max_i\abs{H_i}/m<\epsilon_{\mathrm{loc}}$. Let $c$ be the configuration on $\Lat m$ with $c_e=e^{H_i/m}$ on every link $e$ in direction $i$. Then $c$ and all its commuting refinements, together with their representatives in the block axial gauge, lie in the interior of these domains for one RG step, with a margin independent of $m$, of the depth, and of $\gamma$. For every depth $d\ge0$ we have $E_d(c)=0$. In the free logarithmic coordinates relative to the coarse-field lift $U_0(c)$, the refinement has $z=0$; this point is the conditional constrained minimizer $z_d^*(c)$, and the corresponding normalized fluctuation variable is $w=0$. The lemma imposes no condition on the other flat configurations on $\Lat m$.
+\end{lemma}
+
+\begin{proof}
+We check the domain conditions directly, without using a neighborhood of the small-field event. We use the identities for commuting roots in \cref{ch11:lem:flat-lifts}, but not its condition on the minimum side. For one averaging step, let
+\[
+ a_i=e^{H_i/(Mm)},\qquad c_i=a_i^M,
+\]
+where $a$ denotes the constant configuration on $\Lat{Mm}$ with these link variables. In the block averaging map \eqref{ch01:eq:ordinary-map}, every translated path with endpoint connectors $F_{c,x}$ has the same transport $a_i^M$ as the reference path $C_c$, since all factors commute and the paths have the same displacement. Hence the logarithms of all based loop holonomies vanish, $T_Ma=c$, and no exceptional value of $T_M$ occurs.
+
+We write $M=2R_M+1$. In a centered block with center $v$, the based gauge transformation to the block axial gauge at $x=v+r$ is $k(x)=\prod_ja_j^{r_j}$, where $\abs{r_j}\le R_M$. By commutativity, we have
+\begin{equation}\label{ch27:eq:local-flat-margin}
+ \abs{\Log k(x)}\le\frac{3R_M}M\epsilon,\qquad\max_e\abs{\Log a_e}\le\epsilon/M,\qquad\max_e\abs{\Log U_0(c)_e}\le\epsilon.
+\end{equation}
+A transformed link in the interior of a block is the identity. On a link between two blocks in direction $i$, the offsets $r_i$ at its endpoints differ by $1-M$, and the transformed link is $a_i^M=c_i$. Thus the configuration in the block axial gauge is exactly the coarse-field lift $U_0(c)$ of \cref{ch01:chapter}, and all free logarithmic coordinates and the logarithms on the eliminated edges $e^*_c$ vanish. Since the derivative of the block averaging constraint with respect to the eliminated edge is $M^{-2}I_3$ there, the point lies in the domain of the local constraint coordinates, with positive Jacobian. The Haar factors are positive on the small link ball.
+
+We now choose the margin. Let $b_*>0$ be smaller than $r$, than the radii $r_*$ and $r_{\mathrm{sym}}$ and the constant $\kappa_{\mathrm{sym}}$ of \cref{ch07:thm:all-root-classical,ch07:lem:classical-symmetries}, than the radius $r_{\mathrm{lift}}$ of the $C^1$ ball of fine potentials in \cref{ch07:lem:classical-symmetries}, and than the fixed radii of the coarse-field, constraint, Haar disintegration, and gauge domains of one RG step in \cref{ch09:thm:sequential-density}. These are the radii used in the choice of $r_{\mathrm{flat}}$ in \cref{ch11:lem:flat-lifts}. There are only finitely many types of words in the construction of one RG step. Let $C_{\mathrm{geo},J}\ge1+3R_M/M$ be a bound for their lengths and for the sums of the offsets in their based gauge transformations, measured in units of the output lattice of the RG step. This bound does not depend on the side, since the words are translates of the words in one fixed block, and there are only $J$ successive block sizes. Finally, we require
+\[
+ 4C_{\mathrm{geo},J}\epsilon_{\mathrm{loc}}<b_*.
+\]
+The logarithm of a product of commuting small factors is bounded by its word length times the largest logarithm of a factor. Thus \eqref{ch27:eq:local-flat-margin} and this choice verify every intermediate condition on coarse fields, tree gauges, and gauge transformations, with a fixed margin. At a finer side $mM^l$ the link bound is $\epsilon M^{-l}$, and none of these inequalities becomes worse with the number of averaging steps. The gauge identity of \cref{ch07:lem:classical-symmetries} applies, because both representatives lie in its ball of radius $r_{\mathrm{sym}}$ and the logarithms of the gauge transformations are below $\kappa_{\mathrm{sym}}$.
+
+We prove that the effective classical action vanishes by induction on $d$, simultaneously for all sides $m\ge4$ and all constant commuting configurations as in the statement. The comparison below concerns real configurations and real free coordinates. No minimum and no positive Hessian is asserted for complex coarse fields. The continuation in a complex parameter below concerns only the analytic identity for the minimizer, after it has been proved near real parameter values. For $d=0$, the Wilson action vanishes at the flat configuration $c$. Suppose that the claim holds at depth $d$. The refinement $a$ has side $Mm$ and satisfies the smaller bound $\epsilon/M$. By the induction hypothesis, we have $E_d(a)=0$, and by the gauge invariance just checked, $E_d(U_0(c))=E_d(a)=0$. By the definition of the effective classical action in \cref{ch01:chapter}, for the actions and minimizers of \cref{ch09:thm:sequential-density}, we have
+\[
+ E_{d+1}(c)=MF_d(c,z_d^*(c))=M\min_zF_d(c,z),\qquad F_d(c,z)=E_d(b(c,z)),
+\]
+where the minimum is over the domain of the classical background field. The free point $z=0$ lies in this domain by the margins verified above; this does not presuppose that $z=0$ lies in a fluctuation cutoff domain centered at $z_d^*(c)$. Since $F_d(c,0)=0$, the minimum is at most zero, and nonnegativity (\cref{ch08:thm:classical-cutoff}) implies that $E_{d+1}(c)=0$. This completes the induction, and it also shows that $E_d(U_0(c))=0$ at every depth. In other words, the iteration uses exact commuting roots, whose potential in units of the coarse lattice is $H_i/m$ at every side and whose first spatial differences vanish; no loss of domain accumulates.
+
+It remains to identify $z=0$ with the conditional constrained minimizer. In the coordinates of \cref{ch09:thm:sequential-density}, $z_d^*$ is the analytic branch of constrained minimizers through $z_d^*(I)=0$. Since the point $z=0$ attains the minimum of $F_d(c,\cdot)$, we have $D_zF_d(c,0)=0$. At $c=I$ the constrained Hessian $K_d(I)$ is positive. By \cref{ch27:lem:smooth-charts}(1), applied to $D_zF_d$, the critical point near $0$ is then locally unique for $c$ near $I$. For each fixed side and depth, we find $z_d^*(e^{tH/m})=0$ for real $t$ near zero. The minimizer is holomorphic on the common domain of coarse fields of \cref{ch09:thm:sequential-density}, and the factor four in the choice of $\epsilon_{\mathrm{loc}}$ keeps $e^{tH/m}$ in this domain for complex $\abs t<2$. Each component of $t\mapsto z_d^*(e^{tH/m})$ is therefore holomorphic on $\abs t<2$ and vanishes on an interval around zero. Its Taylor coefficients at zero vanish, and continuation through overlapping discs gives $z_d^*(e^{tH/m})=0$ for $\abs t<2$, in particular at $t=1$. The radius of local uniqueness at the origin need not be uniform; the common domain and the margins are. Since the normalization $z-z_d^*(c)=g_dK_d^{-1/2}w$ is invertible, $z=z_d^*(c)$ corresponds to $w=0$, which lies in the interior of every fluctuation cutoff domain. By \cref{ch12:thm:replacement-family}, the reconstruction maps $\RepMap$, whose gauge transformations are based at the coarse vertices, preserve these properties. This completes the proof.
+\end{proof}
+
+\begin{theorem}\label{ch27:thm:central-stiff-chart}
+Consider the stopped measures of \cref{ch27:sec:stopped}, with $L$, $n\in4\N$, $M$, $J$, $\Theta$, and $\gamma_0$ fixed before $\gamma$, and let $g=\sqrt{\gamma/n}$. Let $d_0$ denote the forward lattice gradient on $\Lat n$ (not a depth) and $d_0^*$ its adjoint, the discrete divergence, both acting componentwise on $\su$-valued functions and link arrays, and let
+\[
+ \mathcal S_n=\Bigl\{s=(s_i(x))\in\su^{\Links n}:d_0^*s=0,\ \sum_xs_i(x)=0\ (i=1,2,3)\Bigr\},
+\]
+and $d_n=\dim\mathcal S_n=6n^3-6$. There exist $\rho_n,s_n,c_n,C_n>0$ such that the following hold.
+\begin{enumerate}
+\item The based quotient of $\Conf n$ is a compact manifold of dimension $6n^3+3$, and the based gauge transformations carry Haar measure of total mass one. The map $(X,s)\mapsto V(X,s)=e^{X/n+s}$, which assigns $\exp(X_i/n+s_i(x))$ to the link from $x$ to $x+a_ne_i$, defined for $X\in\R^9$ with $\abs X<\rho_n$ and $s\in\mathcal S_n$ with $\abs s<s_n$, induces coordinates on a neighborhood of the class of the identity in the based quotient. In these coordinates the image of $H_n$ is $J_n(X,s)\,dX\,ds$, where $J_n$ is smooth and strictly positive. The configurations $V(X,s)$ lie in $B_r\subset D_r$. Simultaneous conjugation at the root is not divided out.
+\item Let $F_d(X,s)=E_d(e^{X/n+s})$, $f_d(X)=F_d(X,0)$, and $A_d(X)=D_s^2F_d(X,0)$. For every integer $d\ge0$,
+\begin{gather*}
+ D_sF_d(X,0)=0,\qquad F_d(X,s)=f_d(X)+\tfrac12\ip s{A_d(X)s}+O_n(\abs s^3),\\
+ c_nI\le A_d(X)\le C_nI,\qquad F_d(X,s)\ge f_d(X)+c_n\abs s^2.
+\end{gather*}
+\item For $d=kJ$ and $0<\gamma\le\gamma_0$, write $\overline R_{d,\gamma}(X,s)=\overline R_{d,\gamma}(V(X,s))$. Then, uniformly in $X$, $d$, and $\gamma$,
+\begin{gather*}
+ \int_{\abs s<s_n}e^{-F_d(X,s)/g^2-\overline R_{d,\gamma}(X,s)}J_n(X,s)\,ds=(2\pi)^{d_n/2}g^{d_n}e^{-f_d(X)/g^2}a_{d,\gamma}(X)\bigl[1+O_n(g)\bigr],\\
+ a_{d,\gamma}(X)=\frac{e^{-\overline R_{d,\gamma}(X,0)}J_n(X,0)}{\sqrt{\det A_d(X)}}.
+\end{gather*}
+The amplitude $a_{d,\gamma}$ has positive upper and lower bounds and a $C^1$ bound, uniformly in $d$ and $\gamma$.
+\end{enumerate}
+The constants may depend on $n$, $L$, $M$, $J$, $\Theta$, $\gamma_0$, and on the larger chart and the bounds in (P2) and (P3), but not on $d$, on the total number of averaging steps, or on $\gamma\in(0,\gamma_0]$.
+\end{theorem}
+
+No positive Hessian is asserted in the nine constant directions $X$: at the identity the quadratic part of $E_0$ vanishes on constant configurations.
+
+\begin{proof}
+The proof has five steps. We construct the based quotient and the coordinates $(X,s)$, fix the radii, prove the stationarity in $s$ and the gap at the fixed side $n$, and then apply \cref{ch27:lem:uniform-tube-laplace} in the variable $s$ at each fixed $X$.
+
+\paragraph{Step 1: inputs.}
+All bounds in this proof are at the fixed side $n$. The lower bound (P1) holds at every integer $d\ge0$, whether or not an effective interaction is attached to $d$. In the statements involving $\overline R_{d,\gamma}$, we have $d=kJ$, and $R_{d,\gamma}$ is the effective interaction of the density \eqref{ch27:eq:stopped-density}, with the value bound and the analytic norm of that density. Its first derivatives in the chart are obtained from \cref{ch27:lem:residual-derivatives}, on the relatively compact subcharts chosen in Step 3 and with the identity gauge transformation, which extends past their closures. They do not follow from the value bound. The derivative bounds for the classical actions in fixed charts come from \cref{ch07:thm:all-root-classical}: restricted to the finitely many coordinates at side $n$, its coefficient bounds give bounds for ordinary derivatives, with constants depending on $n$. The exact translation invariance of $E_d$ is \cref{ch07:lem:classical-symmetries}. The vanishing of $E_d$ and the domain conditions for small constant commuting configurations are proved in \cref{ch27:lem:local-flat-admission}, with no condition on the minimum side. Finally, (P4) allows us to apply \cref{ch09:thm:sequential-density,ch11:thm:terminal-anchor} for every $0<\gamma\le\gamma_0$.
+
+\paragraph{Step 2: the based quotient.}
+We fix a periodic spanning tree of the lattice graph $\Lat n$. There exists a unique based gauge transformation that makes every tree link the identity. It is obtained successively from the root, by prescribing its value at a new vertex from the tree link leading to that vertex. The remaining links are $3n^3-(n^3-1)=2n^3+1$ independent non-tree links. This change of variables has an exact interpretation for the measure. We condition on the preceding tree variables and use a left or right translation of Haar measure at the next tree link. This replaces that link by the value of the gauge transformation at the new vertex, with Haar measure. At each non-tree link the two endpoint factors are determined by the tree variables, and its change of variables is again a Haar translation. By Fubini's theorem, the image of $H_n$ is the product of Haar probability measures in the $n^3-1$ values of the based gauge transformation and in the $2n^3+1$ non-tree link variables. Integrating out the gauge variables gives one. In particular the based quotient is the compact product $\SU^{2n^3+1}$, of dimension $6n^3+3$, and no conjugation at the root has been divided out from the non-tree link variables.
+
+\paragraph{Step 3: the coordinates and the radii.}
+The gradient is injective on $\su$-valued vertex functions that vanish at the root: if the gradient of such a function vanishes, the function is constant on the connected graph and hence zero. The image of these gradients has dimension $3(n^3-1)$, and its orthogonal complement in the $9n^3$-dimensional space of link arrays is $\ker d_0^*$, of dimension $6n^3+3$. The nine arrays that are constant in position lie in this complement, and their orthogonal complement within it is $\mathcal S_n$, of dimension $6n^3-6$. The orthogonal decomposition can be constructed explicitly. For an array $A$, the equation $d_0^*d_0\xi=d_0^*A$ has a unique solution $\xi$ with mean zero, by diagonalization of this positive matrix on mean-zero vertex functions. Subtracting $d_0\xi$ and then the spatial means of the three components, we obtain the component in $\mathcal S_n$.
+
+We consider the map that sends $(X,s)$ to $e^{X/n+s}$ and then to the non-tree link variables of its representative in the tree gauge. At $(0,0)$ its derivative is the projection along gradients onto the non-tree link coordinates. Indeed, the linearized tree gauge fixing sends a link logarithm array $A$ to $A-d_0\xi$, where $\xi$ vanishes at the root and $A-d_0\xi$ vanishes on the tree, and then reads off the non-tree links. The kernel of the derivative is the image of $d_0$ on functions vanishing at the root. The derivative is therefore injective on the complement $\R^9\oplus\mathcal S_n$ constructed above, and invertible there, since the dimensions agree. By \cref{ch27:lem:smooth-charts}(1), the map is a diffeomorphism near $(0,0)$. Pulling back the product of Haar measures on the non-tree links, whose density in exponential coordinates is smooth and positive near the identity, we obtain a smooth strictly positive density $J_n(X,s)$. Its bounds and the bounds for its derivatives of fixed order on smaller closed coordinate balls depend only on $n$ and on these balls.
+
+We now fix the radii, independently of $d$ and $\gamma$. We shrink the balls so that $\max_{x,i}\abs{X_i/n+s_i(x)}<r/2$, and choose slightly larger balls with the same property. We also require $2\rho_n/n<\epsilon_{\mathrm{loc}}$, with $\epsilon_{\mathrm{loc}}$ from \cref{ch27:lem:local-flat-admission}, and put the larger balls inside the charts of radii $r_*$ and $r_{\mathrm{sym}}$ of \cref{ch07:thm:all-root-classical,ch07:lem:classical-symmetries}. More precisely, we choose the product $\mathcal C$ of the two coordinate balls in the statement and a larger product $\mathcal C^+$ with $\overline{\mathcal C}\subset\mathcal C^+$, such that $\overline{\mathcal C^+}$ lies in the chart just constructed and satisfies all these strict bounds on link logarithms. These finitely many conditions are compatible with positive radii. The map $(X,s)\mapsto e^{X/n+s}$ and the quotient chart extend smoothly to a neighborhood of $\overline{\mathcal C^+}$, and the gauge transformation used here is the identity. Every derivative of fixed order of the chart is therefore bounded on this closure, with constants depending only on $n$. This verifies the condition on compact subcharts in \cref{ch11:thm:terminal-anchor} and \cref{ch27:lem:residual-derivatives}, both for the integration in $s$ and for the derivative of the amplitude in $X$. The configurations $V(X,s)$ lie in $B_r\subset D_r$, with link logarithms in the ball $B_{r_1}$ of \cref{ch27:lem:residual-derivatives}, for a fixed $r_1\in(r,\min(\rho,\pi))$; in particular $\eta=1-r_1/\rho$ is fixed. Every commuting point $X$ used here satisfies $\max_i\abs{X_i}/n<\epsilon_{\mathrm{loc}}$, so $E_d$ vanishes there at every depth.
+
+\paragraph{Step 4: stationarity and the gap.}
+Fix a constant array of logarithms $A_i(x)=X_i/n$. Translation by any lattice vector fixes this array. Differentiating the exact translation invariance of $E_d$, we find that the gradient $DE_d(e^A)$ in link logarithm coordinates is constant in position for each direction and color. Its pairing with every array of spatial mean zero vanishes, and
+\begin{equation}\label{ch27:eq:stiff-stationarity}
+ D_sF_d(X,0)=0
+\end{equation}
+for every $d$ and every $X$ in the chart. This argument concerns $E_d$ only, and it does not set any derivative of the effective interaction or of the Haar density to zero.
+
+We now prove the gap at the fixed side. The expansion of a plaquette variable at the identity in link logarithms is $d_0A+O(\abs A^2)$, and $4q(e^Y)=\abs Y^2/2+O(\abs Y^4)$. It follows that
+\[
+ E_0(e^A)=\tfrac12\sum_{x,\,i<j}\abs{A_j(x+e_i)-A_j(x)-A_i(x+e_j)+A_i(x)}^2+O_n(\abs A^3),
+\]
+where $e_i$ denotes one lattice step. At the Fourier mode $m\in\Z^3/n\Z^3$, let $\eta_i(m)=e^{2\pi im_i/n}-1$. For each color,
+\[
+ \sum_{i<j}\abs{\eta_ia_j-\eta_ja_i}^2=\abs\eta^2\abs a^2-\abs{\eta^*a}^2.
+\]
+Since the zero mode is absent on $\mathcal S_n$ and $\eta^*a=0$ there, the Hessian of $E_0$ at the identity is at least $\lambda_nI$ on $\mathcal S_n$, where $\lambda_n=4\sin^2(\pi/n)>0$. All inequalities between functions and Hessians here concern real configurations and real tangent vectors. Since $E_d-\kappa E_0\ge0$ near the identity by (P1) and vanishes at the identity, its Hessian at this point is positive semidefinite. This implies
+\[
+ D_s^2F_d(0,0)\ge\kappa\lambda_nI.
+\]
+By the uniform bound on third derivatives in (P2), we have
+\[
+ \norm{D_s^2F_d(X,s)-D_s^2F_d(0,0)}\le C_n(\abs X+\abs s).
+\]
+We choose the radii so that the right side is at most $\kappa\lambda_n/2$; the upper derivative bounds in (P2) give a uniform upper bound. Then $A_d(X)=D_s^2F_d(X,0)\ge\kappa\lambda_nI/2$, and Taylor's formula with integral remainder and \eqref{ch27:eq:stiff-stationarity} give
+\[
+ F_d(X,s)=f_d(X)+\tfrac12\ip s{A_d(X)s}+O(C_n\abs s^3),\qquad F_d(X,s)-f_d(X)\ge\tfrac14\kappa\lambda_n\abs s^2.
+\]
+This proves part (2), after decreasing $c_n$.
+
+\paragraph{Step 5: integration in $s$ and the amplitude.}
+On the larger $s$-ball we apply \cref{ch27:lem:uniform-tube-laplace}, at each fixed $X$, with
+\[
+ V(X,s)=F_d(X,s)-f_d(X),\qquad\delta=g^2,\qquad a(X,s)=e^{-\overline R_{d,\gamma}(X,s)}J_n(X,s),
+\]
+the rank $d_n$, and the Hessian $L=A_d(X)$. All these functions and the Hessian field are smooth in $(X,s)$ on the fixed real chart, hence jointly Borel, and we choose a fixed smooth cutoff in $s$, equal to one on a smaller fixed ball and supported in the ball $\abs s<s_n$. The phase bounds were proved in Step 4. For the amplitude, let $B_n=\sup_{D_r}\abs{\overline R_{d,\gamma}}$, which is bounded by (P3). By \eqref{ch27:eq:residual-central-derivatives} and the mean value theorem on the convex $s$-ball,
+\[
+ \abs{a(X,s)-a(X,0)}\le e^{B_n}\bigl(\norm{J_n}_\infty3n^{3/2}K_1+\norm{D_sJ_n}_\infty\bigr)\abs s.
+\]
+The positive lower and upper bounds follow from $e^{-B_n}\le e^{-\overline R_{d,\gamma}}\le e^{B_n}$ and the positivity of $J_n$. Every hypothesis of \cref{ch27:lem:uniform-tube-laplace} therefore holds with constants $c_0,C_0$ depending only on the fixed data. The case $P=1$ of \eqref{ch27:eq:pointwise-laplace} gives the integral with the cutoff. The additive error $O(g)$ becomes a relative error because the amplitude $a(X,0)/\sqrt{\det A_d(X)}$ has a fixed positive lower bound. The lower bound $F_d-f_d\ge c_n\abs s^2$ holds on the whole ball $\abs s<s_n$, and so do the amplitude bounds. By \eqref{ch27:eq:tube-tail}, for $g\le1$ and after factoring out $e^{-f_d(X)/g^2}$, the difference between the integral with the cutoff and the integral over the whole ball is at most $Cg^{d_n}e^{-c'/g^2}$, which is $O_n(g^{d_n+1})$. If $\gamma_0/n>1$, then for $1<g^2\le\gamma_0/n$ both the integral and the main term are bounded above and below by positive constants depending only on the fixed data, and the asserted formula holds there after enlarging the constant. We obtain
+\[
+ (2\pi)^{d_n/2}g^{d_n}e^{-f_d(X)/g^2}\frac{e^{-\overline R_{d,\gamma}(X,0)}J_n(X,0)}{\sqrt{\det A_d(X)}}\bigl[1+O_n(g)\bigr].
+\]
+
+For the $C^1$ bound of the amplitude, we have
+\[
+ D_X\log a_{d,\gamma}(X)=-D_X\overline R_{d,\gamma}(X,0)+D_X\log J_n(X,0)-\tfrac12\tr\bigl(A_d(X)^{-1}D_XA_d(X)\bigr).
+\]
+The first term is bounded by $3n^2K_1$, by \eqref{ch27:eq:residual-central-derivatives}; the value bound alone would not give this estimate. The trace is bounded by $d_n\norm{A_d^{-1}}\norm{D_XA_d}$, and every factor is bounded uniformly, by the fixed chart, the lower bound for the Hessian, and the bound on third derivatives. This proves the bounds for the amplitude, with the phase $f_d$ at finite depth. In particular, no limit of the classical actions as $d\to\infty$ at fixed coupling has been inserted into an exponent divided by $g^2$. All constants have the dependence stated in the theorem.
+\end{proof}
+
+\section{Flat configurations and the partition function}\label{ch27:sec:normalizer}
+
+We now describe the flat configurations on $\Lat n$ away from the central triples, that is, the triples of central cycle holonomies. We then prove the two-sided bound for the partition function. Recall from \cref{ch11:lem:flat-lifts} that the flat configurations modulo all periodic gauge transformations are classified by their commuting cycle holonomies modulo simultaneous conjugation. In the based quotient, where simultaneous conjugation is not divided out, the flat set is the set of commuting triples $(H_1,H_2,H_3)\in\SU^3$. We call a flat configuration regular if its cycle holonomies are not all central. A compact regular patch is a compact subset of the flat set in the based quotient containing none of the eight configurations with central cycle holonomies.
+
+\begin{lemma}\label{ch27:lem:regular-flat-tube}
+\begin{enumerate}
+\item In the based quotient at side $n\ge4$, the set of regular flat configurations is a smooth embedded submanifold of dimension five. The Hessian of $E_0$ is positive definite in the normal directions at every regular flat configuration. On every compact regular patch it has a positive lower bound, and there is a finite atlas of normal coordinates $V(y,v)$, with $y$ in the flat manifold and $v\in\R^{6n^3-2}$, in which the image of $H_n$ has a smooth positive density $J(y,v)$ with respect to $d\mathrm{vol}(y)\,dv$.
+\item Consider the stopped measures of \cref{ch27:sec:stopped} and a compact regular patch. Assume either that the patch consists of configurations gauge equivalent to constant commuting links $e^{H_i/n}$ with $\max_i\abs{H_i}/n<\epsilon_{\mathrm{loc}}$, as in \cref{ch27:lem:local-flat-admission}, or that $2\pi/n<r_{\mathrm{flat}}$, where $r_{\mathrm{flat}}$ is the radius of \cref{ch11:lem:flat-lifts}. Assume also that the patch lies in a common larger classical link chart, after fixed gauge transformations. Then there is a normal tube over the patch, fixed independently of $d$ and $\gamma$, on which, for every integer $d\ge0$,
+\begin{gather*}
+ nE_d(V(y,v))=\tfrac12v^{\mathsf T}H_d(y)v+O(C_n\abs v^3),\\
+ c_nI\le H_d(y)\le C_nI,\qquad nE_d(V(y,v))\ge c_n\abs v^2.
+\end{gather*}
+The normal rank is $6n^3-2$. The constants may depend on $n$, the patch, the larger chart, the constant $\kappa$ of (P1), the derivative bounds of (P2), and the margins of the tube.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We use the based quotient $\SU^{2n^3+1}$ of non-tree link variables constructed in Step 2 of the proof of \cref{ch27:thm:central-stiff-chart}. By \cref{ch11:lem:flat-lifts}, a flat point of the based quotient is determined by its three commuting cycle holonomies. This identification and its inverse are locally smooth. Indeed, each holonomy is a finite product of non-tree link variables. Conversely, after fixing paths in the tree, the flat transport along every non-tree link is the word in the three commuting cycle transports given by the winding numbers of the closed path that it forms with the tree. Such a word is a smooth product of integer powers.
+
+At a regular triple we choose a noncentral member. Its quaternion vector is nonzero and, after fixing its sign, determines a smooth unit axis on a small patch. Every member of a commuting triple has its vector parallel to that axis. We choose local lifts of the three angles on the corresponding circles and two local coordinates for the axis. Differentiation in the three angles and the two axis coordinates is injective, since the chosen member has nonzero vector. Projection onto five suitable ambient coordinates therefore has invertible derivative. By \cref{ch27:lem:smooth-charts}(1), the regular flat set is a smooth embedded five-dimensional manifold, and its only possible singular points are the eight triples whose members are all central.
+
+Next we determine the kernel of the Hessian, including the count of based gauge directions. By a periodic gauge transformation and a constant conjugation, we conjugate a flat representative to the constant commuting links $U_i^0=e^{\vartheta_i\tau_3/n}$. Such transformations change neither the rank of the Hessian nor its quadratic form on the gauge quotient. We write a variation of the links in left coordinates as $e^{ta_i(x)}U_i^0$. The derivative of the plaquette logarithm is
+\[
+ (d_Ua)_{ij}(x)=\Ad_{U_i^0}a_j(x+e_i)-a_j(x)-\Ad_{U_j^0}a_i(x+e_j)+a_i(x),
+\]
+as one sees by differentiating its four ordered factors, since the background plaquette variable is the identity. Since the quadratic part of $E_0$ is $\sum\abs{d_Ua}^2/2$, the kernel of the Hessian is $\{d_Ua=0\}$.
+
+We split the colors into $\R\tau_3$, the neutral color, and its orthogonal plane, the charged color, which we identify with $\C$ so that $\ad_{\tau_3}$ acts as multiplication by $i$. In neutral color the Fourier difference vector is $\eta_i=e^{2\pi im_i/n}-1$. If $\eta\ne0$, the equations $\eta_ia_j-\eta_ja_i=0$ imply $a=\eta\phi$, with $\phi=a_j/\eta_j$ for an index $j$ with $\eta_j\ne0$. These are exactly the gradient directions, and the zero mode gives three real constant neutral directions. In charged color the difference vector is
+\[
+ \eta_i=e^{i(2\pi m_i+\vartheta_i)/n}-1.
+\]
+It cannot vanish in all three components, since that would force every $\vartheta_i$ into $2\pi\Z$ and all three holonomies to be central. The same algebra $a=\eta\phi$ shows that every charged mode in the kernel is a covariant gradient. This argument includes the cases in which some $\vartheta_i$ vanish, without division by a possibly vanishing component.
+
+The covariant gradient on vertex functions has a one-dimensional kernel, consisting of the constant neutral functions, since its charged Fourier vectors never vanish and its neutral kernel consists of constants. Its real image has dimension $3n^3-1$. Its restriction to functions vanishing at the root is injective, since a covariantly constant function vanishing at one point vanishes everywhere by transport along links. Hence the image of the based gradients has dimension $3n^3-3$, and after dividing out the based gradients, the kernel has dimension
+\[
+ (3n^3-1)+3-(3n^3-3)=5.
+\]
+Two of these directions are infinitesimal simultaneous conjugations at the root, and three are the constant neutral directions. They are exactly the tangent directions of the five-dimensional manifold parametrized above. Since the Hessian is a nonnegative symmetric matrix with no further kernel, it is positive definite on a normal complement. Its least normal eigenvalue has a positive minimum on a compact regular patch, since continuous unit normal vectors over that compact set form a compact set on which the quadratic form does not vanish.
+
+For integration, we give the based quotient $\SU^{2n^3+1}$ its product Riemannian metric, which is bi-invariant, and let $\mathcal F$ be the manifold of regular flat configurations. We use the normal exponential map
+\[
+ V(y,v)=\operatorname{Exp}_y(v),\qquad y\in\mathcal F,\ v\perp T_y\mathcal F,
+\]
+of \cref{ch27:lem:smooth-charts}(2). Over a compact neighborhood of a compact regular patch, it is injective for a common small normal radius. We choose finitely many smooth orthonormal trivializations of the normal bundle of $\mathcal F$, with working subcharts relatively compact in larger charts. Since their transitions preserve $y$ and are orthogonal in $v$, a partition of unity on the base extends consistently to the tube. The maps $V(y,v)$, their lifts to configurations, and the normal frames extend smoothly past the closures of the working subcharts, so all derivatives of fixed order of the charts are bounded there. Since the Haar measure of the product group is a constant multiple of its Riemannian volume, its pullback $J(y,v)$ is smooth and positive with respect to $d\mathrm{vol}(y)\,dv$. This proves part (1).
+
+For part (2), on patches of small commuting configurations, the vanishing of the classical actions is proved in \cref{ch27:lem:local-flat-admission}. On a general patch at a side with $2\pi/n<r_{\mathrm{flat}}$, it is the conclusion of \cref{ch11:lem:flat-lifts} for all flat configurations: every averaging step has output side $m\ge n$, and $2\pi/m\le2\pi/n<r_{\mathrm{flat}}$ verifies the condition on the side at each step. By gauge invariance, these zeros transfer to the smooth based representatives used here. Since $E_d\ge0$, its first derivative vanishes on the flat manifold. Since $E_d-\kappa E_0\ge0$ by (P1) and vanishes there, the Hessian of $E_d-\kappa E_0$ is positive semidefinite on real normal vectors. The lower bound of part (1) then implies $H_d=D_v^2(nE_d)(y,0)\ge c_nI$. The uniform derivative bounds of (P2) on the common larger chart give the upper bound and a common cubic Taylor error. If a quotient chart is not itself a representative with small links, we fix a gauge transformation taking its center into $B_r$ and shrink the neighborhood inside the fixed larger classical chart. By compactness, finitely many such fixed gauge transformations suffice. Their derivatives and the bounds of \cref{ch07:thm:all-root-classical} give the same bound by the chain rule, and no gauge transformation depending on the point is needed. We choose the radius of the tube so that the cubic error is at most one quarter of the lower bound for the Hessian times $\abs v^2$. This proves the lower bound for $nE_d$ on the whole smaller tube. All these choices depend only on the listed data. The normal rank is the dimension $6n^3+3$ of the based quotient minus five.
+\end{proof}
+
+\begin{theorem}\label{ch27:thm:sharp-normalizer}
+The following statements hold.
+\begin{enumerate}
+\item For every integer $n\ge4$ and every $\kappa>0$ there exists $C_{n,\kappa}<\infty$ such that for $0<g\le1$
+\[
+ \int_{\Conf n}e^{-\kappa E_0(V)/g^2}\,dH_n(V)\le C_{n,\kappa}g^{6n^3-2},\qquad E_0(V)=4\sum_{p\in\Faces n}q(V_p).
+\]
+This is an integral over the whole configuration space, including neighborhoods of all eight flat configurations with central cycle holonomies. Divisibility of $n$ by four is not needed, and $C_{n,\kappa}$ depends only on $n$ and $\kappa$.
+\item Consider the stopped measures of \cref{ch27:sec:stopped}. There exist $g_0(n)>0$ and $0<c_n\le C_n<\infty$, with the dependence described in \cref{ch27:thm:central-stiff-chart}, such that for all depths $d=kJ$ and all $0<\gamma\le\gamma_0$ with $g=\sqrt{\gamma/n}\le g_0(n)$,
+\[
+ c_ng^{d_n+4}\le\widehat Z_{n,d,\gamma}\le C_ng^{d_n+4},\qquad d_n=6n^3-6.
+\]
+Equivalently, $\widehat Z_{n,d,\gamma}$ is comparable to $\gamma^{p_n}$, $p_n=3n^3-1$, uniformly in $d$ and $\gamma$ in this range, at the fixed side $n$. Here $\widehat Z_{n,d,\gamma}$ is the partition function of \eqref{ch27:eq:stopped-density}, with the centered effective interaction. If $Z^{\mathrm{raw}}$ is defined with $R_{d,\gamma}$ in place of $\overline R_{d,\gamma}$, then $\widehat Z_{n,d,\gamma}=e^{R_{d,\gamma}(I)}Z^{\mathrm{raw}}$ exactly.
+\item For every $\rho>0$ and $c>0$ there exists $C_{\rho,c}$ such that for $0<g\le1$
+\[
+ \int_{\abs X<\rho}e^{-cQ(X)/g^2}\,dX\le C_{\rho,c}g^4.
+\]
+Here $\rho$ is an arbitrary radius, not the analytic radius. More precisely, for $g\le\min(1,\rho^2)$ the ball $\abs X\le\sqrt g$ contributes $O(g^{9/2})$, and each annulus $\varrho/2<\abs X<\varrho$ with $\sqrt g\le\varrho\le\rho$ contributes $O(g^4\varrho)$.
+\end{enumerate}
+\end{theorem}
+
+The lower bound in (2) comes from a fixed annulus of regular constant commuting configurations in the chart of \cref{ch27:thm:central-stiff-chart}, and it uses only the bound on the values of the centered effective interaction.
+
+\begin{proof}
+We prove the upper bound in (1) by covering the based quotient by neighborhoods of the eight central flat configurations, normal tubes over the remaining compact regular part of the flat set, and a compact set without flat configurations. Near the central configurations, we integrate the nonconstant directions with the gap of \cref{ch27:thm:central-stiff-chart}, and the constant directions with the estimate in (3). We then deduce (2) from (1), (P1), and (P3).
+
+\paragraph{Step 1: constant configurations.}
+We need an exact lower bound for the Wilson action on constant configurations. We write $U=aI+2v^a\tau_a$ and $W=bI+2w^a\tau_a$ with $a^2+\abs v^2=b^2+\abs w^2=1$. The multiplication rule
+\[
+ (a,v)(b,w)=(ab-v\cdot w,\ aw+bv+v\times w)
+\]
+follows directly from the products of the matrices $\tau_a$. Conjugation by $(a,v)$ sends $w$ to $(a^2-\abs v^2)w+2(v\cdot w)v+2a(v\times w)$. Thus the scalar part of $UWU^{-1}W^{-1}$ is
+\[
+ b^2+\bigl[(a^2-\abs v^2)w+2(v\cdot w)v+2a(v\times w)\bigr]\cdot w=1-2\abs{v\times w}^2,
+\]
+which implies $q(UWU^{-1}W^{-1})=2\abs{v\times w}^2$ exactly. For $U_i=e^{x_i/n}$ we have $v_i=\sin(\abs{x_i}/(2n))\widehat x_i$, and summing over the $n^3$ plaquettes in each of the three planes gives, continuously also when some $x_i$ vanish,
+\begin{equation}\label{ch27:eq:bare-constant-quartic}
+\begin{split}
+ E_0(e^{X/n})&=8n^3\sum_{i<j}\sin^2(\abs{x_i}/(2n))\sin^2(\abs{x_j}/(2n))\abs{\widehat x_i\times\widehat x_j}^2\\
+ &=\frac1{2n}\sum_{i<j}\abs{x_i\times x_j}^2\sinc^2(\abs{x_i}/(2n))\sinc^2(\abs{x_j}/(2n)).
+\end{split}
+\end{equation}
+Since the factors $\sinc^2$ have positive lower and upper bounds on a fixed small ball, $E_0(e^{X/n})$ is comparable to $Q(X)/n$ there. This is a relative bound, valid also in almost commuting directions.
+
+\paragraph{Step 2: the neighborhood of the identity.}
+Applying the proof of \cref{ch27:thm:central-stiff-chart} to the Wilson action alone, we obtain, on a fixed neighborhood of the identity in the based quotient,
+\begin{equation}\label{ch27:eq:central-bare-bound}
+ E_0(e^{X/n+s})\ge E_0(e^{X/n})+c_n\abs s^2\ge c_n'(Q(X)+\abs s^2),
+\end{equation}
+where the second inequality is \eqref{ch27:eq:bare-constant-quartic}. This uses only the translation invariance of $E_0$, the gap at side $n$, and the smoothness of $E_0$, all verified explicitly in Steps 3 and 4 of that proof. It does not use the stopped density or the divisibility of $n$ by four, and it holds at every integer $n\ge4$.
+
+\paragraph{Step 3: the nine-dimensional estimate.}
+We prove (3). The ball $\abs X\le\sqrt g$ has volume $C_9g^{9/2}$, which bounds its contribution. We now consider an annulus $\varrho/2<\abs X<\varrho$ with $\varrho\ge\sqrt g$, and set $X=\varrho Y$ and $\epsilon=g/\varrho^2\le1$. Since $Q$ is homogeneous of degree four, the integral over the annulus is
+\[
+ \varrho^9\int_{1/2<\abs Y<1}e^{-cQ(Y)/\epsilon^2}\,dY.
+\]
+On the fixed closed annulus $1/2\le\abs Y\le1$, the zero set of $Q$ is a compact piece of the nonzero cone $\CommMan$. In a fixed small normal tube around it the radius of the base point is bounded below, and by \cref{ch27:lem:commuting-cone} we have $Q(y+b)\ge c'\abs b^2$ and a bounded Jacobian. The tangential volume is finite by the volume formula of \cref{ch27:lem:commuting-cone}. Integrating in the four normal directions, we see that the tube contributes at most $C\epsilon^4$. Off the tube, $Q$ has a positive minimum $q_*$ on the annulus: a sequence with $Q\to0$ would have a limit point in the zero set, hence in the tube. Since $\sup_{u>0}u^2e^{-cq_*u}<\infty$, the integrand off the tube is at most $C\epsilon^4$. The annulus therefore contributes at most
+\begin{equation}\label{ch27:eq:dyadic-cone}
+ C\varrho^9\epsilon^4=Cg^4\varrho.
+\end{equation}
+We take the radii $\rho,\rho/2,\rho/4,\dots$ until the last annulus reaches $\sqrt g$. The sum of these radii is at most $2\rho$, and the remaining ball has radius at most $2\sqrt g$ and contributes $O(g^{9/2})$. This proves the bound $C_{\rho,c}g^4$ for $g\le\min(1,\rho^2)$. If $\rho^2\le g\le1$, the volume of the ball, $C\rho^9$, is at most $C\rho g^4$. The statements about the ball and the annuli follow from the same estimates.
+
+\paragraph{Step 4: the whole configuration space.}
+Integrating \eqref{ch27:eq:central-bare-bound} against the bounded density of the chart, first in $s$ and then in $X$, we find that the neighborhood of the identity contributes at most
+\[
+ C_{n,\kappa}g^{d_n}\int_{\abs X<\rho_n}e^{-c_{n,\kappa}Q(X)/g^2}\,dX\le C_{n,\kappa}g^{d_n+4},
+\]
+by Step 3. To cover the other seven central points, we multiply, for each of the three directions, the links crossing one wrapping coordinate plane in that direction by either $I$ or $-I$, and call the resulting array of central link variables $z$. Since each plaquette contains either no such factor or two canceling ones, $z_p=I$ for every plaquette. The three cycle signs of $z$ are arbitrary, and they give the eight central triples. The map $V\mapsto zV$ preserves every plaquette variable and the product Haar measure, and it commutes with based gauge transformations because $z$ is central. It maps the identity point of the flat set in the based quotient to the corresponding central flat point. Transporting the chart just used, we obtain the same bound near every central point, without dividing by the volume of a stabilizer.
+
+We choose smaller open neighborhoods inside these eight charts; the flat set outside them is a compact regular patch. By \cref{ch27:lem:regular-flat-tube}(1), it is covered by finitely many normal coordinate charts with bounded Haar density. By Taylor's formula as in the proof of part (2) of that lemma, with $E_0$ in place of $E_d$, we have $E_0\ge c_n\abs v^2$ on these tubes after shrinking them. Each such tube contributes at most $Cg^{6n^3-2}$, since its normal rank is $6n^3-2$. The complement of the union of these tubes and of the central neighborhoods is compact and contains no flat configuration. Since $E_0\ge0$ and its zero set consists exactly of the flat configurations, $E_0$ has a positive minimum $e_n$ on this complement. The complement therefore contributes at most $e^{-\kappa e_n/g^2}\le C_{n,\kappa}g^{6n^3-2}$ for $0<g\le1$. Summing over the finite cover, and recalling that the based gauge transformations have mass one, we obtain (1).
+
+\paragraph{Step 5: the stopped measure.}
+For the upper bound in (2), we use (P1), which holds at every integer $d\ge0$, and the bound $\abs{\overline R_{d,\gamma}}\le C_n$ of (P3) at the depths $d=kJ$. Enlarging the domain of integration from $D_r$ to $\Conf n$ and applying (1), we obtain
+\[
+ \widehat Z_{n,d,\gamma}\le e^{C_n}\int_{\Conf n}e^{-\kappa E_0/g^2}\,dH_n\le C_ng^{6n^3-2}.
+\]
+Only an upper integral has been enlarged, and the partition function is that of the centered density \eqref{ch27:eq:stopped-density}.
+
+For the lower bound, we choose a small fixed annulus of constant commuting configurations $X=(\vartheta_iu)_i$, with $\abs{\bm\vartheta}$ between two fixed positive radii, strictly inside the chart of \cref{ch27:thm:central-stiff-chart}, with positive tangential volume and with $\max_i\abs{X_i}/n<\epsilon_{\mathrm{loc}}/2$. Such an annulus exists at every fixed side, since its radii can be taken arbitrarily small. Its commuting refinements and their representatives in the block axial gauge satisfy the domain conditions with the margins of \cref{ch27:lem:local-flat-admission}, which are independent of the depth; no condition on the side is needed for this annulus. We shrink its fixed normal tube so that it stays inside $B_r$. On this compact annulus, \cref{ch27:lem:regular-flat-tube} implies that $E_d\le C_n\abs v^2$ and that the Haar density has positive upper and lower bounds. The lower bound for the density times $e^{-C_n}$ bounds the amplitude $e^{-\overline R_{d,\gamma}}J$ from below. We integrate only over $\abs v\le g$ and over a fixed smaller tangential subpatch of positive volume. For $g$ below the fixed radius of the tube, we obtain
+\[
+ \widehat Z_{n,d,\gamma}\ge c_n\int_{\abs v\le g}e^{-C_n\abs v^2/g^2}\,dv\ge c_n'g^{6n^3-2}.
+\]
+All the sets used here are subsets of $D_r$. Neither bound requires derivative bounds for the centered effective interaction or any convergence of its restriction to the flat directions as $\gamma\to0$.
+
+Since $d_n+4=6n^3-2=2(3n^3-1)$ and $g^2=\gamma/n$, the two bounds have the asserted form $\gamma^{p_n}$ at the fixed side $n$. Finally,
+\[
+ e^{-E_d/g^2-(R_{d,\gamma}-R_{d,\gamma}(I))}=e^{R_{d,\gamma}(I)}e^{-E_d/g^2-R_{d,\gamma}}
+\]
+on the same domain, which proves the relation between the two normalizations. All constants in the lower and upper bounds for $\widehat Z_{n,d,\gamma}$ are uniform in $d$ and $\gamma$; their dependence on the side has not been bounded.
+\end{proof}
+
+\section{Linearized flowed cycle logarithms}\label{ch27:sec:covariance}
+
+We now compute the covariance $\Sigma_\theta$ of \eqref{ch01:eq:normal-covariance}, which appears in \cref{s2:thm:regular}. It is the covariance, divided by $\gamma$, of the linear response of the flowed holonomy logarithms at a regular flat connection, under the Gaussian measure defined by the quadratic part of the Yang--Mills action. The computation has three ingredients: the covariance of the transverse Gaussian field at the flat background; the derivative of the flowed cycle logarithms, including the differential of the logarithm; and the projection onto the normal space $\NormalFiber y$, which removes the longitudinal part. We carry out the computation in the continuum and on the lattice, and compare the two. The lattice flow is the Wilson flow of L\"uscher \cite{Luscher2010WilsonFlow}, with the normalization of \cref{ch01:chapter}.
+
+\begin{theorem}\label{ch27:thm:flowed-log-covariance}
+Fix $L>0$, $\theta>0$, and a compact regular patch of commuting triples $y=(\vartheta_iu)_{i=1}^3$ with $u\in S^2$ and $0<r_0\le\abs{\bm\vartheta}\le r_1<\pi$. Work in the variables of the unit torus, $\widetilde A(x)=LA(Lx)$, in which the flat background is $\widetilde A_i^0=\vartheta_iu$ and the time $t=\theta L^2$ becomes $\theta$. Let $D_i=\partial_i+\vartheta_i\ad_u$ be the covariant derivative of the background, acting on $\su$-valued one-forms $a=(a_1,a_2,a_3)$ on $\mathbb T_1^3$, and consider the quadratic form
+\[
+ \frac1{2\gamma}\int_{\mathbb T_1^3}\sum_{i<j}\abs{D_ia_j-D_ja_i}^2\,dx.
+\]
+Its kernel $\mathcal K$ consists of the covariant gradients $D\phi$ and the constant one-forms with values in $\R u$. The form is positive definite on the quotient by $\mathcal K$. Let $a$ be the centered Gaussian field with distributional values on this quotient, realized on the $L^2$-orthogonal complement of $\mathcal K$, whose covariance is $\gamma$ times the inverse of the positive operator associated with $\int_{\mathbb T_1^3}\sum_{i<j}\abs{D_ia_j-D_ja_i}^2\,dx$ on this complement; it is constructed from its Fourier coefficients in Step 2 of the proof. Let $\mathcal L$ be the derivative at $\widetilde A^0$ of the map that sends a connection to the logarithms of the holonomies of its Yang--Mills heat flow at time $\theta$ around the three coordinate cycles based at $0$, followed by the orthogonal projection onto $\NormalFiber y$. Then $\mathcal L$ vanishes on $\mathcal K$, and the covariance of $\mathcal L(a)$ is $\gamma\Sigma_\theta(y)$, where $\Pi_{\bm\vartheta}=I-\bm\vartheta\bm\vartheta^{\mathsf T}/\abs{\bm\vartheta}^2$ and
+\begin{gather*}
+ k_m=2\pi m+\bm\vartheta,\qquad\lambda_m=\abs{k_m}^2,\qquad R_i(m,\bm\vartheta)=\begin{cases}1,&m_i=0,\\ \vartheta_i/(2\pi m_i+\vartheta_i),&m_i\ne0,\end{cases}\\
+ d_i=\sum_{m\in\Z^3}\frac{e^{-2\theta\lambda_m}}{\lambda_m}R_i(m,\bm\vartheta)^2,\qquad D=\operatorname{diag}(d_1,d_2,d_3),\qquad\Sigma_\theta(y)=(\Pi_{\bm\vartheta}D\Pi_{\bm\vartheta})|_{\bm\vartheta^\perp}\otimes I_{u^\perp}.
+\end{gather*}
+Here $\NormalFiber y$ is identified with $\bm\vartheta^\perp\otimes u^\perp$, and these formulas include the cases in which some coordinates of $\bm\vartheta$ vanish. Moreover, the following hold.
+\begin{enumerate}
+\item On the patch, $cI_4\le\Sigma_\theta\le CI_4$, and $\Sigma_\theta$ and its inverse are smooth, covariant under color rotations, and invariant under $(\bm\vartheta,u)\mapsto(-\bm\vartheta,-u)$. The inverse is
+\[
+ \Bigl[D^{-1}-\frac{D^{-1}\bm\vartheta\bm\vartheta^{\mathsf T}D^{-1}}{\bm\vartheta^{\mathsf T}D^{-1}\bm\vartheta}\Bigr]\Big|_{\bm\vartheta^\perp}\otimes I_{u^\perp}.
+\]
+The constant charged mode $m=0$ alone contributes $e^{-2\theta\abs{\bm\vartheta}^2}\abs{\bm\vartheta}^{-2}I_4$.
+\item Before the flow is applied, the derivative of the cycle logarithms is
+\[
+ T_ia=J_i^{-1}\int_0^1e^{v\vartheta_i\ad_u}a_i(ve_i)\,dv,\qquad J_i=\int_0^1e^{v\vartheta_i\ad_u}\,dv,
+\]
+where $J_i^{-1}$ is the differential of the logarithm. Its normal projection annihilates covariant gradients and the neutral color $\R u$, and the linearized flow multiplies the charged transverse Fourier mode $m$ by $e^{-\theta\lambda_m}$.
+\item For $N\ge4$ let $\mathcal B_N$ be the set of centered representatives of $\Z^3/N\Z^3$, and set
+\[
+ \delta_i^N=N\bigl(e^{i(2\pi m_i+\vartheta_i)/N}-1\bigr),\qquad\lambda_m^N=\sum_i\abs{\delta_i^N}^2,\qquad R_i^N=i\vartheta_i/\delta_i^N,
+\]
+with $R_i^N=1$ if $m_i=\vartheta_i=0$ and $R_i^N=0$ if $\vartheta_i=0\ne m_i$. On the lattice $\Lat N$ of mesh $1/N$ in $\mathbb T_1^3$, consider the background links $e^{\vartheta_iu/N}$, the Gaussian measure defined by the quadratic part of the Wilson exponent $(4N/\gamma)\sum_pq(U_p)$ on the quotient by its kernel, and the derivative of the cycle logarithms after the Wilson flow at lattice time $4\theta N^2$, projected onto $\NormalFiber y$. The covariance of this derivative, divided by $\gamma$, is exactly
+\[
+ \Sigma_\theta^N(y)=\Bigl(\Pi_{\bm\vartheta}\operatorname{diag}\Bigl(\sum_{m\in\mathcal B_N}\frac{e^{-2\theta\lambda_m^N}}{\lambda_m^N}\abs{R_i^N}^2\Bigr)\Pi_{\bm\vartheta}\Bigr)\Big|_{\bm\vartheta^\perp}\otimes I_{u^\perp},
+\]
+and $\sup_y\norm{\Sigma_\theta^N(y)-\Sigma_\theta(y)}\le CN^{-2}$.
+\item As $\varrho=\abs{\bm\vartheta}\downarrow0$, with $\varrho<r_1<\pi$,
+\[
+ \Sigma_\theta(y)=\varrho^{-2}I_{\NormalFiber y}+O_\theta(1),\qquad\varrho^2\Sigma_\theta(y)\to I_{\NormalFiber y},
+\]
+uniformly in the directions of $\bm\vartheta$ and $u$.
+\end{enumerate}
+The constants, and the bounds for any fixed number of derivatives on the patch, depend on $r_0$, $r_1$, $\theta$, the order of the derivatives, and the margins of the charts, but not on $N$, on $\gamma$, or on any depth. The bounds on the patch are not uniform as $\abs{\bm\vartheta}\to0$.
+\end{theorem}
+
+The positive time is needed: for $\theta=0$ the series defining $d_i$ diverges logarithmically, since $R_i=1$ on the plane $m_i=0$. Part (4) is a statement about the explicit matrix $\Sigma_\theta$; it is used in \cref{ch32:chapter} only for a comparison measure.
+
+\begin{proof}
+The proof follows the three ingredients described above: Steps 1 and 2 construct the Gaussian field, Steps 3--5 compute the response, and Step 6 performs the projection. Steps 7--10 prove the bounds, the lattice formula, the comparison with the continuum, and the central asymptotics.
+
+\paragraph{Step 1: normalization.}
+The map $\widetilde A(x)=LA(Lx)$ sends the flat connection in physical units to $\widetilde A_i^0=\vartheta_iu$ and the time $t=\theta L^2$ to $\theta$. Since the curvature is multiplied by $L^2$, the volume by $L^{-3}$, and $g_3^2L=\gamma$, the quadratic part of the exponent $E_L/(2g_3^2)$ becomes exactly the form in the statement.
+
+\paragraph{Step 2: the Gaussian field.}
+We fix an oriented orthonormal basis of $u^\perp$ in which $v\mapsto u\times v$ is multiplication by $i$, and regard the two real charged colors as one complex color. On the Fourier mode $e^{2\pi im\cdot x}$, the operator $D_i$ acts on charged fields as multiplication by $ik_{m,i}$, and the quadratic form on that mode is
+\begin{equation}\label{ch27:eq:charged-quadratic}
+ \sum_{i<j}\abs{k_{m,i}a_j-k_{m,j}a_i}^2=\lambda_m\abs a^2-\abs{k_m^{\mathsf T}a}^2.
+\end{equation}
+Since $\abs{\bm\vartheta}\ge r_0$ and $r_1<\pi$,
+\[
+ \abs{k_0}\ge r_0,\qquad\abs{k_m}\ge2\pi\abs m-r_1\quad(m\ne0),
+\]
+so $k_m\ne0$ for every $m$. By \eqref{ch27:eq:charged-quadratic} the charged kernel consists of the multiples of $k_m$, which are the charged covariant gradients. In neutral color the form at mode $m$ is $\abs{2\pi m}^2\abs a^2-\abs{2\pi m\cdot a}^2$, whose kernel consists of gradients for $m\ne0$ and of all constants for $m=0$. This proves the description of $\mathcal K$. The form is positive definite on the quotient by $\mathcal K$. We realize the quotient on the $L^2$-orthogonal complement of $\mathcal K$, namely the covariantly transverse one-forms, $\sum_jD_ja_j=0$, that are orthogonal to the constant neutral one-forms. We show in Step 4 that $\mathcal L$ vanishes on $\mathcal K$. Since the form vanishes on $\mathcal K$ as well, the projection along $\mathcal K$ identifies any two complements isometrically for the form and does not change $\mathcal L$. In particular, the law of $\mathcal L(a)$ does not depend on the choice of the complement. On the chosen complement we have $k_m^{\mathsf T}a=0$ at each charged mode, and the covariance divided by $\gamma$ is
+\begin{equation}\label{ch27:eq:charged-covariance}
+ \lambda_m^{-1}P(k_m),\qquad P(k)=I-kk^{\mathsf T}/\abs k^2.
+\end{equation}
+This follows by diagonalizing the finite-dimensional form \eqref{ch27:eq:charged-quadratic} and using $\int e^{-x^2/(2\sigma^2)}e^{i\tau x}\,dx=e^{-\sigma^2\tau^2/2}\int e^{-x^2/(2\sigma^2)}\,dx$. We construct all the Fourier Gaussians in this way and take their sum as a distribution: for every $s>1/2$ the expected squared norm in the Sobolev space $H^{-s}$ is finite, since $\sum_{m\ne0}\abs m^{-2-2s}<\infty$. Since $\theta>0$, every functional considered below is an absolutely summable Gaussian series.
+
+The complex notation does not double the covariance. We regard the complex Hilbert space of charged fields as a real Hilbert space with inner product $\operatorname{Re}\int a^*b$. For each orthonormal complex Fourier vector $e$, the pair $e,ie$ is real orthonormal, and a precision eigenvalue $\lambda$ assigns the variance $\gamma/\lambda$ to each of the two real coefficients. The realification of a Hermitian covariance $C$ is therefore
+\[
+ \begin{pmatrix}\operatorname{Re}C&-\operatorname{Im}C\\ \operatorname{Im}C&\operatorname{Re}C\end{pmatrix},
+\]
+with no extra scalar factor. When $C$ is real, this is $C\otimes I_{u^\perp}$ in spatial and color notation.
+
+\paragraph{Step 3: the derivative of the cycle logarithms.}
+Let $Y_i=\vartheta_iu$. With the convention $H'(v)=H(v)A(\ell(v))\dot\ell(v)$ of \cref{ch01:def:orbit-space}, the transport along the $i$th cycle at the background is $e^{vY_i}$ at the parameter $v$. Differentiating the transport equation, we find the right-trivialized derivative
+\[
+ \delta H_i\,H_i^{-1}=\int_0^1e^{v\vartheta_i\ad_u}a_i(ve_i)\,dv.
+\]
+For the exponential map the corresponding derivative is $\delta(e^{Y_i})e^{-Y_i}=J_i\,\delta Y_i$ with $J_i=\int_0^1e^{v\vartheta_i\ad_u}\,dv$. In neutral color $J_i=1$, and in charged color $J_i=(e^{i\vartheta_i}-1)/(i\vartheta_i)$, with value one at $\vartheta_i=0$. It is invertible on the whole patch because $\abs{\vartheta_i}<\pi$. The differential of the logarithm is therefore $J_i^{-1}$, which proves the formula for $T_i$ in part (2). On the charged Fourier mode $m$ this derivative is the scalar
+\[
+ \frac{\int_0^1e^{i(2\pi m_i+\vartheta_i)v}\,dv}{\int_0^1e^{i\vartheta_iv}\,dv}.
+\]
+For $\vartheta_i\ne0$, canceling $e^{i\vartheta_i}-1$ gives $\vartheta_i/(2\pi m_i+\vartheta_i)$. If $m_i=0$, the two integrals are equal, also when $\vartheta_i=0$. If $\vartheta_i=0$ and $m_i\ne0$, the numerator vanishes and the denominator is one. These are exactly the cases in the definition of $R_i$.
+
+\paragraph{Step 4: the normal projection.}
+Let $\phi$ be a smooth periodic gauge parameter. Integrating the derivative of $v\mapsto e^{v\vartheta_i\ad_u}\phi(ve_i)$ over $[0,1]$ and using periodicity, we find
+\[
+ T_i(D\phi)=\vartheta_i\ad_u\phi(0).
+\]
+As a triple indexed by $i$, this is $\bm\vartheta$ tensored with a vector of $u^\perp$, an infinitesimal simultaneous conjugation at the root, and the normal projection $\Pi_{\bm\vartheta}\otimes(I-uu^{\mathsf T})$ annihilates it. Every response in neutral color is parallel to $u$ and is annihilated as well. Hence the constant neutral one-forms and all other flat tangent directions contribute zero, $\mathcal L$ vanishes on $\mathcal K$, and the normal response is well defined on the quotient, independently of the representative used to compute it.
+
+\paragraph{Step 5: the linearized flow.}
+At a flat background $[D_i,D_j]=0$, and the linearization of the Yang--Mills heat flow $\partial_tA_i=\sum_jD_jF_{ji}$ is
+\[
+ \partial_\theta a_i=\sum_jD_j(D_ja_i-D_ia_j).
+\]
+Covariant gradients are stationary for this equation. On covariantly transverse fields, $\sum_jD_ja_j=0$, it reads $\partial_\theta a=\sum_jD_j^2a$. The Fourier multiplier on charged modes is $-\lambda_m$, and the linearized flow multiplies the mode $m$ by $e^{-\theta\lambda_m}$. A linearized gauge damping term can only change a covariant gradient, whose normal logarithmic response vanishes by Step 4. This derives the response of the Yang--Mills heat flow itself on the quotient, rather than replacing it by the scalar heat flow at a charged background.
+
+\paragraph{Step 6: the covariance.}
+Let $R_m=\operatorname{diag}(R_i(m,\bm\vartheta))$. Applying the response of Steps 3--5 to \eqref{ch27:eq:charged-covariance}, we find the spatial covariance
+\[
+ \sum_m\frac{e^{-2\theta\lambda_m}}{\lambda_m}\bigl(\Pi_{\bm\vartheta}R_mP(k_m)R_m\Pi_{\bm\vartheta}\bigr)\big|_{\bm\vartheta^\perp}.
+\]
+For each $i$, including every case in which a coordinate vanishes, $R_ik_{m,i}=\vartheta_i$. Then $R_mk_m=\bm\vartheta$, and the longitudinal term $R_mk_mk_m^{\mathsf T}R_m/\lambda_m$ is annihilated exactly by $\Pi_{\bm\vartheta}$. What remains is $\Pi_{\bm\vartheta}D\Pi_{\bm\vartheta}$ restricted to $\bm\vartheta^\perp$. Since this matrix is real, the realification of Step 2 gives the factor $I_{u^\perp}$. This proves the formula for $\Sigma_\theta$.
+
+\paragraph{Step 7: bounds, inverse, and invariance.}
+Every $R_i$ is bounded on the patch. For any fixed number of derivatives in $\bm\vartheta$, the terms of the series are bounded by $C(1+\abs m)^qe^{-c\theta\abs m^2}$, with constants depending on the order, on $r_0$ and $r_1$, and on $\theta$. The sum of these bounds is finite, as one sees by separating the three coordinates and comparing $\sum_{j\in\Z}(1+\abs j)^qe^{-c\theta j^2}$ with a finite initial segment and a convergent integral. Termwise differentiation is therefore valid. The term $m=0$ has $R_i=1$ and contributes
+\[
+ e^{-2\theta\abs{\bm\vartheta}^2}\abs{\bm\vartheta}^{-2}I_4.
+\]
+This term gives a positive lower bound on the compact patch, and the summable series gives an upper bound; in particular, all $d_i$ are positive. To invert the form, let $b,v\perp\bm\vartheta$ with $\Pi_{\bm\vartheta}Dv=b$. Then $Dv=b+\alpha\bm\vartheta$ for a scalar $\alpha$, and the condition $\bm\vartheta^{\mathsf T}v=0$ gives
+\[
+ \alpha=-\frac{\bm\vartheta^{\mathsf T}D^{-1}b}{\bm\vartheta^{\mathsf T}D^{-1}\bm\vartheta}.
+\]
+This proves the formula for the inverse. Its denominator is positive, and the bounds just proved give smoothness and the two-sided bound. Color rotations act by the corresponding orthogonal maps of $u^\perp$. The reversal $(\bm\vartheta,u)\mapsto(-\bm\vartheta,-u)$ is implemented in the series by $m\mapsto-m$ and complex conjugation of the charged color, since $R_i(m,-\bm\vartheta)=R_i(-m,\bm\vartheta)$ and $\lambda_m(-\bm\vartheta)=\lambda_{-m}(\bm\vartheta)$. Thus the covariance and its inverse have the asserted invariance. This proves part (1).
+
+\paragraph{Step 8: the lattice covariance.}
+We compute the lattice covariance directly, without using the continuum. At the background links $U_i^0=e^{\vartheta_iu/N}$, we write a perturbation as $e^{a_i(x)/N}U_i^0$, where $x$ is now an integer lattice coordinate. Differentiating the four factors of the plaquette variable, we find, in charged color,
+\[
+ \delta\Log U_{p_{ij}(x)}=N^{-1}\bigl\{e^{i\vartheta_i/N}a_j(x+e_i)-a_j(x)-e^{i\vartheta_j/N}a_i(x+e_j)+a_i(x)\bigr\}.
+\]
+On the Fourier mode $m$ this is $N^{-2}(\delta_i^Na_j-\delta_j^Na_i)$. The coefficient $4N/\gamma$ of the Wilson exponent and $q(e^v)=\abs v^2/8+O(\abs v^4)$ give the quadratic exponent
+\begin{equation}\label{ch27:eq:lattice-maxwell-exponent}
+ \frac1{2\gamma N^3}\sum_x\sum_{i<j}\abs{\delta_i^Na_j-\delta_j^Na_i}^2.
+\end{equation}
+Fourier orthonormality uses the normalized volume $N^{-3}\sum_x$. With $\delta=(\delta_i^N)_i$, the corresponding transverse projection is $P_\delta=I-\delta\delta^*/\lambda_m^N$, and the covariance divided by $\gamma$ is $(\lambda_m^N)^{-1}P_\delta$. We treat the quotient by the kernel and its independence of the complement as in Step 2, using the description of the kernel in the proof of \cref{ch27:lem:regular-flat-tube}.
+
+We check the flow factor in the same coordinates. In the Lie-algebra coordinates $b=a/N$ of the links, the quadratic part of $\sum_pq(U_p)$ is $\norm{d_Ub}^2/8$, and its Hessian is $d_U^*d_U/4$. Since the left group coordinates are orthonormal for the group metric at the critical flat configuration, the linearized negative gradient equation is $\partial_sb=-d_U^*d_Ub/4$. On the transverse mode $m$ its eigenvalue is $-\lambda_m^N/(4N^2)$, and at the lattice time $s=4\theta N^2$ the multiplier is exactly $e^{-\theta\lambda_m^N}$.
+
+The derivative of the cycle product, including the differential of its final logarithm, is
+\[
+ J_i^{-1}\frac1N\sum_{l=0}^{N-1}e^{i(2\pi m_i+\vartheta_i)l/N}.
+\]
+For $\vartheta_i\ne0$, the formula for a geometric sum and the formula for $J_i$ reduce this to
+\[
+ \frac{i\vartheta_i}{N\bigl(e^{i(2\pi m_i+\vartheta_i)/N}-1\bigr)}=R_i^N.
+\]
+For $\vartheta_i=0$ the sum is one if $m_i=0$ and zero otherwise, which are the prescribed values. We conclude that, with $R_m^N=\operatorname{diag}(R_i^N)$,
+\[
+ R_m^N\delta=i\bm\vartheta,\qquad\Pi_{\bm\vartheta}R_m^NP_\delta(R_m^N)^*\Pi_{\bm\vartheta}=\Pi_{\bm\vartheta}\operatorname{diag}(\abs{R_i^N}^2)\Pi_{\bm\vartheta}.
+\]
+This equality uses the complex phases of $R_i^N$ before the longitudinal part cancels; the phases can be discarded only afterwards. Summing over the modes in the real covariance, as in Step 2, we obtain the formula for $\Sigma_\theta^N$.
+
+\paragraph{Step 9: comparison with the continuum.}
+For centered representatives and $N\ge4$ we have $\abs{k_{m,i}/(2N)}\le\pi/2+r_1/8<5\pi/8$. On this interval the function $\sin x/x$ has a positive minimum, and Taylor's formula gives $\abs{4\sin^2(x/2)-x^2}\le C\abs x^4$. Since $\lambda_m^N=\sum_i4N^2\sin^2(k_{m,i}/(2N))$, we obtain
+\begin{equation}\label{ch27:eq:lattice-sine-bounds}
+ c\abs{k_m}^2\le\lambda_m^N\le\abs{k_m}^2,\qquad\abs{\lambda_m^N-\abs{k_m}^2}\le CN^{-2}\abs{k_m}^4.
+\end{equation}
+Also
+\[
+ \abs{R_i^N}^2=R_i^2\Bigl(\frac{k_{m,i}/(2N)}{\sin(k_{m,i}/(2N))}\Bigr)^2,\qquad\bigl\lvert\abs{R_i^N}^2-R_i^2\bigr\rvert\le CN^{-2}R_i^2k_{m,i}^2\le CN^{-2},
+\]
+where the continuous extensions at the vanishing cases are understood. In particular $R_i^2k_{m,i}^2=\vartheta_i^2$, also when $m_i=0$, and all these multipliers are bounded. For $F(x)=e^{-2\theta x}/x$ we have $\abs{F'(x)}=e^{-2\theta x}(2\theta/x+x^{-2})$. By the mean value theorem and \eqref{ch27:eq:lattice-sine-bounds}, the difference of corresponding summands is at most
+\[
+ CN^{-2}e^{-c\theta\abs{k_m}^2}\bigl(1+\abs{k_m}^2+\abs{k_m}^{-2}\bigr),
+\]
+which is summable uniformly on the patch. The continuum modes not in $\mathcal B_N$ satisfy $\abs{m_i}\ge N/2$ for some $i$, and their Gaussian tail is at most $Ce^{-c'\theta N^2}\le C_\theta N^{-2}$. Summing, we obtain the uniform bound $CN^{-2}$ in part (3). Fixed derivatives in the parameters obey the same bound. Indeed, differentiating the Taylor remainders in the sine expressions leaves a factor $N^{-2}$ times a fixed polynomial in $\abs{k_m}$. All inverse powers of $\lambda_m^N$ and $\lambda_m$ are bounded by the gap on the patch, and the differentiated exponentials add only polynomial factors. The same summable majorant applies, with constants depending also on the order, and smooth local normal frames introduce only constants depending on the margins of the patch.
+
+\paragraph{Step 10: the central asymptotics.}
+Let $\varrho=\abs{\bm\vartheta}\downarrow0$ with $\varrho<r_1<\pi$. The nonzero modes still satisfy $\abs{k_m}\ge2\pi\abs m-r_1$, and their multipliers $R_i$ are bounded uniformly in all directions, since $\abs{2\pi m_i+\vartheta_i}\ge\pi$ for $m_i\ne0$. Their total contribution is $O_\theta(1)$. The zero mode contributes
+\[
+ e^{-2\theta\varrho^2}\varrho^{-2}I_4=\varrho^{-2}I_4+O_\theta(1).
+\]
+Since the projection onto the normal space has norm one, this proves both assertions of part (4), uniformly in the directions. It also shows why the bounds on the regular patch cannot be extended uniformly to the central point.
+\end{proof}
+
+\section{The stopped measure near regular flat configurations}\label{ch27:sec:terminal}
+
+We now combine the preceding results. The first part of the next proposition is the Laplace approximation of the stopped measure transverse to a compact patch of regular flat configurations. The second part is an exact decomposition of the covariance $\Sigma_\theta^N$ of \cref{ch27:thm:flowed-log-covariance} at the flat reconstruction, obtained by completion of squares for Gaussian measures in the constrained coordinates of \cref{ch09:thm:sequential-density}. In \cref{ch31:chapter} this decomposition identifies the covariance of the Gaussian approximation obtained at finitely many scales with $\Sigma_\theta$.
+
+\begin{proposition}\label{ch27:lem:terminal-gaussian-telescope}
+Consider the stopped measures of \cref{ch27:sec:stopped} at the side $n$, a compact regular patch, and a fixed normal tube over a larger compact regular patch whose closure lies in $D_r$. Assume that $2\pi/n<r_{\mathrm{flat}}$, where $r_{\mathrm{flat}}$ is the radius of \cref{ch11:lem:flat-lifts}, which lies below the fixed margins of all classical, constraint, Haar disintegration, and gauge domains. For a patch of small commuting configurations as in \cref{ch27:lem:local-flat-admission}, the margins of that lemma may be used instead of this condition.
+\begin{enumerate}
+\item There is a finite atlas of normal coordinates $V(y,v)$ over the patch, of normal rank $\mathfrak d_n=6n^3-2=d_n+4$, in which the image of $H_n$ has a smooth positive density $J(y,v)$, and for every integer $d\ge0$
+\begin{gather*}
+ nE_d(V(y,v))=\tfrac12v^{\mathsf T}H_d(y)v+O_n(\abs v^3),\\
+ c_nI\le H_d(y)\le C_nI,\qquad nE_d(V(y,v))\ge c_n\abs v^2.
+\end{gather*}
+Let $\chi$ be a fixed normal cutoff equal to one near $v=0$, let $f$ be a bounded measurable function of $y$ with compact support in the patch, and let $P_y$ be a family of polynomials of a fixed degree with bounded measurable coefficients. Put
+\[
+ z_0=H_d(y)^{1/2}v/\sqrt\gamma,\qquad a_{d,\gamma}(y,v)=e^{-\overline R_{d,\gamma}(V(y,v))}J(y,v).
+\]
+Then for $d=kJ$ and $0<\gamma\le\gamma_0$, with the partition of unity of the atlas understood and the insertion extended by zero outside the charts,
+\begin{align*}
+ &\widehat Z_{n,d,\gamma}\E_{\widehat\nu_{n,d,\gamma}}[f(y)\chi(v)P_y(z_0)]\\
+ &\qquad=(2\pi\gamma)^{\mathfrak d_n/2}\Bigl[\int f(y)\frac{a_{d,\gamma}(y,0)}{\sqrt{\det H_d(y)}}\E P_y(G_{\mathfrak d_n})\,d\mathrm{vol}(y)+O_{n,f,P}(\sqrt\gamma)\Bigr].
+\end{align*}
+The error is uniform in $d$ and $\gamma$. Given $y$, the moments of $z_0$ under the normal conditional law, normalized by its own normal integral, differ from those of $G_{\mathfrak d_n}$ by $O_n(\sqrt\gamma)$, and all fixed moments of $z_0$ are bounded. The tangential density may vary with $\gamma$ within its bounds, without converging. Here $\widehat Z_{n,d,\gamma}$ is the partition function of \cref{ch27:thm:sharp-normalizer}. For every nonnegative $f$ as above with $\int f\,d\mathrm{vol}>0$ there exists $c_{n,f}>0$ such that $\E_{\widehat\nu_{n,d,\gamma}}[f(y)\chi(v)]\ge c_{n,f}$ for all depths $d=kJ$ and all sufficiently small $\gamma$.
+\item Suppose in addition that the cycle holonomies of the patch have logarithms $y=(\vartheta_iu)_i$ with $0<r_0\le\abs{\bm\vartheta}\le r_1<\pi$, and fix $\theta>0$. Let $K\ge0$, $N=nB^K$, $n_j=nB^j$, $d=JK$, and $H_K^{\mathrm{act}}(y)=D_v^2(nE_{JK})(y,0)$. Consider the reconstruction of a configuration on $\Lat N$ from the stopping field $V$ on $\Lat n$ and the normalized fluctuation variables $w_j=(w_{j,l})_{0\le l<J}$ of the RG steps $j=1,\dots,K$, given by the triangular coordinates
+\[
+ z_{j,l}=z_{j,l}^*+g_{j,l}K_{j,l}^{-1/2}w_{j,l}
+\]
+of \cref{ch09:thm:sequential-density}, computed in smooth local charts in which the expressions in different gauges agree, and satisfying $T_M^{JK}U=V$. At the flat reconstruction of the flat stopping field $V(y,0)$, where all $w_j$ vanish, differentiate the composition of this reconstruction with the map that sends a configuration on $\Lat N$ to the logarithms of the cycle holonomies, based at the root, of its Wilson flow at physical time $\theta L^2$, followed by the orthogonal projection onto $\NormalFiber y$. Normalize the normal variable of the stopping field by $v=\sqrt\gamma(H_K^{\mathrm{act}})^{-1/2}z_0$. After division by $\sqrt\gamma$, denote the resulting linear maps by $A_{0,K}(y):\R^{\mathfrak d_n}\to\NormalFiber y$ and $A_{j,K}(y):\R^{D_j}\to\NormalFiber y$, $1\le j\le K$, where $D_j=6(n_j^3-n_{j-1}^3)$ is the number of real normalized fluctuation variables of the $j$th RG step. Then for every finite $K$,
+\[
+ A_{0,K}A_{0,K}^{\mathsf T}+\sum_{j=1}^KA_{j,K}A_{j,K}^{\mathsf T}=\Sigma_\theta^N(y),\qquad\norm{A_{0,K}}_{\mathrm{HS}}^2+\sum_{j=1}^K\norm{A_{j,K}}_{\mathrm{HS}}^2\le C.
+\]
+Each $A_{j,K}$ includes the factors $g_{j,l}/\sqrt\gamma$, the inverse square roots of the constrained Hessians at the flat background, and the derivative of the composition with all finer reconstruction steps. If $T_K$ denotes the response of the normal variable of the stopping field before normalization and $H_K^E=D_v^2E_{JK}(y,0)$ in the same normal coordinates, then
+\[
+ H_K^{\mathrm{act}}=nH_K^E,\qquad A_{0,K}A_{0,K}^{\mathsf T}=n^{-1}T_K(H_K^E)^{-1}T_K^{\mathsf T}.
+\]
+The same identities hold for the reconstruction maps $\RepMap$ of \cref{ch12:thm:replacement-family}.
+\end{enumerate}
+The constants depend on $n$, $L$, $\theta$, $M$, $J$, $\Theta$, the patch, the larger tube, the bounds for the polynomials, and the fixed analytic domains, with the dependence described in item~(6) of \cref{ch01:conv:constants}. They are independent of $K$, of the depth, and of $\gamma\in(0,\gamma_0]$.
+\end{proposition}
+
+The identities in part (2) concern the Gaussian quadratic model at the flat reconstruction; they do not assert that the normalized fluctuation variables are independent under the interacting measure. The normal responses of the stopping field, including those of the constant charged modes, are part of the identity: for $K=0$ the block $A_{0,0}$ gives the whole covariance.
+
+\begin{proof}[Proof of part (1) of \cref{ch27:lem:terminal-gaussian-telescope}]
+We first check that the flat configurations and their refinements lie in the domains of the construction, separately from the normal integral. Then we apply \cref{ch27:lem:uniform-tube-laplace} in the normal coordinates of \cref{ch27:lem:regular-flat-tube}.
+
+\paragraph{Step 1: flat refinements.}
+First suppose that $2\pi/n<r_{\mathrm{flat}}$. Fix the side $n$ before the coupling, and let
+\begin{equation}\label{ch27:eq:whole-flat-margin}
+ \delta_{\mathrm{flat}}=r_{\mathrm{flat}}-2\pi/n>0.
+\end{equation}
+The radius $r_{\mathrm{flat}}$ lies below all the classical, constraint, Haar disintegration, and gauge margins of one RG step, with the strict margin required in \cref{ch11:lem:flat-lifts}. These margins include the fixed conversions for the words of the block axial gauge. A flat triple of cycle holonomies has commuting logarithms $H_i$ with $\abs{H_i}\le2\pi$. At every averaging step with output side $m\ge n$, its constant representative and its refinement at the next finer side have link logarithms $H_i/m$ and $H_i/(Mm)$, and
+\[
+ \max_i\abs{H_i}/m\le2\pi/n=r_{\mathrm{flat}}-\delta_{\mathrm{flat}}.
+\]
+By the computation for commuting products leading to \eqref{ch27:eq:local-flat-margin}, the representative in the block axial gauge is $U_0(c)$, and the free logarithmic coordinates and the logarithms on the eliminated edges vanish. The conclusion of \cref{ch11:lem:flat-lifts} for all flat configurations, with smallest side $n$, verifies every intermediate classical, constraint, based gauge, and small-field condition, for every $K$. The classical action of the free coordinates, which is nonnegative, vanishes at this point. By the uniqueness of the conditional constrained minimizer in the same conclusion, the point is $z_i^*(c)=0$, and each normalized fluctuation variable vanishes. This verifies the hypothesis of part (2) at all the depths involved. The margins and the radii of the fluctuation cutoff domains are fixed by the parameters. No neighborhood of the flat set depending on the cutoffs of the small-field event is used as a normal tube. Under the alternative local hypothesis, we apply \cref{ch27:lem:local-flat-admission} on a slightly larger compact patch satisfying its strict inequality. It gives the same conclusions at every side $m\ge n$ and every depth, and its positive domain margins replace $\delta_{\mathrm{flat}}$ below.
+
+\paragraph{Step 2: phase and amplitude.}
+The finite atlas and the estimates for the phase are those of \cref{ch27:lem:regular-flat-tube}, applied on the larger patch and then shrunk. The normal rank is $\mathfrak d_n=6n^3+3-5=6n^3-2=d_n+4$. The vanishing of $E_d$ on the flat set, the lower bound (P1), and the uniform bounds on third derivatives were verified there. The centered effective interaction of \cref{ch11:thm:terminal-anchor} is bounded on $D_r$ by (P3). For its derivatives, we take the normal atlas on the larger tangential patch with a larger normal radius, and finitely many relatively compact parameter subcharts $W_l\Subset W_l^+$ covering the working tube. The maps $\Psi_l(y,v)=V(y,v)$ and their based lifts are smooth on $W_l^+$, as constructed in \cref{ch27:lem:regular-flat-tube}, and extend past $\overline W_l$. Let $\mathcal K$ be the compact union of the images of the closures in the larger tube; it lies in $D_r$ by hypothesis and does not depend on $d$ or $\gamma$. On these compact subcharts we apply \eqref{ch27:eq:residual-chart-transfer}. Finitely many fixed based gauge transformations map neighborhoods of $\mathcal K$ into $B_{r_1}$, with $r<r_1<\rho$ and the fixed margin $\eta$. We refine the subcharts so that each closure lies in one of the larger neighborhoods in the proof of \cref{ch27:lem:residual-derivatives}. Each gauge transformation acts smoothly on all of $\Conf n$. The chart composed with it extends to a neighborhood of the closure of the subchart, and its derivatives of every fixed order are bounded on these finitely many compact closures, independently of $d$ and $\gamma$. These are the conditions on subcharts in \cref{ch11:thm:terminal-anchor}, at each chart of the atlas. The chain rule then gives $\abs{D_{y,v}\overline R_{d,\gamma}(V(y,v))}\le C_nE_*$ on each compact parameter closure, uniformly in the depth and the coupling. The amplitude
+\[
+ a_{d,\gamma}(y,v)=e^{-\overline R_{d,\gamma}(V(y,v))}J(y,v)
+\]
+therefore has fixed positive upper and lower bounds and a fixed Lipschitz bound in $v$; it includes the Haar density of the based quotient. Since all insertions in the charts are supported in $D_r$, the indicator of $D_r$ equals one where these coordinates are used. On each normal fiber, with $B_n=\sup_{D_r}\abs{\overline R_{d,\gamma}}$, the mean value theorem gives
+\[
+ \abs{a_{d,\gamma}(y,v)-a_{d,\gamma}(y,0)}\le e^{B_n}\bigl(\norm J_\infty C_nE_*+\norm{D_vJ}_\infty\bigr)\abs v.
+\]
+This is the Lipschitz bound in the normal direction required by \cref{ch27:lem:uniform-tube-laplace}; a bound on the values of the effective interaction alone would not imply it.
+
+\paragraph{Step 3: the Laplace approximation.}
+We apply \cref{ch27:lem:uniform-tube-laplace} with $\delta=\gamma$, the phase $nE_d$, the Hessian $L=H_d$, and the weight $h$ given by $f$ times the partition of unity of the atlas; the formula for general $f$ follows by splitting $f$ into its positive and negative parts. The phase, the amplitude, and the Hessian are smooth in each real normal trivialization, hence jointly Borel, and we choose the normal cutoff smooth as well. The tests and the polynomial coefficients are measurable, as required in that lemma. We decrease the constant $c_0$ of that lemma and increase $C_0$ to include the bounds for the normal Hessian, the lower bound for the phase, the bounds for the amplitude, and the Lipschitz constant just verified. No matrix $L_\infty$ is substituted in this application. We obtain
+\[
+ (2\pi\gamma)^{\mathfrak d_n/2}\Bigl[\int f(y)\frac{a_{d,\gamma}(y,0)}{\sqrt{\det H_d(y)}}\E P_y(G_{\mathfrak d_n})\,d\mathrm{vol}(y)+O_{n,f,P}(\sqrt\gamma)\Bigr].
+\]
+Since the exponent of \eqref{ch27:eq:stopped-density} is $E_d/g^2=nE_d/\gamma$, the left side of \eqref{ch27:eq:global-laplace} is exactly the integral of the insertion extended by zero against the unnormalized stopped density, namely $\widehat Z_{n,d,\gamma}\E_{\widehat\nu_{n,d,\gamma}}[f(y)\chi(v)P_y(z_0)]$. This proves the displayed identity, with the partition function of \cref{ch27:thm:sharp-normalizer}. The statements about conditional moments and bounded moments are part (1) of \cref{ch27:lem:uniform-tube-laplace}. If the conditional law is taken on the whole tube instead of with the cutoff, the additional part lies outside a fixed smaller normal ball. By \cref{ch27:cor:weighted-tube-density} and the bounds on the whole tube verified below, it is exponentially small, and the conditional statements are unchanged.
+
+\paragraph{Step 4: lower bounds for tangential tests.}
+Let $f\ge0$ with $\int f\,d\mathrm{vol}>0$. By the case $P=1$ of the formula, with the error $C\sqrt\gamma\int f$, the numerator is at least $c_{n,f}\gamma^{\mathfrak d_n/2}$ for all sufficiently small $\gamma$. The upper bound of \cref{ch27:thm:sharp-normalizer} is $\widehat Z_{n,d,\gamma}\le C_ng^{\mathfrak d_n}=C_nn^{-\mathfrak d_n/2}\gamma^{\mathfrak d_n/2}$, with $n$ fixed. Dividing, we obtain the uniform positive lower bound for the expectation. For an event expressed by a bounded insertion, dividing this expectation by the supremum of the insertion gives a lower bound for the probability as well. The tangential amplitude may depend on $\gamma$ arbitrarily within its uniform bounds.
+\end{proof}
+
+\begin{proof}[Proof of the last assertion of \cref{ch27:cor:weighted-tube-density}]
+We verify the additional hypotheses on the whole tube in the setting of part (1) of \cref{ch27:lem:terminal-gaussian-telescope}, with $d=JK$. On the fixed working tube, Step 2 and \cref{ch27:lem:regular-flat-tube} give $nE_{JK}(V(y,v))\ge c_n\abs v^2$, the quadratic expansion, and the bounds for the spectrum of $H_K^{\mathrm{act}}$. The amplitude $a_{JK,\gamma}(y,v)=e^{-\overline R_{JK,\gamma}(V(y,v))}J(y,v)$ has uniform positive upper and lower bounds there: the centered effective interaction is bounded on $D_r$, and the Haar density of the based quotient is smooth and positive on the fixed compact subcharts. These bounds are used before the partition of unity of the atlas is absorbed into the tangential weight. Then the normal integral over the whole tube is at least $c_n\gamma^{\mathfrak d_n/2}$, uniformly in $K$ and $y$, and the statements of \cref{ch27:cor:weighted-tube-density} on the whole tube apply with $\delta=\gamma$, $L=H_K^{\mathrm{act}}$, and rank $\mathfrak d_n=6n^3-2$, with constants independent of $K$.
+\end{proof}
+
+\begin{proof}[Proof of part (2) of \cref{ch27:lem:terminal-gaussian-telescope}]
+We first count the variables. Then we expand the classical action to second order along the flat reconstruction, which gives an identity $S_K^{\mathsf T}\mathcal H_NS_K=I$ for the differential $S_K$ of the reconstruction. Finally, we apply the derivative of the observable and \cref{ch27:thm:flowed-log-covariance}.
+
+\paragraph{Step 5: the count of variables.}
+By \cref{ch09:thm:sequential-density}, one averaging step from side $Mm$ to side $m$ has $6((Mm)^3-m^3)$ real free coordinates. Summing over the $J$ averaging steps of the $j$th RG step, from side $n_j$ to side $n_{j-1}$, we find
+\begin{equation}\label{ch27:eq:gaussian-dimension-count}
+ D_j=6(n_j^3-n_{j-1}^3),\qquad\mathfrak d_n+\sum_{j=1}^KD_j=6N^3-2.
+\end{equation}
+These are counts on based quotients. The five flat tangent directions belong to the stopping field, and they are held fixed in the quadratic computation. The right side $6N^3-2$ is the dimension of the based tangent space at side $N$, $6N^3+3$, minus the five-dimensional kernel of the Hessian of the Wilson action at a regular flat configuration (\cref{ch27:lem:regular-flat-tube}).
+
+\paragraph{Step 6: the flat reconstruction.}
+At a flat stopping field, Step 1 gives the flat refinement with vanishing normalized fluctuation variables at every averaging step, with the same based cycle holonomies and zero classical action. This uses \cref{ch11:lem:flat-lifts} or, under the alternative local hypothesis, \cref{ch27:lem:local-flat-admission}. The conditional constrained minimizers are these flat refinements. In particular, the flat zero-fluctuation reconstruction is critical for each classical action, and it is stationary for the Wilson flow on the finest lattice. The fixed domain conditions give smooth constraint coordinates and Haar disintegration densities near this reconstruction. By \cref{ch12:thm:replacement-family}, the reconstruction maps $\RepMap$ preserve the coarse field, the orbit of the minimizer, the free coordinates, the square roots of the constrained Hessians, and the density in these coordinates. Their gauge transformations are smooth on these local charts and equal to the identity at the coarse vertices. No gauge transformation chosen measurably as a function of the configuration is differentiated. At each RG step we use the nested domains $\mathscr D_{\mathrm{in}}\Subset\mathscr D_{\mathrm{mid}}\Subset\mathscr D_{\mathrm{out}}$ of \cref{ch12:thm:replacement-family}. The flat coarse field lies below its margin by the domain margins verified in Step 1, and every free coordinate vanishes. Hence a joint neighborhood of the flat reconstruction lies in $\mathscr D_{\mathrm{in}}$ before the outer domain of holomorphy is used. The fluctuation cutoff domains satisfy \eqref{ch27:eq:common-coupling-gates}, and the reconstruction maps keep these domains, their kernels, and their identities at the coarse vertices. These checks use only the fixed parameters and the integer sides $mM^i$, $m\ge n\ge4$, and no domain depending on the depth.
+
+\paragraph{Step 7: completion of squares.}
+We consider one averaging step with coarse field $c$ and free coordinate $z$, and set
+\[
+ F(c,z)=E_{\mathrm{old}}(b(c,z)),\qquad z=z^*(c)+g_{\mathrm{old}}K(c)^{-1/2}w,\qquad K(c)=D_z^2F(c,z^*(c)),
+\]
+where $E_{\mathrm{old}}$ and $g_{\mathrm{old}}$ are the effective classical action and the coupling on the finer side. The minimizer satisfies $D_zF(c,z^*(c))=0$. By Taylor's formula and the definition of $K(c)$, we have
+\[
+ \frac{F(c,z)}{g_{\mathrm{old}}^2}=\frac{F(c,z^*(c))}{g_{\mathrm{old}}^2}+\tfrac12\abs w^2+U^{\mathrm{cl}}(c,w),\qquad D_w^\alpha U^{\mathrm{cl}}(c,0)=0\quad(\abs\alpha\le2).
+\]
+The exact identity for the classical actions in \cref{ch09:thm:sequential-density} identifies the first term with $E_{\mathrm{new}}(c)/g_{\mathrm{new}}^2$, and these identities compose over the averaging steps. Since the displayed derivatives vanish for every coarse field $c$ in the domain, $U^{\mathrm{cl}}$ has no joint Taylor terms of total degree at most two in the variation of the coarse field and the normalized fluctuation variables at the flat reconstruction. Hence, at the flat reconstruction, the quadratic part of the exponent is exactly
+\begin{equation}\label{ch27:eq:quadratic-telescope}
+ \frac1{2\gamma}\ip v{H_K^{\mathrm{act}}v}+\frac12\sum_{j=1}^K\abs{w_j}^2,\qquad H_K^{\mathrm{act}}=D_v^2(nE_{JK})(y,0),
+\end{equation}
+where we used that the exponent at the stopping side is $E_{JK}/g_n^2=nE_{JK}/\gamma$. Second derivatives of the changes of coordinates do not affect this conclusion. In the second derivative of a composed scalar function, they are multiplied by the first derivative of the function, which vanishes at a flat configuration. Since the dependence of the positive square roots on the background is included in the differential of the coordinates, it creates no missing quadratic cross term. The Haar disintegration factors and the effective interaction remain in the amplitude and are not part of this identity for the classical quadratic form.
+
+\paragraph{Step 8: Gaussian linear algebra.}
+Let $\mathcal H_N$ be the Hessian of $NE_0$ at the finest flat configuration, on the based tangent space modulo its five-dimensional kernel; it is positive definite there by \cref{ch27:lem:regular-flat-tube}. By the count in the proof of that lemma, this quotient is the quotient of the full space of link variations by the kernel of the Hessian, which consists of all covariant gradients and the three constant neutral directions. Thus it is the space on which the lattice covariance of \cref{ch27:thm:flowed-log-covariance}(3) is computed, and the exponent $NE_0/\gamma$ is the Wilson exponent $(4N/\gamma)\sum_pq(U_p)$ used there. As in the statement, $v=\sqrt\gamma(H_K^{\mathrm{act}})^{-1/2}z_0$. The normalized fluctuation variable $w_{j,l}$ of each averaging step enters through the differential $g_{j,l}K_{j,l}^{-1/2}w_{j,l}$ of the free coordinate. Composing with all finer reconstruction steps, we obtain the differential of the configuration on the finest lattice. After extracting $\sqrt\gamma$, we denote by $S_K$ this linear map from $(z_0,w_1,\dots,w_K)$ to the quotient on the finest lattice. It does not depend on $\gamma$: the remaining coupling factors are $g_{j,l}/\sqrt\gamma$, and the classical maps and Hessians do not depend on the coupling. Since the quadratic part of $NE_0/\gamma$ at the finest flat configuration, composed with the reconstruction, is \eqref{ch27:eq:quadratic-telescope}, we have
+\begin{equation}\label{ch27:eq:quadratic-isometry}
+ S_K^{\mathsf T}\mathcal H_NS_K=I.
+\end{equation}
+This makes $S_K$ injective. Since its domain and codomain have the same dimension by \eqref{ch27:eq:gaussian-dimension-count}, $S_K$ is invertible, and
+\[
+ S_KS_K^{\mathsf T}=\mathcal H_N^{-1}.
+\]
+Equivalently, consider independent standard real Gaussian variables in the normal coordinates of the stopping field and in all normalized fluctuation variables. In the auxiliary quadratic model, the differential of the reconstruction sends them to the Gaussian field on the finest lattice with covariance $\gamma\mathcal H_N^{-1}$.
+
+\paragraph{Step 9: the observable.}
+Let $\ell_N$ be the derivative of the flowed based cycle logarithms on the finest lattice, followed by the projection onto $\NormalFiber y$. By the computations for gauge directions and flat tangent directions in the proof of \cref{ch27:thm:flowed-log-covariance}, $\ell_N$ vanishes on the kernel of the quotient. Applied to the columns of $S_K$, it gives exactly the response maps of the statement:
+\[
+ \ell_NS_K=(A_{0,K},A_{1,K},\dots,A_{K,K}).
+\]
+The finest flat reconstruction has the same based cycle holonomies as the constant links $e^{\vartheta_iu/N}$. To justify the use of this Fourier representative, we fix a spanning tree and compare the flat transports of the reconstruction with those of the constant links. Their transports along the tree determine a periodic vertex gauge transformation, equal to the identity at the root, because the three cycle holonomies agree. This gauge transformation identifies the two flat configurations. The Wilson action and the Wilson flow commute with it, and the based holonomies are the same before and after it. If such a gauge transformation depends on parameters, its derivative contributes a covariant gradient, whose normal logarithmic response vanishes by the same computation. The covariance of $\ell_N$ is therefore exactly the one computed in \cref{ch27:thm:flowed-log-covariance}(3), and
+\[
+ \sum_{j=0}^KA_{j,K}A_{j,K}^{\mathsf T}=\ell_NS_KS_K^{\mathsf T}\ell_N^{\mathsf T}=\ell_N\mathcal H_N^{-1}\ell_N^{\mathsf T}=\Sigma_\theta^N(y).
+\]
+Taking traces and using the uniform upper bound for $\Sigma_\theta^N$ on the patch, which follows from \cref{ch27:thm:flowed-log-covariance}(1) and (3), we obtain $\sum_{j=0}^K\norm{A_{j,K}}_{\mathrm{HS}}^2\le4C$.
+
+\paragraph{Step 10: the block of the stopping field.}
+If $T_K$ is the response of the normal variable of the stopping field before normalization, then
+\[
+ H_K^{\mathrm{act}}=nH_K^E,\qquad A_{0,K}=T_K(H_K^{\mathrm{act}})^{-1/2}=n^{-1/2}T_K(H_K^E)^{-1/2}.
+\]
+Multiplying by the transpose, we obtain the last identity of the statement. For $K=0$ this block gives the whole covariance; in particular, it cannot be omitted. Since the gauge transformations of the reconstruction maps $\RepMap$ are equal to the identity at the coarse vertices and contribute only gauge variations, which are annihilated, the proof applies to these maps without a new choice of representatives. No growth in the number of scales enters the trace bound or the error of the Laplace approximation.
+\end{proof}
+
+\begin{remark}\label{ch27:rem:scope}
+The convergence of the effective classical actions as the depth tends to infinity (\cref{ch08:thm:classical-cutoff}) does not allow one to replace the phase at finite depth in an exponent divided by $g^2$, uniformly as $\gamma\to0$. None of the proofs above makes such a replacement. The Gaussian covariance computed here is the covariance of the quadratic model at a flat background; transferring its moments to the flowed observables under the interacting measures requires the additional estimates of \cref{ch30:chapter,ch31:chapter}. The identification of the limiting observables uses \cref{ch26:thm:tier-one}, and \cref{ch02:lem:seven-traces} identifies the continuous functions of the cycle holonomies that are invariant under simultaneous conjugation as functions of the seven traces; neither identification replaces a comparison of normal moments.
+\end{remark}
+
+\section{An Abelian comparison measure}\label{ch27:sec:abelian}
+
+For later comparison with the measures $\lambda_\gamma$ we record one explicit comparison measure in which all cycle holonomies commute: the Abelian Maxwell measure with Haar cycle holonomies of \cref{ch01:def:references}. It is used, together with the other comparison measures, in \cref{ch31:chapter,ch32:chapter}.
+
+\begin{lemma}\label{ch27:lem:abelian-reference}
+Embed the subgroup $\{e^{v\tau_3}:v\in\R\}$ of $\SU$. Take a centered transverse Gaussian Maxwell field with one real color on $\Torus$, with covariance $g_3^2(-\Delta)^+P_{\mathrm{tr}}$, where $(-\Delta)^+$ is the inverse of $-\Delta$ on the nonconstant Fourier modes and $P_{\mathrm{tr}}$ the projection onto transverse fields, and three independent phases, uniformly distributed in $(\R/4\pi\Z)^3$ and independent of the field. Smooth the field by the scalar heat flow at a fixed positive time, add the flat connection with these cycle phases, and form the three cycle holonomies in the embedded subgroup. Then the following hold.
+\begin{enumerate}
+\item The smoothed field is almost surely smooth, so the holonomies are defined. Conditionally on the Maxwell field, the three cycle angles are distributed according to the Haar probability measure on $(\R/4\pi\Z)^3$; hence their joint law is exactly Haar. The three holonomies commute, and an independent common random conjugation does not change the value of any function invariant under simultaneous conjugation.
+\item Let $R_{\mathrm{ab}}$ be the Euclidean norm of the three logarithms of the cycle holonomies, taken in the principal chart. For every nonnegative $\varphi\in C_c^\infty((1,2))$ and every $\delta$ with $0<4\delta<2\pi$,
+\[
+ \E_{\mathrm{ab}}\varphi(R_{\mathrm{ab}}/\delta)=(4\pi)^{-3}\,4\pi\delta^3\int_1^2\varphi(v)v^2\,dv.
+\]
+\end{enumerate}
+This lemma specifies a comparison probability measure and makes no assertion about the Wilson measure.
+\end{lemma}
+
+\begin{proof}
+In the Fourier modes $k=2\pi m/L$, $m\ne0$, we use the transverse multiplier $g_3^2\abs k^{-2}(I-kk^{\mathsf T}/\abs k^2)$ in one real color, with real sine and cosine bases orthonormal in $L^2(\Torus,dx)$. Independent real Gaussian coefficients in a transverse orthonormal basis define this field. For every $s>1/2$, the expected sum of the squared coefficients with the weight $(1+\abs k^2)^{-s}$ is finite, since $\sum_{m\ne0}\abs m^{-2-2s}<\infty$. The weighted sum of squared coefficients is then a nonnegative random variable with finite expectation, and the Fourier series converges almost surely in this weighted Hilbert norm. This constructs the field as a distribution. After any positive heat time, the expected sum of the absolute values of the differentiated Fourier coefficients is finite at every order of differentiation, because of the factor $e^{-t\abs k^2}$. The smoothed field is therefore almost surely smooth, and the three cycle integrals are defined.
+
+We add the independent flat connection whose three cycle integrals are the independent uniform phases $\alpha_i\in\R/4\pi\Z$. In the embedded Abelian subgroup, each smoothed cycle angle is $\alpha_i+l_i$ modulo $4\pi$, where $l_i$ is a function of the Maxwell field. Since a translation of a uniform variable on the circle preserves its law, the three angles are distributed, conditionally on the Maxwell field, according to the Haar probability measure. If $\beta_i\in[-2\pi,2\pi)$ are their representatives, the distance of $e^{\beta_i\tau_3}$ from the identity is $\abs{\beta_i}$, and $R_{\mathrm{ab}}=\abs\beta$. Since the support of the insertion lies in the Euclidean ball of radius $2\delta<2\pi$, polar coordinates in $\R^3$ give
+\[
+ (4\pi)^{-3}\int_{\R^3}\varphi(\abs\beta/\delta)\,d\beta=(4\pi)^{-3}\,4\pi\delta^3\int_1^2\varphi(v)v^2\,dv.
+\]
+All group elements here belong to the same Abelian subgroup. An independent common conjugation therefore preserves the values of all functions invariant under simultaneous conjugation, and it preserves commutativity. This completes the proof.
+\end{proof}

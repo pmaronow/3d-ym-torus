@@ -1,0 +1,572 @@
+\chapter{Periodic gauge fixing and energy estimates}\label{ch04:chapter}
+
+In this section, we prove deterministic estimates for the block averaging map and for gauge fixing, and one probability bound. Together they show that configurations with small curvature at every scale lie in the domains where the renormalization group analysis applies. The two main estimates are the following. We write $\delta(U)=\max_p\groupdist(U_p)$ for the maximal curvature and $\mathscr E(U)=\sum_pq(U_p)$ for the Wilson energy of a configuration $U$. If $\delta(U)$ is small, then
+\[
+ \mathscr E(T_MU)\le M\bigl(1+C_M\delta(U)\bigr)\mathscr E(U),\qquad \delta(T_MU)\le M^2\delta(U)+c_M\delta(U)^2
+\]
+(\cref{ch04:thm:energy-near-contraction}). Since the squared coupling grows by the factor $M$ in each averaging step, the first inequality bounds the output Wilson action divided by the squared coupling by $1+C_M\delta(U)$ times its input value. The product of these upper-bound factors is bounded under the squared-mesh curvature hypothesis of part (5) of that theorem. Second, on a periodic cubic lattice of side $n\ge4$, every configuration with $\delta(U)\le\delta\le\delta_{\mathrm{SG}}$ has a periodic gauge transform $U^k$ with
+\[
+ \max_e\groupdist(U^k_e)\le C_{\mathrm{SG}}\bigl(\sqrt\delta+n^{-1}\bigr)
+\]
+(\cref{ch04:thm:small-curvature-admission}). In particular, $\delta(U)\le\delta_r$ and $n\ge4C_{\mathrm{SG}}/r$ imply that $U$ lies in the gauge-invariant small-field domain $D_r$, with $\delta_r$ defined in that theorem, and the plaquette moments of \cref{ch03:thm:original-chessboard} bound the probability of the complement of $D_r$ under the Wilson measure.
+
+\Cref{ch04:sec:coordinates} gives sufficient conditions, small links or small plaquettes, under which the logarithms of a configuration relative to the coarse-field lift are the local constraint coordinates of \cref{ch03:lem:relative-coarea} (\cref{ch04:lem:actual-local-branch}), and \cref{ch04:sec:energy} proves the energy estimate; these results are used in the classical analysis of \cref{ch05:chapter,ch06:chapter,ch08:chapter} and in \cref{ch11:chapter,ch19:chapter,ch20:chapter}. \Cref{ch04:sec:cells} describes the dependence sets of iterated averages and the eight shifted tilings by which the chessboard estimates are applied to blocked plaquettes (\cref{ch04:lem:cones-and-cells}). \Cref{ch04:sec:gauge} constructs periodic gauges by gluing local axial gauges (\cref{ch04:lem:quantitative-fillings,ch04:lem:cell-gluing}), and \cref{ch04:sec:small-curvature} proves the small-curvature gauge estimate and the probability bound; these results are used in the large-field analysis of \cref{ch15:chapter,ch18:chapter,ch19:chapter,ch20:chapter}. The inputs are the block averaging map, its local constraint coordinates, and the chessboard estimates of \cref{ch03:chapter}, together with the metric, word, and conditioning estimates of \cref{ch02:lem:haar-and-forests,ch02:lem:bounded-transfer}. No result on conditional constrained minimizers or on normalized fluctuation variables is used.
+
+\paragraph{Conventions.}
+The distance between group elements is $\dist(g,h)=\groupdist(gh^{-1})$. We work in lattice units until a physical mesh is displayed. A rectangular patch contains all its vertices, all links with both endpoints among those vertices, and all plaquettes with their four vertices among them; in particular its boundary links are included. A plaquette is counted once in every sum of energies, and a maximum over an empty set of plaquettes is zero. When an estimate concerns only the norm of a logarithm of a group element $V$, it refers to a shortest logarithm, whose norm is $\groupdist(V)$; every logarithm that is later used as an analytic coordinate lies in a fixed ball strictly inside the domain of the principal logarithm. Constants depend only on $M$ and on such fixed radii, with additional dependencies stated explicitly; this is the dependence described in item (1) of \cref{ch01:conv:constants}.
+
+\section{Local inverse coordinates for block averaging}\label{ch04:sec:coordinates}
+
+We begin with the elementary discrete form of the non-Abelian Stokes theorem in a box: in an axial gauge, every link is a product of transported plaquette variables along strips of width one.
+
+\begin{lemma}\label{ch04:lem:axial-strips}
+Let $Q=\prod_{i=1}^3\{0,\dots,b_i\}$ with integers $b_i\ge0$, assign arbitrary values in $\SU$ to its links, and put $b=b_1+b_2+b_3$. Let $q_Q(x)$ be the transport from the lower corner of $Q$ to $x$ along the path that changes the coordinates in the order $1,2,3$. After the gauge transformation $q_Q$, every link of $Q$ is a product of at most $b$ conjugates of plaquette variables of $Q$ or their inverses. In particular, writing $d_p=\groupdist(U_p)$,
+\[
+ \max_{e\subset Q}\groupdist\bigl(U_e^{q_Q}\bigr)\le b\max_{p\subset Q}d_p,\qquad
+ \Bigl(\sum_{e\subset Q}\groupdist\bigl(U_e^{q_Q}\bigr)^2\Bigr)^{1/2}\le b\sqrt{3\abs Q}\Bigl(\sum_{p\subset Q}d_p^2\Bigr)^{1/2}.
+\]
+If the first bound is smaller than a fixed radius below $2\pi$, these are bounds for the principal logarithms of the links. Every closed path of $s$ links in $Q$ has a transport that is a product of at most $sb$ conjugated plaquette variables. These statements also hold in a periodic lattice for a box that lifts injectively to the covering lattice.
+\end{lemma}
+
+\begin{proof}
+For two successive orthogonal positive steps we have the identity
+\[
+ U_i(x)U_k(x+e_i)=U_{p_{ik}(x)}U_k(x)U_i(x+e_k),\qquad i<k.
+\]
+Changing an orientation replaces the plaquette factor by a conjugate of its inverse, and in a longer path the transport of the preceding subpath conjugates the plaquette factor. Each interchange of two adjacent orthogonal steps therefore introduces exactly one transported plaquette and leaves the other factors unchanged. Repeating it gives the corresponding identity for a strip of width one, including its boundary links.
+
+The path from the corner to $x$ first runs in direction 1, then 2, then 3. For a link in direction 3, the path to its endpoint is the path to its initial point followed by the link, and its transformed value is $I$. For a link in direction 2, we move it backwards through the direction-3 part of the path, of length $x_3$. This uses the $x_3$ plaquettes of a $23$ strip of width one, and the remaining path is the path to the endpoint, which cancels. For a link in direction 1, we move it first through the direction-3 part, using $x_3$ plaquettes of a $13$ strip, and then through the direction-2 part in the lower plane, using $x_2$ plaquettes of a $12$ strip. The direction-1 parts then cancel. These moves stay in the closed box and use at most $b$ plaquettes. Reversing a link inverts its word. Using the bi-invariance of $\groupdist$, the triangle inequality $\groupdist(UV)\le\groupdist(U)+\groupdist(V)$ of \cref{ch02:lem:haar-and-forests}, and invariance under inversion, we obtain the bound on the maximum.
+
+Since each $d_p$ is at most $(\sum_{p\subset Q}d_p^2)^{1/2}$, each transformed link is bounded by $b$ times this quantity, and there are at most $3\abs Q$ links. This gives the second bound. In a closed path the gauge factors cancel except for a conjugation at the starting vertex, and substituting the words just obtained for its links gives at most $sb$ factors. In an injective periodic lift every interchange uses a lifted plaquette, and the same proof applies. If $Q$ has no plaquettes, all words are empty.
+\end{proof}
+
+For a coarse link $c=(v,v+Me_i)$, its two blocks form a rectangular patch with $2M$ vertices in direction $i$ and $M$ vertices in the other directions. For a coarse $ik$ plaquette, the four blocks at its corners form a rectangular patch with $2M$, $2M$, and $M$ vertices in the directions $i$, $k$, and the third direction. Their diameters in the lattice path metric are at most $4M$ and $5M$. Since on a coarse lattice of side $m\ge4$ every coordinate extent of these patches is smaller than the period $Mm$, each patch lifts injectively to a box of the covering lattice, also when it meets the periodic identifications. Every translated path with endpoint connectors, every reference path, and every strip used below lies in such a lift. \Cref{ch04:fig:cells} shows these patches.
+
+We now recall the setting of \cref{ch03:lem:relative-coarea}. Let $h$ be the block axial gauge transformation, $h_x=U(\sigma_{v,x})$ for $x\in\mathsf B_M(v)$, so that $h_v=I$ at every block center and $U^h=I$ on the block trees. By gauge covariance, $b=T_MU^h=T_MU$. On the links not in the block trees we write
+\[
+ U^h_e=e^{X_e}U_{0,e}(b),\qquad z=X_{\mathrm{free}}.
+\]
+\Cref{ch03:lem:relative-coarea} provides radii $r_M$ and $\widetilde r_M$ for the free and the eliminated coordinates, independent of the coarse configuration $b$, within which the constraint has the unique solution $X=\Gamma_b(z)$. The next lemma identifies the logarithms $X$ of the given configuration with $\Gamma_b(z)$. The existence of a solution of the constraint near $U_0(b)$ would not suffice, since later sections integrate functions of the given configuration in these coordinates. We distinguish three normalizations: the relative logarithms $X$ and their free part $z$, which are controlled here; the coupling-rescaled coordinates $z/g$; and the normalized fluctuation variables $w$ of \cref{ch09:lem:centered-white-coarea}, defined by $z_i=z_i^*+g_iK_i^{-1/2}w_i$ after the conditional constrained minimizer has been subtracted, which do not appear in this section.
+
+\begin{lemma}\label{ch04:lem:actual-local-branch}
+Fix an odd $M\ge3$ and a fine side $Mm$ with $m\ge4$, and let $T_M$, the block trees, and $\Gamma_b$ be as in \cref{ch03:def:centered-map,ch03:lem:relative-coarea}. There exist $u_M,\delta_M>0$ and $C_M<\infty$, depending only on $M$ and on fixed radii strictly inside the coordinate domain of \cref{ch03:lem:relative-coarea} and the domain of the principal logarithm, with the following properties.
+\begin{enumerate}
+\item If $\max_e\groupdist(U_e)\le u$ and $(5M-3)u<2\pi$, then no based loop holonomy $U(F_{c,x})U(C_c)^{-1}$ in one application of $T_M$ equals $-I$, and
+\[
+ \max_c\groupdist\bigl((T_MU)_c\bigr)\le(6M-3)u\le10Mu.
+\]
+In the block axial gauge, the logarithms relative to $U_0(b)$, $b=T_MU$, of the links not in the block trees satisfy $\max_e\abs{X_e}\le C_Mu$, where shortest logarithms are meant. If moreover $u\le u_M$, then all these logarithms, including those on the eliminated edges, are principal logarithms in the coordinate domain of \cref{ch03:lem:relative-coarea}, and $X=\Gamma_b(X_{\mathrm{free}})$.
+\item Let $J\ge1$ be fixed, and let the fine side be $M^Jm_{\mathrm{out}}$ with an integer $m_{\mathrm{out}}\ge4$. Suppose that $\max_e\groupdist(U_e)\le u$ and $(10M)^Ju\le u_M$. Then the conclusions of (1) with $u\le u_M$ hold for each of the $J$ averaging steps, with $u$ replaced by $(10M)^su$ at the step from $T_M^sU$ to $T_M^{s+1}U$, and
+\[
+ \max_e\groupdist\bigl((T_M^sU)_e\bigr)\le(10M)^su,\qquad0\le s\le J.
+\]
+\item Suppose only that $\max_p\groupdist(U_p)\le\delta\le\delta_M$; no bound on the links is assumed. Then all based loop holonomies in one application of $T_M$ lie in a fixed ball strictly inside the domain of the principal logarithm, and in the block axial gauge
+\[
+ \max_e\abs{X_e}\le C_M\delta,\qquad X=\Gamma_{T_MU}(X_{\mathrm{free}}),\qquad \max_P\groupdist\bigl((T_MU)_P\bigr)\le C_M\delta,
+\]
+where $P$ runs over the coarse plaquettes. For every $g>0$ the coupling-rescaled coordinate $\eta=z/g$ satisfies $\norm\eta_\infty\le C_M\delta/g$.
+\item Each statement is local: it holds for a given coarse link or plaquette if its hypothesis is imposed only on the patch formed by the two blocks of the link, or by the four blocks at the corners of the plaquette, with all their links and plaquettes. Links outside these patches and the holonomies around the noncontractible cycles of the torus do not affect the estimates.
+\end{enumerate}
+All constants are independent of $m$, of the physical scale, of the coupling, and of the number of preceding averaging steps.
+\end{lemma}
+
+\begin{proof}
+\emph{Small links.} Recall that $R_M=(M-1)/2$. Since each root path has at most $3R_M$ links, the path $F_{c,x}$ has at most $M+6R_M=4M-3$ links and $F_{c,x}C_c^{-1}$ at most $5M-3$. By the triangle inequality, a product of $s$ links of distance at most $u$ from $I$ has distance at most $su$. If $(5M-3)u<2\pi$, every based loop holonomy therefore differs from $-I$. With
+\[
+ A_c=M^{-3}\sum_{x\in\mathsf B_M(v)}\Log\bigl(U(F_{c,x})U(C_c)^{-1}\bigr),\qquad b_c=e^{A_c}U(C_c),
+\]
+we have $\abs{A_c}\le(5M-3)u$ and hence $\groupdist(b_c)\le(6M-3)u\le10Mu$.
+
+In the block axial gauge every transformed link not in a block tree is a product of at most $1+6R_M=3M-2$ links, and its distance from $I$ is at most $(3M-2)u$. Since its value under the coarse-field lift is $I$ or one of the $b_c$, every relative element $U^h_eU_{0,e}(b)^{-1}$ has distance at most $(9M-5)u$ from $I$. Taking shortest logarithms gives the first bound in (1) with any $C_M\ge9M$.
+
+Let $r_M,\widetilde r_M$ be the radii of \cref{ch03:lem:relative-coarea} for the free and the eliminated coordinates. Fix smaller positive radii inside them and inside a fixed ball strictly within the domain of the principal logarithm, and choose $u_M>0$ with
+\[
+ (5M-3)u_M<2\pi,\qquad C_Mu_M<\tfrac12\min\{r_M,\widetilde r_M,1\},
+\]
+decreasing $u_M$ further if the fixed ball requires it. For $u\le u_M$ all relative logarithms are unique principal logarithms. By gauge covariance, and since $h=I$ at the block centers, $T_MU^h=b$. Hence the vector $X$ solves the constraint at the target $b$, and both its free and its eliminated entries lie in the uniqueness neighborhood of \cref{ch03:lem:relative-coarea}. Uniqueness implies $X=\Gamma_b(X_{\mathrm{free}})$; this identifies every eliminated entry, not only the free ones. This proves (1).
+
+\emph{Several averaging steps.} Let the initial side be $M^Jm_{\mathrm{out}}$, and define
+\begin{equation}\label{ch04:eq:finite-shell-sides}
+ n_s=M^{J-s}m_{\mathrm{out}}\quad(0\le s\le J),\qquad n_s=Mn_{s+1},\quad n_{s+1}\ge m_{\mathrm{out}}\ge4\quad(0\le s<J).
+\end{equation}
+At each step, the input side is a multiple of $M$ and the output side is at least four, so the hypotheses of \cref{ch03:def:centered-map,ch03:lem:relative-coarea} hold and every patch used above lifts injectively. Let $u_s=(10M)^su$. The assumed bound $\max_e\groupdist(U_e)\le u$ gives the link bound for $s=0$, and the hypothesis $(10M)^Ju\le u_M$ implies $u_s\le u_M$, and hence $(5M-3)u_s<2\pi$, for $0\le s\le J$. We apply (1) to $T_M^sU$ on the lattice of side $n_s$, for $s=0,1,\dots,J-1$ in turn. This identifies the relative coordinates of each step with the solution $\Gamma$ at its target and gives the link bound $10Mu_s=u_{s+1}$ for the next step. The constants are the same at every step, since they do not depend on $n_s$. This proves (2).
+
+\emph{Small plaquettes.} We now assume only a bound on the plaquettes, and let $K_M^{(0)}=100M^2$. Every based loop holonomy is the transport around a closed path of at most $5M-3$ links in a patch of two blocks, whose side lengths sum to at most $4M$. By \cref{ch04:lem:axial-strips}, it is a product of at most $20M^2\le K_M^{(0)}$ conjugated plaquette variables, so
+\begin{equation}\label{ch04:eq:relative-contour}
+ \groupdist\bigl(U(F_{c,x})U(C_c)^{-1}\bigr)\le K_M^{(0)}\delta,\qquad\abs{A_c}\le K_M^{(0)}\delta.
+\end{equation}
+Here and below, $\delta$ need only bound the plaquettes of the indicated patch. It is chosen so small that the first bound lies in a fixed ball strictly inside the domain of the principal logarithm.
+
+Consider a link not in the block tree with both endpoints in one block. Its gauge-transformed value is the transport around the closed path formed by the link and two root paths, of length at most $6R_M+1$ in one block. The same argument bounds its distance from $I$ by $K_M^{(0)}\delta$. For an interface link $e=(x,y)$ between the blocks of $c$, we write
+\[
+ W_e=U(\sigma_{v,x})\,U_e\,U(\sigma_{v+Me_i,y})^{-1}=U^h_e.
+\]
+The closed path for $W_eU(C_c)^{-1}$ lies in the patch of the two blocks and has length at most $6R_M+1+M$. As before, we have $\groupdist(W_eU(C_c)^{-1})\le K_M^{(0)}\delta$. Since $b_c=e^{A_c}U(C_c)$,
+\begin{equation}\label{ch04:eq:interface-relative}
+ \groupdist\bigl(W_eb_c^{-1}\bigr)\le\groupdist\bigl(W_eU(C_c)^{-1}\bigr)+\abs{A_c}\le2K_M^{(0)}\delta.
+\end{equation}
+This includes the eliminated edge. The coarse plaquette formed by the four reference paths has distance at most $M^2\delta$ from $I$, since its $M$ by $M$ square can be reduced by successive interchanges of steps that use each of its $M^2$ plaquettes once. Replacing its four reference transports by the values $b_c$ changes this distance by at most $4K_M^{(0)}\delta$. Here we used that the bi-invariant metric satisfies $\dist(\prod_ia_i,\prod_ib_i)\le\sum_i\dist(a_i,b_i)$, as one sees by replacing one factor at a time, and that inverting both elements preserves each term. We obtain
+\begin{equation}\label{ch04:eq:coarse-face-rough}
+ \groupdist\bigl((T_MU)_P\bigr)\le\bigl(M^2+4K_M^{(0)}\bigr)\delta.
+\end{equation}
+We increase $C_M$ so that it dominates the three constants in \eqref{ch04:eq:relative-contour}, \eqref{ch04:eq:interface-relative}, and \eqref{ch04:eq:coarse-face-rough}, and choose $\delta_M>0$ with $C_M\delta_M<\min\{r_M,\widetilde r_M,1\}/2$, also respecting the fixed logarithm radius. Then the relative vector lies in the uniqueness neighborhood of \cref{ch03:lem:relative-coarea}, and, as in the proof of (1), we obtain $X=\Gamma_{T_MU}(X_{\mathrm{free}})$. Its free part satisfies $\norm z_\infty\le C_M\delta$, and dividing by $g>0$ gives the bound for $\eta$. This proves (3).
+
+\emph{Locality.} All paths and all fillings used above lie in the patches of two or four blocks. A gauge transformation on such a patch can be extended arbitrarily to the other vertices of the torus, and by covariance of $T_M$ no link outside the patch enters these computations; the block axial gauge uses only the paths in its own block. The local statements therefore do not constrain any holonomy around a noncontractible cycle. For a local statement on the inverse coordinates, the equality with $\Gamma_b$ refers to the coordinates in question: we extend the local free data by zero to a free vector in the coordinate domain. Each eliminated coordinate is determined by its own constraint, which involves only its two blocks. By the locality and uniqueness statements of \cref{ch03:lem:relative-coarea}, the corresponding entry of $\Gamma_b$ does not depend on the extension. The local eliminated value solves the same constraint in the same uniqueness neighborhood; by uniqueness, the two agree. This proves (4). All radii and constants were chosen from fixed finite patches and from the radii of \cref{ch03:lem:relative-coarea}; they depend only on $M$ and the fixed radii.
+\end{proof}
+
+\section{Energy estimates and physical curvature}\label{ch04:sec:energy}
+
+The leading factor $M$ in the energy estimate has a simple origin. At the linear level, the curvature of a coarse plaquette is an average over $M^3$ translates of the sum of the $M^2$ fine curvatures in an $M$ by $M$ square (\eqref{ch04:eq:flat-stokes} below). A coarse curvature is therefore about $M^2$ times a typical fine curvature, while the number of plaquettes decreases by the factor $M^3$. The sum of the squared curvatures, and with it the Wilson energy, is multiplied by $M^4/M^3=M$. Since the squared coupling satisfies $g_{j+1}^2=Mg_j^2$, this factor cancels in the action $4\mathscr E/g^2$. Part (3) bounds the nonlinear error by the maximal curvature times the local $\ell^2$ norm of the curvature, which keeps the estimate uniform in the volume. The bound on the maximal curvature in part (1) and its iteration in parts (5) and (6) adapt the estimates of Bałaban for his averaging operation in \cite[Section~B, Propositions~1 and~2]{Balaban1985Averaging}, which also use the four blocks at the corners of a coarse plaquette. We give the proofs for the paths and the metric used here. The estimate for the Wilson energy with leading factor $M$ requires in addition the exact column sums of the linearized kernel and the local form of the remainder.
+
+\begin{theorem}\label{ch04:thm:energy-near-contraction}
+For each odd $M\ge3$ there exist $\delta_*(M)>0$ and $C_M,c_M<\infty$ with the following properties, for every $m\ge4$ and every configuration $U$ on the fine lattice of side $Mm$. Write $\delta(U)=\max_p\groupdist(U_p)$ and $\mathscr E(U)=\sum_pq(U_p)$.
+\begin{enumerate}
+\item If $\delta(U)\le\delta_*$, then
+\[
+ \mathscr E(T_MU)\le M\bigl(1+C_M\delta(U)\bigr)\mathscr E(U),\qquad\delta(T_MU)\le M^2\delta(U)+c_M\delta(U)^2.
+\]
+\item The derivative of $T_M$ at the identity acts on curvatures by the nonnegative kernel
+\[
+ (\mathsf L_Mf)_{ik}(v)=M^{-3}\sum_{r\in\{-R_M,\dots,R_M\}^3}\sum_{s,t=0}^{M-1}f_{ik}(v+r+se_i+te_k),
+\]
+that is, $\mathrm d\,DT_M(I)=\mathsf L_M\mathrm d$ on one-cochains. Its row sums equal $M^2$ and its column sums equal $M^{-1}$, and $\norm{\mathsf L_Mf}_2^2\le M\norm f_2^2$ for every array $f$ indexed by plaquettes with values in a Euclidean space.
+\item For a set $\mathcal A$ of positive coarse plaquettes, let $\operatorname{Pa}(\mathcal A)$ be the union, counted once, of the fine plaquettes in the patches of four blocks of the plaquettes in $\mathcal A$. If $\delta=\max_{p\in\operatorname{Pa}(\mathcal A)}\groupdist(U_p)\le\delta_*$, then
+\[
+ \sum_{P\in\mathcal A}q\bigl((T_MU)_P\bigr)\le M(1+C_M\delta)\sum_{p\in\operatorname{Pa}(\mathcal A)}q(U_p).
+\]
+For each $P\in\mathcal A$ there is a rooted axial gauge on its patch $Q(P)$ of four blocks in which
+\[
+ \Log\bigl((T_MU)_P\bigr)^{(P)}=\sum_p\mathsf L_M(P,p)\Log(U_p)^{(P)}+e_P,
+\]
+with
+\[
+ \abs{e_P}\le C_M\delta\Bigl(\sum_{p\subset Q(P)}\groupdist(U_p)^2\Bigr)^{1/2},
+\]
+where the superscript $(P)$ refers to this gauge; the gauges for different $P$ need not agree. Each fine plaquette lies in at most $48$ of the patches $Q(P)$, and the restriction of $\mathsf L_M$ to output plaquettes in $\mathcal A$ has row sums at most $M^2$ and column sums at most $M^{-1}$.
+\item Let $U^{j+1}=T_MU^j$, $0\le j<d$, be configurations on lattices all of whose coarse sides are at least four, and let $g_j>0$ satisfy $g_{j+1}^2=Mg_j^2$. If $\delta_j=\delta(U^j)\le\delta_*$ for $j<d$, then
+\[
+ \frac{4\mathscr E(U^d)}{g_d^2}\le\prod_{j<d}(1+C_M\delta_j)\,\frac{4\mathscr E(U^0)}{g_0^2}\le e^{C_M\sum_{j<d}\delta_j}\,\frac{4\mathscr E(U^0)}{g_0^2}.
+\]
+\item Measure lengths in units of the mesh of the coarsest lattice, so that $U^j$ lives on a lattice of mesh $\epsilon_j=M^{j-d}$. Let
+\[
+ 0<\varepsilon\le\varepsilon_M,\qquad\varepsilon_M\le\min\bigl\{\delta_*/2,\ M^2(M^2-1)/(4c_M)\bigr\}.
+\]
+If $\delta(U^0)\le\varepsilon\epsilon_0^2$, then each of $U^0,\dots,U^{d-1}$ satisfies the hypothesis of \cref{ch04:lem:actual-local-branch}(3), and
+\[
+ \delta(U^j)\le2\varepsilon\epsilon_j^2\quad(0\le j\le d),\qquad\sum_{j<d}\delta(U^j)\le\frac{2\varepsilon}{M^2-1},
+\]
+and
+\[
+ \frac{4\mathscr E(U^d)}{g_d^2}\le e^{2C_M\varepsilon/(M^2-1)}\,\frac{4\mathscr E(U^0)}{g_0^2}.
+\]
+\item Let $U^0$ be obtained by sampling a fixed smooth periodic connection, with $\delta(U^0)\le C_Aa_0^2$, where $a_j$ denotes the physical mesh of $U^j$ and $a_*=a_d$, so that $a_j=a_*\epsilon_j$. If $\varepsilon=C_Aa_*^2\le\varepsilon_M$, the conclusions of (5) hold, and the free logarithmic coordinates $z_j$ of $U^j$ in \cref{ch04:lem:actual-local-branch}(3) satisfy
+\[
+ \norm{z_j/g_j}_\infty\le C_{A,M}\,a_j^{3/2}/g_3,\qquad g_j=g_3\sqrt{a_j},\qquad0\le j<d,
+\]
+with $C_{A,M}=2C_MC_A$.
+\end{enumerate}
+All constants are independent of $d$, of the volume, of the physical side, and of the coupling, except for the constant $C_A$ of the smooth connection. The iterated bound in (4) is uniform under a bound on the sum of the curvatures, not merely under a bound on each curvature separately.
+\end{theorem}
+
+In the proof, we first compute the derivative of $T_M$ at the identity and the row and column sums of its kernel on curvatures. Then, in an axial gauge on the patch of each coarse plaquette, we compare $\Log((T_MU)_P)$ with its linearization by Taylor's formula. The remainder is quadratic in the logarithms of the links, and the axial gauge bounds these by the curvatures in the patch. Summing over $P$ with the bounded overlap of the patches gives the energy estimate, and a single row gives the curvature recursion. The iteration in (4)--(6) is then elementary.
+
+\begin{proof}
+\emph{The linearized kernel.} Let $a$ be a real $\su$-valued one-cochain and let $U_e(t)=e^{ta_e}$. For a coarse vertex $v$ define
+\[
+ r(v)=M^{-3}\sum_{x\in\mathsf B_M(v)}\sum_{e\in\sigma_{v,x}}a_e,\qquad k_i(v)=M^{-3}\sum_{r\in\{-R_M,\dots,R_M\}^3}\sum_{s=0}^{M-1}a_i(v+r+se_i),
+\]
+where the sum along a path takes orientations into account. We differentiate the formula for $T_M$. The derivative of the reference transport cancels its negative occurrence in the logarithm of every based loop holonomy, and we find
+\[
+ (DT_M(I)a)_i(v)=r(v)+k_i(v)-r(v+Me_i).
+\]
+Around a coarse plaquette the four terms involving $r$ cancel. For each $r$, the four segment sums in $k$ form the boundary of the translated $M$ by $M$ square, and summing the signed curls of its plaquettes cancels every interior link. With $\mathrm d$ the signed curl in the respective lattice units, this gives
+\begin{equation}\label{ch04:eq:flat-stokes}
+ \bigl(\mathrm d\,DT_M(I)a\bigr)_{ik}(v)=M^{-3}\sum_{r\in\{-R_M,\dots,R_M\}^3}\sum_{s,t=0}^{M-1}(\mathrm da)_{ik}(v+r+se_i+te_k).
+\end{equation}
+This proves the kernel identity in (2); repeated occurrences of a fine plaquette are added in its entry. Since each row has $M^3M^2$ terms of weight $M^{-3}$, the row sums equal $M^2$. Fix a fine plaquette at $x$ with orientation $ik$. For each $(s,t)\in\{0,\dots,M-1\}^2$ the vertex $x-se_i-te_k$ has exactly one representation $v+r$ with $v$ a coarse vertex and $r\in\{-R_M,\dots,R_M\}^3$. This gives exactly $M^2$ contributions in the column, and its sum is $M^{-1}$; this count includes contributions across the periodic identifications. For an array $f$ with values in a Euclidean space, by the weighted Cauchy--Schwarz inequality, we have
+\begin{equation}\label{ch04:eq:kernel-schur}
+ \sum_P\Bigl\lvert\sum_p\mathsf L_M(P,p)f_p\Bigr\rvert^2\le M^2\sum_{P,p}\mathsf L_M(P,p)\abs{f_p}^2=M\sum_p\abs{f_p}^2.
+\end{equation}
+Restricting to output plaquettes in $\mathcal A$ keeps the row sums equal to $M^2$ and decreases the column sums, so the restricted kernel satisfies the stated bounds and the same inequality.
+
+\emph{The local Taylor estimate.} Fix an output plaquette $P$. We use the rooted axial gauge of \cref{ch04:lem:axial-strips} on its patch $Q(P)$ of four blocks and set $A_e=\Log(U_e^{q_{Q(P)}})$. The patch has at most $12M^3$ links and at most $12M^3$ plaquettes, and the sum of its side lengths is at most $5M$. By \cref{ch04:lem:axial-strips}, with constants depending only on $M$,
+\begin{equation}\label{ch04:eq:patch-logs}
+ \norm A_\infty\le C_M\delta,\qquad\norm A_2\le C_M\Bigl(\sum_{p\subset Q(P)}\groupdist(U_p)^2\Bigr)^{1/2}.
+\end{equation}
+The local gauge can be extended to the torus, and by \cref{ch03:prop:map-properties}(6) its values outside the patch do not affect $(T_MU)_P$. In this gauge, we consider the functions
+\[
+ \Phi_P(A)=\Log\bigl((T_Me^A)_P\bigr),\qquad f_p(A)=\Log\bigl((e^A)_p\bigr),
+\]
+and
+\[
+ G_P(A)=\Phi_P(A)-\sum_p\mathsf L_M(P,p)f_p(A).
+\]
+Let $\delta_*\le\delta_M$ be so small that all link, path, and plaquette transports in the patch stay in a fixed ball strictly inside the domain of the principal logarithm whenever $\norm A_\infty\le C_M\delta_*$. Since the distance of a product from $I$ is at most its length times $\norm A_\infty$, this choice is made on a fixed finite patch and does not depend on the side of the torus. On a slightly larger fixed ball, the finite-word bounds of \cref{ch02:lem:haar-and-forests} bound the Hessian of $G_P$ in the Euclidean operator norm by a constant $H_M$. Indeed, each averaged link is a composition of finitely many word maps, logarithms, an arithmetic mean, and an exponential, whose first two derivatives are bounded on these balls, and the chain rule applies. The value and the first derivative of $G_P$ vanish at zero, the latter by \eqref{ch04:eq:flat-stokes}. By Taylor's formula along the segment $tA$, we have
+\[
+ \abs{G_P(A)}\le\int_0^1(1-t)H_M\norm A_2^2\,dt\le\tfrac12H_M\sqrt{12M^3}\,\norm A_\infty\norm A_2,
+\]
+where we used $\norm A_2\le\sqrt{12M^3}\norm A_\infty$. Inserting \eqref{ch04:eq:patch-logs}, we obtain the estimate for $e_P=G_P(A)$ in (3). Here $\Log(U_p)^{(P)}=f_p(A)$ is the logarithm of the plaquette transport in the gauge of this patch, at the usual base point of $p$. Its norm is $\groupdist(U_p)$, although its direction in $\su$ may depend on $P$. By covariance of $T_M$, the coarse plaquette is conjugated by the axial gauge at its starting vertex, and we also have $\abs{\Phi_P(A)}=\groupdist((T_MU)_P)$.
+
+\emph{Overlap.} A fine vertex belongs to exactly one block, and a block center is a corner of twelve positive coarse plaquettes: three orientations and four choices of the corner. If a fine plaquette lies in $Q(P)$, its vertices lie in the four corner blocks of $P$, so one of the at most four block centers of its vertices is a corner of $P$. Hence there are at most $4\cdot12=48$ such $P$; this count may be redundant, and it holds on every periodic lattice considered. Combining this count with the error estimate in (3), we find
+\begin{equation}\label{ch04:eq:error-squared}
+ \sum_{P\in\mathcal A}\abs{e_P}^2\le C_M\delta^2\sum_{p\in\operatorname{Pa}(\mathcal A)}\groupdist(U_p)^2,
+\end{equation}
+where the sum on the right is over the union, without multiplicity.
+
+\emph{Energy and curvature bounds.} Let $F^2=\sum_{p\in\operatorname{Pa}(\mathcal A)}\groupdist(U_p)^2$. Although the gauges differ from one $P$ to another, the Cauchy--Schwarz inequality in each row uses only the norms $\abs{f_p}=\groupdist(U_p)$, so \eqref{ch04:eq:kernel-schur} bounds the squared norm of the linear term by $MF^2$. By \eqref{ch04:eq:error-squared}, the error term has norm at most $C_M\delta F$. By the triangle inequality in the finite-dimensional Euclidean space of outputs, we have
+\begin{equation}\label{ch04:eq:curl-near-contraction}
+ \sum_{P\in\mathcal A}\groupdist\bigl((T_MU)_P\bigr)^2\le\bigl(\sqrt M+C_M\delta\bigr)^2F^2\le M(1+C_M\delta)F^2,
+\end{equation}
+after enlarging $C_M$, for $0\le\delta\le\delta_*\le1$. On a single row, the error estimate and the row sum give
+\begin{equation}\label{ch04:eq:curvature-recursion}
+ \groupdist\bigl((T_MU)_P\bigr)\le M^2\delta+C_M\delta\sqrt{12M^3}\,\delta\le M^2\delta+c_M\delta^2,
+\end{equation}
+with $c_M\ge1$. The linear coefficient $M^2$ is exact.
+
+To pass to the Wilson energy, recall from \cref{ch02:lem:haar-and-forests} that, for a fine plaquette with $\groupdist(U_p)\le\delta$ and for every coarse plaquette,
+\[
+ \frac{\groupdist(U_p)^2}8\Bigl(1-\frac{\delta^2}{48}\Bigr)\le q(U_p),\qquad q\bigl((T_MU)_P\bigr)\le\frac{\groupdist((T_MU)_P)^2}8.
+\]
+The energy of the output plaquettes in $\mathcal A$ is therefore at most $M(1+C_M\delta)(1-\delta^2/48)^{-1}$ times the energy of $\operatorname{Pa}(\mathcal A)$. Decreasing $\delta_*\le1$ and enlarging $C_M$, we absorb the last factor into $1+C_M\delta$. This proves the restricted inequality in (3); with all output plaquettes it proves the energy inequality in (1), and \eqref{ch04:eq:curvature-recursion} proves the curvature inequality in (1). All estimates used only the plaquettes in the patches.
+
+\emph{Iteration.} Dividing the one-step energy inequality by $g_{j+1}^2=Mg_j^2$, multiplying by $4$, and iterating, we obtain the product in (4); since $1+x\le e^x$ for $x\ge0$, the exponential bound follows. For $d=0$ the product is empty and (4) is an equality.
+
+For (5), let $y_j=\delta(U^j)/\epsilon_j^2$. As long as the preceding inputs satisfy $\delta(U^i)\le\delta_*$, \eqref{ch04:eq:curvature-recursion} and $\epsilon_{j+1}=M\epsilon_j$ imply
+\begin{equation}\label{ch04:eq:scaled-recurrence}
+ y_{j+1}\le y_j+\frac{c_M}{M^2}\epsilon_j^2y_j^2,\qquad\sum_{j=0}^{d-1}\epsilon_j^2=\frac{1-M^{-2d}}{M^2-1}\le\frac1{M^2-1}.
+\end{equation}
+The initial value is at most $\varepsilon$. Suppose that $y_i\le2\varepsilon$ for all $i\le j$. Summing the recurrence up to $j$ bounds $y_{j+1}$ by
+\[
+ \varepsilon+\frac{4c_M\varepsilon^2}{M^2(M^2-1)}\le2\varepsilon,
+\]
+by the choice of $\varepsilon_M$. Each preceding curvature is then at most $2\varepsilon\epsilon_i^2\le2\varepsilon\le\delta_*\le\delta_M$, which verifies the hypothesis needed for the next application of the recurrence and of \cref{ch04:lem:actual-local-branch}(3). This induction reaches $j=d$. Summing $\delta(U^j)\le2\varepsilon\epsilon_j^2$ over $j<d$, we find the bound on the sum of the curvatures, and inserting it into (4) gives the last bound in (5).
+
+For (6), note that $a_0=a_*M^{-d}=a_*\epsilon_0$, so the hypothesis $\delta(U^0)\le C_Aa_0^2$ is the hypothesis of (5) with $\varepsilon=C_Aa_*^2$. Part (5) then implies $\delta(U^j)\le2C_Aa_j^2$. Applying \cref{ch04:lem:actual-local-branch}(3) to each $U^j$, $j<d$, we find
+\[
+ \norm{z_j/g_j}_\infty\le\frac{C_M\delta(U^j)}{g_j}\le\frac{2C_MC_A}{g_3}a_j^{3/2},\qquad0\le j<d,
+\]
+where $g_j=g_3\sqrt{a_j}$, in agreement with $g_n^2=\gamma/n=g_3^2a_n$ from \cref{ch01:def:ensemble}. If $C_A=0$, the curvature recursion gives $\delta(U^j)=0$ at every step and \cref{ch04:lem:actual-local-branch}(3) gives $z_j=0$, and the formulas hold directly. Every constant in the proof came from fixed patches of blocks, from the radii of the logarithm and the inverse coordinates, or from the constant $C_A$.
+\end{proof}
+
+\section{Dependence sets and reflected cell partitions}\label{ch04:sec:cells}
+
+To apply the chessboard estimates of \cref{ch03:thm:original-chessboard} to plaquettes of the blocked configurations $V^j=T_M^jU$, we need to know on which fine links such a plaquette depends. We also need a partition of the lattice into cells, invariant under reflections, such that each cell contains these dependence sets. The relevant sets are shown in \cref{ch04:fig:cells}. Because the blocks are centered and nested, the iterated dependence set of a coarse plaquette stays inside the four blocks at its corners, at every scale. Since a single tiling by cells of two coarse sites in each direction does not contain every plaquette in a cell, we use eight tilings, shifted by the parities of the starting vertex.
+
+\begin{figure}[ht]
+\centering
+\setlength{\unitlength}{6mm}
+\begin{picture}(15,6)(-1,-1)
+\thinlines
+\multiput(-0.5,-0.5)(1,0){7}{\line(0,1){5}}
+\multiput(-0.5,-0.5)(0,1){6}{\line(1,0){6}}
+\multiput(0,0)(1,0){6}{\multiput(0,0)(0,1){5}{\circle*{0.15}}}
+\linethickness{1.4pt}
+\put(-0.5,2.5){\line(1,0){2}}
+\put(-0.5,3.5){\line(1,0){2}}
+\put(-0.5,2.5){\line(0,1){1}}
+\put(1.5,2.5){\line(0,1){1}}
+\put(2.5,0.5){\line(1,0){2}}
+\put(2.5,2.5){\line(1,0){2}}
+\put(2.5,0.5){\line(0,1){2}}
+\put(4.5,0.5){\line(0,1){2}}
+\linethickness{2.2pt}
+\put(0,3){\line(1,0){1}}
+\put(3,1){\line(1,0){1}}
+\put(3,2){\line(1,0){1}}
+\put(3,1){\line(0,1){1}}
+\put(4,1){\line(0,1){1}}
+\thinlines
+\put(0.3,3.15){$\scriptstyle c$}
+\put(3.35,1.3){$\scriptstyle P$}
+\multiput(7.5,-0.5)(1,0){7}{\line(0,1){4}}
+\multiput(7.5,-0.5)(0,1){5}{\line(1,0){6}}
+\multiput(8,0)(1,0){6}{\multiput(0,0)(0,1){4}{\circle*{0.15}}}
+\linethickness{1.2pt}
+\multiput(7.5,-0.5)(2,0){4}{\line(0,1){4}}
+\multiput(7.5,-0.5)(0,2){3}{\line(1,0){6}}
+\multiput(8.5,-0.5)(2,0){3}{\multiput(0,0)(0,0.4){10}{\line(0,1){0.2}}}
+\linethickness{2.2pt}
+\put(9,0){\line(1,0){1}}
+\put(9,1){\line(1,0){1}}
+\put(9,0){\line(0,1){1}}
+\put(10,0){\line(0,1){1}}
+\end{picture}
+\caption{Left: the blocks of side $m_j$ (thin squares) around the vertices of the level-$j$ lattice, in a plane spanned by two coordinate directions. The patch of the coarse link $c$ consists of its two blocks, and the patch of the coarse plaquette $P$ consists of the four blocks at its corners (thick outlines). Right: cell boundaries of two of the eight shifted tilings, with shifts $(0,0)$ (solid) and $(1,0)$ (dashed) in the two directions shown; each cell is the union of the blocks of $2\times2\times2$ level-$j$ vertices. The thick plaquette crosses a cell boundary of the first tiling, but lies in a cell of the second.}
+\label{ch04:fig:cells}
+\end{figure}
+
+\begin{lemma}\label{ch04:lem:cones-and-cells}
+Fix an odd $M\ge3$, integers $D\ge0$ and $0\le j\le D$, and the fine side $N=M^Dn$ with $n\in4\N$. Work in fine lattice units, put $m_j=M^j$ and $n_j=N/m_j$, and write $V^\ell=T_M^\ell U$.
+\begin{enumerate}
+\item For a plaquette $P$ of the lattice at level $j$, define recursively $\mathcal P_j(P)=\{P\}$ and $\mathcal P_i(P)=\operatorname{Pa}(\mathcal P_{i+1}(P))$ for $i<j$, with $\operatorname{Pa}$ defined in \cref{ch04:thm:energy-near-contraction}(3); we call $\mathcal P_0(P)$ the energy-estimate predecessor set of $P$. Every fine plaquette in $\mathcal P_0(P)$ has its vertices in the union of the four blocks $\mathsf B_{m_j}$ at the corners of $P$. This union also contains all fine links on which $V^j_P$ depends, including through the Borel extension of $T_M$, and all paths and plaquettes used in the patches of the intermediate steps. Further,
+\[
+ \abs{\mathcal P_0(P)}\le C_Mm_j^3,\qquad\diam\mathcal P_0(P)\le C_Mm_j,\qquad\sup_p\#\{P:p\in\mathcal P_0(P)\}\le48.
+\]
+The same statements hold between any two intermediate levels, with the ratio of their meshes in place of $m_j$.
+\item For each shift $\eta\in\{0,1\}^3$, tile the vertices of the level-$j$ lattice by the sets $\eta+2t+\{0,1\}^3$, and define the cells of the fine lattice
+\[
+ C^\eta_{j,t}=\bigcup_{\zeta\in\{0,1\}^3}\mathsf B_{m_j}\bigl(m_j(\eta+2t+\zeta)\bigr).
+\]
+These are disjoint cubes with $2m_j$ fine vertices in each direction, and there are $\mathfrak m_j=n_j^3/8$ of them in each tiling. If a level-$j$ plaquette has all its vertices in the level-$j$ vertices of a cell, then the plaquette and its energy-estimate predecessor set depend only on fine links with both endpoints in the cell. The reflections between adjacent cells are $x_i\mapsto(2\eta_i+4t_i+3)m_j-x_i$; their planes and the opposite planes bisect fine links, and these reflections map the blocks, the patches, and the sets $\mathcal P_\ell(P)$ at every level $\ell\le j$ onto the corresponding sets. Every level-$j$ plaquette lies in a cell of at least one of the eight tilings.
+\item Let $j\ge1$. For a cell $C$ of one tiling $\mathcal T$, let $\mathcal P_{j-1}(C)$ be the union of the sets $\operatorname{Pa}(\{P\})$ of the six level-$j$ plaquettes $P$ in $C$. Then
+\[
+ \abs{\mathcal P_{j-1}(C)}\le24M^3.
+\]
+The sets obtained from $\mathcal P_{j-1}(C)$ by successive applications of $\operatorname{Pa}$, for distinct cells $C$ of $\mathcal T$, are disjoint, and for individual level-$j$ plaquettes the overlap bound $48$ of (1) applies. For $0\le\ell<j$ let
+\[
+ \mathcal F_\ell(C)=\Bigl\{p\in\Faces{n_\ell}:\bigcup_{v\text{ a vertex of }p}\mathsf B_{m_\ell}(m_\ell v)\subset C\Bigr\},
+\]
+where the vertices $v$ are written in level-$\ell$ lattice units, and for $d_{\mathrm{cut}}>0$ let
+\[
+ R_{<j}(C;d_{\mathrm{cut}})=\bigcap_{\ell<j}\bigcap_{p\in\mathcal F_\ell(C)}\bigl\{q(V^\ell_p)<d_{\mathrm{cut}}\bigr\},\qquad R^{\mathcal T}_{<j}(d_{\mathrm{cut}})=\bigcap_{C\in\mathcal T}R_{<j}(C;d_{\mathrm{cut}}).
+\]
+These events impose the conditions on every $\mathcal P_\ell(P)$, $\ell<j$, for the six level-$j$ plaquettes $P$ in $C$. Further, put
+\[
+ \mathcal P^{\mathcal T}_{j-1}=\bigcup_{C\in\mathcal T}\mathcal P_{j-1}(C),\qquad Q^{\mathcal T}_j=\frac4{h_{n_{j-1}}}\sum_{p\in\mathcal P^{\mathcal T}_{j-1}}q(V^{j-1}_p),
+\]
+where $h_n=g_n^2=\gamma/n$.
+\item Put $Q_{j,C}=(4/h_{n_{j-1}})\sum_{p\in\mathcal P_{j-1}(C)}q(V^{j-1}_p)$. The following functions are nonnegative observables supported in the cell $C$, in the sense of \cref{ch03:thm:original-chessboard}(2), that is, bounded Borel functions of the fine links with both endpoints in $C$ that are invariant under all periodic gauge transformations: the indicator of $R_{<j}(C;d_{\mathrm{cut}})$, the plaquette-energy sum $Q_{j,C}$, the functions $\exp(\lambda Q_{j,C})$ for $\lambda\ge0$, and their products. Plaquettes crossing the boundaries of the cells of a tiling are not tested by the events of that tiling.
+\end{enumerate}
+All bounds are deterministic and do not depend on the coupling or on $D$; the constant $C_M$ depends only on $M$, not on any region of the lattice or on widths chosen later.
+\end{lemma}
+
+\begin{proof}
+\emph{Nesting.} For odd $s\ge1$ and $-R_M\le\alpha\le R_M$, the intervals of $s$ consecutive integers centered at $v+s\alpha$ are disjoint and adjacent, with extreme endpoints $v-(Ms-1)/2$ and $v+(Ms-1)/2$. Taking products gives
+\begin{equation}\label{ch04:eq:block-nesting}
+ \bigcup_{\alpha\in\{-R_M,\dots,R_M\}^3}\mathsf B_s(v+s\alpha)=\mathsf B_{Ms}(v).
+\end{equation}
+This is the nesting identity of \cref{ch03:prop:map-properties}(6); it holds on the periodic lattice, since the blocks partition its vertices.
+
+\emph{Containment.} At a single step, a plaquette of $\operatorname{Pa}(\{P\})$ has its four vertices in the four corner blocks of $P$. Replacing each of these vertices by its own finer block keeps the union inside the same four larger blocks, by \eqref{ch04:eq:block-nesting}. By induction backwards from level $j$, we obtain the containment for $\mathcal P_0(P)$ and, in the same way, at every intermediate level. The same induction shows that the dependence sets are contained: at each step the dependence set of a link given by \cref{ch03:prop:map-properties}(6), its reference path, and the patch of four blocks used in \cref{ch04:thm:energy-near-contraction} are included. The decision whether the Borel extension is used reads only the same based loop holonomies, and the value it assigns reads only the reference path. No continuity of $T_M$ at such configurations is used.
+
+\emph{Counting and overlap.} The four corner blocks of side $m_j$ contain $4m_j^3$ vertices and fit into a box with $2m_j$, $2m_j$, and $m_j$ vertices in the three directions. Since at most three positive plaquettes start at each vertex, we have $\abs{\mathcal P_0(P)}\le12m_j^3$, and the diameter in the lattice path metric is at most $5m_j$. Periodic identifications can only decrease these bounds. For the overlap, fix a fine plaquette $p$; each of its four vertices lies in one block of side $m_j$. If $p\in\mathcal P_0(P)$, all its vertices lie in corner blocks of $P$, so one of the at most four centers of these blocks is a corner of $P$. A center is a corner of twelve positive plaquettes, so there are at most $4\cdot12=48$ such $P$, also when some centers coincide. Starting the argument at an intermediate level replaces $m_j$ by the ratio of the meshes and changes nothing else.
+
+\emph{Cells and reflections.} For the shift $\eta$, the coordinate interval of $C^\eta_{j,t}$ in direction $i$ starts at $l_i=m_j(\eta_i+2t_i)-(m_j-1)/2$ and ends at $l_i+2m_j-1$; it contains $2m_j$ vertices, and the next interval starts at $l_i+2m_j$. Since $n_j$ is even, these intervals partition the coordinate circle, and their products give $(n_j/2)^3=n_j^3/8$ disjoint cells. A level-$j$ plaquette with all its vertices in a cell has its four corner blocks in the cell. By the containment just proved, its energy-estimate predecessor set and all its dependencies are in the cell. Every link involved has both endpoints in the cell, including links in the boundary planes of the cell. The plane between the interval above and the next one is $x_i=l_i+2m_j-1/2$, and the reflection in it is $x_i\mapsto c_i-x_i$ with
+\[
+ c_i=2l_i+4m_j-1=(2\eta_i+4t_i+3)m_j.
+\]
+Since $m_j$ is odd, this number is odd, and the plane bisects fine links. The opposite plane has intercept larger by $N$, which is even, and it also bisects fine links. Since, for every level $\ell\le j$, the intercept divided by $m_\ell$ is still an odd integer, the reflection preserves the partition into blocks of side $m_\ell$. By \cref{ch03:prop:map-properties}(4) it preserves the order of the coordinates in the root paths, and it maps a closed rectangular patch, with all its links and plaquettes, onto the reflected patch. Repeating this at every level proves the statement for all the sets $\mathcal P_\ell(P)$.
+
+\emph{Coverage.} Given a level-$j$ $ik$ plaquette with starting vertex $v$, we choose $\eta_i=v_i\bmod2$ and $\eta_k=v_k\bmod2$. Its two vertices in each of these directions then lie in one interval of the tiling. In the third direction either shift works, since the interval containing $v$ contains the plaquette. Hence every plaquette lies in a cell of at least one of the eight tilings.
+
+\emph{The sets of one cell.} Let $j\ge1$. Every plaquette of $\mathcal P_{j-1}(C)$ has its vertices among the $8M^3$ level-$(j-1)$ vertices whose blocks of side $m_{j-1}$ form $C$, and there are at most $3\cdot8M^3=24M^3$ positive plaquettes with vertices there; the bound is for the union of the six patches, whose overlaps are not counted. Every backward expansion of this set stays in $C$, by \eqref{ch04:eq:block-nesting}. Since distinct cells have disjoint sets of vertices, the sets obtained from them by successive applications of $\operatorname{Pa}$, and the links on which these depend, are disjoint. For individual target plaquettes the bound $48$ of (1) still applies. When a plaquette occurs in one of the sets $\mathcal P_\ell(P)$, $\ell<j$, of a plaquette $P$ in $C$, the union of the blocks of side $m_\ell$ of its four vertices lies in $C$, by the same nesting argument; this is the defining condition of $\mathcal F_\ell(C)$. The events $R_{<j}(C;d_{\mathrm{cut}})$ therefore impose the conditions on all these sets, and $Q^{\mathcal T}_j$ is the sum over the union of the sets $\mathcal P_{j-1}(C)$, each plaquette counted once, with the normalization $4/h_{n_{j-1}}$ of the Wilson action.
+
+\emph{Observables.} Each function $q(V^\ell_p)$ is Borel, since $T_M$ is Borel (\cref{ch03:prop:map-properties}(2)), and gauge invariant, by gauge covariance of $T_M$ and conjugation invariance of $q$. For $p\in\mathcal F_\ell(C)$ it depends only on links with both endpoints in $C$. The indicator of $R_{<j}(C;d_{\mathrm{cut}})$ is a finite product of Borel indicators of such events; it is Borel with values in $\{0,1\}$. For $j\ge1$, the sum $Q_{j,C}$ is a Borel gauge-invariant function of the links in $C$, and $0\le q\le2$ gives
+\begin{equation}\label{ch04:eq:bounded-cell-tests}
+ 0\le Q_{j,C}\le\frac{8\abs{\mathcal P_{j-1}(C)}}{h_{n_{j-1}}}\le\frac{8\cdot24M^3}{h_{n_{j-1}}}.
+\end{equation}
+Hence, for every fixed $\lambda\ge0$, $\exp(\lambda Q_{j,C})$ is bounded by the exponential of $\lambda$ times this bound, and the indicator, the exponential, and their product are nonnegative bounded Borel observables supported in $C$. The reflections between cells map each set of tested plaquettes onto the reflected set; they may reverse a plaquette or move its base point, and $q(HWH^{-1})=q(W^{-1})=q(W)$. Finally, the parity condition of \cref{ch03:thm:original-chessboard} holds, since $n_j=M^{D-j}n\in4\N$. The constants do not depend on the coupling, on $D$, or on any region or width.
+\end{proof}
+
+\section{Lipschitz extensions and periodic gauge fixing}\label{ch04:sec:gauge}
+
+Regular lattice configurations and gauge fixing conditions are part of the renormalization group program of Bałaban for lattice gauge theories \cite{Balaban1985Regular}. Here we need a particular quantitative statement: a configuration with small curvature on a periodic lattice has a periodic gauge transform with uniformly small links, with no restriction on its holonomies around the noncontractible cycles. The following example shows the form such a bound must take. Let $\theta\in\su$ with $0<\abs\theta<2\pi$, and let $U$ be the configuration on the lattice of side $n$ with $U_e=e^{\theta/n}$ on the links in direction 1 and $U_e=I$ on all other links. Its curvature vanishes, and the transport around a cycle in direction 1 is $e^\theta$. For every gauge transform $U^k$ this transport is conjugate to $e^\theta$. By the triangle inequality, some link satisfies $\groupdist(U^k_e)\ge\abs\theta/n$. A bound of the form $C\sqrt\delta$ in terms of the maximal curvature $\delta$ alone is therefore impossible, and a term of order $1/n$ is needed. Spreading the holonomy evenly over the links of the cycle, as in the example, attains this order. At positive curvature $\delta$ the relevant length scale is $\delta^{-1/2}$. An axial gauge on a box of side $R$ produces links of size about $\delta R$, while gluing such boxes requires gauge transformations varying by about $1/R$ per link; both are of order $\sqrt\delta$ when $R$ is of order $\delta^{-1/2}$.
+
+The construction glues local axial gauges on a partition of the torus into cells. In the gluing we extend group-valued maps successively over the edges, faces, and interiors of the cells. This is possible because $\SU\simeq S^3$ has vanishing first and second homotopy groups, and \cref{ch04:lem:quantitative-fillings} below gives Lipschitz bounds for the extensions. We prove the bounds on the extension, interpolation, and gluing directly, without an external extension theorem.
+
+\begin{lemma}\label{ch04:lem:quantitative-fillings}
+Use the bi-invariant metric of $\SU\simeq S^3$, which is twice the round metric. There is an absolute constant $C$ with the following properties.
+\begin{enumerate}
+\item Every map from the unit circle $S^1$ to $\SU$ with Lipschitz constant $B_0$ extends to the unit disk with Lipschitz constant at most $C(1+B_0)^2$, and every such map from the unit sphere $S^2$ extends to the unit ball of $\R^3$ with Lipschitz constant at most $C(1+B_0)^5$; the extensions agree with the given maps on the boundary. For $A_0\ge1$ and a rectangle or a rectangular box with all side lengths between $R/A_0$ and $A_0R$, the corresponding boundary-preserving extensions of a map with Lipschitz constant $B_0$ on the boundary have Lipschitz constants at most
+\[
+ C(A_0)R^{-1}(1+B_0R)^2\qquad\text{and}\qquad C(A_0)R^{-1}(1+B_0R)^5.
+\]
+\item Fix the triangulation of every lattice cube into the six simplices determined by the orderings of the coordinates; it is consistent on common faces and invariant under translations, so it descends to periodic lattices, and it induces triangulations of the faces of lattice boxes. There is an absolute $c_0>0$ such that, if unit quaternions are prescribed at the vertices of a simplex with pairwise distances at most $c_0$, their normalized affine interpolation $\sum_i\lambda_iu_i/\abs{\sum_i\lambda_iu_i}$ is defined, with denominator at least $1/2$. If vertex data on a lattice of mesh $a$ satisfy $\dist(u_x,u_y)\le B_0a$ for all nearest neighbors $x,y$, and $B_0a\le c(A_0)$, then the interpolation has Lipschitz constant at most $C(A_0)B_0$, and the interpolations on two simplices agree on their common face.
+\item For every $L>0$, $\mathscr K\ge0$, integer $n\ge4$, and $a=L/n$, every periodic configuration on the lattice of side $n$ and mesh $a$ with $\max_p\groupdist(U_p)\le\mathscr Ka^2$ admits a periodic gauge transformation $k$ with
+\[
+ \max_e\groupdist(U^k_e)\le\frac{Ca}L\bigl(1+\mathscr KL^2\bigr)^{10}.
+\]
+All holonomies around the cycles of the torus are allowed. If $a\le cL(1+\mathscr KL^2)^{-2}$ for an absolute $c>0$, the construction uses a partition of the torus into closed rectangular cells $Q$ with side lengths between $L/8$ and $L/2$, each with a rooted axial gauge $q_Q$ such that $\groupdist(U^{q_Q}_e)\le C\mathscr KLa$ on every link of its closure, and the transition functions $t_{QR}=q_Qq_R^{-1}$ on common links $(x,y)$ satisfy
+\[
+ t_{QR}(y)=\bigl(U^{q_Q}_{xy}\bigr)^{-1}t_{QR}(x)\,U^{q_R}_{xy},\qquad\dist\bigl(t_{QR}(x),t_{QR}(y)\bigr)\le C\mathscr KLa.
+\]
+On coarser meshes the bound on $\max_e\groupdist(U^k_e)$ follows from the diameter of $\SU$, after an absolute enlargement of $C$. When this bound is smaller than $2\pi$, it bounds the principal logarithms of the links of $U^k$.
+\end{enumerate}
+The constants in (1) and (2) depend only on $A_0$ and the triangulation, and the constant in (3) is absolute: it does not depend on $n$, $L$, $\mathscr K$, or the holonomies. No regularity of $k$ as a function of $U$ is claimed, and no estimate for differences of the link logarithms beyond the bound on each link is asserted.
+\end{lemma}
+
+We prove parts (1) and (2) first. Part (3) follows from the gluing estimate of \cref{ch04:lem:cell-gluing} below.
+
+\begin{proof}[Proof of \cref{ch04:lem:quantitative-fillings}(1) and (2)]
+We identify $\SU$ with the unit quaternions in $\R^4$. Its metric is twice the round metric of the unit sphere: the quaternion $\cos(t/2)+\omega\sin(t/2)$ is at distance $\abs t$ from $I$ for $0\le\abs t\le2\pi$. Comparing arc and chord on a circle, we obtain, for $u,v\in S^3$,
+\begin{equation}\label{ch04:eq:chord-comparison}
+ 2\abs{u-v}\le\dist(u,v)\le\pi\abs{u-v}.
+\end{equation}
+All constants in the arguments on spheres below are absolute.
+
+\emph{Covering.} A unit sphere $S^m$, $m=1,2$, can be covered by at most $C_mr^{-m}$ balls of radius $r\le1$. Indeed, consider a maximal set of points with mutual distances greater than $r$. The balls of radius $r/2$ around them are disjoint, and each has volume at least $c_mr^m$, as one sees by integrating the polar density $(\sin t)^{m-1}$ and using $2t/\pi\le\sin t\le t$ for $0\le t\le\pi/2$. A separated set is finite, since it has at most one point in each cube of a sufficiently fine subdivision of a cube containing the sphere, and maximality gives the cover. The same polar integration shows that a ball of radius $2\varepsilon$ in $S^3$ has volume at most $C\varepsilon^3$ for $\varepsilon\le c$.
+
+\emph{Extension from a sphere.} Let $f:S^m\to S^3$ have Lipschitz constant $B_0$. A cover of $S^m$ by balls of radius $\varepsilon/(1+B_0)$ gives a cover of the image by at most $C((1+B_0)/\varepsilon)^m$ balls of radius $\varepsilon$, so the $\varepsilon$-neighborhood of the image has volume at most $C(1+B_0)^m\varepsilon^{3-m}$. Let
+\[
+ \varepsilon=c_m(1+B_0)^{-m/(3-m)}
+\]
+with $c_m>0$ so small that this volume is less than half the volume of $S^3$. Then some point $p$ has distance at least $\varepsilon$ from the image, and after a rotation we may take it to be the north pole. The stereographic projection from $p$ is $\pi_p(u)=u_\perp/(1-u\cdot p)$, where $u_\perp$ is the component of $u$ orthogonal to $p$. For points at round distance at least $\varepsilon/2$ from $p$ it satisfies
+\begin{equation}\label{ch04:eq:stereo-bounds}
+ \abs{\pi_p(u)}\le C\varepsilon^{-1},\qquad\abs{\pi_p(u)-\pi_p(v)}=\frac{\abs{u-v}}{\sqrt{(1-u\cdot p)(1-v\cdot p)}}\le C\varepsilon^{-2}\abs{u-v}.
+\end{equation}
+The equality follows by squaring both sides and using $\abs u=\abs v=1$, and the inequalities follow from $1-\cos t=2\sin^2(t/2)\ge ct^2$ for $0\le t\le\pi$; the factor two between the group metric and the round metric only changes constants. We conclude that $\psi=\pi_p\circ f$ has supremum at most $C\varepsilon^{-1}$ and Lipschitz constant at most $C\varepsilon^{-2}B_0$. On the source sphere the arc distance is at most $\pi/2$ times the chord distance, so this is also a Lipschitz bound with respect to the Euclidean metric, after an absolute change of the constant.
+
+We extend $\psi$ to the unit ball by $\Psi(r\omega)=r\psi(\omega)$, with $\Psi(0)=0$. For $r\ge s$,
+\[
+ \abs{r\psi(\omega)-s\psi(\eta)}\le(r-s)\norm\psi_\infty+s\Lip(\psi)\abs{\omega-\eta},
+\]
+and $r-s\le\abs{r\omega-s\eta}$, $s\abs{\omega-\eta}\le2\abs{r\omega-s\eta}$, so the Lipschitz constant of $\Psi$ is at most $\norm\psi_\infty+2\Lip(\psi)$. The inverse stereographic projection is
+\[
+ \pi_p^{-1}(z)=\frac{(2z,\abs z^2-1)}{1+\abs z^2}.
+\]
+Its differential has Euclidean norm at most $2$. Following the image of a line segment and using its round length, and doubling for the group metric, we find that $\pi_p^{-1}$ has Lipschitz constant at most $4$. Hence $\pi_p^{-1}\circ\Psi$ extends the given boundary map and has Lipschitz constant at most
+\[
+ C\bigl(\varepsilon^{-1}+B_0\varepsilon^{-2}\bigr)\le\begin{cases}C(1+B_0)^2,&m=1,\\ C(1+B_0)^5,&m=2.\end{cases}
+\]
+This proves the extension bounds for spheres, including the case $B_0=0$.
+
+\emph{Rectangles and boxes.} In dimension $k=2,3$, the radial map $r\omega\mapsto r\omega/\norm\omega_\infty$ takes the Euclidean unit ball onto $[-1,1]^k$ and the unit sphere onto its boundary. On the sphere, $1/\sqrt k\le\norm\omega_\infty\le1$ and $\abs{\norm\omega_\infty-\norm\eta_\infty}\le\abs{\omega-\eta}$, so the map is Lipschitz on the sphere, and so is its inverse, which has radial factor $\norm\omega_\infty$ on each ray. The radial estimate used for $\Psi$ shows that both maps are Lipschitz on the balls as well. A diagonal affine map onto a box with side lengths between $R/A_0$ and $A_0R$ changes Lipschitz constants by factors at most $C(A_0)R$ and $C(A_0)/R$. Composing the extensions for spheres with these maps gives the bounds for rectangles and boxes. The same comparison bounds the intrinsic distance on the boundary of a box by $C(A_0)$ times the ambient distance: on a sphere, a shortest arc is at most $\pi/2$ times its chord, and the boundary maps just discussed transfer this inequality. This proves (1).
+
+\emph{Interpolation.} Let $c_0>0$ be so small that pairwise distances at most $c_0$ between the vertex values of a simplex imply $u_0\cdot u_i\ge3/4$; this follows from $u_0\cdot u_i=1-\abs{u_0-u_i}^2/2$ and \eqref{ch04:eq:chord-comparison}. For barycentric coordinates $\lambda_i$,
+\[
+ \Bigl\lvert\sum_i\lambda_iu_i\Bigr\rvert\ge u_0\cdot\sum_i\lambda_iu_i\ge\frac34\ge\frac12,
+\]
+so the normalization is defined. The derivative of $z\mapsto z/\abs z$ has operator norm at most $2$ on $\{\abs z\ge1/2\}$. On a simplex of the triangulation, the affine interpolation has derivative at most $C(A_0)a^{-1}\max_{i,l}\abs{u_i-u_l}$, as one sees by writing it in barycentric coordinates, whose gradients are bounded by $C(A_0)/a$ on the finitely many simplex shapes. Two vertices of a simplex are joined by at most three lattice links, so the maximum is at most $CB_0a$, and the derivative of the normalized interpolation, hence its Lipschitz constant for the group metric, is at most $C(A_0)B_0$. The condition $B_0a\le c(A_0)$ ensures the smallness condition on the simplices. Since the restriction of the barycentric formula to a common face uses only the values at the common vertices, the interpolations agree there. This proves (2).
+\end{proof}
+
+\begin{lemma}\label{ch04:lem:cell-gluing}
+Let $A_0\ge1$. There exist $c(A_0)>0$ and $C(A_0)<\infty$ with the following property. Consider a periodic cubic lattice of mesh $a$ and a face-to-face decomposition of the torus into closed coordinate boxes: each lifted cell has the form $\prod_{i=1}^3[am_i,an_i]$, with integers $m_i<n_i$. Assume that every side length lies between $R/A_0$ and $A_0R$ and that each cell lifts injectively to the covering lattice. Here face-to-face means that the intersection of two distinct cells is empty or a whole face, edge, or vertex of both cells. Suppose that each cell $Q$ has a gauge transformation $q_Q$, defined on its vertices, such that
+\begin{equation}\label{ch04:eq:frame-hypothesis}
+ \groupdist\bigl(U^{q_Q}_{xy}\bigr)\le B_0a\qquad\text{for every link $(x,y)$ of the closure of $Q$}.
+\end{equation}
+No bound on the gauge transformations $q_Q$ themselves is assumed. Then there is a periodic gauge transformation $k$ with
+\begin{equation}\label{ch04:eq:general-skeleton}
+ a\le c(A_0)R(1+B_0R)^{-2}\quad\Longrightarrow\quad\max_e\groupdist(U^k_e)\le\frac{C(A_0)a}R(1+B_0R)^{10}.
+\end{equation}
+The constants do not depend on the number of cells.
+\end{lemma}
+
+\begin{proof}
+On a link $(x,y)$ common to two cells $Q$ and $R'$, let $t_{QR'}=q_Qq_{R'}^{-1}$. Direct multiplication gives
+\begin{equation}\label{ch04:eq:transition}
+ t_{QR'}(y)=\bigl(U^{q_Q}_{xy}\bigr)^{-1}t_{QR'}(x)\,U^{q_{R'}}_{xy},\qquad\dist\bigl(t_{QR'}(x),t_{QR'}(y)\bigr)\le2B_0a.
+\end{equation}
+This applies also to cells that meet only along an edge. We assign a single gauge transformation $k$ at all vertices. Its coordinates in the frame of $Q$ are $s_Q=kq_Q^{-1}$, so that $s_{R'}=s_Qt_{QR'}$. By bi-invariance, multiplying two group-valued maps adds their Lipschitz bounds, so passing from one incident frame to another increases the bound on neighbor distances by at most $2B_0a$.
+
+\emph{Vertices and edges of the cells.} We set $k=I$ at every corner of a cell, once on the periodic lattice. For each edge of the cell partition, we choose one incident cell $Q$ and join the two prescribed values of $s_Q$ at its endpoints by a minimizing geodesic of $\SU$, parametrized proportionally to arc length over the edge. Such a geodesic is an arc of a great circle in $S^3$; if its endpoints are antipodal, any great circle through them may be used. Since the diameter of $\SU$ is $2\pi$ and the edge has length at least $R/A_0$, the speed is at most $C(A_0)/R$. At the lattice vertices of the edge, we set $k=s_Qq_Q$. These assignments reproduce the given values at the corners. In every incident frame the resulting vertex data satisfy $\dist(s(x),s(y))\le B_1a$ for neighbors on the edge, with
+\[
+ B_1\le C(A_0)/R+2B_0.
+\]
+
+\emph{Faces of the cells.} For each face of the cell partition, we choose one incident cell, express the values already assigned on the boundary of the face in its frame, and interpolate them along the lattice links of the boundary by \cref{ch04:lem:quantitative-fillings}(2). Provided $aB_1\le c(A_0)$, this is a continuous loop with Lipschitz constant at most $C(A_0)B_1$. The comparison of intrinsic and ambient distances in the proof of \cref{ch04:lem:quantitative-fillings}(1) gives this bound also between points on different sides of the face. The extension over the disk, rescaled to the face, gives an extension with Lipschitz constant
+\[
+ B_2\le\frac{C(A_0)}R(1+B_1R)^2.
+\]
+We use it to assign $k=s_Qq_Q$ at the remaining lattice vertices of the face. Every vertex value assigned before is kept. Each face is treated once, including faces that meet the periodic identifications. The vertices of an edge shared by several faces were assigned before and have a single value throughout.
+
+\emph{Interiors of the cells.} Consider a cell $Q$. On a face that was treated in the frame of a cell $Q_F$, the boundary values in the frame of $Q$ are $s_Q=s_{Q_F}t_{Q_FQ}$, so by \eqref{ch04:eq:transition} neighboring values satisfy $\dist(s_Q(x),s_Q(y))\le B_\partial a$ with
+\[
+ B_\partial\le B_2+2B_0\le\frac{C(A_0)}R(1+B_0R)^2.
+\]
+We interpolate the vertex values on the boundary of $Q$ by the triangulation of \cref{ch04:lem:quantitative-fillings}(2). If $aB_\partial\le c(A_0)$, this is a continuous map on the boundary sphere with Lipschitz constant at most $C(A_0)B_\partial$. It is single valued at every edge and vertex, since the gauge transformation was assigned there only once. The extension over the ball gives an extension in the frame of $Q$ with Lipschitz constant
+\[
+ B_3\le\frac{C(A_0)}R(1+B_\partial R)^5\le\frac{C(A_0)}R(1+B_0R)^{10}.
+\]
+At each interior vertex of $Q$, we assign $k=s_Qq_Q$ from this extension. Interior vertices belong to only one cell, and the boundary values are those assigned before. The result is a gauge transformation on the whole periodic lattice.
+
+\emph{Links.} Each lattice link lies in a closed cell, and the extension constructed for that cell represents both endpoint values, also when one or both endpoints lie on the boundary of the cell. Therefore
+\[
+ \groupdist\bigl(k_xU_{xy}k_y^{-1}\bigr)=\groupdist\bigl(s_Q(x)U^{q_Q}_{xy}s_Q(y)^{-1}\bigr)\le(B_0+B_3)a.
+\]
+Both smallness conditions $aB_1\le c(A_0)$ and $aB_\partial\le c(A_0)$ follow from $a\le c(A_0)R(1+B_0R)^{-2}$ after decreasing $c(A_0)$, and $(B_0+B_3)a$ is at most the right side of \eqref{ch04:eq:general-skeleton}. The constants do not depend on the number of cells: each change of frame compares two incident frames by a single transition \eqref{ch04:eq:transition}, and no chain of comparisons through other cells is taken. Continuous extensions in different frames were required to agree only at the lattice vertices assigned earlier, and every later extension kept these values. This suffices for the bound on every link.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch04:lem:quantitative-fillings}(3)]
+Suppose first that $n\ge8$. We divide each coordinate circle at the vertices with indices $0$, $\lfloor n/4\rfloor$, $\lfloor n/2\rfloor$, $\lfloor3n/4\rfloor$, and $n$; each interval has physical length between $L/8$ and $L/2$. The resulting $4^3$ closed cells form a product, hence face-to-face, decomposition of the torus; they have bounded aspect ratios and lift injectively to the covering lattice, also when they meet the periodic identifications. On each cell, we use the rooted axial gauge of \cref{ch04:lem:axial-strips}. Each link not in its axial tree is a product of at most $CL/a$ conjugated plaquette variables along strips of width one, each at distance at most $\mathscr Ka^2$ from $I$. Then \eqref{ch04:eq:frame-hypothesis} holds with $B_0=C\mathscr KL$ and $R=L$. These gauges are rooted and give the stated bound on every link of the closure of a cell; their transitions satisfy \eqref{ch04:eq:transition}, which gives the stated transition bounds.
+
+With the fixed aspect bound, the condition in \eqref{ch04:eq:general-skeleton} follows from $a\le cL(1+\mathscr KL^2)^{-2}$ after decreasing the absolute constant $c$; taking $c\le1/8$ also guarantees $n\ge8$. The conclusion of \eqref{ch04:eq:general-skeleton} is the asserted bound. If the condition on the mesh fails, we take $k=I$. Then $\groupdist(U_e)\le2\pi$, while
+\[
+ \frac aL\bigl(1+\mathscr KL^2\bigr)^{10}>c\bigl(1+\mathscr KL^2\bigr)^8\ge c,
+\]
+so an absolute enlargement $C\ge2\pi/c$ gives the same bound on all such meshes, including $4\le n<8$. If the bound is smaller than $2\pi$, the links of $U^k$ differ from $-I$, and their principal logarithms have the same norms.
+
+All assignments were made on the periodic lattice, not by identifying the values of independently chosen gauges afterwards, so arbitrary holonomies remain in the local gauges and in the assigned values throughout.
+\end{proof}
+
+\section{Small-curvature gauge fixing and probability bounds}\label{ch04:sec:small-curvature}
+
+We apply the gluing lemma at cell size $R\approx\delta^{-1/2}$, and then estimate the probability of $D_r^c$ using \cref{ch03:thm:original-chessboard}. Recall from \cref{ch01:def:selected-law} the small-link domain and the gauge-invariant small-field domain; for $0<r<2\pi$ they are
+\[
+ B_r=\bigl\{V:\max_e\groupdist(V_e)<r\bigr\},\qquad D_r=\bigl\{U:U^k\in B_r\text{ for some }k\bigr\},
+\]
+where $k$ runs over the periodic gauge transformations.
+The deterministic part of the following theorem, parts (1) and (2), is used at every scale in \cref{ch19:chapter,ch20:chapter}; the probability bound in parts (3) and (4) concerns only the restriction of the Wilson measure on the finest lattice.
+
+\begin{theorem}\label{ch04:thm:small-curvature-admission}
+There exist absolute constants $C_{\mathrm{SG}}\ge1$ and $\delta_{\mathrm{SG}}>0$ with the following properties.
+\begin{enumerate}
+\item For every periodic cubic lattice of side $n\ge4$, every $0\le\delta\le\delta_{\mathrm{SG}}$, and every configuration $U$ with $\max_p\groupdist(U_p)\le\delta$, there exists a periodic gauge transformation $k$ with
+\[
+ \max_e\groupdist(U^k_e)\le C_{\mathrm{SG}}\bigl(\sqrt\delta+n^{-1}\bigr).
+\]
+This includes $\delta=0$ and arbitrary holonomies around the cycles of the torus.
+\item Fix $0<r<2\pi$ and set
+\[
+ \delta_r=\min\bigl\{\delta_{\mathrm{SG}},\,(r/(4C_{\mathrm{SG}}))^2\bigr\},\qquad d_r=\frac{\delta_r^2}{2\pi^2}=\min\Bigl\{\frac{\delta_{\mathrm{SG}}^2}{2\pi^2},\,\frac{r^4}{512\pi^2C_{\mathrm{SG}}^4}\Bigr\}.
+\]
+If $n\ge4C_{\mathrm{SG}}/r$, then
+\[
+ \bigl\{\max_p\groupdist(U_p)\le\delta_r\bigr\}\subset D_r,\qquad\bigl\{\max_pq(U_p)\le d_r\bigr\}\subset D_r.
+\]
+Some lower bound on the side is necessary: for $n<2\pi/r$, the flat configurations of the example at the beginning of \cref{ch04:sec:gauge} with $rn\le\abs\theta<2\pi$ do not lie in $D_r$. The set $D_r$ is open and gauge invariant, so these inclusions do not require a measurable choice of the gauge transformation.
+\item Let $n\in4\N$ with $n\ge4C_{\mathrm{SG}}/r$, and let $\gamma>0$ be such that $\beta_n=4n/\gamma\ge2$. Then the Wilson measure satisfies $\mu_{n,\gamma}(D_r^c)\le\varepsilon_{n,r,\gamma}$, where
+\[
+ \varepsilon_{n,r,\gamma}=\min\Bigl\{1,\ 3n^3\exp\Bigl[\frac18\Bigl(C_0+24\log2+\frac{36\log\beta_n}n\Bigr)-\frac{\beta_n\delta_r^2}{32\pi^2}\Bigr]\Bigr\}
+\]
+and $C_0$ is the absolute constant of \cref{ch03:thm:original-chessboard}(3). The surface term $36\log\beta_n/n$ is kept for every $(n,\gamma)$; no relation between $n$ and $\gamma$ is assumed.
+\item Under the assumptions of (3), $\mu_{n,\gamma}(D_r)>0$, the conditioned measure $\mu_{n,\gamma}(\,\cdot\mid D_r)$ has total variation distance exactly $\mu_{n,\gamma}(D_r^c)$ from $\mu_{n,\gamma}$, and the partition function $Z_{D_r}$ restricted to $D_r$ satisfies
+\[
+ \frac{Z_{D_r}}Z=\mu_{n,\gamma}(D_r),\qquad\Bigl\lvert\log\frac{Z_{D_r}}Z\Bigr\rvert\le2\varepsilon_{n,r,\gamma}\quad\text{if }\varepsilon_{n,r,\gamma}\le1/2.
+\]
+\end{enumerate}
+The constants $C_{\mathrm{SG}}$ and $\delta_{\mathrm{SG}}$ do not depend on $L$, $\gamma$, $n$, the number of averaging steps, or any widths of regions. The probability bound concerns the restriction to $D_r$ of the Wilson measure on the full periodic lattice; it is not a conditional bound at a later scale.
+\end{theorem}
+
+\begin{proof}
+\emph{Part (1).} We use lattice spacing one. For $\delta=0$, by \cref{ch04:lem:quantitative-fillings}(3) with $a=1$, $L=n$, and $\mathscr K=0$, we have $\max_e\groupdist(U^k_e)\le C/n$ for every $n\ge4$, including arbitrary flat holonomies. For $0<\delta\le1$, let $R=\lceil\delta^{-1/2}\rceil$. Then
+\begin{equation}\label{ch04:eq:curvature-radius}
+ 1\le\delta R^2\le4.
+\end{equation}
+If $n<8R$, the same lemma with $\mathscr K=\delta$ gives
+\[
+ \max_e\groupdist(U^k_e)\le\frac Cn\bigl(1+\delta n^2\bigr)^{10}\le\frac{C'}n,
+\]
+with $C'$ absolute, since $\delta n^2<64\delta R^2\le256$.
+
+Suppose now that $n\ge8R$, and let $b=\lfloor n/R\rfloor\ge8$. We divide each coordinate circle at the vertices $\lfloor in/b\rfloor$, $0\le i\le b$. Since $R\le n/b<R(1+1/b)$, the intervals have lengths between $R/2$ and $2R$ when $R\ge2$. The closed cells form a product, hence face-to-face, decomposition; they have bounded aspect ratios, and they lift injectively since $2R\le n/4$. By \cref{ch04:lem:axial-strips}, the rooted axial gauges on these cells satisfy
+\[
+ \max_{e\subset Q}\groupdist\bigl(U^{q_Q}_e\bigr)\le C\delta R.
+\]
+Indeed, a link in direction 1 not in the axial tree is moved through one strip of width one in direction 3 and one in direction 2, of total length at most $4R$, and the counts for the other directions are smaller. Then \cref{ch04:lem:cell-gluing} applies with mesh one, cell size $R$, and $B_0=C\delta R$, and \eqref{ch04:eq:curvature-radius} implies $B_0R\le4C$. Fix an absolute $R_0\ge2$ so large that
+\[
+ 1\le c(A_0)R_0(1+4C)^{-2}
+\]
+for these fixed aspect bounds, and let $0<\delta_{\mathrm{SG}}\le\min\{1,R_0^{-2}\}$. Then $R\ge R_0$, and the condition on the mesh in \eqref{ch04:eq:general-skeleton} holds. Its conclusion is
+\[
+ \max_e\groupdist(U^k_e)\le\frac CR(1+B_0R)^{10}\le\frac{C''}R\le C''\sqrt\delta.
+\]
+As in the gluing lemma, these constants do not depend on the number $b^3$ of cells. Taking $C_{\mathrm{SG}}\ge\max\{1,C,C',C''\}$, we obtain (1) in all cases, with absolute constants and no condition on the holonomies.
+
+\emph{Part (2).} For $\delta_r$ and $n$ as stated, the gauge transformation of part (1) satisfies
+\[
+ \max_e\groupdist(U^k_e)\le C_{\mathrm{SG}}\sqrt{\delta_r}+C_{\mathrm{SG}}/n\le r/4+r/4=r/2<r<2\pi.
+\]
+These links have unique principal logarithms and lie in $B_r$, which proves the first inclusion, with a margin even at the closed threshold. By \cref{ch02:lem:haar-and-forests}, $\groupdist(U_p)^2\le2\pi^2q(U_p)$, so the event $\{\max_pq(U_p)\le d_r\}$ with $d_r=\delta_r^2/(2\pi^2)$ is contained in the first event. Squaring the two values in the minimum defining $\delta_r$ gives the formula for $d_r$. For fixed $k$ the action of $k$ is a homeomorphism of the configuration space, so $D_r$, a union of translates of the open set $B_r$, is open, and it is gauge invariant because gauge transformations compose. In particular, the existence of the constructed gauge transformation gives membership in a Borel set without a measurable choice. The example at the beginning of \cref{ch04:sec:gauge} shows that the term $n^{-1}$ and the corresponding condition on the side are needed, also at zero curvature.
+
+\emph{Part (3).} Let $n\in4\N$ and $\beta_n=4n/\gamma\ge2$, with $n\ge4C_{\mathrm{SG}}/r$ as in part (2). In the notation of \cref{ch01:def:ensemble} the exponent of the Wilson measure is $-\beta_n\sum_pq(U_p)$, so $\mu_{n,\gamma}=\mu_n^{\beta_n}$ in the notation of \cref{ch03:thm:original-chessboard}. We apply \cref{ch03:thm:original-chessboard}(3) with $\ell=0$, the face set $S=\{p\}$, and $s=1/2$; its hypotheses $n\in4\N$ and $\beta_n\ge2$ hold. The function $\exp(\beta_nq(U_p)/16)$ is gauge invariant, Borel, and between $1$ and $e^{\beta_n/8}$, and $p$ lies in a cell of one of the eight shifted tilings, by \cref{ch04:lem:cones-and-cells} with $j=0$. We obtain
+\[
+ \E_{\mu_{n,\gamma}}\exp\bigl(\beta_nq(U_p)/16\bigr)\le\exp\Bigl[\frac18\Bigl(C_0+24\log2+\frac{36\log\beta_n}n\Bigr)\Bigr].
+\]
+Since $\{\groupdist(U_p)>\delta_r\}\subset\{q(U_p)>\delta_r^2/(2\pi^2)\}$, by Markov's inequality, we have
+\[
+ \mu_{n,\gamma}\bigl\{\groupdist(U_p)>\delta_r\bigr\}\le\exp\Bigl[\frac18\Bigl(C_0+24\log2+\frac{36\log\beta_n}n\Bigr)-\frac{\beta_n\delta_r^2}{32\pi^2}\Bigr].
+\]
+There are $3n^3$ positive plaquettes, and by part (2) the complement of $D_r$ is contained in the union of these events. The union bound and the trivial bound by one give $\varepsilon_{n,r,\gamma}$. The calculation keeps the surface term for every $n$ and $\gamma$ and uses no bound on $\beta_n/n$.
+
+\emph{Part (4).} By \cref{ch02:lem:haar-and-forests}, the open set $B_r$ contains a product of balls of positive Haar measure. Since the density of the Wilson measure is strictly positive, we have $\mu_{n,\gamma}(D_r)>0$. The identity for the total variation distance (in the convention $\norm{\mu-\nu}_{\mathrm{TV}}=\sup_A\abs{\mu(A)-\nu(A)}$), the identity $Z_{D_r}/Z=\mu_{n,\gamma}(D_r)$, and the bound $\abs{\log(Z_{D_r}/Z)}\le2\mu_{n,\gamma}(D_r^c)$ when $\mu_{n,\gamma}(D_r^c)\le1/2$ are the conditioning identities of \cref{ch02:lem:bounded-transfer}, applied with $S=D_r$. Since $\mu_{n,\gamma}(D_r^c)\le\varepsilon_{n,r,\gamma}$, the last bound gives the stated one. The deterministic constants came only from the axial strips, the extension bounds, and the aspect bounds, and the probability constant is the absolute constant $C_0$.
+\end{proof}

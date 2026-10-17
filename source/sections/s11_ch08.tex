@@ -1,0 +1,807 @@
+\chapter{Classical continuum limits and contraction estimates}\label{ch08:chapter}
+
+This section proves four deterministic properties of the effective classical actions $E_d$ and of the classical background fields constructed in \cref{ch07:chapter}. They are the classical inputs to the fluctuation integration in \cref{part:rg} and to the large-field analysis in \cref{part:largefield}.
+\begin{enumerate}
+\item \Cref{ch08:sec:refinement} fixes the coarse lattice and the coarse field and lets the number $d$ of averaging steps tend to infinity, so that the fine lattice spacing $M^{-d}$ tends to zero. We prove that a summably corrected version of $E_d$ is nondecreasing in $d$, that $E_d$ converges, that $E_d$ is bounded below by a fixed multiple of the Wilson action, and that, at a fixed coarse lattice, $E_d$ converges in the weighted analytic coefficient norm. We also prove that the reconstruction maps through finitely many averaging steps converge, together with all the matrices and densities entering them. This is \cref{ch08:thm:classical-cutoff}; it is used in \cref{ch11:chapter,ch12:chapter,ch19:chapter}.
+\item \Cref{ch08:sec:overlap} proves that two small representatives of the same periodic gauge orbit have the same effective classical action, even when the gauge transformation relating them has no small logarithm. This implies that $E_d$ extends to a real analytic function on the gauge-invariant small-field domain $D_\rho$ (\cref{ch08:thm:compact-overlap}). This is used in \cref{ch10:chapter,ch11:chapter,ch16:chapter}.
+\item \Cref{ch08:sec:alignment} constructs, for one renormalization group step of $J$ averaging steps, a representative of the gauge orbit of the classical background field that satisfies the block averaging constraint exactly and whose potential and first differences have coefficient bounds uniform in $J$. For each fixed $J$ it identifies this representative, after an explicit gauge transformation, with the zero-fluctuation reconstruction (\cref{ch08:lem:aligned-zero-white}). This is used in \cref{ch10:chapter,ch12:chapter,ch20:chapter,ch28:chapter}.
+\item \Cref{ch08:sec:contraction} proves that evaluating an effective interaction $R$ at the classical background field of one renormalization group step contracts its weighted analytic norm by a factor $O(M^{-J})$, at the same analytic radius and the same spatial decay rate, provided that $R$ is invariant under lattice translations, constant gauge transformations, spatial inversion, and infinitesimal gauge transformations (\cref{ch08:thm:principal-contraction}). This contraction allows us to choose $J$ in \cref{ch10:thm:common-analytic-class}.
+\end{enumerate}
+The inputs are the results of \cref{ch07:chapter} on the classical background field, its symmetries, the nested minimization identity for $E_d$, and its derivative estimates (\cref{ch07:thm:regular-minimum,ch07:lem:classical-symmetries,ch07:thm:bellman,ch07:thm:all-root-classical}); the gauge slice with prescribed coarse gauge of \cref{ch06:thm:projected-landau-slice}; the finite-torus estimate for gauge-invariant quadratic forms of \cref{ch05:lem:ward-parity}; and the one-step energy estimate of \cref{ch04:thm:energy-near-contraction,ch04:lem:actual-local-branch}.
+
+The classical background fields are constrained minimizers in the sense of Bałaban's variational construction \cite[Theorem~1, p.~279]{Balaban1985Variational}, which rests on his averaging operations and gauge-fixing conditions \cite{Balaban1985Averaging,Balaban1985Regular}. The constraints, coordinate domains, and coefficient norms used here are those of \cref{ch06:chapter,ch07:chapter}, and the results of this section are proved here.
+
+\section{Setting and conventions}\label{ch08:sec:setting}
+
+\paragraph{Units and norms.}
+Fix an odd integer $M\ge3$. Throughout this section we measure lengths in units of the coarse lattice, which has integer side $n\ge4$ (or $m\ge4$ when we consider one renormalization group step) and spacing one. For $d\ge0$ the fine lattice has side $nM^d$ and spacing
+\[
+ \varepsilon_d=M^{-d}
+\]
+in these units; its physical spacing on the torus $\Torus$ is $a_n\varepsilon_d$. For a configuration $U=e^{\varepsilon A}$ on a lattice of spacing $\varepsilon$ we write
+\[
+ \mathscr S_\varepsilon(U)=4\varepsilon^{-1}\sum_pq(U_p),
+ \qquad
+ \|A\|_{C^1_\varepsilon}=\|A\|_\infty+\|\nabla_\varepsilon A\|_\infty,
+\]
+where $\nabla_\varepsilon$ is the collection of all componentwise forward differences divided by $\varepsilon$, as in \cref{ch07:def:physical-classical-data}. We also write $\mathscr S_\varepsilon(A)$ for $\mathscr S_\varepsilon(e^{\varepsilon A})$. All spatial statements in this section concern complete periodic tori. In analytic coefficient norms, $a$ and $b$ denote spatial decay rates. We use $\varepsilon_d$, $t$, $\delta$, and $\delta_l$ for dimensionless lattice spacings and $a_n$ for the physical coarse spacing.
+
+Tensor norms, their Taylor factorials, and their volume normalizations are those of \cref{ch01:def:analytic-norms}. For a derivative tensor of a scalar function, $\|\cdot\|_{a,\mathrm{root}}$ denotes the coefficient bound with each external index fixed in turn: it fixes any one index and sums the absolute values of the coefficients over the other indices, with weight $e^{a\Tree}$, where $\Tree$ is the length of a shortest network connecting the locations of all indices (internal vertices allowed). Let $F$ be an analytic field of a coarse variable $\theta$, with values in the link variables of a lattice of spacing $\varepsilon$, and let $v=\varepsilon^3$. The output-row norm $\|D^s_\theta F\|_{b,\mathrm{out}}$ fixes one output index and sums the absolute values of the coefficients over all coarse input indices, with weight $e^{b\Tree}$. The volume-normalized column norm $\|D^s_\theta F\|_{b,\mathrm{input};v}$ fixes one coarse input index, sums over the output index and the remaining inputs with the same weight, and multiplies the result by the output volume $v$.
+
+\paragraph{Constants.}
+Unless stated otherwise, a constant in this section depends only on $M$ and on the fixed larger domains, spatial decay rates, and coefficient bounds of \cref{ch06:chapter,ch07:chapter}, with the dependence described in item~(2) of \cref{ch01:conv:constants}. Such a constant does not depend on the coarse side, on the depth $d$, on the coarse field, on $L$, on $\gamma$, or on $J$. We identify explicitly the constants that may depend on $J$, on a finite lattice, or on a fixed number of averaging steps.
+
+\paragraph{Real and complex arguments.}
+Variational comparisons and lower bounds on Hessians are applied only at real coarse fields and real free coordinates. At complex arguments the effective classical action and the conditional constrained minimizers denote the holomorphic continuations of the critical values and critical points from real data, as in \cref{ch07:thm:regular-minimum,ch07:thm:bellman}.
+
+\paragraph{The effective classical action and the gauge orbit of the classical background field.}
+We recall the objects of \cref{ch07:chapter}. For a small real coarse logarithm $\theta$, \cref{ch07:thm:regular-minimum} constructs the classical background field $A_d(\theta)$ on the lattice of spacing $\varepsilon_d$. It is the unique minimizer of $\mathscr S_{\varepsilon_d}$ among the fields whose gauge-corrected block average (see below) equals $e^\theta$, in a convex coordinate domain inside the gauge slice $\mathsf P_d\operatorname{div}_{\varepsilon_d}A=0$, where $\mathsf P_d$ is the projection of \cref{ch06:thm:projected-landau-slice}. The effective classical action is its value,
+\[
+ E_d(e^\theta)=\mathscr S_{\varepsilon_d}(A_d(\theta)),\qquad E_0=S_W.
+\]
+We distinguish three objects.
+\begin{enumerate}
+\item The value $E_d(c)$, a function of the coarse field $c$. It is the minimum on the locally unique branch constructed in \cref{ch06:chapter,ch07:chapter}; it is not asserted to be the infimum of $\mathscr S_{\varepsilon_d}$ over the whole fiber $\{U:T_M^dU=c\}$.
+\item The gauge orbit of the classical background field, that is, the orbit of $e^{\varepsilon_dA_d(\theta)}$ under periodic gauge transformations of the fine lattice. By gauge invariance of the Wilson action, every point of this orbit has action $E_d(e^\theta)$.
+\item Representatives at the fine and intermediate resolutions. On the fine lattice, the slice representative $e^{\varepsilon_dA_d(\theta)}$ and the representative with $T_M^dU=e^\theta$ from \cref{ch07:lem:classical-symmetries} belong to the orbit in item~(2). For each $j$, the field $e^{\varepsilon_{d,j}A_{d,j}(\theta)}$, with $\varepsilon_{d,j}=M^{j-d}$, represents the gauge orbit of $T_M^j(e^{\varepsilon_dA_d(\theta)})$ on its intermediate lattice, as in \cref{ch07:thm:all-root-classical}. The representative $C_{d_0,J}(\theta)$ and its orbit on the fine lattice of one renormalization group step are defined in \cref{ch08:sec:alignment}.
+\end{enumerate}
+We prove convergence of the values and of specified finite reconstruction maps. We do not prove convergence of the representatives in a fixed gauge as $d\to\infty$, and we do not identify a continuum variational problem.
+
+\paragraph{Block averages and gauge-corrected block averages.}
+Two maps from fine to coarse configurations appear below. The first is the iterated block averaging map $T_M^d$. The second is the gauge-corrected block average of \cref{ch05:lem:modified-average}, which at each averaging step multiplies the output of $T_M$ by explicit vertex gauge factors at the coarse vertices. Let $V_d(U)$ denote the gauge-corrected block average of a configuration $U$ after $d$ steps, and let $\mathsf G_d(U)$ denote the accumulated gauge transformation at the coarse vertices. Then
+\begin{equation}\label{ch08:eq:gauge-corrected-relation}
+ V_d(U)=\bigl(T_M^dU\bigr)^{\mathsf G_d(U)},
+\end{equation}
+for configurations in the domain of \cref{ch05:lem:modified-average}. This follows from the gauge covariance of $T_M$ (\cref{ch03:chapter}), induction over the $d$ steps, and the composition rule $(U^k)^l=U^{lk}$ of \eqref{ch01:eq:lattice-gauge}; for the representatives of \cref{ch07:thm:all-root-classical} we verify it explicitly in \eqref{ch08:eq:remaining-gauge} below. The classical background field is defined through $V_d$, but the block averaging constraint in the renormalization group is $T_M^dU=c$.
+
+The gauge slice of \cref{ch06:thm:projected-landau-slice} connects the two. Given a small field $A$ on the lattice of spacing $\varepsilon_d$ and a small prescribed coarse gauge logarithm $\zeta$, it produces a gauge transformation $e^\lambda$ such that $A^{e^\lambda}$ satisfies $\mathsf P_d\operatorname{div}_{\varepsilon_d}A^{e^\lambda}=0$ and
+\[
+ V_d\bigl(e^{\varepsilon_dA^{e^\lambda}}\bigr)=b^{e^\zeta},\qquad b=T_M^d\bigl(e^{\varepsilon_dA}\bigr).
+\]
+With prescribed coarse gauge logarithm $\zeta=0$, the gauge-corrected block average of the transformed field is exactly the block average $b$ of the original field. Since gauge transformations preserve the Wilson action, this converts a configuration $U$ with $T_M^dU=b$ into a field in the gauge slice with gauge-corrected block average $b$ and the same action. We use this in the comparison of \cref{ch08:sec:refinement}, the transfer of criticality in \cref{ch08:sec:overlap}, and the identification in \cref{ch08:sec:alignment}. We also use that the transformed field has small potential and curl (\cref{ch06:thm:projected-landau-slice}). It therefore lies in the larger domain of \cref{ch06:thm:constrained-convexity}, on which the background field is still the unique minimum (\cref{ch07:thm:regular-minimum}). We do not need an estimate on all first differences of the output.
+
+\paragraph{Majorant series.}
+For power series with nonnegative coefficients we write $P\preccurlyeq Q$ if every coefficient of $P$ is at most the corresponding coefficient of $Q$. For an analytic field $F$ of the coarse variable $\theta$, a decay rate $b$, and an output volume $v$, we define
+\begin{equation}\label{ch08:eq:aligned-series-convention}
+ \begin{aligned}
+ \mathscr R_b(F;u)&=
+  \sum_{s\ge1}\frac{u^s}{s!}
+                     \|D_\theta^sF(0)\|_{b,\mathrm{out}},\\
+ \mathscr C_{b,v}(F;u)&=
+  \sum_{s\ge1}\frac{u^{s-1}}{(s-1)!}
+                     \|D_\theta^sF(0)\|_{b,\mathrm{input};v}.
+ \end{aligned}
+\end{equation}
+For a group-valued $F$, only $F-F(0)$ enters these series, so the identity matrix does not contribute to a series vanishing at $u=0$. All comparisons of series below are coefficientwise comparisons of absolute tensor sums, not comparisons of values. The following lemma gives the counting rule for compositions of such series.
+
+\begin{lemma}\label{ch08:lem:majorant-composition}
+Let $k\ge1$, let $T$ be a symmetric $k$-linear map between finite-dimensional spaces, let $F$ be holomorphic near $0\in\C^D$ with $F(0)=0$, and put $G(\theta)=T[F(\theta),\dots,F(\theta)]/k!$. For $s\ge1$ and $h_1,\dots,h_s\in\C^D$,
+\begin{equation}\label{ch08:eq:partition-count}
+ \frac1{s!}D^sG(0)[h_1,\dots,h_s]
+ =\frac1{k!}\cdot\frac1{s!}\sum_{(S_1,\dots,S_k)}
+   T\bigl[D^{|S_1|}F(0)[h_{S_1}],\dots,D^{|S_k|}F(0)[h_{S_k}]\bigr],
+\end{equation}
+where the sum runs over the ordered partitions of $\{1,\dots,s\}$ into $k$ nonempty sets and $h_S$ is the list of the $h_i$ with $i\in S$. For given sizes $s_1+\dots+s_k=s$ there are $s!/\prod_is_i!$ such partitions.
+\end{lemma}
+
+\begin{proof}
+Since $F(0)=0$, inserting the Taylor series of $F$ in each argument of $T$, we find that the homogeneous part of degree $s$ of $G$ at $h$ is
+\[
+ \frac1{k!}\sum_{\substack{s_1+\dots+s_k=s\\ s_i\ge1}}
+ T\Bigl[\frac{D^{s_1}F(0)[h^{\otimes s_1}]}{s_1!},\dots,
+        \frac{D^{s_k}F(0)[h^{\otimes s_k}]}{s_k!}\Bigr].
+\]
+The right side of \eqref{ch08:eq:partition-count} is symmetric in $h_1,\dots,h_s$, and at $h_1=\dots=h_s=h$ it equals this expression, because the partitions with sizes $(s_1,\dots,s_k)$ number $s!/\prod_is_i!$. A symmetric multilinear form is determined by its values on the diagonal, which proves \eqref{ch08:eq:partition-count}.
+\end{proof}
+
+We use \cref{ch08:lem:majorant-composition} as follows. In \eqref{ch08:eq:partition-count}, the factor $1/k!$ cancels the reorderings of the $k$ slots of $T$. After division by $s!$, the partitions with sizes $(s_1,\dots,s_k)$ carry exactly the weights $\prod_i1/s_i!$ of the Taylor coefficients of the arguments. Taking absolute values before summing over labels, we bound the absolute order-$s$ coefficients of $G$, divided by $s!$, by the products of the absolute order-$s_i$ coefficients of $F$, divided by $s_i!$, summed over $s_1+\dots+s_k=s$, with the weight $1/k!$ and no further factorial. This also holds when some labels coincide. Consider an absolute weighted sum over labels in which the vertex $T$ contributes a factor $\tau$ and each argument contributes the coefficients of a series $f(u)$ with nonnegative coefficients. Then the series of $G$ is dominated by $\tau f(u)^k/k!$. If one label is fixed, it lies in exactly one of the $k$ groups, and a coefficient of order $j$ containing the fixed label has denominator $(j-1)!$ rather than $j!$. Summing over the $k$ choices replaces one factor $f$ by its termwise derivative $f'$, which gives $\tau f(u)^{k-1}f'(u)/(k-1)!$. Any external index may serve as the fixed one. The spatial weights are handled separately in each application: the network connecting the external indices of a composition is contained in the union of the networks of $T$ and of the arguments, so the weight $e^{b\Tree}$ of the composition is at most the product of the weights of the factors.
+
+\section{Classical actions at a fixed coarse lattice}\label{ch08:sec:refinement}
+
+\begin{theorem}\label{ch08:thm:classical-cutoff}
+Fix an odd integer $M\ge3$. There exist $r_{\rm CK},a_0,C>0$, depending only on $M$ and the fixed domains, and in particular independent of the coarse side $n\ge4$ and of $d\ge0$, with the following properties.
+\begin{enumerate}
+\item Let $0<r\le r_{\rm CK}$ and let $c=e^\theta$ be a real coarse field with $\|\theta\|_\infty<r$. Then, with both actions evaluated at the same coarse field on the same coarse lattice,
+\[
+ E_d(c)\le(1+CrM^{-2(d+1)})E_{d+1}(c)\qquad(d\ge0).
+\]
+Set $P_0=1$, $P_d=\prod_{\ell=0}^{d-1}(1+CrM^{-2(\ell+1)})$, and $\kappa_*=P_\infty^{-1}>0$. Then $P_dE_d(c)$ is nondecreasing in $d$, $0\le E_d(c)\le Cn^3\|\theta\|_\infty^2$, the limit $E_\infty(c)=\lim_{d\to\infty}E_d(c)$ exists, and
+\[
+ \begin{gathered}
+ E_d(c)\ge P_d^{-1}E_0(c)\ge\kappa_*E_0(c),\qquad
+ E_\infty(c)\ge(P_d/P_\infty)E_d(c),\\
+ E_d(c)-E_\infty(c)\le C_MrM^{-2d}E_d(c).
+ \end{gathered}
+\]
+In particular these inequalities apply to $c=U^k$ whenever $U$ is a coarse configuration and $k$ is a fixed periodic gauge transformation with $U^k$ in the stated domain; the identification of the values for different choices of $k$ is \cref{ch08:thm:compact-overlap}.
+\item For each fixed $n$, the whole sequence $E_d$ converges locally uniformly and holomorphically on a common complex polydisc of coarse logarithms to a holomorphic function $E_\infty$. For $0<a\le a_0$ and every sufficiently small fixed $\rho>0$ inside that polydisc,
+\[
+ \mathcal B_{\rho,a}(E_d-E_\infty)\longrightarrow0\qquad(d\to\infty).
+\]
+Every derivative of fixed order converges on strictly smaller neighborhoods. The radii, the coefficient bounds, and $\kappa_*$ are chosen uniformly in $n$; the convergence modulus is asserted only at fixed $n$.
+\item Fix two lattices of sides $M^sm$ and $m$, with $1\le s<\infty$, and fix the couplings. Consider the reconstruction maps through $s$ averaging steps in the free logarithmic coordinates, built from $E_{d+i}$, $0\le i<s$, as in \cref{ch07:thm:bellman}. As $d\to\infty$ they converge, and so do the conditional constrained minimizers, the constrained Hessians, their positive square roots and inverse square roots, every Haar disintegration density, and the whole triangular reconstruction map. The convergence holds with every derivative of fixed order in the coarse and free variables, uniformly on every compact set of real coarse fields and real free coordinates that lies in the domains of \cref{ch07:thm:bellman} with a fixed strict margin, and on a complex neighborhood of each such set. On these fixed finite lattices it also holds in an absolute coefficient norm with a smaller radius. The constants and convergence moduli in this item may depend on the two lattices, on $s$, on the couplings, and on the margins.
+\end{enumerate}
+\end{theorem}
+
+The proof uses two lemmas. The first controls one application of $T_M$; the second is a form of Montel's theorem with a statement about coefficient norms.
+
+\begin{lemma}\label{ch08:lem:one-step}
+There exist $b_M>0$ and $C_M<\infty$, depending only on $M$ and on fixed margins of the identity chart of the logarithm, with the following properties. Let $U$ be a configuration on a periodic lattice of side $Mn$, with $n\ge4$, such that $\eta=\max_p\groupdist(U_p)\le b_M$. Then every based loop holonomy entering the definition of the plaquettes of $T_MU$ lies in a fixed strict identity chart of the logarithm, and
+\begin{equation}\label{ch08:eq:one-step-energy}
+ \sum_Pq((T_MU)_P)\le M(1+C_M\eta)\sum_pq(U_p).
+\end{equation}
+If, in addition, the spacing of this lattice is $t\le M^{-1}$ in coarse units, $U=e^{tA}$, and $\|A\|_{C^1_t}\le R\le b_M$, then
+\begin{equation}\label{ch08:eq:one-step-potential}
+ T_MU=e^{MtB},\qquad
+ \|B\|_{C^1_{Mt}}\le C_MR,\qquad
+ \max_p\groupdist(U_p)\le C_Mt^2(R+R^2).
+\end{equation}
+All constants are independent of the spacing and of the side.
+\end{lemma}
+
+\begin{proof}
+Let $b_M\le\min(\delta_*(M),\delta_M)$, where $\delta_*(M)$ and $\delta_M$ are the thresholds of \cref{ch04:thm:energy-near-contraction,ch04:lem:actual-local-branch}, reduced further for the fixed margins of the logarithm if needed. \Cref{ch04:thm:energy-near-contraction}, applied to the averaging step from side $Mn$ to side $n$ with maximal plaquette distance $\eta$, implies \eqref{ch08:eq:one-step-energy}. The part of \cref{ch04:lem:actual-local-branch} that assumes only a bound on plaquette distances places every based loop holonomy in a fixed strict identity chart, without a bound on the link variables themselves. Its constants depend only on $M$ and the fixed margins, and not on $t$, $n$, or any coupling.
+
+For the bound on the potential, consider the averaging word \eqref{ch01:eq:ordinary-map} with every fine link variable written as $e^{ta_e}$. Its identity logarithm vanishes at $t=0$ for all small $a$. Division by $Mt$ is removable, since after expanding the absolutely convergent product and logarithm series, every nonconstant monomial contains at least one factor $t$. We obtain a local analytic function of the finitely many $a_e$, with first derivative bounded uniformly for $0\le t\le M^{-1}$ and value zero at $a=0$. Its value is bounded by $C_MR$. To compare the words at two neighboring coarse vertices, we translate every input edge by $Mt$. By telescoping $M$ fine differences, each input changes by at most $Mt\|\nabla_tA\|_\infty$. Integrating the derivative of the local function along the segment between the two lists of inputs gives the bound on $\nabla_{Mt}B$ in \eqref{ch08:eq:one-step-potential}. Finally, in a fine plaquette the linear sum of the four exponents $tA$ is bounded by $Ct^2\|\nabla_tA\|_\infty$, and the remainder of the product series is at most $Ct^2\|A\|_\infty^2$. The logarithm series preserves this bound, which gives the last assertion of \eqref{ch08:eq:one-step-potential}.
+\end{proof}
+
+\begin{lemma}\label{ch08:lem:analytic-compactness}
+Fix $D\ge1$, and let $(f_j)$ be holomorphic functions on a fixed open polydisc in $\C^D$, uniformly bounded on every strictly smaller closed polydisc.
+\begin{enumerate}
+\item Every sequence of the $f_j$ has a subsequence converging locally uniformly to a holomorphic function, together with all derivatives of fixed order.
+\item If $(f_j)$ converges pointwise on a real open subpolydisc, then the whole sequence converges locally uniformly on the polydisc.
+\item Under the convergence hypothesis of item~(2), let $f$ be the locally uniform limit. If also $\|D^kf_j(0)\|_{a,\mathrm{root}}\le C^{k+1}k!$ for all $k\ge2$ and all $j$, then for $C\rho<1$ we have $\mathcal B_{\rho,a}(f_j-f)\to0$.
+\end{enumerate}
+Here $D$ and the finite spatial weights are fixed; only the coefficient bound $C$ may be uniform over a family of dimensions.
+\end{lemma}
+
+\begin{proof}
+Consider a polydisc of radius $R$ on which $|f_j|\le B_R$. By the iterated one-variable Cauchy integral for the Taylor coefficient $c_\alpha$, we have $|c_\alpha|\le B_RR^{-|\alpha|}$. (The Cauchy formula follows by integrating the power series on a smaller circle, where it converges uniformly, and then enlarging the circle inside the domain of holomorphy.) Fix an increasing sequence of radii approaching the outer radius. By successive selection over the countably many multi-indices, the bounded complex coefficients have a common convergent subsequence. On a smaller radius $r<R$, the tails of the series are bounded uniformly by $B_R\sum_{k>K}\binom{D+k-1}{k}(r/R)^k$, which tends to zero as $K\to\infty$. This implies that the subsequence converges locally uniformly to the corresponding power series. Multiplying the coefficients by a fixed power of $k$ keeps these tails summable, which gives the convergence of all derivatives of fixed order. This proves (1).
+
+For (2), two subsequential limits agree on the real open subpolydisc. Fix all but one coordinate at real values there. A holomorphic function of one variable that vanishes on a real interval vanishes on its disc: if it had a first nonzero Taylor coefficient, factoring out the corresponding power would make its zeros isolated. Repeating this for each coordinate, we find that the two limits agree on a complex subpolydisc. By continuation along line segments through overlapping Taylor discs, they agree on the whole polydisc. Suppose that the whole sequence fails to converge uniformly on some compact subset. Then a subsequence stays at a fixed positive distance from any limit there. By (1), it has a further locally convergent subsequence, whose limit is the common limit just identified. This contradiction proves (2).
+
+For (3), at fixed $D$, convergence of the finitely many entries of order $k$ implies convergence of every absolute sum at that order with a fixed index, and the limit inherits the assumed bound. The term of order $k$ in $\mathcal B_{\rho,a}(f_j-f)$ is therefore at most $2C^{k+1}k!\rho^{k-2}/k!\le2C^3(C\rho)^{k-2}$. Its tail is a geometric series, uniformly in $j$, while every finite initial sum converges. This proves (3). For derivatives at other centers on a strictly smaller neighborhood, we use the Cauchy integrals about those centers on a larger compact neighborhood; by the uniform convergence just proved, these integrals converge uniformly.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch08:thm:classical-cutoff}]
+The proof has four steps: the comparison of consecutive depths, the monotone limit and its consequences, the analytic convergence at fixed $n$, and the convergence of the finite reconstruction maps.
+
+\paragraph{Step 1: comparison of consecutive depths.}
+Let $\theta$ be real and lie in a ball of coarse logarithms inside the common domains of \cref{ch07:thm:regular-minimum,ch07:lem:classical-symmetries,ch07:thm:bellman,ch07:thm:all-root-classical} and of the gauge slice of \cref{ch06:thm:projected-landau-slice}. By \cref{ch07:lem:classical-symmetries}, the gauge orbit of the classical background field of depth $d+1$ has a real representative
+\[
+ U=e^{tA^{\mathrm{ord}}},\qquad t=M^{-(d+1)},\qquad
+ T_M^{d+1}U=c,\qquad
+ \|A^{\mathrm{ord}}\|_{C^1_t}\le C\|\theta\|_\infty,
+\]
+with action $\mathscr S_t(U)=E_{d+1}(c)$. Let $b=T_MU$, a configuration on the lattice of spacing $Mt=\varepsilon_d$. Since the fine side is $nM^{d+1}=M(nM^d)$, the map $U\mapsto b$ is one averaging step with integer coarse side $nM^d\ge4$, and $T_M^db=T_M^{d+1}U=c$. If $C\|\theta\|_\infty\le b_M$, which holds after reducing $r_{\rm CK}$, then \cref{ch08:lem:one-step} implies that $b=e^{\varepsilon_dB}$ with $\|B\|_{C^1_{\varepsilon_d}}\le C_M\|\theta\|_\infty$. The divergence and the curl of $B$ are also bounded by this number. Let $r_{\rm CK}>0$ be so small that these three bounds meet the hypotheses of \cref{ch06:thm:projected-landau-slice} with prescribed coarse gauge logarithm zero, and that the output of the slice lies strictly inside the larger domain of \cref{ch06:thm:constrained-convexity} on which \cref{ch07:thm:regular-minimum} applies. Each of these requirements divides a fixed positive radius by a fixed constant, so $r_{\rm CK}$ is independent of $d$ and $n$. By the discussion in \cref{ch08:sec:setting}, the slice output has gauge-corrected block average exactly $c$ and the same action as $b$. By the minimizing property of the background field in that larger domain, we have
+\[
+ E_d(c)\le\mathscr S_{\varepsilon_d}(b).
+\]
+For $d=0$ this is an equality, since $b=c$ and $E_0=S_W$. No stationarity of $b$ is needed.
+
+Let $\|\theta\|_\infty<r\le r_{\rm CK}$. By the last bound of \eqref{ch08:eq:one-step-potential}, we have $\eta=\max_p\groupdist(U_p)\le Crt^2$. Inserting this into \eqref{ch08:eq:one-step-energy}, with the normalization of $\mathscr S$, we obtain
+\[
+ \mathscr S_{Mt}(T_MU)
+ \le\frac4{Mt}M(1+C\eta)\sum_pq(U_p)
+ \le(1+CrM^{-2(d+1)})E_{d+1}(c).
+\]
+Combining the last two displays, we obtain the comparison in item~(1).
+
+\paragraph{Step 2: the monotone limit.}
+We integrate the bound $\|DE_d(e^\theta)\|_\infty\le C_*\|\theta\|_\infty$ of \cref{ch07:thm:all-root-classical} along the segment $u\theta$, $0\le u\le1$, and use $E_d(I)=0$ (\cref{ch07:thm:regular-minimum}). Since there are $3n^3$ link variables, each with a fixed number of color components, on both the real and the complex balls of coarse logarithms we have
+\begin{equation}\label{ch08:eq:value-ceiling}
+ |E_d(e^\theta)|\le Cn^3\|\theta\|_\infty^2.
+\end{equation}
+Nonnegativity on real data is part of \cref{ch07:thm:regular-minimum}. Since $P_{d+1}=P_d(1+CrM^{-2(d+1)})$, the comparison of Step~1 is equivalent to $P_dE_d\le P_{d+1}E_{d+1}$. Further, using $\log(1+x)\le x$ and $\sum_{\ell\ge d}M^{-2(\ell+1)}=M^{-2d}/(M^2-1)$, we have
+\[
+ 1\le P_d\le P_\infty\le
+ \exp\Bigl(\frac{Cr}{M^2-1}\Bigr),\qquad
+ 0\le\log(P_\infty/P_d)\le\frac{CrM^{-2d}}{M^2-1}.
+\]
+The sequence $P_dE_d(c)$ is nondecreasing and, by \eqref{ch08:eq:value-ceiling} and $P_d\le P_\infty$, bounded. It therefore has a limit, and dividing by $P_d\to P_\infty$ shows that $E_\infty(c)=\lim_dE_d(c)$ exists. The inequality $P_dE_d\ge P_0E_0$ implies $E_d\ge P_d^{-1}E_0\ge P_\infty^{-1}E_0$, and $P_\infty E_\infty=\lim_jP_jE_j\ge P_dE_d$ implies $E_\infty\ge(P_d/P_\infty)E_d$. We conclude that
+\[
+ E_d-E_\infty\le\bigl(1-P_d/P_\infty\bigr)E_d\le\log(P_\infty/P_d)\,E_d\le\frac{Cr}{M^2-1}M^{-2d}E_d,
+\]
+where we used $1-e^{-u}\le u$ for $u\ge0$. This is the one-sided error bound in item~(1). We obtain no bound of the same order for $E_\infty-E_d$.
+
+\paragraph{Step 3: analytic convergence at fixed $n$.}
+Fix $n$. The coarse field has finitely many coordinates, and \eqref{ch08:eq:value-ceiling} bounds the holomorphic functions $E_d$ uniformly on the common complex polydisc of \cref{ch07:thm:all-root-classical}. By Step~2, they converge on real points. By part~(2) of \cref{ch08:lem:analytic-compactness}, the whole sequence converges locally uniformly and holomorphically. Let $a_0\le a_*$, and let the norm radius $\rho$ satisfy $C_*\rho<1/2$ and lie strictly inside that polydisc, where $a_*,C_*$ are the constants of \cref{ch07:thm:all-root-classical}. Since $\|D^kE_d\|_{a_*,\mathrm{root}}\le C_*^{k+1}k!$ for $k\ge2$, part~(3) of the same lemma implies that $\mathcal B_{\rho,a}(E_d-E_\infty)\to0$ for $0<a\le a_0$. Cauchy integrals on larger compact neighborhoods give the convergence of derivatives of fixed order on strictly smaller neighborhoods. The radii, the coefficient bound, and $\kappa_*$ were chosen before $n$ was fixed; only the subsequence argument and the finite list of coefficients use the fixed value of $n$.
+
+\paragraph{Step 4: finite reconstruction maps.}
+Fix the two lattices, the number $s$ of averaging steps, and the couplings. For the $i$-th averaging step write
+\[
+ \begin{gathered}
+ F_{d+i}(c,z)=E_{d+i}(b(c,z)),\qquad
+ D_zF_{d+i}(c,z_{d+i}^*(c))=0,\\
+ K_{d+i}(c)=D_z^2F_{d+i}(c,z_{d+i}^*(c)),
+ \end{gathered}
+\]
+where $b(c,z)$ is the configuration of \cref{ch07:thm:bellman} with coarse field $c$ and free logarithmic coordinates $z$. At real $c$, the conditional constrained minimizers $z^*_{d+i}(c)$ are real minima; at complex $c$, they are the holomorphic continuations solving the displayed critical equation. The map $b(c,z)$ does not depend on $d$, and \cref{ch07:thm:bellman} provides its coordinate neighborhoods and the uniform lower bound on the real Hessian. Since $E_{d+i}$ converges on each fixed lattice by Step~3, $F_{d+i}$ and all its derivatives of fixed order converge on every compact complex product with a strict margin. On real products the Hessian is at least $m_0I/2$. We subtract the critical equations at depths $d+i$ and $d'+i$, and integrate the Hessian of $F_{d'+i}$ along the segment joining the two minimizers, which lies in the convex ball of free coordinates. We obtain
+\[
+ |z_{d+i}^*(c)-z_{d'+i}^*(c)|_2
+ \le\frac2{m_0}\sup_z
+       |D_zF_{d+i}(c,z)-D_zF_{d'+i}(c,z)|_2.
+\]
+This shows that the conditional constrained minimizers are uniformly Cauchy on compact sets of real coarse fields.
+
+For complex coarse fields, we freeze the Hessian $K$ at a real minimizer, so that $\|K^{-1}\|_2\le2/m_0$. On a sufficiently small complex neighborhood in the coarse and free variables, the uniform analytic bounds on third and mixed derivatives give $\|I-K^{-1}D_z^2F_{d+i}\|_2\le1/2$. These bounds are uniform in $d$; their conversion between finite-dimensional norms may depend on the fixed lattice. The map $z\mapsto z-K^{-1}D_zF_{d+i}(c,z)$ is therefore a contraction there and maps a smaller closed ball into itself. Its iterates are holomorphic and converge geometrically, and they define a holomorphic critical point on a common neighborhood. For two late depths, we may use the matrix $K$ of the first depth for both equations, since their Hessians converge. If $\Phi_d$ and $\Phi_{d'}$ denote the two contraction maps, then
+\[
+ |z_d-z_{d'}|\le|\Phi_d(z_d)-\Phi_d(z_{d'})|+|\Phi_d(z_{d'})-\Phi_{d'}(z_{d'})|
+ \le\frac12|z_d-z_{d'}|+\sup|\Phi_d-\Phi_{d'}|,
+\]
+which implies that the difference of the fixed points is at most twice the uniform difference of the maps. A finite cover of the compact set of real coarse fields gives common complex neighborhoods, and on overlaps the branches agree by uniqueness of the fixed point. This proves locally uniform convergence of the complex minimizers, and Cauchy integrals give the convergence of each derivative of fixed order. The constrained Hessians $K_{d+i}$ then converge with their derivatives. Here the chain rule reads
+\[
+ D_z^2F=(D_zB)^{\mathsf T}D^2E(B)D_zB+DE(B)D_z^2B,
+ \qquad B=\Log b,
+\]
+and the second term is kept throughout.
+
+The positive square root and its inverse are holomorphic operations on the common matrix neighborhood in use. For a real symmetric $K\ge m_0I/2$,
+\begin{equation}\label{ch08:eq:root-integral}
+ K^{-1/2}=\frac2\pi\int_0^\infty(K+t^2I)^{-1}\,dt,
+ \qquad K^{1/2}=KK^{-1/2},
+\end{equation}
+as one checks by diagonalizing $K$ and using $\int_0^\infty(\lambda+t^2)^{-1}dt=\pi/(2\sqrt\lambda)$. On a complex neighborhood on which the Hermitian part of $K$ is at least $m_0I/4$, the resolvent norm is at most $(m_0/4+t^2)^{-1}$. Its Neumann series and the differentiated series converge on smaller neighborhoods, and every derivative is bounded by a finite product of these integrable resolvent bounds. Integrating over $[0,T]$ and using the uniform integrable tails, we obtain the convergence in \eqref{ch08:eq:root-integral} with every derivative of fixed order.
+
+The reconstruction through the $s$ averaging steps has the explicit triangular form
+\[
+ z_i=z_{d+i}^*(c_i)+g_iK_{d+i}(c_i)^{-1/2}w_i,
+ \qquad c_{i-1}=b(c_i,z_i),
+\]
+with the indexing adjusted to the input and output sides of each step. Starting at the coarsest field, we prove by finite induction over the $s$ steps the convergence of each $z_i$ and $c_{i-1}$ and of every joint derivative of fixed order in the coarse and free variables. At each step, the strict margin keeps the argument in a compact subset of the domain of the next map. The Haar disintegration density of one step is the product of the Haar factors $\sinc^2(|\Gamma_e|/2)$ over the non-tree edges, divided by the constraint determinant at the eliminated edges, times the constant Haar normalization (\cref{ch01:eq:haar-coordinates} and the formula following \cref{ch01:def:block-map}). For complex arguments, the Haar factor is defined by its even power series in the bilinear expression $\Gamma_e\cdot\Gamma_e$, whose restriction to real arguments is the real formula; no Hermitian modulus is continued. All the arguments just shown to converge enter these fixed functions, and the fixed margin keeps the denominators uniformly away from zero. These factors and their derivatives therefore converge. The triangular factors $g_i^{3f_i}\det K_{d+i}^{-1/2}$ converge as well.
+
+Finally, on these fixed finite lattices the finitely composed maps have a common holomorphic bound on a strictly larger product. The Cauchy estimate in the proof of \cref{ch08:lem:analytic-compactness} then gives a common absolute majorant on a smaller product. The spatial weight and the volume factor are finite here: the weight of a coefficient of degree $k$ is at most $e^{aD_0k}$, where $D_0$ is the diameter of the fixed finite set of indices. Let the radius of the coefficient norm be smaller than the larger radius times $e^{-aD_0}$. Then the tail of degree $k$ is a polynomial in $k$ times a fixed geometric sequence, and the tails are uniformly small, while every finite list of coefficients converges. This proves convergence in an absolute coefficient norm with a smaller radius. All constants in this last step may depend on the fixed lattices, on $s$, on the couplings, and on the margins, as asserted.
+\end{proof}
+
+\begin{remark}\label{ch08:rem:complex-domain}
+Item~(3) of \cref{ch08:thm:classical-cutoff} asserts complex convergence on a neighborhood of each compact set of real data; this is what the proof constructs, and it is what is used in \cref{ch12:chapter}. If, on a polydisc centered at a real point of such a set, all the maps in item~(3) are holomorphic and bounded uniformly in $d$, then part~(2) of \cref{ch08:lem:analytic-compactness} extends the locally uniform convergence to that polydisc.
+\end{remark}
+
+\section{Gauge invariance on overlapping charts}\label{ch08:sec:overlap}
+
+The classical background field exists only in a chart around the identity, but the renormalization group needs a well-defined value of $E_d$ on the gauge-invariant small-field domain $D_\rho=\mathcal G B_\rho$. The representatives in $B_\rho$ of a configuration in $D_\rho$ are related by periodic gauge transformations that need not have a small global logarithm.
+
+\begin{theorem}\label{ch08:thm:compact-overlap}
+There exists $\rho_{\rm ov}>0$, depending only on $M$ and the fixed domains, with the following properties. Let $n\ge4$, $d\ge0$, and $0<\rho\le\rho_{\rm ov}$, and let $k$ be a real periodic gauge transformation of the coarse lattice such that $c$ and $c^k$ both lie in $B_\rho$. Then
+\[
+ E_d(c^k)=E_d(c).
+\]
+No smallness of a global logarithm of $k$ is assumed. Moreover the following statements hold.
+\begin{enumerate}
+\item At adjacent coarse vertices $x,y$, $\groupdist(k_xk_y^{-1})<2\rho$.
+\item There is a smooth periodic map $\mathscr K$ from the torus (in coarse units) to $\SU$, obtained in each unit cell by normalizing a nonnegative cardinal average of the values of $k$ at the corners of the cell, regarded as unit quaternions, such that
+\[
+ \mathscr K=k\ \text{at the coarse vertices},\qquad
+ \|D\mathscr K\|_\infty+\|D^2\mathscr K\|_\infty\le C\rho.
+\]
+The map $k\mapsto\mathscr K$ commutes with left and right multiplication by constant elements of $\SU$, with translations of the coarse lattice, and with spatial inversion. Near every real $k$ satisfying the hypotheses with a fixed strict margin, $\mathscr K$ has a holomorphic continuation in the values of $k$ whose absolute Taylor coefficients of order $s$ are bounded by $C^{s+1}s!$, together with the corresponding volume-normalized column sums; these constants depend on the margin but not on $d$ or $n$. On the fine lattice of spacing $\varepsilon$, the gauge transformation by $\mathscr K$ sends a small potential $A$ to a potential whose $C^1_\varepsilon$ norm is at most $C(\|A\|_{C^1_\varepsilon}+\rho)$, uniformly in $\varepsilon$.
+\item Consequently the function $E_{d,\mathrm{sat}}(U)=E_d(U^k)$, where $k$ is any periodic gauge transformation with $U^k\in B_\rho$, is well defined and real analytic on $D_\rho$, and its local holomorphic expressions agree on every strict real overlap. If, in addition, $\rho\le r_{\rm CK}$, then $E_{d,\mathrm{sat}}\ge\kappa_*E_0$ on $D_\rho$, with $\kappa_*$ as in \cref{ch08:thm:classical-cutoff}. The same identities and the same extension hold for $E_\infty$ at each fixed coarse side $n$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}\label{ch08:rem:quaternion-picture}
+The following picture describes the interpolation in item~(2). In a unit cell of the coarse lattice, the values of $k$ at the eight corners are unit quaternions that lie pairwise within angle $3\rho$ of each other, although they may be far from $1$. Their weighted average $m(x)$ lies in the convex hull of these eight points, hence at distance more than $1/2$ from the origin, and $\mathscr K(x)$ is its radial projection back to the unit sphere $\SU\cong S^3$. The holomorphic continuation in item~(2) concerns the dependence on the corner values; the weights are smooth, but not analytic, functions of the position.
+\end{remark}
+
+\begin{proof}[Proof of \cref{ch08:thm:compact-overlap}]
+The proof has seven steps. Steps~1--5 construct the interpolation $\mathscr K$ and prove the estimates in items~(1) and~(2). Step~6 proves $E_d(c^k)=E_d(c)$, and Step~7 proves item~(3).
+
+\paragraph{Step 1: neighboring values of $k$.}
+Let $c'=c^k$. On a coarse edge $(x,y)$ we have $c'_{xy}=k_xc_{xy}k_y^{-1}$, so
+\[
+ k_xk_y^{-1}=c'_{xy}\bigl(k_yc_{xy}^{-1}k_y^{-1}\bigr),\qquad
+ \groupdist(k_xk_y^{-1})
+ \le\groupdist(c'_{xy})+\groupdist(c_{xy})<2\rho,
+\]
+where we used that $\groupdist$ is invariant under conjugation and satisfies the triangle inequality. The eight values of $k$ at the corners of any unit cell of the coarse lattice are therefore pairwise within $6\rho$. This estimate concerns only differences and does not restrict a logarithm of $k$.
+
+\paragraph{Step 2: the interpolation.}
+Let
+\[
+ b(t)=\begin{cases}e^{-1/t},&t>0,\\0,&t\le0,\end{cases}
+ \qquad f(t)=\frac{b(t)}{b(t)+b(1-t)}\quad(0\le t\le1).
+\]
+The function $f$ is smooth, flat at both endpoints, takes values in $[0,1]$, and satisfies $f(1-t)=1-f(t)$. In a cell $x_0+[0,1]^3$, we write $x=x_0+t$ and, for $v\in\{0,1\}^3$, define
+\begin{equation}\label{ch08:eq:quaternion-cardinal}
+ W_v(t)=\prod_{i=1}^3
+       \big[v_if(t_i)+(1-v_i)(1-f(t_i))\big],\quad
+ m(x)=\sum_vW_v(t)k_{x_0+v},\quad
+ \mathscr K(x)=\frac{m(x)}{|m(x)|}.
+\end{equation}
+Here elements of $\SU$ are represented by unit quaternions in $\R^4$. The weights $W_v$ are nonnegative, sum to one, and are cardinal at the corners. With our normalization of $\su$, the angle between two unit quaternions is half the group distance between the corresponding elements. Fix one corner value $k_0$. By Step~1, every corner value lies within angle $3\rho$ of $k_0$, so
+\[
+ \langle m(x),k_0\rangle\ge\cos(3\rho)>1/2
+\]
+after one fixed reduction of $\rho$. In particular, $|m(x)|>1/2$. On a face of the cell, the weights of the corners off that face vanish, and the formulas of the two adjacent cells reduce to the same four-corner formula. Since $f$ is flat at the endpoints, all normal derivatives of every order match across the face. We conclude that \eqref{ch08:eq:quaternion-cardinal} defines a smooth periodic map, also across the periodic seams.
+
+\paragraph{Step 3: derivative bounds and symmetries.}
+For every spatial derivative of positive order $j$ we have $\sum_vD^jW_v=0$, so
+\[
+ D^jm=\sum_vD^jW_v\,(k_{x_0+v}-k_0).
+\]
+The derivatives of the weights of each fixed order are bounded independently of the cell and of the side, and $|k_{x_0+v}-k_0|\le C\rho$ by Step~1. For $j=1,2$, the last display is therefore bounded by $C\rho$. The normalization $m\mapsto m/|m|$ has bounded derivatives on $|m|>1/2$, and the second derivative of $\mathscr K$ contains, besides $D^2m$, only products of two first derivatives of $m$. This proves
+\begin{equation}\label{ch08:eq:compact-lift-derivatives}
+ \|D\mathscr K\|_\infty+\|D^2\mathscr K\|_\infty\le C\rho.
+\end{equation}
+Since left and right quaternion multiplications by fixed elements of $\SU$ are orthogonal linear maps of $\R^4$, they commute with the average and its normalization. Integer translations commute with the cell formula. Spatial inversion reverses each coordinate of the cell and exchanges $v$ with $1-v$; the identity $f(1-t)=1-f(t)$ then gives the asserted equivariance. We do not assert a multiplication law for the interpolation of two variable gauge transformations.
+
+\paragraph{Step 4: holomorphic continuation.}
+We regard a quaternion as a $2\times2$ matrix. On real inputs,
+\[
+ \mathscr K=m(\det m)^{-1/2},\qquad \det m=|m|^2>1/4.
+\]
+We use exponential coordinates for the eight corner values about their fixed real values. By the equivariance under left multiplication, multiplying all eight on the left by the inverse of one real corner value puts them in a common fixed neighborhood of the identity. For sufficiently small complex increments of the coordinates, $\det m$ stays in a disc around its positive real value that avoids zero. The absolutely convergent binomial series then continues the branch of the square root that is positive on real data. On a smaller ball of increments, the exponential and binomial series give an absolute majorant $C/(1-Ct)$ for this function and for each of its first two spatial derivatives. Since there are only eight inputs, the absolute tensors of order $s$ are bounded by $C^{s+1}s!$. The constants depend only on the fixed margins of the determinant and of the coordinates. Since an input vertex belongs to at most eight cells, each of bounded diameter, the tensors have finite range and satisfy the weighted bounds at every fixed decay rate. For a fine output lattice of spacing $\varepsilon$, the column sums with a fixed input index are bounded, because $\varepsilon^3$ times the number of fine vertices in these cells is at most a fixed constant. The same conclusions hold for fixed spatial differences, by integrating the corresponding spatial derivatives of the cell formula. Strict margins allow a common choice of all these neighborhoods. This proves the holomorphic and coefficient assertions of item~(2), uniformly in $d$ and $n$.
+
+\paragraph{Step 5: the effect on a fine potential.}
+For a fine edge in direction $i$, with $y=x+\varepsilon e_i$, we set
+\[
+ V_i(x)=\varepsilon^{-1}\Log\bigl(\mathscr K(x)^{-1}\mathscr K(y)\bigr).
+\]
+By \eqref{ch08:eq:compact-lift-derivatives}, the ratio $\mathscr K(x)^{-1}\mathscr K(y)$ has group distance at most $C\varepsilon\rho$ from the identity, so this logarithm is taken on the identity branch. To see that the factor $\varepsilon^{-1}$ is harmless, let $R(x,s)=\mathscr K(x)^{-1}\mathscr K(x+s\varepsilon e_i)$; then
+\[
+ V_i(x)=\int_0^1D\Log_{R(x,s)}
+       \bigl[\mathscr K(x)^{-1}\partial_i\mathscr K(x+s\varepsilon e_i)\bigr]\,ds.
+\]
+All derivatives of this local logarithm are bounded. Differentiating in $x$ uses only the first and second derivatives in \eqref{ch08:eq:compact-lift-derivatives}: differentiating $R$ contributes a factor at most $C\rho$, and differentiating the other factor contributes at most $C(\rho+\rho^2)$. Using the mean value integral in $x$ for the lattice differences, we have $\|V\|_\infty+\|\nabla_\varepsilon V\|_\infty\le C\rho$, uniformly in $\varepsilon$.
+
+Since $\mathscr K(y)=\mathscr K(x)e^{\varepsilon V_i(x)}$, the transformed link variable $\mathscr K(x)e^{\varepsilon A_i(x)}\mathscr K(y)^{-1}$ has logarithmic potential
+\begin{equation}\label{ch08:eq:large-gauge-word}
+ \varepsilon^{-1}\Log[(e^{\varepsilon A})^{\mathscr K}_{xy}]
+ =\Ad(\mathscr K(x))
+       \big(A_i(x)-V_i(x)+\varepsilon\mathcal R_\varepsilon(A_i(x),V_i(x))\big).
+\end{equation}
+Here the remainder is defined by the product and logarithm series for $\varepsilon^{-1}\Log(e^{\varepsilon A}e^{-\varepsilon V})$ after subtracting $A-V$. Since all remaining monomials contain at least one factor $\varepsilon$, the series and its first derivatives are bounded on a fixed small ball of $(A,V)$, for $0\le\varepsilon\le1$. The real factor $\Ad(\mathscr K(x))$ is an isometry, and its first difference is bounded by $C\rho$. Taking a first difference in \eqref{ch08:eq:large-gauge-word}, by integrating the derivative of the local function between the neighboring arguments, we obtain
+\begin{equation}\label{ch08:eq:large-gauge-c1}
+ \big\|\varepsilon^{-1}\Log[(e^{\varepsilon A})^{\mathscr K}]
+                                      \big\|_{C^1_\varepsilon}
+       \le C(\|A\|_{C^1_\varepsilon}+\rho)
+\end{equation}
+on a fixed small ball of potentials. The constants do not depend on the distance of $\mathscr K$ from the identity.
+
+\paragraph{Step 6: identification of the minima.}
+Let $U^{\rm ord}(c)$ be the real representative of the gauge orbit of the classical background field with $T_M^dU^{\rm ord}(c)=c$ from \cref{ch07:lem:classical-symmetries}. Its potential has $C^1_{\varepsilon_d}$ norm at most $C\rho$, its action is $E_d(c)$, and by \cref{ch07:thm:regular-minimum} every tangent vector to the fiber $\{U:T_M^dU=c\}$ at $U^{\rm ord}(c)$ has zero first variation. The restriction of $\mathscr K$ to the fine vertices takes the values $k$ at the coarse vertices. The block averaging map is gauge covariant: the vertex factors cancel between adjacent edges of each defining path, and the logarithm of each based loop holonomy is conjugated at its basepoint. Hence
+\[
+ T_M^d\bigl[(U^{\rm ord}(c))^{\mathscr K}\bigr]=c^k=c'.
+\]
+A fixed real gauge transformation preserves the Wilson action and maps the fiber over $c$ diffeomorphically onto the fiber over $c'$. It therefore preserves constrained criticality. By \eqref{ch08:eq:large-gauge-c1}, the potential, the divergence, and the curl of $(U^{\rm ord}(c))^{\mathscr K}$ are bounded by $C'\rho$. Let $\rho_{\rm ov}$ be smaller than the fixed radii of \cref{ch06:thm:projected-landau-slice,ch06:thm:constrained-convexity} divided by $C'$, and smaller than the thresholds used in Steps~2--5. Then the gauge slice of \cref{ch06:thm:projected-landau-slice}, with prescribed coarse gauge logarithm zero, sends $(U^{\rm ord}(c))^{\mathscr K}$ into the larger domain of \cref{ch06:thm:constrained-convexity}, with gauge-corrected block average exactly $c'$ (\cref{ch08:sec:setting}).
+
+We verify that the resulting field is critical in that domain, rather than identifying the two constraint maps. Consider a curve $\gamma(t)$ through it in the gauge slice, with fixed gauge-corrected block average $c'$. By \eqref{ch08:eq:gauge-corrected-relation}, its block average is $T_M^d\gamma(t)=(c')^{\mathsf G(t)^{-1}}$, where $\mathsf G(t)$ is the accumulated gauge transformation of the gauge-corrected average along the curve. Since all defining words have strict margins in the identity chart of the logarithm, $\mathsf G(t)$ is differentiable. We interpolate $\mathsf G(t)$ smoothly to the fine vertices with the cardinal interpolation of \cref{ch07:lem:classical-symmetries}, and apply the resulting gauge transformation to $\gamma(t)$. The new curve has block average fixed at $c'$ and the same action as $\gamma(t)$, and its value at $t=0$ lies on the critical gauge orbit of $(U^{\rm ord}(c))^{\mathscr K}$. The constrained criticality on the fiber over $c'$ therefore kills its derivative at $t=0$. The additional term coming from the field-dependent gauge transformation is a gauge tangent and has zero first variation as well. Hence the curve $\gamma$ has zero first variation of the action. By \cref{ch07:thm:regular-minimum}, the unique critical point in the convex domain is the classical background field for $c'$. Since all transformations used preserve the action, we conclude that $E_d(c')=E_d(c)$. For $d=0$, this identity follows directly by conjugating the plaquette variables.
+
+\paragraph{Step 7: extension to $D_\rho$.}
+If $U^k,U^l\in B_\rho$, then $U^l=(U^k)^{lk^{-1}}$, and Step~6 gives the same value in both charts. This proves that $E_{d,\mathrm{sat}}$ is well defined on $D_\rho$. Each fixed $k$ defines an open set on which $U\mapsto E_d(U^k)$ is real analytic. On a strict real overlap, two such local holomorphic expressions agree on a real open set, and the coordinatewise uniqueness argument in the proof of part~(2) of \cref{ch08:lem:analytic-compactness} identifies their germs. They therefore patch to a real analytic function. The lower bound follows from \cref{ch08:thm:classical-cutoff}:
+\[
+ E_{d,\mathrm{sat}}(U)=E_d(U^k)\ge\kappa_*E_0(U^k)=\kappa_*E_0(U),
+\]
+since the Wilson action $E_0$ is gauge invariant. For a fixed coarse side, passing to the limit $d\to\infty$ in the two chart values by \cref{ch08:thm:classical-cutoff}, we find the same identities and the same extension for $E_\infty$.
+\end{proof}
+
+\section{Gauge alignment of the successive constrained minimizers}\label{ch08:sec:alignment}
+
+In this section, we consider one renormalization group step. Let $J\ge1$, $d_0\ge0$, and $m\ge4$, and let $\delta=M^{-J}$. The step goes from the fine lattice of side $m/\delta=mM^J$, of spacing $\delta$ in coarse units, to the coarse lattice of side $m$, through the intermediate lattices of spacings $\delta_l=M^{l-J}$, $0\le l\le J$. The effective classical action on the fine lattice of the step is $E_{d_0}$.
+
+At each step, the renormalization group needs a representative of the gauge orbit of the classical background field that satisfies the block averaging constraint $T_M^J(\cdot)=e^\theta$ exactly. Indeed, the small-field event and the reconstruction maps are defined through $T_M$, not through the gauge-corrected average. Its coefficient bounds must be uniform in $J$, since $J$ is chosen only after these bounds are known. The identification with the reconstruction maps of \cref{ch09:chapter,ch10:chapter} is needed only for fixed $J$.
+
+\paragraph{The classical background field of the step.}
+Let $\theta$ be a small coarse logarithm. We apply \cref{ch07:thm:all-root-classical} with coarse side $n=m$, depth $d=d_0+J$, and intermediate index $j=d_0+l$, $0\le l\le J$. The intermediate spacing is then exactly $M^{j-d}=\delta_l$, and the fine side is $mM^J=m/\delta$. Since these are complete periodic tori of side at least four, \cref{ch07:thm:all-root-classical} applies in its form for arbitrary sides. We denote the resulting representatives by
+\[
+ D_l(\theta)=e^{\delta_lA_l(\theta)},\qquad 0\le l\le J,
+\]
+so that $D_J=e^\theta$ and $D_0=e^{\delta A_0(\theta)}$ is a configuration on the fine lattice of the step. For real $\theta$, these are gauge-corrected block averages of the classical background field of depth $d_0+J$; on the common complex ball, they are holomorphic continuations. We refer to the gauge orbit of $D_0(\theta)$ as the gauge orbit of the classical background field of the step. By \cref{ch07:thm:all-root-classical}, the pairs $(A_l,\nabla_{\delta_l}A_l)$ have one common factorial majorant, for output-row norms and for column norms with output volume $\delta_l^3$, independent of $d_0$, $J$, $l$, and $m$.
+
+The next lemma identifies this orbit, for each fixed $J$, with the configuration obtained by successive conditional constrained minimization. For a configuration $V$ on the fine lattice of the step in the domain of \cref{ch07:lem:classical-symmetries} (applied with depth $d_0$ and coarse side $m/\delta$), let $U^{\rm ord}_{d_0}(V)$ denote the representative of the gauge orbit of the classical background field of depth $d_0$ with $T_M^{d_0}U^{\rm ord}_{d_0}(V)=V$.
+
+\begin{lemma}\label{ch08:lem:successive-minimizer-orbit}
+Let $J\ge1$, $d_0\ge0$, $m\ge4$, and $\delta=M^{-J}$.
+\begin{enumerate}
+\item For $0\le j\le J$ define functions $\Phi_j$ of configurations $c_j$ on the lattice of spacing $\delta_j$ by $\Phi_0=E_{d_0}$ and $\Phi_{j+1}(c_{j+1})=\Phi_j\bigl(b(c_{j+1},z^*)\bigr)$, where $b(c,z)$ is the configuration of \cref{ch07:thm:bellman} for the averaging step from spacing $\delta_j$ to $\delta_{j+1}$ and $z^*$ is the conditional constrained minimizer of $z\mapsto\Phi_j(b(c_{j+1},z))$. Then $\Phi_j=M^{-j}E_{d_0+j}$, wherever the successive minimizers lie in the domains of \cref{ch07:thm:bellman}. For real data this is an identity between minima on the branch of \cref{ch07:thm:bellman}; it extends holomorphically.
+\item Let $\widehat c_0(\theta)$ be the configuration on the fine lattice of the step obtained by successive conditional constrained minimization, starting from $e^\theta$, that is, the zero-fluctuation reconstruction before gauge transformation, and let $\widehat U(\theta)=U^{\rm ord}_{d_0}(\widehat c_0(\theta))$. For each fixed $J$ there is $r'_J>0$, depending on $J$ and the fixed domains but not on $d_0$, $m$, $L$, or $\gamma$, such that the following holds for real $\|\theta\|_\infty<r'_J$. The configuration $\widehat c_0(\theta)$ is a critical point of $E_{d_0}$ on the fiber $\{V:T_M^JV=e^\theta\}$. The configuration $\widehat U(\theta)$ satisfies $T_M^{d_0+J}\widehat U=e^\theta$, every tangent vector to the fiber $\{U:T_M^{d_0+J}U=e^\theta\}$ at $\widehat U(\theta)$ has zero first variation of the Wilson action, its action in coarse units equals $E_{d_0+J}(e^\theta)$, and it lies in the gauge orbit of the classical background field of depth $d_0+J$ at $e^\theta$. Finally, $\widehat c_0(\theta)$ and $D_0(\theta)$ are gauge equivalent, and $E_{d_0}(\widehat c_0(\theta))=E_{d_0}(D_0(\theta))$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (1), by \cref{ch07:thm:bellman} we have $E_{d+1}(c)=M\min_zE_d(b(c,z))$ on the branch constructed there, for every depth $d$. If $\Phi_j=M^{-j}E_{d_0+j}$, then
+\[
+ \Phi_{j+1}(c_{j+1})=M^{-j}\min_zE_{d_0+j}(b(c_{j+1},z))=M^{-j-1}E_{d_0+j+1}(c_{j+1}),
+\]
+which proves (1) by induction; the factor $M^{-j}$ comes from applying \cref{ch07:thm:bellman} $j$ times. The minima are taken for real coarse fields and real free coordinates, and the critical-value identities extend holomorphically, as stated in \cref{ch07:thm:bellman}.
+
+For (2), we first show that $\widehat c_0$ is critical on its fiber. The tangent space at a configuration on a lattice of one averaging step decomposes according to the coordinates of \cref{ch07:thm:bellman}. These coordinates gauge the configuration by the transports along the root paths of the block trees, take the remaining free logarithmic coordinates, and solve the eliminated edges by the inverse branch. Differentiating them, we split a tangent vector into a tangent to the gauge action of the block trees, a derivative of $b(c,z)$ in the free coordinates $z$, and a derivative through the next coarser field $c$. Consider a tangent vector to the fiber $\{T_M^JV=e^\theta\}$ at $\widehat c_0$. At the first averaging step, the gauge part has zero derivative of $E_{d_0}$ by the local gauge invariance of \cref{ch07:lem:classical-symmetries}. The free part is killed by the critical equation of the conditional constrained minimizer. The remaining derivative is the derivative of the partially minimized value $\Phi_1=M^{-1}E_{d_0+1}$ in the next coarser field. Repeating this at each of the $J$ averaging steps, and using that the coarsest field $e^\theta$ is fixed, we find that the derivative vanishes. This proves the first assertion. The same induction, preceded by one more step, applies to $\widehat U$. A variation of $\widehat U$ at fixed coarse field splits into the variation of $U^{\rm ord}_{d_0}$ induced by the variation of its field on the fine lattice of the step, and a variation that keeps that field fixed. The latter has zero derivative of the action by \cref{ch07:thm:regular-minimum}. The former has derivative $DE_{d_0}$ applied to the induced variation, up to the fixed scale factor, and this vanishes by the first assertion. We conclude that every tangent to the fiber $\{T_M^{d_0+J}U=e^\theta\}$ at $\widehat U$ has zero first variation.
+
+Changing from units in which the fine lattice of the step has spacing one to coarse units multiplies potentials by $\delta^{-1}$ and first differences by $\delta^{-2}$, which are fixed factors for fixed $J$. The potential of $\widehat U(\theta)$ therefore has $C^1$ norm at most $C_J\|\theta\|_\infty$ in coarse units. By (1), its action in coarse units is $M^J$ times $\Phi_J=M^{-J}E_{d_0+J}$, that is, $E_{d_0+J}(e^\theta)$. Let $r'_J$ be so small that the gauge slice of \cref{ch06:thm:projected-landau-slice}, with prescribed coarse gauge logarithm zero, places $\widehat U(\theta)$ in the larger domain of \cref{ch06:thm:constrained-convexity}. The argument of Step~6 in the proof of \cref{ch08:thm:compact-overlap} transfers the constrained criticality to that domain. The uniqueness in \cref{ch07:thm:regular-minimum} then identifies the gauge orbit of $\widehat U(\theta)$ with that of the classical background field of depth $d_0+J$.
+
+Finally, we write $\widehat U=(e^{\varepsilon A_{d_0+J}})^g$ for a fine gauge transformation $g$, where $\varepsilon=M^{-d_0-J}$. By gauge covariance of $T_M$, $\widehat c_0=T_M^{d_0}\widehat U$ is the gauge transform of $T_M^{d_0}e^{\varepsilon A_{d_0+J}}$ by the restriction of $g$, and by \eqref{ch08:eq:gauge-corrected-relation} the latter is gauge equivalent to $D_0$. Thus $\widehat c_0(\theta)$ and $D_0(\theta)$ are gauge equivalent, and after reducing $r'_J$ both lie in $B_{\rho}$ with $\rho\le\rho_{\rm ov}$. \Cref{ch08:thm:compact-overlap} then implies that $E_{d_0}(\widehat c_0)=E_{d_0}(D_0)$.
+\end{proof}
+
+We write ${\RawRecon}_{d_0,J}(\theta,0)=\widehat c_0(\theta)$ for the zero-fluctuation reconstruction of the step before gauge transformation. It is built from the successive conditional constrained minimizers of \cref{ch07:thm:bellman} and their normalization by the positive inverse square roots of the constrained Hessians, with every normalized fluctuation variable equal to zero.
+
+\begin{lemma}\label{ch08:lem:aligned-zero-white}
+Let $J\ge1$, $d_0\ge0$, and $m\ge4$, and put $\delta=M^{-J}$.
+\begin{enumerate}
+\item On a common complex ball $\|\theta\|_\infty<r_{\rm cen}$ there is an analytic representative
+\[
+ C_{d_0,J}(\theta)=e^{\delta\overline A_{d_0,J}(\theta)},\qquad
+ T_M^JC_{d_0,J}(\theta)=e^\theta,
+ \qquad \overline A_{d_0,J}(0)=0,
+\]
+of the gauge orbit of the classical background field of the step.
+\item There exist $r_{\rm cen},a_{\rm cen},C_{\rm cen}>0$, depending only on $M$ and the fixed domains and independent of $J$, $d_0$, and $m$, such that for every integer $s\ge1$ and every $\|\theta\|_\infty<r_{\rm cen}$,
+\[
+ \|D_\theta^s(\overline A_{d_0,J},\nabla_\delta\overline A_{d_0,J})
+                                      \|_{a_{\rm cen},\mathrm{out}}
+ +\|D_\theta^s(\overline A_{d_0,J},\nabla_\delta\overline A_{d_0,J})
+                         \|_{a_{\rm cen},\mathrm{input};\delta^3}
+ \le C_{\rm cen}^{s+1}s!.
+\]
+In particular $\|\overline A_{d_0,J}(\theta)\|_{C^1_\delta}\le C_{\rm cen}\|\theta\|_\infty$.
+\item The representative is $C_{d_0,J}=D_0^{L}$, where $L$ is the smooth interpolation, by the cardinal weights of \cref{ch07:lem:classical-symmetries}, of the accumulated gauge transformation $G$ at the coarse vertices that relates the gauge-corrected and the ordinary block averages of $D_0$; at the coarse vertices $L=G$ (not $G^{-1}$), the multiplication order being forced by $(U^k)^l=U^{lk}$. The real gauge path connecting $D_0$ to $C_{d_0,J}$ has logarithms of the fine link variables bounded by $C\delta\|\theta\|_\infty$.
+\item After one fixed reduction of $r_{\rm cen}$ with $Cr_{\rm cen}<1/2$,
+\[
+ \mathscr R_{a_{\rm cen}}\bigl((\overline A_{d_0,J},\nabla_\delta\overline A_{d_0,J});u\bigr)\preccurlyeq Z(u)=\frac{Cu}{1-Cu},\qquad
+ \mathscr C_{a_{\rm cen},\delta^3}\bigl((\overline A_{d_0,J},\nabla_\delta\overline A_{d_0,J});u\bigr)\preccurlyeq Z'(u),
+\]
+on $0\le u<r_{\rm cen}$, with $C$ and $r_{\rm cen}$ independent of $J$, $d_0$, and $m$. The accumulated gauge transformation $G$, its inverse, and its interpolation $L$ have bounds of the same type, uniform in $J$. This item gives no bound uniform in $J$ for the full reconstruction in coarse and free coordinates or for the gauge transformation $F_J$ of item~(6), and no column bound for arbitrary fine inputs to these gauge transformations.
+\item For each fixed $J$, the representative $C_{d_0,J}$, the gauge transformation $L$ and its inverse, and the gauge transformation $F_J$ of item~(6) have weighted absolute coefficient bounds of factorial type, with every index fixed in turn, on a fixed larger domain of radius $r_J>0$, with constants $C_J$. A positive spatial decay rate for these bounds can be chosen before $J$; $r_J$ and $C_J$ may depend on $J$ and on the chosen analytic domains, but not on $d_0$, $m$, $L$, or $\gamma$. These constants are not used to choose $J$.
+\item For the same fixed $J$, after reducing $r_J$ only, let $F_J(\theta)$ be the gauge transformation obtained from $C_{d_0,J}(\theta)$ by imposing, in the order $j=J-1,J-2,\dots,0$, the block axial gauge of the level-$j$ blocks of the field after the preceding gauge transformations, each factor being extended constantly through the finer block partitions. With $(U^k)^l=U^{lk}$ its ordered product is $F_J=K_0K_1\cdots K_{J-1}$, and
+\[
+ F_J=I\ \text{at the coarse vertices},\qquad F_J(0)=I,\qquad
+ C_{d_0,J}(\theta)^{F_J(\theta)}
+       ={\RawRecon}_{d_0,J}(\theta,0).
+\]
+This identity holds on the complex ball of radius $r_J$, with strict margins in all intermediate charts. The gauge transformations $F_J$ and $F_J^{-1}$ depend only on $\theta$ and satisfy the bounds of item~(5), uniformly in $d_0$, $m$, $L$, and $\gamma$; no bound on $F_J$ uniform in $J$ is asserted.
+\end{enumerate}
+\end{lemma}
+
+The bounds of item~(2) hold at every order $s$; the reconstruction maps of \cref{ch12:chapter} use only finitely many orders of such uniform bounds. \Cref{ch08:tab:constants} lists the order in which the constants of this section enter the choice of parameters.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.3\textwidth}p{0.64\textwidth}@{}}
+\toprule
+Constants & Dependence and role\\
+\midrule
+$a_*,C_*,r_*$, $m_0$; $r_{\rm CK}$, $\rho_{\rm ov}$ & Fixed geometry, decay rates, and classical coefficient bounds (\cref{ch07:thm:bellman,ch07:thm:all-root-classical,ch08:thm:classical-cutoff,ch08:thm:compact-overlap}); independent of $J$.\\
+$a_{\rm cen},r_{\rm cen},C_{\rm cen}$ and $Z$ & Items~(2)--(4) of \cref{ch08:lem:aligned-zero-white}; independent of $J$, $d_0$, and $m$.\\
+$a$, $\rho_0(a),\delta_0(a),C_P(a)$ & \Cref{ch08:thm:principal-contraction}; for the application to $C_{d_0,J}$, $0<a<a_{\rm cen}/8$, $2\rho_0<\min(r_{\rm cen},r_*)$, and $\delta_0$ chosen so that the image condition holds for both $D_0$ and $C_{d_0,J}$; independent of $J$, $d_0$, $m$, and of the later choice of $\rho\le\rho_0$.\\
+$J$ & Chosen after the preceding constants, for instance so that $C_P(a)M^{-J}<1/4$ (\cref{ch10:thm:common-analytic-class}; see also \cref{ch20:thm:common-parameters}).\\
+$r_J,C_J$ & Items~(5)--(6) of \cref{ch08:lem:aligned-zero-white}; depend on $J$ but not on $d_0$, $m$, $L$, or $\gamma$; never used to choose $J$.\\
+Later radii and coupling bounds & Chosen in \cref{part:rg,part:largefield}, after $J$.\\
+\bottomrule
+\end{tabular}
+\caption{Order of the constants in \cref{ch08:chapter}.}
+\label{ch08:tab:constants}
+\end{table}
+
+\begin{proof}[Proof of \cref{ch08:lem:aligned-zero-white}]
+Steps~1--6 construct $C_{d_0,J}$ and prove items~(1)--(4) with constants independent of $J$. Step~7 constructs $F_J$ and proves item~(5), and Step~8 proves the identity in item~(6).
+
+\paragraph{Step 1: conventions.}
+We use the representatives $D_l$ described before \cref{ch08:lem:successive-minimizer-orbit}, with their common factorial majorant from \cref{ch07:thm:all-root-classical}. Fix $0<a_{\rm cen}<a_*/32$. The larger multiples of this rate used below give spatial decay rates strictly larger than the working rate, which we use to sum columns. This choice does not depend on $J$, $d_0$, or $m$.
+
+\paragraph{Step 2: the accumulated gauge transformation.}
+We bound the gauge transformation relating the ordinary and the gauge-corrected block averages, rather than replacing the block averaging constraint by the gauge-corrected one. At level $l$, the vertex factor of the gauge-corrected average at a block center $r$ is
+\[
+ H_l(r)=\exp\Bigl\{-M^{-3}
+       \sum_{x\in\mathsf B_M(r)}\Log D_l(\sigma_{r,x})\Bigr\},
+\]
+the identity-background factor of \cref{ch05:lem:modified-average}; by its definition, $D_{l+1}=(T_MD_l)^{H_l}$. By gauge covariance of $T_M$, the accumulated gauge transformations $G_l$ satisfy
+\[
+ G_0=I,\qquad G_{l+1}=H_l\,(G_l|_{\text{next coarser vertices}}),\qquad
+ D_l=(T_M^lD_0)^{G_l};
+\]
+the last identity follows by induction from $(U^k)^l=U^{lk}$. In particular, with $G=G_J$,
+\begin{equation}\label{ch08:eq:remaining-gauge}
+ e^\theta=(T_M^JD_0)^G,\qquad
+                   T_M^JD_0=(e^\theta)^{G^{-1}}.
+\end{equation}
+
+We now bound the coefficients of $\kappa=\Log G$ by a series that does not depend on $J$. Each path in $H_l$ has at most $C_M$ edges with variables $e^{\delta_lA_{l,e}}$. Expanding the product, the logarithm, and the exponential, we obtain the coefficientwise bound
+\begin{equation}\label{ch08:eq:local-gauge-series}
+ H_l-I\ \preccurlyeq\ \delta_l\beta(Z(t)),\qquad
+          \beta(z)\le\frac{Cz}{1-Cz},\quad \beta(0)=0,
+\end{equation}
+where $Z(t)=Ct/(1-Ct)$ is the majorant of the pairs $(A_l,\nabla_{\delta_l}A_l)$ and $\preccurlyeq$ refers to absolute output-row sums at a specified smaller decay rate. The factor $\delta_l$ appears because every nonconstant monomial of the local word contains at least one exponent $\delta_lA_l$, and $\delta_l^k\le\delta_l$. The finitely many path variables contribute a fixed factor per degree. The paths lie in a collar of radius $C_M\delta_l$, and joining it to the output vertex contributes another fixed factor per degree, absorbed in $C$. The absolute exponential, logarithm, and product series converge for one small fixed $t$. This proves \eqref{ch08:eq:local-gauge-series} as an estimate on coefficients.
+
+Restriction to coarser vertices cannot increase an output row. Using $\sum_{l=0}^{J-1}\delta_l<1/(M-1)$, we obtain
+\[
+ G-I\preccurlyeq\prod_{l=0}^{J-1}(1+\delta_l\beta(Z))-1
+ \preccurlyeq \exp\Bigl(\frac{\beta(Z)}{M-1}\Bigr)-1,
+\]
+and we denote the right side by $Q(t)$.
+Fix a radius of coarse logarithms such that $Q(t)<1/2$. The logarithm series then bounds the absolute row series of $\kappa$ by $\sum_{k\ge1}Q(t)^k/k$. This series converges, vanishes at zero, and is dominated coefficientwise by $Ct/(1-Ct)$ after enlarging $C$. Indeed, the coefficient of degree $s$ of a series with nonnegative coefficients that converges at $t_0>0$ is at most its value at $t_0$ times $t_0^{-s}$. The radius and the constants are independent of $J$, $d_0$, and $m$. The inverse needs no implicit differentiation: since $\det G=1$, for $2\times2$ matrices
+\begin{equation}\label{ch08:eq:terminal-gauge-inverse}
+ G^{-1}=\operatorname{adj}G,\qquad
+ \operatorname{adj}(I+X)-I=(\tr X)I-X.
+\end{equation}
+This is linear in $X$, with absolute rows at most a fixed multiple of those of its argument, and on the common branch $\Log G^{-1}=-\kappa$. Enlarging the constant of the rational majorant, we bound $\kappa$, $G-I$, and $G^{-1}-I$ simultaneously, at every order, before $J$ is chosen.
+
+\paragraph{Step 3: from rows to columns.}
+We work with row bounds at twice the decay rate used in the conclusion. For an output vertex $x$ and a fixed coarse input $u$, the length of a shortest connecting network is at least $\dist(x,u)$. We remove the sum over that input from an absolute output row and use half of the rate. Then the remaining weighted sum of order $s$ is at most $C^{s+1}s!e^{-a\dist(x,u)}$. For the meshes that occur here,
+\begin{equation}\label{ch08:eq:volume-exponential}
+ \sup_u\ \sup_{\substack{\varepsilon=M^{-j}\\j\in\Z_{\ge0}}}
+ \varepsilon^3\sum_{x\in\varepsilon\Z^3/(m\Z)^3}
+                         e^{-a\dist(x,u)}\le C_a,
+\end{equation}
+where $m$ is an integer, $m/\varepsilon=mM^j\in\N$, and $u$ is a vertex of the fine lattice; this covers the coarse spacing $1$ and every intermediate spacing $\delta_l$. To prove \eqref{ch08:eq:volume-exponential}, we take the shortest periodic representatives and bound the torus sum by the sum over the infinite lattice. By equivalence of the fixed lattice metrics, this reduces to a product of three one-dimensional sums. For $b>0$, by monotonicity of $e^{-bt}$ we have $\varepsilon\sum_{k\in\Z}e^{-b\varepsilon|k|}\le1+2\int_0^\infty e^{-bt}dt=1+2/b$, uniformly in the side. Hence $\kappa$ has bounded counting columns with coarse outputs, and the same argument gives volume-normalized columns for outputs on a lattice of spacing $\varepsilon$. The input in this argument is the coarse logarithm $\theta$, through the representatives $D_l$.
+
+\paragraph{Step 4: the interpolated gauge transformation and the exact constraint.}
+With the smooth periodic cardinal weights $\chi_r$ of \cref{ch07:lem:classical-symmetries}, we define on the fine vertices
+\begin{equation}\label{ch08:eq:positive-alignment}
+ \lambda_x(\theta)=\sum_r\chi_r(x)\kappa_r(\theta),\qquad
+ L_x(\theta)=e^{\lambda_x(\theta)},\qquad
+ C_{d_0,J}(\theta)=D_0(\theta)^{L(\theta)}.
+\end{equation}
+Since $L=G$ at the coarse vertices, gauge covariance of $T_M^J$ and \eqref{ch08:eq:remaining-gauge} give $T_M^JC_{d_0,J}=((e^\theta)^{G^{-1}})^G=e^\theta$ exactly. This is why we interpolate $G$, and not $G^{-1}$. The interpolation need not be the identity at the coarse vertices, since it corrects the block average; the gauge transformation $F_J$ constructed in Step~7 will be the identity there.
+
+The weights and their first two spatial derivatives have bounded absolute rows and volume-normalized columns, with a fixed collar of support. Integrating these derivatives, we obtain the same bounds for the first and second divided differences of their restrictions to the lattice. By Steps~2 and~3, $\lambda$, $\nabla_\delta\lambda$, and all second divided differences of $\lambda$ have factorial rows and columns in $\theta$, uniformly in $J$. If $Y(u)$ is their common row majorant, the exponential series bounds $L-I$ by $e^{Y(u)}-1$. Since $\det L=1$, \eqref{ch08:eq:terminal-gauge-inverse} applies to $L$ and bounds $L^{-1}-I$. Differentiating the exponential series spatially once or twice inserts a first difference of $\lambda$, or a second difference and products of first differences, which have convergent majorant series of the same type. Row bounds at a spatial decay rate strictly larger than the working rate, together with \eqref{ch08:eq:volume-exponential}, give their columns with one fixed coarse input and output volume $\delta^3$. For $G$, the output measure is counting measure on the coarse lattice. This proves the bounds of item~(4) for $G$, its inverse, and its interpolation, all with the coarse logarithm $\theta$ as input.
+
+\paragraph{Step 5: removal of the inverse mesh.}
+We remove the inverse mesh in the gauge word before taking spatial or $\theta$ derivatives. For $u=\lambda_x$, $v=(\lambda_{x+\delta e_i}-\lambda_x)/\delta$, and $a=A_{0,i}(x)$, we define
+\begin{equation}\label{ch08:eq:removable-alignment}
+ F_\delta(u,v,a)=\delta^{-1}
+              \Log(e^u e^{\delta a}e^{-u-\delta v}).
+\end{equation}
+The product equals $I$ at $\delta=0$, for all small $u,v,a$. The absolutely convergent exponential and logarithm series are jointly analytic in $(\delta,u,v,a)$ on a small ball, also for $|\delta|\le2$, and the zero at $\delta=0$ makes the division removable. After division, the absolute series have a common majorant for $0\le\delta\le1$. Differentiating at $\delta=0$, we find
+\begin{equation}\label{ch08:eq:alignment-zero-mesh}
+ F_0(u,v,a)=\Ad(e^u)a-\int_0^1\Ad(e^{su})v\,ds,
+\end{equation}
+as follows from $De^X[Y]=\int_0^1e^{(1-s)X}Ye^{sX}ds$. Thus $F_\delta=F_0+\delta R_\delta$ with a uniformly convergent absolute analytic remainder. We define
+\[
+ \overline A_{d_0,J,i}(x)=
+                 F_\delta(\lambda_x,\nabla_{\delta,i}\lambda_x,A_{0,i}(x)).
+\]
+Since $L_xe^{\delta A_{0,i}(x)}L_{x+\delta e_i}^{-1}=e^{\lambda_x}e^{\delta A_{0,i}(x)}e^{-\lambda_x-\delta\nabla_{\delta,i}\lambda_x}$, this is the logarithmic potential of $C_{d_0,J}$ in \eqref{ch08:eq:positive-alignment}. Its first divided difference is the integral of the derivative of $F_\delta$ along the segment between the neighboring lists of arguments, whose differences are $\nabla_\delta\lambda$, $\nabla_\delta^2\lambda$, and $\nabla_\delta A_0$. All of these have the majorants established above. Composing majorant series with the counting of \cref{ch08:lem:majorant-composition}, we obtain factorial rows for $(\overline A,\nabla_\delta\overline A)$ at one fixed smaller decay rate. Here the union of the local collars and of the input networks connects every external index. Applying \eqref{ch08:eq:volume-exponential} to rows at a strictly larger rate gives the columns with output volume $\delta^3$. All decay rates are chosen before $J$, and no rate is reduced from one averaging step to the next.
+
+\paragraph{Step 6: one majorant for all bounds.}
+We work first at twice the final rate $a_{\rm cen}$. Let $Y(u)=C_0u/(1-C_0u)$ dominate the absolute rows of $(A_0,\nabla_\delta A_0,\lambda,\nabla_\delta\lambda,\nabla_\delta^2\lambda)$, where $C_0$ is increased to account for the finitely many types of components. For a suitable fixed $c$, the series of $F_\delta$ and of its first derivative in its local arguments are bounded by $cz/(1-cz)$ and $c/(1-cz)^2$. Using the integral representation of the spatial difference, we obtain
+\begin{equation}\label{ch08:eq:aligned-positive-composition}
+ \mathscr R_{2a_{\rm cen}}
+       ((\overline A,\nabla_\delta\overline A);u)
+ \preccurlyeq
+ P(u),\qquad P(u)=\frac{cY(u)}{1-cY(u)}
+                 +\frac{cY(u)}{(1-cY(u))^2},
+\end{equation}
+by multiplication of absolute Taylor series and \cref{ch08:lem:majorant-composition}. In the second term, the last factor $Y$ accounts for the spatial difference of a local argument. The majorant is independent of $\delta$ and of $J$. At order $s$, since the rows are bounded at a larger rate than the columns, \eqref{ch08:eq:volume-exponential} bounds the column by $C_{a_{\rm cen}}$ times the row; in the notation \eqref{ch08:eq:aligned-series-convention},
+\[
+ \mathscr C_{a_{\rm cen},\delta^3}
+       ((\overline A,\nabla_\delta\overline A);u)
+       \preccurlyeq C_{a_{\rm cen}}P'(u).
+\]
+The same conversion applies to the series for $G$, $G^{-1}$, and $L$. We add all these row majorants, together with $P$ and the fixed constants of the column conversions, into one series $S(u)=\sum_{s\ge1}S_su^s$ with nonnegative coefficients, convergent at some $u_*>0$ independent of $J$, $d_0$, and $m$. Then $S_s\le S(u_*)u_*^{-s}$. Choosing $C\ge\max\{1,u_*^{-1}\max\{1,S(u_*)\}\}$, we have $S_s\le C^s$ for every $s\ge1$, and hence
+\begin{equation}\label{ch08:eq:aligned-positive-majorant}
+ \begin{aligned}
+ \mathscr R_{a_{\rm cen}}
+       ((\overline A,\nabla_\delta\overline A);u)
+       &\preccurlyeq Z(u)=\frac{Cu}{1-Cu},\\
+ \mathscr C_{a_{\rm cen},\delta^3}
+       ((\overline A,\nabla_\delta\overline A);u)
+       &\preccurlyeq Z'(u).
+ \end{aligned}
+\end{equation}
+The same $Z$ and $Z'$ dominate the nonconstant parts of the series of $G$, $G^{-1}$, and $L$, with output volume $1$ for coarse outputs and $\delta^3$ for fine outputs. The final $Z$ may be larger than the majorant used in \eqref{ch08:eq:local-gauge-series}; all earlier estimates remain valid on the smaller common ball.
+
+With this rate, let $r_{\rm cen}>0$ be such that the series just used converge on a ball strictly larger than $\|\theta\|_\infty<r_{\rm cen}$ and $Cr_{\rm cen}<1/2$. These constants are fixed before $J$. The bounds also hold at every point of the ball, not only at its center. Indeed, if a tensor of order $k$ at zero is bounded by $C^{k+1}k!$, then translating the argument by $\theta$ bounds the tensor of order $s$ at $\theta$ by
+\[
+ \sum_{l\ge0}\frac{\|\theta\|_\infty^l}{l!}
+                   C^{s+l+1}(s+l)!
+ =\frac{C^{s+1}s!}{(1-C\|\theta\|_\infty)^{s+1}}.
+\]
+Since contracting $l$ inputs only shortens the external network, the same inequality holds for each coefficient bound with a fixed external index and for each volume-normalized column. A fixed reduction of the radius bounds the right side by $C_{\rm cen}^{s+1}s!$ for every $s\ge1$, with no loss in the radius or the decay rate that depends on $s$. Enlarging $C_{\rm cen}$, we also bound the first derivative itself. Since the pair $(\overline A,\nabla_\delta\overline A)$ and the nonconstant parts of the gauge transformations vanish at $\theta=0$, integrating the first derivative, we find $\|\overline A\|_{C^1_\delta}\le C_{\rm cen}\|\theta\|_\infty$. Replacing $\lambda$ by $t\lambda$ in \eqref{ch08:eq:removable-alignment}, uniformly for $0\le t\le1$, we find that the real gauge path from $D_0$ to $C_{d_0,J}$ has fine logarithms at most $C\delta\|\theta\|_\infty$. This completes the proof of items~(1)--(4); item~(1) refers to this gauge orbit because $C_{d_0,J}$ is a gauge transform of $D_0$.
+
+\paragraph{Step 7: the block axial gauge transformation for fixed $J$.}
+For a configuration $V$ on the fine lattice of one averaging step, we define on each block with center $r$
+\[
+ f(V)_x=V(\sigma_{r,x}),\qquad f(V)_r=I.
+\]
+For each edge $(x,y)$ of the block tree, oriented away from the center, the root path gives $f(V)_y=f(V)_xV_{xy}$, and hence $(V^{f(V)})_{xy}=I$. Starting from $V=C_{d_0,J}(\theta)$, we perform the following finite procedure for $j=J-1,J-2,\dots,0$. We compute $V_j=T_M^jV$ for the field $V$ after the preceding gauge transformations, form $f(V_j)$, extend this gauge transformation constantly through the $j$ finer block partitions to the fine vertices, and apply the resulting gauge transformation $K_j$ to $V$. The factor $K_j$ is the identity at the vertices of level $j+1$. By gauge covariance, it therefore leaves unchanged every coarser iterated block average and each block axial gauge condition already imposed there. The resulting gauge transformation is
+\begin{equation}\label{ch08:eq:forest-order}
+ F_J=K_0K_1\cdots K_{J-1},\qquad F_J=I\ \text{at the coarse vertices}.
+\end{equation}
+Each factor is evaluated on the field transformed by the preceding factors, and the order of the product is forced by $(U^k)^l=U^{lk}$.
+
+For fixed $J$, these operations are finite products and the local logarithms of the block averaging map. At $\theta=0$, every intermediate field and every factor is the identity. Finite-word absolute series and the uniform series of $C_{d_0,J}$ therefore give a radius $r_J>0$ with strict margins in all intermediate charts. The lengths of the words depend on $M$ and $J$, not on $d_0$ or $m$, and all factorial row constants may depend on $J$. The collars are bounded by a fixed multiple of $\sum_{j<J}M^{j-J}<1/(M-1)$; extension through finer block partitions enlarges them only by the same geometric sum. The union of networks preserves a chosen positive decay rate at every composition, and the number of variables per coarse unit cell is finite for fixed $J$. Row bounds at a spatial decay rate strictly larger than the working rate and \eqref{ch08:eq:volume-exponential} give the volume-normalized columns. Since inversion of a matrix of determinant one is a fixed polynomial in its entries, the same statements hold for $F_J^{-1}$, for $L$, and for $L^{-1}$. This proves item~(5).
+
+\paragraph{Step 8: identification with the zero-fluctuation reconstruction.}
+The stationarity and convexity arguments below use real coarse fields and real free coordinates; the final identity is then continued holomorphically. Consider the free logarithmic coordinates $z=(z_0,\dots,z_{J-1})$ of the $J$ averaging steps in the nested coordinates of \cref{ch07:thm:bellman}. Consider also the function of $z$ obtained by composing $E_{d_0}$ with the reconstruction of the fine field of the step from $\theta$ and $z$. By part~(1) of \cref{ch08:lem:successive-minimizer-orbit}, partial minimization over the first $j$ steps gives $M^{-j}E_{d_0+j}$. At $\theta=0$, let $\delta z_j$ be a free tangent vector of step $j$, let $\delta c_{j+1}$ be the induced tangent vector of the next coarser field, and set
+\[
+ \eta_j=\delta z_j-Dz_{d_0+j}^*(I)[\delta c_{j+1}].
+\]
+We complete the square at each step. The critical equation of the conditional minimizer removes the mixed term, and differentiating the identity of part~(1) gives the remaining term. We obtain the Hessian of this function at $\theta=0$, $z=0$:
+\begin{equation}\label{ch08:eq:physical-schur-blocks}
+ \sum_{j=0}^{J-1}M^{-j}
+           \langle\eta_j,K_{d_0+j}^{0}\eta_j\rangle,
+ \qquad \delta c_J=0,
+\end{equation}
+where $K^0_{d_0+j}$ are the constrained Hessians of \cref{ch07:thm:bellman} at the identity. For a quadratic form $\langle z,Kz\rangle/2+\langle z,Bc\rangle+\langle c,Dc\rangle/2$, the derivative of the minimizer is $-K^{-1}B$. Substituting $z=\eta-K^{-1}Bc$ leaves $\langle\eta,K\eta\rangle/2+\langle c,(D-B^{\mathsf T}K^{-1}B)c\rangle/2$, where the last matrix, the Schur complement, is the Hessian of the partially minimized value. Iterating gives \eqref{ch08:eq:physical-schur-blocks}. In particular, the blocks are $M^{-j}K_{d_0+j}^{0}$, not $K_{d_0+j}^{0}$.
+
+The map from $(\delta z_j)$ to $(\eta_j)$ is triangular with identity diagonal. Its inverse is given by backward substitution and involves only finitely many compositions of the mixed derivatives of the minimizers and of the geometric one-step maps. By their row and column bounds in \cref{ch07:thm:bellman,ch07:thm:all-root-classical}, the rows and columns of the inverse are bounded by $C_J$. Its $\ell^2$ norm is then at most $C_J$, since by the Cauchy--Schwarz inequality
+\[
+ \|Tv\|_2^2\le\Bigl(\sup_x\sum_y|T_{xy}|\Bigr)\Bigl(\sup_y\sum_x|T_{xy}|\Bigr)\|v\|_2^2.
+\]
+Since $K_{d_0+j}^0\ge m_0I$, the Hessian \eqref{ch08:eq:physical-schur-blocks} is bounded below by $m_0M^{-(J-1)}C_J^{-2}I$. By the bounds on third derivatives for fixed $J$, with each external index fixed in turn, the Hessian at $(\theta,z)$ differs from this one by at most $C_J(\|\theta\|_\infty+\max_j\|z_j\|_\infty)$ in row and column norm. We reduce the radius for this fixed $J$ so that this is less than half the lower bound. Then the function is strictly convex on a smaller real convex ball of coordinates, uniformly in $d_0$ and $m$.
+
+The successive conditional constrained minimizers give a critical point of this function. Indeed, at the first minimizer the derivative in its free variables vanishes. The derivative in the remaining variables is the derivative of $M^{-1}E_{d_0+1}$, whose derivative in the next free variables vanishes at its minimizer, and so on through the $J$ steps. This critical point corresponds to $\widehat c_0(\theta)={\RawRecon}_{d_0,J}(\theta,0)$. On the other hand, by part~(2) of \cref{ch08:lem:successive-minimizer-orbit}, $C_{d_0,J}(\theta)$ is a gauge transform of $\widehat c_0(\theta)$, by a gauge transformation whose restriction to the coarse vertices fixes $e^\theta$. Since $\widehat c_0(\theta)$ is critical for $E_{d_0}$ on the fiber $\{T_M^JV=e^\theta\}$ and $E_{d_0}$ is gauge invariant on $D_\rho$ (\cref{ch08:thm:compact-overlap}), so is $C_{d_0,J}(\theta)$. The gauge transformation $F_J(\theta)$ is the identity at the coarse vertices and preserves this criticality. The field $C_{d_0,J}(\theta)^{F_J(\theta)}$ satisfies the block axial gauge condition at every level. It is therefore the reconstruction of the step from $\theta$ and some free coordinates $z$, and it is a critical point of the function above. It lies in the ball of strict convexity when $r_J$ is small, because it equals the identity at $\theta=0$ and its coordinates have rows bounded for fixed $J$. By strict convexity, it is the unique critical point, so
+\[
+ C_{d_0,J}(\theta)^{F_J(\theta)}=\widehat c_0(\theta)={\RawRecon}_{d_0,J}(\theta,0)
+\]
+for real $\theta$. The identity extends to the complex ball by the coordinatewise uniqueness argument of \cref{ch08:lem:analytic-compactness}. Thus $F_J^{-1}$ is the gauge transformation, depending only on $\theta$ and equal to the identity at the coarse vertices, that takes the zero-fluctuation reconstruction to the representative $C_{d_0,J}$. The gauge transformations $F_J$, $F_J^{-1}$ have the bounds of item~(5). We shrink $r_J$ inside a larger domain on which these bounds hold, so that they remain available later. Their constants depend only on $M$, $J$, and the chosen domains and rates, never on $d_0$, $m$, $L$, or $\gamma$. The constants $r_{\rm cen}$, $a_{\rm cen}$, and $C_{\rm cen}$ were fixed without them, so the constants of item~(5) are not used to choose $J$.
+\end{proof}
+
+\section{Contraction of the interaction under the classical background field}\label{ch08:sec:contraction}
+
+In the renormalization group step of \cref{ch10:chapter}, the effective interaction $R$ of the fine lattice is evaluated at the classical background field of the step. We show that this evaluation contracts the weighted analytic norm by a factor $O(\delta)$, $\delta=M^{-J}$, at the same radius and the same decay rate. A term of degree $k$ in the link logarithms $\xi$ of the fine lattice, evaluated at $\xi=\delta A$ with $A$ of order one, gains $\delta^k$. The sum over the position of a fixed fine index, measured against the coarse lattice, contributes a factor $\delta^{-3}$. Terms of degree at least four therefore gain $\delta^{k-3}\le\delta$. The quadratic and cubic terms need additional cancellations. Gauge invariance and spatial inversion make the quadratic term a quadratic form in first differences of $\xi$, up to an exponentially small finite-period remainder. Each first difference of $\delta A$ gains an extra factor $\delta$. Spatial inversion and translation invariance make the first derivative of the cubic term vanish at fields that are constant in each orientation, which yields one first difference. This use of gauge invariance is standard in renormalization group analyses of gauge theories; we prove the absolute kernel factorization, the cubic cancellation, and the composition estimate at unchanged radius below.
+
+We use the following notation. On the fine lattice of side $q=m/\delta$, in units in which its spacing is one, $\nabla$ denotes the collection of all componentwise first differences of link fields, $(\nabla v)_{\ell,i}(x)=v_i(x+e_\ell)-v_i(x)$ for each direction $\ell$ and each orientation and color component $i$. Its adjoint is $\nabla^*$. We write $\operatorname{grad}$ for the lattice gradient from vertex fields to link fields, $(\operatorname{grad}\lambda)_{xy}=\lambda_y-\lambda_x$, and $\mathsf I$ for spatial inversion acting on link fields, $(\mathsf Iv)_i(x)=-v_i(-x-e_i)$, as in \cref{ch05:lem:ward-parity}. For a link logarithm $\xi$ and a vertex field $\lambda$, let $\mathcal D_\xi\lambda$ be the infinitesimal gauge variation, that is, the derivative of $t\mapsto\Log\bigl((e^\xi)^{e^{t\lambda}}\bigr)$ at $t=0$; then $\mathcal D_0\lambda=-\operatorname{grad}\lambda$. In this section the letter $q$ denotes the side of the fine lattice; the plaquette energy $q(U)$ does not occur. For a translation-invariant kernel $K$, $\|K\|_{b,\mathrm{row+col}}$ denotes the sum of its weighted absolute row and column norms at rate $b$, using the periodic Euclidean distance between initial vertices, consistently with \cref{ch01:def:analytic-norms}. The sum convention agrees with \cref{ch05:lem:ward-parity}; that lemma uses the periodic $\ell^1$ distance instead, so its rate must be converted when we apply it. These kernels act on a single lattice, so their columns carry no volume factor. For the same distance, the sum lies between the maximum of the row and column norms, used in \cref{ch01:chapter,ch11:chapter,ch28:chapter}, and twice that maximum; in particular, the upper bounds on the sum proved below also hold for the maximum.
+
+\begin{theorem}\label{ch08:thm:principal-contraction}
+Let $a_*$ be the decay rate of \cref{ch07:thm:all-root-classical} and fix $0<a<a_*/8$. There exist $\rho_0(a),\delta_0(a),C_P(a)>0$, depending on $a$ and on the fixed classical data (including $M$), and independent of the later choice of $0<\rho\le\rho_0$, of $J$, of $d_0$, and of the side of the lattice, with the following property. Let $\delta=M^{-J}\le\delta_0$, let $m\ge4$ be the side of the coarse lattice, so that the fine lattice of the renormalization group step has side $m/\delta$. Let $R$ be a scalar function, holomorphic in the logarithms $\xi$ of the fine link variables on $\|\xi\|_\infty<\rho$, such that
+\[
+ DR(I)=0,\qquad \mathcal B_{\rho,a}(R)\le\epsilon,
+\]
+and such that $R$ is invariant under translations of the fine lattice, under constant gauge transformations, and under spatial inversion, and satisfies the infinitesimal gauge-invariance identity $DR(\xi)[\mathcal D_\xi\lambda]=0$ for all $\xi$ in its domain and all vertex fields $\lambda$. These hypotheses concern the function $R$ as a whole, not the individual terms of an expansion of $R$.
+\begin{enumerate}
+\item Set $w_q=(1+q)^3e^{-c_aq}$, where $c_a>0$ is fixed using part of the spatial decay rate. Then, exactly on the finite torus,
+\[
+ \begin{gathered}
+ D^2R(I)=\nabla^*W\nabla+\mathsf E_{\rm per},\\
+ \|W\|_{a/2,\mathrm{row+col}}\le C_a\epsilon,\qquad
+ \|\mathsf E_{\rm per}\|_{a/2,\mathrm{row+col}}
+                                      \le C_a\epsilon w_{m/\delta}.
+ \end{gathered}
+\]
+\item Let $R_3$ be the cubic term of the Taylor expansion of $R$ at $I$. The first derivative of $R_3$ vanishes at every field that is constant in each orientation and color component, and it has the exact representation through first differences along coordinate paths given in \eqref{ch08:eq:cubic-force} and \eqref{ch08:eq:path-difference} below.
+\item Let $e^{\delta A_{d_0,J}(\theta)}$ be the representative $D_0(\theta)$ of the gauge orbit of the classical background field of the step from \cref{ch08:sec:alignment}, with the bounds of \cref{ch07:thm:all-root-classical} on the output rows and volume-normalized columns of $(A_{d_0,J},\nabla_\delta A_{d_0,J})$. Assume that the image of $\|\theta\|_\infty\le2\rho$, measured by absolute Taylor series, lies in the ball of radius $\rho/2$ of fine link logarithms; a sufficient condition is $\delta Z(2\rho)\le\rho/2$, where $Z(u)\le Cu/(1-Cu)$ is the majorant series of $(A_{d_0,J},\nabla_\delta A_{d_0,J})$. Set $\mathcal P_\delta R(\theta)=R(e^{\delta A_{d_0,J}(\theta)})$. Then
+\[
+ \mathcal B_{\rho,a}(\mathcal P_\delta R)
+ \le C_a[\delta+\delta^{-1}w_{m/\delta}]
+                        \mathcal B_{\rho,a}(R)
+ \le C_P(a)\delta\,\mathcal B_{\rho,a}(R).
+\]
+The radius $\rho$ and the rate $a$ are the same on both sides; in the norm of $R$ distances are measured in units of the fine lattice, and in the norm of $\mathcal P_\delta R$ in units of the coarse lattice. The constant $C_P(a)$ includes the bound on the finite-period remainder, uniformly for $m\ge4$.
+\item More generally, let $e^{\delta\widetilde A(\theta)}$ be another representative of the gauge orbit of the classical background field of the step (for instance one satisfying $T_M^J(\cdot)=e^\theta$ exactly), holomorphic on $\|\theta\|_\infty<\widetilde r$, and suppose that for some rate $b>8a$ the output rows and the volume-normalized columns, with one fixed coarse input and output volume $\delta^3$, of the Taylor coefficients at $\theta=0$ of $(\widetilde A,\nabla_\delta\widetilde A)$ are dominated at rate $b$ by a series $\widetilde Z(u)\le\widetilde Cu/(1-\widetilde Cu)$ and by its derivative $\widetilde Z'$, where $\widetilde r$ and $\widetilde C$ do not depend on $J$, $d_0$, or $m$. Then the conclusion of item~(3) holds with $e^{\delta\widetilde A}$ in place of $e^{\delta A_{d_0,J}}$, provided $2\rho_0<\widetilde r$ and the image condition holds with $\widetilde Z$ in place of $Z$. The constants $\rho_0$, $\delta_0$, and $C_P$ then depend also on $b$, $\widetilde C$, and $\widetilde r$, and they remain independent of $J$, $d_0$, $m$, and of the later choice of $\rho\le\rho_0$. No conclusion is asserted at output rates $a\ge b/8$. The equality of $\mathcal P_\delta R$ with the evaluation of $R$ at a specified reconstruction in block axial gauge coordinates requires, in addition, either a real gauge path inside the domain of $R$ connecting the two representatives, or the invariance of $R$ under the gauge transformations between overlapping charts.
+\end{enumerate}
+\end{theorem}
+
+We record the application to the representative $C_{d_0,J}$ of \cref{ch08:lem:aligned-zero-white}. By items~(2) and~(4) of that lemma, $C_{d_0,J}$ satisfies the hypotheses of item~(4) with $b=a_{\rm cen}$, $\widetilde Z=Z$, and $\widetilde r=r_{\rm cen}$. For $C_{d_0,J}$, the theorem therefore gives the estimate of item~(3) at every output rate $0<a<a_{\rm cen}/8$, and at no larger rate. Since $a_{\rm cen}<a_*/32$, such an $a$ also satisfies $a<a_*/8$, and the estimate for $D_0$ holds at the same rate. To treat both representatives with one set of constants, let $0<a<a_{\rm cen}/8$ and $2\rho_0<\min(r_{\rm cen},r_*)$, where $r_*$ is the radius of \cref{ch07:thm:all-root-classical}. We use one enlarged majorant $Cu/(1-Cu)$ at rate $a_{\rm cen}$ for both pairs; the bounds of \cref{ch07:thm:all-root-classical} at rate $a_*$ imply the same bounds at the smaller rate $a_{\rm cen}$. Finally, $\delta_0$ is chosen so that the image condition holds for both pairs for every $\rho\le\rho_0$. Steps~3--9 of the proof then give constants independent of $J$, $d_0$, and $m$ for both representatives, before $J$ is chosen. This is the form in which the theorem is used in \cref{ch10:thm:common-analytic-class}. The proof of item~(1) rests on the following kernel factorization, which strengthens the quadratic-form bound of \cref{ch05:lem:ward-parity} to a factorization with exponentially decaying kernels.
+
+\begin{lemma}\label{ch08:lem:two-differences}
+Fix $a>0$ and a finite number of color components. Let $q\ge4$, and let $H$ be a real self-adjoint translation-invariant kernel on the link fields of the periodic lattice of side $q$ such that
+\[
+ H\operatorname{grad}=0=\operatorname{grad}^{\mathsf T}H,\qquad
+ H\mathsf I=\mathsf IH,\qquad
+ \|H\|_{a,\mathrm{row+col}}\le b.
+\]
+Then there exist translation-invariant kernels $W$ and $\mathsf E$ such that, exactly on the torus of side $q$,
+\[
+ H=\nabla^*W\nabla+\mathsf E,\qquad
+ \|W\|_{a/2,\mathrm{row+col}}\le C_ab,\qquad
+ \|\mathsf E\|_{a/2,\mathrm{row+col}}\le C_abw_q.
+\]
+The differences act on every orientation and color component, and the constants depend only on $a$, the fixed dimension, and the norm conventions, not on $q$, $H$, or $b$. The conclusion also holds for a complex symmetric kernel whose real and imaginary parts satisfy these hypotheses.
+\end{lemma}
+
+\begin{proof}
+A bound on the quadratic form would not suffice here, since we need a factorization of the kernel. We write $h_{ij}(r)$ for the translation kernel, with color indices suppressed, and attach each positive link to its lower endpoint. The midpoint displacement of this entry is $p=r+(e_j-e_i)/2$. We lift it from the torus by its shortest representatives, splitting tied representatives equally, and use opposite lifts for the entry related by inversion. Since spatial inversion gives $h_{ij}(r)=h_{ij}(-r+e_i-e_j)$, this midpoint interpolation is even. It preserves every allowed Fourier sample: two lifts differ by $qz$ with $z\in\Z^3$, and $e^{\mathrm ik\cdot qz}=1$ at the allowed frequencies $k$. The lifted integer coefficients, attached to lower endpoints, have absolute exponentially weighted sum at most $C_ab$, since moving an endpoint to a midpoint changes distances by a fixed amount. We denote by $H(k)$ the trigonometric interpolation of the lower-endpoint coefficients and by $\widetilde H(k)$ that of the midpoint coefficients. Entrywise,
+\[
+ \widetilde H_{ij}(k)=e^{\mathrm ik\cdot(e_j-e_i)/2}H_{ij}(k),\qquad
+ D_\ell\widetilde H(0)=0,
+\]
+so $D_\ell H_{ij}(0)=-\mathrm i(e_j-e_i)_\ell H_{ij}(0)/2$. Write $d_2$ and $d_1$ for the periodic Euclidean and $\ell^1$ distances. Since $d_2\le d_1\le\sqrt3d_2$, the hypothesis at Euclidean rate $a$ implies the same kernel bound at $\ell^1$ rate $a/\sqrt3$. Applying the estimate on the Fourier block at zero frequency in part~(1) of \cref{ch05:lem:ward-parity} at that rate, with $c_a=c(a/\sqrt3)>0$ in $w_q$, we obtain
+\begin{equation}\label{ch08:eq:small-two-jets}
+ \|H(0)\|+\sum_\ell\|D_\ell H(0)\|\le C_abw_q.
+\end{equation}
+Since the symmetric choice of lifts preserves self-adjointness, $H(k)$ and its derivatives are Hermitian at real $k$. We set
+\[
+ E(k)=H(0)+\sum_{\ell=1}^3\sin(k_\ell)D_\ell H(0).
+\]
+This is a Hermitian trigonometric polynomial of range one with the same value and first derivatives at zero as $H$, and its kernel norm is at most $C_abw_q$. Let $h'(r)$ be the finitely supported lifted coefficients of $H-E$. They satisfy the two exact moment cancellations $\sum_rh'(r)=0$ and $\sum_rr_\ell h'(r)=0$.
+
+Next, we divide by two differences, with an absolute bound. Let $t_i=e^{\mathrm ik_i}$ and $z_i=t_i-1$. For each integer $m$, we write $t^m-1=zS_m(t)$ and $t^m-1-mz=z^2B_m(t)$. For $m\ge0$,
+\[
+ S_m(t)=\sum_{j=0}^{m-1}t^j,\qquad
+ B_m(t)=\sum_{j=0}^{m-2}(m-1-j)t^j,
+\]
+with empty sums equal to zero, and for $m=-p<0$,
+\[
+ S_{-p}(t)=-\sum_{j=1}^{p}t^{-j},\qquad
+ B_{-p}(t)=\sum_{j=1}^{p}(p-j+1)t^{-j}.
+\]
+Multiplying by $t-1$, respectively $(t-1)^2$, we verify all four identities term by term. The sums of the absolute coefficients are at most $|m|$ and $C(1+|m|)^2$. We now telescope $t^r-1=\sum_i(t_i^{r_i}-1)\prod_{j<i}t_j^{r_j}$. Substituting $t_i^{r_i}-1=r_iz_i+z_i^2B_{r_i}(t_i)$ and telescoping each $\prod_{j<i}t_j^{r_j}-1$ in the same way, we obtain
+\begin{equation}\label{ch08:eq:laurent-division}
+ t^r-1-\sum_ir_iz_i=\sum_{i,j}z_iz_jP_{r,ij}(t).
+\end{equation}
+The sum of the absolute coefficients of all $P_{r,ij}$ is at most $C(1+|r|)^2$: the pure terms contribute $\sum_iC(1+|r_i|)^2$ and the mixed terms $\sum_{j<i}|r_i||r_j|$. Their supports lie in the coordinate box from $0$ to $r$, enlarged by a fixed distance, so their displacements are at most $|r|+C$ in the usual lattice metrics, with a fixed comparison of metrics absorbed in the constants.
+
+By the moment cancellations, we may apply \eqref{ch08:eq:laurent-division} termwise in $\sum_rh'(r)t^r$. The unused half of the exponential weight absorbs the factor $(1+|r|)^2$, since $\sup_{u\ge0}(1+u)^2e^{-au/2}<\infty$. Hence the coefficients in $H-E=\sum_{i,j}z_iL_{ij}z_j$ have weighted absolute sum at most $C_ab$ at rate $a/2$. Since $z_i=-t_i(t_i^{-1}-1)$, setting $W_{ij}=-t_iL_{ij}$ gives $H-E=\nabla^*W\nabla$. Hermitian symmetrization of $W$ preserves this identity and its bound. We periodize these kernels. Their Fourier samples, and hence their kernels, agree exactly with those of the original operator on the torus. Periodization does not increase the periodic weighted absolute sums, because each distance on the torus is at most the distance of its lift. Taking $\mathsf E$ to be the periodized kernel of $E$ proves the lemma. For a complex kernel, we apply the argument to the real and imaginary parts, each of norm at most $b$, and add the two factorizations.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch08:thm:principal-contraction}]
+We first prove the two cancellations, items~(1) and~(2), then the composition estimate of item~(3), and finally item~(4). Throughout, the norm of $R$ is taken in units of the fine lattice, and $q=m/\delta$.
+
+\paragraph{Step 1: the quadratic term.}
+We subtract the constant $R(I)$, which does not enter $\mathcal B_{\rho,a}$, and write $T_k=D^kR(I)$ in the logarithmic coordinates of the fine lattice. By the definition of $\mathcal B_{\rho,a}$, we have
+\begin{equation}\label{ch08:eq:primitive-bound}
+ \frac1{k!}\|T_k\|_{a,\mathrm{root}}
+       \le\epsilon\rho^{2-k}\qquad(k\ge2).
+\end{equation}
+We differentiate the identity $DR(\xi)[\mathcal D_\xi\lambda]=0$ in $\xi$ at $\xi=0$. The term containing the derivative of $\mathcal D_\xi\lambda$ is multiplied by $DR(0)=0$, and we are left with $T_2\operatorname{grad}=0=\operatorname{grad}^{\mathsf T}T_2$. Translation invariance and invariance under spatial inversion give the remaining hypotheses of \cref{ch08:lem:two-differences}, with $b\le C\epsilon$. Since both norms use the periodic Euclidean distance, the constant accounts only for the color components and for adding the row and column bounds. For a complex-valued $R$, the real and imaginary parts of the coefficients satisfy the same linear identities. \Cref{ch08:lem:two-differences} then implies the factorization and the remainder bound in item~(1). Its constant $c_a$ is fixed in that proof from the rate $a/\sqrt3$ in \cref{ch05:lem:ward-parity}, and is independent of all later radii.
+
+\paragraph{Step 2: the cubic term.}
+Let $R_3(\xi)=T_3[\xi,\xi,\xi]/6$. By linearity of $\mathsf I$ and of the translations, $R_3$ has the same invariances as $R$. On a field $a$ that is constant in each orientation and color component, spatial inversion acts as $\mathsf Ia=-a$. Hence $R_3(a)=R_3(-a)=-R_3(a)$, and $R_3(a)=0$. By translation invariance, the first derivative of $R_3$ at such a field is the same at every link of a given orientation and color component. Differentiating the vanishing restriction with respect to one constant component gives $q^3$ times this common value, which therefore vanishes. We conclude that $DR_3(a)=0$ at every link. For a link $e$ with lower endpoint $x_e$, let $a_i=\xi_i(x_e)$ and let $a$ be the corresponding constant field. Subtracting $DR_3(a)=0$, we obtain componentwise the exact identity
+\begin{equation}\label{ch08:eq:cubic-force}
+ (DR_3(\xi))_e=\frac12\sum_{f,g}(T_3)_{efg}
+                           (\xi_f\xi_g-a_{i_f}a_{i_g}),
+\end{equation}
+where $i_f$ is the orientation of the link $f$ and the products denote the bilinear color contractions with the tensor. We expand the bracket as $(\xi_f-a_{i_f})\xi_g+a_{i_f}(\xi_g-a_{i_g})$. For a coordinate path $x_0=x_e,x_1,\dots,x_l=x_f$ on the fine lattice,
+\begin{equation}\label{ch08:eq:path-difference}
+ \xi_f-a_{i_f}=\sum_{j=0}^{l-1}
+              (\xi_{i_f}(x_{j+1})-\xi_{i_f}(x_j)).
+\end{equation}
+We use shortest coordinate displacements on the torus, with one fixed choice in case of ties. The path and its reverse stay within a fixed multiple of the length of a shortest network connecting the three links. Together with Euler's identity $3R_3=\sum_e\xi_e(DR_3)_e$, \eqref{ch08:eq:cubic-force} and \eqref{ch08:eq:path-difference} are the representation asserted in item~(2).
+
+\paragraph{Step 3: majorants of the background field and power counting.}
+We write $A=A_{d_0,J}$. For real $\theta$, this is the potential of the representative of item~(3); for complex $\theta$, we use its holomorphic continuation and make no variational comparison. By \cref{ch07:thm:all-root-classical}, the Taylor tensors of $(A,\nabla_\delta A)$ have output rows, and columns with one fixed coarse input and output volume $\delta^3$, that are dominated at a decay rate larger than the one used here by one series
+\begin{equation}\label{ch08:eq:jet-series}
+ Z(t)\le\frac{Ct}{1-Ct},\qquad A(0)=\nabla_\delta A(0)=0.
+\end{equation}
+We enlarge $C$ to cover both members of the pair and the finitely many orientation and color types. The derivative $Z'(t)$ bounds the series with one fixed coarse input, because a Taylor coefficient of order $s$ then has denominator $(s-1)!$ instead of $s!$.
+
+We expand each vertex $T_k[\xi,\dots,\xi]/k!$, with $\xi=\delta A(\theta)$, and replace each argument by its Taylor series in $\theta$. \Cref{ch08:lem:majorant-composition} implies that the resulting absolute coefficients are controlled by products of the argument series, with no factorials beyond those of the Taylor coefficients, for any fixed external index. For the spatial and volume bookkeeping, at a vertex we fix the relative positions of its fine indices and sum the remaining position with the fixed-index coefficient bound of $T_k$. We use output rows for every argument except the one containing the fixed coarse input; for that argument, its volume-normalized column bounds the sum over the translated fine index by $\delta^{-3}Z'(t)$. Since the union of the network of the coefficient and the networks of the arguments connects all external coarse indices, the external weight is at most the product of the weights. A fine displacement has length $\delta$ times its length in fine units. Let $\delta_0$ be smaller than a fixed geometric constant, so that half of the fine weight remaining after a polynomial or path moment controls the same output rate $a$. The networks of the arguments need only the rate $a$, which is smaller than the rate $a_*$ of their bounds, since $a<a_*/8$. Any enlargement caused by coordinate paths is absorbed by decreasing this fixed $\delta_0$, independently of the order. In particular, no decay rate depends on the number of Taylor inputs. \Cref{ch08:tab:powers} summarizes the resulting powers of $\delta$, which are verified in Steps~4--6.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+Contribution & Field factors & Sum over a fine index & Result\\
+\midrule
+Quadratic term, two differences & $\delta^2\cdot\delta^2$ & $\delta^{-3}$ & $\delta$\\
+Cubic term, one difference & $\delta^2\cdot\delta\cdot\delta$ & $\delta^{-3}$ & $\delta$\\
+Degree $k\ge4$ & $\delta^k$ & $\delta^{-3}$ & $\delta^{k-3}$\\
+Finite-period remainder & $\delta\cdot\delta\cdot w_{m/\delta}$ & $\delta^{-3}$ & $\delta^{-1}w_{m/\delta}=O(\delta)$\\
+\bottomrule
+\end{tabular}
+\caption{Powers of $\delta=M^{-J}$ in the proof of \cref{ch08:thm:principal-contraction}.}
+\label{ch08:tab:powers}
+\end{table}
+
+\paragraph{Step 4: the quadratic contribution.}
+A first difference of $\xi=\delta A$ over one fine step, in fine units, is exactly $\delta^2$ times a component of $\nabla_\delta A$, translated and with a sign if the step is negative. The two difference factors in $\nabla^*W\nabla$ therefore supply $\delta^4$, and the single sum over a fine index supplies $\delta^{-3}$. We find that the quadratic contribution to the series with one fixed coarse input is at most $C_a\epsilon\delta Z(t)Z'(t)$. Since the finite-period remainder has two undifferentiated factors $\delta A$, it contributes $C_a\epsilon\delta^{-1}w_qZ(t)Z'(t)$.
+
+\paragraph{Step 5: the cubic contribution.}
+In the representation of Step~2, the factor given by \eqref{ch08:eq:path-difference} supplies $\delta^2\nabla_\delta A$, and the two other field factors supply $\delta^2$. The counting column again supplies $\delta^{-3}$. The length of the path and the number of its vertices are absorbed by a polynomial moment of the unused fine weight, since $l\le C(1+\Tree)$. If the fixed coarse derivative falls on one of the undifferentiated factors, we use the column of that factor. If it falls on the difference factor, we first fix the relative fine configuration and the position along the path, and then translate the summed fine index to that vertex of the path. This translation is a bijection of the periodic lattice. Translation invariance of $T_3$ leaves the coefficient unchanged, and the same column with volume $\delta^3$ controls the sum. By \eqref{ch08:eq:primitive-bound}, we find the bound $C_a\epsilon\delta\rho^{-1}Z(t)^2Z'(t)$, for every choice of the fixed external input.
+
+\paragraph{Step 6: terms of degree at least four.}
+No cancellation is needed. The $k$ field factors and the one counting column give exactly $\delta^{k-3}$. The vertex is bounded by \eqref{ch08:eq:primitive-bound}, and the fixed derivative can fall on any of the $k$ slots. Thus these terms are bounded by
+\[
+ C_a\epsilon\delta\rho^{-2}Z(t)^3Z'(t)
+                    \sum_{k\ge4}k\big(\delta Z(t)/\rho\big)^{k-4}.
+\]
+Combining Steps~4--6, we find that the majorant $\mathcal D(t)$ of the series of the composed function with one fixed coarse input satisfies
+\begin{equation}\label{ch08:eq:principal-series}
+ \mathcal D(t)\le C_a\epsilon\delta
+  \Bigl\{ZZ'+\rho^{-1}Z^2Z'
+       +\rho^{-2}Z^3Z'\sum_{k\ge4}k(\delta Z/\rho)^{k-4}\Bigr\}
+       +C_a\epsilon\delta^{-1}w_qZZ',
+\end{equation}
+where all series are evaluated at $t$. We used only symmetries of the tensors $T_k$, never symmetries of an individual term of an expansion of $R$.
+
+\paragraph{Step 7: summation.}
+Let $\rho_0(a)>0$ lie inside the domain of \cref{ch07:thm:all-root-classical} and satisfy $Z(2\rho)\le C_1\rho$ and $Z'(\rho)\le C_1$ for $0<\rho\le\rho_0$. Let $\delta_0(a)$ be smaller than the geometric threshold of Step~3 and satisfy $\delta_0C_1\le1/2$. Through the sufficient condition $\delta Z(2\rho)\le\rho/2$, these choices give the image condition of item~(3) simultaneously for all later $\rho\le\rho_0$. At $t=\rho$, the series in \eqref{ch08:eq:principal-series} converges, because $\delta Z(\rho)/\rho\le1/2$. Since $DR(I)=0$ and $A(0)=0$, we also have $D\mathcal P_\delta R(0)=0$. Since a coefficient of order $s$ with one fixed input has denominator $(s-1)!$, the series $\rho^{-1}\mathcal D(\rho)$ dominates $\sum_{s\ge2}\rho^{s-2}\|D^s\mathcal P_\delta R(0)\|_{a,\mathrm{root}}/s!$. Using $Z(\rho)\le C_1\rho$ in each term of \eqref{ch08:eq:principal-series}, we obtain
+\[
+ \mathcal B_{\rho,a}(\mathcal P_\delta R)
+ \le C_a(\delta+\delta^{-1}w_{m/\delta})\epsilon.
+\]
+These constants do not depend on the later reduction of $\rho$. Replacing $\epsilon$ by $\mathcal B_{\rho,a}(R)$ gives the first inequality of item~(3); the case $\mathcal B_{\rho,a}(R)=0$ follows by continuity.
+
+\paragraph{Step 8: the finite-period remainder.}
+Since $q=m/\delta\ge4/\delta$,
+\[
+ \delta^{-2}w_q
+ \le\frac1{16}q^2(1+q)^3e^{-c_aq}\le C_a.
+\]
+The last supremum is finite, for example because $q^je^{-c_aq}\le j!c_a^{-j}$ by the exponential series. Thus $\delta^{-1}w_q\le C_a\delta$, uniformly for $m\ge4$, and we enlarge $C_P(a)$ to include this constant. This proves the second inequality of item~(3).
+
+\paragraph{Step 9: other representatives.}
+About the representative, Steps~3--8 used only its domain of holomorphy, the output rows and volume-normalized columns of $(A,\nabla_\delta A)$, their majorant $Z$, and the fact that these bounds hold at a rate larger than $8a$. Repeating Steps~3--8 with $\widetilde A$, $\widetilde Z$, $\widetilde r$, and the rate $b>8a$ in place of $A$, $Z$, $r_*$, and $a_*$, we obtain the estimate in item~(4), with constants depending on these data and independent of $J$, $d_0$, and $m$. To compare with the evaluation of $R$ at a specified reconstruction, we integrate the infinitesimal gauge-invariance identity along a real gauge path inside the domain of $R$. Even if the path is only continuous, at each of its points the strict margin of the domain allows all sufficiently small exponential gauge increments. Integrating the identity along each such increment, we find that $R$ is constant on that neighborhood in the gauge variable. Continuity of the path and a finite subcover of its parameter interval identify the values at the two endpoints, and their holomorphic continuations agree by the uniqueness argument of \cref{ch08:lem:analytic-compactness}. Alternatively, invariance of $R$ under the gauge transformations between overlapping charts identifies the values at the two real endpoints directly. Neither conclusion follows from the bound on the image alone, which concerns only $e^{\delta A}$. This proves item~(4).
+\end{proof}

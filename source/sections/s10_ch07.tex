@@ -1,0 +1,1048 @@
+\chapter{Classical background fields and analytic estimates}\label{ch07:chapter}
+
+In this section we construct the classical background field on the periodic torus and prove the analytic estimates for it that the renormalization group analysis uses. Fix a coarse lattice of side $n\ge4$ and a depth $d\ge0$, and consider the fine lattice of side $nM^d$, so that $d$ averaging steps lead from the fine lattice to the coarse one. For a coarse configuration $e^\theta$ close to the identity, we minimize the Wilson action, rescaled to coarse lattice units, in a local gauge-fixed constraint chart. A gauge transform of the resulting field is a local minimum of the action on the fiber $\{U:T_M^dU=e^\theta\}$, modulo gauge transformations. Following Ba{\l}aban \cite{Balaban1985Variational}, we call the minimizer the classical background field. Its action is the effective classical action $E_d(e^\theta)$; divided by the square of the coupling, it is the classical part of the effective densities of \cref{ch10:chapter,ch11:chapter}.
+
+We prove four results. \Cref{ch07:thm:regular-minimum} constructs the background field in a gauge-fixed chart and shows that it depends analytically on $\theta$ and that its response to a change of $\theta$ decays exponentially. It also proves the local minimality on the fiber $\{U:T_M^dU=e^\theta\}$ described above. \Cref{ch07:lem:classical-symmetries} shows that $E_d$ is invariant under small coarse gauge transformations, lattice translations, the spatial inversion, and constant color rotations. \Cref{ch07:thm:bellman} proves the nested minimization identity
+\[
+ E_{d+1}(c)=M\min_{\norm z_\infty\le r_z}E_d(b(c,z)),
+\]
+where $b(c,z)$, for $\norm z_\infty\le r_z$, parametrizes a local branch of the fiber $\{b:T_Mb=c\}$ on the intermediate lattice, in block axial gauge. The minimizer $z^*_d(c)$ is an interior point, it is analytic in $c$, and the Hessian in $z$ has a positive lower bound that does not depend on $d$. The factor $M$ is the change of units in three dimensions: with $g_+^2=Mg^2$ the identity reads $E_{d+1}(c)/g_+^2=g^{-2}\min_zE_d(b(c,z))$. Finally, \cref{ch07:thm:all-root-classical} proves factorial bounds, in weighted row and column norms of the derivative tensors, for $E_d$, the background field, its block averages at every intermediate scale (in explicitly given gauges), and its plaquette logarithms divided by the square of the mesh. In all these statements the radii, decay rates, and constants are the same for every $d$ and $n$.
+
+The background field and the conditional constrained minimizer $z^*$ center the fluctuation coordinates of \cref{ch09:chapter}, and the constrained Hessian normalizes them. The uniform estimates are the classical input to the contraction estimates of \cref{ch08:chapter}, and they are used throughout the later parts of the paper, from the analysis on block regions in \cref{ch15:chapter} to the weak-coupling analysis in \cref{ch32:chapter}.
+
+The inputs are the block averaging map of \cref{ch01:def:block-map} and the coefficient norms of \cref{ch01:def:analytic-norms}, the estimates for weighted absolute Taylor coefficients in \cref{ch02:lem:coefficient-algebra}, and the effective Maxwell quadratic form of \cref{ch05:thm:flat-precision}. From \cref{ch06:chapter} we use the linear constrained extension (\cref{ch06:thm:matched-flat-extension}), the nonlinear constraint parametrization (\cref{ch06:thm:nonlinear-section}), the convexity of the constrained action (\cref{ch06:thm:constrained-convexity}), the gauge slice with prescribed coarse gauge (\cref{ch06:thm:projected-landau-slice}), and the transfer of kernels from periodic covers (\cref{ch06:lem:periodic-kernel-descent}). The only other input from the literature is Ba{\l}aban's estimate for the constrained Green operator at the identity background \cite[Theorem~3.13, p.~426]{Balaban1985Background}.
+
+There are two main ideas. The first is to invert the constrained linear curl form from the supremum norm to the $C^1$ norm, using Ba{\l}aban's estimate, and to solve the Euler equation in the constraint coordinates by a contraction argument. The strict convexity proved in \cref{ch06:thm:constrained-convexity} then identifies the solution as the minimum. The second concerns the derivative bounds. At the linear level, one averaging step has row sums one and column sums $M^{-3}$. Its nonlinear part at mesh $\epsilon_j=M^{j-d}$ carries a factor $\epsilon_j$, and these factors are summable over $j$. Composing nonnegative majorant series with these linear masses, we obtain bounds in which no radius and no decay rate is lost at any scale.
+
+The construction follows Ba{\l}aban's treatment of the variational problem in \cite{Balaban1985Variational}. There the minimizing configuration with prescribed averages is constructed in a projected Landau gauge \cite[Theorem~1, p.~279]{Balaban1985Variational}, and its analytic dependence on the averages and the exponential localization of its derivative are studied in \cite[Section~G, pp.~305--309, and Proposition~9, p.~309]{Balaban1985Variational}. Our averaging map, coordinate domains, and coefficient norms differ from those of \cite{Balaban1985Variational}, and we give the proofs in full. Uniform regularity and decay of lattice Green functions go back to \cite{Balaban1983Green}.
+
+After the notation of \cref{ch07:sec:conventions}, the proof proceeds through the constrained Green operator (\cref{ch07:sec:green}), the block maps and constraint coordinates (\cref{ch07:sec:block-maps}), the minimization (\cref{ch07:sec:euler,ch07:sec:background,ch07:sec:symmetries,ch07:sec:nested}), and the estimates at intermediate scales (\cref{ch07:sec:intermediate}).
+
+\section{Rescaled fields, scalar products, and norms}\label{ch07:sec:conventions}
+
+\paragraph{Units and constants.}
+Throughout this section $M\ge3$ is a fixed odd integer, $n\ge4$ is the side of the coarse lattice, and $d\ge0$ is the depth. We measure lengths in coarse lattice units, in which the coarse lattice spacing is one. The fine lattice then has side $nM^d$ and mesh $\varepsilon_d=M^{-d}$, and all distances are periodic distances in these units. On the torus of side $L$ the coarse spacing is $a_n=L/n$, and the physical length of the fine mesh is $a_n\varepsilon_d$. The coupling plays no role in this section; in particular $\varepsilon_d$ is unrelated to $g_n^2$.
+
+All constants, radii, and decay rates in this section depend only on $M$, on fixed larger complex and real coordinate domains and the ratios of their radii, and on finitely many spatial decay rates chosen in the proofs, as in item~(2) of \cref{ch01:conv:constants}. In particular, they do not depend on $d$, $n$, $L$, or $\gamma$. The integer $J$ of a renormalization group step does not enter the constructions of this section, and the constants are also independent of $J$. A constant that carries a derivative order $s$ as an index may depend on $s$. In proofs, $K$ denotes a constant of this kind whose value may change from line to line. The auxiliary localization size used in \cref{ch07:lem:green-rows} is a fixed function of $M$.
+
+We identify $\su$ with $\R^3$ as in \cref{ch01:chapter}. A color block, that is, an element of $\su$ or a multilinear map between copies of $\su$, has its Euclidean norm. Complex fields take values in the complexification of $\su$, and the scalar products below are extended bilinearly to them. For a field and its first differences in the three coordinate directions we use the maximum of the norms of the four components. This maximum and the $C^1_\varepsilon$ norm below are equivalent up to a fixed factor, which enters only at the beginning and at the end of an estimate.
+
+\paragraph{Fields and scalar products.}
+The operators $\mathsf Q_d$, $\mathsf P_d^{\mathrm{div}}$, $\mathsf H_d$, and $\mathsf D_d$ of the following definition are constructed in \cref{ch06:chapter}; here we only name them.
+
+\begin{definition}\label{ch07:def:physical-classical-data}
+Fix $n\ge4$ and $d\ge0$, and put $\varepsilon=\varepsilon_d=M^{-d}$. A rescaled lattice connection is a function $A$ on the positive links of the fine lattice of side $nM^d$, with values in $\su$ or its complexification; it determines the configuration $e^{\varepsilon A}$, $(e^{\varepsilon A})_e=\exp(\varepsilon A_e)$. Let $\nabla_\varepsilon$ be the collection of all componentwise forward differences divided by $\varepsilon$, and let $d_\varepsilon$ be the lattice exterior derivative (the curl) divided by $\varepsilon$. Set
+\[
+ \mathscr S_\varepsilon(A)=4\varepsilon^{-1}\sum_pq((e^{\varepsilon A})_p),\qquad
+ \ip AB_\varepsilon=\varepsilon^3\sum_e\ip{A_e}{B_e},\qquad
+ \norm A_{C^1_\varepsilon}=\norm A_\infty+\norm{\nabla_\varepsilon A}_\infty,
+\]
+where $p$ runs over the positive fine plaquettes and $e$ over the positive fine links. We also write $\mathscr S_\varepsilon(U)$ for the same sum $4\varepsilon^{-1}\sum_pq(U_p)$ at a fine configuration $U$. On coarse fields we use the counting scalar product $\sum_c\ip{\theta_c}{\eta_c}$, where $c$ runs over the positive coarse links.
+
+Let $\mathsf Q_d$ be the centered linear block average, $\mathsf P_d^{\mathrm{div}}$ the orthogonal projection onto $\mathscr L_\varepsilon\ker Q_d'$, where $Q_d'$ is the scalar centered box average and $\mathscr L_\varepsilon$ the positive scalar Laplacian, and $\mathsf H_d$ the linear constrained extension, all as in \cref{ch06:thm:matched-flat-extension}, where they are denoted $Q_d$, $\mathsf P_d$, and $H_d$. Thus
+\[
+ \mathsf Q_d\mathsf H_d=I,\qquad \mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon\mathsf H_d=0.
+\]
+Write
+\[
+ \mathcal V_d=\ker\mathsf Q_d\cap\ker(\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon).
+\]
+The constrained Green operator $\mathsf C_d$ is defined by the conditions $\mathsf C_df\in\mathcal V_d$ and
+\[
+ \ip{d_\varepsilon v}{d_\varepsilon\mathsf C_df}_\varepsilon=\ip vf_\varepsilon\qquad(v\in\mathcal V_d);
+\]
+its existence is proved in \cref{ch07:lem:green-rows}. Let $\mathsf D_d$ be the coarse correction and $\mathsf P_d^{\mathrm{cl}}$ the nonlinear constraint parametrization of \cref{ch06:thm:nonlinear-section}, where they are denoted $\mathscr D_d$ and $\Xi_d$:
+\[
+ \mathsf P_d^{\mathrm{cl}}(w)=w-\mathsf H_d\mathsf D_d(w),\qquad w=v+\mathsf H_d\theta,\quad v\in\mathcal V_d.
+\]
+Here $\mathsf D_d(0)=D\mathsf D_d(0)=0$, and the field $\mathsf P_d^{\mathrm{cl}}(w)$ has gauge-corrected block average $e^\theta$ and projected divergence $\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon\mathsf P_d^{\mathrm{cl}}(w)=0$; the gauge-corrected block average is defined by the recursion \eqref{ch07:eq:modified-word} below. A superscript $\sharp$ denotes the adjoint with respect to the fine and coarse scalar products just defined, with the bilinear transpose on complexifications. In particular
+\[
+ ((D\mathsf D_d(w))^\sharp u)_e=\varepsilon^{-3}\sum_c(D_{w_e}\mathsf D_{d,c}(w))^Tu_c.
+\]
+None of these objects removes the constant (harmonic) part of the coarse field $\theta$.
+\end{definition}
+
+The letter $d$ denotes the depth, and $d_\varepsilon$ the exterior derivative. The constrained Green operator is $\mathsf C_d$, while in \cref{ch07:sec:nested} the symbol $\mathsf C_{c'}$, indexed by a coarse link $c'$, denotes the block averaging constraint of \cref{ch01:def:block-map}. In \cref{ch07:sec:block-maps,ch07:sec:intermediate} we write $\epsilon_j=M^{j-d}$ for the mesh of the lattice reached after $j$ averaging steps from the fine lattice; thus $\epsilon_0=\varepsilon_d$ is the fine mesh, and the coarse mesh is $\epsilon_d=1$. The variable $w$ of \cref{ch07:def:physical-classical-data} is a fine field; it is not one of the normalized fluctuation variables of later sections, which do not occur here.
+
+\paragraph{Coefficient norms.}
+We use the weighted absolute coefficient norms of \cref{ch01:def:analytic-norms}. Let $T$ be a tensor with one output index $x$ and input indices $y_1,\dots,y_s$. Typically $T$ is the derivative of order $s$, at a given point, of a map between spaces of fields, and an index consists of a link of some lattice, a color, and, where relevant, a component type. Each index has a spatial location. Let $\mathsf t(x;y_1,\dots,y_s)$ be the length, in coarse lattice units, of a shortest connected network containing the locations of all the indices; internal vertices are allowed. For $a\ge0$ the output row and the counting input column of $T$ are
+\begin{gather*}
+ \norm T_{a,\mathrm{out}}=\sup_x\sum_{y_1,\dots,y_s}e^{a\mathsf t}\abs{T(x;y_1,\dots,y_s)},\\
+ \norm T_{a,\mathrm{input,count}}=\sup_{y_1}\sum_x\sum_{y_2,\dots,y_s}e^{a\mathsf t}\abs{T(x;y_1,\dots,y_s)},
+\end{gather*}
+where $\abs\cdot$ is the norm of the color block and $\mathsf t=\mathsf t(x;y_1,\dots,y_s)$. A derivative tensor is symmetric in its inputs, so fixing $y_1$ is the same as fixing any one input. If the output lives on a lattice of mesh $a_{\mathrm{out}}$ and the inputs on a lattice of mesh $a_{\mathrm{in}}$, the volume-normalized input column of \cref{ch01:def:analytic-norms} is $(a_{\mathrm{out}}/a_{\mathrm{in}})^3$ times the counting column. For a tensor with coarse inputs and outputs at mesh $\varepsilon$ we write $\norm T_{a,\mathrm{input};\varepsilon^3}$ for the volume-normalized column, which is $\varepsilon^3$ times the counting column. For a scalar function $E$ of a coarse field, $\norm{D^sE}_{a,\mathrm{root}}$ is the supremum over one argument of the weighted sum of $\abs{D^sE}$ over the remaining arguments; by symmetry every argument may serve as the fixed one. For a matrix $T$, $\norm T_{a,\mathrm{row+col}}$ is the sum of the output row and the counting input column. For matrices whose input and output indices have the same mesh, counting and volume-normalized columns coincide. For these matrices, and with the same spatial weights, the sum used here lies between the maximum used in \cref{ch01:chapter,ch11:chapter,ch28:chapter} and twice that maximum. The bounds imported from \cref{ch05:thm:flat-precision} use the same sum. The matrices measured in this sum in \cref{ch07:lem:shell-branch,ch07:thm:bellman} have their input and output indices on one lattice, and their upper bounds therefore imply the corresponding maximum-norm bounds in \cref{ch11:chapter} with unchanged constants. For matrices between different meshes, the column measures must first be related by the factor $(a_{\mathrm{out}}/a_{\mathrm{in}})^3$. We omit $a$ from the notation when $a=0$. These norms are sums of absolute Taylor coefficients. A bound on directional derivatives, or on the values of an analytic map, does not control them, which is why several proofs below work with majorant series for the coefficients.
+
+For example, $D^2_\theta A(\theta)$, for a map $\theta\mapsto A(\theta)$ from coarse fields to fine fields, has a fine output link $e$ and coarse input links $c_1,c_2$. Its output row is $\sup_e\sum_{c_1,c_2}e^{a\mathsf t(e;c_1,c_2)}\abs{D^2_\theta A(\theta)(e;c_1,c_2)}$, and its volume-normalized input column is
+\[
+ \sup_{c_1}\varepsilon^3\sum_e\sum_{c_2}e^{a\mathsf t(e;c_1,c_2)}\abs{D^2_\theta A(\theta)(e;c_1,c_2)}.
+\]
+There are of order $\varepsilon^{-3}$ fine links within distance one of $c_1$, and the factor $\varepsilon^3$ makes their contribution of order one. Since $\mathsf t(e;c_1,c_2)$ is at least each of the distances $\dist(e,c_1)$, $\dist(e,c_2)$, and $\dist(c_1,c_2)$, bounds on these norms give exponential decay in all three distances.
+
+\paragraph{Normalizations.}
+The following factors occur repeatedly.
+\begin{enumerate}
+\item The fine scalar product carries the factor $\varepsilon^3$ and the coarse one does not. For a linear map $L$ from fine to coarse fields with kernel $L(c,e)$, the adjoint is $(L^\sharp u)_e=\varepsilon^{-3}\sum_cL(c,e)^Tu_c$, and for a linear map $L$ from coarse to fine fields, $(L^\sharp f)_c=\varepsilon^3\sum_eL(e,c)^Tf_e$.
+\item By \cref{ch06:thm:matched-flat-extension}, the kernels of $\mathsf H_d$ and $\nabla_\varepsilon\mathsf H_d$ have bounded weighted rows and bounded volume-normalized columns
+\[
+ \sup_c\varepsilon^3\sum_ee^{a\dist(e,c)}\bigl(\abs{\mathsf H_d(e,c)}+\abs{\nabla_\varepsilon\mathsf H_d(e,c)}\bigr)\le C_a;
+\]
+their counting columns are of order $\varepsilon^{-3}$.
+\item The derivatives of $\mathsf D_d$ have bounded output rows, and their counting columns with a fine input fixed carry the factor $\varepsilon^3$ (\cref{ch06:thm:nonlinear-section} and \cref{ch07:lem:word-majorant} below). When $\mathsf H_d$ and a derivative of $\mathsf D_d$ are contracted over a fine index, the factors $\varepsilon^{-3}$ and $\varepsilon^3$ cancel. In the adjoint $(D\mathsf D_d)^\sharp$, the factor $\varepsilon^{-3}$ of item~(1) cancels the factor $\varepsilon^3$ of the column.
+\item The fine lattice at depth $d$ over a coarse lattice of side $Mm$ is also the fine lattice at depth $d+1$ over the coarse lattice of side $m$. In the new coarse units the fine mesh is $\varepsilon/M$. The rescaled connection of a fixed configuration is multiplied by $M$, its first differences by $M^2$, and $\mathscr S_{\varepsilon/M}=M\mathscr S_\varepsilon$. With the couplings $g_+^2=Mg^2$, the action divided by the square of the coupling is unchanged.
+\end{enumerate}
+
+\section{The constrained Green operator}\label{ch07:sec:green}
+
+We invert the Euler equation of the variational problem with the operator $\mathsf C_d$ of \cref{ch07:def:physical-classical-data}. A bound on $\mathsf C_d$ from the supremum norm to the supremum norm of the field and its first differences, uniform in $d$ and $n$, does not follow from the coercivity of the curl form on $\mathcal V_d$. We obtain it from Ba{\l}aban's estimate for the constrained Green operator. A unit block below is a cube of side one in coarse lattice units, and $\norm u_{C^1_\varepsilon(x)}$ is the supremum of $\abs u$ and $\abs{\nabla_\varepsilon u}$ over the fine links in the unit block $x$.
+
+\begin{lemma}\label{ch07:lem:green-rows}
+The operator $\mathsf C_d$ of \cref{ch07:def:physical-classical-data} exists, is real, and is self-adjoint with respect to $\ip\cdot\cdot_\varepsilon$. There exist $b,K>0$ such that the counting kernels of $\mathsf C_d$ and of $\nabla_{\varepsilon_d}\mathsf C_d$ satisfy
+\begin{equation}\label{ch07:eq:green-rows}
+ \sup_e\sum_f e^{b\dist(e,f)}
+ \bigl(\abs{\mathsf C_d(e,f)}+\abs{\nabla_{\varepsilon_d}\mathsf C_d(e,f)}\bigr)\le K.
+\end{equation}
+Further, there exist $a,C>0$ such that, for every fine field $f$,
+\[
+ \norm{\mathsf C_df}_{C^1_{\varepsilon_d}}\le C\norm f_\infty,
+\]
+and, if $f$ is supported in one unit block $y$, then for every unit block $x$
+\[
+ \norm{\mathsf C_df}_{C^1_{\varepsilon_d}(x)}\le Ce^{-a\dist(x,y)}\norm f_\infty .
+\]
+\end{lemma}
+
+The counting kernel is defined by $(\mathsf C_df)_e=\sum_f\mathsf C_d(e,f)f_f$; since the variational definition uses $\ip\cdot\cdot_\varepsilon$, it already contains the factor $\varepsilon^3$ of the source. The first bound in the lemma follows from \eqref{ch07:eq:green-rows}.
+
+\begin{proof}[Proof of \cref{ch07:lem:green-rows}]
+Existence and self-adjointness are finite-dimensional linear algebra (Step~1). The estimates come from \cite[Theorem~3.13, p.~426]{Balaban1985Background}, which applies to periodic tori whose sides satisfy divisibility conditions relative to fixed auxiliary localization sizes. We first work on a finite periodic cover of side $kn$ which satisfies these conditions (Step~2), identify $\mathsf C_d$ on the cover with Ba{\l}aban's constrained Green operator (Step~3), apply his estimate (Step~4), and convert it into absolute row bounds (Step~5). Finally we restrict the cover operator to fields invariant under the deck translations (Step~6) and transfer the estimates to side $n$ (Step~7). Throughout, $\varepsilon=\varepsilon_d$.
+
+\paragraph{Step 1: finite solvability.}
+On a torus of any finite side $s\ge4$, the curl coercivity of \cref{ch06:thm:matched-flat-extension} makes the form $\ip{d_\varepsilon u}{d_\varepsilon v}_\varepsilon$ positive definite on $\mathcal V_d^{(s)}$, the space $\mathcal V_d$ on that torus. Inverting this form after restricting the source pairing $v\mapsto\ip vf_\varepsilon$ to $\mathcal V_d^{(s)}$, we obtain a unique operator $\mathsf C_d^{(s)}$ with the variational definition, and it is real and self-adjoint. If $d=0$, then $\mathsf Q_0=I$, $\mathcal V_0=\{0\}$, and $\mathsf C_0=0$, and all assertions hold. We assume $d\ge1$ from now on.
+
+\paragraph{Step 2: a cover satisfying the conditions of the literature.}
+Fix the admissible auxiliary integers $R_0,M_0,K_{\mathrm{loc}}$ of \cref{ch06:lem:periodic-kernel-descent}, and define
+\[
+ M_{\mathrm{loc}}=K_{\mathrm{loc}}R_0M_0\ge M_1(3,M),\qquad k=6M_{\mathrm{loc}},\qquad s=kn.
+\]
+These integers depend only on $M$, not on $n$ or $d$. At mesh $\varepsilon$ the cover has fine side $knM^d$. The periodic torus of \cite[Section~A, pp.~17--18]{Balaban1984I} has sides $2L_\mu$ with general side parameters; we take $2L_\mu=kn$ in coarse units, which is possible since $k$ is even. For the scale domains of \cite[(2.1)--(2.2), p.~224]{Balaban1984II} we take every domain to be the whole cover. Since their complements are empty, the separation condition imposes no boundary restriction. At scale $j$ the side of the cover, in the lattice units of that scale, is $knM^{d-j}$, which is divisible by $M_{\mathrm{loc}}$. Both endpoints of the symmetric fundamental interval are boundaries of auxiliary blocks, since $knM^{d-j}/2=3M_{\mathrm{loc}}nM^{d-j}$. Hence the auxiliary blocks tile every scale domain.
+
+The domain condition in \cite[Section~A, p.~393]{Balaban1985Background} is the same. The subdivisions there use the auxiliary sizes $R_0$, $M_0$, and $K_{\mathrm{loc}}R_0M_0$. The local regularity step of \cite[Section~C, pp.~408--409]{Balaban1985Background} uses enlarged localization cubes $\widetilde\square^{\,5}$ of side $12M_{\mathrm{loc}}$ in the units of their own scale. Their side in coarse units is at most $12M_{\mathrm{loc}}$. Since $kn\ge24M_{\mathrm{loc}}$, these cubes have embedded lifts in the cover. This verifies the subdivision, divisibility, and size requirements and the empty boundary condition, which are the geometric conclusions recorded in \cref{ch06:lem:periodic-kernel-descent}. A lower bound on $n$ alone would not give these requirements on the torus of side $n$; this is why we pass to the cover.
+
+\paragraph{Step 3: identification of the operator on the cover.}
+We use the identity background $U=I$, zero background force, and zero local background potentials. Both regularity conditions (3.35)--(3.36) of \cite[pp.~396--397]{Balaban1985Background} then have vanishing left sides. The dimension is $3$, the blocking factor is our odd $M$, and the auxiliary localization size is $M_{\mathrm{loc}}$. The constrained Gaussian covariance is defined in \cite[(3.148), p.~425]{Balaban1985Background} and represented in \cite[(3.153), p.~426]{Balaban1985Background}; at this background the additional background quadratic terms vanish.
+
+The constraints match ours. By \cref{ch06:thm:matched-flat-extension}, the centered translation $\mathsf T_d$ conjugates the published vector average to $\mathsf Q_d$, that is, $\mathsf Q_d=Q_d^{\mathrm{pub}}\mathsf T_d$. The scalar centered box average $Q'_d$ is obtained from the published scalar average by the same fine translation. Since the translation is orthogonal and commutes with the scalar Laplacian, it also conjugates the orthogonal projection onto $\mathscr L_\varepsilon\ker Q_d^{\prime\,\mathrm{pub}}$ to $\mathsf P_d^{\mathrm{div}}$. The two constraints become $\mathsf Q_dv=0$ and $\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon v=0$. The translation has bounded length in coarse units and preserves the fine scalar product. It changes localization distances and block assignments by at most a fixed collar, which is absorbed into the constants.
+
+The penalty used in \cite{Balaban1985Background} does not change the operator on $\mathcal V_d$. For a penalty $\alpha>0$, we define
+\[
+ \mathscr D_{d,\alpha}^0=d_\varepsilon^*d_\varepsilon+\nabla_\varepsilon\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon+\alpha\mathsf Q_d^\sharp\mathsf Q_d.
+\]
+For $u,v\in\mathcal V_d$ its pairing is $\ip{d_\varepsilon v}{d_\varepsilon u}_\varepsilon$, since the last two terms vanish by the two constraints. In particular the covariance on $\mathcal V_d$ is the same whether the positive homogeneous penalty of \cite{Balaban1985Background}, with its parameter equal to one, or the penalty $\alpha=1$ is used. The Gaussian quadratic form is $\norm{d_\varepsilon v}_\varepsilon^2/2$, with the source pairing $\ip vf_\varepsilon$. No constant mode has to be removed separately: a constant field with zero block average is zero. By uniqueness of this finite variational problem, the translated published covariance on the cover equals $\widehat{\mathsf C}_d=\mathsf C_d^{(kn)}$.
+
+\paragraph{Step 4: Ba{\l}aban's estimate on the cover.}
+We use a special case. On a periodic torus satisfying the conditions verified in Step~2, at the identity background with zero background force and zero local background potentials, \cite[Theorem~3.13, p.~426]{Balaban1985Background} transfers \cite[Theorem~3.3, p.~399]{Balaban1985Background} to the constrained covariance (3.148). We use only the entries of \cite[(3.42), p.~397]{Balaban1985Background} for the potential and its first differences, in their global form \cite[(3.47), p.~398]{Balaban1985Background}. The scale in these entries is $M^d\varepsilon=1$, so both scale factors equal one. With the hypotheses checked in Steps~2 and~3, the result on the cover is: there exist $K_0,b_0>0$ such that
+\begin{equation}\label{ch07:eq:cover-green-block}
+ \norm{\widehat{\mathsf C}_df}_{C^1_\varepsilon(\widehat x)}
+ \le K_0e^{-b_0\dist_{kn}(\widehat x,\widehat y)}\norm f_\infty
+ \quad\text{if }\supp f\text{ is contained in the unit block }\widehat y .
+\end{equation}
+The entry for the covariant Laplacian, which is excepted in Theorem~3.13, is not used.
+
+\paragraph{Step 5: absolute rows on the cover.}
+Fix one scalar output component at a fine link $\widehat e$ and one source unit block, and let each scalar source coordinate in that block be the sign of the real kernel coefficient of that output. The supremum norm of this source is bounded by a fixed color factor, and its output at $\widehat e$ is the sum of the absolute values of the coefficients in the block. Applying \eqref{ch07:eq:cover-green-block} to this source, and repeating for the finitely many color components and first-difference outputs, we find that the sum of the absolute kernel coefficients over a unit block $\widehat y$ is at most $K_0'e^{-b_0\dist_{kn}(\widehat x,\widehat y)}$, where $\widehat x$ is the unit block containing $\widehat e$. For $0<b<b_0$, summing over source blocks, we obtain
+\begin{equation}\label{ch07:eq:cover-green-row}
+ \sup_{\widehat e}\sum_{\widehat f}
+ e^{b\dist_{kn}(\widehat e,\widehat f)}
+ \bigl(\abs{\widehat{\mathsf C}_d(\widehat e,\widehat f)}
+       +\abs{\nabla_\varepsilon\widehat{\mathsf C}_d(\widehat e,\widehat f)}\bigr)\le K_1.
+\end{equation}
+In the summation we used that the number of unit blocks in a shell of radius $R$ and thickness one is at most $K(1+R)^2$, uniformly on periodic tori, and that the remaining exponential is summable. The counting kernel already contains the factor $\varepsilon^3$ of the source, and the choice of signs introduces no factor that counts the fine source coordinates.
+
+\paragraph{Step 6: restriction to deck-invariant fields.}
+Let $\pi^*$ repeat fields from side $n$ to side $kn$, and let $\mathcal D=(\Z/k\Z)^3$ act on the cover by the translations by $n\eta$, $\eta\in\mathcal D$, in coarse units. These translations are integer multiples of every lattice spacing $M^{j-d}$, $0\le j\le d$, so they preserve the centered blocks, their patterns at all scales, and the fine translation $\mathsf T_d$. The vector and scalar averages, the differences, and the adjoints therefore intertwine $\pi^*$. Both the fine and the coarse scalar products satisfy
+\begin{equation}\label{ch07:eq:cover-inner-product}
+ \ip{\pi^*u}{\pi^*v}_{kn}=k^3\ip uv_n .
+\end{equation}
+
+The scalar projection needs an additional argument, since it is not a local operator. We write $\mathcal S^{(s)}=\mathscr L_\varepsilon\ker Q_d^{\prime\,(s)}$; the cover space $\mathcal S^{(kn)}$ is invariant under $\mathcal D$. Let $g=\mathscr L_\varepsilon\lambda$ be an element of $\mathcal S^{(kn)}$ invariant under $\mathcal D$. The average $\overline\lambda$ of $\lambda$ over $\mathcal D$ is of the form $\pi^*\lambda_0$, it still has zero scalar average, and $\mathscr L_\varepsilon\overline\lambda=g$. Since $\pi^*$ is injective and $\pi^*Q_d^{\prime\,(n)}\lambda_0=Q_d^{\prime\,(kn)}\pi^*\lambda_0=0$, we have $Q_d^{\prime\,(n)}\lambda_0=0$. Conversely, the repetition of every element of $\mathcal S^{(n)}$ is an invariant element of $\mathcal S^{(kn)}$. We conclude that
+\[
+ \mathcal S^{(kn)}\cap\operatorname{Fix}\mathcal D=\pi^*\mathcal S^{(n)}.
+\]
+Let $g_0$ be an arbitrary scalar field on the torus of side $n$. Since the orthogonal projection onto $\mathcal S^{(kn)}$ commutes with the unitary action of $\mathcal D$, the projection of $\pi^*g_0$ is invariant. It is therefore $\pi^*h$ for some $h\in\mathcal S^{(n)}$, and $\pi^*(g_0-h)$ is orthogonal to $\pi^*\mathcal S^{(n)}$. By \eqref{ch07:eq:cover-inner-product}, $g_0-h$ is orthogonal to $\mathcal S^{(n)}$, that is, $h=\mathsf P_d^{\mathrm{div},(n)}g_0$. Combining this with the identities for the averages and the divergence, we obtain
+\begin{equation}\label{ch07:eq:projector-descent}
+ \begin{gathered}
+ \mathsf P_d^{\mathrm{div},(kn)}\pi^*=\pi^*\mathsf P_d^{\mathrm{div},(n)},\\
+ \mathcal V_d^{(kn)}\cap\operatorname{Fix}\mathcal D=\pi^*\mathcal V_d^{(n)}.
+ \end{gathered}
+\end{equation}
+This verifies the nonlocal constraint in \cref{ch06:lem:periodic-kernel-descent}.
+
+Let $f$ be a field on the torus of side $n$, and let $\widehat u=\widehat{\mathsf C}_d\pi^*f$. A deck translation preserves $\mathcal V_d^{(kn)}$, the curl form, and the source $\pi^*f$, so it maps $\widehat u$ to a solution of the same variational problem on the cover. By uniqueness, $\widehat u=\pi^*u_0$ for some $u_0$, and \eqref{ch07:eq:projector-descent} implies that $u_0\in\mathcal V_d^{(n)}$. Testing the equation on the cover against $\pi^*v$, $v\in\mathcal V_d^{(n)}$, and using \eqref{ch07:eq:cover-inner-product}, we have
+\[
+ k^3\ip{d_\varepsilon v}{d_\varepsilon u_0}_{\varepsilon,n}=k^3\ip vf_{\varepsilon,n}.
+\]
+Canceling $k^3$, we see that $u_0$ solves the variational problem on the torus of side $n$. By uniqueness,
+\begin{equation}\label{ch07:eq:covariance-descent}
+ \widehat{\mathsf C}_d\pi^*=\pi^*\mathsf C_d^{(n)}.
+\end{equation}
+This establishes the hypotheses of the constrained curl case of \cref{ch06:lem:periodic-kernel-descent}.
+
+Evaluating \eqref{ch07:eq:covariance-descent} on a coordinate source, we obtain for any lifts $\widetilde e,\widetilde f$ the identity of counting kernels
+\begin{equation}\label{ch07:eq:covariance-image-sum}
+ \mathsf C_d^{(n)}(e,f)=\sum_{\eta\in\mathcal D}\widehat{\mathsf C}_d(\widetilde e,\widetilde f+n\eta).
+\end{equation}
+It also holds after a first difference in the output: differences commute with repetition, also across periodic seams, where the neighboring output is taken at a neighboring lift. There is no factor $k^{-3}$, because repetition repeats a source rather than averaging it.
+
+\paragraph{Step 7: the estimates on the torus of side $n$.}
+For every image of the source, $\dist_n(e,f)\le\dist_{kn}(\widetilde e,\widetilde f+n\eta)$. By the triangle inequality in \eqref{ch07:eq:covariance-image-sum} and summation over $f$ and $\eta$, the weighted row in \eqref{ch07:eq:green-rows} is bounded by the left side of \eqref{ch07:eq:cover-green-row}, since the images $\widetilde f+n\eta$ run over the positive source links of the cover exactly once. The identity for first differences gives the same bound for $\nabla_\varepsilon\mathsf C_d^{(n)}$. This proves \eqref{ch07:eq:green-rows}, without a multiplicity factor, and the bound from the supremum norm to $C^1_\varepsilon$ follows.
+
+If $f$ is supported in one unit block $y$, then $\pi^*f$ is the sum of the sources in the $k^3$ image blocks of $y$. At a lift $\widetilde x$ of $x$, using \eqref{ch07:eq:cover-green-block} and $\dist_{kn}(\widetilde x,\widetilde y+n\eta)\ge\dist_n(x,y)$, we obtain
+\[
+ \norm{\mathsf C_d^{(n)}f}_{C^1_\varepsilon(x)}
+ \le K_0\sum_{\eta\in\mathcal D}e^{-b_0\dist_{kn}(\widetilde x,\widetilde y+n\eta)}\norm f_\infty
+ \le k^3K_0e^{-b_0\dist_n(x,y)}\norm f_\infty .
+\]
+Since the factor $k^3$ is a fixed function of $M$, this is the bound for sources in one unit block, for every $n\ge4$. Taking the smaller of the decay rates and the larger of the constants proves all assertions for real sources. Complex sources follow by splitting into real and imaginary parts.
+\end{proof}
+
+\section{Analytic block maps and constraint coordinates}\label{ch07:sec:block-maps}
+
+In this section we prove coefficient bounds for the composition of $d$ gauge-corrected averaging steps and for the coarse correction $\mathsf D_d$, with one radius and one decay rate for all derivative orders and all depths. These bounds strengthen the fixed-order estimates of \cref{ch05:lem:modified-average,ch06:thm:nonlinear-section} to convergent majorant series. We first isolate the composition argument, since it is used again in \cref{ch07:sec:intermediate}.
+
+Let $d\ge1$ and $\epsilon_j=M^{j-d}$. By level $j$ we mean the lattice of mesh $\epsilon_j$, that is, of side $nM^{d-j}$. A label at level $j$ is a pair consisting of a positive link of this lattice and a component type from a fixed finite set (which may consist of one element); a field at level $j$ is a function on the labels at level $j$ with values in the complexification of $\su$, and $\norm A_\infty$ is the maximum of $\abs{A}$ over the labels. The norms below are those of \cref{ch07:sec:conventions}, with the component type as part of the index.
+
+\begin{lemma}\label{ch07:lem:composition-majorant}
+Let $d\ge1$, and for $0\le j<d$ let $\Phi_j$ be a holomorphic map from the complex fields $A$ at level $j$ with $\norm A_\infty<\rho$ to the fields at level $j+1$. Let $K\ge1$ and $0<R<\rho/2$, and assume that for $0\le j<d$, for every complex field $A$ at level $j$ with $\norm A_\infty\le2R$, and for every $s\ge2$, the following hold:
+\begin{enumerate}
+\item $\norm{\Phi_j(A)}_\infty\le\norm A_\infty+K\epsilon_j\norm A_\infty^2$;
+\item $\norm{D\Phi_j(A)}_{\mathrm{out}}\le1+K\epsilon_jR$ and $\norm{D\Phi_j(A)}_{\mathrm{input,count}}\le M^{-3}(1+K\epsilon_jR)$;
+\item $\norm{D^s\Phi_j(A)}_{\mathrm{out}}\le s!K^s\epsilon_j$ and $\norm{D^s\Phi_j(A)}_{\mathrm{input,count}}\le M^{-3}s!K^s\epsilon_j$;
+\item each output label of $\Phi_j$ depends only on the input labels at distance at most $K\epsilon_j$ from it.
+\end{enumerate}
+Put $S=1/(M-1)$ and assume that $8KSR<1$. For a complex field $A$ at level $0$ with $\norm A_\infty\le R$ let $A_0=A$ and $A_{j+1}=\Phi_j(A_j)$. Then $A_j$ is defined and
+\[
+ \norm{A_j}_\infty\le\frac{\norm A_\infty}{1-KS\norm A_\infty}\le2\norm A_\infty\qquad(0\le j\le d).
+\]
+Further, for every $b\ge0$ there exists $K_1$, depending only on $K$, $M$, $R$, and $b$, such that for all such $A$, all $0\le j\le d$, and all $s\ge1$, the derivatives of the map $A\mapsto A_j$ at $A$ satisfy
+\[
+ \norm{D^sA_j}_{b,\mathrm{out}}\le K_1^{s+1}s!,\qquad
+ \norm{D^sA_j}_{b,\mathrm{input,count}}\le(\epsilon_0/\epsilon_j)^3K_1^{s+1}s!.
+\]
+Each output label of $A\mapsto A_j$ depends only on the labels at level $0$ at distance at most $K\epsilon_j/(M-1)$ from it.
+\end{lemma}
+
+\begin{proof}[Proof of \cref{ch07:lem:composition-majorant}]
+We begin with the values. Let $a_j=\norm{A_j}_\infty$. If some $a_j$ vanishes, then by hypothesis~(1) every later $a_l$ vanishes, and their bounds are immediate. We may therefore assume that the iterates under consideration are nonzero when we take reciprocals. As long as $a_j\le2R$, hypothesis~(1) implies $a_{j+1}\le a_j+K\epsilon_ja_j^2$, and hence, if $a_{j+1}>0$,
+\[
+ \frac1{a_{j+1}}\ge\frac1{a_j(1+K\epsilon_ja_j)}\ge\frac1{a_j}-K\epsilon_j .
+\]
+Since $\sum_{l<d}\epsilon_l=(1-M^{-d})/(M-1)\le S$, by induction on $j$ we have $1/a_j\ge1/a_0-KS$, that is, $a_j\le a_0/(1-KSa_0)$. As $KSa_0\le KSR<1/8$, this is at most $2a_0\le2R$, which keeps the induction going.
+
+Next we bound the rows. Fix $A$ with $\norm A_\infty\le R$, let $R_s(j)$ be the unweighted output row of $D^sA_j$ at $A$, and let $F_j(t)=\sum_{s\ge1}R_s(j)t^s/s!$, a power series with nonnegative coefficients. Then $F_0(t)=t$, since $A_0=A$. We write $F\preceq G$ if every coefficient of $G-F$ is nonnegative. By the chain rule, $D^s(\Phi_j\circ A_j)$ is the sum, over all partitions of $\{1,\dots,s\}$ into blocks $B_1,\dots,B_k$, of $D^k\Phi_j(A_j)[D^{\abs{B_1}}A_j,\dots,D^{\abs{B_k}}A_j]$. By \cref{ch02:lem:coefficient-algebra}, with output rows on all factors, the output row of each term is at most $\norm{D^k\Phi_j(A_j)}_{\mathrm{out}}\prod_iR_{\abs{B_i}}(j)$. The sum over partitions with $k$ blocks has generating function $F_j^k/k!$. Since $\norm{A_j}_\infty\le2R$, hypotheses (2) and (3) give
+\begin{equation}\label{ch07:eq:positive-recurrence}
+ F_{j+1}\preceq(1+K\epsilon_jR)F_j+K^2\epsilon_j\frac{F_j^2}{1-KF_j},
+\end{equation}
+where we used $\sum_{k\ge2}K^k\epsilon_jF_j^k=K^2\epsilon_jF_j^2/(1-KF_j)$. Let $P_j=\prod_{l<j}(1+K\epsilon_lR)$, so that $P_j\le P=\exp(KRS)$, and let $f_j=F_j/P_j$. At a fixed $t>0$ with $KF_j(t)\le1/2$, \eqref{ch07:eq:positive-recurrence} implies
+\[
+ f_{j+1}(t)\le f_j(t)+2K^2P\epsilon_jf_j(t)^2,
+\]
+because $P_j^2/P_{j+1}\le P$. Fix $t_0>0$ with $4KPt_0\le1$ and $8K^2PSt_0\le1$. By the reciprocal inequality used for the values and induction on $j$, we have $1/f_j(t_0)\ge1/t_0-2K^2PS\ge3/(4t_0)$. In particular, $f_j(t_0)\le2t_0$ and $F_j(t_0)\le2Pt_0\le1/(2K)$, which keeps the induction going. Since the coefficients are nonnegative, $R_s(j)\le s!\,t_0^{-s}F_j(t_0)\le2Pt_0\,s!\,t_0^{-s}$.
+
+For the columns, let $C_s(j)$ be the unweighted counting column of $D^sA_j$ at $A$, with one input at level $0$ fixed, and define $\widehat C_s(j)=(\epsilon_j/\epsilon_0)^3C_s(j)$ and $H_j(t)=\sum_{s\ge1}\widehat C_s(j)t^{s-1}/(s-1)!$. Then $H_0=1$. In the chain rule, the block containing the fixed input contributes the counting column of $D^{\abs{B}}A_j$, the corresponding slot of $D^k\Phi_j$ contributes the counting column of $D^k\Phi_j$, and all other blocks contribute output rows; this is the contraction rule of \cref{ch02:lem:coefficient-algebra} with the column on the branch containing the fixed index. The factor $M^{-3}$ in hypotheses (2) and (3) cancels the change from $(\epsilon_j/\epsilon_0)^3$ to $(\epsilon_{j+1}/\epsilon_0)^3=M^3(\epsilon_j/\epsilon_0)^3$. With $\psi(z)=Kz^2/(1-Kz)$ we obtain
+\[
+ H_{j+1}\preceq\bigl[1+K\epsilon_jR+K\epsilon_j\psi'(F_j)\bigr]H_j .
+\]
+At $t_0$ we have $KF_j(t_0)\le1/2$ and $\psi'(F_j(t_0))\le4$, and therefore $H_j(t_0)\le\exp(KS(R+4))$. Since the coefficients are nonnegative, $C_s(j)\le(\epsilon_0/\epsilon_j)^3(s-1)!\,t_0^{1-s}H_j(t_0)$.
+
+Finally we add the spatial weights. By hypothesis~(4) and induction, each output label of $A_j$ depends only on labels at level $0$ at distance at most $\sum_{l<j}K\epsilon_l\le K\epsilon_j/(M-1)$. A nonzero coefficient of $D^sA_j$ therefore has connecting length $\mathsf t\le sK\epsilon_j\le sK$, and the weight $e^{b\mathsf t}$ is at most $e^{bKs}$. Combining this with the unweighted bounds and enlarging the constant, we obtain the claim.
+\end{proof}
+
+We now apply this lemma to the gauge-corrected block averages. They are defined by the explicit path products of the following lemma, which also gives the gauge transformation relating them to the iterates of $T_M$.
+
+\begin{lemma}\label{ch07:lem:word-majorant}
+Let $d\ge0$ and $\epsilon_j=M^{j-d}$. For a field $A$ on the lattice of mesh $\epsilon$, with $V=e^{\epsilon A}$, and for a vertex $r$ of the next coarser lattice, set
+\begin{equation}\label{ch07:eq:modified-word}
+ \begin{aligned}
+ k_\epsilon(A)_r&=\exp\Bigl\{-M^{-3}\sum_{x\in\mathsf B_M(r)}\Log V(\sigma_{r,x})\Bigr\},\\
+ (\mathcal M_\epsilon(V))_{rs}&=k_\epsilon(A)_r(T_MV)_{rs}k_\epsilon(A)_s^{-1},\\
+ \Psi_\epsilon(A)&=(M\epsilon)^{-1}\Log\mathcal M_\epsilon(e^{\epsilon A}),\qquad A_{j+1}=\Psi_{\epsilon_j}(A_j),\quad A_0=A .
+ \end{aligned}
+\end{equation}
+The block $\mathsf B_M(r)$, the paths $\sigma_{r,x}$, and the coarse link $(r,s)$ are those of \cref{ch01:def:block-map}, at the current fine mesh. This is the gauge-corrected averaging step of \cref{ch05:lem:modified-average} at the identity background, and $e^{A_d}$ is the gauge-corrected block average of $e^{\epsilon_0A}$; in the notation of \cref{ch06:thm:nonlinear-section}, $A_d=\mathsf F_d(A)$. There exist $R,R',b,K>0$ such that the following hold for every complex fine field $A$ with $\norm A_\infty\le R$.
+\begin{enumerate}
+\item For $0\le j\le d$ and $s\ge1$, the map $A\mapsto A_j$ satisfies $\norm{D^sA_j}_{b,\mathrm{out}}\le K^{s+1}s!$ and $\norm{D^sA_j}_{b,\mathrm{input,count}}\le(\epsilon_0/\epsilon_j)^3K^{s+1}s!$.
+\item The nonlinear remainder $\mathscr E_d^{\mathrm{av}}(A)=A_d-\mathsf Q_dA$ of \cref{ch06:thm:nonlinear-section} has no constant or linear term. Its first derivative has output row at most $K\norm A_\infty$ and counting input column at most $\epsilon_0^3K\norm A_\infty$, and its derivatives of order $s\ge2$ have counting input columns at most $\epsilon_0^3K^{s+1}s!$.
+\item For the coarse correction $\mathsf D_d$, which has fine inputs and coarse outputs, let $\norm\cdot_{b,\mathrm{input,count}}$ be the counting sum over the coarse output and all remaining fine inputs with one fine input fixed. Since $\epsilon_0=\varepsilon_d$, the volume-normalized column is $\epsilon_0^{-3}$ times this sum. For complex fine fields $w$ with $\norm w_\infty\le R'$,
+\begin{equation}\label{ch07:eq:D-majorant}
+ \begin{aligned}
+ \norm{D^s\mathsf D_d}_{b,\mathrm{out}}&\le K^ss!,&
+ \norm{D^s\mathsf D_d}_{b,\mathrm{input,count}}&\le\epsilon_0^3K^ss!\quad(s\ge2),\\
+ \norm{D\mathsf D_d(w)}_{b,\mathrm{out}}&\le K\norm w_\infty,&
+ \norm{D\mathsf D_d(w)}_{b,\mathrm{input,count}}&\le\epsilon_0^3K\norm w_\infty .
+ \end{aligned}
+\end{equation}
+\item There is a gauge transformation $G_j$ at the vertices of level $j$, holomorphic in $A$, such that
+\begin{equation}\label{ch07:eq:accumulated-gauge}
+ e^{\epsilon_jA_j}=(T_M^je^{\epsilon_0A})^{G_j},\qquad
+ G_0=I,\quad G_{j+1}=k_{\epsilon_j}(A_j)\,G_j|_{\mathrm{next\ roots}},
+\end{equation}
+where $G_j|_{\mathrm{next\ roots}}$ is the restriction of $G_j$ to the vertices of level $j+1$. Its final logarithm satisfies $\norm{\Log G_d}_\infty\le K\norm A_\infty$.
+\end{enumerate}
+For $d=0$ the recursion is empty, $G_0=I$, and $\mathsf D_0=0$.
+\end{lemma}
+
+We write $G_d(A)$ for the gauge transformation $G_d$ of \eqref{ch07:eq:accumulated-gauge} determined by the fine field $A$; it is the composed gauge transformation denoted $\mathsf G_d(A)$ in \cref{ch06:thm:projected-landau-slice}. The definition \eqref{ch07:eq:modified-word} fixes the representatives used later. They are not the iterates of the block averaging map, to which they are related through \eqref{ch07:eq:accumulated-gauge}.
+
+\begin{proof}[Proof of \cref{ch07:lem:word-majorant}]
+For $d=0$ there is nothing to prove, so let $d\ge1$. We first prove bounds for one step (Steps~1--3), then apply \cref{ch07:lem:composition-majorant} (Step~4), identify the linear part of the composition and the remainder (Step~5), solve the equation for $\mathsf D_d$ (Step~6), and finally prove the gauge identity (Steps~7 and~8).
+
+\paragraph{Step 1: local analyticity.}
+Every expression in \eqref{ch07:eq:modified-word} for one output involves at most $q_M$ distinct link variables and paths of length at most $q_M$, for an integer $q_M$ depending only on $M$. We shrink a complex polydisc of link angles until every exponential, relative logarithm, and final logarithm in \eqref{ch07:eq:modified-word} is holomorphic there. Cauchy estimates on smaller closed polydiscs and the geometric series for the matrix logarithm give a bound depending only on $q_M$ and the ratio of the radii. Cauchy's formula in these $3q_M$ scalar variables bounds the sum of the absolute values of the derivatives of order $s$ by $s!K_M^s$. The factor from counting the local variables is exponential in $s$ and does not depend on the size of the lattice.
+
+\paragraph{Step 2: the linear part at zero.}
+Before composing the steps, we compute the linear masses exactly. At zero, the derivative of $\Log T_MV$ is the average of the sums of $A$ along the paths $F_{c,x}$. The derivative of the reference path enters each relative logarithm with a negative sign and cancels the derivative of the final reference factor. The derivative of $k_\epsilon$ cancels the averaged sums along the initial root paths, and the derivative of its inverse at the other endpoint cancels the averaged sums along the final root paths. After division by $M\epsilon$ there remains the positive operator
+\begin{equation}\label{ch07:eq:positive-Q}
+ (QA)_{(r,r+Me_i)}=M^{-4}\sum_{x\in\mathsf B_M(r)}\sum_{l=0}^{M-1}A_i(x+le_i).
+\end{equation}
+Its row mass is $1$. A fixed positive fine link $(y,y+e_i)$ of orientation $i$ occurs for the $M$ starting points $x=y-le_i$, $0\le l<M$, each of which lies in exactly one centered block. Its counting column mass is $M\cdot M^{-4}=M^{-3}$. The starting points are distinct on every input lattice of side at least $4M$, and the same count holds across periodic seams.
+
+\paragraph{Step 3: bounds for one step.}
+We write $\Psi_\epsilon(A)=(M\epsilon)^{-1}P(\epsilon A)$, where $P$ is the fixed local analytic expression of Step~1. Its linear part is $Q$, and its derivatives of order $s\ge2$ carry the factor $\epsilon^{s-1}/M$. Together with Steps~1 and~2, this gives, on $\norm A_\infty\le2R$,
+\begin{equation}\label{ch07:eq:word-step}
+ \begin{aligned}
+ \norm{D\Psi_\epsilon(A)}_{\mathrm{out}}&\le1+K_M\epsilon R,&
+ \norm{D\Psi_\epsilon(A)}_{\mathrm{input,count}}&\le M^{-3}(1+K_M\epsilon R),\\
+ \norm{D^s\Psi_\epsilon(A)}_{\mathrm{out}}&\le s!K_M^s\epsilon,&
+ \norm{D^s\Psi_\epsilon(A)}_{\mathrm{input,count}}&\le M^{-3}s!K_M^s\epsilon\quad(s\ge2).
+ \end{aligned}
+\end{equation}
+For the columns of the nonlinear part, we note that a fixed input lies in at most $q'_M$ output stencils. Bounding each such coefficient by the row bound and absorbing $M^3q'_M$ into $K_M$, we obtain the column bounds. This counting of incidences is applied only to the nonlinear part; the leading factor $M^{-3}$ is the count of Step~2. Since $Q$ has nonnegative scalar coefficients and row mass one, $\norm{QA}_\infty\le\norm A_\infty$. Using this, the Taylor series of $\Psi_\epsilon-Q$ at zero, and \eqref{ch07:eq:word-step}, we obtain, after enlarging $K_M$,
+\[
+ \norm{\Psi_\epsilon(A)}_\infty\le\norm A_\infty+K_M\epsilon\norm A_\infty^2 .
+\]
+Each output of $\Psi_\epsilon$ depends only on the fine links in the two blocks of its coarse link, that is, on labels within distance $K_M\epsilon$.
+
+\paragraph{Step 4: composition.}
+By Step~3, the maps $\Phi_j=\Psi_{\epsilon_j}$ satisfy the hypotheses of \cref{ch07:lem:composition-majorant} with $K=K_M$. We choose $R$ so that $8K_MSR<1$ and the polydisc of Step~1 contains the ball of radius $2R$. By the lemma, the recursion is defined on the common complex ball $\norm A_\infty\le R$, with $\norm{A_j}_\infty\le2\norm A_\infty$, and assertion~(1) holds at a fixed exponent $b>0$. Every composed expression depends only on initial inputs within distance $K_M\epsilon_j$ of its output. Its connecting length is therefore at most $K_Ms\epsilon_j$ at order $s$, and the spatial weight does not reduce the rate at any scale or order.
+
+\paragraph{Step 5: the linear map at level $d$ and the remainder.}
+At $j=d$ the linear part of $A\mapsto A_d$ is the product of the kernels \eqref{ch07:eq:positive-Q}, and it equals $\mathsf Q_d$. The centered sums of the base-$M$ digits give the centered box, and the segment sums give its convolution in the direction of the link. This is also the linear map of \cref{ch06:thm:nonlinear-section}. Subtracting it, we obtain $\mathscr E_d^{\mathrm{av}}$, which has no constant or linear term. Its derivatives of order $s\ge2$ are those of $A\mapsto A_d$, and assertion~(1) at $j=d$, where $\epsilon_d=1$, gives the factor $\epsilon_0^3$ in their counting columns. Integrating the second derivative from zero, we find that the first derivative of $\mathscr E_d^{\mathrm{av}}$ has row $O(\norm A_\infty)$ and counting input column $O(\epsilon_0^3\norm A_\infty)$. This proves assertion~(2).
+
+\paragraph{Step 6: the coarse correction.}
+By \cref{ch06:thm:nonlinear-section}, $\mathsf D_d$ is the unique small solution of
+\[
+ \mathsf D_d(w)=\mathscr E_d^{\mathrm{av}}(w-\mathsf H_d\mathsf D_d(w)).
+\]
+The rows of $\mathsf H_d$ and its volume-normalized columns are bounded by \cref{ch06:thm:matched-flat-extension}. When $\mathsf H_d$ is contracted with $\mathscr E_d^{\mathrm{av}}$ over a fine index, the counting column $O(\epsilon_0^{-3})$ of $\mathsf H_d$ cancels the counting input column $O(\epsilon_0^3)$ of $\mathscr E_d^{\mathrm{av}}$. In a tensor whose fixed input is a fine input $w_e$, the factor $\epsilon_0^3$ of $\mathscr E_d^{\mathrm{av}}$ is kept instead. The weighted tensor composition inequality of \cref{ch02:lem:coefficient-algebra} applies at a rate below the decay rate of $\mathsf H_d$. It shows that all output rows and all columns with a fixed fine input are majorized by the solution of the scalar equation
+\[
+ x=K\frac{(t+Kx)^2}{1-K(t+Kx)} .
+\]
+This is the implicit-series assertion of \cref{ch02:lem:coefficient-algebra}, with zero linear coefficient in $x$, and it gives \eqref{ch07:eq:D-majorant} at $w=0$, including the factor $\epsilon_0^3$ at a fixed fine input. To pass to a nonzero point $w$ of a smaller ball of radius $r$, we translate the series: a series with coefficients bounded by $K^{s+1}$ acquires the binomial sum $\sum_{l\ge0}\binom{s+l}{l}(Kr)^l=(1-Kr)^{-s-1}$. Contracting the additional slots with the fixed point $w$ does not increase the connecting length of the external indices. One smaller ball and one rate therefore suffice for all the bounds in \eqref{ch07:eq:D-majorant}. By the uniqueness statement of \cref{ch06:thm:nonlinear-section}, the solution of the majorized system is $\mathsf D_d$. This proves assertion~(3).
+
+\paragraph{Step 7: gauge covariance of the block averaging map.}
+For real configurations and compact gauge transformations, the gauge covariance below, including the Borel extension at the logarithm singularity, is stated in \cref{ch03:prop:map-properties}(3). We recall the argument, since we also need its holomorphic version. Let $\omega$ be a periodic vertex gauge transformation and $P=e_1\cdots e_l$ a path from $r$ to $s$. When we multiply the transformation laws of the links, the adjacent factors $\omega_x^{-1}\omega_x$ cancel, and we obtain
+\[
+ (U^\omega)(P)=\omega_rU(P)\omega_s^{-1}.
+\]
+This also covers reversed links, whose transports are the inverses of the transports of the corresponding positive links. Since both $F_{c,x}$ and $C_c$ run from $r$ to $s$, their relative product transforms by conjugation:
+\[
+ (U^\omega)(F_{c,x})(U^\omega)(C_c)^{-1}=\omega_r\bigl[U(F_{c,x})U(C_c)^{-1}\bigr]\omega_r^{-1}.
+\]
+On the identity chart of the logarithm, conjugation commutes with $\Log$, as one sees by conjugating each term of the power series of $\Log(I+X)$; it also commutes with the exponential. For compact real gauge transformations, the principal real logarithm away from $-I$ has the same property: the conjugated logarithm exponentiates to the conjugated group element and has the same norm, less than $2\pi$, so it is the principal logarithm of that element. The mean logarithm in the definition of $T_M$ is then conjugated at $r$, and the final reference factor transforms from $r$ to $s$. This proves
+\begin{equation}\label{ch07:eq:ordinary-gauge-covariance}
+ T_M(U^\omega)=(T_MU)^{\omega|_{\mathrm{roots}}},
+\end{equation}
+where $\omega|_{\mathrm{roots}}$ is the restriction to the vertices of the coarser lattice. The exceptional case is preserved as well: a relative product equals $-I$ if and only if its conjugate does. In that case both sides use the reference path, for which covariance was just proved. The identity \eqref{ch07:eq:ordinary-gauge-covariance} therefore holds for the block averaging map with its Borel extension. For complex gauge transformations it holds on the domains where the logarithms before and after the transformation exist, and the power series argument gives its holomorphic version.
+
+\paragraph{Step 8: the composed gauge transformation.}
+Let $V_j=e^{\epsilon_jA_j}$, and suppose that $V_j=(T_M^jV_0)^{G_j}$, which holds for $j=0$ with $G_0=I$. By \eqref{ch07:eq:ordinary-gauge-covariance}, $T_MV_j=(T_M^{j+1}V_0)^{G_j|_{\mathrm{next\ roots}}}$. The definition \eqref{ch07:eq:modified-word} applies the gauge transformation $k_{\epsilon_j}(A_j)$ to this field. Since $(U^a)^b=U^{ba}$, the new gauge transformation is $G_{j+1}=k_{\epsilon_j}(A_j)G_j|_{\mathrm{next\ roots}}$. This proves \eqref{ch07:eq:accumulated-gauge}, with the displayed order of the factors, and its holomorphic continuation.
+
+Each $\Log k_{\epsilon_j}(A_j)$ has norm at most $K_M\epsilon_j\norm{A_j}_\infty\le2K_M\epsilon_j\norm A_\infty$, and the sum of these bounds is at most $K\norm A_\infty$. After reducing $R$, products of factors this close to the identity stay in a fixed ball of the logarithm. The power series of the product and of its logarithm give the holomorphy and the bound on $\Log G_d$, uniformly in $j$, $d$, and $n$.
+\end{proof}
+
+\section{The Euler equation in constraint coordinates}\label{ch07:sec:euler}
+
+We now write the condition for a critical point of $v\mapsto\mathscr S_\varepsilon(\mathsf P_d^{\mathrm{cl}}(v+\mathsf H_d\theta))$, $v\in\mathcal V_d$, as a fixed point equation that can be solved by contraction.
+
+We begin with a heuristic. If $A$ is the restriction to the lattice of a smooth connection, then the logarithm of the plaquette variable is $\varepsilon^2(\partial_iA_j-\partial_jA_i+[A_i,A_j])+O(\varepsilon^3)$. Since $q(e^X)=\abs X^2/8+O(\abs X^4)$, the action $\mathscr S_\varepsilon(A)$ is a Riemann sum for one half of $\sum_{i<j}\int\abs{F_{ij}}^2$, and its gradient should be $d_\varepsilon^*d_\varepsilon A$ plus terms of the form $A\nabla A$ and $A^3$. However, a direct expansion of the lattice gradient produces a quadratic term with the prefactor $\varepsilon^{-1}$, which is of size $\varepsilon^{-1}\abs A^2$ unless it cancels. The first part of the following lemma shows that this term vanishes on fields that are constant in each direction, and hence is of order $\norm A_\infty\norm{\nabla_\varepsilon A}_\infty$. The second part records the gradient of the action in the constraint coordinates. Differentiating these coordinates produces the term $(D\mathsf D_d)^\sharp\mathsf J_d$ below, which must be kept.
+
+\begin{lemma}\label{ch07:lem:wilson-euler}
+There exist $r_0,a_0,C>0$ with the following properties for every $d\ge0$ and $n\ge4$, with $\varepsilon=\varepsilon_d$.
+\begin{enumerate}
+\item Define the gradient $G_\varepsilon(A)$ of the action by $D\mathscr S_\varepsilon(A)[v]=\ip{G_\varepsilon(A)}v_\varepsilon$. Then
+\[
+ G_\varepsilon(A)=d_\varepsilon^*d_\varepsilon A+N_\varepsilon(A),
+\]
+where $d_\varepsilon^*$ is the adjoint of $d_\varepsilon$ with respect to the fine scalar products. On the complex $C^1_\varepsilon$ ball of radius $r_0$ the map $N_\varepsilon$ is holomorphic, and for $0<r\le r_0$,
+\[
+ \norm{N_\varepsilon(A)}_\infty\le C\norm A_{C^1_\varepsilon}^2,\qquad
+ \norm{N_\varepsilon(A)-N_\varepsilon(B)}_\infty\le Cr\norm{A-B}_{C^1_\varepsilon}
+ \quad(\norm A_{C^1_\varepsilon},\norm B_{C^1_\varepsilon}\le r).
+\]
+\item There is a holomorphic function $\widetilde N_\varepsilon(A,G)$ of a fine field $A$ and a triple $G=(G_\mu)_{\mu=1,2,3}$ of independent fine fields, defined on a fixed complex ball, with $\widetilde N_\varepsilon(A,\nabla_\varepsilon A)=N_\varepsilon(A)$, where $G_{i,\mu}$ takes the place of $\nabla_{\varepsilon,\mu}A_i$. It vanishes to second order at the origin, and its derivatives of order $s\ge2$ have output rows and counting input columns at most $C^{s+1}s!$ at the exponent $a_0$. Each output of $\widetilde N_\varepsilon$ depends only on inputs at distance at most $C_M\varepsilon$.
+\item For $w=v+\mathsf H_d\theta$ with $v\in\mathcal V_d$, and $A=\mathsf P_d^{\mathrm{cl}}(w)$, put
+\[
+ \Delta_d=\mathsf H_d^\sharp d_\varepsilon^*d_\varepsilon\mathsf H_d,\qquad
+ \mathsf J_d(w)=\Delta_d[\theta-\mathsf D_d(w)]+\mathsf H_d^\sharp N_\varepsilon(A).
+\]
+If $\norm v_{C^1_\varepsilon}+\norm\theta_\infty\le r\le r_0$, then
+\[
+ \norm{\mathsf J_d(w)}_\infty\le C(\norm\theta_\infty+r^2),\qquad
+ \norm{(D\mathsf D_d(w))^\sharp}_{\infty\to\infty}\le Cr .
+\]
+The second bound follows from $\sup_e\sum_ce^{a_0\dist(e,c)}\abs{D_{w_e}\mathsf D_{d,c}(w)}\le C\varepsilon^3r$. At fixed $\theta$, the maps $v\mapsto N_\varepsilon(A)$ and $v\mapsto(D\mathsf D_d(w))^\sharp\mathsf J_d(w)$ are Lipschitz from the $C^1_\varepsilon$ norm to the supremum norm, with constant $Cr$.
+\item For every $u\in\mathcal V_d$,
+\[
+ D_v\mathscr S_\varepsilon(\mathsf P_d^{\mathrm{cl}}(w))[u]
+ =\ip{d_\varepsilon u}{d_\varepsilon v}_\varepsilon
+ +\ip{u}{N_\varepsilon(A)-(D\mathsf D_d(w))^\sharp\mathsf J_d(w)}_\varepsilon .
+\]
+Consequently $D_v\mathscr S_\varepsilon(\mathsf P_d^{\mathrm{cl}}(w))[u]=0$ for all $u\in\mathcal V_d$ if and only if
+\[
+ v=-\mathsf C_d\bigl\{N_\varepsilon(A)-(D\mathsf D_d(w))^\sharp\mathsf J_d(w)\bigr\}.
+\]
+\end{enumerate}
+\end{lemma}
+
+In the proof we show that $\mathsf J_d(w)=\mathsf H_d^\sharp G_\varepsilon(A)$: it is the gradient of the action pulled back to the coarse variables. The bounds of the lemma concern local rows and volume-normalized columns. The sum of $\abs{\mathsf J_d(w)}$ over all coarse links is not bounded independently of the volume, and it is not used.
+
+\begin{proof}[Proof of \cref{ch07:lem:wilson-euler}]
+Parts~(1) and~(2) are proved in Steps~1--4, part~(3) in Steps~5 and~6, and part~(4) in Step~7.
+
+\paragraph{Step 1: expansion of the gradient.}
+Fix a positive fine link. Differentiating the finitely many plaquette variables containing it, in the link angles $X_e=\varepsilon A_e$, we see that the gradient $G_\varepsilon(A)$ at that link is $4\varepsilon^{-3}$ times the angle derivative of $\sum_pq$. The common power series of these local expressions has no constant term. Its linear part is $d_\varepsilon^*d_\varepsilon A$, because the quadratic part of the action is $\varepsilon^3\sum_p\abs{d_\varepsilon A(p)}^2/2$, by $q(e^X)=\abs X^2/8+O(\abs X^4)$. A term of degree $k$ in $A$ in the gradient carries the factor $\varepsilon^{k-3}$. After the linear part is subtracted, only the quadratic term can carry a negative power of $\varepsilon$; we write it as $\varepsilon^{-1}P_e(A)$, where $P_e$ is a quadratic polynomial in the values of $A$ near $e$.
+
+\paragraph{Step 2: the quadratic term vanishes on constant fields.}
+Let $A_i(x)=a_i$ on the whole lattice, for constants $a_1,a_2,a_3$. A plaquette variable is then the group commutator of $e^{\varepsilon a_i}$ and $e^{\varepsilon a_j}$. Its logarithm begins at degree two, so its value of $q$ begins at degree four, and the cubic part of the action vanishes identically on such fields. At a constant field, translation invariance makes the gradient of the cubic part of the action the same at all links of a given orientation. Differentiating the vanishing cubic polynomial in $a_i$ shows that the number of links of orientation $i$ times this common coefficient is zero. We conclude that $P_e(a)=0$ for every link $e$.
+
+\paragraph{Step 3: the nonlinear bounds.}
+Fix a vertex near $e$ as base point, and replace each value $A_i(x)$ in the stencil of $P_e$ by the value $a_i=A_i(\text{base point})$. The differences $A_i(x)-a_i$ are sums of at most $K_M$ first differences times $\varepsilon$. Subtracting the two quadratic polynomials and using $P_e(a)=0$, we obtain
+\[
+ \abs{P_e(A)}\le K\varepsilon\norm A_\infty\norm{\nabla_\varepsilon A}_\infty,
+\]
+and the differential of $P_e$ at $A$ in the direction $v$ is bounded by
+\[
+ K\varepsilon\bigl(\norm A_\infty\norm{\nabla_\varepsilon v}_\infty+\norm{\nabla_\varepsilon A}_\infty\norm v_\infty\bigr).
+\]
+These identities cancel the apparent inverse power of the mesh before any norm is taken. All terms of degree at least three in the gradient carry nonnegative powers of $\varepsilon$ and are given by a uniformly convergent local series; their value and differential are bounded by $K\norm A_\infty^3$ and $K\norm A_\infty^2\norm v_\infty$. Integrating along the segment from $B$ to $A$, we obtain the two inequalities of part~(1).
+
+\paragraph{Step 4: a version for independent value and difference variables.}
+In the difference of the two quadratic polynomials used in Step~3, we change the arguments one at a time. Every resulting term contains a factor
+\[
+ A_i(x)-a_i=\varepsilon\sum_l\pm G_{i,\mu_l}(x_l),
+\]
+a sum of first differences along a path from the base point to $x$. Treating the remaining local values of $A$ and these variables $G$ as independent, we obtain a polynomial extension of $\varepsilon^{-1}P_e$ which is quadratic in $(A,G)$. Adding the terms of degree at least three, which are local analytic functions of $A$, defines $\widetilde N_\varepsilon(A,G)$. It agrees with $N_\varepsilon(A)$ when $G=\nabla_\varepsilon A$. Cauchy estimates on a fixed smaller polydisc in finitely many variables bound each absolute derivative tensor of order $s$ by $K^{s+1}s!$. Since a fixed input belongs to a bounded number of stencils, this bound holds with any input fixed as well as with the output fixed. Since the stencils have radius $K_M\varepsilon$, a spatial weight contributes a factor at most $e^{a_0K_Ms}$. Since these arguments use polynomial identities and convergent power series, they hold on the complex balls. This proves part~(2).
+
+\paragraph{Step 5: the coarse gradient.}
+We use $\mathsf H_d$ and its minimizing property from \cref{ch06:thm:matched-flat-extension}: $\ip{d_\varepsilon\mathsf H_d\eta}{d_\varepsilon v}_\varepsilon=0$ for every coarse field $\eta$ and every $v\in\mathcal V_d$. The kernel of $\Delta_d$ is $\Delta_d(c,c')=\varepsilon^3\sum_p(d_\varepsilon\mathsf H_d)(p,c)^T(d_\varepsilon\mathsf H_d)(p,c')$, the pairing with the fine measure of two curl kernels of $\mathsf H_d$. Since each curl kernel is controlled by the bounds of \cref{ch06:thm:matched-flat-extension} on first differences, $\Delta_d$ has bounded weighted rows and columns. The same volume-normalized column bound implies $\norm{\mathsf H_d^\sharp f}_\infty\le K\norm f_\infty$. Since $A=v+\mathsf H_d[\theta-\mathsf D_d(w)]$, the minimizing property gives the identity
+\[
+ \mathsf H_d^\sharp G_\varepsilon(A)=\Delta_d[\theta-\mathsf D_d(w)]+\mathsf H_d^\sharp N_\varepsilon(A)=\mathsf J_d(w).
+\]
+The bounds on $\mathsf H_d$ and on $\mathsf D_d$ (\cref{ch06:thm:matched-flat-extension,ch06:thm:nonlinear-section}) place $A$ in a $C^1_\varepsilon$ ball of radius $Kr$ and give $\norm{\mathsf D_d(w)}_\infty\le Kr^2$. Together with part~(1), this proves $\norm{\mathsf J_d(w)}_\infty\le K(\norm\theta_\infty+r^2)$.
+
+\paragraph{Step 6: the adjoint of the derivative of the correction.}
+By \eqref{ch07:eq:D-majorant}, the counting column of $D\mathsf D_d(w)$ with a fine input fixed is at most $K\varepsilon^3r$, and the same holds with the exponential weight. Taking the adjoint multiplies this column by exactly $\varepsilon^{-3}$ (item~(1) of the normalizations in \cref{ch07:sec:conventions}), which proves $\norm{(D\mathsf D_d(w))^\sharp}_{\infty\to\infty}\le Kr$, together with its weighted version. The column bound for the second derivative of $\mathsf D_d$ bounds the difference of these adjoints at $w$ and $w'=v'+\mathsf H_d\theta$ by $K\norm{v-v'}_{C^1_\varepsilon}$. At fixed $\theta$, the parametrized fields $\mathsf P_d^{\mathrm{cl}}(w)$ and $\mathsf P_d^{\mathrm{cl}}(w')$ differ by at most $K\norm{v-v'}_{C^1_\varepsilon}$ in $C^1_\varepsilon$, the nonlinear terms $N_\varepsilon$ by at most $Kr\norm{v-v'}_{C^1_\varepsilon}$ by part~(1), and $\mathsf J_d$ by the same amount. By the product rule and $\norm\theta_\infty\le r$, the difference of $(D\mathsf D_d)^\sharp\mathsf J_d$ at $w$ and $w'$ is at most $Kr\norm{v-v'}_{C^1_\varepsilon}$. This proves part~(3).
+
+\paragraph{Step 7: the tested equation.}
+For $u\in\mathcal V_d$, the derivative of $v\mapsto\mathsf P_d^{\mathrm{cl}}(v+\mathsf H_d\theta)$ in the direction $u$ is $u-\mathsf H_dD\mathsf D_d(w)u$. Testing the derivative of the action against it and using the adjoints, we have
+\[
+ \ip u{G_\varepsilon(A)}_\varepsilon-\sum_c\ip{(D\mathsf D_d(w)u)_c}{\mathsf J_d(w)_c}
+ =\ip{d_\varepsilon u}{d_\varepsilon v}_\varepsilon
+ +\ip u{N_\varepsilon(A)-(D\mathsf D_d(w))^\sharp\mathsf J_d(w)}_\varepsilon .
+\]
+Here we used $\ip u{d_\varepsilon^*d_\varepsilon A}_\varepsilon=\ip{d_\varepsilon u}{d_\varepsilon v}_\varepsilon$, which follows from the minimizing property of $\mathsf H_d$; only the linear contribution of the extension is removed by this property. By the defining identity of $\mathsf C_d$, the right side vanishes for every $u\in\mathcal V_d$ if and only if $v$ satisfies the displayed fixed point equation; uniqueness follows from the coercivity of the curl form on $\mathcal V_d$. We decrease $r_0$ and $a_0$ to the minima of the finitely many radii and rates used above, and take $C$ larger than the corresponding constants.
+\end{proof}
+
+\section{The classical background field and local minimality}\label{ch07:sec:background}
+
+\paragraph{The two descriptions of the constraint.}
+The renormalization group prescribes the block average $T_M^dU$ of a fine configuration. The coordinates of \cref{ch06:chapter} prescribe its gauge-corrected block average instead. For a fine field $A$ the gauge-corrected block average is $e^{\mathsf F_d(A)}$, where $\mathsf F_d(A)$ is the $d$-th iterate in \eqref{ch07:eq:modified-word}. Taking $j=d$ in \eqref{ch07:eq:accumulated-gauge}, we obtain
+\[
+ e^{\mathsf F_d(A)}=(T_M^de^{\varepsilon A})^{G_d(A)},\qquad\text{that is,}\qquad
+ T_M^de^{\varepsilon A}=\bigl(e^{\mathsf F_d(A)}\bigr)^{G_d(A)^{-1}}.
+\]
+Thus a field $A$ with gauge-corrected block average $e^\theta$ lies in the fiber of $T_M^d$ over $(e^\theta)^{G_d(A)^{-1}}$. Let $\Omega$ be any fine gauge transformation whose values at the coarse vertices are $G_d(A)$. Applying \eqref{ch07:eq:ordinary-gauge-covariance} $d$ times and using $(U^k)^l=U^{lk}$, we have
+\[
+ T_M^d\bigl((e^{\varepsilon A})^\Omega\bigr)=\bigl((e^\theta)^{G_d(A)^{-1}}\bigr)^{G_d(A)}=e^\theta,\qquad
+ \mathscr S_\varepsilon\bigl((e^{\varepsilon A})^\Omega\bigr)=\mathscr S_\varepsilon(A).
+\]
+We construct the background field in the chart $\{\mathsf P_d^{\mathrm{cl}}(v+\mathsf H_d\theta):v\in\mathcal V_d\}$. All points of this chart have gauge-corrected block average $e^\theta$ and projected divergence zero, and we transfer the conclusions to the fiber $\{U:T_M^dU=e^\theta\}$ with such a gauge transformation. In the opposite direction, we use \cref{ch06:thm:projected-landau-slice} to move a field near the fiber into the chart by a gauge transformation, in part~(6) of the next theorem and in \cref{ch07:lem:criticality-transfer}.
+
+By \cref{ch07:lem:wilson-euler}, the critical points in the chart are the fixed points of the map
+\[
+ \mathcal T_\theta(v)=-\mathsf C_d\bigl\{N_\varepsilon(A)-(D\mathsf D_d(w))^\sharp\mathsf J_d(w)\bigr\},\qquad w=v+\mathsf H_d\theta,\quad A=\mathsf P_d^{\mathrm{cl}}(w).
+\]
+In the following theorem, $r_{\mathrm{ph}}$ and $C_*$ denote the constants of \cref{ch06:thm:constrained-convexity}, and $\mathcal T$ is called the Euler map.
+
+\begin{theorem}\label{ch07:thm:regular-minimum}
+There exist $r_v,r_\theta,a,C>0$ such that the following hold for every $d\ge0$ and $n\ge4$, with $\varepsilon=\varepsilon_d$.
+\begin{enumerate}
+\item For every complex coarse field $\theta$ with $\norm\theta_\infty<r_\theta$, the Euler map $\mathcal T_\theta$ maps the closed complex ball $\{v\in\mathcal V_d:\norm v_{C^1_\varepsilon}\le r_v\}$ strictly into itself and is a contraction with factor at most $1/2$. Its unique fixed point $v_d^*(\theta)$ is holomorphic in $\theta$ and real for real $\theta$, and
+\begin{gather*}
+ \norm{v_d^*(\theta)}_{C^1_\varepsilon}\le C\norm\theta_\infty^2,\qquad
+ A_d(\theta)=\mathsf P_d^{\mathrm{cl}}(v_d^*(\theta)+\mathsf H_d\theta),\\
+ \norm{A_d(\theta)}_{C^1_\varepsilon}\le C\norm\theta_\infty,\qquad
+ DA_d(0)=\mathsf H_d .
+\end{gather*}
+We call $A_d(\theta)$ the classical background field with coarse field $e^\theta$.
+\item For real $\theta$ with $\norm\theta_\infty<r_\theta$, the point $v_d^*(\theta)$ is the unique minimum of $v\mapsto\mathscr S_\varepsilon(\mathsf P_d^{\mathrm{cl}}(v+\mathsf H_d\theta))$ on the closed ball $\{v\in\mathcal V_d:\norm v_{C^1_\varepsilon}\le r_v\}$. It is also the unique minimum of this function on the convex set $\{v\in\mathcal V_d:\norm v_\infty+\norm{d_\varepsilon v}_\infty<r_{\mathrm{ph}}\}$, for every $r_{\mathrm{ph}}$ allowed in \cref{ch06:thm:constrained-convexity} with $\norm\theta_\infty<r_{\mathrm{ph}}/C_*$.
+\item For a fine output link $e$ and a coarse input link $c$, and $\norm\theta_\infty<r_\theta$,
+\[
+ \abs{D_{\theta_c}A_d(\theta)_e}+\abs{\nabla_\varepsilon D_{\theta_c}A_d(\theta)_e}\le Ce^{-a\dist(e,c)}.
+\]
+\item For every integer $s\ge1$ there exist $a_s,C_s>0$, depending on $s$, such that on $\norm\theta_\infty<r_\theta/2$,
+\[
+ \norm{D_\theta^s(A_d,\nabla_\varepsilon A_d)}_{a_s,\mathrm{out}}
+ +\norm{D_\theta^s(A_d,\nabla_\varepsilon A_d)}_{a_s,\mathrm{input};\varepsilon^3}\le C_s .
+\]
+\item Define the effective classical action by
+\[
+ E_d(e^\theta)=\mathscr S_\varepsilon(A_d(\theta)),\qquad E_0=S_W .
+\]
+It is holomorphic on a common ball, nonnegative for real $\theta$, and $E_d(I)=DE_d(I)=0$. With $w=v_d^*(\theta)+\mathsf H_d\theta$, its gradient in $\theta$ is
+\[
+ \nabla_\theta E_d=(I-D\mathsf D_d(w)\mathsf H_d)^T\mathsf J_d(w).
+\]
+For each $s\ge2$ there exist $a_s,C_s>0$ such that $\norm{D^sE_d}_{a_s,\mathrm{root}}\le C_s$. For $g>0$ let $W_{d,g}(B)=g^{-2}E_d(e^{gB})$. If $\norm{gB}_\infty<r_\theta/2$, then
+\[
+ \norm{D_B^sW_{d,g}}_{a_s,\mathrm{root}}\le C_sg^{s-2}\quad(s\ge2),\qquad
+ \norm{D_BW_{d,g}}_\infty\le C\norm B_\infty .
+\]
+\item Let $\theta$ be real with $\norm\theta_\infty<r_\theta$, and let $\Omega_*$ be a fine gauge transformation whose values at the coarse vertices are $G_d(A_d(\theta))$. Then $U_*=(e^{\varepsilon A_d(\theta)})^{\Omega_*}$ satisfies $T_M^dU_*=e^\theta$, and $U_*$ is a local minimum of $\mathscr S_\varepsilon$ on the fiber $\{U:T_M^dU=e^\theta\}$ modulo fine gauge transformations. More precisely, there is a neighborhood of $U_*$ in this fiber on which $\mathscr S_\varepsilon(U)\ge\mathscr S_\varepsilon(U_*)$, with equality only if $U=U_*^h$ for a fine gauge transformation $h$ whose values at the coarse vertices leave $e^\theta$ fixed. Every tangent vector to the fiber at $U_*$ has zero first variation. The neighborhood may depend on the fine lattice; the radii and constants in (1)--(5) do not.
+\item The constrained Green operator $\mathsf C_d$ satisfies the bounds of \cref{ch07:lem:green-rows}: $\norm{\mathsf C_df}_{C^1_\varepsilon}\le C\norm f_\infty$, and $\norm{\mathsf C_df}_{C^1_\varepsilon(x)}\le Ce^{-a\dist(x,y)}\norm f_\infty$ if $f$ is supported in the unit block $y$. They give weighted absolute rows for $\mathsf C_d$ and its first differences, and they are the specialization of \cite[Theorem~3.13, p.~426]{Balaban1985Background} described in the proof of \cref{ch07:lem:green-rows}.
+\end{enumerate}
+\end{theorem}
+
+The fixed-order bounds in (4) and (5) follow from the factorial bounds \eqref{ch07:eq:min-all-order-row} and \eqref{ch07:eq:action-majorant} proved below, which are also collected in \cref{ch07:thm:all-root-classical}. The minimality statements in (2) and (6) concern real coarse fields; for complex $\theta$, the field $A_d(\theta)$ and the value $E_d(e^\theta)$ are holomorphic continuations of the critical point and the critical value.
+
+\begin{proof}[Proof of \cref{ch07:thm:regular-minimum}]
+Step~1 constructs the fixed point by contraction. Steps~2 and~3 prove factorial coefficient bounds for $A_d$, which give (3) and (4). Step~4 proves (2). Steps~5 and~6 treat the effective classical action, and Step~7 proves the local minimality on the fiber. Part~(7) is \cref{ch07:lem:green-rows}, applied on the torus of side $n$. Since the geometry of the cover, both constraints, and the variational identity were checked there, no divisibility condition or additional lower bound on $n$ enters.
+
+\paragraph{Step 1: contraction.}
+Let $K$ be larger than the constants of the extension $\mathsf H_d$, of the correction $\mathsf D_d$, of the nonlinear remainder of the action gradient in \cref{ch07:lem:wilson-euler}, and of the Green operator in \cref{ch07:lem:green-rows}, on fixed larger domains. By \cref{ch07:lem:green-rows,ch07:lem:wilson-euler}, for $\norm v_{C^1_\varepsilon},\norm{v'}_{C^1_\varepsilon}\le r_v$ and $\norm\theta_\infty\le r_\theta$,
+\begin{equation}\label{ch07:eq:min-contraction}
+ \begin{aligned}
+ \norm{\mathcal T_\theta(v)}_{C^1_\varepsilon}&\le K(\norm v_{C^1_\varepsilon}+\norm\theta_\infty)^2,\\
+ \norm{\mathcal T_\theta(v)-\mathcal T_\theta(v')}_{C^1_\varepsilon}&\le K(r_v+r_\theta)\norm{v-v'}_{C^1_\varepsilon}.
+ \end{aligned}
+\end{equation}
+Fix $r_v>0$ with $16Kr_v\le1$ and so small that the closed $C^1_\varepsilon$ ball of radius $r_v$ in $\mathcal V_d$ lies inside all the larger domains. We also require that $3r_v$ is an allowed value of $r_{\mathrm{ph}}$ in \cref{ch06:thm:constrained-convexity}. Since $\norm{d_\varepsilon v}_\infty\le2\norm{\nabla_\varepsilon v}_\infty$, the closed $C^1_\varepsilon$ ball of radius $r_v$ is then contained in the convex domain $\{v\in\mathcal V_d:\norm v_\infty+\norm{d_\varepsilon v}_\infty<3r_v\}$ of that theorem. Next fix $0<r_\theta\le r_v$ so that $\mathsf H_d\theta$ and the correction lie in their domains with fixed margins, uniformly in $d$ and $n$, and so that $r_\theta<3r_v/C_*$ and $6Kr_\theta\le C_*$. Then \eqref{ch07:eq:min-contraction} implies that $\norm{\mathcal T_\theta(v)}_{C^1_\varepsilon}\le4Kr_v^2\le r_v/4$, and it gives a contraction factor at most $2Kr_v\le1/8$. Iteration from zero converges, since successive differences are bounded by a geometric series. The limit lies in the closed linear subspace $\mathcal V_d$, and it is the unique fixed point $v_d^*(\theta)$ in the closed ball. Comparing the fixed point with the first iterate $\mathcal T_\theta(0)$, we obtain
+\[
+ \norm{v_d^*(\theta)}_{C^1_\varepsilon}\le\tfrac12\norm{v_d^*(\theta)}_{C^1_\varepsilon}+K\norm\theta_\infty^2 .
+\]
+This proves the quadratic bound $\norm{v_d^*(\theta)}_{C^1_\varepsilon}\le2K\norm\theta_\infty^2$. Since $A_d(\theta)=v_d^*(\theta)+\mathsf H_d\theta-\mathsf H_d\mathsf D_d(w)$ and $\norm{\mathsf D_d(w)}_\infty\le K\norm w_\infty^2$, it also implies the bound on $A_d$ and $DA_d(0)=\mathsf H_d$. Since the equation is preserved by complex conjugation of all fields, uniqueness shows that $v_d^*(\theta)$ is real for real $\theta$. Holomorphy follows from Step~2.
+
+\paragraph{Step 2: factorial bounds for the background field.}
+We prove analyticity and locality through the coefficients. Let $p=(v,V_1,V_2,V_3)$ be independent variables for a fine field and its first differences in the three directions. In the nonlinear expressions we replace $A$ and its differences by
+\begin{equation}\label{ch07:eq:ambient-min-pair}
+ \Bigl(v+\mathsf H_d[\theta-\mathsf D_d(w)],\quad
+ V_\mu+\nabla_{\varepsilon,\mu}\mathsf H_d[\theta-\mathsf D_d(w)]\Bigr),\qquad w=v+\mathsf H_d\theta,
+\end{equation}
+and we use the extension $\widetilde N_\varepsilon$ of \cref{ch07:lem:wilson-euler}. If $f$ denotes the negative of the resulting nonlinear constrained first variation, we define the output to be the pair $(\mathsf C_df,\nabla_\varepsilon\mathsf C_df)$. This is an analytic map on a product ball. Its output is a field together with its own first differences, its field component lies in $\mathcal V_d$, and when $V_\mu=\nabla_{\varepsilon,\mu}v$ it coincides with the Euler map.
+
+Every factor has a majorant series with nonnegative coefficients at one rate $b>0$: \eqref{ch07:eq:D-majorant} for the correction, part~(2) of \cref{ch07:lem:wilson-euler} for the nonlinear remainder of the action gradient, \eqref{ch07:eq:green-rows} for the pair $(\mathsf C_d,\nabla_\varepsilon\mathsf C_d)$, and the rows and volume-normalized columns of \cref{ch06:thm:matched-flat-extension} for $\mathsf H_d$ and $\nabla_\varepsilon\mathsf H_d$. The kernel $\Delta_d$ is the contraction of two curl kernels of $\mathsf H_d$ with the fine measure, as in Step~5 of the proof of \cref{ch07:lem:wilson-euler}, and $\mathsf H_d^\sharp$ carries the factor $\varepsilon^3$ in its sum. The only apparent inverse power of the volume is in
+\[
+ ((D\mathsf D_d(w))^\sharp u)_e=\varepsilon^{-3}\sum_c(D_{w_e}\mathsf D_{d,c}(w))^Tu_c .
+\]
+An output row of this expression fixes a fine input $w_e$ of the tensor of $\mathsf D_d$, and the column bound in \eqref{ch07:eq:D-majorant} supplies the factor $\varepsilon^3$ that cancels $\varepsilon^{-3}$. Taking $s$ further derivatives produces a factor at most $(s+1)!K^{s+1}$; after division by $s!$, the additional factor $s+1\le2^{s+1}$ changes only the constant.
+
+Since the pair map has no constant and no linear term in $(\theta,p)$, the part of \cref{ch02:lem:coefficient-algebra} concerning output rows majorizes the implicit solution by the solution of $x=K(t+x)^2/(1-K(t+x))$ on a fixed small disc. The comparison can also be read off from Picard iteration: the coefficient of degree $s$ of the solution depends only on coefficients of lower degree, and the nonnegative scalar recursion bounds all of them. The convergent series defines a holomorphic solution on every finite lattice, and the contraction of Step~1 identifies it with $v_d^*$. Composing with the majorants of $\mathsf H_d$ and $\mathsf D_d$, we obtain, at $\theta=0$ and on a smaller common ball of coarse fields,
+\begin{equation}\label{ch07:eq:min-all-order-row}
+ \norm{D_\theta^s(A_d,\nabla_\varepsilon A_d)}_{b,\mathrm{out}}\le K^{s+1}s!\qquad(s\ge1).
+\end{equation}
+To pass from $\theta=0$ to the smaller ball, we use the binomial sum of Step~6 of the proof of \cref{ch07:lem:word-majorant}, at the same rate.
+
+\paragraph{Step 3: from rows to columns.}
+The rows also give the volume-normalized columns. Fix a coarse input $c_1$ and $0<b'<b$. For a coefficient $T_s(e;c_1,\dots,c_s)$ of order $s$, the connecting length satisfies $\mathsf t\ge\dist(e,c_1)$. Therefore
+\begin{equation}\label{ch07:eq:row-to-physical-column}
+ \begin{aligned}
+ &\varepsilon^3\sum_e\sum_{c_2,\dots,c_s}e^{b'\mathsf t}\abs{T_s(e;c_1,\dots,c_s)}\\
+ &\qquad\le K^{s+1}s!\,\varepsilon^3\sum_ee^{-(b-b')\dist(e,c_1)}\le K_bK^{s+1}s! .
+ \end{aligned}
+\end{equation}
+In the first inequality we used $e^{b'\mathsf t}\le e^{b\mathsf t}e^{-(b-b')\dist(e,c_1)}$ and \eqref{ch07:eq:min-all-order-row}. The last inequality follows by summing over fine cubes in annuli around $c_1$: $\varepsilon^3$ times the number of fine links within distance $R$ is at most $K(1+R)^3$, on every periodic torus and for every mesh at most one. By symmetry any $c_i$ may be the fixed input. Taking $s=1$ in \eqref{ch07:eq:min-all-order-row} gives part~(3). Taking $a_s=b'$ and enlarging $C_s$, we obtain part~(4), with no loss of exponent depending on the order.
+
+\paragraph{Step 4: minimality in the chart.}
+Let $\theta$ be real. The fixed point $v_d^*(\theta)$ is an interior point of the convex domain $\{v\in\mathcal V_d:\norm v_\infty+\norm{d_\varepsilon v}_\infty<3r_v\}$, and its tested Euler equation vanishes by \cref{ch07:lem:wilson-euler}. The formula for the Hessian and the stability inequality of \cref{ch06:thm:constrained-convexity} then show that $v_d^*(\theta)$ is the unique critical point and the unique minimum throughout this domain, and in particular on the closed $C^1_\varepsilon$ ball of radius $r_v$. Now let $r_{\mathrm{ph}}$ be any value allowed in \cref{ch06:thm:constrained-convexity} with $\norm\theta_\infty<r_{\mathrm{ph}}/C_*$. By Step~1, $\norm{v_d^*}_\infty+\norm{d_\varepsilon v_d^*}_\infty\le3\norm{v_d^*}_{C^1_\varepsilon}\le6K\norm\theta_\infty^2$, and since $6K\norm\theta_\infty\le C_*$ this is at most $C_*\norm\theta_\infty<r_{\mathrm{ph}}$. Thus $v_d^*(\theta)$ is an interior point of the larger domain as well, all its constrained first variations vanish, and the same stability inequality gives uniqueness and minimality there. This proves part~(2).
+
+\paragraph{Step 5: the effective classical action.}
+The finite sum defining $\mathscr S_\varepsilon$ is holomorphic on the common ball and nonnegative for real fields. At $\theta=0$ we have $A_d(0)=0$ and $\mathsf J_d=0$; in particular $E_d(I)=0$, and $DE_d(I)=0$ once the gradient formula is proved. We differentiate at fixed $v$ before using stationarity. The derivative in $\theta$ of the parametrized field $v+\mathsf H_d\theta-\mathsf H_d\mathsf D_d(v+\mathsf H_d\theta)$ is $\mathsf H_d(I-D\mathsf D_d(w)\mathsf H_d)$. The contribution of $Dv_d^*$ is a variation in $\mathcal V_d$, and its derivative of the action vanishes because $v_d^*$ is critical. Using $\mathsf J_d(w)=\mathsf H_d^\sharp G_\varepsilon(A)$, we obtain
+\begin{equation}\label{ch07:eq:envelope}
+ \nabla_\theta E_d=(I-D\mathsf D_d(w)\mathsf H_d)^T\mathsf J_d(w),
+\end{equation}
+where $T$ is the transpose for the counting scalar product on coarse fields. Note that this formula keeps the contribution of the constraint parametrization, and that it gives the derivatives of $E_d$ without estimating the size of the total action.
+
+\paragraph{Step 6: coefficient bounds for the action.}
+We now derive coefficient bounds at one rate from \eqref{ch07:eq:envelope}. We write $(\nabla_\theta E_d)_c=\mathsf J_d(w)_c-\mathsf T_c$, where
+\[
+ \mathsf T_c=\sum_{c'}\sum_e\mathsf H_d(e,c)^T\bigl(D_{w_e}\mathsf D_{d,c'}(w)\bigr)^T\mathsf J_d(w)_{c'},\qquad w=v_d^*(\theta)+\mathsf H_d\theta,
+\]
+with $c,c'$ coarse links and $e$ a fine link. In the term $\mathsf H_d^\sharp N_\varepsilon$ of $\mathsf J_d$, a fixed coarse index $c$ sees the volume-normalized column of $\mathsf H_d$, which is bounded. In $\mathsf T_c$ the fine index $e$ is summed between $\mathsf H_d$ and $D\mathsf D_d$, and the factors $\varepsilon^{-3}$ and $\varepsilon^3$ cancel. We carry out the bookkeeping for the first derivative, which shows all the mechanisms. The derivative of $\mathsf T_c$ in $\theta_{c_1}$ is $\mathsf T^{(1)}_c(c_1)+\mathsf T^{(2)}_c(c_1)$, where
+\[
+ \begin{aligned}
+ \mathsf T^{(1)}_c(c_1)&=\sum_{c',e}\mathsf H_d(e,c)^T\bigl(D_{w_e}\mathsf D_{d,c'}(w)\bigr)^TD_{\theta_{c_1}}\bigl[\mathsf J_d(w)_{c'}\bigr],\\
+ \mathsf T^{(2)}_c(c_1)&=\sum_{c',e,e'}\mathsf H_d(e,c)^T\bigl(D^2_{w_ew_{e'}}\mathsf D_{d,c'}(w)\,D_{\theta_{c_1}}w_{e'}\bigr)^T\mathsf J_d(w)_{c'} .
+ \end{aligned}
+\]
+Let $b''>0$ be smaller than all rates used, and write $\omega(x,y)=e^{b''\dist(x,y)}$. By the triangle inequality, $e^{b''\mathsf t(c;c_1)}=\omega(c,c_1)$ is at most the product of the weights $\omega$ along the chain $c,e,c',c_1$, or $c,e,e',c_1$. We first consider the output row, with $c$ fixed. For $\mathsf T^{(1)}$ we sum in the order $c_1$, $c'$, $e$:
+\begin{multline*}
+ \sum_{c_1}\omega(c,c_1)\abs{\mathsf T^{(1)}_c(c_1)}\\
+ \le\sum_e\omega(c,e)\abs{\mathsf H_d(e,c)}\sum_{c'}\omega(e,c')\abs{D_{w_e}\mathsf D_{d,c'}(w)}\,\sup_{c'}\sum_{c_1}\omega(c',c_1)\abs{D_{\theta_{c_1}}\mathsf J_d(w)_{c'}} .
+\end{multline*}
+The first sum is a counting column of $\mathsf H_d$, of order $\varepsilon^{-3}$. For each fixed fine $e$, the second sum is a counting column of $D\mathsf D_d$ with the fine input fixed, of order $\varepsilon^3r$ by \eqref{ch07:eq:D-majorant}. The last factor is a row of the coarse tensor $D_\theta\mathsf J_d$, which is bounded by Step~2. The product is of order $r$, with no power of $\varepsilon$. For $\mathsf T^{(2)}$ we bound $\abs{\mathsf J_d(w)_{c'}}\le\norm{\mathsf J_d(w)}_\infty$ and sum in the order $c_1$, $(c',e')$, $e$: the counting column of $\mathsf H_d$ at $c$, of order $\varepsilon^{-3}$, multiplies the counting column of $D^2\mathsf D_d$ with the fine input $e$ fixed, of order $\varepsilon^3$, and the row of $D_\theta w=Dv_d^*+\mathsf H_d$, which is bounded by Step~2. Next we consider the input column, with $c_1$ fixed. For $\mathsf T^{(1)}$ the fixed input lies in $D_\theta\mathsf J_d$. We use its column $\sum_{c'}\omega(c',c_1)\abs{D_{\theta_{c_1}}\mathsf J_d(w)_{c'}}$, and then the rows $\sup_{c'}\sum_e\omega(e,c')\abs{D_{w_e}\mathsf D_{d,c'}(w)}\le Kr$ and $\sup_e\sum_c\omega(c,e)\abs{\mathsf H_d(e,c)}\le K$; no power of $\varepsilon$ occurs. For $\mathsf T^{(2)}$ the fixed input lies in $D_\theta w$, whose counting column $\sum_{e'}\omega(e',c_1)\abs{D_{\theta_{c_1}}w_{e'}}$ is of order $\varepsilon^{-3}$; it multiplies the counting column of $D^2\mathsf D_d$ with the fine input $e'$ fixed, of order $\varepsilon^3$, the row of $\mathsf H_d$, and $\norm{\mathsf J_d(w)}_\infty$.
+
+The derivatives of higher order are bounded in the same way. In each term of the chain rule, the branch containing the fixed input, whether it lies in $w$ or in $\mathsf J_d$, uses the input column of that factor, and every other branch uses its output row; these are the contraction rules of \cref{ch02:lem:coefficient-algebra}. Every contraction over a fine index pairs a counting column of order $\varepsilon^{-3}$, of $\mathsf H_d$ or of $D_\theta w$, with a counting column of order $\varepsilon^3$ of a derivative of $\mathsf D_d$. Together with \eqref{ch07:eq:min-all-order-row}, this gives, on a fixed smaller ball and at the rate $b''$,
+\begin{equation}\label{ch07:eq:action-majorant}
+ \norm{D_\theta^s\nabla_\theta E_d}_{b'',\mathrm{root}}\le K^{s+1}s!\qquad(s\ge1),
+\end{equation}
+where the norm is the maximum of the output row and the input columns. Since the derivatives of a scalar function are symmetric, every argument may be the fixed one. This proves the bounds $\norm{D^sE_d}_{a_s,\mathrm{root}}\le C_s$ of part~(5). Integrating the row of the Hessian along $t\theta$, $0\le t\le1$, and using $\nabla_\theta E_d(0)=0$, we obtain $\norm{\nabla_\theta E_d}_\infty\le K\norm\theta_\infty$. The substitution $\theta=gB$ contributes exactly the factor $g^{s-2}$ at order $s$ of $g^{-2}E_d(e^{gB})$, and its first derivative is $g^{-1}\nabla_\theta E_d(gB)$, which gives $\norm{D_BW_{d,g}}_\infty\le K\norm B_\infty$.
+
+\paragraph{Step 7: local minimality on the fiber.}
+Let $\theta$ be real, and write $A_*=A_d(\theta)$, $G_*=G_d(A_*)$, and $c_*=\Log G_*$. Let $\Omega_*$ be a periodic fine gauge transformation with values $G_*$ at the coarse vertices. By the discussion at the beginning of this section, $U_*=(e^{\varepsilon A_*})^{\Omega_*}$ satisfies $T_M^dU_*=e^\theta$. On the fixed finite lattice, let $U$ be a configuration in this fiber close to $U_*$, and write $U^{\Omega_*^{-1}}=e^{\varepsilon A}$. Since $A=A_*$ for $U=U_*$, continuity in finitely many variables shows that $A$ lies in the ball of inputs of \cref{ch06:thm:projected-landau-slice} if $U$ is close enough to $U_*$. Its block average is $T_M^de^{\varepsilon A}=(e^\theta)^{G_*^{-1}}$.
+
+We apply \cref{ch06:thm:projected-landau-slice} to $A$ with prescribed coarse datum $c=c_*$. For $A=A_*$ the gauge transformation of that theorem is the identity, since $\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon A_*=0$ and $c_*=\Log G_d(A_*)$. The transformed field $A'$ has projected divergence zero and gauge-corrected block average
+\[
+ \bigl[(e^\theta)^{G_*^{-1}}\bigr]^{G_*}=e^\theta,
+\]
+where the order of the factors comes from $(U^k)^l=U^{lk}$. By that theorem $\norm{A'}_\infty+\norm{d_\varepsilon A'}_\infty$ is small, and the parametrization of all nearby solutions of the constraint in \cref{ch06:thm:nonlinear-section} gives
+\[
+ v'=(I-\mathsf H_d\mathsf Q_d)A'\in\mathcal V_d,\qquad A'=\mathsf P_d^{\mathrm{cl}}(v'+\mathsf H_d\theta).
+\]
+By continuity and the supremum and curl bounds for $\mathsf H_d\mathsf Q_dA'$, we see that $v'$ lies in the larger convex domain of Step~4. By the stability inequality of \cref{ch06:thm:constrained-convexity}, we have
+\[
+ \mathscr S_\varepsilon(U)-\mathscr S_\varepsilon(U_*)\ge\frac{c_0}4\norm{v'-v_d^*(\theta)}_{H^1_\varepsilon}^2,
+\]
+where we used that all the gauge transformations involved preserve the action $\mathscr S_\varepsilon$. Equality forces $v'=v_d^*(\theta)$, hence $A'=A_*$. Undoing the two fine gauge transformations shows that $U$ and $U_*$ lie on the same fine gauge orbit. Since both configurations lie in the fiber over $e^\theta$, the values of the relating gauge transformation at the coarse vertices leave $e^\theta$ fixed. The construction applies to all points of a sufficiently small neighborhood of $U_*$ in the fiber on the given finite lattice. Applying the inequality along a differentiable curve in the fiber through $U_*$, for both signs of the parameter, shows that every tangent vector to the fiber has zero first variation. This proves part~(6) and completes the proof.
+\end{proof}
+
+\section{Gauge extensions and symmetries of the effective action}\label{ch07:sec:symmetries}
+
+In this section we prove that $E_d$ is invariant under small coarse gauge transformations, the lattice symmetries, and constant color rotations. A symmetry applied to the background field moves it out of the gauge slice in which it was constructed. To compare, we bring the transformed field back into the slice with \cref{ch06:thm:projected-landau-slice} and use the uniqueness of critical points in the convex domain of \cref{ch06:thm:constrained-convexity}. The following lemma isolates this argument; it is used here and again in the proof of the nested minimization identity.
+
+\begin{lemma}\label{ch07:lem:criticality-transfer}
+There exists $r_{\mathrm{tr}}>0$ such that the following holds for every $d\ge0$ and $n\ge4$, with $\varepsilon=\varepsilon_d$. Let $U=e^{\varepsilon A}$ be a real fine configuration with $\norm A_{C^1_\varepsilon}<r_{\mathrm{tr}}$, and let $b=T_M^dU$ satisfy $\norm{\Log b}_\infty<r_{\mathrm{tr}}$. Assume that $U$ is a critical point of $\mathscr S_\varepsilon$ on the fiber $\{U':T_M^dU'=b\}$, that is, $(d/dt)\mathscr S_\varepsilon(U(t))|_{t=0}=0$ for every differentiable curve $t\mapsto U(t)$ in this fiber with $U(0)=U$. Then, with $\theta=\Log b$, there is a real fine gauge transformation $h$ such that $U^h=e^{\varepsilon A_d(\theta)}$. In particular $\mathscr S_\varepsilon(U)=E_d(b)$.
+\end{lemma}
+
+\begin{proof}[Proof of \cref{ch07:lem:criticality-transfer}]
+If $d=0$, the fiber is the single point $U=b$, so $A=\theta$; since $\mathcal V_0=\{0\}$, $\mathsf H_0=I$, and $\mathsf D_0=0$, we have $A_0(\theta)=\theta$, and $h=I$ works. Let $d\ge1$. We choose $r_{\mathrm{tr}}$ so small that the following three steps are possible.
+
+\paragraph{Step 1: moving $U$ into the gauge slice.}
+We have $\norm A_\infty+\norm{\operatorname{div}_\varepsilon A}_\infty\le3\norm A_{C^1_\varepsilon}$ and $\norm{d_\varepsilon A}_\infty\le2\norm{\nabla_\varepsilon A}_\infty$. For small $r_{\mathrm{tr}}$, \cref{ch06:thm:projected-landau-slice} therefore applies to $A$ with prescribed coarse datum $0$. It gives a real fine scalar field $\lambda$ such that the field $A'=A^{e^\lambda}$, defined by $e^{\varepsilon A'}=U^{e^\lambda}$, satisfies
+\[
+ \mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon A'=0,\qquad G_d(A')\,e^{\lambda|_{\mathrm{roots}}}=I,
+\]
+and has gauge-corrected block average $b$ and $\norm{A'}_\infty+\norm{d_\varepsilon A'}_\infty\le Kr_{\mathrm{tr}}$. By the parametrization of all nearby solutions of the constraint in \cref{ch06:thm:nonlinear-section}, $A'=\mathsf P_d^{\mathrm{cl}}(a'+\mathsf H_d\theta)$ with $a'=(I-\mathsf H_d\mathsf Q_d)A'\in\ker\mathsf Q_d$. Since $\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon A'=0$ and $\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon\mathsf H_d=0$, also $\mathsf P_d^{\mathrm{div}}\operatorname{div}_\varepsilon a'=0$, that is, $a'\in\mathcal V_d$. The bounds on $\mathsf H_d$ give $\norm{a'}_\infty+\norm{d_\varepsilon a'}_\infty\le Kr_{\mathrm{tr}}$.
+
+\paragraph{Step 2: criticality in the chart.}
+Let $u\in\mathcal V_d$, and for small real $t$ let $a(t)=a'+tu$ and $A(t)=\mathsf P_d^{\mathrm{cl}}(a(t)+\mathsf H_d\theta)$. Since the gauge-corrected block average of $A(t)$ is $e^\theta=b$ for all $t$, the relation at the beginning of \cref{ch07:sec:background} gives $T_M^de^{\varepsilon A(t)}=b^{G_d(A(t))^{-1}}$. For a fine vertex $x$ let $r(x)$ be the coarse vertex whose centered block at depth $d$ contains $x$, and let $\Omega(t)_x=G_d(A(t))_{r(x)}$. Then $\Omega(t)$ has the values $G_d(A(t))$ at the coarse vertices, and it depends differentiably on $t$ because $G_d$ is holomorphic. The curve $U(t)=(e^{\varepsilon A(t)})^{\Omega(t)}$ lies in the fiber over $b$, and $\mathscr S_\varepsilon(U(t))=\mathscr S_\varepsilon(A(t))$. At $t=0$ we have $e^{\varepsilon A'}=U^{e^\lambda}$, so $U(0)=U^{h_0}$ with $h_0=\Omega(0)e^\lambda$, by $(U^k)^l=U^{lk}$. The values of $h_0$ at the coarse vertices are $G_d(A')e^{\lambda|_{\mathrm{roots}}}=I$. Since a fine gauge transformation equal to the identity at the coarse vertices maps the fiber over $b$ onto itself and preserves $\mathscr S_\varepsilon$, the configuration $U(0)$ is critical on the fiber, as $U$ is. It follows that
+\[
+ \frac d{dt}\mathscr S_\varepsilon(A(t))\Big|_{t=0}=\frac d{dt}\mathscr S_\varepsilon(U(t))\Big|_{t=0}=0 .
+\]
+Since $u\in\mathcal V_d$ was arbitrary, $a'$ is a critical point of $a\mapsto\mathscr S_\varepsilon(\mathsf P_d^{\mathrm{cl}}(a+\mathsf H_d\theta))$ on $\mathcal V_d$.
+
+\paragraph{Step 3: identification.}
+Fix an allowed value $r_{\mathrm{ph}}$ of \cref{ch06:thm:constrained-convexity}, and choose $r_{\mathrm{tr}}$ so that $r_{\mathrm{tr}}<r_\theta$, $Kr_{\mathrm{tr}}<r_{\mathrm{ph}}$, and $r_{\mathrm{tr}}<r_{\mathrm{ph}}/C_*$. Then $a'$ is a critical point in the interior of the convex domain $\{a\in\mathcal V_d:\norm a_\infty+\norm{d_\varepsilon a}_\infty<r_{\mathrm{ph}}\}$. By \cref{ch07:thm:regular-minimum} and \cref{ch07:lem:wilson-euler}, $v_d^*(\theta)$ is also an interior critical point of this domain. By the uniqueness of interior critical points in \cref{ch06:thm:constrained-convexity}, $a'=v_d^*(\theta)$. Hence $A'=A_d(\theta)$, that is, $U^{e^\lambda}=e^{\varepsilon A_d(\theta)}$, and $\mathscr S_\varepsilon(U)=\mathscr S_\varepsilon(A_d(\theta))=E_d(b)$, since gauge transformations preserve the action.
+\end{proof}
+
+The next lemma constructs a smooth extension of coarse gauge transformations to the fine lattice by cardinal interpolation, and proves the symmetries of $E_d$. The first differences of the extension are of the size of the coarse gauge transformation, not of its size divided by the mesh. For a coarse vertex field $\kappa$ and a point $x$ of the torus we write $\sum_c\chi_c(x)\kappa_c$, where $c$ runs over the coarse vertices.
+
+\begin{lemma}\label{ch07:lem:classical-symmetries}
+There exist smooth periodic functions $\chi_c$ on the torus, indexed by the coarse vertices $c$, such that $\sum_c\chi_c=1$, $\chi_c(c')=\delta_{cc'}$ for all coarse vertices $c'$, the supports of the $\chi_c$ have diameter at most $2\sqrt3$, and
+\[
+ \sup_x\sum_c\abs{\partial^j\chi_c(x)}\le C_j\qquad(0\le j\le3);
+\]
+their restrictions to the fine vertices satisfy $\varepsilon_d^3\sum_x\abs{\partial^j\chi_c(x)}\le C_j$. There exist $r_{\mathrm{lift}},r_{\mathrm{sym}},\kappa_{\mathrm{sym}},C>0$ with $2Cr_{\mathrm{sym}}<\min(r_{\mathrm{lift}},\kappa_{\mathrm{sym}})$, where $C$ also bounds the constants of \cref{ch07:thm:regular-minimum} and the constant in the bound on $\Log G_d$ in \cref{ch07:lem:word-majorant}, such that the following hold for every $d\ge0$ and $n\ge4$, with $\varepsilon=\varepsilon_d$.
+\begin{enumerate}
+\item Let $k_c=e^{\kappa_c}$ be a coarse gauge transformation with $\norm\kappa_\infty<\kappa_{\mathrm{sym}}$, and let $\Omega(x)=\exp(\sum_c\chi_c(x)\kappa_c)$ at the fine vertices $x$. Then $\Omega$ equals $k$ at the coarse vertices, and for fine fields $A$ with $\norm A_{C^1_\varepsilon}<r_{\mathrm{lift}}$,
+\[
+ \norm{\varepsilon^{-1}\Log[(e^{\varepsilon A})^\Omega]}_{C^1_\varepsilon}\le C(\norm A_{C^1_\varepsilon}+\norm\kappa_\infty).
+\]
+In particular, for $\norm\theta_\infty<r_{\mathrm{sym}}$ the gauge orbit of $e^{\varepsilon A_d(\theta)}$ contains a representative $U$, analytic in $\theta$, with $T_M^dU=e^\theta$ and $\norm{\varepsilon^{-1}\Log U}_{C^1_\varepsilon}\le C\norm\theta_\infty$.
+\item On common smaller complex domains,
+\[
+ E_d(b^k)=E_d(b),\qquad E_d(\sigma b)=E_d(b),\qquad E_d(b^u)=E_d(b)\quad(u\in\SU\text{ constant}),
+\]
+where $b$ and $b^k$ lie in the chart $\{\norm{\Log b}_\infty<r_{\mathrm{sym}}\}$, $\norm{\Log k}_\infty<\kappa_{\mathrm{sym}}$, and $\sigma$ is a translation of the coarse lattice or the spatial inversion $x\mapsto-x$, which maps links to reversed links and inverts their variables. Differentiating the first identity, we obtain the infinitesimal gauge-invariance identities $(d/dt)E_d(b^{e^{t\xi}})|_{t=0}=0$ for every field $\xi$ on the coarse vertices with values in $\su$.
+\end{enumerate}
+\end{lemma}
+
+The representative in part~(1) is used in the proof of \cref{ch07:thm:bellman}. Part~(2) concerns small gauge transformations only. Gauge transformations far from the identity are treated in \cref{ch08:chapter}.
+
+\begin{proof}[Proof of \cref{ch07:lem:classical-symmetries}]
+We construct the cardinal functions (Step~1), prove the bound on the gauge transform (Steps~2 and~3), and then prove the three identities (Steps~4--6). Step~7 fixes the radii.
+
+\paragraph{Step 1: cardinal functions.}
+Let
+\[
+ \eta(t)=\begin{cases}\exp\bigl(1-(1-t^2)^{-1}\bigr),&\abs t<1,\\0,&\abs t\ge1,\end{cases}
+\]
+and
+\[
+ D(t)=\sum_{l\in\Z}\eta(t-l),\qquad\phi_l(t)=\eta(t-l)/D(t).
+\]
+The function $D$ is positive and periodic, so its minimum on $[0,1]$ is positive. The derivatives of each fixed order of $\eta$ are bounded and vanish at the endpoints of its support. At most two translates of $\eta$ are nonzero at a noninteger point and only one at an integer point, and the sums of their derivatives are bounded in terms of the order. It follows that $\sum_l\phi_l=1$ and $\phi_l(k)=\delta_{lk}$ for integers $k$. Taking tensor products of the $\phi_l$ in the three coordinates and periodizing with period $n$, we obtain functions $\chi_c$ whose supports have diameter at most $2\sqrt3$ in the metric of the torus. Since $n\ge4$, the periodization keeps the finite overlap and the values at the coarse vertices. The bounds on the sums of derivatives follow from the product rule. For fixed $c$, the support of $\chi_c$ contains at most $K\varepsilon^{-3}$ fine vertices and the derivatives of $\chi_c$ are bounded, which proves the bounds with the factor $\varepsilon^3$. Finite differences divided by $\varepsilon$ satisfy the same bounds, since they are averages of the corresponding derivatives over intervals of length $\varepsilon$.
+
+\paragraph{Step 2: the gauge transform has a bounded rescaled connection.}
+Let $\lambda(x)=\sum_c\chi_c(x)\kappa_c$, so that $\Omega=e^\lambda$. By Step~1, the value of $\lambda$ and its first two differences divided by $\varepsilon$ are bounded by $K\norm\kappa_\infty$. For a fine link $xy$ we write $u=\lambda_x$, $v=(\lambda_y-\lambda_x)/\varepsilon$, and $a=A_{xy}$. The analytic function of finitely many variables
+\[
+ \varepsilon^{-1}\Log\bigl(e^ue^{\varepsilon a}e^{-u-\varepsilon v}\bigr)
+ =\Ad(e^u)a-\Bigl(\int_0^1\Ad(e^{tu})\,dt\Bigr)v+\varepsilon R_\varepsilon(u,v,a)
+\]
+has a removable singularity at $\varepsilon=0$, uniformly on a fixed small complex ball of $(u,v,a)$. Indeed, the product of the three exponentials is the identity at $\varepsilon=0$, and its first derivative in $\varepsilon$ at $\varepsilon=0$ gives the two displayed principal terms. The remainder $R_\varepsilon$ and its derivatives are bounded by the convergent series in finitely many variables on a smaller ball. The difference of the first principal term involves $\nabla_\varepsilon A$ and $\nabla_\varepsilon\lambda$, and the difference of the second involves the first two differences of $\lambda$. For the last term,
+\[
+ \abs{\nabla_\varepsilon(\varepsilon R)_e}\le\abs{R_{e+\varepsilon e_\mu}}+\abs{R_e},
+\]
+with no inverse power of the mesh. Since the remainder vanishes at $(a,v)=0$, after shrinking the domain its value is at most $K(\abs a+\abs v)$. This proves the bound of part~(1), on a radius $r_{\mathrm{lift}}$ independent of the fine mesh.
+
+\paragraph{Step 3: a representative with block average $e^\theta$.}
+By \cref{ch07:lem:word-majorant} and part~(1) of \cref{ch07:thm:regular-minimum}, $\norm{\Log G_d(A_d(\theta))}_\infty\le K\norm\theta_\infty$. We apply the cardinal extension of Step~2 with these values at the coarse vertices. By the discussion at the beginning of \cref{ch07:sec:background}, the resulting field $U$ satisfies $T_M^dU=e^\theta$, and Step~2 implies that $\norm{\varepsilon^{-1}\Log U}_{C^1_\varepsilon}\le K\norm\theta_\infty$. The formulas in finitely many variables and the holomorphic maps already constructed show that $U$ is analytic in $\theta$. The radii and the bound are the same for all $d$ and $n$. This proves part~(1).
+
+\paragraph{Step 4: gauge invariance.}
+We first let $b$ and $k$ be real with $\norm{\Log b}_\infty$ and $\norm{\Log k}_\infty$ small, and write $b=e^\theta$ and $G=G_d(A_d(\theta))$. Using the local logarithm of $kG$, we apply the cardinal extension of Step~2 to the coarse gauge transformation $kG$, and we apply the resulting fine gauge transformation to $e^{\varepsilon A_d(\theta)}$. Since $T_M^de^{\varepsilon A_d(\theta)}=b^{G^{-1}}$, the transformed field $U_k$ satisfies $T_M^dU_k=(b^{G^{-1}})^{kG}=b^k$. By Step~2 its rescaled connection has $C^1_\varepsilon$ norm at most $K(\norm\theta_\infty+\norm{\Log k}_\infty)$. The field $U_k$ is obtained from the configuration $U_*$ of part~(6) of \cref{ch07:thm:regular-minimum} by a fine gauge transformation, which maps the fiber over $b$ onto the fiber over $b^k$ and preserves $\mathscr S_\varepsilon$. Since $U_*$ is critical on its fiber, $U_k$ is critical on the fiber over $b^k$. By \cref{ch07:lem:criticality-transfer}, $\mathscr S_\varepsilon(U_k)=E_d(b^k)$. Since all the transformations used preserve the action, we conclude that $E_d(b^k)=\mathscr S_\varepsilon(e^{\varepsilon A_d(\theta)})=E_d(b)$.
+
+\paragraph{Step 5: translations, inversion, and constant color rotations.}
+Translations of the coarse lattice preserve the centered blocks and their coordinate-ordered paths. They lift to translations of the fine lattice and commute with the block averaging map. For the inversion, let $c=(r,r+Me_i)$, let $c'=(-r-Me_i,-r)$, and let $y=-x-Me_i$. The inversion maps the paths as follows: $\sigma_{r,x}\mapsto\sigma_{-r,-x}$, $F_{c,x}\mapsto F_{c',y}^{-1}$, and $C_c\mapsto C_{c'}^{-1}$. For group elements $F,C$ in the domain of the logarithm,
+\[
+ \Log(F^{-1}C)=-\Ad(C^{-1})\Log(FC^{-1}).
+\]
+Inserting this identity into the exponential average defining $T_M$, we find that the averaged reversed link is the inverse of the averaged link. The same holds for the Borel extension when a ratio equals $-I$, although that case does not occur in the present chart. The inversion therefore also commutes with the block averaging map. A translation preserves the $C^1_\varepsilon$ norm of the rescaled connection; the inversion replaces each component by its negative at a translated link and also preserves that norm. Let $\sigma$ be one of these maps and let $U$ be the representative of part~(1) for $b$, which is critical on its fiber by part~(6) of \cref{ch07:thm:regular-minimum}. Then $\sigma U$ has block average $\sigma b$ and the same action, it is critical on the fiber over $\sigma b$, and its rescaled connection has the same small norm. By \cref{ch07:lem:criticality-transfer}, $E_d(\sigma b)=\mathscr S_\varepsilon(\sigma U)=\mathscr S_\varepsilon(U)=E_d(b)$. This proves the spatial identities on a common smaller domain.
+
+A constant $u\in\SU$ acts by the orthogonal color rotation $\Ad(u)$ on every path product, every linear operator, the constraints, and the action. It preserves all the domains above. By uniqueness of the fixed point, $v_d^*(\Ad(u)\theta)=\Ad(u)v_d^*(\theta)$ and $A_d(\Ad(u)\theta)=\Ad(u)A_d(\theta)$, which gives the identity $E_d(b^u)=E_d(b)$ for every such $u$.
+
+\paragraph{Step 6: complex continuation.}
+For translations, the inversion, and each fixed constant $u$, both sides of the identity are holomorphic functions of the coarse logarithm. Since they agree on a real open ball, every coefficient of the Taylor series of their difference vanishes. For the gauge identity the same argument applies jointly in $\Log b$ and $\Log k$.
+
+\paragraph{Step 7: the radii and the infinitesimal identities.}
+Let $C$ be a constant larger than the constants for the minimum, for the gauge transformation $G_d$, and for the extension. First fix $r_{\mathrm{lift}}$ and $\kappa_{\mathrm{sym}}$ inside the domains used above, and then fix $r_{\mathrm{sym}}$ so small that $2Cr_{\mathrm{sym}}<\min(r_{\mathrm{lift}},\kappa_{\mathrm{sym}})$ and all the requirements of \cref{ch07:lem:criticality-transfer} and of Steps~4 and~5 hold. This order gives the dependence of the constants stated in \cref{ch07:sec:conventions}. Differentiating the gauge identity along $k_x(t)=e^{t\xi_x}$ gives the infinitesimal identity for every coarse vertex field $\xi$; for $t$ in a small interval about zero, both $b$ and $b^{k(t)}$ stay in the chart.
+\end{proof}
+
+\section{One averaging step and nested minimization}\label{ch07:sec:nested}
+
+We now consider one averaging step, from a lattice of side $Mm$ to the lattice of side $m\ge4$. We minimize $E_d$ over the configurations on the lattice of side $Mm$ whose block average is a given coarse field $c$. We first recall the local coordinates on the fiber $\{b:T_Mb=c\}$ and prove the bounds we need for them; then we prove the nested minimization identity.
+
+\paragraph{Coordinates for one averaging step.}
+The coordinates are those of \cref{ch01:def:block-map} and \cref{ch03:lem:relative-coarea}; the eliminated edges are denoted $e^*_{c'}$ here. In this paragraph $c$ denotes a coarse field and $c'$ a positive coarse link. The coarse-field lift $U_0(c)$ is the identity on the internal links of the blocks and equals $c_{c'}$ on the interface links of the coarse link $c'$; thus $T_MU_0(c)=c$. In each block, the paths $\sigma_{r,x}$ from the block center $r$ form a rooted spanning tree, and we let $\mathcal F$ be the set of positive fine links whose unoriented edges belong to these trees. For the coarse link $c'=(r,r+Me_i)$, the eliminated edge is $e^*_{c'}=(r+R_Me_i,r+(R_M+1)e_i)$, where $M=2R_M+1$. We write a fine configuration as $e^XU_0(c)$, and we let
+\[
+ \mathsf C_{c'}(X)=\Log\bigl((T_M(e^XU_0(c)))_{c'}c_{c'}^{-1}\bigr)
+\]
+be the block averaging constraint at $c'$. The free logarithmic coordinates $z$ are the values $X_e$ on the positive fine links $e\notin\mathcal F$ that are not eliminated edges, and $X_e=0$ for $e\in\mathcal F$. The local constraint coordinates $X=\Gamma_c(z)$ solve the constraints $\mathsf C_{c'}(X)=0$ for the eliminated-edge variables $X_{e^*_{c'}}$, with $\Gamma_c(z)_e=z_e$ on the free links. We set
+\[
+ b(c,z)=e^{\Gamma_c(z)}U_0(c),\qquad B(c,z)=\Log b(c,z),\qquad \mathsf E_{\mathrm f}=D_zB(I,0).
+\]
+Let $f$ be the number of free coordinates, each a group variable, let $c_{\mathrm{Haar}}=1/(16\pi^2)$ and $j_H(X)=\sinc^2(\abs X/2)$ be as in \eqref{ch01:eq:haar-coordinates}, and define the Haar disintegration density
+\[
+ \mathcal J_c(z)=c_{\mathrm{Haar}}^f\frac{\prod_{e\notin\mathcal F}j_H(\Gamma_c(z)_e)}{\prod_{c'}\det D_{X_{e^*_{c'}}}\mathsf C_{c'}(\Gamma_c(z))},
+\]
+where $e$ runs over the positive fine links and $c'$ over the positive coarse links. In complex formulas $\abs X^2$ denotes the bilinear sum of the squares of the three coordinates of $X$. This is the density of \cref{ch03:lem:relative-coarea}; the numerator contains the Haar factors of the eliminated edges, which lie outside $\mathcal F$. We recall its derivation in the proof below, since the estimates use its explicit form.
+
+\begin{lemma}\label{ch07:lem:shell-branch}
+There exist $R'_M,b,K_M>0$ such that the following hold for every $m\ge4$.
+\begin{enumerate}
+\item On the complex product $\norm\theta_\infty<R'_M$, $\norm z_\infty<R'_M$, with $c=e^\theta$, the maps $\Gamma_c(z)$ and $B(c,z)$ are holomorphic, their absolute derivative tensors have factorial bounds and finite stencils, and
+\[
+ \norm{B(c,z)}_\infty\le K_M(\norm\theta_\infty+\norm z_\infty),\qquad
+ \norm{D_zB(c,z)-\mathsf E_{\mathrm f}}_{b,\mathrm{row+col}}\le K_M(\norm\theta_\infty+\norm z_\infty).
+\]
+\item On a smaller real product, the constraint Jacobian determinants $\det D_{X_{e^*_{c'}}}\mathsf C_{c'}(\Gamma_c(z))$ are bounded below by a fixed positive constant, and
+\[
+ \norm{D_z^2\log\mathcal J_c(z)}_{b,\mathrm{row+col}}\le K_M .
+\]
+\item Let $t\mapsto b(t)$ be a differentiable curve in the fiber $\{T_Mb=c\}$, and let $k(t)$, equal to the identity at the coarse vertices, be the block axial gauge transformation of $b(t)$, so that $b(t)^{k(t)}=b(c,z(t))$, with $z(t)$ in the domain of~(1). Put $k_0=k(0)$ and $z_0=z(0)$, and let $\mathcal G_h(U)=U^h$. Then
+\[
+ b'(0)=D\mathcal G_{k_0^{-1}}\big|_{b(c,z_0)}D_zb(c,z_0)z'(0)+\frac d{dt}\Bigl[b(c,z_0)^{k(t)^{-1}}\Bigr]\Big|_{t=0}.
+\]
+The second term is the tangent vector at $b(0)$ of a curve of fine gauge transformations along the block trees which are the identity at the coarse vertices. If $b(0)=b(c,z_0)$, then $k_0=I$, and the first term is $D_zb(c,z_0)z'(0)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of \cref{ch07:lem:shell-branch}]
+We construct the block axial gauge (Step~1), solve the constraint for the eliminated edges (Steps~2 and~3), derive the density and bound its Hessian (Steps~4 and~5), and prove the decomposition of tangent vectors (Step~6). The density formula is the tree-gauge specialization of the disintegration of Haar measure for this averaging constraint.
+
+\paragraph{Step 1: the block axial gauge.}
+We gauge the links of $\mathcal F$ to the identity with $k_r=I$ at each block center $r$. On a tree edge directed from a parent $x$ to a child $y$ we prescribe
+\begin{equation}\label{ch07:eq:forest-gauge}
+ k_y=k_xU_{xy},\qquad k_x=U(\sigma_{r,x}).
+\end{equation}
+If this direction reverses a positive link, $U_{xy}$ is the inverse of the variable of that link, as in the path convention. Then $k_xU_{xy}k_y^{-1}=I$ on every tree edge. By recursion along the tree, we see that this gauge transformation is unique given the values at the roots and that each $k_x$ is an analytic path product. By \eqref{ch07:eq:ordinary-gauge-covariance}, a gauge transformation equal to the identity at the coarse vertices preserves the coarse field. In these coordinates each straight reference path $C_{c'}$ has only one link that is not gauged to the identity, the eliminated edge $e^*_{c'}$.
+
+\paragraph{Step 2: the derivative in the eliminated edge.}
+We note that in these coordinates the constraint at $c'$ contains, among all the eliminated variables, only its own. Indeed, the root paths are identities, and a straight middle segment crosses only the interface from its starting block to the neighboring block in direction $i$. Exactly $M$ of the $M^3$ segments cross $e^*_{c'}$: their transverse offset is zero, and the longitudinal start has $M$ choices. At $z=0$, let only $X=X_{e^*_{c'}}$ vary. Then the $M$ contours through $e^*_{c'}$ have transport $e^Xc_{c'}$, all other contours have transport $c_{c'}$, and the reference path has transport $e^Xc_{c'}$. The relative logarithms are $0$ for the first $M$ contours and $-X$ for the others, so their mean is $-(1-M^{-2})X$, and the output is exactly
+\[
+ \exp\bigl(-(1-M^{-2})X\bigr)e^Xc_{c'}=e^{M^{-2}X}c_{c'} .
+\]
+Thus the derivative of the constraint in the eliminated edge is $M^{-2}I_3$ at $z=0$, for every sufficiently small $c$, not only for $c=I$.
+
+\paragraph{Step 3: solving the constraints.}
+Each constraint involves a bounded number of variables, and a fixed free link meets a bounded number of constraints, both depending only on $M$. The derivatives of these path products on a fixed smaller polydisc are bounded by $s!K_M^s$. We consider the equation
+\[
+ X_{e^*_{c'}}=X_{e^*_{c'}}-M^2\mathsf C_{c'}(X,z).
+\]
+By Step~2, the derivative of its right side in $X_{e^*_{c'}}$ vanishes at $(X,z)=(0,0)$. On a fixed small product this derivative has norm less than $1/4$, and the constant term is $O_M(\norm z_\infty)$. Hence the right side maps a ball of radius $K_M\norm z_\infty$ strictly into itself, and iteration gives the unique small holomorphic solution. Majorizing by the scalar quadratic implicit series of \cref{ch02:lem:coefficient-algebra}, we obtain factorial bounds on its derivatives. Since the equations are independent in their eliminated unknowns, the solution on the whole lattice has the same bounds and a fixed stencil, with no factor depending on the dimension. At $z=0$ the solution vanishes identically. Multiplying by $U_0(c)$ and taking the local logarithm, we obtain the bounds on $B$ and on $D_zB-\mathsf E_{\mathrm f}$ from Taylor's formula. Since a stencil has bounded diameter, a fixed spatial weight changes only the constant. A fixed input enters a bounded number of outputs, which gives the column bounds. This proves part~(1).
+
+\paragraph{Step 4: the density.}
+To derive the density, we first eliminate the gauge transformations along the trees recursively, by left and right translations of the Haar probability measure; their integral is one. With the remaining links fixed, we change each eliminated link to the output of its constraint; the Jacobian of this change is the displayed $3\times3$ determinant. The remaining exponential coordinates lie outside $\mathcal F$ and contribute their Haar factors to the numerator of $\mathcal J_c$, including those of the eliminated edges. Since these changes of variables are triangular, a derivative in an earlier coordinate contributes no further determinant. More explicitly, we fix $c$ as a parameter before the change of variables. A nearby output is $e^\varphi c$, and the Haar probability measure in this coordinate is $c_{\mathrm{Haar}}^q\prod_{c'}j_H(\varphi_{c'})\,d\varphi$, where $q$ is the number of positive coarse links. On the fiber $\varphi=0$ these factors $j_H$ equal one. There are $f+q$ input links outside $\mathcal F$, so dividing their Haar constants by those of the output leaves $c_{\mathrm{Haar}}^f$. Right translation by the fixed configuration $U_0(c)$ preserves the Haar measure of the inputs. This gives the displayed density at each fixed coarse field. Letting this parameter vary afterwards introduces no further Jacobian and no additional Haar factor for the coarse field.
+
+\paragraph{Step 5: the Hessian of the logarithm of the density.}
+We shrink the product until the Haar factors are bounded away from zero and the derivatives of the constraints in the eliminated edges differ from $M^{-2}I_3$ by less than $M^{-2}/4$. Then the real determinants are positive, and their logarithms and the logarithms of the Haar factors have bounded local analytic derivatives. The function $\log\mathcal J_c$ is the sum of these local terms and of the constant $f\log c_{\mathrm{Haar}}$. Each differentiated row meets a bounded number of terms, and each term involves a bounded number of coordinates. This proves the bounds on the rows and columns of the Hessian in part~(2); the undifferentiated density depends on the volume.
+
+\paragraph{Step 6: tangent vectors to the fiber.}
+For a curve $b(t)$ in the fiber as in part~(3), we apply to each $b(t)$ its unique block axial gauge transformation $k(t)$, which is the identity at the coarse vertices and depends differentiably on $t$, since each $k_x(t)$ is a path product. The gauged curve has the same block average $c$, and its free coordinates are some $z(t)$. By uniqueness of the solution of the constraints, all its remaining coordinates are those of $\Gamma_c(z(t))$, that is, $b(t)^{k(t)}=b(c,z(t))$. Hence $b(t)=\mathcal G_{k(t)^{-1}}(b(c,z(t)))$. Differentiating at $t=0$ by the product rule, we obtain the displayed formula: the first term comes from the derivative of $b(c,z(t))$ at the fixed gauge transformation $k_0^{-1}$, and the second from the derivative of $k(t)^{-1}$ at the fixed configuration $b(c,z_0)$. If $b(0)=b(c,z_0)$, the uniqueness of the block axial gauge transformation gives $k_0=I$. The argument is local and requires no global choice on the compact fiber.
+\end{proof}
+
+In the following theorem, $E_{d_0}$ is the effective classical action of depth $d_0$ over the lattice of side $Mm$, in the coarse lattice units of that lattice, and $E_{d_0+1}$ is the effective classical action of depth $d_0+1$ over the lattice of side $m$. The coordinates $z$ are the free logarithmic coordinates of \cref{ch07:lem:shell-branch}; no coupling has been inserted.
+
+\begin{theorem}\label{ch07:thm:bellman}
+There exist $r_c,r_z,m_0,C_0,a,C,g_*>0$ such that the following hold for every $d_0\ge0$ and every $m\ge4$. Let
+\[
+ F_{d_0}(c,z)=E_{d_0}(b(c,z)),\qquad
+ K_{d_0}^0=\mathsf E_{\mathrm f}^TD^2E_{d_0}(I)\mathsf E_{\mathrm f}.
+\]
+Here $D^2E_{d_0}(I)$ is the effective Maxwell quadratic form of \cref{ch05:thm:flat-precision}; its gauge and constant null directions are kept.
+\begin{enumerate}
+\item On the real space of free coordinates,
+\[
+ m_0I\le K_{d_0}^0\le C_0I,\qquad
+ \norm{K_{d_0}^0}_{a,\mathrm{row+col}}+\norm{(K_{d_0}^0)^{-1}}_{a,\mathrm{row+col}}\le C_0 .
+\]
+\item On the real product $\norm{\Log c}_\infty<r_c$, $\norm z_\infty\le r_z$, the configuration $b(c,z)$ lies in the domain of $E_{d_0}$ and in the domain of positivity of the Haar disintegration density with fixed margins. The Hessian
+\[
+ D_z^2F_{d_0}=(D_zB)^TD^2E_{d_0}(B)D_zB+DE_{d_0}(B)D_z^2B,\qquad B=B(c,z),
+\]
+satisfies
+\[
+ \norm{D_z^2F_{d_0}-K_{d_0}^0}_{a,\mathrm{row+col}}\le C(\norm{\Log c}_\infty+\norm z_\infty),\qquad
+ D_z^2F_{d_0}\ge\tfrac12m_0I .
+\]
+\item For real $c$ with $\norm{\Log c}_\infty<r_c$ there is a unique minimizer $z_{d_0}^*(c)$ of $z\mapsto F_{d_0}(c,z)$ on the closed real ball $\norm z_\infty\le r_z$. It is an interior point, it depends real analytically on $c$, and it has a holomorphic continuation to the complex ball $\norm{\Log c}_\infty<r_c$. Further,
+\[
+ D_zF_{d_0}(c,z_{d_0}^*(c))=0,\qquad\norm{z_{d_0}^*(c)}_\infty\le C\norm{\Log c}_\infty<r_z/8,
+\]
+\[
+ E_{d_0+1}(c)=M\min_{\norm z_\infty\le r_z}F_{d_0}(c,z)=MF_{d_0}(c,z_{d_0}^*(c)).
+\]
+We call $z_{d_0}^*(c)$ the conditional constrained minimizer.
+\item There exists $0<r'_c\le r_c$, independent of $d_0$ and $m$, such that for every integer $s\ge1$ there exist $a_s,C_s>0$, depending on $s$ but independent of $d_0$ and $m$, for which the following bound holds on the complex ball $\norm\theta_\infty<r'_c$:
+\[
+ \norm{D_\theta^sz_{d_0}^*(e^\theta)}_{a_s,\mathrm{out}}+\norm{D_\theta^sz_{d_0}^*(e^\theta)}_{a_s,\mathrm{input,count}}\le C_s,
+\]
+where the outputs are the free coordinates, the inputs are the coarse links, and distances are measured in the coarse lattice units of the lattice of side $m$. The volume-normalized column differs from the counting column by the fixed factor $M^{-3}$.
+\item The identity $E_{d_0+1}(c)=MF_{d_0}(c,z_{d_0}^*(c))$ holds for complex $c$ in the ball of~(3), with the holomorphic continuation of $z_{d_0}^*$. For real $c$ and couplings $g_+^2=Mg^2$, the identity in~(3) reads
+\[
+ \frac{E_{d_0+1}(c)}{g_+^2}=\frac1{g^2}\min_{\norm z_\infty\le r_z}F_{d_0}(c,z).
+\]
+\item Let $c$ be real with $\norm{\Log c}_\infty<r_c$, let $p\ge1$, and let $0<g\le g_*$ with $gp<r_z/4$. Then the function
+\[
+ y\longmapsto\frac1{g^2}\bigl[F_{d_0}(c,z_{d_0}^*+gy)-F_{d_0}(c,z_{d_0}^*)\bigr]-\log\frac{\mathcal J_c(z_{d_0}^*+gy)}{\mathcal J_I(0)}
+\]
+of real $y$ has Hessian at least $m_0I/4$ on the product $\prod_e\{\abs{y_e}\le p\}$.
+\end{enumerate}
+\end{theorem}
+
+Since the radii and the lower bounds in the theorem do not decrease with $d_0$, the theorem can be iterated over arbitrarily many averaging steps. The minimization statements and the lower bounds on Hessians concern real coarse fields and real free coordinates. The identity in~(5) for complex $c$ and the bounds in~(4) concern the holomorphic continuations of the critical point and the critical value. In~(6) the denominator $\mathcal J_I(0)$ is a constant, so the value of the numerator at the shifted point is kept.
+
+\begin{proof}[Proof of \cref{ch07:thm:bellman}]
+We identify the Hessian of $E_{d_0}$ at the identity (Step~1), obtain the bounds on $K_{d_0}^0$ (Step~2), and bound the Hessian away from the identity (Step~3). We then choose the radii (Step~4), construct the minimizer (Step~5), identify the nested minimum with the background field of depth $d_0+1$ (Steps~6--8), and prove part~(6) (Step~9).
+
+\paragraph{Step 1: the Hessian of the action at the identity.}
+Differentiating the action twice at $\theta=0$ in \cref{ch07:thm:regular-minimum}, using $DA_{d_0}(0)=\mathsf H_{d_0}$ and the vanishing of the gradient of $\mathscr S_\varepsilon$ at $0$, we obtain
+\begin{equation}\label{ch07:eq:flat-value-hessian}
+ D^2E_{d_0}(I)=\mathsf H_{d_0}^\sharp d_\varepsilon^*d_\varepsilon\mathsf H_{d_0}.
+\end{equation}
+We show that this is the effective Maxwell quadratic form of \cref{ch05:thm:flat-precision}, which is defined with the linearization of $T_M^{d_0}$ rather than with the gauge-corrected average. Let $\ell(a)$ be the derivative at $a=0$ of $\Log T_M^{d_0}e^{\varepsilon a}$, and let $\gamma(a)$ be the derivative at $a=0$ of $\Log G_{d_0}(a)$, a field on the coarse vertices. For a coarse vertex field $\kappa$ we write $(\nabla^{\mathrm c}\kappa)_{(r,s)}=\kappa_s-\kappa_r$. Linearizing \eqref{ch07:eq:accumulated-gauge} at $j=d_0$ and \eqref{ch07:eq:ordinary-gauge-covariance}, we obtain, for fine fields $a$ and fine scalar fields $\lambda$,
+\[
+ \mathsf Q_{d_0}a=\ell(a)-\nabla^{\mathrm c}\gamma(a),\qquad
+ \ell(\nabla_\varepsilon\lambda)=\nabla^{\mathrm c}(\lambda|_{\mathrm{roots}}).
+\]
+Thus the linearized block average and $\mathsf Q_{d_0}$ differ by a coarse gradient, and a fine gradient changes the linearized block average by a coarse gradient and has zero curl. Let $a$ have $\ell(a)=\eta$. Linearizing the gauge slice of \cref{ch06:thm:projected-landau-slice} with prescribed coarse datum zero, we obtain a fine scalar field $\lambda$ such that $a'=a-\nabla_\varepsilon\lambda$ has $\mathsf P_{d_0}^{\mathrm{div}}\operatorname{div}_\varepsilon a'=0$ and $\gamma(a')+\lambda|_{\mathrm{roots}}=0$. Then $d_\varepsilon a'=d_\varepsilon a$ and $\mathsf Q_{d_0}a'=\eta-\nabla^{\mathrm c}(\lambda|_{\mathrm{roots}})-\nabla^{\mathrm c}\gamma(a')=\eta$. Conversely, let $a'$ have $\mathsf Q_{d_0}a'=\eta$, and let $\lambda'$ be a fine scalar field with $\lambda'|_{\mathrm{roots}}=\gamma(a')$, for instance the linearization of the cardinal extension of \cref{ch07:lem:classical-symmetries}. Then $a''=a'-\nabla_\varepsilon\lambda'$ has $d_\varepsilon a''=d_\varepsilon a'$ and $\ell(a'')=\eta$. We conclude that the minimum of $\norm{d_\varepsilon a}_\varepsilon^2$ over the fields with $\ell(a)=\eta$ equals its minimum over the fields with $\mathsf Q_{d_0}a=\eta$ and $\mathsf P_{d_0}^{\mathrm{div}}\operatorname{div}_\varepsilon a=0$. Every field of the latter kind is $\mathsf H_{d_0}\eta+v$ with $v\in\mathcal V_{d_0}$, and the minimizing property of $\mathsf H_{d_0}$ shows that the minimum equals the right side of \eqref{ch07:eq:flat-value-hessian} evaluated at $\eta$. This identifies $D^2E_{d_0}(I)$ with the effective Maxwell quadratic form of \cref{ch05:thm:flat-precision}, including its gauge and constant null directions. The function $W_{d_0,g}(B)=g^{-2}E_{d_0}(e^{gB})$ has the same Hessian at $B=0$, since the two factors $g$ from the derivatives cancel $g^{-2}$.
+
+\paragraph{Step 2: the constrained Hessian at the identity.}
+We apply the statement of \cref{ch05:thm:flat-precision} about the next constrained fluctuation space, with the lattice of side $Mm$ as the coarse lattice of that theorem, the next lattice of side $m$, depth $d_0$, and the embedding $E_0=D_z\Gamma_I(0)$ of \cref{ch03:lem:free-curl-gap}, which equals $\mathsf E_{\mathrm f}$ because $U_0(I)=I$. That theorem gives $m_0,C_0,a_0>0$, independent of $d_0$ and $m$, for the lower bound, the upper bound, and the weighted bounds on $K_{d_0}^0$ and on its inverse. The inverse is asserted only on the next constrained fluctuation space, on which the vanishing of the linearized next average removes the constant fluctuation. If distances are measured in the coarse units of the lattice of side $m$ rather than in those of the lattice of side $Mm$, they are divided by $M$, and we decrease the exponent once. This proves part~(1).
+
+\paragraph{Step 3: the Hessian away from the identity.}
+We write $t=\Log c$, $H_0=D^2E_{d_0}(I)$, and $B=B(c,z)$. The Hessian in the coordinates $z$ is
+\begin{equation}\label{ch07:eq:shell-full-hessian}
+ D_z^2F_{d_0}=(D_zB)^TD^2E_{d_0}(B)D_zB+DE_{d_0}(B)D_z^2B .
+\end{equation}
+By the bounds on the third derivatives and on the gradient in \cref{ch07:thm:regular-minimum}, we have
+\[
+ \norm{D^2E_{d_0}(B)-H_0}_{a,\mathrm{row+col}}\le K\norm B_\infty,\qquad\norm{DE_{d_0}(B)}_\infty\le K\norm B_\infty .
+\]
+For the second term in \eqref{ch07:eq:shell-full-hessian}, we fix a free coordinate and use the column of $D_z^2B$ with this input fixed; the remaining input and the output are summed against the bound on the components of $DE_{d_0}(B)$. This term is $O(\norm B_\infty)$ in both the row and the column norm. For the first term we expand around $\mathsf E_{\mathrm f}^TH_0\mathsf E_{\mathrm f}$, using the bound on $D_zB-\mathsf E_{\mathrm f}$ in \cref{ch07:lem:shell-branch} and the displayed bound on $D^2E_{d_0}(B)-H_0$. Using the contraction rule of \cref{ch02:lem:coefficient-algebra} and $\norm B_\infty\le K(\norm t_\infty+\norm z_\infty)$, we obtain
+\begin{equation}\label{ch07:eq:shell-hessian-perturbation}
+ \norm{D_z^2F_{d_0}-K_{d_0}^0}_{a,\mathrm{row+col}}\le K(\norm t_\infty+\norm z_\infty).
+\end{equation}
+Every sum here has one index fixed; no sum of $\abs{DE_{d_0}}$ over all links, and no factor of the volume, occurs.
+
+\paragraph{Step 4: the radii.}
+We take a complex radius for the coordinates of \cref{ch07:lem:shell-branch} that leaves fixed margins for four requirements: the relative logarithms, the solution of the constraints, the positivity of the real density, and the larger domain of $E_{d_0}$. Let $C_{\mathrm{inv}}$ bound the weighted norm of the inverse of $K_{d_0}^0$. Fix $r_z>0$ so small that the entire product lies inside these domains and
+\[
+ 2Kr_z\le m_0/2,\qquad 2C_{\mathrm{inv}}Kr_z\le1/2 .
+\]
+Next we take $r_c\le r_z$ inside the domains for the coarse field. Since the weighted bound \eqref{ch07:eq:shell-hessian-perturbation} also bounds the Euclidean operator norm, the real Hessian is at least $m_0I/2$ on the entire product. This proves part~(2). The radii use only the bounds on the fixed larger domains of \cref{ch07:thm:regular-minimum}, which do not depend on $d_0$, and not a recursively reduced domain of $E_{d_0}$; the same radii work for every $d_0$.
+
+\paragraph{Step 5: the conditional constrained minimizer.}
+At $t=0$ and $z=0$ the gradient in $z$ vanishes. Integrating its mixed derivative in the coarse field, we obtain $\norm{D_zF_{d_0}(c,0)}_\infty\le K_1\norm t_\infty$. The equation for the minimizer is the fixed point equation
+\[
+ z=-(K_{d_0}^0)^{-1}\bigl[D_zF_{d_0}(c,z)-K_{d_0}^0z\bigr].
+\]
+By \eqref{ch07:eq:shell-hessian-perturbation}, the right side has Lipschitz constant at most $1/2$ on the complex ball of radius $r_z$. If we reduce $r_c$ so that $2C_{\mathrm{inv}}K_1r_c<r_z/8$, the right side maps this ball strictly into itself, and its fixed point satisfies
+\[
+ \norm{z_{d_0}^*(c)}_\infty\le2C_{\mathrm{inv}}K_1\norm t_\infty<r_z/8 .
+\]
+Using iteration and the convergent majorant series of \cref{ch02:lem:coefficient-algebra}, we obtain the holomorphy on the complex ball of coarse fields and the bounds on the derivative tensors of every fixed order. For the rows we use the rows of $(K_{d_0}^0)^{-1}$, of the derivatives of $E_{d_0}$ of each fixed order in \cref{ch07:thm:regular-minimum}, and of the derivatives of $B$. For the columns we follow the fixed input through the weighted inverse and the mixed derivatives of $D_zF_{d_0}$. Since the derivative tensors of the action and of $B$ have both row and column bounds, the same implicit-series argument applies. The rates obtained depend on the order through the rates $a_s$ of \cref{ch07:thm:regular-minimum}. We take $r'_c=r_c/2$, where $r_c$ denotes its final value after the reductions in this step and in Step~7. The implicit-series clause of \cref{ch02:lem:coefficient-algebra} includes the translation to backgrounds in such a fixed smaller ball, so the coefficient bounds of each fixed order hold on $\norm\theta_\infty<r'_c$. This proves part~(4). Strict convexity in the real variables shows that this interior critical point is the unique minimum on the closed real ball $\norm z_\infty\le r_z$.
+
+\paragraph{Step 6: the nested minimizer is critical on the longer fiber.}
+We now identify the minimum with the effective classical action of depth $d_0+1$. Let $b_*=b(c,z_{d_0}^*(c))$, so that $\norm{\Log b_*}_\infty\le K\norm t_\infty$. For coarse fields $b$ near $b_*$, let $s_{d_0}(b)$ be the representative of part~(1) of \cref{ch07:lem:classical-symmetries}: it lies in the gauge orbit of the background field of depth $d_0$, it depends analytically on $b$, its rescaled connection is small in $C^1_\varepsilon$, and $T_M^{d_0}s_{d_0}(b)=b$. Its action is $E_{d_0}(b)$. The fine configuration $U_*=s_{d_0}(b_*)$ satisfies
+\[
+ T_M^{d_0}U_*=b_*,\qquad T_M^{d_0+1}U_*=c .
+\]
+Let $\dot U$ be a tangent vector at $U_*$ to the fiber $\{T_M^{d_0+1}U=c\}$, and let $\dot b=D(T_M^{d_0})\dot U$; then $D T_M\,\dot b=0$. The vector $\dot U-Ds_{d_0}(b_*)\dot b$ is tangent to the fiber $\{T_M^{d_0}U=b_*\}$. By part~(6) of \cref{ch07:thm:regular-minimum}, the first variation of the action in this direction vanishes. Indeed, $U_*$ is of the form considered there: it is obtained from the background field with coarse field $b_*$ by the cardinal extension of Step~3 of the proof of \cref{ch07:lem:classical-symmetries}, whose values at the coarse vertices are $G_{d_0}(A_{d_0}(\Log b_*))$. The remaining first variation, in the direction $Ds_{d_0}(b_*)\dot b$, equals $DE_{d_0}(b_*)\dot b$, in the coarse units of the lattice of side $Mm$, since the action on the analytic family $s_{d_0}$ equals $E_{d_0}$. Since $b_*=b(c,z_{d_0}^*)$ is already in block axial gauge, the fixed transport in part~(3) of \cref{ch07:lem:shell-branch} is the identity. That part then shows that $\dot b$ is the sum of a tangent vector $D_zb(c,z_{d_0}^*)\dot z$ of the free coordinates and of a tangent vector of gauge transformations along the block trees that are the identity at the coarse vertices. The first is annihilated by $D_zF_{d_0}(c,z_{d_0}^*)=0$, and the second by the infinitesimal gauge-invariance identities of \cref{ch07:lem:classical-symmetries}. This shows that $U_*$ is critical on the fiber $\{T_M^{d_0+1}U=c\}$.
+
+\paragraph{Step 7: identification with the background field of depth $d_0+1$.}
+In the coarse units of the lattice of side $m$, the same fine lattice has mesh $\varepsilon/M$, where $\varepsilon=M^{-d_0}$. By item~(4) of the normalizations in \cref{ch07:sec:conventions}, the rescaled connection of $U_*$ is multiplied by $M$ and its first differences by $M^2$, so its $C^1_{\varepsilon/M}$ norm is at most $K_M\norm t_\infty$. We decrease $r_c$ once more so that $K_Mr_c<r_{\mathrm{tr}}$ and $r_c<r_{\mathrm{tr}}$, the radius of \cref{ch07:lem:criticality-transfer}. That lemma, at depth $d_0+1$, shows that $U_*$ lies in the gauge orbit of the background field of depth $d_0+1$ with coarse field $c$, and that $\mathscr S_{\varepsilon/M}(U_*)=E_{d_0+1}(c)$.
+
+\paragraph{Step 8: the change of units.}
+By item~(4) of the normalizations, we have $\mathscr S_{\varepsilon/M}=M\mathscr S_\varepsilon$ for the same fine configuration, and therefore
+\[
+ E_{d_0+1}(c)=\mathscr S_{\varepsilon/M}(U_*)=M\mathscr S_\varepsilon(U_*)=ME_{d_0}(b_*)=M\min_{\norm z_\infty\le r_z}F_{d_0}(c,z).
+\]
+This proves part~(3) on the real ball of coarse fields. The value $MF_{d_0}(c,z_{d_0}^*(c))$ at the holomorphic minimizer and the effective classical action $E_{d_0+1}(c)$ are both holomorphic, and their difference has vanishing real Taylor coefficients on a real open ball. Its convergent complex Taylor series therefore vanishes as well, which proves the first statement of part~(5). The second statement follows by dividing by $g_+^2=Mg^2$.
+
+\paragraph{Step 9: the Hessian with the density.}
+Let $c$ and $y$ be real. Under $gp<r_z/4$ we have $\norm{z_{d_0}^*+gy}_\infty<3r_z/8$. Two derivatives in $y$ cancel the prefactor $g^{-2}$ of the classical part, while two derivatives of the logarithm of the density give $g^2D_z^2\log\mathcal J_c$. By part~(2) and \cref{ch07:lem:shell-branch}, the Hessian of the function in part~(6) is
+\[
+ D_z^2F_{d_0}(c,z_{d_0}^*+gy)-g^2D_z^2\log\mathcal J_c(z_{d_0}^*+gy)\ge\tfrac12m_0I-K_Mg^2I .
+\]
+Taking $g_*\le1$ with $K_Mg_*^2\le m_0/4$, we obtain part~(6) on the entire convex product. All the choices above have the dependence stated in \cref{ch07:sec:conventions}.
+\end{proof}
+
+\section{Analytic estimates at intermediate scales}\label{ch07:sec:intermediate}
+
+The last theorem collects the factorial bounds proved so far and extends them to the block averages of the background field at every intermediate scale and to their curvature. At the intermediate scales we use the gauge-corrected averages of \eqref{ch07:eq:modified-word} as representatives; they differ from the iterates of $T_M$ by the explicit gauge transformations $G_j$ of \eqref{ch07:eq:accumulated-gauge}. As in \cref{ch07:sec:block-maps}, $\epsilon_j=\varepsilon_{d,j}=M^{j-d}$.
+
+\begin{theorem}\label{ch07:thm:all-root-classical}
+There exist $r_*,a_*,C_*>0$ such that the following hold for every $d\ge0$, $n\ge4$, $0\le j\le d$, and every real or complex coarse field $\theta$ with $\norm\theta_\infty<r_*$. All connecting lengths are measured in coarse lattice units.
+\begin{enumerate}
+\item For $s\ge2$,
+\[
+ \norm{D_\theta^sE_d(e^\theta)}_{a_*,\mathrm{root}}\le C_*^{s+1}s!,\qquad\norm{DE_d(e^\theta)}_\infty\le C_*\norm\theta_\infty .
+\]
+\item Put $\varepsilon_{d,j}=M^{j-d}$, and let $A_{d,j}(\theta)$ be the $j$-th iterate of \eqref{ch07:eq:modified-word} started at $A_{d,0}(\theta)=A_d(\theta)$. Then $e^{\varepsilon_{d,j}A_{d,j}(\theta)}$ is a representative of the gauge orbit of $T_M^j(e^{\varepsilon_dA_d(\theta)})$, related to it by the gauge transformation $G_j$ of \eqref{ch07:eq:accumulated-gauge}, and for every $s\ge1$,
+\[
+ \norm{D_\theta^s(A_{d,j},\nabla_{\varepsilon_{d,j}}A_{d,j})}_{a_*,\mathrm{out}}
+ +\norm{D_\theta^s(A_{d,j},\nabla_{\varepsilon_{d,j}}A_{d,j})}_{a_*,\mathrm{input};\varepsilon_{d,j}^3}\le C_*^{s+1}s! .
+\]
+In the second norm one coarse input is fixed, and the intermediate outputs and the remaining inputs are summed, with the output measure $\varepsilon_{d,j}^3$.
+\item For the coarse correction $\mathsf D_d$ we use the counting input columns $\norm\cdot_{a_*,\mathrm{input,count}}$ of \cref{ch07:lem:word-majorant}; multiplying them by $\varepsilon_d^{-3}$ gives the volume-normalized columns. Then
+\[
+ \norm{D_w^s\mathsf D_d}_{a_*,\mathrm{out}}\le C_*^ss!,\qquad
+ \norm{D_w^s\mathsf D_d}_{a_*,\mathrm{input,count}}\le\varepsilon_d^3C_*^ss!\quad(s\ge2),
+\]
+and, on a fixed smaller ball of fine fields $w$, the first derivative satisfies the corresponding bounds $C_*\norm w_\infty$ and $\varepsilon_d^3C_*\norm w_\infty$.
+\item For a plaquette $f$ of the lattice of mesh $\varepsilon_{d,j}$ put
+\[
+ \mathcal F_{d,j,f}(\theta)=\varepsilon_{d,j}^{-2}\Log\bigl[(e^{\varepsilon_{d,j}A_{d,j}(\theta)})_f\bigr].
+\]
+It vanishes at $\theta=0$, and it satisfies the bound of~(2) for every $s\ge1$: the sum of its output row and its volume-normalized input column with output measure $\varepsilon_{d,j}^3$ is at most $C_*^{s+1}s!$. The underlying local fact is that the function
+\[
+ \varepsilon^{-2}\Log\bigl(e^{\varepsilon a}e^{\varepsilon b+\varepsilon^2v}e^{-\varepsilon a-\varepsilon^2u}e^{-\varepsilon b}\bigr)
+\]
+of independent variables $(a,b,u,v)$ in a small ball extends holomorphically to $\varepsilon=0$, with value $v-u+[a,b]$ there, uniformly for $0\le\varepsilon\le1$.
+\item In the coupling-rescaled variables $\theta=g_+B$, with $g_j=\sqrt{\varepsilon_{d,j}}\,g_+$, let
+\[
+ X_1(B)=\varepsilon_{d,j}A_{d,j}(g_+B)/g_j,\qquad
+ X_2(B)=\Log\bigl[(e^{\varepsilon_{d,j}A_{d,j}(g_+B)})_f\bigr]/g_j
+\]
+be the normalized connection and curvature. Then, for every $s\ge1$,
+\[
+ \begin{aligned}
+ \norm{D_B^sX_1}_{a_*,\mathrm{out}}+\norm{D_B^sX_1}_{a_*,\mathrm{input};\varepsilon_{d,j}^3}&\le C_*^{s+1}s!\,\sqrt{\varepsilon_{d,j}}\,g_+^{s-1},\\
+ \norm{D_B^sX_2}_{a_*,\mathrm{out}}+\norm{D_B^sX_2}_{a_*,\mathrm{input};\varepsilon_{d,j}^3}&\le C_*^{s+1}s!\,\varepsilon_{d,j}^{3/2}g_+^{s-1}.
+ \end{aligned}
+\]
+The columns use the output measure $\varepsilon_{d,j}^3$, as in~(2).
+\end{enumerate}
+If the connecting lengths are replaced by the lengths of spanning trees on the external indices, the bounds hold with $a_*$ replaced by $a_*/2$. No reduction of the rate or of the radius depends on the order $s$.
+\end{theorem}
+
+The bounds in (2)--(5) concern the representatives $e^{\varepsilon_{d,j}A_{d,j}}$ on the stated domain of fields and first differences; in other gauges the iterates $T_M^j(e^{\varepsilon_dA_d(\theta)})$ need not satisfy them.
+
+\begin{proof}[Proof of \cref{ch07:thm:all-root-classical}]
+Parts (1) and (3), and part~(2) at $j=0$, follow from the earlier coefficient bounds \eqref{ch07:eq:action-majorant}, \eqref{ch07:eq:min-all-order-row}, \eqref{ch07:eq:row-to-physical-column}, and \eqref{ch07:eq:D-majorant}. It remains to prove the estimates at intermediate scales and for the curvature. We first construct a map on independent field and difference variables that describes one averaging step (Step~1). We check its mesh powers (Step~2) and its domain (Step~3), apply \cref{ch07:lem:composition-majorant} (Step~4), compose with the background field (Step~5), treat the curvature (Steps~6 and~7), and collect the constants (Step~8). For $d=0$ only $j=0$ occurs, so let $d\ge1$.
+
+\paragraph{Step 1: one step on field and difference variables.}
+We consider one step at mesh $\epsilon\le1/M$. A shift of the coarser lattice by one coarse spacing $M\epsilon$ is a shift of the fine lattice by $M$ sites, and it preserves the centered partition and every ordered path in \eqref{ch07:eq:modified-word}. Let $S_{M,\mu}$ be this shift of the fine lattice and $S'_\mu$ the shift by one spacing of the coarser lattice, in direction $\mu$. Then
+\[
+ S'_\mu\Psi_\epsilon(A)=\Psi_\epsilon(S_{M,\mu}A),
+\]
+also at periodic seams. For a triple $G=(G_\mu)$ of fine fields, we define
+\[
+ (T_\mu G_\mu)_i(x)=M^{-1}\sum_{l=0}^{M-1}G_{i,\mu}(x+l\epsilon e_\mu).
+\]
+This average of shifts on the fine lattice has counting row and column mass one. If $G=\nabla_\epsilon A$, telescoping gives $S_{M,\mu}A-A=M\epsilon\,T_\mu G_\mu$, and by the fundamental theorem of calculus in finitely many variables we have
+\begin{equation}\label{ch07:eq:exact-jet-word}
+ \nabla_{M\epsilon,\mu}\Psi_\epsilon(A)=\int_0^1D\Psi_\epsilon\bigl(A+tM\epsilon\,T_\mu G_\mu\bigr)[T_\mu G_\mu]\,dt .
+\end{equation}
+We define the right side for independent $(A,G)$ and let $\mathcal P_\epsilon$ be the map whose outputs are $\Psi_\epsilon(A)$ and these three expressions. It is holomorphic on a common small ball of $(A,G)$: since $M\epsilon\le1$, the auxiliary arguments $A+tM\epsilon T_\mu G_\mu$ stay in the domain of the local expressions. By \eqref{ch07:eq:exact-jet-word}, on the fields with $G=\nabla_\epsilon A$ its outputs are the next pair $(\Psi_\epsilon(A),\nabla_{M\epsilon}\Psi_\epsilon(A))$.
+
+The linear part of $\mathcal P_\epsilon$ at zero is
+\[
+ \operatorname{diag}(Q,QT_1,QT_2,QT_3),
+\]
+with $Q$ from \eqref{ch07:eq:positive-Q}. For each of the four component types, its row mass is $1$ and its counting column mass is $M^{-3}$; for the latter, we sum first over the outputs of $Q$, whose column mass is $M^{-3}$, and then use the column mass one of $T_\mu$. We keep the four component types as separate labels, so that no factor comparing norms of different components enters at any scale.
+
+\paragraph{Step 2: the mesh powers.}
+We record the powers of the mesh in the nonlinear part, rather than differentiating a bound on values. With the fixed local expression $P$ of the proof of \cref{ch07:lem:word-majorant}, the integrand in \eqref{ch07:eq:exact-jet-word} is
+\begin{equation}\label{ch07:eq:jet-power-ledger}
+ M^{-1}DP\bigl(\epsilon A+tM\epsilon^2T_\mu G_\mu\bigr)[T_\mu G_\mu].
+\end{equation}
+The constant coefficient $DP(0)$ contributes the linear term $QT_\mu G_\mu$, and every other term contains $\epsilon A$ or $M\epsilon^2T_\mu G_\mu$. On a ball $\norm A_\infty\le a$, $\norm G_\infty\le b$, the nonlinear part is bounded by $K_M(\epsilon ab+\epsilon^2b^2)$, with first derivatives $O_M(\epsilon b)$ in $A$ and $O_M(\epsilon a+\epsilon^2b)$ in $G$. We consider a derivative of order $s$ of the integrand, with $p$ derivatives in $A$ and $q$ in $G$. If $q\ge1$ and one of the derivatives in $G$ falls on the external factor $T_\mu G_\mu$, the explicit factor is $\epsilon^p(M\epsilon^2)^{q-1}$. If none falls on it, the factor is $\epsilon^p(M\epsilon^2)^q$ times an undifferentiated $G$. When $p=0$ and $q=1$, the contribution from $DP(0)$ is the linear operator separated above; the remaining terms contain $\epsilon A$ or $M\epsilon^2T_\mu G_\mu$. When $q=0$ and $p\ge2$, the factor is $\epsilon^p$ times $G$. For the field output the factor at order $s$ is $\epsilon^{s-1}/M$. Using Cauchy estimates in finitely many variables on the fixed polydisc, we obtain, for $s\ge2$,
+\begin{equation}\label{ch07:eq:joint-word-tensors}
+ \begin{aligned}
+ \norm{D\mathcal P_\epsilon}_{\mathrm{out}}&\le1+K_M\epsilon(a+b),&
+ \norm{D\mathcal P_\epsilon}_{\mathrm{input,count}}&\le M^{-3}[1+K_M\epsilon(a+b)],\\
+ \norm{D^s\mathcal P_\epsilon}_{\mathrm{out}}&\le s!K_M^s\epsilon,&
+ \norm{D^s\mathcal P_\epsilon}_{\mathrm{input,count}}&\le M^{-3}s!K_M^s\epsilon .
+ \end{aligned}
+\end{equation}
+For the columns, the nonlinear terms have a fixed enlarged stencil of inputs, which includes the $M$ shifts in $T_\mu$. A fixed input lies in at most $q''_M$ such stencils; this count enters as a factor only in the nonlinear part, while the linear masses are those computed in Step~1. Integration in $t$ preserves all the bounds.
+
+\paragraph{Step 3: a common domain under iteration.}
+Let $u_j$ be the maximum of the norms of the field and difference variables after $j$ steps. By the bound on the field in Step~3 of the proof of \cref{ch07:lem:word-majorant} and the bound on the nonlinear part of the difference outputs in Step~2, we have $u_{j+1}\le u_j+K_M\epsilon_ju_j^2$, after enlarging $K_M$. As in \cref{ch07:lem:composition-majorant}, with $\sum_j\epsilon_j<1/(M-1)$, the radius stays below twice its initial value if that value is small enough. On the fields with $G=\nabla_\epsilon A$, the argument $A+tM\epsilon T_\mu G_\mu$ in \eqref{ch07:eq:exact-jet-word} is a convex combination of $A$ and its shift. This shows directly that the difference variables after step $j+1$ have norm at most $(1+K_M\epsilon_j\norm{A_j}_\infty)$ times their norm after step $j$. This common domain justifies treating $A$ and $G$ as independent variables in \eqref{ch07:eq:joint-word-tensors}.
+
+\paragraph{Step 4: composition of the steps.}
+By Steps~2 and~3, the maps $\mathcal P_{\epsilon_j}$ satisfy the hypotheses of \cref{ch07:lem:composition-majorant}, with the nonlinear coefficient $\epsilon_j$ and the linear column factor $M^{-3}$ as before. The labels consist of a link and one of the four component types, and the joint radius takes the place of $R$. Each output depends only on inputs within distance $K_M\epsilon_j$. Applying the lemma, we obtain, for the composition of $j$ steps,
+\begin{equation}\label{ch07:eq:composed-joint-word}
+ R_s(j)\le K^{s+1}s!,\qquad C_s(j)\le(\epsilon_0/\epsilon_j)^3K^{s+1}s!,
+\end{equation}
+where $R_s(j)$ and $C_s(j)$ are the output row and the counting input column of the derivative of order $s$. This holds for all orders and all $0\le j\le d$. Since the enlarged stencils have total radius at most $K_M\epsilon_j$, a nonzero tensor has connecting length at most $K_Ms\epsilon_j$, and a fixed spatial weight only changes $K^s$.
+
+\paragraph{Step 5: composition with the background field.}
+We start the recursion from the pair $(A_d(\theta),\nabla_{\epsilon_0}A_d(\theta))$. Its value is $O(\norm\theta_\infty)$, and it has the majorant \eqref{ch07:eq:min-all-order-row}. We take the radius of $\theta$ so small that this pair lies strictly inside the common domain of Step~3. Composing the two majorant series, we obtain factorial output rows at one fixed smaller radius and one rate. For a column with a coarse input fixed, we follow the branch of the composition containing that input. The initial tensor has counting column $O(\epsilon_0^{-3})$, by \eqref{ch07:eq:row-to-physical-column}, and the composed map has counting column $O((\epsilon_0/\epsilon_j)^3)$ by \eqref{ch07:eq:composed-joint-word}; their product is $O(\epsilon_j^{-3})$, and all other branches use output rows. The output measure $\epsilon_j^3$ cancels the factor $\epsilon_j^{-3}$. By the contraction rule of \cref{ch02:lem:coefficient-algebra}, the same bound holds for every fixed coarse input. The field outputs of the composition are the fields $A_{d,j}(\theta)$ of part~(2), and their gauge transformation is the $G_j$ of \eqref{ch07:eq:accumulated-gauge}, evaluated at the initial field $A_d(\theta)$. These fields represent the gauge orbits of $T_M^j(e^{\varepsilon_dA_d(\theta)})$, including for $j=0$ and $j=d$. For complex $\theta$ the gauge transformations are the analytic continuations of these path products, with values in $\SL$; for real $\theta$ they are unitary. This proves part~(2).
+
+\paragraph{Step 6: the local curvature formula.}
+It remains to treat the curvature and its factor $\epsilon^{-2}$. At a plaquette in the directions $\mu,\nu$ based at $x$, let
+\[
+ a=A_\mu(x),\qquad b=A_\nu(x),\qquad u=\nabla_{\epsilon,\nu}A_\mu(x),\qquad v=\nabla_{\epsilon,\mu}A_\nu(x).
+\]
+The plaquette variable is
+\[
+ P_\epsilon=e^{\epsilon a}e^{\epsilon b+\epsilon^2v}e^{-\epsilon a-\epsilon^2u}e^{-\epsilon b}.
+\]
+We treat $a,b,u,v$ as independent and fix a small complex ball of these variables on which this product has a logarithm for all complex $\abs\epsilon\le2$. The constant and the linear terms in $\epsilon$ of $P_\epsilon-I$ vanish identically. Expanding the four factors to second order, we obtain
+\[
+ \Log P_\epsilon=\epsilon^2(v-u+[a,b])+O(\epsilon^3).
+\]
+The quotient $\epsilon^{-2}\Log P_\epsilon$ therefore has a removable singularity at $\epsilon=0$, with the value stated in part~(4). Cauchy's formula on the disc $\abs\epsilon\le2$, or the Taylor series beginning at degree two, bounds the quotient uniformly for $\abs\epsilon\le1$. Cauchy's formula in the finitely many variables $(a,b,u,v)$ on a strictly smaller ball then bounds its coefficients by $K^{s+1}s!$, uniformly for $0\le\epsilon\le1$. This division by $\epsilon^2$ uses no second difference of the field.
+
+\paragraph{Step 7: composition with the intermediate pair.}
+We compose this local quotient with the majorant of Step~5 for the intermediate pair. Each plaquette involves a fixed number of field and difference entries, at distance $O(\epsilon_j)$, and each entry occurs in a fixed number of plaquettes. The composition rule gives the factorial row for the curvature. With a coarse input fixed, the branch containing it uses the volume-normalized column of the pair, with the factor $\epsilon_j^3$, and the other branches use rows. Hence the plaquette output has the same volume-normalized column, with no inverse power of the mesh. Its value at $\theta=0$ is zero, because all fields and differences vanish there. This proves part~(4).
+
+\paragraph{Step 8: constants and coupling-rescaled variables.}
+We take $a_*$ smaller than the finitely many rates used for the extension $\mathsf H_d$, the Green operator, the correction, the background field, the envelope formula for the action, and the passage from rows to columns. We take $r_*$ inside all the finitely many common balls, and we increase $C_*$ to dominate their constants and the fixed counts of incidences and comparisons of norms. These choices are independent of $d$, $n$, and $j$. With them, parts (1) and (3) are \eqref{ch07:eq:action-majorant}, the bound $\norm{\nabla_\theta E_d}_\infty\le K\norm\theta_\infty$ of the proof of \cref{ch07:thm:regular-minimum}, and \eqref{ch07:eq:D-majorant}. Since $\epsilon_j=\varepsilon_{d,j}$ and $g_j=\sqrt{\epsilon_j}\,g_+$,
+\[
+ \frac{\epsilon_jA_{d,j}(g_+B)}{g_j}=\sqrt{\epsilon_j}\,g_+^{-1}A_{d,j}(g_+B),\qquad
+ \frac{\Log[(e^{\epsilon_jA_{d,j}(g_+B)})_f]}{g_j}=\epsilon_j^{3/2}g_+^{-1}\mathcal F_{d,j,f}(g_+B).
+\]
+Each of the $s$ derivatives in $B$ produces a factor $g_+$, which gives the powers $g_+^{s-1}$ in part~(5), with the same row and column conventions. Finally, by \cref{ch02:lem:coefficient-algebra}, the length of a spanning tree on the external indices is at most twice the connecting length, and replacing $a_*$ by $a_*/2$ proves the last assertion.
+\end{proof}

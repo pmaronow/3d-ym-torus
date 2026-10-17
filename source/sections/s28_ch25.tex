@@ -1,0 +1,683 @@
+\chapter{Linear and quadratic flow data and convergence of Wilson loops}\label{ch25:chapter}
+
+In this section we prove that the joint law of finitely many flowed Wilson loops under the Wilson measure $\mu_{N_K,\gamma}$ converges along the lattice sides $N_K=n_*B^K$, $B=M^J$, at fixed coupling $\gamma$ (\cref{ch25:thm:original-loop-stitching}). This is part~(1) of \cref{s2:thm:main} along the subsequences of \cref{s2:rem:ladders}. The passage to all lattice sides $nM^k$ and the construction of the continuum measure on the trajectory space are carried out in \cref{ch26:chapter}.
+
+The proof has three steps.
+\begin{enumerate}
+\item \emph{Truncation.} Fix a coarse side $n$ and condition $\mu_{nB^K,\gamma}$ on the small-field event. Under the conditioned Wilson measure the fine field is obtained from the coarse field by a coarse-to-fine reconstruction, one RG step at a time. We compare the linear and quadratic flow data $(x,y)$ of the fine field with those of the finite-scale reconstruction from the first $q$ RG steps, interpolated to the fine lattice. The difference tends to zero in probability as $q\to\infty$, uniformly in $K$, and the norms of the flow data are tight (\cref{ch25:thm:finite-mesh-prefix-control}).
+\item \emph{Comparison with smooth flows.} For fixed $q$ the finite-scale reconstruction is a random field on a fixed lattice, with compact support, and its law converges as $K\to\infty$ (\cref{ch12:thm:representative-prefixes}). Its smooth cardinal interpolant is a smooth initial datum, and the lattice Wilson flow started from it converges to the Yang--Mills heat flow (\cref{ch25:lem:fixed-smooth-prefix}). On bounded sets of flow data, flowed Wilson loops are Lipschitz functions of the flow data, with constants that do not depend on $q$ (\cref{ch22:cor:bounded-input-trace-stability}). We choose first a bound $R$ on the norm of the flow data, then a tolerance $\eta$, then $q$, and finally let $K\to\infty$. This gives convergence of the laws of flowed Wilson loops under the conditioned measure (\cref{ch25:thm:selected-loop-limit}).
+\item \emph{Removal of the conditioning.} At a fixed lattice side, conditioning on an event changes the expectation of a bounded function by at most twice the probability of the complement (\cref{ch02:lem:bounded-transfer}). By \cref{ch20:thm:literal-payment}, the small-field failure probability is bounded uniformly in $K$ by a quantity that tends to zero as the coarse side grows. We let first $K\to\infty$ at a fixed coarse side $n_r=n_*B^r$, and then $r\to\infty$.
+\end{enumerate}
+
+The main estimate behind the first step is \cref{ch25:lem:ordered-product-inventory}. Each increment $d_j$ of the linear heat evolution is split into four terms (\cref{ch23:lem:four-piece-increment}): the centered linear fluctuation term $s_j$, the centered nonlinear heat term $z_j$, the interpolation defect $r_j$, and the predictable term $u_j$. The increment of the quadratic Picard term consists of a cross term with the previous linear heat evolution and of the sixteen ordered products of these four terms. We bound the expected norm of each ordered product separately, keeping the conditional means of these products, which do not vanish. Since the bilinear Duhamel term is not symmetric, the two orders of each product are treated separately. The stochastic inputs are the estimates of \cref{ch23:chapter,ch24:chapter} for the conditional fluctuation kernel. The deterministic inputs are the ordered product inequality \cref{ch21:lem:ordered-duhamel-products} and the consistency and stability results of \cref{ch21:chapter,ch22:chapter}.
+
+The strategy of separating a rough linear evolution from a smoother nonlinear part goes back to Bourgain \cite{Bourgain1996} and to Da Prato and Debussche \cite{DaPratoDebussche2003}. Cao and Chatterjee used probabilistic smoothing in this form for the Yang--Mills heat flow with random initial data \cite[Section~1.1]{CCHeat2022v4}. Here the quadratic Picard term is the ordered bilinear Duhamel term of the damped Wilson flow of \cref{ch21:chapter}, and the stochastic estimates concern the conditioned Wilson measure; no Gaussian hypothesis on the initial data is used. The lattice flow is the Wilson flow of L\"uscher \cite{Luscher2010WilsonFlow}, in the physical time normalization of \cref{s2:model}.
+
+\Cref{ch26:chapter} uses \cref{ch25:thm:selected-loop-limit,ch25:thm:original-loop-stitching,ch25:thm:finite-mesh-prefix-control} and the approximation \cref{ch25:lem:probability-approximation} to construct the continuum measure, and \cref{ch25:lem:finite-ceiling-selected-chain} to work with the parameters chosen below an arbitrary finite bound on the coupling. \Cref{ch26:chapter,ch29:chapter} use \cref{ch25:lem:fixed-smooth-prefix} and the estimates of \cref{ch25:lem:finite-ceiling-finite-mesh-estimates}, which are uniform for couplings in a compact subinterval of $(0,\infty)$. \Cref{ch30:chapter} uses the bounds on the ordered products in \cref{ch25:lem:ordered-product-inventory}.
+
+The stochastic truncation estimates are stated at a fixed coarse side and, except in \cref{ch25:lem:finite-ceiling-finite-mesh-estimates}, at a fixed coupling. The convergence results for observables concern finitely many Wilson loops. We do not construct a limit of the flow data themselves as random fields, nor a solution map of the flow for rough initial data, and we do not claim a rate of convergence.
+
+\Cref{ch25:sec:setting} fixes the notation and states the two main theorems. \Cref{ch25:sec:deterministic} collects deterministic estimates, including the comparison with smooth flows. \Cref{ch25:sec:ordered} contains the four-term decomposition and the bounds on the ordered products, and \cref{ch25:sec:truncation} the truncation estimates. The two main theorems are proved in \cref{ch25:sec:conditioned,ch25:sec:unconditioning}. \Cref{ch25:sec:coupling} treats compact intervals of couplings and couplings below a finite bound.
+
+\section{Setting and main results}\label{ch25:sec:setting}
+
+\paragraph{Standing assumptions.}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\gamma_0\le1$, and let $J$, $B=M^J$, the tuple $\Theta$ of remaining parameters, $g_*$, and $n_0$ be as in \cref{ch20:thm:common-parameters}; these are the parameters used in \cref{ch20:thm:literal-payment}. Fix $0<\gamma\le\gamma_0$, set $g_3^2=\gamma/L$, and fix a coarse side $n\in4\N$ with $n\ge n_0$. For an integer $K\ge0$ we set
+\[
+ H=L/n,\qquad N=nB^K,\qquad a_j=HB^{-j}\quad(0\le j\le K),\qquad a=a_K,\qquad g_j=g_3\sqrt{a_j}.
+\]
+Thus $a_j$ is the mesh of the lattice of side $nB^j$, and $g_j^2=\gamma/(nB^j)$ is its lattice coupling. We work under the conditioned Wilson measure $\nu_{N,n,\gamma}=\mu_{N,\gamma}(\,\cdot\mid S_{N,n,\gamma})$ of \cref{ch01:def:selected-law}. All fields are defined on the whole torus. Tail indices $k,l,m$ are positive integers, and a sum whose upper limit is smaller than its lower limit is zero.
+
+\paragraph{The coarse-to-fine reconstruction.}
+Let $\RepMap$ be the family of reconstruction maps of \cref{ch12:thm:replacement-family}, and consider its coarse-to-fine disintegration of $\nu_{N,n,\gamma}$ (\cref{ch12:lem:backward-law}) at the classical depths $J(K-j)$:
+\[
+ \widehat\theta_j=\widehat\Phi_j(\widehat\theta_{j-1},g_{j,\cdot}w_j),\qquad
+ A_j=\widehat\theta_j/a_j,\qquad
+ \mathcal F_j=\sigma(\widehat\theta_0,w_1,\ldots,w_j),\qquad 1\le j\le K.
+\]
+Here $\widehat\theta_0$ is the link logarithm of the coarse field on $\Lat n$, in the Borel gauge of \cref{ch12:lem:backward-law}, so that $\norm{\widehat\theta_0}_\infty<r$, where $r$ is the radius of the small-link domain $\SmallChart r$. Further, $w_j$ is the vector of normalized fluctuation variables of the $j$th RG step counted from the coarse side, $g_{j,\cdot}$ are the couplings of the $J$ intermediate scales of this step, $\widehat\Phi_j$ is the logarithmic reconstruction map of the family $\RepMap$ for this step, $\widehat\theta_j$ is the link logarithm of the reconstructed field on the lattice of side $nB^j$, and $A_j$ is the corresponding lattice potential on the mesh $a_j$. In the notation of \cref{ch23:sec:setup}, $\widehat\Phi_j(\theta,g_{j,\cdot}w)=\mathscr R_j(\theta,w)$, at the depth $\mathfrak d_j=J(K-j)$. Conditionally on $\mathcal F_{j-1}$, the law of $w_j$ is the conditional fluctuation kernel \eqref{ch01:eq:complete-white-kernel} of the $j$th RG step at the coarser field $\widehat\theta_{j-1}$, including all action, Jacobian, determinant, and effective-interaction factors and the indicator of the fluctuation cutoff domain. This kernel is not Gaussian. All conditional expectations below refer to it, and we write $\bar w_j=\E(w_j\mid\mathcal F_{j-1})$; this is the conditional mean $m_{\widehat\theta_{j-1}}$ of \cref{ch23:sec:setup}.
+
+Let $t_j=M^{(J-1)/2}g_j$ be the largest coupling of the intermediate scales of the $j$th RG step, and $p_j=A_{\mathrm w}\log(1/t_j)\ge1$ the corresponding fluctuation cutoff. Let $a_{\mathrm{cap}}$ be the contraction factor of the reconstruction amplitude bound of \cref{ch12:lem:backward-law}, which satisfies $a_{\mathrm{cap}}\sqrt B<1$, and set
+\[
+ \qanc=Ba_{\mathrm{cap}}^2<1,\qquad \lambda_{\mathrm{anc}}=-\log(\qanc)/\log B>0.
+\]
+
+\paragraph{Interpolation, heat semigroup, and norms.}
+For meshes $a\le h$ with $h/a$ an integer, $I_{h\to a}$ is the cardinal interpolation from the lattice of mesh $h$ to the lattice of mesh $a$, recalled in \cref{ch25:sec:deterministic}; $I_{a\to a}$ is the identity. The lattice heat semigroup $\Heat ta=e^{t\Delta_a}$ acts componentwise and includes the constant mode. For an array $f$ on the lattice of mesh $a$ we write $P^a_\cdot f$ for the heat path $t\mapsto\Heat taf$. Let $\mathcal N_a$ be the ordered quadratic coefficient of the damped Wilson flow (\cref{ch21:lem:wilson-local-algebra}), and recall the bilinear Duhamel term and its polarization,
+\[
+ \Duhamel a(u,v)(t)=\int_0^t\Heat{t-s}a\,\mathcal N_a(u(s),v(s))\,ds,\qquad
+ \Polarized a(u,v)=\Duhamel a(u,v)+\Duhamel a(v,u).
+\]
+The term $\Duhamel a$ is not symmetric. We fix a horizon $T<\infty$ and exponents
+\[
+ 1/2<\alpha=\alpflow<2/3,\quad \beta=\betflow=\alpha-1/2,\quad 0<\sigma<1-\alpha,\quad 0<\tau<\min\{\sigma,1/2,\lambda_{\mathrm{anc}}\}.
+\]
+We use the norms of \cref{ch01:def:enhancement} on $[0,T]$: with $v_a(t)=t+a^2$,
+\[
+\begin{split}
+ \Xnorm\alpha a(x)&=\sup_{0\le t\le T}\bigl\{v_a(t)^{\alpha/2}\norm{x(t)}_\infty+v_a(t)^{(\alpha+1)/2}\norm{D_ax(t)}_\infty\bigr\},\\
+ \Ynorm\alpha a(y)&=\sup_{0\le t\le T}\bigl\{v_a(t)^{\beta}\norm{y(t)}_\infty+v_a(t)^{\alpha}\norm{D_ay(t)}_\infty\bigr\},\\
+ \Hnorm\sigma a(f)&=\sup_{0\le t\le T}\bigl\{v_a(t)^{\sigma/2}\norm{\Heat taf}_\infty+v_a(t)^{(\sigma+1)/2}\norm{D_a\Heat taf}_\infty\bigr\},
+\end{split}
+\]
+where $D_a$ runs over all physical forward and backward first differences, applied also to the translated components that occur in $\mathcal N_a$; $\Vnorm\sigma a(f)$ is the first term of $\Hnorm\sigma a(f)$. The linear and quadratic flow data of the reconstructed field at level $j$, on the fine mesh $a$, are
+\[
+ x_j=P^a_\cdot I_{a_j\to a}A_j,\qquad y_j=\Duhamel a(x_j,x_j),\qquad\text{and we set}\qquad d_j=x_j-x_{j-1}.
+\]
+Thus $x_K$ is the linear heat evolution of the fine field $A_K$, and $y_K$ is its quadratic Picard term. For $j<K$, the pair $(x_j,y_j)$ is the flow data of the finite-scale reconstruction $A_j$, interpolated to the fine mesh. The norm of a pair is $\norm{(x,y)}_{\mathrm{fl},a}=\Xnorm\alpha a(x)+\Ynorm\alpha a(y)$, as in \cref{ch21:def:two-grade-datum}.
+
+By \cref{ch12:thm:representative-prefixes}, for each fixed $q$ the law of the array $A_q$ under $\nu_{nB^K,n,\gamma}$ converges weakly as $K\to\infty$, and these arrays take values in a fixed compact set. We denote the limit law by $\pi_q$.
+
+\paragraph{Dependence of constants.}
+Unless stated otherwise, the constants in the stochastic estimates of this section depend only on $L$, $n$, $\gamma$, $M$, $J$, $\Theta$, $T$, the exponents, and the moment orders. They do not depend on $K$, on the level $j$, on the classical depth $J(K-j)$, or on the ratio $a/a_j$. The letter $b<\infty$ denotes an exponent with the same dependence, which may increase finitely many times; in a displayed estimate we may replace finitely many such exponents by their maximum. This is the dependence described in item~(7) of \cref{ch01:conv:constants}. None of the stochastic estimates of this section is claimed to be uniform as $\gamma\to0$ or as $n\to\infty$.
+
+\paragraph{Wilson loops.}
+Let $\ell_1,\ldots,\ell_m$ be piecewise $C^1$ loops in $\Torus$, let $\chi_1,\ldots,\chi_m$ be characters of finite-dimensional representations of $\SU$, and let $t_1,\ldots,t_m>0$. For each $i$ let $(\ell_{i,K})_{K\ge0}$ be an admissible approximation of $\ell_i$ along the lattices $\Lat{nB^K}$ (\cref{s2:def:approx}) whose based homotopies to $\ell_i$ can be chosen with swept area, counted with multiplicity, of order $O(a_K)$. Under $\nu_{nB^K,n,\gamma}$ we consider the vector $W_K=(W_{K,1},\ldots,W_{K,m})$ with
+\[
+ W_{K,i}=\chi_i\bigl(\Hol_{\ell_{i,K}}\Flowlat N_{t_i}U\bigr),\qquad N=nB^K.
+\]
+Each $W_{K,i}$ takes values in $\{w\in\C:\abs w\le\chi_i(\Id)\}$, where $\chi_i(\Id)$ is the dimension of the representation.
+
+\paragraph{Main results.}
+The first theorem gives convergence under the conditioned measure at a fixed coarse side; it is proved in \cref{ch25:sec:conditioned}.
+
+\begin{theorem}\label{ch25:thm:selected-loop-limit}
+Assume the standing assumptions, and let $W_K$ be as above. Then the law of $W_K$ under $\nu_K=\nu_{nB^K,n,\gamma}$ converges weakly as $K\to\infty$. The limit laws are consistent under finite unions of lists of loops and under coordinate projections. For each $q$ and each array $\vartheta$ on the lattice of side $nB^q$, let $G_q(\vartheta)=(\chi_i(\Hol_{\ell_i}\Flowcov_{t_i}[f]))_{i=1}^m$, where $f$ is the smooth cardinal interpolant of $\vartheta$, viewed as a smooth connection, and $\Flowcov_t[f]$ is the gauge orbit at time $t$ of the Yang--Mills heat flow started from $f$. Then the limit law of $W_K$ is the weak limit, as $q\to\infty$, of the laws $(G_q)_\#\pi_q$. The moment generating functions $\E_{\nu_K}\exp(\sum_iz_iW_{K,i})$ converge uniformly on every bounded subset of $\C^m$, and their cumulants of every finite order converge, the logarithms being taken on a fixed neighborhood of the origin on which none of these functions vanishes.
+\end{theorem}
+
+The second theorem removes the conditioning; it is proved in \cref{ch25:sec:unconditioning}. Here the coarse side varies along the sequence $n_r=n_*B^r$, while the fine lattice $\Lat{N_K}$, the configuration, and the observable stay the same.
+
+\begin{theorem}\label{ch25:thm:original-loop-stitching}
+Assume the standing assumptions, except that the coarse side is not fixed. Fix $n_*\in4\N$, put $n_r=n_*B^r$, $N_K=n_*B^K$, and $\nu_{K\mid r}=\nu_{N_K,n_r,\gamma}$ for $K\ge r$, and let $W_K$ be the vector of flowed Wilson loops on $\Lat{N_K}$ defined above, with $D=\max_i\chi_i(\Id)$. Let $C'$, $\bar c$, $C_{\mathrm w}$, and $a_{\mathrm w}$ be the constants of \cref{ch20:thm:literal-payment}, and set
+\[
+ F_\gamma(u)=C'u^3e^{-\bar cu/\gamma}+C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}}.
+\]
+Then there exists $r_0$ such that, for all $r\ge r_0$ and all $K\ge r$,
+\[
+ e_{K\mid r}=\mu_{N_K,\gamma}(S_{N_K,n_r,\gamma}^c)\le F_\gamma(n_r),
+\]
+and $F_\gamma(n_r)\to0$ as $r\to\infty$. For $r\ge r_0$ let $Z_r^{\mathrm{sel}}(z)$ be the limit as $K\to\infty$ of $\E_{\nu_{K\mid r}}\exp(\sum_iz_iW_{K,i})$, which exists by \cref{ch25:thm:selected-loop-limit}. For every $R<\infty$ and all $r,r'\ge r_0$,
+\[
+ \sup_{\sum_i\abs{z_i}\le R}\abs{Z_r^{\mathrm{sel}}(z)-Z_{r'}^{\mathrm{sel}}(z)}\le2e^{DR}\bigl[F_\gamma(n_r)+F_\gamma(n_{r'})\bigr].
+\]
+There exists a probability measure $\rho$ on $\prod_i\{w\in\C:\abs w\le\chi_i(\Id)\}$ such that, as $K\to\infty$,
+\[
+ \Law_{\mu_{N_K,\gamma}}(W_{K,1},\ldots,W_{K,m})\Longrightarrow\rho,\qquad
+ \E_{\mu_{N_K,\gamma}}e^{\sum_iz_iW_{K,i}}\longrightarrow\int e^{\sum_iz_iw_i}\,d\rho(w),
+\]
+and the second convergence is uniform on $\{\sum_i\abs{z_i}\le R\}$ for every $R<\infty$. These limits are consistent under taking subfamilies of the loops. The events $S_{N_K,n_r,\gamma}$ for different $r$ need not be nested.
+\end{theorem}
+
+\section{Deterministic estimates}\label{ch25:sec:deterministic}
+
+This section collects the deterministic facts used below: elementary properties of the cardinal interpolation and of the lattice heat semigroup, a geometric summation, and the comparison of lattice and continuum flows for a fixed family of smooth initial data.
+
+\paragraph{Cardinal interpolation.}
+We recall the cardinal interpolation of \cref{ch13:lem:cardinal-columns}, explicitly enough to justify the elementary facts needed here. Let $b_*$ be the even nonnegative smooth function of that lemma, denoted $b$ there, which is supported in $[-1,1]$, positive on $(-1,1)$, and flat at $\pm1$, and set
+\[
+ \varphi(u)=\frac{b_*(u)}{\sum_{q\in\Z}b_*(u-q)},\qquad
+ \varphi_3(u)=\prod_{i=1}^3\varphi(u_i).
+\]
+The denominator is positive, smooth, and one-periodic. Hence $\varphi(q)=\one_{q=0}$ for $q\in\Z$ and $\sum_q\varphi(u-q)=1$. In the notation of that lemma, $\varphi=\zeta$ and $\varphi_3=\zeta_3$. For an array $f$ on the lattice of mesh $h$, its periodized smooth interpolant is
+\[
+ f_h(x)=\sum_{v\in\Lat{L/h}}\varphi_3((x-v)/h)f(v),
+\]
+where the periodic images of $v$ are understood. The formula is applied separately to every directed-link and color component, at the location of that component. For $a\le h$ with $h/a$ an integer, $I_{h\to a}f$ is the restriction of $f_h$ to the lattice of mesh $a$. For an array $f$ on the lattice of mesh $a$, we write $J_af=f_a$ for its interpolant, which is the continuous interpolant $I_af$ of that lemma. At every point only a bounded number of the translates $\varphi_3((x-v)/h)$ are nonzero.
+
+\begin{lemma}\label{ch25:lem:elementary-estimates}
+Let $a\le h$ be meshes with $h/a$ an integer, let $f$ be an array on the lattice of the indicated mesh, and let $F$ be a smooth periodic field. Take $t\ge0$ and an integer $q\ge0$. Let $D_a^q$ be any product of $q$ physical forward or backward differences, possibly applied to translated components. Then
+\begin{equation}\label{ch25:eq:cardinal-elementary}
+ \norm{J_af}_\infty\le\norm f_\infty,\qquad
+ \norm{D_a^qI_{h\to a}f}_\infty\le C_qh^{-q}\norm f_\infty,
+\end{equation}
+\begin{equation}\label{ch25:eq:cardinal-sampling}
+ \norm{J_a(F|_a)-F}_\infty\le Ca\norm{\partial F}_\infty,
+\end{equation}
+\begin{equation}\label{ch25:eq:coarse-heat-short}
+ \norm{\Heat ta I_{h\to a}f}_\infty\le\norm f_\infty,\qquad
+ \norm{D_a\Heat ta I_{h\to a}f}_\infty\le Ch^{-1}\norm f_\infty,
+\end{equation}
+where $C_q$ and $C$ depend only on $q$ and $b_*$. Further, if $a_j=HB^{-j}$, $\delta>\delta'>0$, and $c\ge0$, then for every integer $k\ge0$,
+\begin{equation}\label{ch25:eq:geometric-sums}
+ \sum_{j\ge k}(1+j)^ca_j^\delta\le C_{B,c,\delta}(1+k)^ca_k^\delta\le C_{H,B,c,\delta,\delta'}a_k^{\delta'}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The first bound in \eqref{ch25:eq:cardinal-elementary} follows from nonnegativity of $\varphi_3$ and the partition of unity. For the second, a product of $q$ physical differences of $I_{h\to a}f$ is an average of the corresponding $q$th derivative of $f_h$ over $q$ segments. Each derivative of order $q$ of $\varphi_3((x-v)/h)$ is bounded by $C_qh^{-q}$, and only a bounded number of terms contribute at each point. This proves the bound, also for backward differences and translated components, with the same constant. For \eqref{ch25:eq:cardinal-sampling}, every lattice site $v$ that contributes to $J_a(F|_a)(x)$ lies within distance $Ca$ of $x$. Subtracting $F(x)$ inside the partition sum and integrating the derivative of $F$ along the segment from $x$ to $v$ gives the bound.
+
+For \eqref{ch25:eq:coarse-heat-short}, we write $\Delta_a=a^{-2}\sum_i(T_i+T_i^{-1}-2\Id)$, where $T_i$ is the translation by $ae_i$. Then $e^{t\Delta_a}=e^{-6t/a^2}\exp(ta^{-2}\sum_i(T_i+T_i^{-1}))$ is a series in translations with nonnegative coefficients of total mass one, so $\Heat ta$ is a contraction in the supremum norm. Differences commute with $\Heat ta$. The two bounds then follow from \eqref{ch25:eq:cardinal-elementary}.
+
+For the first inequality in \eqref{ch25:eq:geometric-sums}, set $j=k+i$ and use $1+k+i\le(1+k)(1+i)$ and $a_{k+i}=a_kB^{-i}$; the remaining series $\sum_{i\ge0}(1+i)^cB^{-i\delta}$ converges by the ratio test. The second inequality holds because $a_k^\delta=H^{\delta-\delta'}B^{-k(\delta-\delta')}a_k^{\delta'}$ and $\sup_k(1+k)^cB^{-k(\delta-\delta')}<\infty$.
+\end{proof}
+
+We use \eqref{ch25:eq:coarse-heat-short} only for a fixed finite-scale reconstruction or at times $t<h^2$; it does not transfer between meshes uniformly. Under the standing assumptions, $t_j=t_1B^{-(j-1)/2}$, so the cutoff $p_j=A_{\mathrm w}\log(1/t_j)$ is an affine function of $j$ with slope $A_{\mathrm w}(\log B)/2$. In particular
+\begin{equation}\label{ch25:eq:cutoff-linear}
+ p_j\le C_{L,n,\gamma,M,J,A_{\mathrm w}}(1+j).
+\end{equation}
+
+\paragraph{Smooth initial data.}
+The next lemma compares the lattice objects with their continuum counterparts for a fixed compact family of smooth initial data. It is used for the finite-scale reconstructions, whose interpolants form such a family. The continuum counterpart of $\Duhamel a$ is the Duhamel term $\int_0^tP_{t-s}\mathcal N(u(s),v(s))\,ds$, where $P_t=e^{t\Delta}$ and $\mathcal N$ is obtained from the finite sum of shifted brackets defining $\mathcal N_a$ by replacing translations by the identity and physical differences by derivatives.
+
+\begin{lemma}\label{ch25:lem:fixed-smooth-prefix}
+Let $h=L/m$ for an integer $m\ge4$, let $M_h<\infty$ and $0<T<\infty$, and let $\mathscr F$ be the family of cardinal interpolants $f=\vartheta_h$ of arrays $\vartheta$ on the lattice of mesh $h$ with $\norm\vartheta_\infty\le M_h$. For meshes $a\le h$ with $h/a$ an integer, put
+\[
+ x_a=P^a_\cdot(f|_a),\qquad y_a=\Duhamel a(x_a,x_a),\qquad f\in\mathscr F,
+\]
+where $f|_a=I_{h\to a}\vartheta$ is the restriction of $f$ to the lattice of mesh $a$. Then, as $a\to0$, the four components of $(x_a,y_a)$, embedded as in \cref{ch21:def:two-grade-datum}, converge uniformly over $\mathscr F$ to the continuum heat path $P_\cdot f$, the continuum Duhamel term $\int_0^tP_{t-s}\mathcal N(P_sf,P_sf)\,ds$, and their spatial derivatives in the difference components. The norms $\norm{(x_a,y_a)}_{\mathrm{fl},a}$ are bounded by a constant depending only on $h$, $M_h$, $L$, $T$, $\alpha$, and $b_*$, and not on $a$.
+
+Further, let $U_a$ be the configuration on the lattice of mesh $a$ with link variables $\exp(a f|_a)$. Fix finitely many characters $\chi_i$ of finite-dimensional representations of $\SU$, loops $\ell_i$, and closed lattice paths $\ell_{i,a}$, independent of time, whose physical lengths are bounded uniformly in $a$ and which admit based homotopies to the $\ell_i$, including connecting paths between base points, with swept areas counted with multiplicity tending to zero as $a\to0$. Then for every compact interval $[\tau,T']\subset(0,\infty)$,
+\[
+ \chi_i\bigl(\Hol_{\ell_{i,a}}\Flowlat{L/a}_tU_a\bigr)\longrightarrow\chi_i\bigl(\Hol_{\ell_i}\Flowcov_t[f]\bigr)\qquad(a\to0),
+\]
+uniformly in $t\in[\tau,T']$ and $f\in\mathscr F$, where $\Flowcov_t[f]$ is the Yang--Mills heat flow started from $f$. The map from $\vartheta$ to the path $t\mapsto\chi_i(\Hol_{\ell_i}\Flowcov_t[\vartheta_h])$ is continuous. The constants in these convergences may depend on $h$, $M_h$, and the smooth bounds on $\mathscr F$; no uniformity as $h\to0$ is asserted.
+\end{lemma}
+
+\begin{proof}
+Since the cardinal basis is fixed, $\norm f_{C^k}\le C_{k,h}M_h$ for every $k$ and every $f\in\mathscr F$. Let $S_a$ denote sampling on the lattice of mesh $a$. By Taylor's formula, we have
+\[
+ \norm{\Delta_aS_aP_tf-S_a\Delta P_tf}_\infty\le Ca^2\norm f_{C^4},\qquad
+ \norm{D_a^kS_aP_tf-S_a\partial^kP_tf}_\infty\le C_ka\norm f_{C^{k+1}},
+\]
+where we used that $P_t$ commutes with derivatives and contracts every $C^k$ norm. By variation of constants, we have
+\[
+ \Heat taS_af-S_aP_tf=\int_0^t\Heat{t-s}a(\Delta_aS_a-S_a\Delta)P_sf\,ds,
+\]
+so $\norm{\Heat taS_af-S_aP_tf}_\infty\le Cta^2\norm f_{C^4}$ by heat contraction. Commuting finitely many differences with $\Heat ta$ and using the second Taylor estimate, we obtain the same convergence, with error $O_{h,M_h}(a)$, for every fixed number of differences, uniformly over $\mathscr F$ and $t\in[0,T]$.
+
+The ordered coefficient $\mathcal N_a$ of \cref{ch21:lem:wilson-local-algebra} is a fixed finite sum of shifted brackets with one physical difference. Its first difference is a sum of terms with $(1,1)$ or $(0,2)$ differences on the two factors. By the heat convergence just proved, the value and the first difference of $\mathcal N_a(x_a,x_a)$ agree with those of the continuum source $S_a\mathcal N(P_\cdot f,P_\cdot f)$ up to an error $O_{h,M_h}(a)$, uniformly. The same holds in each order of the two arguments. The error $y_a-S_ay$, where $y$ is the continuum Duhamel term, solves the lattice heat equation with zero initial value and with source equal to this source error plus the heat residual $(\Delta_aS_a-S_a\Delta)y$ of the smooth continuum output. By heat contraction, also for the equation after commuting one difference, the value and the first differences of $y_a$ converge, uniformly down to time zero. The bounds \eqref{ch25:eq:cardinal-elementary} and \eqref{ch25:eq:cardinal-sampling} then imply the convergence of the four embedded components. The same bounds on sources and derivatives, multiplied by the weights in the norms, bound $\norm{(x_a,y_a)}_{\mathrm{fl},a}$ uniformly in $a$.
+
+For the Wilson flow we use the consistency of the flow, with all its nonlinear terms, for smooth initial data, namely \cref{ch22:lem:fixed-prefix-coefficients,ch22:thm:sampled-smooth-stability}; no quadratic truncation of the equation is used. The family $\mathscr F$ is compact in every fixed smooth norm. \Cref{ch21:thm:continuum-atlas} gives a finite reference family of local smooth continuum solutions that covers the flows started from $\mathscr F$ on a fixed time horizon. On each of these solutions, \cref{ch22:lem:physical-volterra} compares the lattice flow and the sampled smooth flow in values and first physical differences, in the same gauge frame. The consistency of smooth samples gives a residual of order $a$ for the potential, or $a^2$ for the link variables, including each of the finitely many sampled gauge transformations between the local solutions. We choose this finite family and the corresponding thresholds at the fixed $h$, before letting $a\to0$. Thus the lattice flow is uniformly close, on all local solutions, to the sampled smooth flow. Since transports are unitary, the error of the transport along a closed lattice path telescopes into a sum of edge errors; a path of physical length at most $\mathfrak l$ has at most $\mathfrak l/a$ edges, so the error in its character is $O(\mathfrak la)$.
+
+It remains to compare the lattice paths with the continuum loops for the smooth continuum flow; for this only bounds on the smooth curvature are needed. Differentiating parallel transport along a smooth piece of a based homotopy $H(u,v)$ gives an integral of $F_A(H)(\partial_uH,\partial_vH)$, conjugated by unitary transports. Its norm is at most $C\norm{F_A}_\infty$ times the swept area of that piece, counted with multiplicity. Subdivision and smooth approximation in $C^1$ give the same bound for piecewise $C^1$ homotopies. The terms coming from moving base points are removed by the transport along the connecting paths. The transport along each edge of a lattice path, with the frozen sampled link variable, differs from the continuum parallel transport along that edge by $O(a^2)$, by the transport equation and a $C^1$ bound. Writing $A_a$ for the swept area of the homotopy at mesh $a$, counted with multiplicity, the total error in each character is therefore at most $C_{h,M_h}(a+A_a)$, uniformly in $t\in[\tau,T']$ and in $f\in\mathscr F$. Only characters are used, so conjugations at the base point cancel. Continuity with respect to $\vartheta$ follows, on the same finite family of local solutions, from the smooth dependence of the flow in \cref{ch21:thm:continuum-atlas} and the continuous dependence of the transport equation on the connection.
+\end{proof}
+
+\section{The four-term decomposition and the ordered bilinear terms}\label{ch25:sec:ordered}
+
+Since $\Duhamel a$ is bilinear and $y_j=\Duhamel a(x_{j-1}+d_j,x_{j-1}+d_j)$, we have
+\begin{equation}\label{ch25:eq:quadratic-increment}
+ y_j-y_{j-1}=\Polarized a(x_{j-1},d_j)+\Duhamel a(d_j,d_j),\qquad 1\le j\le K.
+\end{equation}
+Summing over $j$ expresses the truncation error of the quadratic Picard term through the cross terms $\Polarized a(x_{j-1},d_j)$ and the quadratic increments $\Duhamel a(d_j,d_j)$; both sums are taken on the same fine mesh and with the same ordered operator $\Duhamel a$. The next lemma splits $d_j$ into four terms and bounds the expected norm of each of the sixteen ordered products $\Duhamel a(v_j,w_j)$. The centered linear fluctuation term $s_j$ is linear in the centered new fluctuations $w_j-\bar w_j$. The centered nonlinear heat term $z_j$ is the heat evolution of the rest of the conditionally centered part of $A_j$, which is nonlinear in $w_j$. The interpolation defect $r_j$ is the difference between the linearized reconstruction of the coarser field and the cardinal interpolation of that field; it is a deterministic function of $\widehat\theta_{j-1}$. The predictable term $u_j$ is the nonlinear part of the zero-fluctuation reconstruction plus the conditional mean correction. The cross terms are treated in \cref{ch25:sec:truncation}.
+
+\begin{lemma}\label{ch25:lem:ordered-product-inventory}
+Assume the standing assumptions of \cref{ch25:sec:setting}. For $1\le j\le K$ define
+\[
+ \widehat P_j(v)=\widehat\Phi_j(v,0),\qquad
+ \widehat L_j=D\widehat P_j(0),\qquad
+ \mathsf E_{j,v}=g_j^{-1}D_w\widehat\Phi_j(v,g_{j,\cdot}w)|_{w=0},
+\]
+and the following four heat paths on the mesh $a$:
+\[
+\begin{split}
+ s_j&=\frac{g_j}{a_j}P_\cdot^a I_{a_j\to a}\mathsf E_{j,\widehat\theta_{j-1}}(w_j-\bar w_j),\\
+ z_j&=P_\cdot^a I_{a_j\to a}\bigl(A_j-\E[A_j\mid\mathcal F_{j-1}]\bigr)-s_j,\\
+ r_j&=P_\cdot^a\Bigl(I_{a_j\to a}\frac{\widehat L_j\widehat\theta_{j-1}}{a_j}-I_{a_{j-1}\to a}\frac{\widehat\theta_{j-1}}{a_{j-1}}\Bigr),\\
+ u_j&=P_\cdot^a I_{a_j\to a}U_j^0,\qquad U_j^0=\E[A_j\mid\mathcal F_{j-1}]-\widehat L_j\widehat\theta_{j-1}/a_j.
+\end{split}
+\]
+Then the following statements hold.
+\begin{enumerate}
+\item We have $d_j=s_j+z_j+r_j+u_j$. The paths $s_j$ and $z_j$ have zero conditional mean given $\mathcal F_{j-1}$, and $r_j$ and $u_j$ are $\mathcal F_{j-1}$-measurable. The difference defining $r_j$ involves the two input meshes $a_j$ and $a_{j-1}$.
+\item For any two heat paths $v=P^a_\cdot v_0$ and $w=P^a_\cdot w_0$ on the mesh $a$, the two orders satisfy separately, without cancellation,
+\[
+ \Ynorm\alpha a(\Duhamel a(v,w))+\Ynorm\alpha a(\Duhamel a(w,v))\le C_{L,T,\alpha,\sigma,J,\Theta}\,\Xnorm\alpha a(v)\Hnorm\sigma a(w_0).
+\]
+The constant does not depend on $\gamma$, $n$, or $K$.
+\item The reconstructed fields satisfy deterministic bounds $\norm{\widehat\theta_j}_\infty\le\bar b_j$, where $\bar b_0=r$ and
+\[
+ \bar b_j\le C\bigl[ra_{\mathrm{cap}}^{\,j}+g_3\sqrt{a_j}(p_j+1)\bigr],\qquad a_{\mathrm{cap}}\sqrt B<1\qquad(j\ge1).
+\]
+For every fixed $p\ge1$ define
+\[
+\begin{split}
+ S_{p,j}&=C_pg_3a_j^\beta\bigl[\sqrt{\log(2+L/a_j)}+\sqrt p\bigr],\\
+ Z^-_{p,j}&=C_p\bigl[g_3^2a_j^\sigma(1+j)+g_3^3a_j^{1/2}p_j^3\bigr],\\
+ Z^+_{p,j}&=C_p\bigl[g_3^2a_j^\alpha(1+j)+g_3^3a_j^{1/2}p_j^3\bigr],\\
+ R_j&=C\bar b_{j-1}a_{j-1}^{\alpha-1},\qquad U_{p,j}=C_{p,\tau}(1+j)^ba_j^\tau.
+\end{split}
+\]
+Then $\norm{\Xnorm\alpha a(s_j)}_p\le S_{p,j}$, $\norm{\Hnorm\sigma a(z_j(0))}_p\le Z^-_{p,j}$, $\norm{\Xnorm\alpha a(z_j)}_p\le Z^+_{p,j}$, $\Xnorm\alpha a(r_j)\le R_j$ pathwise, and $\norm{\Hnorm\sigma a(I_{a_j\to a}U_j^0)}_p\le U_{p,j}$ and $\norm{\Xnorm\alpha a(u_j)}_p\le U_{p,j}$. The first three bounds also hold conditionally on $\mathcal F_{j-1}$, for every value of the coarser field. Further, $\mathcal U_j=\Hnorm\sigma a(I_{a_j\to a}U_j^0)$ satisfies $\mathcal U_j\le C(1+j)^b$ pathwise.
+\item There is a nonnegative deterministic sequence $(W_j)$ with $\E\Ynorm\alpha a(\Duhamel a(r_j,r_j))\le W_j$ and such that $W_j\le C_\zeta(1+j)^ba_j^\zeta$ for every $0<\zeta<\min\{2\alpha-1,\lambda_{\mathrm{anc}}\}$.
+\item Put $F_j=g_3^2[a_j^{2\alpha-1}(1+j)+\bar b_{j-1}]$. For $v,w\in\{s,z,r,u\}$, the expectation $\E\Ynorm\alpha a(\Duhamel a(v_j,w_j))$ is bounded by a constant times the entry in row $v$ and column $w$ of the following table:
+\[
+\begin{array}{c|cccc}
+ &s&z&r&u\\\hline
+ s&F_j&S_{2,j}Z^-_{2,j}&S_{1,j}R_j&S_{1,j}U_{1,j}\\
+ z&S_{2,j}Z^-_{2,j}&Z^+_{2,j}Z^-_{2,j}&R_jZ^-_{1,j}&U_{1,j}Z^-_{1,j}\\
+ r&R_jS_{1,j}&R_jZ^-_{1,j}&W_j&R_jU_{1,j}\\
+ u&U_{1,j}S_{1,j}&U_{1,j}Z^-_{1,j}&R_jU_{1,j}&(1+j)^bU_{1,j}
+\end{array}
+\]
+\item For every $0<\zeta_2<\min\{2\alpha-1,\tau\}$,
+\[
+ \sup_{K\ge j}\sum_{v,w\in\{s,z,r,u\}}\E_{\nu_{N,n,\gamma}}\Ynorm\alpha a(\Duhamel a(v_j,w_j))\le C_{\zeta_2}(1+j)^ba_j^{\zeta_2}.
+\]
+\end{enumerate}
+The constants in (3)--(6) have the dependence stated in \cref{ch25:sec:setting}; the same holds in the remaining results of this section.
+\end{lemma}
+
+The lemma uses the expansion at $w=0$. By \cref{ch23:rem:base-point}, $s_j$ and $z_j=P_\cdot^aI_{a_j\to a}Z_j^{(0)}$ are the terms $s_j^{(0)}$ and $z_j^{(0)}$ of \cref{ch23:lem:four-piece-increment}, while $s_j+z_j$, $r_j$, and $u_j$ are the same as in the expansion at the conditional mean. In the notation of that lemma, $\widehat P_j(\theta)/a_j=C_j(\theta)$ is the zero-fluctuation reconstruction in physical units; the linearization $\widehat L_j$ of $\widehat P_j$ acts on link logarithms, and $\mathsf P_j=B\widehat L_j$ acts on lattice potentials, so that the linear part of $C_j$ is $a_j^{-1}\widehat L_j\theta=a_{j-1}^{-1}\mathsf P_j\theta$.
+
+Three groups of entries in the table require different inputs. The entry $F_j$ for $\Duhamel a(s_j,s_j)$, which includes the conditional mean of this product at a nonzero coarser field, and the two entries $S_{1,j}R_j$ for $\Duhamel a(s_j,r_j)$ and $\Duhamel a(r_j,s_j)$ rely on the conditional concentration estimates of \cref{ch23:chapter}. The entry $W_j$ for $\Duhamel a(r_j,r_j)$ is a separate estimate from \cref{ch24:thm:ordered-rough-return}. The remaining twelve entries follow from the product inequality~(2) and the bounds in~(3), combined either with the Cauchy--Schwarz inequality or with conditioning on $\mathcal F_{j-1}$. All entries decay like positive powers of $a_j$; by \eqref{ch25:eq:factor-powers} below, $\bar b_{j-1}\le C(1+j)^ba_j^{1/2}$, $R_j$ and $S_{p,j}$ are $O((1+j)^ba_j^\beta)$, and $2\beta=2\alpha-1>0$.
+
+\begin{proof}[Proof of \cref{ch25:lem:ordered-product-inventory}]
+We first prove the decomposition and the bounds on the four factors, then the product inequality, then the table, and finally the summed bound~(6).
+
+\paragraph{Step 1: the decomposition.}
+The arrays $A_j$ are bounded at every finite $K$ by the amplitude bounds in~(3), so conditional expectation commutes with the fixed linear heat and cardinal maps. By the definition of $z_j$, we have
+\[
+ s_j+z_j=P_\cdot^aI_{a_j\to a}\bigl(A_j-\E[A_j\mid\mathcal F_{j-1}]\bigr).
+\]
+Adding $u_j$ replaces the conditional expectation by $\widehat L_j\widehat\theta_{j-1}/a_j$, and adding $r_j$ cancels this linearized reconstruction and subtracts $P_\cdot^aI_{a_{j-1}\to a}A_{j-1}=x_{j-1}$. This proves $d_j=s_j+z_j+r_j+u_j$. The vector $w_j-\bar w_j$ has conditional mean zero under the conditional fluctuation kernel, and the derivative $\mathsf E_{j,\widehat\theta_{j-1}}$ and the conditional mean of $A_j$ are $\mathcal F_{j-1}$-measurable. This gives the four assertions on conditional means and measurability.
+
+\paragraph{Step 2: the linear fluctuation term and the centered nonlinear term.}
+We use the convention of \cref{ch23:thm:fresh-and-mixed-rows,ch23:thm:centered-residual,ch23:thm:fresh-square} in which the reconstruction is Taylor expanded at $w=0$. The input mesh, coarser mesh, and common fine mesh of those theorems are $a_j$, $a_{j-1}=Ba_j$, and $a_K$, and the refinement ratios are the integers $B$ and $B^{K-j}$. The classical depth is $J(K-j)$, and the coarser dimensionless field is $\widehat\theta_{j-1}$. The parameter choice of \cref{ch20:thm:common-parameters} gives $t_1\le g_*$, where $g_*$ is the bound on the coupling under which the conditional fluctuation kernel is controlled (\cref{ch10:thm:complete-white-law}). Hence $t_j=t_1B^{-(j-1)/2}\le g_*$ for every $j\ge1$. The coarser fields that occur lie in the inner domain of the small-field event, and their reconstructions are evaluated on the fixed larger analytic domain. All conditional estimates below use the conditional fluctuation kernel on its fluctuation cutoff domain and its mean $\bar w_j$. The larger domain supplies bounds on coefficients only; no conditional law on a larger domain of coarser fields is used. Thus the terms of those theorems in the convention at $w=0$ are precisely $s_j$ and $z_j$. By the conditional estimates of the first two theorems, we obtain $S_{p,j}$, $Z^-_{p,j}$, and $Z^+_{p,j}$, and taking expectations of their conditional $p$th moments gives the same unconditional bounds. The amplitude bounds in \cref{ch23:thm:fresh-square} give the displayed $\bar b_j$, where $r$ is the radius of $\SmallChart r$.
+
+\paragraph{Step 3: the interpolation defect.}
+Let $H_j=a_{j-1}$ and $d_{H_j}(t)=H_j(t+H_j^2)^{-1/2}$. In the notation of \cref{ch24:lem:signed-heat-defect}, the linearized reconstruction in physical units is $B\widehat L_j$, since
+\[
+ \widehat L_j\widehat\theta_{j-1}/a_j=(B\widehat L_j)\widehat\theta_{j-1}/H_j.
+\]
+The difference of the two interpolations in that lemma is therefore the one in $r_j$. The bounds of that lemma on the rows of the heat-evolved difference and of its first differences imply
+\[
+ \norm{r_j(t)}_\infty\le C\bar b_{j-1}H_j^{-1}d_{H_j}(t),\qquad
+ \norm{D_ar_j(t)}_\infty\le C\bar b_{j-1}H_j^{-1}(t+H_j^2)^{-1/2}d_{H_j}(t).
+\]
+Since $a\le H_j$ and $\alpha<1$, each of the two weighted terms in $\Xnorm\alpha a(r_j)$ is at most $C\bar b_{j-1}H_j^{\alpha-1}$: we replace $t+a^2$ by $t+H_j^2$ in the weights, and the remaining power $(t+H_j^2)^{(\alpha-1)/2}$ is largest at $t=0$. This proves the pathwise bound $R_j$.
+
+\paragraph{Step 4: the predictable term.}
+The field $U_j^0$ is the nonlinear part of the zero-fluctuation reconstruction, in physical units, plus the conditional mean correction under the conditional fluctuation kernel. It is the field of \cref{ch24:thm:full-smoother-return}. That theorem bounds the moments of $\Hnorm\sigma a(I_{a_j\to a}U_j^0)$, including the first differences at times $t\le a^2$, and of $\Xnorm\alpha a(u_j)$, and it gives the pathwise polynomial bound. Its moment bound has $H_j^\tau=a_{j-1}^\tau$ in place of $a_j^\tau$; the fixed factor $B^\tau$ is absorbed into $C_{p,\tau}$. This gives $U_{p,j}$ and the pathwise bound on $\mathcal U_j$.
+
+\paragraph{Step 5: the product inequality.}
+Statement~(2) is \cref{ch21:lem:ordered-duhamel-products}, with the two orders kept separately. Its hypotheses hold, since the side $N=nB^K\ge4$ is an integer, $a=L/N$, $1/2<\alpha<2/3$, and $0<\sigma<1-\alpha$. For $a\le1$ its heat-kernel proof applies. For $1<a\le L/4$ we use its clause for coarse meshes, which we check directly. \Cref{ch21:lem:wilson-local-algebra} gives the finite stencil of shifted brackets on every periodic lattice of side $N\ge4$. Its bilinear polynomial defines $\mathcal N_a$ on arbitrary arrays; this does not require the smallness of link logarithms needed for the nonlinear equation. A physical first difference has supremum operator norm at most $2/a$, translations are isometries, and $\mathcal N_a$ is a fixed finite sum of brackets with one difference. Together with heat contraction, these facts imply that
+\[
+ \norm{\Duhamel a(v,w)(t)}_\infty\le Cta^{-1}\norm{v_0}_\infty\norm{w_0}_\infty,\qquad
+ \norm{D_a\Duhamel a(v,w)(t)}_\infty\le Cta^{-2}\norm{v_0}_\infty\norm{w_0}_\infty;
+\]
+for the second bound we commute the output difference with the outer heat semigroup and use the bound $2/a$ on the source. The reversed order has the same bound. Evaluating the input norms at $t=0$, we find $\norm{v_0}_\infty\le a^{-\alpha}\Xnorm\alpha a(v)$ and $\norm{w_0}_\infty\le a^{-\sigma}\Hnorm\sigma a(w_0)$. Since $a>1$, the sum of the two output norms is at most
+\begin{equation}\label{ch25:eq:coarse-ordered-product}
+ CT\bigl[(T+(L/4)^2)^\beta+(T+(L/4)^2)^\alpha\bigr]\Xnorm\alpha a(v)\Hnorm\sigma a(w_0).
+\end{equation}
+If $L\le4$ this case does not occur. For $a\le1$ the factor $(T+a^2)^{(\alpha-\sigma)/2}$ in \cref{ch21:lem:ordered-duhamel-products} is bounded by a constant depending only on $L$, $T$, $\alpha$, and $\sigma$, since $\alpha>\sigma$ and $a\le L/4$. Taking the larger of the two constants proves~(2) for every mesh that occurs, independently of the coupling, the coarse side, and $K$. In particular, if $x=P^a_\cdot f$ for an array $f$ on the mesh $a$, then $x$ and $u_j$ are heat paths on the same mesh, and~(2) applies to $\Duhamel a(x,u_j)$ and $\Duhamel a(u_j,x)$ with the norm $\Hnorm\sigma a(I_{a_j\to a}U_j^0)$ bounded in \cref{ch24:thm:full-smoother-return}.
+
+\paragraph{Step 6: the sequence $W_j$.}
+Let $W_j$ be the nonnegative deterministic bound of \cref{ch24:thm:ordered-rough-return}, with $\rho_0=r$ and with the amplitude bounds of that theorem replaced by $\bar b_i$. After enlarging its constant to account for this choice, both conclusions of that theorem remain valid:
+\begin{equation}\label{ch25:eq:rough-two-responses}
+ \E\Ynorm\alpha a(\Duhamel a(r_j,r_j))\le W_j,\qquad
+ \E\Ynorm\alpha a(\Polarized a(x_{j-1},r_j))\le4W_j.
+\end{equation}
+The tail estimate of that theorem, for any $\zeta<\min(2\alpha-1,\lambda_{\mathrm{anc}})$, implies that $W_j\le\sum_{i\ge j}W_i\le C_\zeta a_j^\zeta$, which is stronger than~(4). Both quantities in \eqref{ch25:eq:rough-two-responses} include all contributions of the coarse field and all propagated conditional means.
+
+\paragraph{Step 7: all products except those of $s_j$ and $r_j$.}
+The bound on $\Duhamel a(s_j,s_j)$, including its conditional mean at a nonzero coarser field, is \cref{ch23:thm:fresh-square}; the expectation it gives is at most $CF_j$.
+
+For $\Duhamel a(s_j,z_j)$ and $\Duhamel a(z_j,s_j)$ we put $s_j$ in the argument measured by $\Xnorm\alpha a$ and $z_j(0)$ in the argument measured by $\Hnorm\sigma a$, in~(2). By the Cauchy--Schwarz inequality under the same measure, we have
+\[
+ \E\bigl[\Xnorm\alpha a(s_j)\Hnorm\sigma a(z_j(0))\bigr]\le S_{2,j}Z^-_{2,j}.
+\]
+For $\Duhamel a(z_j,z_j)$ the same argument with $z_j$ in the $\Xnorm\alpha a$ argument gives $Z^+_{2,j}Z^-_{2,j}$.
+
+For $\Duhamel a(z_j,r_j)$ and $\Duhamel a(r_j,z_j)$ we use the pathwise bound $R_j$ on $\Xnorm\alpha a(r_j)$ and the bound on $\Hnorm\sigma a(z_j(0))$; each expectation is at most $CR_jZ^-_{1,j}$, in either order, without any symmetry of $\Duhamel a$.
+
+For $\Duhamel a(s_j,u_j)$ and $\Duhamel a(u_j,s_j)$, statement~(2) gives the bound $C\Xnorm\alpha a(s_j)\mathcal U_j$. Here $\mathcal U_j$ is $\mathcal F_{j-1}$-measurable, and the conditional first moment of $\Xnorm\alpha a(s_j)$ is at most $S_{1,j}$ for every value of the coarser field. Taking first the conditional expectation and then the expectation, we obtain $CS_{1,j}U_{1,j}$. For $\Duhamel a(z_j,u_j)$ and $\Duhamel a(u_j,z_j)$ we put $u_j$ in the $\Xnorm\alpha a$ argument and $z_j(0)$ in the $\Hnorm\sigma a$ argument; conditioning on $\mathcal F_{j-1}$ and using the conditional bound $Z^-_{1,j}$ gives $CU_{1,j}Z^-_{1,j}$. In these four products one factor is $\mathcal F_{j-1}$-measurable and the other has a conditional moment bound that is uniform in the coarser field; this is why their bounds are products of first moments.
+
+For $\Duhamel a(r_j,u_j)$ and $\Duhamel a(u_j,r_j)$, statement~(2) gives $CR_j\mathcal U_j$, hence $CR_jU_{1,j}$ after taking expectations. For $\Duhamel a(u_j,u_j)$, the splitting of the heat semigroup in \cref{ch24:thm:full-smoother-return} gives $\Xnorm\alpha a(u_j)\le C\mathcal U_j$, so the product is at most $C\mathcal U_j^2$. By the pathwise bound on $\mathcal U_j$, we have
+\[
+ \E\,\mathcal U_j^2\le C(1+j)^b\,\E\,\mathcal U_j\le C(1+j)^bU_{1,j}.
+\]
+Finally, $\Duhamel a(r_j,r_j)$ is bounded by the first estimate in \eqref{ch25:eq:rough-two-responses}.
+
+\paragraph{Step 8: the products of $s_j$ and $r_j$.}
+For $\Duhamel a(s_j,r_j)$ and $\Duhamel a(r_j,s_j)$ we use the clause of \cref{ch23:thm:fresh-and-mixed-rows} on predictable heat backgrounds on the common fine mesh. To check its hypotheses, let $h=a_j$, $H_j=a_{j-1}=Bh$, $\delta=a_K$, $\theta=\widehat\theta_{j-1}$, and $\mathsf P_j=B\widehat L_j$, and let $\mathsf E_{H_j}$ be the identity map of arrays on the lattice of mesh $H_j$. Then the background in that clause is exactly
+\begin{equation}\label{ch25:eq:marked-background-identification}
+ r_j(t)=H_j^{-1}\Heat t\delta\bigl(I_{h\to\delta}\mathsf P_j-I_{H_j\to\delta}\mathsf E_{H_j}\bigr)\theta,
+ \qquad R_j^\sharp=C_J\norm\theta_\infty H_j^{\alpha-1}.
+\end{equation}
+It is a predictable heat path on the whole torus, and both input meshes are kept. That clause gives, for each integer $0\le q\le4$ and every choice of differences and shifts,
+\begin{equation}\label{ch25:eq:marked-background-envelopes}
+ \norm{D_\delta^qr_j(t)}_\infty\le C_qR_j^\sharp(t+h^2)^{-(\alpha+q)/2},
+\end{equation}
+which are the hypotheses on higher differences in its class of backgrounds, including times $t<h^2$. The finitely many constants $C_q$ depend on the ratio $B$, the cardinal basis, the stencil, $L$, $T$, and the exponents, but not on the coarser field or on $\delta/h$. Since $r_j$ is a heat path, $\partial_tD_\delta^qr_j=\Delta_\delta D_\delta^qr_j$; the time increments of its values and of its first and second differences involve differences of order at most four, which are controlled by \eqref{ch25:eq:marked-background-envelopes}. The same clause gives a bounded diameter for the normalized coefficient metric and the covering bound $N(v)\le C(1+L/h)^Pv^{-Q}$, $0<v\le1$, independently of $\delta/h=B^{-(K-j)}$. Thus the conditional maximum is taken over a cover at the input mesh $h$.
+
+In the expansion at $w=0$ used in that theorem, the linear coefficient is $\mathsf E_{j,\theta}$ and the centered vector is $w_j-\bar w_j$, so the theorem concerns the same $s_j$ and the same conditional fluctuation kernel as here. For each order separately let $V_j$ be the norm $\Ynorm\alpha\delta$ of the product. For each value of the coarser field, the theorem implies that
+\[
+ \Prob\Bigl\{V_j>Cg_3h^\beta R_j^\sharp\sqrt{\log(2+L/h)+u}\Bigm|\mathcal F_{j-1}\Bigr\}\le Ce^{-u},\qquad u\ge0.
+\]
+If $R_j^\sharp=0$, then $r_j=0$ and the product vanishes. Otherwise we integrate this tail. With $\Lambda_h=\log(2+L/h)$ and $A_j^\sharp=Cg_3h^\beta R_j^\sharp$, the layer-cake formula and the substitution $v=A_j^\sharp\sqrt{\Lambda_h+u}$ give
+\[
+ \E[V_j\mid\mathcal F_{j-1}]\le A_j^\sharp\sqrt{\Lambda_h}+\frac{CA_j^\sharp}{2}\int_0^\infty\frac{e^{-u}}{\sqrt{\Lambda_h+u}}\,du\le Cg_3h^\beta\bigl(\sqrt{\Lambda_h}+1\bigr)R_j^\sharp,
+\]
+where we used $\Lambda_h\ge\log2$. The amplitude bound gives $R_j^\sharp\le C_J\bar b_{j-1}H_j^{\alpha-1}\le CR_j$. By the tower property we obtain, separately for the two orders,
+\begin{equation}\label{ch25:eq:marked-cells}
+ \E\Ynorm\alpha a(\Duhamel a(s_j,r_j))\le CS_{1,j}R_j,\qquad
+ \E\Ynorm\alpha a(\Duhamel a(r_j,s_j))\le CS_{1,j}R_j.
+\end{equation}
+No cancellation between the two orders is used. This completes the proof of~(5).
+
+\paragraph{Step 9: summation.}
+Let $\kappa_{\mathrm{cap}}=-\log a_{\mathrm{cap}}/\log B$, so that $\kappa_{\mathrm{cap}}>1/2$. For $j\ge2$, by the amplitude bounds, \eqref{ch25:eq:cutoff-linear}, and \eqref{ch25:eq:geometric-sums}, we have
+\begin{equation}\label{ch25:eq:factor-powers}
+ \begin{gathered}
+ \bar b_{j-1}\le C(1+j)^ba_j^{1/2},\\
+ R_j\le C(1+j)^ba_j^\beta,\qquad S_{p,j}\le C_p(1+j)^ba_j^\beta,\\
+ Z^-_{p,j}\le C_p(1+j)^ba_j^\sigma,\qquad Z^+_{p,j}\le C_p(1+j)^ba_j^{1/2},\qquad
+ U_{p,j}\le C_{p,\tau}(1+j)^ba_j^\tau.
+ \end{gathered}
+\end{equation}
+In the first line, the contribution of the coarse field is $ra_{\mathrm{cap}}^{\,j-1}=r(a_{j-1}/H)^{\kappa_{\mathrm{cap}}}$, whose exponent is strictly larger than $1/2$. The first level $j=1$ is absorbed into a constant. In the bounds on $Z^\pm_{p,j}$ we used $\sigma<1-\alpha<1/2$ and $\alpha>1/2$. By \eqref{ch25:eq:factor-powers}, the slowest powers of $a_j$ in the sixteen entries of the table are
+\[
+\begin{array}{c|cccc}
+ &s&z&r&u\\\hline
+ s&2\beta&\beta+\sigma&2\beta&\beta+\tau\\
+ z&\beta+\sigma&1/2+\sigma&\beta+\sigma&\tau+\sigma\\
+ r&2\beta&\beta+\sigma&\zeta&\beta+\tau\\
+ u&\beta+\tau&\tau+\sigma&\beta+\tau&\tau
+\end{array}
+\]
+where we choose $\zeta$ strictly between $\zeta_2$ and $\min(2\beta,\lambda_{\mathrm{anc}})$; such a choice exists since $\zeta_2<2\beta$ and $\zeta_2<\tau<\lambda_{\mathrm{anc}}$. The term of $F_j$ that contains the conditional mean has power $1/2>2\beta$. Every displayed power exceeds $\zeta_2$. Absorbing the fixed powers of $H$ into the constant, we obtain~(6).
+\end{proof}
+
+\section{Truncation estimates}\label{ch25:sec:truncation}
+
+We now bound the truncation error $(x_K-x_{k-1},y_K-y_{k-1})$. Its first component is the sum of the increments $d_j$, $k\le j\le K$, which we control by the factor bounds of \cref{ch25:lem:ordered-product-inventory}. By \eqref{ch25:eq:quadratic-increment}, its second component is the sum of the cross terms $\mathcal M_j=\Polarized a(x_{j-1},d_j)$ and of the quadratic increments $\Duhamel a(d_j,d_j)$. The quadratic increments are controlled by \cref{ch25:lem:ordered-product-inventory}(6). For the cross terms we use the splitting $\mathcal M_j=\mathcal M_j^s+\mathcal M_j^z+\mathcal M_j^r+\mathcal M_j^u$ with $\mathcal M_j^v=\Polarized a(x_{j-1},v_j)$. The terms $\mathcal M_j^s$ and $\mathcal M_j^z$ are conditionally centered fields with the predictable background $x_{j-1}$; we bound them by the conditional estimates of \cref{ch23:chapter}, in terms of a radius of the background at the input scale $a_j$. The bound on $\mathcal M_j^r$ is part of \eqref{ch25:eq:rough-two-responses}, and $\mathcal M_j^u$ is bounded by the product inequality and the Cauchy--Schwarz inequality. In every case we bound the first moments of the norms and sum them over $j$; the norms themselves are not centered.
+
+\begin{theorem}\label{ch25:thm:all-prefix-first-grade}
+Assume the standing assumptions, and use the notation of \cref{ch25:lem:ordered-product-inventory}. For every fixed $p\ge1$ and every $0<\zeta_1<\min\{\beta,\tau\}$,
+\[
+ \sup_{K\ge m\ge l\ge k}\Bigl\|\Xnorm\alpha{a_K}\Bigl(\sum_{j=l}^md_j\Bigr)\Bigr\|_p\le C_{p,\zeta_1}a_k^{\zeta_1},\qquad
+ \sup_{K\ge0}\sup_{0\le j\le K}\norm{\Xnorm\alpha{a_K}(x_j)}_p\le C_p.
+\]
+For $1\le j\le K$ the radius of the background $x_{j-1}$ at the input scale,
+\[
+ \mathcal R_{j-1}=\sup_{0\le t\le T}\bigl\{(t+a_j^2)^{\alpha/2}\norm{x_{j-1}(t)}_\infty+(t+a_j^2)^{(\alpha+1)/2}\norm{D_{a_K}x_{j-1}(t)}_\infty\bigr\},
+\]
+satisfies $\sup_{K,j}\norm{\mathcal R_{j-1}}_p\le C_p$. With $\mathcal M_j^v=\Polarized{a_K}(x_{j-1},v_j)$ we have
+\[
+\begin{split}
+ \sup_{K\ge m\ge l\ge k}\E\,\Ynorm\alpha{a_K}\Bigl(\sum_{j=l}^m\mathcal M_j^s\Bigr)&\le Cg_3\sum_{j\ge k}a_j^\beta\sqrt{1+j},\\
+ \sup_{K\ge m\ge l\ge k}\E\,\Ynorm\alpha{a_K}\Bigl(\sum_{j=l}^m\mathcal M_j^z\Bigr)&\le C\sum_{j\ge k}\bigl[g_3^2a_j^\alpha(1+j)+g_3^3a_j^{1/2}p_j^3\bigr],\\
+ \sup_{K\ge m\ge l\ge k}\E\,\Ynorm\alpha{a_K}\Bigl(\sum_{j=l}^m\mathcal M_j^r\Bigr)&\le4\sum_{j\ge k}W_j.
+\end{split}
+\]
+All three right sides tend to zero as $k\to\infty$. The fields $\mathcal M_j^s$ and $\mathcal M_j^z$ have zero conditional mean given $\mathcal F_{j-1}$, while $\mathcal M_j^r$ includes all propagated conditional means. These statements include the level $j=K$, for which $I_{a_K\to a_K}$ is the identity.
+\end{theorem}
+
+\begin{proof}
+Let $a=a_K$. By the triangle inequality for the path norm and Minkowski's inequality,
+\[
+ \norm{\Xnorm\alpha a(d_j)}_p\le S_{p,j}+Z^+_{p,j}+R_j+U_{p,j}.
+\]
+By \eqref{ch25:eq:factor-powers} and \eqref{ch25:eq:geometric-sums}, the sum of the right side over $j\ge k$ is at most $C_{p,\zeta_1}a_k^{\zeta_1}$ for every $\zeta_1<\min(\beta,\tau)$. This proves the first bound, uniformly over all partial sums and all $K$.
+
+On the coarse lattice, of mesh $H=L/n$, we have $\norm{A_0}_\infty\le r/H$. By \eqref{ch25:eq:coarse-heat-short} and the bounded horizon,
+\[
+ \Xnorm\alpha a(x_0)\le(T+H^2)^{\alpha/2}r/H+C(T+H^2)^{(\alpha+1)/2}r/H^2.
+\]
+This bound is deterministic and independent of $K$. Adding the sum of the increments from level $1$ to level $j$ proves the uniform moment bound on $x_j$, including the case $K=j=0$.
+
+For the radius $\mathcal R_{j-1}$, let $h=a_j$ and $H_j=Bh$. For $t\ge h^2$ we have $t+h^2\le2(t+a^2)$, so the two weighted terms in $\mathcal R_{j-1}$ are bounded by a fixed multiple of $\Xnorm\alpha a(x_{j-1})$. For $t<h^2$, \eqref{ch25:eq:coarse-heat-short} applied to $A_{j-1}$, an array on the mesh $H_j$ with $\norm{A_{j-1}}_\infty\le\bar b_{j-1}/H_j$, bounds the sum of the two terms by
+\[
+ C\bigl(h^\alpha+h^{\alpha+1}/H_j\bigr)\bar b_{j-1}/H_j\le C_B\bar b_{j-1}H_j^{\alpha-1}.
+\]
+This bound is deterministic, bounded uniformly in $j$, and decays at fine levels by \eqref{ch25:eq:factor-powers}; at the first level it uses only $\bar b_0=r$ and the fixed mesh $H$. Taking $p$th moments proves the bound on $\mathcal R_{j-1}$. At short times the weight is the one at the input scale $a_j$, not the one at the output mesh $a$.
+
+For $\mathcal M_j^s$ note that the background $x_{j-1}$ is the heat path of a cardinal interpolation from the coarser mesh, so it satisfies the hypothesis on backgrounds of \cref{ch23:thm:fresh-and-mixed-rows}. The coarser mesh is $a_{j-1}=Ba_j$, the common fine mesh is $a_K$, an integer refinement of both input meshes, the input is $A_{j-1}$, the radius of the background is $\mathcal R_{j-1}$, and the horizon is $T$. The clause of that theorem on cardinal backgrounds from the coarser mesh gives the bounds on their higher differences with fixed geometric constants; the larger class of backgrounds is needed only for \eqref{ch25:eq:marked-background-identification}. The conditional kernel and the convention of Taylor expansion at $w=0$ are those matched in Step~2 of the proof of \cref{ch25:lem:ordered-product-inventory}. For each value of the coarser field we use $\mathcal R_{j-1}$ as the number $R$ in the conditional tail bound of that theorem. Integrating the tail in $u$, which is justified since $\int_0^\infty e^{-u}(1+\sqrt u)\,du<\infty$, we obtain
+\[
+ \E\bigl[\Ynorm\alpha a(\mathcal M_j^s)\bigm|\mathcal F_{j-1}\bigr]\le Cg_3\mathcal R_{j-1}a_j^\beta\bigl[\sqrt{\log(2+L/a_j)}+1\bigr].
+\]
+Using the bound on the first moment of $\mathcal R_{j-1}$ and $\log(2+L/a_j)\le C(1+j)$, we obtain the bound on each summand. The triangle inequality and expectation then sum it over $l\le j\le m$, and the sum is at most the sum over $j\ge k$.
+
+The same background satisfies the hypotheses of \cref{ch23:thm:centered-residual}. Integrating its conditional tail, which has a quadratic part and a remainder, we obtain
+\[
+ \E\bigl[\Ynorm\alpha a(\mathcal M_j^z)\bigm|\mathcal F_{j-1}\bigr]\le C\mathcal R_{j-1}\bigl[g_3^2a_j^\alpha(1+j)+g_3^3a_j^{1/2}p_j^3\bigr].
+\]
+Taking expectations and using the moment bound on $\mathcal R_{j-1}$, we obtain the second bound. The fields $\mathcal M_j^s$ and $\mathcal M_j^z$ have zero conditional mean, since their backgrounds are predictable and $s_j(0)$ and $z_j(0)$ have zero conditional mean.
+
+For $\mathcal M_j^r$ we use the second estimate in \eqref{ch25:eq:rough-two-responses}, which is a conclusion of \cref{ch24:thm:ordered-rough-return}; the triangle inequality gives $4\sum_{j\ge k}W_j$. All three right sides tend to zero as $k\to\infty$, by \eqref{ch25:eq:geometric-sums}, \eqref{ch25:eq:cutoff-linear}, and the summability of $W_j$ in \cref{ch24:thm:ordered-rough-return}. At the last level $I_{a_K\to a_K}$ is the identity, and none of these estimates omits that level.
+\end{proof}
+
+\begin{theorem}\label{ch25:thm:both-enhanced-tails}
+Assume the standing assumptions, use the notation of \cref{ch25:lem:ordered-product-inventory}, and write $\mathcal M_j=\Polarized{a_K}(x_{j-1},d_j)$ and $\mathcal M_j^v=\Polarized{a_K}(x_{j-1},v_j)$ for $v\in\{s,z,r,u\}$. There exist $b\ge0$ and $C<\infty$ such that, for every $k\ge1$,
+\[
+ \sup_{K\ge m\ge l\ge k}\E_{\nu_{nB^K,n,\gamma}}\Ynorm\alpha{a_K}\Bigl(\sum_{j=l}^m\mathcal M_j^u\Bigr)\le C(1+k)^ba_k^\tau.
+\]
+Further, both
+\[
+ \sup_{K\ge m\ge l\ge k}\E\,\Ynorm\alpha{a_K}\Bigl(\sum_{j=l}^m\mathcal M_j\Bigr)\qquad\text{and}\qquad
+ \sup_{K\ge m\ge l\ge k}\E\,\Ynorm\alpha{a_K}\Bigl(\sum_{j=l}^m\Duhamel{a_K}(d_j,d_j)\Bigr)
+\]
+tend to zero as $k\to\infty$. In particular, the sums $\sum_{j=l}^m\mathcal M_j$ and $\sum_{j=l}^m\Duhamel{a_K}(d_j,d_j)$ tend to zero in probability in the norm $\Ynorm\alpha{a_K}$, at every fixed threshold, uniformly over $K\ge m\ge l\ge k$. The constants have the dependence stated in \cref{ch25:sec:setting}, with the exponents added.
+\end{theorem}
+
+\begin{proof}
+Let $a=a_K$, $X_j=\Xnorm\alpha a(x_{j-1})$, and $\mathcal U_j=\Hnorm\sigma a(I_{a_j\to a}U_j^0)$. The case $p=2$ of \cref{ch25:thm:all-prefix-first-grade} gives $\norm{X_j}_2\le C_2$, uniformly in $K$ and $j$. The case $p=2$ of \cref{ch24:thm:full-smoother-return}, applied under the same conditioned measure to the predictable term, which includes the contributions of the coarse field, the cubic part of the zero-fluctuation reconstruction, and the conditional mean correction, gives
+\[
+ \norm{\mathcal U_j}_2\le C(1+j)^ba_{j-1}^\tau\le C'(1+j)^ba_j^\tau,
+\]
+since $a_{j-1}=Ba_j$ with $B$ fixed. Neither input uses an estimate of \cref{ch30:chapter}.
+
+We apply \cref{ch21:lem:ordered-duhamel-products} separately to $\Duhamel a(x_{j-1},u_j)$ and $\Duhamel a(u_j,x_{j-1})$; both arguments are heat paths on the mesh $a$, and the argument measured by $\Hnorm\sigma a$ has initial datum $I_{a_j\to a}U_j^0$. The factor $(T+a^2)^{(\alpha-\sigma)/2}$ in that lemma is bounded uniformly, since $a\le L/n$. By this inequality and the Cauchy--Schwarz inequality under the same measure, we have
+\[
+ \E\,\Ynorm\alpha a(\mathcal M_j^u)\le C\,\E(X_j\mathcal U_j)\le C\norm{X_j}_2\norm{\mathcal U_j}_2\le C(1+j)^ba_j^\tau.
+\]
+By the triangle inequality for the path norm and \eqref{ch25:eq:geometric-sums}, for every $K\ge m\ge l\ge k$,
+\[
+ \E\,\Ynorm\alpha a\Bigl(\sum_{j=l}^m\mathcal M_j^u\Bigr)\le C\sum_{j\ge k}(1+j)^ba_j^\tau\le C'(1+k)^ba_k^\tau.
+\]
+This proves the first assertion.
+
+By \cref{ch25:lem:ordered-product-inventory}(1), $\mathcal M_j=\mathcal M_j^s+\mathcal M_j^z+\mathcal M_j^r+\mathcal M_j^u$. Combining the three bounds on first moments in \cref{ch25:thm:all-prefix-first-grade} with the bound just proved, we obtain a bound on the first moment of the sum of the $\mathcal M_j$ that tends to zero as $k\to\infty$. The means of $\mathcal M_j^r$ are included in $W_j$ by \cref{ch24:thm:ordered-rough-return}. At fixed coupling $p_j\le C(1+j)$ by \eqref{ch25:eq:cutoff-linear}, so all the sums of powers converge and their tails tend to zero, and the same holds for $\sum_jW_j$ by \cref{ch24:thm:ordered-rough-return}.
+
+For the quadratic increments, let $0<\zeta_2<\min(2\alpha-1,\tau)$. By \cref{ch25:lem:ordered-product-inventory}(6), at every level the sum of the expected norms of the sixteen ordered products is at most $C_{\zeta_2}(1+j)^ba_j^{\zeta_2}$. We expand $\Duhamel a(d_j,d_j)$ by bilinearity, using $d_j=s_j+z_j+r_j+u_j$, apply the triangle inequality, and sum the geometric series \eqref{ch25:eq:geometric-sums}. This proves the last limit, with the bound $C_{\zeta_2}(1+k)^ba_k^{\zeta_2}$. Markov's inequality at a fixed positive threshold implies the two statements in probability. All these operations take place under the same conditioned measure and on the same fine mesh, including the level $j=K$.
+\end{proof}
+
+The next theorem combines the two previous results. Here the finite-scale reconstruction $A_j$ is extended to the fine mesh by cardinal interpolation, not by further reconstruction with zero fluctuations, and the quadratic operator is the same ordered $\Duhamel{a_K}$ for every $j$.
+
+\begin{theorem}\label{ch25:thm:finite-mesh-prefix-control}
+Assume the standing assumptions, with the norms taken on a fixed horizon $[0,T_0]$, $0<T_0<\infty$, and let $\nu_K=\nu_{nB^K,n,\gamma}$. Let the arrays $A_j$, $0\le j\le K$, be those of the coarse-to-fine reconstruction of the fine configuration, at the classical depths $J(K-j)$, and put
+\[
+ \mathcal E_{K,j}=(x_j,y_j),\qquad x_j=P_\cdot^{a_K}I_{a_j\to a_K}A_j,\qquad y_j=\Duhamel{a_K}(x_j,x_j),
+\]
+$d_j=x_j-x_{j-1}$ for $1\le j\le K$, and $\mathsf R_K=\norm{\mathcal E_{K,K}}_{\mathrm{fl},a_K}=\Xnorm\alpha{a_K}(x_K)+\Ynorm\alpha{a_K}(y_K)$, as in \cref{ch21:def:two-grade-datum}. Then, for $1\le k\le K$,
+\begin{equation}\label{ch25:eq:exact-prefix-polarization}
+ \mathcal E_{K,K}-\mathcal E_{K,k-1}=\Bigl(\sum_{j=k}^Kd_j,\ \sum_{j=k}^K\bigl\{\Polarized{a_K}(x_{j-1},d_j)+\Duhamel{a_K}(d_j,d_j)\bigr\}\Bigr).
+\end{equation}
+For every $\eta>0$,
+\begin{equation}\label{ch25:eq:enhanced-prefix-error}
+ \lim_{k\to\infty}\sup_{K\ge k}\nu_K\bigl\{\Xnorm\alpha{a_K}(x_K-x_{k-1})+\Ynorm\alpha{a_K}(y_K-y_{k-1})>\eta\bigr\}=0,
+\end{equation}
+and $\rho(R)=\sup_{K\ge0}\nu_K\{\mathsf R_K>R\}$ tends to zero as $R\to\infty$. All norms include the physical first differences and shifts. For each fixed $q$, the laws of the arrays $A_q$ converge, on a fixed compact set, to the law $\pi_q$ (\cref{ch12:thm:representative-prefixes}), and their smooth cardinal interpolants satisfy the uniform consistency and the deterministic norm bound of \cref{ch25:lem:fixed-smooth-prefix}. For every sample, the configuration $e^{a_KA_K}$ on $\Lat{nB^K}$ is gauge equivalent to the sampled configuration $U$. The constants and the rates of convergence in these statements are taken at fixed coarse side and fixed coupling, uniformly in $K$.
+\end{theorem}
+
+\begin{proof}
+Summing \eqref{ch25:eq:quadratic-increment} over $k\le j\le K$ gives \eqref{ch25:eq:exact-prefix-polarization}. We apply \cref{ch25:thm:all-prefix-first-grade,ch25:thm:both-enhanced-tails} with $T=T_0$. The first component in \eqref{ch25:eq:enhanced-prefix-error} tends to zero by Markov's inequality and \cref{ch25:thm:all-prefix-first-grade}. For the second component we apply \cref{ch25:thm:both-enhanced-tails} separately to the two sums in \eqref{ch25:eq:exact-prefix-polarization}, with threshold $\eta/3$ for each of the three contributions, and use a union bound. This proves \eqref{ch25:eq:enhanced-prefix-error}.
+
+For the tightness, let $\varepsilon>0$ and choose $k$ such that the probability in \eqref{ch25:eq:enhanced-prefix-error} with $\eta=1$ is less than $\varepsilon$ for all $K\ge k$. The array $A_{k-1}$ lies in a fixed compact set, and $x_{k-1}=P_\cdot^{a_K}(f|_{a_K})$, where $f$ is its cardinal interpolant. By \cref{ch25:lem:fixed-smooth-prefix}, $\norm{\mathcal E_{K,k-1}}_{\mathrm{fl},a_K}\le C_k$ for a deterministic $C_k$ that does not depend on $K$. By the triangle inequality, $\mathsf R_K\le C_k+1$ outside the exceptional event. The finitely many $K<k$ have bounded arrays, so their linear heat evolutions and quadratic Picard terms have a common finite bound. This proves that $\rho(R)\to0$. The remaining assertions, including the gauge equivalence of $e^{a_KA_K}$ and $U$, are \cref{ch12:thm:representative-prefixes} applied to the family $\RepMap$ at the classical depths $J(K-j)$.
+\end{proof}
+
+\section{Convergence under the conditioned measure}\label{ch25:sec:conditioned}
+
+We first state an approximation lemma for laws, a version of the standard approximation theorem for weak convergence (compare \cite[Theorem~3.2]{Billingsley1999}). In that theorem the limit of the approximating laws is assumed to exist; here its existence is part of the conclusion, so we include the proof. For a metric space $E$ let $\mathscr L$ be the set of functions $f:E\to\R$ with $\norm f_\infty\le1$ and Lipschitz constant at most one, and let $d_{\mathrm{BL}}(\mu,\nu)=\sup_{f\in\mathscr L}\abs{\int f\,d\mu-\int f\,d\nu}$ be the bounded-Lipschitz distance between probability measures on $E$.
+
+\begin{lemma}\label{ch25:lem:probability-approximation}
+Let $(E,d)$ be a complete separable metric space. For each $K\ge0$ let $Z_K$ be an $E$-valued random variable with law $\mu_K$, and for $0\le k\le K$ let $Z_{K,k}$ be $E$-valued random variables defined on the same probability space as $Z_K$. Suppose that for each fixed $k$ the laws of $Z_{K,k}$ converge weakly as $K\to\infty$, that the union over $K\ge k$ of the supports of these laws has compact closure, that each $\mu_K$ has compact support, and that for every $\eta>0$
+\[
+ \lim_{k\to\infty}\sup_{K\ge k}\Prob\{d(Z_K,Z_{K,k})>\eta\}=0.
+\]
+Then $\mu_K$ converges weakly to a probability measure on $E$.
+\end{lemma}
+
+\begin{proof}
+We show that $(\mu_K)$ is a Cauchy sequence for $d_{\mathrm{BL}}$ and is tight, and then identify the limit.
+
+\paragraph{Step 1: the Cauchy property.}
+For $f\in\mathscr L$ and $\eta>0$ we have
+\[
+ \abs{\E f(Z_K)-\E f(Z_{K,k})}\le\eta+2\Prob\{d(Z_K,Z_{K,k})>\eta\}.
+\]
+Fix $k$, and let $C_k$ be the compact closure of the union of the supports of the laws of $Z_{K,k}$, $K\ge k$. Given $\varepsilon>0$, let $x_1,\ldots,x_N$ be a finite $\varepsilon$-net of $C_k$. We group the functions $f\in\mathscr L$ according to the values $f(x_1),\ldots,f(x_N)$ rounded to multiples of $\varepsilon$. There are finitely many groups, and two functions in the same group differ by at most $3\varepsilon$ on $C_k$. Choosing one representative in each group and applying weak convergence to the finitely many representatives, we find that $\sup_{f\in\mathscr L}\abs{\E f(Z_{K,k})-\E f(Z_{K',k})}\le6\varepsilon+o(1)$ as $K,K'\to\infty$. Combining the two bounds and letting first $K,K'\to\infty$ with $k$ fixed, then $k\to\infty$, and then $\eta,\varepsilon\to0$, we obtain that $(\mu_K)$ is a Cauchy sequence for $d_{\mathrm{BL}}$.
+
+\paragraph{Step 2: tightness.}
+Fix $\varepsilon>0$, and choose increasing $k_h$ such that $\Prob\{d(Z_K,Z_{K,k_h})>2^{-h}\}\le\varepsilon2^{-h}$ for all $K\ge k_h$. Let $C_h$ be the compact closure of the union of the supports of the laws of $Z_{K,k_h}$, $K\ge k_h$, together with the supports of the finitely many $\mu_K$ with $K<k_h$. For $K\ge k_h$ we have $d(Z_K,C_h)\le2^{-h}$ unless $d(Z_K,Z_{K,k_h})>2^{-h}$, and for $K<k_h$ we have $Z_K\in C_h$ almost surely. By the union bound, the closed set
+\[
+ C_\varepsilon=\bigcap_{h\ge1}\{z:d(z,C_h)\le2^{-h}\}
+\]
+has $\mu_K$-mass at least $1-\varepsilon$ for every $K$. It is totally bounded: for a given tolerance, choose $h$ large and a finite net of the compact set $C_h$. Since $C_\varepsilon$ is closed in a complete space, it is compact. Hence $(\mu_K)$ is tight.
+
+\paragraph{Step 3: the limit.}
+By Prokhorov's theorem \cite{Prokhorov1956}, in the direction that holds on every metric space \cite[Theorem~5.1]{Billingsley1999}, every subsequence of $(\mu_K)$ has a further subsequence that converges weakly to a probability measure. By Step~1, $\int f\,d\mu_K$ converges for every $f\in\mathscr L$, so any two subsequential limits $\mu$ and $\mu'$ satisfy $\int f\,d\mu=\int f\,d\mu'$ for all bounded Lipschitz $f$. For a closed set $F$, the functions $\max(0,1-m\,d(\cdot,F))$ decrease to $\one_F$ as $m\to\infty$, so $\mu(F)=\mu'(F)$. Closed sets form a $\pi$-system generating the Borel $\sigma$-algebra, so $\mu=\mu'$. Since every subsequence has a further subsequence converging weakly to the same limit, the whole sequence converges weakly to it.
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch25:thm:selected-loop-limit}]
+We compare $W_K$ with the Wilson loops of the flow started from the finite-scale reconstruction from the first $q$ RG steps. By \cref{ch25:thm:finite-mesh-prefix-control} and the stability of flowed Wilson loops, this approximation is uniform in $K$. We then identify the limit law of the approximation at fixed $q$ and apply \cref{ch25:lem:probability-approximation}. We fix a horizon $T_0>0$ and use \cref{ch25:thm:finite-mesh-prefix-control} with it.
+
+\paragraph{Step 1: comparison with finite-scale reconstructions.}
+On the same probability space, let $W_K^{[q]}$ be the vector of the same characters of holonomies for the Wilson flow on $\Lat{nB^K}$ started from
+\[
+ U_K^{[q]}=\exp\bigl(a_KI_{a_q\to a_K}A_q\bigr),
+\]
+and let $D_{K,q}=\norm{\mathcal E_{K,K}-\mathcal E_{K,q}}_{\mathrm{fl},a_K}$. The Wilson flow commutes with lattice gauge transformations and characters of holonomies are gauge invariant. Since $e^{a_KA_K}$ is gauge equivalent to $U$ (\cref{ch25:thm:finite-mesh-prefix-control}), $W_K$ is also the vector of Wilson loops of the flow started from $e^{a_KA_K}=e^{a_Kx_K(0)}$, while $U_K^{[q]}=e^{a_Kx_q(0)}$. On the event $\{\mathsf R_K\le R,\ D_{K,q}\le\eta\le1\}$ both flow data $\mathcal E_{K,K}$ and $\mathcal E_{K,q}$ have norm at most $R+1$. By \cref{ch22:cor:bounded-input-trace-stability} there exist $a_*>0$ and $C_R$ such that $\abs{W_K-W_K^{[q]}}\le C_R\eta$ on this event whenever $a_K\le a_*$. These constants depend on $R$, the loops, the characters, the times, and the deterministic data of the flow, but not on $q$, on the higher derivatives of the finite-scale reconstruction, or on the coupling. Thus for $f\in\mathscr L$ the replacement error is at most
+\begin{equation}\label{ch25:eq:observable-prefix-BL-bound}
+ C_R\eta+2\rho(R)+2\nu_K\{D_{K,q}>\eta\}.
+\end{equation}
+We choose $R$ first, then $\eta$, and then $q$, increasing $q$ until $a_q\le a_*$; then $a_K\le a_*$ for all $K\ge q$. By \cref{ch25:thm:finite-mesh-prefix-control}, the last term in \eqref{ch25:eq:observable-prefix-BL-bound} tends to zero as $q\to\infty$, uniformly in $K\ge q$. In particular, for every $\eta'>0$, $\lim_{q\to\infty}\sup_{K\ge q}\nu_K\{\abs{W_K-W_K^{[q]}}>\eta'\}=0$.
+
+\paragraph{Step 2: the limit at fixed $q$.}
+Fix $q$. The vector $W_K^{[q]}$ is a function of the array $A_q$, which lies in a fixed compact set. By \cref{ch25:lem:fixed-smooth-prefix}, applied with $h=a_q$, these functions converge as $K\to\infty$, uniformly on that compact set, to the continuous map $G_q$ of the statement. By \cref{ch12:thm:representative-prefixes} the law of $A_q$ converges weakly to $\pi_q$. Together, these two facts imply that $\Law(W_K^{[q]})\Rightarrow(G_q)_\#\pi_q$. All the vectors $W_K$ and $W_K^{[q]}$ take values in the compact box $\prod_i\{w\in\C:\abs w\le\chi_i(\Id)\}$. We apply \cref{ch25:lem:probability-approximation} in this box, with $Z_K=W_K$ and $Z_{K,q}=W_K^{[q]}$; its hypotheses were verified in Step~1 and above. Hence the law of $W_K$ converges weakly. Applying the same argument to the union of two lists of loops proves the consistency under finite unions and projections. Taking $K\to\infty$ at fixed $q$ in the bound \eqref{ch25:eq:observable-prefix-BL-bound}, we find that the $d_{\mathrm{BL}}$-distance between the limit law of $W_K$ and $(G_q)_\#\pi_q$ is at most $C_R\eta+2\rho(R)+2\sup_{K\ge q}\nu_K\{D_{K,q}>\eta\}$. This tends to zero in the order $R$, $\eta$, $q$ chosen above, which identifies the limit law of $W_K$ as the limit of $(G_q)_\#\pi_q$.
+
+\paragraph{Step 3: moment generating functions.}
+Let $D\ge\max_i\chi_i(\Id)$. On the box, $\abs{\exp(z\cdot w)}\le e^{D\norm z_1}$, and on $\{\norm z_1\le Z\}$ the function $z\mapsto\exp(z\cdot w)$ is Lipschitz with constant at most $De^{DZ}$, uniformly in $w$. Weak convergence of the laws of $W_K$ implies convergence of the moment generating functions at each $z$. With the common Lipschitz constant and a finite net of $z$, we obtain uniform convergence on $\{\norm z_1\le Z\}$. On the ball where $e^{D\norm z_1}-1<1/2$, we have $\abs{\E\exp(z\cdot W_K)-1}\le e^{D\norm z_1}-1<1/2$, so the logarithm with value zero at the origin is defined and holomorphic. Cauchy's formula on a smaller ball gives the convergence of every finite logarithmic derivative, that is, of the cumulants.
+\end{proof}
+
+\section{Removal of the small-field conditioning}\label{ch25:sec:unconditioning}
+
+\begin{proof}[Proof of \cref{ch25:thm:original-loop-stitching}]
+We first bound the small-field failure probability, then compare conditioned and unconditioned expectations at the same fine lattice, and finally pass to the limit, first in $K$ and then in $r$.
+
+\paragraph{Step 1: the failure probability.}
+\Cref{ch20:thm:literal-payment} implies that, for every $u\in4\N$ with $u\ge n_0$ and every $K'\ge0$, we have $\mu_{uB^{K'},\gamma}(S_{uB^{K'},u,\gamma}^c)\le F_\gamma(u)$, uniformly in $K'$. For fixed $\gamma>0$ both terms of $F_\gamma(u)$ tend to zero as $u\to\infty$. For the second term, with $v=\log u$, the exponent is $3v-(a_{\mathrm w}/4)(v+\log(M/\gamma))^2$, which tends to $-\infty$. Let $r_0$ be such that $n_r\ge n_0$ and $F_\gamma(n_r)<1$ for $r\ge r_0$. For $r\ge r_0$ and $K\ge r$ the conditioned hierarchy with coarse side $n_r$ has $K-r$ RG steps and fine side $n_rB^{K-r}=n_*B^K=N_K$. Applying the bound with $u=n_r$ and $K'=K-r$, we obtain $e_{K\mid r}\le F_\gamma(n_r)$. This bounds the probability of the complement of the event that defines $\nu_{K\mid r}$, including its initial test and the tests at the end of each RG step.
+
+\paragraph{Step 2: conditioning at a fixed fine lattice.}
+For $K\ge r$, the observable $W_K=(W_{K,1},\ldots,W_{K,m})$ under $\nu_{K\mid r}$ is the same measurable function of the configuration on $\Lat{N_K}$ as under $\mu_{N_K,\gamma}$. \Cref{ch02:lem:bounded-transfer}, applied to the measure $\mu_{N_K,\gamma}$, the event $S_{N_K,n_r,\gamma}$, and this map, gives, for every bounded complex measurable $f$ on the range of $W_K$,
+\begin{equation}\label{ch25:eq:same-cutoff-transfer}
+ \bigl\lvert\E_{\mu_{N_K,\gamma}}f(W_K)-\E_{\nu_{K\mid r}}f(W_K)\bigr\rvert\le2\norm f_\infty e_{K\mid r}.
+\end{equation}
+The events for different $r$ need not be nested.
+
+\paragraph{Step 3: the Cauchy property of the limits.}
+We take $f(w)=\exp(\sum_iz_iw_i)$, so that $\norm f_\infty\le e^{DR}$ on $\{\sum_i\abs{z_i}\le R\}$. For $K\ge\max(r,r')$, we compare both conditioned expectations with the same unconditioned expectation in \eqref{ch25:eq:same-cutoff-transfer} and obtain
+\[
+ \sup_{\sum_i\abs{z_i}\le R}\bigl\lvert\E_{\nu_{K\mid r}}e^{\sum_iz_iW_{K,i}}-\E_{\nu_{K\mid r'}}e^{\sum_iz_iW_{K,i}}\bigr\rvert\le2e^{DR}\bigl(e_{K\mid r}+e_{K\mid r'}\bigr).
+\]
+At fixed $r$ and $r'$ the conditioned moment generating functions converge uniformly by \cref{ch25:thm:selected-loop-limit}, applied with coarse side $n_r$, respectively $n_{r'}$. Letting $K\to\infty$ and using Step~1, we obtain the estimate of the theorem for $Z_r^{\mathrm{sel}}$ and $Z_{r'}^{\mathrm{sel}}$. In particular these functions form a uniform Cauchy family on every ball as $r,r'\to\infty$.
+
+\paragraph{Step 4: the limit law.}
+We show that the laws of $W_K$ under $\mu_{N_K,\gamma}$ converge. For $r\ge r_0$ let $\rho_r$ be the weak limit of the laws of $W_K$ under $\nu_{K\mid r}$, which exists by \cref{ch25:thm:selected-loop-limit}. For $f\in\mathscr L$, by \eqref{ch25:eq:same-cutoff-transfer} and Step~1, we have $\abs{\E_{\mu_{N_K,\gamma}}f(W_K)-\E_{\nu_{K\mid r}}f(W_K)}\le2F_\gamma(n_r)$ for all $K\ge r$. Letting $K\to\infty$, we obtain
+\[
+ \limsup_{K,K'\to\infty}\bigl\lvert\E_{\mu_{N_K,\gamma}}f(W_K)-\E_{\mu_{N_{K'},\gamma}}f(W_{K'})\bigr\rvert\le4F_\gamma(n_r),
+\]
+and the right side tends to zero as $r\to\infty$. Hence $\E_{\mu_{N_K,\gamma}}f(W_K)$ converges for every bounded Lipschitz $f$. The vectors $W_K$ take values in the compact box $\prod_i\{w\in\C:\abs w\le\chi_i(\Id)\}$, so every subsequence of their laws has a weakly convergent further subsequence. All these subsequential limits agree on bounded Lipschitz functions, and therefore coincide, as in Step~3 of the proof of \cref{ch25:lem:probability-approximation}. Hence the laws of $W_K$ under $\mu_{N_K,\gamma}$ converge weakly to a unique probability measure $\rho$ on the box. Passing to the limit $K\to\infty$ in the bound above also gives $d_{\mathrm{BL}}(\rho,\rho_r)\le2F_\gamma(n_r)$.
+
+\paragraph{Step 5: moment generating functions and consistency.}
+Weak convergence to $\rho$ implies pointwise convergence of the unconditioned moment generating functions. Their common Lipschitz constant on $\{\sum_i\abs{z_i}\le R\}$ is at most $De^{DR}$, so the finite-net argument of the proof of \cref{ch25:thm:selected-loop-limit} gives uniform convergence on this set. Further, letting $K\to\infty$ in \eqref{ch25:eq:same-cutoff-transfer} at fixed $r$, we find
+\[
+ \sup_{\sum_i\abs{z_i}\le R}\Bigl\lvert\int e^{\sum_iz_iw_i}\,d\rho(w)-Z_r^{\mathrm{sel}}(z)\Bigr\rvert\le2e^{DR}F_\gamma(n_r),
+\]
+which shows how the error at a fixed coarse side disappears as $r\to\infty$. For a subfamily of the loops, the laws at each fixed $K$ are coordinate projections of the laws of the larger family. Coordinate projection is continuous on the compact box, so the weak limits have the same relation. This proves the consistency under taking subfamilies. Along the limit only the coarse side $n_r$ changes, within the single sequence $n_*B^r$.
+\end{proof}
+
+\section{Compact intervals of couplings and couplings below a finite bound}\label{ch25:sec:coupling}
+
+The results above use the parameters of \cref{ch20:thm:common-parameters}, chosen for couplings $0<\gamma\le\gamma_0\le1$, and their constants depend on the fixed coupling. This section gives two extensions. The first concerns the parameters of \cref{ch20:thm:finite-ceiling-parameters}, chosen for couplings up to an arbitrary finite bound $\Gamma$, and shows that the truncation and tightness estimates hold uniformly for $\gamma$ in a compact interval $[\gamma_-,\gamma_+]\subset(0,\Gamma]$. This uniformity requires checking how each constant depends on the coupling; taking the supremum of constants obtained at fixed coupling would not suffice. The second extension states that all fixed-coupling results of this section hold for these parameters at every fixed $\gamma\le\Gamma$.
+
+\begin{lemma}\label{ch25:lem:finite-ceiling-finite-mesh-estimates}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\Gamma<\infty$, and let $J$, $B=M^J$, $\Theta$, $g_*$, and $n_\Gamma$ be as in \cref{ch20:thm:finite-ceiling-parameters}. Fix a horizon $T_0>0$ and an interval $I=[\gamma_-,\gamma_+]\subset(0,\Gamma]$ with $\gamma_->0$, and fix exponents $1/2<\alpha<2/3$, $\beta=\alpha-1/2$, $0<\sigma<1-\alpha$, and $0<\tau<\min\{\sigma,1/2,\lambda_{\mathrm{anc}}\}$. There is a threshold $n_I\ge n_\Gamma$, which does not depend on $\gamma\in I$, such that the following holds for every coarse side $n\in4\N$ with $n\ge n_I$. Put $H=L/n$ and $a_j=HB^{-j}$. Under $\nu_{nB^k,n,\gamma}$ use the arrays $A_j=\widehat\theta_j/a_j$ of the coarse-to-fine reconstruction, and on the fine mesh $a=a_k$ set
+\[
+ x_j=P_\cdot^aI_{a_j\to a}A_j,\qquad y_j=\Duhamel a(x_j,x_j),\qquad
+ d_{k,q}=\Xnorm\alpha a(x_k-x_q)+\Ynorm\alpha a(y_k-y_q),\quad 0\le q\le k,
+\]
+with norms on $[0,T_0]$ that include all first differences and shifts. Then every estimate of \cref{ch25:lem:ordered-product-inventory,ch25:thm:all-prefix-first-grade,ch25:thm:both-enhanced-tails} holds with constants that are uniform for $\gamma\in I$, and with the coupling factors displayed there. In particular, for each $\eta>0$ there exist $b<\infty$, $C_{I,\eta}<\infty$, $0<\xi<\tau$, and $\delta>0$ such that
+\begin{equation}\label{ch25:eq:finite-ceiling-compact-tail}
+ \sup_{\gamma\in I}\sup_{k\ge q}\nu_{nB^k,n,\gamma}\{d_{k,q}>\eta\}\le C_{I,\eta}\bigl[(1+q)^b(a_q^\delta+a_q^{\tau-\xi})+a_q^\xi\bigr],
+\end{equation}
+and the right side tends to zero as $q\to\infty$. Further, the norms of the flow data are tight uniformly in $\gamma\in I$:
+\begin{equation}\label{ch25:eq:finite-ceiling-radius-tightness}
+ \lim_{R\to\infty}\sup_{\gamma\in I,\,k\ge0}\nu_{nB^k,n,\gamma}\bigl\{\Xnorm\alpha{a_k}(x_k)+\Ynorm\alpha{a_k}(y_k)>R\bigr\}=0.
+\end{equation}
+All constants may depend on $I$, $L$, $n$, $M$, $J$, $\Theta$, $T_0$, the exponents, and the moment orders. They do not depend on $\gamma\in I$, $k$, the classical depth, or the ratio of the fine mesh to $a_j$. For a one-point interval $I=\{\gamma\}$ this gives the assertions at every fixed $\gamma\in(0,\Gamma]$.
+\end{lemma}
+
+\begin{proof}
+We go through the inputs of \cref{ch25:lem:ordered-product-inventory,ch25:thm:all-prefix-first-grade,ch25:thm:both-enhanced-tails} and check that their constants, including the constants in the conditional maximal estimates, are uniform on $I$. Let $g_\pm=\sqrt{\gamma_\pm/L}$ and $\kappa=a_{\mathrm{cap}}\sqrt B<1$.
+
+\paragraph{Step 1: cutoffs and amplitude bounds.}
+The cutoffs in the definition of the small-field event differ from $p(t_j)=A_{\mathrm w}\log(1/t_j)$ by at most a fixed $c_J$. Let $p_{\max,j}$ be the largest of them in the $j$th RG step. We have
+\begin{equation}\label{ch25:eq:finite-ceiling-cuts-caps}
+ \begin{gathered}
+ t_j^2=\frac{\gamma}{MnB^{j-1}},\qquad
+ p(t_j)=\frac{A_{\mathrm w}}2\bigl[\log(Mn/\gamma)+(j-1)\log B\bigr],\qquad
+ p_{\max,j}\le P_I(1+j),\\
+ \frac{\bar b_j}{\sqrt{a_j}}\le C\bigl[rH^{-1/2}\kappa^j+g_+P_I(1+j)\bigr],\qquad
+ \frac{\bar b_j}{g_j}\le C\bigl[r(g_-\sqrt H)^{-1}\kappa^j+P_I(1+j)\bigr].
+ \end{gathered}
+\end{equation}
+Here the amplitude bounds are those of \cref{ch12:lem:backward-law,ch14:lem:backward-caps-and-means}; we used $ra_{\mathrm{cap}}^j/\sqrt{a_j}=rH^{-1/2}\kappa^j$, and the first level is included by enlarging $C$. For every fixed integer $v$ we have $p_{\max,j}^v\le C_{I,v}a_j^{-1}$, since $\sup_jHB^{-j}(1+j)^v<\infty$. None of these bounds requires $\gamma_+\le1$.
+
+\paragraph{Step 2: hypotheses of the conditional estimates.}
+The conditional fluctuation potential, the lower bound $\Id/2$ on its Hessian in $w$, the conditional means, the local bounds on derivatives of the conditional log-density, and the volume-normalized column sums are given by \cref{ch10:thm:complete-white-law,ch10:thm:actual-means-and-scores,ch12:thm:replacement-family,ch23:lem:kernel-reserve}. Their hypotheses are the fixed domains and finitely many smallness conditions on $t[p(t)+c_J]^v$, including \eqref{ch23:eq:implemented-gates}. We choose a small $t_*>0$ such that these conditions hold for $0<t\le t_*$. We require $n\ge\gamma_+/(Mt_*^2)$, so that $t_1^2=\gamma/(Mn)\le t_*^2$ for all $\gamma\in I$, together with the thresholds on the coarse side and on the levels in \cref{ch20:thm:finite-ceiling-parameters}; this defines $n_I$. Then every conditional fluctuation kernel at a finer level satisfies these hypotheses, for every value of the coarser field. Factors that depend only on coarser fields cancel in a normalized conditional kernel; no factor that depends on $w$ is dropped.
+
+\paragraph{Step 3: uniform maximal constants.}
+In \cref{ch23:lem:input-maxima} the deterministic moduli contain only the fixed coefficients, powers of $g_3$, and powers of $p_{\max,j}$. By Step~1 they give the same normalized modulus $C_Ia_j^{-30}$ in space and time as in the proof of that lemma. A physical net of spacing $c_Ia_j^{30}$ has at most $C_I(1+La_j^{-30})^3(1+T_0a_j^{-30})$ points, and the logarithm of this number is at most $C_I\log(2+L/a_j)$. The part with short times is estimated at the outputs on the mesh $a_j$ before this net is used. The conditional linear and quadratic concentration of \cref{ch02:thm:reflecting-concentration}, with the Hessian lower bound $1/2$, followed by a union bound and the deterministic modulus, gives maximal constants that are uniform on $I$. Alternatively, \cref{ch23:lem:coefficient-cover,ch23:lem:coefficient-chaining} already give entropy bounds for the coefficients that do not depend on the coupling.
+
+Let $\widetilde x_j=x_{j-1}+r_j$. The three ordered terms $\Duhamel a(\widetilde x_j,r_j)$, $\Duhamel a(r_j,\widetilde x_j)$, and $\Duhamel a(r_j,r_j)$ of \cref{ch24:thm:ordered-rough-return}, with their propagation through the coarser levels as in that theorem, are estimated separately there. The cross term satisfies $\Polarized a(x_{j-1},r_j)=\Duhamel a(\widetilde x_j,r_j)+\Duhamel a(r_j,\widetilde x_j)-2\Duhamel a(r_j,r_j)$, which explains the factor $4$ in \eqref{ch25:eq:rough-two-responses}. For each of these three terms the ratio of the contribution of short times to the scale of the estimate is at most $C_I(1+j)a_{j-1}^4$ (see \eqref{ch24:eq:microscopic-cover-ratio}). A single threshold on the level makes it small, and the finitely many coarser levels are handled by increasing $C_I$. The normalized modulus is $C_Ia_{j-1}^{-7}$, and a net of spacing $c_Ia_{j-1}^{12}$ has at most $C_Ia_{j-1}^{-48}$ points (see \eqref{ch24:eq:net-cardinality}). Conditional concentration, the union bound, and the modulus give the same conditional moments as in that theorem, now uniformly on $I$. In \cref{ch24:thm:full-smoother-return} the normalized modulus is $C_Ia_j^{-4}$, and a net of spacing $c_Ia_j^8$ has at most $C_Ia_j^{-32}$ points (see the estimates following \eqref{ch24:eq:static-micro}); this covers its centered terms. The estimates of \cref{ch24:lem:signed-heat-defect} and the coefficient estimates of \cref{ch24:thm:ancestor-gram-rows} are deterministic under the same amplitude bounds. Their conditional drifts keep the explicit terms
+\[
+ a_{\mathrm{cap}}^2\bar b_{i-1}^3+g_i^2\bar b_{i-1}+g_i^3p_{\max,i}^3.
+\]
+These arguments use $g_->0$ only to bound the inverse coupling in $\bar b_j/g_j$, and $g_+<\infty$ only in upper bounds.
+
+\paragraph{Step 4: the factor bounds.}
+By Steps~1--3, the four-term decomposition of \cref{ch23:lem:four-piece-increment} and \cref{ch23:thm:fresh-and-mixed-rows,ch23:thm:centered-residual,ch23:thm:fresh-square} give, in the notation of \cref{ch25:lem:ordered-product-inventory},
+\[
+\begin{split}
+ S_{p,j}&\le C_{I,p}(1+j)^{1/2}a_j^\beta,\\
+ Z^+_{p,j}&\le C_{I,p}(1+j)^3(a_j^\alpha+a_j^{1/2}),\\
+ Z^-_{p,j}&\le C_{I,p}(1+j)^3(a_j^\sigma+a_j^{1/2}),\\
+ R_j&\le C_I(1+j)a_j^\beta,\\
+ U_{p,j}&\le C_{I,p}(1+j)^ba_j^\tau,\\
+ \sum_{j\ge q}W_j&\le C_{I,\zeta}(1+q)^ba_q^\zeta\qquad(0<\zeta<\min(2\beta,\lambda_{\mathrm{anc}})).
+\end{split}
+\]
+For the last line we insert \eqref{ch25:eq:finite-ceiling-cuts-caps} into the sum over earlier levels in \cref{ch24:thm:ordered-rough-return}, with factor $\qanc^{\,j-1-i}$, keeping the term from the coarse field. A convolution of two geometric sequences multiplied by polynomials decays with every exponent strictly below the smaller of the two exponents. Explicitly, if $\lambda=-\log\qanc/\log B$, $\varrho>\zeta$, and $\lambda>\zeta$, then
+\[
+ \frac{\qanc^{\,j-1-i}a_i^\varrho}{a_j^\zeta}=H^{\varrho-\zeta}B^\zeta B^{-(\lambda-\zeta)(j-1-i)}B^{-(\varrho-\zeta)i}.
+\]
+We bound the sum over $i$ by dropping the first geometric factor, which is at most one, and summing the second. The polynomial factors contribute at most $(1+j)^b$. The term from the coarse field is geometric by itself.
+
+\paragraph{Step 5: the ordered products.}
+With these factors, each of the sixteen ordered products is bounded by a constant, uniform on $I$, times the entry of the table in \cref{ch25:lem:ordered-product-inventory}(5). Indeed, the proof of that table uses only the product inequality, whose constant does not depend on the coupling, and the following inputs. For $(s,s)$ it uses \cref{ch23:thm:fresh-square}, including the conditional mean; for $(s,r)$ and $(r,s)$, the two ordered estimates with a predictable background from \cref{ch23:thm:fresh-and-mixed-rows}; for $(r,r)$, the separate estimate for $\Duhamel a(r_j,r_j)$ in \cref{ch24:thm:ordered-rough-return}; for $(u,u)$, the pathwise bound on $\mathcal U_j$ and one moment; and for the remaining products, conditional estimates, the deterministic bound on $r_j$, or the Cauchy--Schwarz inequality under the same measure. No product of first moments of unrelated quantities occurs. The hypotheses of all these inputs were verified above, without an upper bound $\gamma\le1$. Every entry is summable with a positive power of $a_j$, after an arbitrarily small loss in the exponent.
+
+\paragraph{Step 6: the truncation error.}
+By Minkowski's inequality applied to $d_j=s_j+z_j+r_j+u_j$, we obtain the bounds on partial sums of the increments of the linear heat evolution, and all fixed moments of $\Xnorm\alpha a(x_j)$, uniformly on $I$. The term of the coarse field is bounded deterministically by $C_{H,T_0,\alpha}r/H$. At the fixed order $p=2$ the factor bounds have constants uniform on $I$, and the constant of the product inequality does not depend on the coupling. Hence the proof of \cref{ch25:thm:both-enhanced-tails} gives its bounds on first moments uniformly on $I$: the cross terms with $s_j$ and $z_j$ are bounded by their conditional estimates times the moments of the background radius, the cross term with $r_j$ is bounded by $4W_j$, and the cross term with $u_j$ is bounded, by the Cauchy--Schwarz inequality, by $C_I(1+j)^ba_j^\tau$. By \eqref{ch25:eq:geometric-sums}, for every $v>0$,
+\[
+ \sum_{j\ge q}(1+j)^ba_j^v\le(1+q)^ba_q^v\sum_{h\ge0}(1+h)^bB^{-hv}<\infty.
+\]
+We apply this to every cross term and every ordered product, with $\delta>0$ smaller than all the positive exponents that occur, and with $\delta\le\tau$.
+
+The identity
+\[
+ y_k-y_q=\sum_{j=q+1}^k\bigl\{\Polarized a(x_{j-1},d_j)+\Duhamel a(d_j,d_j)\bigr\}
+\]
+follows from \eqref{ch25:eq:quadratic-increment}. Together with $x_k-x_q=\sum_{j=q+1}^kd_j$ and Markov's inequality, it implies that $\sup_{\gamma\in I}\sup_{k\ge q}\nu_{nB^k,n,\gamma}\{d_{k,q}>\eta\}\le C_{I,\eta}(1+q)^ba_q^\delta$. Since $a_q\le H$, the right side of \eqref{ch25:eq:finite-ceiling-compact-tail} is at least a constant multiple of $(1+q)^ba_q^\delta$, for every choice of $0<\xi<\tau$. This proves \eqref{ch25:eq:finite-ceiling-compact-tail}.
+
+\paragraph{Step 7: tightness.}
+For fixed $q$ the array $A_q$ lies in a deterministic compact ball of a finite-dimensional space, uniformly for $\gamma\in I$, by \eqref{ch25:eq:finite-ceiling-cuts-caps}. By \cref{ch25:lem:fixed-smooth-prefix}, its flow data on every finer lattice have a deterministic norm bound $C_q$. We choose $q$ so that the probability in \eqref{ch25:eq:finite-ceiling-compact-tail} with $\eta=1$ is as small as desired, uniformly for $\gamma\in I$ and $k\ge q$. Outside this event the norm $\Xnorm\alpha{a_k}(x_k)+\Ynorm\alpha{a_k}(y_k)$ is at most $C_q+1$. The finitely many $k<q$ have bounded arrays and bounded norms, uniformly on $I$. This proves \eqref{ch25:eq:finite-ceiling-radius-tightness}.
+\end{proof}
+
+\begin{lemma}\label{ch25:lem:finite-ceiling-selected-chain}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\Gamma<\infty$, let $J$, $B=M^J$, $\Theta$, $g_*$, and $n_\Gamma$ be as in \cref{ch20:thm:finite-ceiling-parameters}, and fix $0<\gamma\le\Gamma$. Then \cref{ch25:lem:ordered-product-inventory,ch25:thm:all-prefix-first-grade,ch25:thm:both-enhanced-tails,ch25:lem:fixed-smooth-prefix,ch25:thm:finite-mesh-prefix-control,ch25:thm:selected-loop-limit,ch25:thm:original-loop-stitching} hold with these parameters in place of those of \cref{ch20:thm:common-parameters}, for coarse sides $n\in4\N$ with $n\ge n_\Gamma$ above finitely many further thresholds, which may depend on $\gamma$. They hold for the same conditional fluctuation kernels, conditional means, laws of finite-scale reconstructions, reconstruction maps, and configurations of the Wilson measure, and their constants have the dependence on the fixed coupling stated in \cref{ch25:sec:setting}. In \cref{ch25:thm:original-loop-stitching} the constants of $F_\gamma$ are those of \cref{ch20:thm:finite-ceiling-payment}. No bound on the norms of the flow data, and no rate of convergence, that is uniform over $\gamma\in(0,\Gamma]$ is asserted.
+\end{lemma}
+
+\begin{proof}
+From \cref{ch20:thm:finite-ceiling-parameters,ch20:thm:finite-ceiling-payment} we use only the common smallness conditions and the bound on the small-field failure probability. The convergence of the laws of finite-scale reconstructions is \cref{ch12:thm:representative-prefixes}. The smallness condition at the first RG step is $t_1^2=\gamma/(Mn)\le g_*^2$, and $t_j=t_1B^{-(j-1)/2}$ for $j\ge1$. The local estimates on coefficients and means in \cref{ch23:lem:four-piece-increment,ch23:thm:fresh-and-mixed-rows,ch23:thm:centered-residual,ch23:thm:fresh-square,ch24:lem:signed-heat-defect,ch24:thm:ordered-rough-return,ch24:thm:full-smoother-return} use these conditions and the same product domains. Their summations over levels use only $p_j\le C_{\gamma,n,J}(1+j)$, which holds at fixed positive coupling. Thus the factor bounds of \cref{ch25:lem:ordered-product-inventory} and \cref{ch25:thm:all-prefix-first-grade,ch25:thm:both-enhanced-tails} keep their proofs and constants. \Cref{ch25:lem:fixed-smooth-prefix} is deterministic and does not involve the coupling. The proofs of \cref{ch25:thm:finite-mesh-prefix-control,ch25:thm:selected-loop-limit} use only these results, the convergence of the laws of finite-scale reconstructions, and deterministic flow estimates, which do not require a bound on the coupling. The proof of \cref{ch25:thm:original-loop-stitching} uses \cref{ch20:thm:finite-ceiling-payment} in place of \cref{ch20:thm:literal-payment}, at coarse sides $n_r$ tending to infinity; the bound \eqref{ch20:eq:finite-ceiling-absorbed} has the same form as the bound used there.
+\end{proof}

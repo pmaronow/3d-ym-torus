@@ -1,0 +1,95 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{booktabs,array}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{imakeidx}%
+\usepackage{environ}
+\PassOptionsToPackage{hypertexnames=false}{hyperref}
+\input{shared/trilogy-style}%
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref}
+\usepackage{aliascnt}
+\hypersetup{pdftitle={The continuum limit of three-dimensional SU(2) lattice Yang--Mills theory on a torus},pdfauthor={P. M. Aronow and Patrick Lopatto}}
+\renewcommand{\chaptername}{Section}
+\numberwithin{equation}{chapter}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\theoremstyle{remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{definition}{Definition}{Definitions}
+\crefname{example}{Example}{Examples}
+\crefname{remark}{Remark}{Remarks}
+\crefname{chapter}{Section}{Sections}
+\crefname{part}{Part}{Parts}
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+\crefname{section}{Section}{Sections}
+\crefname{subsection}{Section}{Sections}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{}{}
+\crefformat{equation}{(#2#1#3)}
+\Crefformat{equation}{(#2#1#3)}
+\crefrangeformat{equation}{(#3#1#4)--(#5#2#6)}
+\Crefrangeformat{equation}{(#3#1#4)--(#5#2#6)}
+\crefmultiformat{equation}{(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+\Crefmultiformat{equation}{(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+
+\makeatletter
+\newcommand{\npp@noteblock}[2]{%
+  \ifx\relax#1\relax\else{\centering\trilogy@spacedsc{#1}\par}\vspace{6pt}\fi
+  {\centering
+   \begin{minipage}{0.84\textwidth}\small\normalfont\setlength{\parindent}{1.5em}%
+     \noindent\ignorespaces#2\end{minipage}\par}}
+\NewEnviron{authorsnote}{%
+  \clearpage\thispagestyle{empty}%
+  \vspace*{\stretch{2}}%
+  \npp@noteblock{Authors' note}{\BODY}%
+  \vspace*{\stretch{3}}%
+  \clearpage}
+\NewEnviron{abstractpage}{%
+  \clearpage\thispagestyle{empty}%
+  \vspace*{\stretch{2}}%
+  \npp@noteblock{Abstract}{\BODY}%
+  \vspace*{\stretch{3}}%
+  \clearpage}
+\newcommand{\npptitlepage}[2]{%
+  \hypersetup{pageanchor=false}%
+  \begin{titlepage}
+  \centering\normalfont
+  \vspace*{1.7in}
+  {\large\strut\par}
+  \vspace{1.05in}
+  {\fontsize{28}{35}\selectfont #1\par}
+  \vspace{1.1in}
+  {\Large\def\\{\par\vspace{10pt}}#2\par}
+  \vfill
+  \end{titlepage}%
+  \hypersetup{pageanchor=true}}
+\makeatother
+
+
+\clubpenalty=10000
+\patchcmd{\thebibliography}{\clubpenalty4000}{\clubpenalty10000}{}{}
+\input{macros}

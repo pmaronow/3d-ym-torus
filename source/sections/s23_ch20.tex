@@ -1,0 +1,1118 @@
+\chapter{Uniform bounds for the small-field event}\label{ch20:chapter}
+
+This section proves that the small-field event $S_{N,u,\gamma}$ of \cref{ch01:def:selected-law} has probability close to one under the Wilson measure, uniformly in the number of renormalization group (RG) steps and in the coupling below a fixed ceiling. The main result is \cref{ch20:thm:finite-ceiling-payment}. For every $0<\Gamma<\infty$ it provides an integer $J$, with $B=M^J$, and all remaining parameters of the small-field event, chosen before the coupling, such that
+\begin{equation}\label{ch20:eq:intro-bound}
+ \mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)
+ \le C'u^3e^{-\bar cu/\gamma}
+ +C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}}
+\end{equation}
+for all $0<\gamma\le\Gamma$, all coarse sides $u\in4\N$ above a threshold $n_\Gamma$, and all $K\ge0$. The first term bounds the probability that some averaged configuration $V^j=T_M^jU$ has a plaquette whose energy exceeds a fixed threshold $d_*$. The second term bounds the probability that the curvature is small at every scale, but the coordinate-domain conditions or the cutoffs $\abs{w_{k,i,e}}\le A_{\mathrm w}\log(1/t_k)$ on the normalized fluctuation variables fail in some RG step. This is the bound on large fields, \cref{s2:thm:large-field}, which lets us pass from the conditioned Wilson measure $\nu_{N,u,\gamma}$ to the Wilson measure by \eqref{s3:eq:transfer}.
+
+Two regimes of \eqref{ch20:eq:intro-bound} are used later. For a fixed coarse side $u$, the probability of $S^c$ is smaller than every power of $\gamma$ as $\gamma\to0$, uniformly in $K$ (\cref{ch20:cor:payment-all-powers}); this is used in the weak-coupling analysis. For a fixed ceiling $\Gamma$, it tends to zero as $u\to\infty$ through the sides $nB^a$, uniformly in $\gamma\in(0,\Gamma]$ and $K$; this is used to remove the conditioning in the construction of the continuum measure. The logarithmic cutoff limits the rate: by \cref{ch20:thm:literal-rejection-log-squared}, at a fixed coarse side, $\sup_K\mu(S^c)$ is of order $\exp(-c\log^2(1/\gamma))$, and a matching lower bound holds already for one RG step.
+
+The principal antecedent of the present construction is Ba{\l}aban's proof of ultraviolet stability for three-dimensional lattice gauge theories \cite{Balaban1985UV}. The estimate proved here concerns the probability of the specific event $S_{N,u,\gamma}$. Its proof has two independent parts: a bound on large curvature under the Wilson measure itself, and a bound on the first failure of a coordinate-domain condition or of a cutoff. Both are described at the beginning of \cref{ch20:sec:small-field}.
+
+The other task of this section is the choice of parameters. The integer $J$, the analytic radii, the support radius $r$ of $B_r$ and $D_r$, the widths of the boundary layers of the large-field decompositions, the cutoff amplitude $A_{\mathrm w}$, the coupling bound $g_*$, and the minimum coarse side must satisfy all hypotheses of the results of \cref{ch10:chapter,ch11:chapter,ch12:chapter,ch15:chapter,ch16:chapter,ch17:chapter,ch18:chapter,ch19:chapter}, and these hypotheses refer to one another. \Cref{ch20:thm:common-parameters} lists the choices in an order in which each choice uses only quantities fixed before it, and \cref{ch20:tab:parameter-order} summarizes this order. The main point is that $J$ is chosen using only constants that are uniform in $J$, and is never enlarged afterward.
+
+\Cref{ch20:sec:elementary,ch20:sec:parameters} contain the elementary inequalities and the statements on the choice of parameters, \cref{ch20:sec:action,ch20:sec:small-field,ch20:sec:log-squared} the probability estimates, \cref{ch20:sec:parameter-proof,ch20:sec:finite-ceiling} the proofs of the parameter theorems, and \cref{ch20:sec:large-J} the extension to every sufficiently large $J$, which is needed in \cref{ch26:chapter} to pass from the subsequences $n_*B^K$ to the full sequence $nM^k$.
+
+The main inputs are the moment bounds for coarse actions and the comparison for initial segments of \cref{ch19:chapter}; the large-field decompositions and their pointwise support bounds for the normalized fluctuation variables in \cref{ch18:chapter}; the regional estimates of \cref{ch15:chapter,ch16:chapter,ch17:chapter}; the recursion for the effective interaction on the torus and the reconstruction maps of \cref{ch10:chapter,ch11:chapter,ch12:chapter}; and the chessboard and curvature estimates of \cref{ch03:chapter,ch04:chapter}. The results of this section are used in \cref{ch25:chapter,ch26:chapter} to remove the conditioning and to construct the continuum measure, in \cref{ch28:chapter,ch29:chapter} at fixed coupling, and in \cref{ch30:chapter,ch31:chapter,ch32:chapter} at weak coupling.
+
+Throughout, $L>0$ and an odd integer $M\ge3$ are fixed. We write $h_n=g_n^2=\gamma/n$ for the lattice coupling at side $n$. The letter $p$ with an argument denotes the cutoff radius $p(t)=A_{\mathrm w}\log(1/t)$ (written $p_{\mathrm w}(t)$ in \cref{ch01:def:selected-law}); a subscript $p$ on a configuration denotes a plaquette.
+
+\section{Elementary inequalities}\label{ch20:sec:elementary}
+
+We use the following lemma repeatedly to choose a coupling bound and a minimum side. It states that powers of logarithms are dominated by positive powers, and that sums over geometrically growing sides are dominated by their first term.
+
+\begin{lemma}\label{ch20:lem:scalar-gates}
+Fix $0<\gamma_0\le1$, a finite set of ratios $R>1$, finitely many positive constants $a$, $c$, $C$, $\varepsilon$, and finitely many nonnegative integers $k$. Then there exists $0<g_*<e^{-1}$ such that each of the finitely many inequalities $Ct^\varepsilon[1+\log(1/t)]^k\le c$ holds for all $0<t\le g_*$. There exists $m_0$, independent of $\gamma\in(0,\gamma_0]$, such that each of the finitely many inequalities
+\[
+ C[1+\log(m/\gamma)]^k\le\varepsilon m/\gamma
+\]
+holds for all $m\ge m_0$ and $0<\gamma\le\gamma_0$. For a fixed $M>1$ define
+\[
+ X_c(m,\gamma)=m^3e^{-cm/\gamma},\qquad
+ W_a(m,\gamma)=m^3e^{-az(m,\gamma)^2},\qquad
+ z(m,\gamma)=\frac12\log(Mm/\gamma).
+\]
+After increasing $m_0$, each of these functions is decreasing in $m\ge m_0$ and increasing in $\gamma\in(0,\gamma_0]$, and its value at $Rm$ is at most half of its value at $m$. Consequently
+\[
+ \sum_{h\ge0}X_c(mR^h,\gamma)\le2X_c(m,\gamma),\qquad
+ \sum_{h\ge0}W_a(mR^h,\gamma)\le2W_a(m,\gamma),
+\]
+and the right sides tend to zero as $m\to\infty$, uniformly in $\gamma\in(0,\gamma_0]$. Finally, let $\delta>0$, and let numbers $\epsilon_h\ge0$, attached to the sides $mR^h$, be bounded by fixed finite sums of these functions. Then, after increasing $m_0$, we have $\log\prod_h(1-\epsilon_h)^{-1}\le\delta$ for all $m\ge m_0$. The thresholds $g_*$ and $m_0$ depend only on the data fixed in the statement.
+\end{lemma}
+
+\begin{proof}
+Set $y=\log(1/t)$. For $\varepsilon>0$ and an integer $l>k$ we have $e^{\varepsilon y/2}\ge(\varepsilon y/2)^l/l!$ for $y>0$, which implies $e^{-\varepsilon y}(1+y)^k\to0$ as $y\to\infty$. Then each inequality holds on a half-line $y\ge y_*$, that is, for $0<t\le g_*$, and we take the smallest of the finitely many thresholds. The same calculation with $y=\log x$ shows that $(1+\log x)^k/x\to0$ as $x\to\infty$. Since $x=m/\gamma\ge m_0/\gamma_0$, the supremum of this ratio over the relevant half-line tends to zero as $m_0\to\infty$, which gives the second assertion.
+
+With $\Delta_R=(1/2)\log R>0$, the two ratios are
+\begin{equation}\label{ch20:eq:tail-ratios}
+ \frac{X_c(Rm,\gamma)}{X_c(m,\gamma)}=R^3e^{-c(R-1)m/\gamma},\qquad
+ \frac{W_a(Rm,\gamma)}{W_a(m,\gamma)}=R^3e^{-a(2\Delta_Rz+\Delta_R^2)}.
+\end{equation}
+Their suprema over $m\ge m_0$ and $\gamma\le\gamma_0$ are attained at $m=m_0$ and $\gamma=\gamma_0$, and tend to zero as $m_0\to\infty$. The derivatives of $\log X_c$ and $\log W_a$ with respect to $\log m$ are $3-cm/\gamma$ and $3-az$, which are negative once $m_0$ is large; their derivatives with respect to $\log\gamma$ are $cm/\gamma$ and $az$, which are positive in the same range. Taking logarithms shows that $m^3e^{-cm/\gamma_0}\to0$ and $m^3e^{-a\log^2(Mm/\gamma_0)/4}\to0$. The sums are bounded by geometric series with ratio $1/2$. Finally, for $0\le\epsilon\le1/2$ we have
+\[
+ -\log(1-\epsilon)=\int_0^\epsilon\frac{dv}{1-v}\le2\epsilon.
+\]
+We increase $m_0$ so that every $\epsilon_h$ is at most $1/2$ and $2\sum_h\epsilon_h\le\delta$. This proves the last assertion, also for finite sublists of the $\epsilon_h$ taken in either order. All thresholds depend only on the fixed data of the lemma.
+\end{proof}
+
+\section{Choice of the parameters}\label{ch20:sec:parameters}
+
+The constants in the next theorem are those of the cited earlier results, evaluated on their larger construction domains before any of the later restrictions. In particular, $q_{\mathrm{CA}}$ is the contraction factor for the zero-fluctuation pullback of the effective interaction on the torus in \cref{ch10:thm:common-analytic-class}, $C_G$ is the constant bounding the part of the effective interaction generated by one RG step, and $Z_\bullet$ are the majorants for the absolute coefficient sums of the background-field map at zero fluctuation from \cref{ch10:thm:whole-image-gauge}. In Step~8 of \cref{ch20:sec:parameter-proof}, we use \cref{ch11:thm:deep-buffer-law} to identify the recursion controlled by these constants with the recursion defining the small-field event. The number $q_{\mathrm{raw}}>0$ is a radius reserved for the free logarithmic coordinates. The symbols $A_J,R_J$ denote the coefficient bounds for the reconstruction maps $\RepMap$ in \cref{ch12:lem:deterministic-prolongation-reserve}; output constants denoted by the same letters elsewhere can be enlarged to a common bound at fixed $J$. The normalization constant $\Lambda$ is kept separate from the bound $\mathcal L_V$ for the conditional fluctuation potential. A subscript $\bullet$ stands for either of the two analytic radii, $\rho$ for the effective interaction and $\rho_{\mathrm{cl}}$ for the effective classical action, and every condition carrying $\bullet$ is imposed for both.
+
+The radii play different roles. The support radius $r$ defines $B_r$ and $D_r$; $R_{\mathrm{buf}}=C_{\mathrm{map},J}r$ is the larger radius of coarse fields on which the analytic recursion is defined; $\rho$ and $\rho_{\mathrm{cl}}$ are analytic radii of coefficient norms; $R_{\mathrm{raw}}$ is the radius of the larger domain of free logarithmic coordinates; $r_{\mathrm{eff}}$ is the working radius for the zero-fluctuation reconstruction; $0<P<Q_{\mathrm{DB}}$ are radii, proportional to $r$, for the unscaled fluctuation coordinates $\zeta_i=g_iw_i$ in the small-field construction; $R_W$ bounds the unscaled fluctuation coordinates allowed in the regional estimates, and $R_{\mathrm{en}}\le R_W$ is the radius of the enclosing product domain; $\beta_{\mathrm{rec}}$ bounds the frozen coordinates of the large-field decompositions.
+
+In applying \cref{ch12:sec:operators}, its generic torus interaction exponent $\asp$ is instantiated by $a_{\mathbb T}$. Its contraction and the construction and convergence of the torus effective interactions are used at that fixed exponent. The smaller regional exponent $a=\asp$ chosen below is used for boundary estimates; bounds and convergence of the already constructed torus interactions pass to it by monotonicity of the coefficient norms. No contraction on an entire ball at the weaker exponent is inferred from this monotonicity.
+
+\begin{theorem}\label{ch20:thm:common-parameters}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\gamma_0\le1$. There exist an integer $J\ge1$, with $B=M^J$, a tuple $\Theta$ of the parameters listed in items \textup{(1)}--\textup{(10)} below, a number $0<g_*<e^{-1}$, and an integer $n_0\in4\N$, all chosen before the coupling, with the following property. For every
+\[
+ 0<\gamma\le\gamma_0,\qquad u\in4\N,\ u\ge n_0,\qquad K\in\N_0,\qquad N=uB^K,
+\]
+the same $J$, $\Theta$, and reconstruction maps satisfy the local, moment, and scalar conditions of the results cited below; only the running couplings and the cutoff radii $p(t)$ are evaluated at $\gamma$. In particular, the parameters satisfy the hypotheses of \cref{ch16:thm:controlled-perturbation} on uniform incoming radii, on boundary compatibility, and on conditional displacements, and the bounds of \cref{ch17:thm:controlled-kernel} on logarithmic fluctuation radii and on frozen coordinates. In the large-field decompositions only complete renormalization group steps are integrated; remainders modulo $J$ and short scale intervals are treated by the composed insertions and the bounded side-ratio clauses of \cref{ch19:thm:all-phase-window}. The coefficient majorants on the torus and the recursion for the effective interaction are those of \cref{ch10:thm:whole-image-gauge,ch10:thm:common-analytic-class}, and \cref{ch11:thm:deep-buffer-law} identifies this recursion with the effective interactions of the stopped measures used in \cref{ch19:thm:all-phase-window}. The geometric hypotheses of \cref{ch18:thm:history-cover} hold, including those of \cref{ch18:thm:fat-cell-admission} for the neighborhoods in which gauge transformations are extended, the closed complex of tested cells at the initial step, and the protection of all older endpoints and tree roots attached to frozen records.
+
+The parameters can be chosen in the order of items \textup{(1)}--\textup{(10)}. Each item uses only constants provided by the cited results and quantities fixed in earlier items.
+\begin{enumerate}[label=(\arabic*)]
+\item \emph{The number $J$.} Fix the spatial decay rate $a_{\mathbb T}$ of the torus estimates with $0<a_{\mathbb T}<a_{\mathrm{cen}}/8$, where $a_{\mathrm{cen}}$ is the $J$-uniform rate of the bounds of \cref{ch08:lem:aligned-zero-white} (the contraction of \cref{ch08:thm:principal-contraction} for the aligned representative holds only at such output rates). Fix also all larger spatial, analytic, and differentiation domains and the analytic-radius enlargement factor $K_*$ needed for the connected-network estimates of \cref{ch17:thm:carried-networks}. Enlarge the $J$-uniform constant $C_{\mathrm{CP}}$ of part~(3) of \cref{ch12:thm:replacement-family} to include the reconstruction tolerances. In the notation of that theorem, it bounds the value and the first three coarse-field derivatives of the pair formed by $B\widehat\Phi(\theta,0)$ and its first spatial differences $\nabla_{1/B}B\widehat\Phi(\theta,0)$, with the row sums, volume-normalized column sums, and polydisc of coarse fields specified there. Bounds for derivatives with respect to the fluctuation inputs are chosen after $J$ is fixed. Let $Z_\bullet(t)\le C_\bullet t/(1-C_\bullet t)$ be the $J$-uniform majorants for the absolute coefficient sums of the background-field map at zero fluctuation on the torus. Choose $J$ so that
+\[
+ B\ge B_{\mathrm{geom}},\qquad q_{\mathrm{CA}}<1/4,\qquad q_{\mathrm{CP}}\le1/4,\qquad M^{-J}\le\delta_0(a_{\mathbb T}),
+\]
+where $q_{\mathrm{CA}}=C_P(a_{\mathbb T})/B$ (denoted $q_P$ in \cref{ch10:thm:common-analytic-class}), $q_{\mathrm{CP}}=C_{\mathrm{CP}}^2/B$, and $C_P(a_{\mathbb T})$ and $\delta_0(a_{\mathbb T})$ are the constants of \cref{ch08:thm:principal-contraction}, and so that the finitely many linear image conditions on the torus hold with strict inequality. These include $C_\bullet K_*/B<1/32$, which permits the later bound $B^{-1}Z_\bullet(K_*\rho_\bullet)\le\rho_\bullet/16$, and the two conditions \eqref{ch20:eq:torus-spatial-gate} on spatial rates. Here $B_{\mathrm{geom}}$ is the constant of \cref{ch17:thm:carried-networks}. None of these lower bounds on $B$ uses a constant of the regional estimates or of the effective-interaction estimates computed at fixed $J$.
+
+\item \emph{Coordinate domains at fixed $J$.} Choose the product domains of \cref{ch16:lem:admitted-products,ch16:lem:strict-two-radius-images}. In their notation choose $v_{\mathrm{free},J}>0$ with
+\[
+ Q_Jv_{\mathrm{free},J}<\lambda_J/64,\qquad I_JQ_Jv_{\mathrm{free},J}<r_{z,J}/64,
+\]
+and choose $R_{\mathrm{raw}}$ strictly below the radii in those results for the identities on overlapping gauge charts and for the local constraint coordinates, and strictly below
+\[
+ \min\{\min(r_{\Gamma,J},r_E)/(64G_J),\ \lambda_J/(64Q_J),\ r_{z,J}/(64I_JQ_J),\ v_{\mathrm{free},J}/(64C_{\mathrm{lift},J})\}.
+\]
+For each initial segment of conditional integrations, fix first a neighborhood of its conditional constrained minimizer, then a smaller domain for the parameters of the later integrations, and then a common smaller product domain for the free logarithmic coordinates of the successive substitutions. These domains preserve real values on real arguments, the conditional displacement bound $r_I/4$, and the bound $1/2$ for the error of the preconditioned Hessian. All inverses are inverses of constrained Hessians in the free coordinates.
+
+\item \emph{Analytic radii and coefficient bounds.} Fix $\rho,\rho_{\mathrm{cl}}>0$, all inner, middle, and outer domains of the reconstruction maps inside the larger construction domains, a bound $E^{\mathrm{cl}}$ for the effective classical action on the torus, and a bound
+\[
+ E\ge2C_G/(1-q_{\mathrm{CA}})
+\]
+for the effective interaction. Set aside the inequality
+\[
+ C_{\mathrm{lift},J}[K_*\max(\rho,\rho_{\mathrm{cl}})+r+\beta_{\mathrm{rec}}+q_{\mathrm{raw}}]<R_{\mathrm{raw}}/8,
+\]
+in which the first summand, fixed now, is required to be below $R_{\mathrm{raw}}/64$; the other summands are made small by the later choices of $q_{\mathrm{raw}}$, of $\beta_{\mathrm{rec}}$ in item \textup{(5)}, and of $r$ in item \textup{(6)}. Compute the coefficient constants $A_J,R_J$ of the reconstruction maps on these larger domains, after one fixed enlargement, before the working and support radii are chosen; these constants and the bounds for the limiting maps do not depend on those radii. Then choose the regional rates as in \cref{ch17:thm:carried-networks}: $a=\asp>0$, $\alpha=\awall=a/16$, equal classical rates, $m_{\mathrm{rate}}=C_*^{\mathrm{geom}}(a+\alpha)$, and $b_1=8C_*^{\mathrm{geom}}\alpha$, with
+\[
+ m_{\mathrm{rate}}+b_1<\min(c_{\mathrm{prim},J},Ba)/C_{\mathrm{alloc}},\qquad
+ b_1<B\alpha/C_{\mathrm{alloc}},\qquad \sqrt3\,(a+\alpha)<a_{\mathbb T}.
+\]
+Here $c_{\mathrm{prim},J}$ is the reserve for the intrinsic tensors and the unperturbed weighted reconstruction images in the graph metric of \cref{ch17:sec:setting}, obtained from the Euclidean exponents by dividing by $\sqrt3$. It includes the positive exponent obtained once from interpolation of the unperturbed coefficient bounds and is chosen no larger than the intrinsic exponent $c_J$ of \cref{ch16:thm:controlled-perturbation}. Inherited perturbative networks use the separate inequalities against $Ba$ and $B\alpha$. Decreasing $a$ changes neither $a_{\mathbb T}$ nor $J$.
+
+\item \emph{Perturbation bounds and the fluctuation radius.} Choose a preliminary bound $\sigma_0>0$ for perturbations that are real on real arguments, on the larger product domains. Compute all local constants of the output, sequential, image, curvature, and mean estimates, and of the estimates of the support of the normalized fluctuation variables, uniformly for $\mathcal X^{\mathrm{cl}}(\overline P)\le2\sigma_0$ and $\mathcal X(f)\le\sigma_0$. In particular fix
+\[
+ A\ge1,\quad C_0\ge2A^3,\quad C_1,\quad C_{\mathrm{en},J},\quad \mathcal L_V=C_{V,J}(1+E+\sigma_0)\ge1,
+\]
+the image constants $C_{T,\bullet},C_{\Delta,\bullet},C_{F,\bullet},C_{P,\bullet}$, and all radii for free logarithmic coordinates that occur in \cref{ch17:lem:complete-white-potential}. Fix also the geometric constants $A_8$, $C_B$, $K_B$, $C_{\mathrm{col}}$, $C_{\mathrm{conv},J}$, and the mesh and interior-restriction factors of the initial step. None of these constants depends on the widths chosen later (of boundary layers, removed layers, protected neighborhoods, and large cells). Choose $R_W$ below the full minimum in \cref{ch17:lem:complete-white-potential}, including $1/(16C_0)$, both image bounds, both product domains, and the conversion to the joint solution neighborhood. Then fix
+\[
+ 0<\sigma_*\le\sigma_0,\qquad
+ \sigma_*\rho_{\mathrm{cl}}<\lambda_*R_W/(6C_{\mathrm{en},J}),\qquad
+ \lambda_*=M^{-(J-1)/2},
+\]
+all margins for the preconditioned forces and displacements, and $C_{P,\bullet}\sigma_*\rho_{\mathrm{cl}}<\rho_\bullet/64$. This choice precedes item \textup{(5)}, and it is not replaced by taking $r$ and $\beta_{\mathrm{rec}}$ small.
+
+\item \emph{Boundary radii, removed layers, and frozen coordinates.} Fix the outer boundary radius $R_{\partial,\bullet}$, the inner radius $\rho_{\partial,\bullet}=R_{\partial,\bullet}/K_*$, and the width $w_{\mathrm{bd}}$ of the boundary layer so that the zero-fluctuation image bound satisfies $A_{0,\bullet}\le\rho_\bullet/4$. Specifically, impose
+\[
+ B^{-1}Z_\bullet(K_*\rho_\bullet)\le\rho_\bullet/16,\qquad
+ C_{\Delta,\bullet}C_{\rho,\bullet}R_{\partial,\bullet}\le\rho_\bullet/16,
+\]
+\[
+ C_{\Delta,\bullet}C_{\rho,\bullet}e^{-a_{W,\bullet}w_{\mathrm{bd}}/2}K_*\rho_\bullet\le\rho_\bullet/16,\qquad
+ C_{T,\bullet}K_*\rho_\bullet\le1/4,
+\]
+together with the full condition
+\[
+\begin{split}
+ A_{0,\bullet}\le{}&B^{-1}Z_\bullet(K_*\rho_\bullet)
+ +C_{\Delta,\bullet}C_{\rho,\bullet}\bigl[R_{\partial,\bullet}+e^{-a_{W,\bullet}w_{\mathrm{bd}}/2}K_*\rho_\bullet\bigr]\\
+ &+C_{F,\bullet}\beta_{\mathrm{rec}}+C_{P,\bullet}\sigma_*\rho_{\mathrm{cl}}
+ \le\rho_\bullet/4.
+\end{split}
+\]
+Here $C_{F,\bullet}$ and $C_{P,\bullet}$ are the image constants for frozen coordinates and for perturbed conditional constrained minimizers on the larger domains. Choose the width $s_{\mathrm{er}}\ge w_{\mathrm{bd}}$ of the layer removed after each renormalization group step so that
+\[
+ 2e^{-\alpha(s_{\mathrm{er}}-1)}[A_J(1+E)+K_J\sigma_*+1]\le\sigma_*/2,\qquad
+ 2e^{-\alpha(s_{\mathrm{er}}-1)}[A_J^{\mathrm{cl}}+K_J^{\mathrm{cl}}\sigma_*]\le\sigma_*/2.
+\]
+Choose the bound $\beta_{\mathrm{rec}}>0$ for frozen coordinates below all coordinate-domain, product, and boundary radii, below one quarter of $\min\{\rho_\bullet,\rho_{\partial,\bullet}\}$, and below $\lambda_*R_W/(6C_{\mathrm{en},J})$. Impose the bounds of \cref{ch15:lem:freezing} for the substitution of frozen coordinates and for the boundary-completion differences, in particular
+\[
+ C\beta_{\mathrm{rec}}E_\bullet/\rho_\bullet\le\sigma_*/8,\qquad
+ \abs{\xi_j^\sharp}\le\phi_\bullet(j)/4,\qquad
+ z_t,z_t^{\mathrm{cl}}\le\sigma_*/4,
+\]
+including the substitution at the initial step, where $C$ denotes the larger-domain constants of \cref{ch15:lem:freezing}. Require also $C_{F,\bullet}\beta_{\mathrm{rec}}<\rho_\bullet/64$.
+
+\item \emph{Working radius and support radius.} Set $\alpha_*=C_{\mathrm{CP}}/B$ and choose
+\[
+ \beta_J\ge\max\{1,R_J^{-1},A_J/(\alpha_*R_J^2)\}.
+\]
+Choose a working radius $r_{\mathrm{eff}}>0$ inside the domains of item \textup{(3)} with $\beta_Jr_{\mathrm{eff}}/(1-\alpha_*)<1/8$. Then choose the support radius $r>0$ so that
+\[
+ r<r_{\mathrm{eff}}/4,\quad r<\beta_{\mathrm{rec}}/C_{\mathrm{conv},J},\quad
+ r<\lambda_*R_W/(6C_{\mathrm{en},J}),\quad (5M-3)(10M)^{J-1}r<\pi,
+\]
+together with the fixed coordinate-domain and chart margins of the earlier constructions, in particular those of \cref{ch11:def:literal-selection}. Set
+\[
+ R_{\mathrm{buf}}=C_{\mathrm{map},J}r,\qquad C_{\mathrm{map},J}\ge(10M)^J,\qquad r<R_{\mathrm{buf}}<\rho.
+\]
+There exist radii $0<P<Q_{\mathrm{DB}}$, proportional to $r$, such that every reconstruction from a coarse field $e^v$ with $\abs v\le r$ and unscaled fluctuation coordinates with $\max_i\abs{\zeta_i}\le Q_{\mathrm{DB}}$ has all link logarithms smaller than $r/2$. With $\mathscr L_{\mathrm{en}}$ the enclosing constant of \cref{ch11:def:literal-selection} and $C$ the constant of its curvature bound, require $C\mathscr L_{\mathrm{en}}r/(1-C\mathscr L_{\mathrm{en}}r)^3<1/2$; the condition including the coupling is completed in item \textup{(8)}. Define
+\[
+ \delta_{\mathrm{en}}=C_{\mathrm{en},J}(r+\beta_{\mathrm{rec}}+\sigma_*\rho_{\mathrm{cl}}),\qquad
+ R_{\mathrm{en}}=2\delta_{\mathrm{en}}/\lambda_*\le R_W.
+\]
+On the entire enclosing product domain,
+\[
+ \frac{C_{T,\bullet}R_{\mathrm{en}}}{1-C_{T,\bullet}(K_*\rho_\bullet+R_{\mathrm{en}})}+C_{\Delta,\bullet}R_{\mathrm{en}}\le\rho_\bullet/8,\qquad
+ 1-C_{T,\bullet}(K_*\rho_\bullet+R_{\mathrm{en}})\ge1/2.
+\]
+Together with item \textup{(5)}, the image under the reconstruction majorant at spatial exponent zero is at most $3\rho_\bullet/8$. The margin of half the radius in the weighted norm is kept, either by the same bounds for weighted sums or by the interpolation of coefficient bounds in \cref{ch17:lem:complete-white-potential}, whose positive exponent was included before $a$ and $\alpha$ were chosen.
+
+\item \emph{Geometric widths and the curvature threshold.} Set
+\[
+ R_{\mathrm{cell}}=\lceil A_8/r\rceil,\quad W=8BR_{\mathrm{cell}},\quad \varrho=\max(s_{\mathrm{er}},W),\quad r_F=\lceil\varrho/B\rceil.
+\]
+If desired, $r$ may be taken small enough in item \textup{(6)} that $W\ge s_{\mathrm{er}}$. The protected sets contain all lifted endpoints of older frozen links and transports and all tree roots, in the lattices where they were introduced. At the initial renormalization group step, which starts from the Wilson measure, use the block-aligned mesh $S\asymp_JR_{\mathrm{cell}}$, one full layer of large cells (the closed cells of side $R_{\mathrm{cell}}$ of \cref{ch18:thm:fat-cell-admission}), and the interior restriction by the full dependence radius of the constraint, tree, and transport paths. These choices fix the constant $F_J$ counting affected plaquettes and the constant $C_{\mathrm{ch},J}$ for the normalization factors attached to threshold failures. Here a threshold failure is a bad plaquette, that is, a plaquette selected by the tests of a large-field decomposition because its energy is at least $d_*$, together with the neighborhood excluded because of it. Fix $0<\delta_*\le1$ for the curvature threshold of \cref{ch04:thm:energy-near-contraction}, as in its proof, and then choose
+\[
+ 0<d_{\mathrm{cut}}\le\min\{d_{\mathrm{SG}},B_*/(96M^3),\delta_*^2/(2\pi^2)\},\qquad
+ d_*=d_{\mathrm{cut}}/2,\qquad \pi\sqrt{2d_*}\,S^2\le1.
+\]
+The threshold $d_{\mathrm{SG}}$, with its side condition, gives membership in $D_r$ with link bound $r/2$ by \cref{ch04:thm:small-curvature-admission}. Use the constants $K_M,K_1,\kappa_0,c_A^{\mathrm{act}},\alpha_W$ of \cref{ch19:thm:classical-source-payment} for arbitrary fields, $K_W=48K_1/\alpha_W$, and $\theta=\lambda=1/2$.
+
+\item \emph{Cutoff amplitude and coupling bound.} Fix $A_{\mathrm w}\ge1$ in the range allowed by \cref{ch17:thm:controlled-kernel} (no earlier choice depends on $A_{\mathrm w}$, so it may be fixed at any earlier stage), and set $p(t)=A_{\mathrm w}\log(1/t)$ and $p^+=p(t)+A_{\mathrm w}(J-1)\log M/2$. Choose $g_*\le t_*<e^{-1}$ such that, for every $0<t\le g_*$,
+\[
+ C_0t_*^2\mathcal L_V\le1/16,\qquad C_1t_*(\mathcal L_V+2)<1/(4\sqrt3),\qquad tp(t)<P,\qquad tp^+<R_{\mathrm{en}},
+\]
+\[
+ C_Tt^2[p(t)^4+Ep(t)^2]\le(1-q_{\mathrm{CA}})/2,\qquad
+ C_Jt^2(E+\sigma_*)[p(t)^4+(E+\sigma_*)p(t)^2]\le1,
+\]
+the same two inequalities with $p^+$ in place of $p(t)$,
+\[
+ t\le\frac{c_{z,J}}{2[(p^+)^3+p^++(E+\sigma_*)p^+]},\qquad \mathfrak s(t)\le\epsilon_J,\qquad
+ \frac{C[\mathscr L_{\mathrm{en}}r+t^2(1+E)]}{(1-C\mathscr L_{\mathrm{en}}r)^3}\le\frac12,
+\]
+and the strict interaction and Jacobian margins of the earlier product theorems with their finitely many bounds for free coordinates and for parameter derivatives of the normalized log density. Here the parameter derivatives are coarse-field derivatives on a fixed fluctuation product: the running couplings, the cutoff radii, and the real frozen data are held fixed. For such a derivative $\partial$ and $k=Z^{-1}e^{-V}$ on that product, $\partial\log k=-\partial V+\E_k[\partial V]$; the applicable bounds are those of \cref{ch10:thm:actual-means-and-scores} and their regional versions. Each remaining bound is a fixed estimate of the form $Ct^\varepsilon\log^k(1/t)\le c$ with $\varepsilon,c>0$. Require in addition
+\[
+ g_*^2\le\alpha_W,\qquad 2\kappa_*/g_*^2\ge1,\qquad a_0g_*<\min(r/2,1)
+\]
+for a fixed positive constant $a_0$ of the tree trial configuration. The total error in the Hessian of the conditional fluctuation potential on the enclosing product domain is then at most $8/27$.
+
+\item \emph{Stopping levels, the insertion interval, and the moment constants.} Fix the finite family of stopping levels, the treatment of each of the $J$ possible remainders modulo $J$, their side-ratio bound $\chi_*$, and the conversion constant $K_{\mathrm{src}}$. Include both functions whose exponential moments are bounded in \cref{ch19:thm:all-phase-window,ch19:lem:all-face-source-cap}, namely the predecessor action $Q_j^{\mathcal T}$ of \cref{ch20:sec:action} and the total Wilson action $S_W/g^2$; we call them the predecessor insertion and the total-action insertion. Enlarge $F_J$ once so that it counts all plaquettes affected by both. Only then choose $s_0>0$ in the interval of \cref{ch19:thm:all-phase-window}, imposing also
+\[
+ s_0\le\frac{\kappa_0}{2\max\{K_M,48K_1\}}.
+\]
+The coefficient of the Wilson action ranges over $[1/4,1/2]$, and the bounds for the stopping partition-function ratio and its numerator are fixed for that interval. Set
+\[
+ s_b=s_0/2,\qquad a_b=4s_bd_*/c_E,\qquad 0<\bar c\le\min\{d_*/8,a_b/2\}.
+\]
+Compute $C_v,C_s,C_b$ from \cref{ch19:thm:all-phase-window}, which places no restriction on the number of averaging steps, keeping $C_s\ge9\chi_*^2$; these constants may be enlarged for the total-action insertion by \cref{ch19:lem:all-face-source-cap} and the same proof. Fix the value $C_\delta=1$ for the bound on the logarithm of the reciprocal products in \cref{ch19:lem:original-prefix-onsets}; it is achieved by the minimum side in item \textup{(10)}. Set $C_b'=C_b+1+\log2$; a larger fixed choice is allowed.
+
+\item \emph{The minimum side.} Finally choose $n_0\in4\N$ above all fixed geometric, curvature-threshold, mesh, flat, and scalar thresholds, with
+\[
+ n_0\ge\max\{4,e\gamma_0,\gamma_0/g_{\mathrm{end}}^2,8R_{\mathrm{cell}},8S\},\qquad
+ 0<g_{\mathrm{end}}\le\min\{1,g_*,g_{\mathrm{anc}},\sqrt{\alpha_W},\sqrt{2\kappa_*}\},
+\]
+where $g_{\mathrm{anc}}$ is the coupling bound for the stopping partition-function ratio of \cref{ch19:thm:classical-source-payment}, uniform for coefficients in $[1/4,1/2]$. Keep every fixed margin near flat configurations, in particular $2\pi/n_0<\min\{r/2,r_{\mathrm{flat}}\}$ with strict inequality, where $r_{\mathrm{flat}}$ is fixed by \cref{ch11:lem:flat-lifts}. Choose $n_0$ so that the ratios of successive terms in the error sums at the endpoints and in the sums over large-field decompositions are at most $1/2$, the reciprocal products have logarithm at most $C_\delta=1$, and
+\begin{equation}\label{ch20:eq:entropy-per-cell}
+ \mathcal A_\gamma(m)=24C_vM^3+\frac{4C_sM^2}{m}\log(Mm/\gamma)+\frac{8C_b'}{m^3}\le\frac{a_bm}{2\gamma}
+ \qquad(m\ge n_0,\ 0<\gamma\le\gamma_0).
+\end{equation}
+Impose also $M^3e^{-\bar c(M-1)n_0/\gamma_0}\le1/2$ and the threshold at the initial scale in \cref{ch19:lem:original-prefix-onsets}. All these are lower bounds on $n_0$ in terms of previously fixed constants. No bound on the number of averaging steps is imposed.
+\end{enumerate}
+
+The reconstruction maps of \cref{ch12:thm:replacement-family} are fixed once on the countable family of pairs of finite lattices. Their joint coefficient bound and $\beta_J$ are obtained before $r_{\mathrm{eff}}$ and $r$; a later refinement of thresholds only increases the finite deterministic thresholds of these maps and does not enlarge that bound. The prescription for the entire indexed family is fixed once and does not depend on $\gamma$, on the field, on observations, or on a later comparison index. Its members and their deterministic thresholds are indexed by the pair of finite lattices and the preceding classical depth; no choice is repeated when the coarse side changes. Write $\widehat C$ for the group-valued reconstruction and $\widehat P(v)=\Log\widehat C(e^v,0)$ for the logarithm of its value at zero fluctuation on the active variables. At every preceding classical depth these maps are majorized by
+\begin{equation}\label{ch20:eq:center-majorant}
+ \varphi(z)=\frac{\alpha_*z}{1-\beta_Jz},\qquad
+ \sup_{\abs v\le r_{\mathrm{eff}}}\norm{D\widehat P(v)}_{\mathrm{root}}
+ \le a_{\mathrm{map}}=\frac{\alpha_*}{(1-\beta_Jr_{\mathrm{eff}})^2},\qquad
+ a_{\mathrm{map}}\sqrt B\le\frac{32}{49}<1.
+\end{equation}
+Here the row sums and volume-normalized column sums follow the conventions of \cref{ch12:lem:deterministic-prolongation-reserve}. We use its common majorant as $a_{\mathrm{map}}$, which gives $\qanc=B\alpha_*^2\le Ba_{\mathrm{map}}^2<1$ as required in the later geometric summations. All constants of the full joint estimates and of the estimates for the gauge transformations of the reconstruction maps are constants at fixed $J$. The choice of $J$ uses only the $J$-uniform geometric constants and torus rates, the $J$-uniform series $Z$ of \cref{ch08:lem:aligned-zero-white}, and the finitely many coarse-field derivative bounds of the reconstruction maps at zero fluctuation.
+
+For every $0\le a<K$, on the event that the initial condition and the first $a$ renormalization group steps pass the tests of the small-field event, the next $J$ averaging steps, from side $uB^{K-a}$ to side $uB^{K-a-1}$, avoid the exceptional set of $T_M$: no based loop holonomy in \eqref{ch01:eq:ordinary-map} equals $-\Id$, even if a later test fails. No assertion is made about a further averaging step at $a=K$. Indeed, every closed path of such a holonomy has length at most $5M-3$, and one averaging step increases a bound on link distances by at most the factor $10M$. Consequently every coarse field produced by the coordinate construction of the small-field event equals the iterate $T_M^J$ of the finer field. The gauge transformations of the reconstruction maps depend only on the coarse field and are the identity at the tree roots; they preserve this identity and all conditional kernels, cutoffs, and Jacobians.
+
+The local constants have the dependence described in item~(3) of \cref{ch01:conv:constants}, and do not depend on the widths chosen later. The probability constants and $n_0$ may depend on $L$, $\gamma_0$, $M$, $J$, $\Theta$, and the fixed family of stopping levels, as in item~(4) of \cref{ch01:conv:constants}; they do not depend on $\gamma$, $u$, $N$, $K$, the preceding classical depth, or the regions, frozen coordinates, and numbers of elapsed renormalization group steps of a large-field decomposition. Neither $J$ nor $r$ is changed at a different coarse side. The analytic radii are restored to their full values, after removal of a boundary layer, only at the end of complete renormalization group steps; remainders modulo $J$ are treated by the fixed insertions and side-ratio bounds.
+\end{theorem}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.38\textwidth}@{}}
+\toprule
+Item & Quantities chosen & Determined by \\
+\midrule
+(1) & $J$, $B=M^J$ & $J$-uniform constants $a_{\mathbb T}<a_{\mathrm{cen}}/8$, $\delta_0(a_{\mathbb T})$, $K_*$, $C_{\mathrm{CP}}$, $C_\bullet$, $C_P(a_{\mathbb T})$, $B_{\mathrm{geom}}$, $C^{\mathbb T}_{\mathrm{geom}}$, $b_{\mathbb T}$, $C_{\mathrm{cen}}$ \\
+(2) & $v_{\mathrm{free},J}$, $R_{\mathrm{raw}}$, solution neighborhoods & $J$; constants of \cref{ch16:chapter} at fixed $J$ \\
+(3) & $\rho$, $\rho_{\mathrm{cl}}$, $E^{\mathrm{cl}}$, $E$; $A_J$, $R_J$; $a$, $\alpha$, $m_{\mathrm{rate}}$, $b_1$ & items (1)--(2); $C_G$, $q_{\mathrm{CA}}$, $c_{\mathrm{prim},J}$, $C_{\mathrm{alloc}}$, $C^{\mathrm{geom}}_*$ \\
+(4) & $\sigma_0$; local and geometric constants; $R_W$; $\sigma_*$ & items (1)--(3); \cref{ch17:chapter,ch18:chapter} \\
+(5) & $R_{\partial,\bullet}$, $\rho_{\partial,\bullet}$, $w_{\mathrm{bd}}$; $s_{\mathrm{er}}$; $\beta_{\mathrm{rec}}$ & items (1)--(4); \cref{ch15:lem:freezing} \\
+(6) & $\beta_J$, $r_{\mathrm{eff}}$; $r$, $R_{\mathrm{buf}}$; $P$, $Q_{\mathrm{DB}}$; $R_{\mathrm{en}}$ & items (1)--(5) \\
+(7) & $R_{\mathrm{cell}}$, $W$, $\varrho$, $r_F$, $S$; $F_J$, $C_{\mathrm{ch},J}$; $\delta_*$, $d_{\mathrm{cut}}$, $d_*$ & items (1)--(6); \cref{ch04:chapter,ch18:chapter,ch19:chapter} \\
+(8) & $A_{\mathrm w}$, $t_*$, $g_*$ & items (1)--(7); \cref{ch20:lem:scalar-gates} \\
+(9) & stopping levels, $\chi_*$, enlarged $F_J$; $s_0$; $s_b$, $a_b$, $\bar c$; $C_v$, $C_s$, $C_b$, $C_b'$ & items (1)--(8); \cref{ch19:chapter} \\
+(10) & $g_{\mathrm{anc}}$, $g_{\mathrm{end}}$, $n_0$ & items (1)--(9); \cref{ch20:lem:scalar-gates,ch20:lem:unrestricted-window-onsets} \\
+\bottomrule
+\end{tabular}
+\caption{The order of the choices in \cref{ch20:thm:common-parameters}. Each row uses only the quantities of the earlier rows and the constants of the cited results, evaluated on their larger construction domains. The amplitude $A_{\mathrm w}$ may be fixed at any stage before item (8).}
+\label{ch20:tab:parameter-order}
+\end{table}
+
+We prove \cref{ch20:thm:common-parameters} in \cref{ch20:sec:parameter-proof}. The parts of the inequalities in items~(3) and~(6) reserved for $r$, $\beta_{\mathrm{rec}}$, $q_{\mathrm{raw}}$, and the coupling are filled by later upper bounds on these small parameters, so no cycle arises.
+
+\begin{remark}\label{ch20:rem:flow-exponents}
+The parameters of \cref{ch20:thm:common-parameters} also allow one to fix, before the coupling, the exponents $\alpflow=7/12$ and $\sigma_{\mathrm{sm}}=5/24$ of \cref{ch01:def:enhancement} and
+\[
+ \tau_{\mathrm{tail}}=\frac12\min\Bigl\{\frac5{24},\frac12,-\frac{\log q_{\mathrm{CP}}}{\log B}\Bigr\}>0,
+\]
+together with smaller positive losses in the heat-kernel estimates. These numbers are positive since $q_{\mathrm{CP}}\le1/4$ and $B>1$. They satisfy the conditions of \cref{ch01:def:enhancement} and the tail condition $0<\tau_{\mathrm{tail}}<\min\{\sigma_{\mathrm{sm}},1/2,-\log q_{\mathrm{anc}}/\log B\}$ of \cref{ch01:chapter}: indeed $1/2<7/12<2/3$ and $5/24<1-7/12$, and the contraction factor of the reconstruction amplitude is $a_{\mathrm{cap}}=C_{\mathrm{CP}}/B$ in the amplitude bound of \cref{ch12:lem:backward-law}, so that $q_{\mathrm{anc}}=Ba_{\mathrm{cap}}^2=q_{\mathrm{CP}}$ and the factor $1/2$ makes the inequality strict. This is a numerical choice only; it asserts no stochastic estimate for the flow. The deterministic sequence of matching levels in \cref{ch26:thm:energy-constrained-matching} is chosen only after the convergence at fixed coupling.
+\end{remark}
+
+\begin{lemma}\label{ch20:lem:unrestricted-window-onsets}
+Fix the parameters of items \textup{(1)}--\textup{(8)} of \cref{ch20:thm:common-parameters}. As in item \textup{(9)}, fix the family of stopping levels with its remainders, the full sets of plaquettes affected by both insertions with the enlarged count $F_J$, and $s_0$ in the interval of \cref{ch19:thm:all-phase-window}. Fix $0<\Gamma<\infty$, and set
+\[
+ s_b=s_0/2,\qquad a_b=4s_bd_*/c_E,\qquad 0<\bar c\le\min\{d_*/8,a_b/2\}.
+\]
+Let $C_v,C_s,C_b$ be the constants of \cref{ch19:thm:all-phase-window} for the ceiling $\Gamma$, and let $C_b'\ge C_b$ (for example $C_b'=C_b+1+\log2$). Then there exists $n_\Gamma\in4\N$, chosen before $\gamma$, the coarse side, and the number of renormalization group steps, and larger than every previous geometric, flat, and local threshold, with the following properties. The conclusions of \cref{ch19:thm:all-phase-window,ch19:lem:finite-ceiling-windows-and-prefixes} hold for all coarse sides $u\ge n_\Gamma$ and $0<\gamma\le\Gamma$, and
+\[
+ \mathcal A_\gamma(m)\le a_bm/(2\gamma)\qquad(m\ge n_\Gamma,\ 0<\gamma\le\Gamma),
+\]
+with $\mathcal A_\gamma(m)$ as in \eqref{ch20:eq:entropy-per-cell}. For $m\ge n_\Gamma$, the ratios of successive terms in the exponential sums with exponents $a_{\mathrm{act}}$, $\bar c$, and $c_*=\min\{a_b,d_*/8\}$ over sides with ratio $M$ or $B$, and in the sums for the fluctuation cutoffs over sides with ratio $B$, are at most $1/2$; and every product $\prod(1-\epsilon)^{-1}$ required in \cref{ch19:lem:original-prefix-onsets} has logarithm at most one. No restriction on the number of averaging steps is imposed. The new constants depend only on $L$, $\Gamma$, $M$, $J$, $\Theta$, and the family of stopping levels, as described in item~\textup{(4)} of \cref{ch01:conv:constants}.
+\end{lemma}
+
+\begin{proof}
+\Cref{ch19:thm:all-phase-window,ch19:lem:finite-ceiling-windows-and-prefixes} provide the thresholds for the endpoints, for the factors attached to threshold failures, and for the initial segments at the fixed parameters. None of their hypotheses is a bound on the probability of a failure at some scale. For $x=m/\gamma\ge e$ and $m\ge4$ we have
+\[
+ \mathcal A_\gamma(m)\le D(1+\log x),\qquad D=1+24C_vM^3+C_sM^2(1+\log M)+C_b'/8.
+\]
+Since $(1+\log x)/x\to0$, we may choose a half-line $x\ge n_\Gamma/\Gamma$ on which $D(1+\log x)\le a_bx/2$. The ratio of successive terms with exponent $c$ is $R^3e^{-c(R-1)m/\gamma}$, with $R=M$ or $R=B$ as appropriate. For the sums of the fluctuation cutoffs we write $z=(1/2)\log(Mm/\gamma)$ and $\Delta=(1/2)\log R$; the ratio is $R^3e^{-a(2\Delta z+\Delta^2)}$. Both ratios are at most $1/2$ after a further increase of the minimum side, uniformly for $\gamma\le\Gamma$, and the corresponding sums tend to zero. If $\epsilon\le1/2$, then $-\log(1-\epsilon)\le2\epsilon$, and the products of reciprocal errors have logarithm as small as prescribed; this is also the content of \cref{ch17:lem:finite-ceiling-endpoint-gates}. We take the maximum of these thresholds, of the threshold at the initial scale, and of all earlier geometric and flat thresholds, rounded up to an element of $4\N$; all of them are monotone conditions on the minimum side.
+
+The structural parameters fixed in the hypotheses involve only the local running couplings and fixed larger products, and none of them is recomputed from $C_v,C_s,C_b$ or from $\Gamma$. The same argument works for any prescribed $J$ for which the parameters of items (1)--(8) have been chosen, and it keeps that $J$. This proves the lemma, with the stated quantifier order and with the margin $a_{\mathrm{map}}\sqrt B\le32/49$ of the reconstruction maps unchanged.
+\end{proof}
+
+\begin{theorem}\label{ch20:thm:finite-ceiling-parameters}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\Gamma<\infty$. There exist an integer $J\ge1$, with $B=M^J$, a tuple $\Theta$, reconstruction maps, a number $0<g_*<e^{-1}$, and an integer $n_\Gamma\in4\N$, all chosen before $\gamma$, the coarse side, and the number of renormalization group steps, such that every structural, local, moment, scalar, flat, and reconstruction conclusion of \cref{ch20:thm:common-parameters} holds for all
+\[
+ 0<\gamma\le\Gamma,\qquad u\in4\N,\ u\ge n_\Gamma,\qquad K\in\N_0,\qquad N=uB^K,
+\]
+with $\gamma_0$ replaced by $\Gamma$ in its conclusions and side conditions, and with the moment constants of \cref{ch19:thm:all-phase-window,ch19:lem:finite-ceiling-windows-and-prefixes} for the ceiling $\Gamma$. In particular $a_{\mathrm{map}}\sqrt B\le32/49$, every coarse field produced by the coordinate construction is the corresponding iterate of $T_M$, and the reconstruction maps, the support radius, and the local constants are fixed before the coupling. The minimum side satisfies
+\[
+ n_\Gamma\ge\max\{4,e\Gamma,\Gamma/g_{\mathrm{end}}^2,8R_{\mathrm{cell}},8S\}
+\]
+and the coupling condition of \cref{ch19:lem:finite-ceiling-windows-and-prefixes}; no restriction on the number of averaging steps is imposed. The parameters satisfy $0<\delta_*\le1$, fixed before $d_{\mathrm{cut}}$, $g_*^2\le\alpha_W$, and
+\[
+ 0<s_0\le\min\Bigl\{\frac12,\ \frac{\kappa_*}{2}c_E^{-(J-1)},\ \frac1{4K_W},\ \frac{c_A^{\mathrm{act}}d_*}{32F_J},\ \frac{\kappa_0}{2\max\{K_M,48K_1\}}\Bigr\},\qquad K_W=48K_1/\alpha_W,
+\]
+and the stopping partition-function ratio is controlled uniformly for coefficients of the Wilson action in $[1/4,1/2]$. The construction can be carried out with any prescribed $J$ for which parameters as in \cref{ch20:thm:common-parameters} with $\gamma_0=1$ have been chosen, without changing $J$. The local constants have the dependence described in item~\textup{(3)} of \cref{ch01:conv:constants}, and the probability constants the dependence described in item~\textup{(4)}, with the fixed ceiling $\Gamma$. No uniformity as $\Gamma\to\infty$ is asserted.
+\end{theorem}
+
+We give the proof in \cref{ch20:sec:finite-ceiling}. When $\Gamma=\gamma_0\le1$, the parameters of \cref{ch20:thm:common-parameters} satisfy the conclusions of \cref{ch20:thm:finite-ceiling-parameters}, and in that case we write $n_0$ for $n_\Gamma$.
+
+\section{Bounds under the Wilson measure}\label{ch20:sec:action}
+
+In this subsection, we bound the probability that some averaged configuration has a plaquette of large energy, and we bound exponential moments of coarse actions under the Wilson measure. We recall the notation of \cref{ch19:thm:all-phase-window,ch19:lem:marked-chessboard}. For $N=uB^K$ and $n_j=N/M^j$, fix one of the eight tilings $\mathcal T$ of the lattice of side $n_j$ into $r_j=n_j^3/8$ disjoint cells with two sites in each direction (this number is denoted $\mathfrak m_j$ in \cref{ch19:lem:marked-chessboard}). Let $\mathcal P_{j-1}^{\mathcal T}$ be the union, counted once, of the complete predecessor patches at side $n_{j-1}$ of the internal plaquettes of the cells, and for a configuration $V$ at side $n_{j-1}$ set
+\[
+ Q_j^{\mathcal T}(V)=\frac4{h_{n_{j-1}}}\sum_{p\in\mathcal P_{j-1}^{\mathcal T}}q(V_p).
+\]
+For a cell $C$, let $R_{<j}(C;d_{\mathrm{cut}})$ be the local regularity event of \cref{ch19:lem:marked-chessboard}, which tests at the threshold $d_{\mathrm{cut}}$ exactly the plaquettes of the finer scales whose full dependence sets lie in $C$; let $I_j(C;d_*)$ be the event that some internal plaquette of $C$ at scale $j$ has energy at least $d_*$; and let $R^{\mathcal T}_{<j}(d_{\mathrm{cut}})$ be the intersection of the events $R_{<j}(C;d_{\mathrm{cut}})$ over the cells of $\mathcal T$. These local events do not test the plaquettes on the boundaries of the cells. By \cref{ch04:lem:cones-and-cells}, every plaquette at scale $j$ is internal to a cell of one of the eight tilings.
+
+The probability bounds below rest on the chessboard estimate of Fr\"ohlich, Israel, Lieb, and Simon \cite{FILS1978,FILS1980}, which we use in the form of Biskup \cite[Theorem~5.8]{Biskup2009}. The Wilson measure is reflection positive \cite{OsterwalderSeiler1978}. Part~(2) of \cref{ch03:thm:original-chessboard} gives the chessboard inequality, for each of the eight shifted tilings, under the image measure $(T_M^j)_*\mu_{N,\gamma}$ for nonnegative observables supported in the coarse cells, and more generally under $\mu_{N,\gamma}$ for nonnegative observables supported in the fine cells formed by the blocks $\mathsf B_{M^j}$ of the vertices of a coarse cell. The side $n_j$ is divisible by four, as that theorem requires. The event $I_j(C;d_*)$ is a function of $T_M^jU$ on the coarse cell $C$, and the event $R_{<j}(C;d_{\mathrm{cut}})\cap I_j(C;d_*)$ is a gauge-invariant function of the fine links in the fine cell of $C$, since it tests only plaquettes whose full dependence sets lie in $C$; this is the form in which \cref{ch19:lem:marked-chessboard} applies the theorem. All estimates in this subsection are under the Wilson measure $\mu_{N,\gamma}$, normalized by its own partition function; no conditioned measure occurs.
+
+\begin{theorem}\label{ch20:thm:shell-induction}
+Use the parameters and the minimum side $n_\Gamma$ of \cref{ch20:lem:unrestricted-window-onsets}; for $\Gamma\le1$ these are the parameters of \cref{ch20:thm:common-parameters} with $\gamma_0=\Gamma$, and for general finite $\Gamma$ those of \cref{ch20:thm:finite-ceiling-parameters}. Let $0<\gamma\le\Gamma$, $u\in4\N$ with $u\ge n_\Gamma$, and $K\in\N_0$, and let $N=uB^K$, $D=JK$, $n_j=N/M^j$, and $V^j=T_M^jU$. Define
+\[
+ \mathrm{FF}_0=\{\max_pq(U_p)\ge d_*\},\qquad
+ \mathrm{FF}_j=\{q(V^\ell_p)<d_*\text{ for all }\ell<j\text{ and all }p,\ \max_pq(V^j_p)\ge d_*\}
+\]
+for $1\le j\le D$. Then, simultaneously for all $0\le j\le D$,
+\begin{equation}\label{ch20:eq:first-failure}
+ \mu_{N,\gamma}(\mathrm{FF}_j)\le3n_j^3e^{-\bar cn_j/\gamma}.
+\end{equation}
+For $1\le j\le D$, each of the eight tilings $\mathcal T$, and $0\le s\le s_0$,
+\[
+ \log\E_{\mu_{N,\gamma}}\bigl[e^{sQ_j^{\mathcal T}(V^{j-1})};R_{<j}^{\mathcal T}(d_{\mathrm{cut}})\bigr]
+ \le3C_vn_{j-1}^3+C_sn_{j-1}^2\log(1/g_{n_{j-1}})+C_b'.
+\]
+The same bound holds without the indicator of $R_{<j}^{\mathcal T}(d_{\mathrm{cut}})$, with $C_b$ in place of $C_b'$. The constants depend only on $L,\Gamma,M,J,\Theta$, and the family of stopping levels, as described in item~\textup{(4)} of \cref{ch01:conv:constants}, and are uniform in $\gamma$, the side, the number of renormalization group steps, the scale $j$, and the tiling.
+\end{theorem}
+
+\begin{proof}
+At $j=0$, by the threshold at the initial scale in item~(10) of \cref{ch20:thm:common-parameters} (for general $\Gamma$, in \cref{ch20:lem:unrestricted-window-onsets} and \cref{ch19:lem:finite-ceiling-windows-and-prefixes}), we have
+\begin{equation}\label{ch20:eq:bare-start}
+ \mu_{N,\gamma}(\mathrm{FF}_0)\le3N^3e^{-d_*N/(8\gamma)}\le3N^3e^{-\bar cN/\gamma},
+\end{equation}
+where we used $\bar c\le d_*/8$. For a scale $j\ge1$, we apply \cref{ch19:thm:all-phase-window} with the Wilson measure at side $N$ as the starting measure (that is, with $b=0$) and the same $j$. This gives the bound without the indicator directly at that scale, whatever its distance from the finest lattice. Since the integrand is nonnegative and $C_b\le C_b'$, the bound with the indicator follows. This proves both moment bounds, without any assumption on earlier failures.
+
+Let $m=n_j$. We divide the logarithm of the moment bound with the indicator by the number $r_j=m^3/8$ of cells. Since $n_{j-1}=Mm$ and $\log(1/g_{Mm})=(1/2)\log(Mm/\gamma)$, we have
+\[
+ \begin{split}
+ \frac{3C_v(Mm)^3+C_s(Mm)^2\frac12\log(Mm/\gamma)+C_b'}{m^3/8}
+ &=24C_vM^3+\frac{4C_sM^2}{m}\log(Mm/\gamma)+\frac{8C_b'}{m^3}\\
+ &=\mathcal A_\gamma(m).
+ \end{split}
+\]
+This identity explains why a moment bound with a volume term and a surface term carrying a logarithm suffices. After the reciprocal-cell-count exponent in the chessboard estimate is applied, the entropy per cell is of order $1+\log(m/\gamma)/m$, which is dominated by the action $a_bm/\gamma$ of a cell containing a bad plaquette. Then, by the estimate of \cref{ch19:lem:marked-chessboard}, which combines Markov's inequality at $s=s_b$ with the chessboard estimate, we have
+\begin{equation}\label{ch20:eq:current-chessboard}
+ \log\mu_{N,\gamma}\bigl(R_{<j}(C;d_{\mathrm{cut}})\cap I_j(C;d_*)\bigr)
+ \le-a_bm/\gamma+\mathcal A_\gamma(m)\le-\bar cm/\gamma,
+\end{equation}
+where in the last inequality we used $\mathcal A_\gamma(m)\le a_bm/(2\gamma)$ and $\bar c\le a_b/2$.
+
+Since $d_*<d_{\mathrm{cut}}$, regularity at the threshold $d_*$ at all earlier scales implies every local event $R_{<j}(C;d_{\mathrm{cut}})$. Every plaquette of scale $j$ with energy at least $d_*$ is internal to a cell of one of the eight tilings, by \cref{ch04:lem:cones-and-cells}. Then $\mathrm{FF}_j$ is contained in the union of the $8r_j=m^3$ events in \eqref{ch20:eq:current-chessboard}, and by a union bound we have $\mu_{N,\gamma}(\mathrm{FF}_j)\le m^3e^{-\bar cm/\gamma}$. This implies \eqref{ch20:eq:first-failure}, where the constant three is kept only for a common formula with \eqref{ch20:eq:bare-start}. The argument applies to each $j$ separately, without induction over scales; if $K=0$, only the assertion at $j=0$ remains.
+\end{proof}
+
+The next theorem gives exponential moments of coarse actions without any indicator. It is not needed for the bound on $S^c$, but it is a quantitative consequence of the same estimates.
+
+\begin{theorem}\label{ch20:thm:unmarked-coarse-action-moments}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\Gamma<\infty$. Use parameters as in \cref{ch20:thm:finite-ceiling-parameters}, in which, as in item~\textup{(9)} of \cref{ch20:thm:common-parameters}, the count $F_J$ includes the plaquettes affected by both the predecessor insertion and the total-action insertion before $s_0$ is chosen. There exist $s_*=s_0>0$, $n_\Gamma\in4\N$, and finite nonnegative constants $C_v,C_s,C_b$, chosen before $\gamma$, the side, and the number of renormalization group steps, such that for every $0<\gamma\le\Gamma$, $u\in4\N$ with $u\ge n_\Gamma$, $K\in\N_0$, $N=uB^K$, $n_j=N/M^j$, and $0\le s\le s_*$,
+\begin{align}
+ \log\E_{\mu_{N,\gamma}}e^{sQ_j^{\mathcal T}(T_M^{j-1}U)}
+ &\le3C_vn_{j-1}^3+C_sn_{j-1}^2\log(1/g_{n_{j-1}})+C_b,\qquad 1\le j\le JK,
+ \label{ch20:eq:unmarked-predecessor-moment}\\
+ \log\E_{\mu_{N,\gamma}}e^{sS_W(T_M^jU)/g_{n_j}^2}
+ &\le3C_vn_j^3+C_sn_j^2\log(1/g_{n_j})+C_b,\qquad 0\le j\le JK.
+ \label{ch20:eq:unmarked-all-face-moment}
+\end{align}
+The first inequality holds for each of the eight tilings $\mathcal T$. All expectations are under the Wilson measure, normalized by its partition function, and all iterates of $T_M$ that occur are defined on the given finite sequence of lattices. The constants depend only on $L,\Gamma,M,J,\Theta$, and the family of stopping levels, as described in item~\textup{(4)} of \cref{ch01:conv:constants}; they are uniform in $\gamma$, the side, the scale, and the number of renormalization group steps, and they do not depend on the large-field decompositions used in the proof. Moreover, with $\mathcal B_\gamma(n)=3C_vn^3+C_sn^2\log(1/g_n)+C_b$, for every integer $p\ge1$,
+\[
+ \E_{\mu_{N,\gamma}}\Bigl[\bigl(S_W(T_M^jU)/g_{n_j}^2\bigr)^p\Bigr]\le p!\,s_*^{-p}e^{\mathcal B_\gamma(n_j)},
+\]
+and the analogous polynomial moment bound holds for $Q_j^{\mathcal T}(T_M^{j-1}U)$, with $\mathcal B_\gamma(n_{j-1})$.
+\end{theorem}
+
+\begin{proof}
+Let $F_J'=\max(F_J,F_J^{\mathrm A})$ be the larger of the counts for the two insertions, enlarged also over the union of the two finite families of remainders. We take a common interval satisfying the conditions of item~(9) of \cref{ch20:thm:common-parameters} with $F_J'$ and the further restriction
+\[
+ 0<s_*=s_0\le\frac{\kappa_0}{2\max\{K_M,48K_1\}}.
+\]
+All entries are positive constants at this stage. The bound \eqref{ch20:eq:unmarked-predecessor-moment} is \cref{ch19:thm:all-phase-window} with the Wilson measure as the starting measure ($b=0$). For \eqref{ch20:eq:unmarked-all-face-moment}, we choose the stopping level $t=J\lfloor j/J\rfloor$, with $v=j-t\in\{0,\dots,J-1\}$, so that $m=n_t=M^vn_j$. All iterates from level $t$ to level $j$ are defined, including for $j=JK$, where $v=0$ and $t=JK$.
+
+Suppose first that $t>0$. We integrate exactly $t/J$ complete RG steps, starting from the Wilson measure, and use the bound of \cref{ch19:lem:all-face-source-cap} for the total-action insertion inside the invariant density bound without weight of \cref{ch19:thm:invariant-wilson-envelope}. The coefficient of the Wilson action remains $\lambda_s=1/2-sK_W\in[1/4,1/2]$, and the plaquettes affected by the insertion contribute at most $8sF_J'\sum_fn_f/\gamma\le P_0\sum_fn_f/(4\gamma)$. The factors listed in \cref{ch19:tab:activation-charges} are unchanged except for their fixed incidence constants: the normalization terms generated by the integration and the completion terms concern the same large-field decompositions, and the finite dependence set of the insertion was enlarged before the interval was chosen. The quantitative conclusion of \cref{ch19:thm:all-phase-window} on these factors applies, with the scale $n_j$ and enlarged fixed constants. We complete the density bound by \cref{ch19:lem:compact-wilson-completion} and use the single stopping partition-function ratio of \cref{ch19:thm:classical-source-payment}. Then each large-field decomposition contributes at most
+\[
+ e^{3C_Tm^3+9m^2\log(1/g_m)+C_\delta}\prod_fe^{-(P_0/2)n_f/\gamma}.
+\]
+The bound of \cref{ch19:thm:all-phase-window} for the sum over decompositions controls the sum of these contributions uniformly at the common minimum side. Converting from $m=\chi n_j$, with $\chi\le M^{J-1}$, leaves exactly a volume term, the surface term $9\chi^2n_j^2\log(1/g_{n_j})$, and a fixed volume contribution from $\log\chi$. We take the maximum of the constants for the two insertions.
+
+Suppose now that $t=0$. Then $0\le j<J$ and $N/n_j=M^j$ is bounded. By the comparison of \cref{ch19:thm:classical-source-payment} for arbitrary fields, valid at all depths, we have $S_W(T_M^jU)/g_{n_j}^2\le48K_1S_W(U)/g_N^2$. Since $48sK_1\le\kappa_0/2\le1/2$, the ratio of the full compact numerator to the periodic trial denominator at depth zero, used for short scale intervals in \cref{ch19:thm:all-phase-window}, applies. This ratio has the required surface-order correction in the partition-function comparison at side $N$, and the bounded ratio $N/n_j\le M^{J-1}$ implies the stated bound at $n_j$. At $j=0$ the deterministic inequality holds with the smaller constant one; this case includes $K=0$. In both cases we bounded the integrals without indicators directly; no indicator of a regularity event was dropped from an upper bound.
+
+Finally, for $x\ge0$ we have $x^p\le p!\,s_*^{-p}e^{s_*x}$, by the exponential series. Inserting the exponential moment bounds, we obtain the last assertion.
+\end{proof}
+
+\begin{corollary}\label{ch20:cor:joint-unconditional-bad-cells}
+Use the parameters and constants of \cref{ch20:thm:unmarked-coarse-action-moments}, increasing only the minimum side if necessary. There exists $c_{\mathrm{bad}}>0$ with the following property. Let $0<\gamma\le\Gamma$, $u\in4\N$ with $u\ge n_\Gamma$, $K\in\N_0$, $N=uB^K$, and $0\le j\le JK$, and let $\mathcal T$ be one of the eight tilings at scale $j$. We set
+\[
+ r_j=n_j^3/8,\qquad q_j=e^{-c_{\mathrm{bad}}n_j/\gamma},
+\]
+and for a cell $C$ of $\mathcal T$ let $I_C$ be the event that some internal plaquette $P$ of $C$ satisfies $q((T_M^jU)_P)\ge d_*$. Then for every deterministic set $A$ of distinct cells of $\mathcal T$,
+\begin{equation}\label{ch20:eq:joint-unconditional-bad-cells}
+ \mu_{N,\gamma}\Bigl(\bigcap_{C\in A}I_C\Bigr)\le q_j^{\abs A}.
+\end{equation}
+For $Y_j=\sum_{C\in\mathcal T}\one_{I_C}$, every integer $0\le k\le r_j$, and every $\vartheta\ge0$,
+\begin{align}
+ \E_{\mu_{N,\gamma}}\binom{Y_j}{k}&\le\binom{r_j}{k}q_j^k,
+ \label{ch20:eq:unconditional-factorial-moments}\\
+ \E_{\mu_{N,\gamma}}e^{\vartheta Y_j}&\le[1+(e^\vartheta-1)q_j]^{r_j}\le\exp\{r_jq_j(e^\vartheta-1)\}.
+ \label{ch20:eq:unconditional-binomial-envelope}
+\end{align}
+Equivalently, $\E(Y_j)_k\le(r_j)_kq_j^k$ for the falling factorials. The constants depend only on $L,\Gamma,M,J,\Theta$, and the family of stopping levels (item~\textup{(4)} of \cref{ch01:conv:constants}), and are uniform in $\gamma$, the side, the number of renormalization group steps, the scale, the tiling, and $A$.
+\end{corollary}
+
+The bounds \eqref{ch20:eq:unconditional-factorial-moments} and \eqref{ch20:eq:unconditional-binomial-envelope} are those of a sum of independent Bernoulli variables with parameter $q_j$, but they are proved from the joint bounds \eqref{ch20:eq:joint-unconditional-bad-cells} alone; no independence or stochastic domination is asserted.
+
+\begin{proof}
+Fix $j$ and $\mathcal T$, and let $m=n_j$. The indicator of $I_C$ is a nonnegative, bounded, gauge-invariant function of the configuration $T_M^jU$ on the internal plaquettes of the cell $C$, that is, an observable supported in the coarse cell $C$. Part~(2) of \cref{ch03:thm:original-chessboard}, applied to the image measure $(T_M^j)_*\mu_{N,\gamma}$ and the tiling $\mathcal T$, applies to it; equivalently, its pullback is supported in the fine cell formed by the centered blocks of the vertices of $C$. The reflection positivity in part~(1) of that theorem includes the configurations at which the Borel extension of $T_M$ is used. Each $I_C$ is the reflected translate of the corresponding event for the base cell of $\mathcal T$, since the energy of a plaquette is invariant under reversal of orientation. For nonempty $A$, the chessboard inequality with all observables equal to the indicator of this event gives
+\[
+ \mu_{N,\gamma}\Bigl(\bigcap_{C\in A}I_C\Bigr)\le\mu_{N,\gamma}(I_{\mathrm{all}})^{\abs A/r_j},\qquad
+ I_{\mathrm{all}}=\bigcap_{C\in\mathcal T}I_C.
+\]
+On $I_{\mathrm{all}}$, we choose one internal plaquette with energy at least $d_*$ in each cell, in a fixed deterministic order. The chosen plaquettes are distinct, since the cells have disjoint vertex sets and only internal plaquettes are used. This gives, pointwise on $I_{\mathrm{all}}$,
+\[
+ S_W(T_M^jU)/g_m^2\ge4d_*r_jm/\gamma.
+\]
+By Markov's inequality and \eqref{ch20:eq:unmarked-all-face-moment} at $s=s_*$, we have
+\[
+ \frac1{r_j}\log\mu_{N,\gamma}(I_{\mathrm{all}})
+ \le-4s_*d_*m/\gamma+24C_v+\frac{4C_s}{m}\log(m/\gamma)+\frac{8C_b}{m^3}.
+\]
+Here the entropy terms are in the units of scale $j$ itself, so no factor $M^3$ appears. With $x=m/\gamma\ge e$ and $m\ge4$, their sum is at most $D_{\mathrm A}(1+\log x)$ for a fixed $D_{\mathrm A}$. We increase the minimum side so that $D_{\mathrm A}(1+\log x)\le2s_*d_*x$ on the half-line $x\ge n_\Gamma/\Gamma$. Then $c_{\mathrm{bad}}=2s_*d_*>0$ works. If $\mu_{N,\gamma}(I_{\mathrm{all}})=0$, the chessboard estimate already implies the result; otherwise we exponentiate the bound on its logarithm. For $A=\varnothing$ both sides of \eqref{ch20:eq:joint-unconditional-bad-cells} equal one.
+
+Pointwise we have $\binom{Y_j}{k}=\sum_{\abs A=k}\prod_{C\in A}\one_{I_C}$, including for $k=0$, and taking expectations proves \eqref{ch20:eq:unconditional-factorial-moments}. For $\vartheta\ge0$ we expand the finite product
+\[
+ e^{\vartheta Y_j}=\prod_{C\in\mathcal T}\bigl[1+(e^\vartheta-1)\one_{I_C}\bigr].
+\]
+Since every coefficient in the expansion is nonnegative, the joint bounds give \eqref{ch20:eq:unconditional-binomial-envelope}; its last inequality uses $1+y\le e^y$ for $y\ge0$. The case $j=0$, including $K=0$, is covered by the instance $j=0$ of \eqref{ch20:eq:unmarked-all-face-moment}.
+\end{proof}
+
+\section{Probability of the small-field event}\label{ch20:sec:small-field}
+
+We now bound the probability of the complement of the small-field event. Recall from \cref{ch01:def:selected-law,ch11:def:literal-selection} that, for $N=uB^K$ and $V^\ell=T_M^\ell U$,
+\[
+ S_{N,u,\gamma}=\{U\in D_r\}\cap\bigcap_{k=0}^{K-1}\Bigl[\mathcal A_{k,J}(U)\cap\{\max_{i,e}\abs{w_{k,i,e}(U)}\le p(t_k)\}\cap\{V^{(k+1)J}\in D_r\}\Bigr],
+\]
+where $t_k^2=\gamma/(Mn_{(k+1)J})$ and $p(t)=A_{\mathrm w}\log(1/t)$. Here $\mathcal A_{k,J}(U)$ is the event that, in the inverse coordinates of the $k$-th RG step at preceding classical depth $kJ$, each pair $(c_{i+1},z_i)$ lies in the coordinate domain of \cref{ch11:def:literal-selection}, with its conditional constrained minimizer, its positive constrained Hessian, and a positive constraint Jacobian; and $w_{k,i,e}(U)$ are the normalized fluctuation variables of that step, defined by these inverse coordinates. There is no condition of the form $V^\ell\in D_r$ at levels $\ell$ that are not multiples of $J$. For $K=0$ the event is $\{U\in D_r\}$.
+
+The proof splits $S^c$ according to the event $G$ that every plaquette at every scale has energy below $d_*$. The probability of $G^c$ is the sum of the probabilities of the first failures $\mathrm{FF}_j$, which \cref{ch20:thm:shell-induction} bounds under the Wilson measure. On $G$, \cref{ch04:thm:small-curvature-admission} implies all conditions $V^{kJ}\in D_r$, and $S$ can fail only through the coordinate-domain conditions or the cutoffs of some RG step. We bound the first such failure using the comparison of \cref{ch19:lem:original-prefix-onsets}, which keeps only the passing initial segment and the condition on the next coarse field. In this comparison, the probability of the initial segment is multiplied, never divided, and we never condition on regularity at later scales, which would change the conditional law.
+
+\begin{theorem}\label{ch20:thm:literal-payment}
+Use the parameters, the renormalization group steps, and the reconstruction maps of \cref{ch20:thm:common-parameters}. There exist constants $C',C,C_{\mathrm w},a_{\mathrm w}>0$ such that for every $u\in4\N$ with $u\ge n_0$, every $K\in\N_0$, and every $0<\gamma\le\gamma_0$,
+\[
+ \mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)\le C'u^3e^{-\bar cu/\gamma}+C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}}
+\]
+and
+\[
+ \mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)\le Cu^3e^{H_0+H_2\log(1/\gamma)-c_*u/\gamma}+C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}},
+\]
+where
+\[
+ H_0=24C_vM^3+\frac{4C_sM^2}{n_0}\log(Mn_0)+\frac{8C_b'}{n_0^3},\qquad
+ H_2=\frac{4C_sM^2}{n_0},\qquad c_*=\min\{a_b,d_*/8\}>0.
+\]
+One may take $a_{\mathrm w}$ to be the smallest of the finitely many fixed positive exponents in the fluctuation bounds for the auxiliary measures and the stopped measures. The constants may depend on $L,\gamma_0,M,J,\Theta$, and the family of stopping levels, but not on $\gamma$, $u$, $N$, $K$, the preceding classical depth, or the large-field decompositions. The event, and hence these bounds, are the same when the inverse coordinates are computed with the reconstruction maps of \cref{ch12:thm:replacement-family}.
+\end{theorem}
+
+The two theorems have a common proof.
+
+\begin{theorem}\label{ch20:thm:finite-ceiling-payment}
+Use the parameters of \cref{ch20:thm:finite-ceiling-parameters} for a fixed $0<\Gamma<\infty$, and the small-field event $S_{N,u,\gamma}$ defined with them, for $0<\gamma\le\Gamma$, $u\in4\N$ with $u\ge n_\Gamma$, $K\in\N_0$, and $N=uB^K$. There exist constants $C',C,C_{\mathrm w},a_{\mathrm w}>0$ such that
+\begin{align}
+ \mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)
+ &\le C'u^3e^{-\bar cu/\gamma}+C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}},
+ \label{ch20:eq:finite-ceiling-absorbed}\\
+ \mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)
+ &\le Cu^3e^{H_0^\Gamma+H_2\log(\Gamma/\gamma)-c_*u/\gamma}+C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}},
+ \label{ch20:eq:finite-ceiling-unabsorbed}
+\end{align}
+where
+\[
+ \begin{gathered}
+ H_0^\Gamma=24C_vM^3+\frac{4C_sM^2}{n_\Gamma}\log(Mn_\Gamma/\Gamma)+\frac{8C_b'}{n_\Gamma^3}\ge0,\\
+ H_2=\frac{4C_sM^2}{n_\Gamma}\ge0,\qquad c_*=\min\{a_b,d_*/8\}\ge\bar c>0.
+ \end{gathered}
+\]
+The constants may depend on the fixed $\Gamma$ (item~\textup{(4)} of \cref{ch01:conv:constants}), and do not depend on $\gamma$, the side, the number of renormalization group steps, the preceding classical depth, or the large-field decompositions. Moreover, for every fixed $u\in4\N$ with $u\ge n_\Gamma$ and every $q>0$,
+\[
+ \sup_{K\ge0}\mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)\le C_{u,q,\Gamma}\gamma^q\qquad(0<\gamma\le\Gamma),
+\]
+with the admissible constant
+\[
+ C_{u,q,\Gamma}=Cu^3e^{H_0^\Gamma}\Gamma^{H_2}\Bigl(\frac{H_2+q}{c_*ue}\Bigr)^{H_2+q}+C_{\mathrm w}u^3(Mu)^{-q}e^{q^2/a_{\mathrm w}}.
+\]
+Finally, for every fixed $n\in4\N$ with $n\ge n_\Gamma$ and $u_a=nB^a$,
+\[
+ \lim_{a\to\infty}\sup_{0<\gamma\le\Gamma}\sup_{K\ge a}\mu_{nB^K,\gamma}\bigl(S_{nB^K,u_a,\gamma}^c\bigr)=0.
+\]
+\end{theorem}
+
+\begin{proof}[Proof of \cref{ch20:thm:literal-payment,ch20:thm:finite-ceiling-payment}]
+For $0\le a\le K$, let $S^a$ be the event formed by the initial condition $U\in D_r$ and the conditions of the first $a$ RG steps in the definition of $S_{N,u,\gamma}$, and let
+\[
+ G=\{q(V^j_p)<d_*\text{ for every }0\le j\le JK\text{ and every plaquette }p\}.
+\]
+The disjoint events $\mathrm{FF}_j$, $0\le j\le JK$, exhaust $G^c$. By \cref{ch20:thm:shell-induction} and the condition $M^3e^{-\bar c(M-1)n_\Gamma/\Gamma}\le1/2$, summing over the sides $uM^h$ in increasing order, we have
+\begin{equation}\label{ch20:eq:curvature-payment}
+ \mu(G^c)\le3\sum_{h\ge0}(uM^h)^3e^{-\bar cuM^h/\gamma}\le6u^3e^{-\bar cu/\gamma}.
+\end{equation}
+The sum over sides starts at the coarse side $u$, so no factor depending on $K$ appears.
+
+To keep the dependence on $\gamma$ before absorption, we use \eqref{ch20:eq:current-chessboard} in the form $\log\mu(R_{<j}(C;d_{\mathrm{cut}})\cap I_j(C;d_*))\le-a_bm/\gamma+\mathcal A_\gamma(m)$. Since $\log(Mm/\gamma)=\log(Mm/\Gamma)+\log(\Gamma/\gamma)$ and $\log(Mm/\Gamma)/m$ is decreasing for $m\ge n_\Gamma\ge e\Gamma$, we have
+\begin{equation}\label{ch20:eq:unabsorbed-entropy}
+ \begin{gathered}
+ \mathcal A_\gamma(m)\le H_0^\Gamma+H_2\log(\Gamma/\gamma),\\
+ H_0^\Gamma=24C_vM^3+\frac{4C_sM^2}{n_\Gamma}\log(Mn_\Gamma/\Gamma)+\frac{8C_b'}{n_\Gamma^3},\qquad
+ H_2=\frac{4C_sM^2}{n_\Gamma},
+ \end{gathered}
+\end{equation}
+and this bound is nonnegative. Combining the bound at the initial scale with the bounds at positive scales, and summing the same geometric list of sides, we obtain
+\begin{equation}\label{ch20:eq:unabsorbed-curvature}
+ \mu(G^c)\le6u^3e^{H_0^\Gamma+H_2\log(\Gamma/\gamma)-c_*u/\gamma},\qquad c_*=\min\{a_b,d_*/8\}\ge\bar c.
+\end{equation}
+For \cref{ch20:thm:literal-payment} we use instead $H_0+H_2\log(1/\gamma)$, which follows from the same calculation with $\Gamma$ replaced by one in the logarithm; the function $\log(Mm)/m$ is decreasing for $m\ge4$.
+
+On $G$, the condition $U\in D_r$ and every condition $V^{(k+1)J}\in D_r$ hold by \cref{ch04:thm:small-curvature-admission}. By the identity of coarse fields in \cref{ch20:thm:common-parameters,ch20:thm:finite-ceiling-parameters}, on a passing initial segment each coarse field produced by the coordinate construction is the corresponding iterate of $T_M$. We conclude that
+\begin{equation}\label{ch20:eq:first-rejection-inclusion}
+ G\cap S^c\subset\bigcup_{0\le a<K}\bigl(S^a\cap A_{n_{(a+1)J}}\cap W_{n_{(a+1)J}}^c\bigr),
+\end{equation}
+where, for $m=n_{(a+1)J}$, $A_m$ is the event that the coarse field $V^{(a+1)J}$ lies in $D_r$, and $W_m$ is the event that all coordinate-domain conditions and fluctuation cutoffs of the $(a+1)$-th RG step hold. After this inclusion we discard $G$ before estimating each term. By the comparison with identical unnormalized prefactors in \cref{ch19:lem:original-prefix-onsets}, in its form for a fixed upper coupling bound $\Gamma$ in \cref{ch19:lem:finite-ceiling-windows-and-prefixes}, we have
+\begin{equation}\label{ch20:eq:one-macro-rejection}
+ \mu(S^a\cap A_m\cap W_m^c)\le\epsilon_a\mu(S^a)\le C_{\mathrm{rej},J}m^3e^{-a_{\mathrm w}\log^2\sqrt{Mm/\gamma}}.
+\end{equation}
+This is the comparison for coarse fields in $D_r$ at preceding depth $aJ$; only $a<K$ is used, and the probability $\mu(S^a)\le1$ of the initial segment is multiplied, never inverted. Summing the bound over the sides $u,uB,uB^2,\dots$ and using the ratio condition for the fluctuation cutoffs, we obtain
+\begin{equation}\label{ch20:eq:sum-white-rejections}
+ \mu(G\cap S^c)\le2C_{\mathrm{rej},J}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}}.
+\end{equation}
+Adding \eqref{ch20:eq:curvature-payment} or \eqref{ch20:eq:unabsorbed-curvature} proves both bounds of each theorem, for example with $C=C'=6$ and $C_{\mathrm w}=2C_{\mathrm{rej},J}$. For $K=0$ the sum \eqref{ch20:eq:sum-white-rejections} is empty, and the initial condition holds on the event that there is no failure at the initial scale. By \cref{ch12:thm:replacement-family}, the reconstruction maps preserve the event, the transitions, the cutoffs, the Jacobians, and the kernels, so the same bounds hold in the coordinates of the reconstruction maps.
+
+For the bound by powers of $\gamma$, we divide the curvature term of \eqref{ch20:eq:finite-ceiling-unabsorbed} by $\gamma^q$. For $\kappa=H_2+q>0$ and $A=c_*u>0$ we have $\sup_{\gamma>0}\gamma^{-\kappa}e^{-A/\gamma}=(\kappa/(Ae))^\kappa$. For the fluctuation term we write $z=(1/2)\log(Mu/\gamma)$, and then
+\[
+ \gamma^{-q}e^{-a_{\mathrm w}z^2}=(Mu)^{-q}e^{2qz-a_{\mathrm w}z^2}\le(Mu)^{-q}e^{q^2/a_{\mathrm w}}.
+\]
+These give the constant $C_{u,q,\Gamma}$. For $u_a=nB^a$, both terms of \eqref{ch20:eq:finite-ceiling-absorbed} decrease in $u$ and increase in $\gamma$ for sides above the minimum side, by \cref{ch20:lem:scalar-gates}. Their values at $\gamma=\Gamma$ tend to zero as $a\to\infty$, uniformly in $K\ge a$, since $nB^K=u_aB^{K-a}$. This proves the last assertion of \cref{ch20:thm:finite-ceiling-payment}.
+\end{proof}
+
+\begin{corollary}\label{ch20:cor:payment-all-powers}
+Use the parameters of \cref{ch20:thm:common-parameters}, and fix $u\in4\N$ with $u\ge n_0$ before varying the coupling. For every real $q>0$ there exists a finite $C_{u,q}$ such that
+\[
+ \sup_{K\ge0}\mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)\le C_{u,q}\gamma^q\qquad(0<\gamma\le\gamma_0).
+\]
+With the constants of the second bound of \cref{ch20:thm:literal-payment}, an admissible constant is
+\[
+ C_{u,q}=Cu^3e^{H_0}\Bigl(\frac{H_2+q}{c_*ue}\Bigr)^{H_2+q}+C_{\mathrm w}u^3(Mu)^{-q}e^{q^2/a_{\mathrm w}},
+\]
+or any larger finite constant. In particular, if
+\[
+ F_u(\gamma)=\limsup_{K\to\infty}\mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr),
+\]
+then $F_u(\gamma)=o(\gamma^\kappa)$ as $\gamma\to0$ for every fixed $\kappa>0$. Besides the probability constants, $C_{u,q}$ depends only on $u$ and $q$; it does not depend on $K$.
+
+Now fix $n\in4\N$ with $n\ge n_0$, and set $u_a=nB^a$ and $N_K=nB^K$. For all integers $a\ge0$ and $K\ge a$,
+\[
+ e_{K,a}(\gamma)=\mu_{N_K,\gamma}\bigl(S_{N_K,u_a,\gamma}^c\bigr)\le\mathcal F(u_a,\gamma),\qquad
+ \mathcal F(u,\gamma)=C'u^3e^{-\bar cu/\gamma}+C_{\mathrm w}u^3e^{-a_{\mathrm w}\log^2\sqrt{Mu/\gamma}},
+\]
+and
+\[
+ \lim_{a\to\infty}\sup_{0<\gamma\le\gamma_0}\mathcal F(u_a,\gamma)=0.
+\]
+These bounds use the same small-field events and reconstruction maps for all coarse sides; no radius, cutoff, map, or threshold is chosen again at a larger coarse side.
+\end{corollary}
+
+At each fixed positive coupling, the probability of the complement tends to zero along the sides $u_a$, while at each fixed side it is smaller than every power of the coupling. The corollary gives no rate, uniform in the coupling, for the convergence of flowed observables, and it does not interchange a limit in the cutoff or in an observable with the limit $a\to\infty$.
+
+\begin{proof}
+We keep $u$ fixed and let $\tau=\log(1/\gamma)$ and $d_u=\log(Mu)$. Dividing the second bound of \cref{ch20:thm:literal-payment} by $\gamma^q$, its curvature term becomes
+\[
+ Cu^3e^{H_0}\exp\{(H_2+q)\tau-c_*ue^\tau\}.
+\]
+For $\kappa=H_2+q>0$, the derivative of $v^\kappa e^{-c_*uv}$ on $v>0$ has the sign of $\kappa-c_*uv$. This function has the global maximum $[\kappa/(c_*ue)]^\kappa$, attained at $v=\kappa/(c_*u)$. Bounding the value at $v=e^\tau=1/\gamma$ by this maximum, we obtain the first summand of $C_{u,q}$. For the fluctuation term, completing the square gives the identity
+\[
+ q\tau-\frac{a_{\mathrm w}}4(\tau+d_u)^2=-\frac{a_{\mathrm w}}4\Bigl(\tau+d_u-\frac{2q}{a_{\mathrm w}}\Bigr)^2+\frac{q^2}{a_{\mathrm w}}-qd_u,
+\]
+and dropping the negative square gives the second summand. Both constants are finite for fixed $u$ and $q$, and the bound of \cref{ch20:thm:literal-payment} is uniform in $K$. This proves the bound on the supremum. Given $\kappa>0$, we choose $q>\kappa$; then
+\[
+ 0\le\gamma^{-\kappa}F_u(\gamma)\le C_{u,q}\gamma^{q-\kappa}\longrightarrow0,
+\]
+and no limit in the cutoff has been interchanged with the limit in the coupling.
+
+Now fix $n$ and set $u_a=nB^a$. For $K\ge a$ we have $N_K=u_aB^{K-a}$, and \cref{ch20:thm:literal-payment} applies directly with coarse side $u_a$ and $K-a$ RG steps. No parameter of the event, of a local reconstruction, or of its finite thresholds is chosen again. We obtain $e_{K,a}(\gamma)\le\mathcal F(u_a,\gamma)$.
+
+Since both terms of $\mathcal F(u,\gamma)$ increase with $\gamma$ for $Mu/\gamma\ge Mu/\gamma_0>1$, we have
+\[
+ \sup_{0<\gamma\le\gamma_0}\mathcal F(u_a,\gamma)\le C'u_a^3e^{-\bar cu_a/\gamma_0}+C_{\mathrm w}u_a^3e^{-a_{\mathrm w}\log^2(Mu_a/\gamma_0)/4}.
+\]
+Up to fixed constants, the logarithms of these two terms are $3\log u_a-\bar cu_a/\gamma_0$ and $3\log u_a-a_{\mathrm w}\log^2(Mu_a/\gamma_0)/4$, and both tend to $-\infty$ as $a\to\infty$, since $u_a\to\infty$.
+\end{proof}
+
+\section{Two-sided bounds of logarithm-squared order}\label{ch20:sec:log-squared}
+
+The fluctuation term in \cref{ch20:thm:literal-payment} has a simple heuristic origin. The cutoff radius is $p(t)\asymp\log(1/t)$, and a fluctuation variable with a Gaussian-type tail exceeds it with probability of order $\exp(-c\log^2(1/t))$. At a fixed coarse side $u$ this gives an upper bound of order $\exp(-c\log^2(1/\gamma))$. The next theorem shows that this order is correct for the supremum over the number of RG steps. For the lower bound we fix one RG step, so that the problem is finite dimensional, and we exhibit a set of configurations of controlled Haar measure and controlled action on which one normalized fluctuation variable lies just beyond its cutoff while all other conditions hold.
+
+\begin{theorem}\label{ch20:thm:literal-rejection-log-squared}
+Use the small-field event and the parameters of \cref{ch20:thm:common-parameters,ch20:thm:literal-payment}. For each fixed $u\in4\N$ with $u\ge n_0$ set
+\[
+ E_u(\gamma)=\sup_{K\in\N_0}\mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr).
+\]
+There exist $c_u,C_u>0$ and $0<\gamma_u\le\min\{\gamma_0,e^{-1}\}$, depending on $u$ and the probability constants but not on $\gamma$ or on the number of renormalization group steps, such that
+\begin{equation}\label{ch20:eq:literal-rejection-log-squared}
+ e^{-C_u[1+\log(1/\gamma)]^2}\le\mu_{uB,\gamma}\bigl(S_{uB,u,\gamma}^c\bigr)\le E_u(\gamma)\le e^{-c_u\log^2(1/\gamma)}
+ \qquad(0<\gamma\le\gamma_u).
+\end{equation}
+In particular, for fixed positive $c$, $\varepsilon$, and $D$, the bound $E_u(\gamma)\le D\exp(-c\gamma^{-\varepsilon})$ does not hold for all sufficiently small $\gamma>0$. No lower bound on $\limsup_{K\to\infty}\mu_{uB^K,\gamma}(S_{uB^K,u,\gamma}^c)$ is asserted.
+\end{theorem}
+
+\begin{proof}
+\emph{Upper bound.} Let $x=\log(1/\gamma)$ and $\ell_u=(1/2)\log(Mu)>0$. The first bound of \cref{ch20:thm:literal-payment}, which is uniform in $K$, reads
+\[
+ E_u(\gamma)\le C'u^3e^{-\bar cue^x}+C_{\mathrm w}u^3e^{-a_{\mathrm w}(x/2+\ell_u)^2}.
+\]
+For all sufficiently large $x$, the first term is at most $e^{-(a_{\mathrm w}/8)x^2}/2$, since $e^x/x^2\to\infty$; the second term is also at most this quantity, since its exponent is a negative quadratic in $x$ with leading coefficient $a_{\mathrm w}/4$. This proves the upper bound with, for example, $c_u=a_{\mathrm w}/8$, after decreasing $\gamma_u$.
+
+\emph{A box in the coordinates of one RG step.} Fix $K=1$, $N=uB$, and preceding classical depth zero. For the rest of the proof this is a fixed finite-dimensional problem. We set
+\[
+ t=\sqrt{\gamma/(Mu)},\quad p=p(t)=A_{\mathrm w}\log(1/t),\quad
+ g_i=t\lambda_i,\quad\lambda_i=M^{(i-J+1)/2}\quad(0\le i<J).
+\]
+The recursion of \cref{ch09:thm:sequential-density} is
+\[
+ z_i=z_i^*(c_{i+1})+g_iS_i(c_{i+1})w_i,\qquad c_i=b_i(c_{i+1},z_i),\qquad c_J=c=e^\theta,\qquad S_i=K_i^{-1/2}.
+\]
+We use it as a classical change of coordinates, before any fluctuation cutoff is imposed. This is valid beyond the region $\max\abs w\le p$: \cref{ch09:lem:centered-white-coarea} gives product domains of fixed positive radius for the coarse fields and the free coordinates, independent of $g$ and $p$, and \cref{ch09:thm:sequential-density,ch10:thm:whole-image-gauge} give the composition of the $J$ averaging steps on a common such domain, with the unscaled inputs $q_i=g_iw_i$. The conditional constrained minimizer at the identity is zero by \cref{ch07:thm:bellman}, and the gauge transformation of \cref{ch10:thm:whole-image-gauge} is the identity there. All intermediate Jacobian determinants are positive on a sufficiently small closed product domain.
+
+Fix $0<\epsilon<1/4$ and one free link $(i_*,e_*)$ of the step, with its three-dimensional fluctuation variable; such a link exists since $M\ge3$ and $u\ge4$. We identify the corresponding copy of $\su$ with $\R^3$ through the orthonormal basis of \cref{ch01:chapter}, and let $e_1$ be its first unit vector. We define the box $\mathcal B_\gamma$ of parameters by
+\begin{equation}\label{ch20:eq:rejection-local-box}
+ \begin{gathered}
+ \abs{\theta_e}<\epsilon\sqrt\gamma\quad(e\in\Links u),\\
+ \abs{w_{i,e}}<\epsilon\quad((i,e)\ne(i_*,e_*)),\qquad
+ \abs{w_{i_*,e_*}-(p+1)e_1}<\epsilon.
+ \end{gathered}
+\end{equation}
+Each ball for a fluctuation variable has the same positive Lebesgue volume, independent of its center and of $\gamma$. The largest unscaled fluctuation input is at most $t(p+1+\epsilon)\to0$, and $\norm\theta_\infty\to0$. Then the closure of the box lies inside the fixed larger coordinate domain, where no cutoff is imposed, for all sufficiently small $\gamma$. We do not assign a Gaussian law to fluctuation variables beyond the cutoff. Explicitly, one may take $\widetilde p=p+2$ in \cref{ch09:thm:sequential-density}: the box is contained in $\Omega^{\mathrm{all}}_{\widetilde p}$, while $C_Jt\widetilde p<1/2$ and $C_J(t\widetilde p^3+t\widetilde p)/(1-C_Jt\widetilde p)\to0$. All hypotheses of that theorem on the coordinate domains and on the triangular Jacobian hold for this larger domain at small coupling. The radius $\widetilde p$ is used only to check the domain; the small-field event still uses exactly $p(t)$.
+
+For the coordinate-domain conditions, we note that at small coupling the unscaled fluctuation inputs lie in the product domain of radius $Q_{\mathrm{phys}}$ of \cref{ch11:def:literal-selection,ch10:thm:whole-image-gauge}, and the coarse field is closer to the identity than $r$. The reconstruction then has all input logarithms smaller than $r/2$, with the intermediate margins for the classical action, the constraint coordinates, and the Jacobians. Then $c_0\in D_r$, $c\in D_r$, and $\mathcal A_{0,J}$ holds, and the averaged field is $T_M^Jc_0=c$. By the uniqueness and the identities on overlapping charts in \cref{ch11:thm:all-point-torus-chart,ch11:def:literal-selection}, the constructed $w_i$ are the normalized fluctuation variables defined by the inverse coordinates, up to their norm-preserving triangular orthogonal changes. Let $\mathcal D_\gamma\subset\Conf N$ be the set of configurations obtained from the configurations with coordinates in $\mathcal B_\gamma$ by all gauge transformations of the block axial gauge that equal the identity at the prescribed tree roots, that is, the union over the tree gauge variables of the images of $\mathcal B_\gamma$. Every configuration in $\mathcal D_\gamma$ fails the small-field event, since
+\[
+ \abs{w_{i_*,e_*}}>p+1-\epsilon>p,
+\]
+while it satisfies all other conditions of the step. In particular, $\mathcal D_\gamma$ is a subset of the complement of the small-field event itself.
+
+\emph{Haar measure of the box.} By repeated use of \cref{ch03:lem:relative-coarea}, followed by the triangular substitution from free coordinates to normalized fluctuation variables, we obtain the exact formula
+\begin{equation}\label{ch20:eq:rejection-exact-haar-mass}
+ \begin{gathered}
+ H_N(\mathcal D_\gamma)=\int_{\mathcal B_\gamma}dH_u(c)\,dw\prod_{i=0}^{J-1}\bigl[\mathcal J_i(c_{i+1},z_i)\,g_i^{D_i}\det S_i(c_{i+1})\bigr],\\
+ D_i=6(M^3-1)(uM^{J-i-1})^3.
+ \end{gathered}
+\end{equation}
+The integral is over the Haar box of coarse fields and the balls of fluctuation variables; the tree gauge variables of $\mathcal D_\gamma$ are integrated out with Haar probability mass one. The determinant identity is that of \cref{ch09:thm:sequential-density}, and its off-diagonal dependence on the coarser fluctuation variables is kept. The formula is a change of variables on the open coordinate domain, and its restriction to the box needs no indicator of the cutoff product; equivalently, it follows from successive Haar disintegration formulas for single averaging steps and Fubini's theorem for the nonnegative integrand. There is no additional density for the logarithm of the coarse field, no Gram determinant, and no gauge multiplicity. Here $D_i$ is the number of real free coordinates of the $i$-th averaging step: besides the eliminated edges there are $3(M^3-1)(uM^{J-i-1})^3$ fine links, with three real coordinates each, and the gauge transformations equal to the identity at the tree roots remove $3(M^3-1)(uM^{J-i-1})^3$ of these coordinates.
+
+On the fixed small closed product domain, all $\mathcal J_i$ and $\det S_i$ are continuous and strictly positive, by \cref{ch03:lem:relative-coarea,ch09:lem:centered-white-coarea}. Their finite product has a positive lower bound depending on $u$ and the fixed chart, but not on $\gamma$. Since $g_i=\sqrt\gamma\,(Mu)^{-1/2}\lambda_i$, and the box of coarse fields is a product over the $\abs{\Links u}=3u^3$ links, \cref{ch02:lem:haar-and-forests} and \eqref{ch20:eq:rejection-exact-haar-mass} imply
+\begin{equation}\label{ch20:eq:rejection-box-mass-lower}
+ H_N(\mathcal D_\gamma)\ge c(u)\gamma^{\kappa_u},\qquad \kappa_u=\frac{9u^3+\sum_{i=0}^{J-1}D_i}{2}>0,
+\end{equation}
+where $\sum_iD_i=6[(uB)^3-u^3]$. This lower bound keeps the Haar densities and all powers of the couplings from the Jacobians.
+
+\emph{The Wilson action on the box.} By the majorant of \cref{ch10:thm:whole-image-gauge}, or its finite-dimensional derivative bound on the same smaller product, we have, in the gauge representative of that theorem,
+\[
+ \max_e\abs{\Log c_{0,e}}\le C_u\{\epsilon\sqrt\gamma+t(p+1+\epsilon)\}\le C_u'\sqrt\gamma\,(1+p).
+\]
+For each plaquette, the triangle inequality for the group distance in \cref{ch02:lem:haar-and-forests} bounds its distance from the identity by four times this quantity, and by the same lemma we have $q\le\groupdist^2/8$. There are $3N^3$ plaquettes, so for a fixed finite $A_u$,
+\[
+ \frac{4N}\gamma\sum_Pq((c_0)_P)\le A_u(1+p)^2\qquad(c_0\in\mathcal D_\gamma).
+\]
+By gauge invariance, the same bound holds on all of $\mathcal D_\gamma$. The partition function of the Wilson measure satisfies $Z_{N,\gamma}\le1$, by \cref{ch02:lem:haar-and-forests}. Combining these bounds, we obtain
+\[
+ \mu_{uB,\gamma}\bigl(S_{uB,u,\gamma}^c\bigr)\ge\mu_{uB,\gamma}(\mathcal D_\gamma)\ge c(u)\gamma^{\kappa_u}\exp\{-A_u(1+p)^2\}.
+\]
+Finally, $p=(A_{\mathrm w}/2)[x+\log(Mu)]$ for $x=\log(1/\gamma)\ge1$. Then $1+p\le C_u''(1+x)$ and $\kappa_ux+\abs{\log c(u)}\le C_u'''(1+x)^2$. After increasing $C_u$ and decreasing $\gamma_u$ to include every threshold of the finite chart and of the upper bound, this is the lower bound in \eqref{ch20:eq:literal-rejection-log-squared}. Since $e^{\varepsilon x}/(1+x)^2\to\infty$, comparing logarithms excludes the bound $D\exp(-c\gamma^{-\varepsilon})$.
+\end{proof}
+
+\begin{corollary}\label{ch20:cor:finite-ceiling-rejection-order}
+Use the parameters of \cref{ch20:thm:finite-ceiling-parameters}. For each fixed $u\in4\N$ with $u\ge n_\Gamma$ there exist $c_{u,\Gamma},C_{u,\Gamma}>0$ and $0<\gamma_{u,\Gamma}\le\min\{\Gamma,e^{-1}\}$ such that
+\[
+ \begin{split}
+ e^{-C_{u,\Gamma}[1+\log(1/\gamma)]^2}&\le\mu_{uB,\gamma}\bigl(S_{uB,u,\gamma}^c\bigr)\le\sup_{K\ge0}\mu_{uB^K,\gamma}\bigl(S_{uB^K,u,\gamma}^c\bigr)\\
+ &\le e^{-c_{u,\Gamma}\log^2(1/\gamma)}\qquad(0<\gamma\le\gamma_{u,\Gamma}).
+ \end{split}
+\]
+No lower bound is asserted for $\limsup_{K\to\infty}\mu_{uB^K,\gamma}(S_{uB^K,u,\gamma}^c)$.
+\end{corollary}
+
+\begin{proof}
+The upper bound follows from \eqref{ch20:eq:finite-ceiling-absorbed} exactly as in the proof of \cref{ch20:thm:literal-rejection-log-squared}: with $x=\log(1/\gamma)$, the curvature term decays like $e^{-ce^x}$, while the fluctuation term has an exponent that is a negative quadratic in $x$ with leading coefficient $a_{\mathrm w}/4$. After decreasing $\gamma_{u,\Gamma}$, the sum is at most $e^{-(a_{\mathrm w}/8)x^2}$.
+
+For the lower bound we keep $u$ and $J$ fixed and use the coordinates of one RG step as in the proof of \cref{ch20:thm:literal-rejection-log-squared}. Their coordinate domains, the classical change of coordinates, the Jacobians, and the cutoff of the small-field event are the same for the parameters of \cref{ch20:thm:finite-ceiling-parameters}, since that theorem enlarges only the probability constants and the minimum side. On the box $\abs{\theta_e}<\epsilon\sqrt\gamma$ of coarse fields, we place all fluctuation variables in balls of radius $\epsilon<1/4$, except one, whose ball is centered at $(p(t)+1)e_1$, where $t^2=\gamma/(Mu)$. Since $t(p(t)+2)\to0$, all unscaled inputs and all Jacobian determinants lie in the same fixed domain without cutoff for sufficiently small $\gamma$. Every such point satisfies the other conditions and fails the cutoff. The exact formula \eqref{ch20:eq:rejection-exact-haar-mass} bounds the Haar measure of the corresponding set of configurations below by $c(u,\Gamma)\gamma^{\kappa_u}$, with $\kappa_u=(9u^3+\sum_iD_i)/2$ and $D_i=6(M^3-1)(uM^{J-i-1})^3$. The Wilson exponent on this set is at most $A(u,\Gamma)(1+p(t))^2$, and the partition function is at most one. The probability of the complement is then at least $c\gamma^{\kappa_u}e^{-A(1+p(t))^2}$. Since $p(t)=A_{\mathrm w}[x+\log(Mu)]/2$, we obtain the claimed lower bound. All domains and constants are fixed before $\gamma$; the restriction $\gamma\le\Gamma$ is obtained by decreasing $\gamma_{u,\Gamma}$ only.
+\end{proof}
+
+\section{Proof of the choice of parameters}\label{ch20:sec:parameter-proof}
+
+In this subsection we prove \cref{ch20:thm:common-parameters}, verifying the choices in the order of the items and using each earlier estimate on its domains and with the quantifiers of its statement. No probability estimate is used. Steps~1--7 make the choices of items~(1)--(8), Steps~8 and~9 verify the hypotheses of the cited results without new choices, Steps~10 and~11 make the choices of items~(9) and~(10), and Step~12 fixes the reconstruction maps and proves the identity of the coarse fields with the iterates of $T_M$.
+
+We fix $A_{\mathrm w}\ge1$ in the range allowed by \cref{ch17:thm:controlled-kernel} at the start. This precedes every use of the existence of a coupling bound in that theorem. Its constants and the $J$-uniform conditions do not depend on $A_{\mathrm w}$; the coupling bound $g_*$ may depend on it.
+
+\paragraph{Step 1: the choice of $J$.}
+We apply \cref{ch10:thm:whole-image-gauge} at the fixed odd $M$, and denote its $J$-uniform spatial exponent by $b_*$ and its majorant for the conditional constrained minimizers at zero fluctuation by $Z(v)\le Cv/(1-Cv)$. First we fix a rate $0<b_{\mathbb T}<b_*$ below the remaining margin of the classical and image estimates. Next we fix a finite scale $\mathscr L_{\mathbb T}$ for boxes covering supports, and its support-counting factor, as in \cref{ch10:thm:common-analytic-class}, so that the entropy of supports is compensated by the rate $b_{\mathbb T}$. At this stage we enlarge the entropy and support constants to cover the margin for the free degrees of freedom in \cref{ch17:thm:carried-networks}. Only after fixing these boxes do we choose the rate $a_{\mathbb T}\in(0,b_{\mathbb T})$, with $a_{\mathbb T}<a_{\mathrm{cen}}/8$ and small enough for the network bound below. Here $a_{\mathrm{cen}}$ is the $J$-uniform rate of the bounds of \cref{ch08:lem:aligned-zero-white}; for the aligned representative, \cref{ch08:thm:principal-contraction} gives the contraction at every output rate below $a_{\mathrm{cen}}/8$ and at no larger rate, so this restriction is necessary. It also gives $a_{\mathbb T}<a_*/8$ for the rate $a_*$ of \cref{ch07:thm:all-root-classical}, as observed in \cref{ch10:thm:common-analytic-class}. These choices precede $J$, and decreasing $a_{\mathbb T}$ does not change the boxes.
+
+We check the support condition of the conversion from supported coefficient bounds to coefficient norms at the same analytic radius in \cref{ch10:thm:common-analytic-class}. A connected set $Y$ of boxes joins the coefficient locations of the background in its boxes by a network of length at most $C_{\mathscr L_{\mathbb T}}\abs Y$, with $C_{\mathscr L_{\mathbb T}}$ independent of $J$. Indeed, we connect the centers of adjacent boxes along a spanning tree of $Y$, and connect the finitely many locations in each box by the coordinate grid inside that box. The same construction covers a connected union of intersecting boxes, and shortest periodic connections give the same bound in directions that wrap around the torus. The bound also covers the supports of the logarithms in the cluster expansion and the larger output radius. Repeated locations add no length. There are only nine types of orientation and color at a site, and the density of free variables does not change this count. With this $C_{\mathscr L_{\mathbb T}}$ we take $a_{\mathbb T}C_{\mathscr L_{\mathbb T}}\le2$, so that $a_{\mathbb T}\Tree\le2\abs Y$ for every support used in the conversion. The effective interaction and its output as a whole, rather than the individual polymer activities, have the translation symmetry required by the conversion, and their color and inversion identities are those kept by \cref{ch10:thm:common-analytic-class}.
+
+Let $C^{\mathbb T}_{\mathrm{geom}}$ be the network comparison constant of that theorem. We include the conditions
+\begin{equation}\label{ch20:eq:torus-spatial-gate}
+ C^{\mathbb T}_{\mathrm{geom}}b_{\mathbb T}/B\le a_{\mathbb T},\qquad C_{\mathrm{cen}}/B<1/8
+\end{equation}
+in the choice of $J$. The first compensates the conversion from the trees on the finer lattice to the trees on the coarse lattice, while keeping the rate $a_{\mathbb T}$ on the torus; it is separate from the smaller regional rates of item~(3). By part~(3) of \cref{ch12:thm:replacement-family}, one enlarged constant $C_{\mathrm{CP}}\ge1$ bounds the value, the first spatial differences, and the first three coarse-field derivatives of the zero-fluctuation reconstruction, with all row sums and all volume-normalized column sums, uniformly before $J$ is chosen; the enlargement includes the prescribed reconstruction tolerances. Derivatives with respect to the fluctuation inputs use the fixed-$J$ joint bounds of \cref{ch12:lem:deterministic-prolongation-reserve}, not this uniformity. The same results provide the signed conservation identities for the volume-normalized derivative kernels and the full bound at fixed $J$. The series $Z$ of \cref{ch08:lem:aligned-zero-white} and its spatial rate are $J$-uniform, as are these finite derivative bounds and the geometric constants. Neither the full joint norm nor the full norm of the gauge transformations of the reconstruction maps is $J$-uniform. We enlarge the $J$-uniform constant $C_{\mathrm{alloc}}$ of \cref{ch17:thm:carried-networks}, which controls the distribution of the spatial decay rates, so that it also covers the corresponding geometric constant in \cref{ch16:thm:controlled-perturbation}, choose $C_*^{\mathrm{geom}}\ge\max(1,C_g)$, and keep $B_{\mathrm{geom}}=256C_{\mathrm{alloc}}(C_*^{\mathrm{geom}}+1)$ from \cref{ch17:thm:carried-networks}. All lower bounds on $M^J$ in item~(1) now have fixed finite right sides, and they hold simultaneously for large $J$, since $M^J\to\infty$.
+
+It remains to separate the linear conditions that choose $J$ from the later choice of radii. For existence we may take $\rho_{\mathrm{cl}}=\rho$, but we keep the subscript $\bullet$ to check both functions. The same classical map evaluates both the effective interaction and the effective classical action, and the series $Z$ provides both $Z_{\mathrm q}$ and $Z_{\mathrm{cl}}$; fixed different ratios of radii would only require the two restrictions of the same series. We choose a $J$-uniform bound $\rho_0$ with $4K_*C\rho_0\le1/2$. With $Z_\bullet(v)\le C_\bullet v/(1-C_\bullet v)$, the conditions
+\[
+ C_\bullet K_*/B<1/32,\qquad C_\bullet K_*\rho_\bullet\le1/2
+\]
+give $B^{-1}Z_\bullet(K_*\rho_\bullet)<\rho_\bullet/16$, and at the enlarged radii, uniformly for $0<\rho_\bullet\le\rho_0$,
+\begin{equation}\label{ch20:eq:torus-enlarged-center}
+ B^{-1}Z_\bullet(4K_*\rho_\bullet)\le(8C_\bullet K_*/B)\rho_\bullet<\rho_\bullet/4.
+\end{equation}
+Only the first condition chooses $J$; the second is an upper bound on a later radius. Together with $q_{\mathrm{CA}}<1/4$, the threshold $M^{-J}\le\delta_0(a_{\mathbb T})$ of \cref{ch08:thm:principal-contraction}, and \eqref{ch20:eq:torus-spatial-gate}, these are the $J$-uniform conditions of \cref{ch10:thm:common-analytic-class}, whose contraction constant $C_P(a_{\mathbb T})$ is uniform over the later radii $0<\rho\le\rho_0$. Since $a_{\mathbb T}$ is fixed before $J$ and depends only on $J$-uniform data, these conditions are lower bounds on $B$ with fixed right sides. The finitely many additional conditions on classical first derivatives use the same $J$-uniform series and $C_{\mathrm{CP}}$, and we impose them with strict inequality in the same choice. No constant at fixed $J$, no radius for free coordinates, and no constant of the effective-interaction estimates has entered; no later step changes $J$.
+
+\paragraph{Step 2: larger domains, solution neighborhoods, and rates.}
+At this $J$, all entries in the minima defining $v_{\mathrm{free},J}$ and $R_{\mathrm{raw}}$ in \cref{ch16:lem:strict-two-radius-images} are positive and depend only on the larger construction data, and we choose each radius strictly below its minimum. For each of the finitely many initial segments of conditional integrations, we choose by \cref{ch16:lem:admitted-products} a neighborhood of the conditional constrained minimizer and then a smaller domain for the later parameters. At zero perturbation we choose, with a positive margin, a smaller product domain for the free coordinates whose successive substitutions stay inside all the previously chosen domains; the condition with a perturbation is checked at every value of the later parameters in Step~3. Taking the minimum of the finitely many margins at zero perturbation preserves them. In particular, the conditional displacement bound and the bound on the preconditioned Hessian hold on these products, and a slice of a larger joint solution domain is never used in their place. The real lower bound for the constrained Hessian and the complex domain of its inverse in the two cited lemmas apply on the resulting product domains.
+
+We choose the inner, middle, and outer domains of the reconstruction maps strictly inside these construction domains; \cref{ch12:thm:replacement-family} provides its bounds on these domains independently of the later support and working radii. We choose $\rho,\rho_{\mathrm{cl}}>0$ inside them, small enough that the first summand in the inequality of item~(3) is below $R_{\mathrm{raw}}/64$ and that both denominators of the torus images are positive. All coefficient sums used here can be bounded on the larger domains before the radii are restricted, since a restriction can only decrease a sum of absolute coefficients; this is the convention of \cref{ch16:lem:strict-two-radius-images}. We also impose the hypotheses of \cref{ch10:thm:whole-image-gauge,ch10:thm:common-analytic-class} on the larger product. With $r_J$ and $C_J$ fixed on that product, we choose
+\begin{equation}\label{ch20:eq:outer-torus-domains}
+ \begin{gathered}
+ 0<\rho\le\min\{\rho_0,r_J/(16K_*)\},\qquad 4K_*C_J\rho<1/4,\\
+ 0<s_J<\min\{r_J/(16K_*),1/(16K_*C_J),\rho/(64K_*C_J)\}.
+ \end{gathered}
+\end{equation}
+These restrictions are compatible with the bounds on the coordinate and reconstruction domains just chosen. We have $4K_*(\rho+s_J)<r_J$ and $1-4K_*C_J(\rho+s_J)>1/2$. Then the majorant of the free part is at most $8K_*C_Js_J<\rho/8$. Together with \eqref{ch20:eq:torus-enlarged-center}, the enlarged image is strictly below $3\rho/8<\rho/2$. All intermediate margins for the classical action and for the constraint Jacobians are the strict margins of \cref{ch10:thm:whole-image-gauge}, since we work on a restriction of its product. We keep this larger product after $r$ is fixed.
+
+The two majorants for the input functions used here concern the torus map of \cref{ch10:thm:whole-image-gauge}. We do not assert a $J$-uniform bound of all orders for the gauge transformations of the reconstruction maps. The full bound at fixed $J$ and the strict image margins of \cref{ch12:thm:replacement-family} apply on nested subproducts of the same domains, and their limiting maps and later refinements of thresholds preserve these margins. The only constants of the reconstruction maps used before $J$ were the finitely many coarse-field derivative bounds at zero fluctuation.
+
+\Cref{ch10:thm:common-analytic-class} now provides finite constants $C_G,C_T>0$, and the constant $c_*>0$ for its auxiliary discs (not to be confused with the exponent $c_*=\min\{a_b,d_*/8\}$ of the probability bounds), on the fixed data $(M,J,\rho,a_{\mathbb T},b_{\mathbb T},K_*,s_J)$. They do not depend on the side, the preceding depth, or the later support radius. We fix $E^{\mathrm{cl}}$ and take a finite $E\ge2C_G/(1-q_{\mathrm{CA}})$; the denominator is positive by item~(1). We verify the invariance of this bound under the recursion in Step~8, after the coupling bound has been chosen; it is not assumed as a hypothesis of a regional estimate. For example, the radius $q_{\mathrm{raw}}>0$ and the later $r$ and $\beta_{\mathrm{rec}}$ can each be taken at most $R_{\mathrm{raw}}/(64C_{\mathrm{lift},J})$; then the sum in item~(3) is strictly below $R_{\mathrm{raw}}/8$.
+
+The interpolation of \cref{ch16:lem:strict-two-radius-images} provides a positive bound on the spatial rate of the unperturbed coefficients on these larger products, and we include it in $c_{\mathrm{prim},J}$ after the conversion of \cref{ch17:sec:setting} to the graph metric. Its finite bound for sums with the remaining exponent can be written as $C_J\rho_\bullet$: we divide a common bound on the larger product by the smaller of the two positive radii and enlarge $C_J$ to at least one. The bound is uniform over the later restrictions, which stay inside the larger product. For its remaining exponent $c>0$ we choose $0<\vartheta<1$ with
+\begin{equation}\label{ch20:eq:interpolation-choice}
+ \vartheta\max\{1,\log(8C_J/3)\}<\frac12\log(4/3),
+\end{equation}
+and take the minimum of the resulting positive exponents over the two radii and the finitely many initial segments. By \cref{ch16:lem:strict-two-radius-images}, the bounds on the larger product are uniform in the later smaller radii and widths, so this choice precedes the choice of $r$.
+
+We now set $\alpha=a/16$, $m_{\mathrm{rate}}=C_*^{\mathrm{geom}}(a+\alpha)$, and $b_1=8C_*^{\mathrm{geom}}\alpha$. Then $m_{\mathrm{rate}}+b_1=(25/16)C_*^{\mathrm{geom}}a$, and the inequalities of item~(3) containing $Ba$ and $B\alpha$ reduce to
+\[
+ \frac{25}{16}C_*^{\mathrm{geom}}<B/C_{\mathrm{alloc}},\qquad 8C_*^{\mathrm{geom}}<B/C_{\mathrm{alloc}},
+\]
+which follow from $B\ge B_{\mathrm{geom}}$. We decrease $a>0$ further so that $\sqrt3\,(a+\alpha)<a_{\mathbb T}$ and the conditions involving $c_{\mathrm{prim},J}$ and the unperturbed image exponent hold, including $m_{\mathrm{rate}}<\vartheta c$ for every radius and initial segment. The cluster expansion with exact supports imposes no further restriction on lengths. The rate $a_{\mathbb T}$ and $J$ are unchanged.
+
+\paragraph{Step 3: perturbation bounds, the fluctuation radius, and the final perturbation bound.}
+We choose a positive preliminary bound $\sigma_0$ for perturbations that are real on real arguments, inside the margins for the force, for the lower bound of the constrained Hessian, and for the domain of its complex inverse in \cref{ch16:lem:admitted-products,ch16:thm:controlled-perturbation}. Here and in every later application, the incoming classical norm is taken on the incoming list $D_{\mathrm{in}}$ of active labels, with the lattices where its coefficient locations were introduced and the volumes of its variables, at the uniform radius $\rho_{\mathrm{cl}}$. The spatially varying radii are output radii. In Step~9 we verify, using the coverage by large-field decompositions and the substitution of frozen coordinates, that these are the incoming radii and compatible complements after any number of RG steps.
+
+The perturbation must be controlled at every value of the later parameters, not only at the joint constrained minimizer. Let $\varepsilon_{\mathrm{tube}}>0$ be the minimum of the margins of the unperturbed solution and parameter domains, and let $I_0$ and $C_{P,J}^{\mathrm{force}}$ be the constants on the larger product for the inverse and for the conditional force in \cref{ch16:thm:controlled-perturbation}; here $V_I$ is the $z_I$-derivative, in the original free coordinates, of the function $V$ in \eqref{ch18:eq:force-function}. The estimate of that theorem, uniform over all $y\in\mathcal T_I$, gives
+\begin{equation}\label{ch20:eq:conditional-force-gate}
+ \begin{gathered}
+ \delta_V=\max_I\sup_{y\in\mathcal T_I}\norm{A_I^{-1}V_I(c,a_I(c,y;\xi),y)}_{\mathrm{coeff}}\le I_0C_{P,J}^{\mathrm{force}}\sigma_0\rho_{\mathrm{cl}},\\
+ C_{\mathrm{seq},J}(2\delta_V+r_{q,P})<\varepsilon_{\mathrm{tube}}/2.
+ \end{gathered}
+\end{equation}
+To obtain the last strict inequality, we first decrease $\sigma_0$ so that $2C_{\mathrm{seq},J}I_0C_{P,J}^{\mathrm{force}}\sigma_0\rho_{\mathrm{cl}}<\varepsilon_{\mathrm{tube}}/8$ and $I_0C_{P,J}^{\mathrm{force}}\sigma_0\rho_{\mathrm{cl}}<\min_Ir_I/4$. Then we choose $0<r_{q,P}<\varepsilon_{\mathrm{tube}}/(8C_{\mathrm{seq},J})$ inside the fixed margin of the joint solution domain; the sum is then even less than $\varepsilon_{\mathrm{tube}}/4$. We decrease $\sigma_0$ also for the bound $1/2$ on the error of the preconditioned Hessian, for half of the real lower bound of the constrained Hessian, and for the domain of its complex inverse; these are the coefficient bounds of \cref{ch16:thm:controlled-perturbation} on the same larger product. Its contraction at fixed parameters bounds every conditional displacement by $2\delta_V$, and the sequential conclusion of \cref{ch16:lem:admitted-products} applies at all such $y$ with a margin of a factor two. In particular, the chain of conditional constrained minimizers at zero fluctuation satisfies the coordinate-domain conditions before the fluctuation radius is chosen. A smaller final $\sigma_*$ preserves all these conditions.
+
+All derivatives here are taken in the active background variables and the free coordinates, at fixed real frozen data $b=(\xi,b_{\mathrm{rec}})$. The incoming coefficients and charts are Borel functions of $b$. At the initial step, the input consists of finite products of link variables and the analytic charts of the classical action; at a step starting from a stopped measure, it is the effective interaction, which is invariant on overlapping charts; and each later input is obtained by substitution, finite products, and convergent operations on coefficients. Integration over a fixed compact product of fluctuation balls preserves Borel dependence on $b$. Indeed, after rescaling the balls to unit balls the measure is a fixed finite measure, and the integral of a nonnegative jointly Borel function against a fixed finite measure is a Borel function of the parameters; this is the monotone class argument given in the proof of \cref{ch18:thm:canonical-density}. Then the uniformly convergent Picard iterations in \cref{ch16:thm:controlled-perturbation} preserve Borel dependence on $b$. No derivative in a frozen real parameter is needed.
+
+On these larger fixed products, \cref{ch17:lem:complete-white-potential,ch17:thm:controlled-kernel,ch18:thm:all-point-enclosure} provide finite constants for the output, sequential, image, potential, and mean estimates, and for the estimates of the support of the normalized fluctuation variables, uniformly for the doubled classical bound $2\sigma_0$. Their dependence, described in item~(3) of \cref{ch01:conv:constants}, excludes all later widths and all values of frozen coordinates. We use these bounds, rather than bounds computed on the eventual small cutoff domain. The threshold $\epsilon_{\mathrm{en},J}$ and the constant $C_{\mathrm{en},J}$ of \cref{ch18:thm:all-point-enclosure} are fixed at this stage as well; the threshold already contains the smallness $C_J(r+\beta_{\mathrm{rec}})\le\epsilon_{M,J}$ that its proof needs for the Hessian bound \eqref{ch15:eq:bare-small-data} of \cref{ch15:lem:bare-gap}, at the small representative, before the orthogonal transport to the representatives used in the descent. The radius of the auxiliary box in that proof is chosen there. The constant $C_{\mathrm{en},J}$ is a bound for every covered large-field decomposition; its conclusion for every point is applied only after the coverage is established in Step~9.
+
+We fix all geometric constants at this stage. Let $C,C',R_0,c$ be the constants of \cref{ch18:thm:fat-cell-admission}. We take $A_8\ge R_0+1$ so large that $C'/A_8<1/4$, and enlarge it for the fixed mesh at the initial step and the fixed margins for path lengths. This is a lower bound independent of $r$ and $\beta_{\mathrm{rec}}$. Let $C_B\ge(10M)^J$ cover the lengths of all tree and transport paths within one RG step, and set
+\begin{equation}\label{ch20:eq:saving-constants}
+ K_B=2+C_B(A_8+1),\qquad C_{\mathrm{col}}=CK_B^{10}/A_8.
+\end{equation}
+Every small frozen coordinate created at the first step after a stopped measure is a product of a fixed number of current small links and of their at most $J$ iterates under $T_M$. By repeated use of the triangle inequality for the group distance and the factor $10M$ per averaging step, it is bounded by $C_{\mathrm{ad},J}r$, where $C_{\mathrm{ad},J}$ depends only on these fixed products. The frozen coordinates at the protected initial step satisfy the same bound. Older long transports are frozen group variables, not new small analytic coordinates. Let $C_{\mathrm{an},J}\ge1$ bound all fixed conversions from group or transported coordinates to the analytic coordinates at the lattice where a frozen coordinate was introduced. For a link variable in the identity chart this constant is one, since $\abs{\Log U}=\groupdist(U)$; a fixed longer product is bounded by its fixed length and its analytic derivative bound. We fix $C_{\mathrm{conv},J}$ large enough for these conversions, including
+\[
+ C_{\mathrm{conv},J}\ge C_{\mathrm{ad},J},\qquad C_{\mathrm{conv},J}>2C_{\mathrm{an},J}C_{\mathrm{col}},\qquad C_{\mathrm{conv},J}>C_{\mathrm{an},J}C_{\mathrm{ad},J},
+\]
+and enlarge it for the fixed transport paths and the protected frozen coordinates of \cref{ch18:thm:history-cover}. We fix the mesh multiplier $C_{\mathrm{mesh},J}$ of the initial step and the interior restriction by the full dependence radius at the same stage. None of these constants depends on a later width.
+
+Every entry in the minimum defining $R_W$ in \cref{ch17:lem:complete-white-potential} is positive at this $J$. We choose $R_W$ strictly below this minimum, including the conversion to the joint solution neighborhood and both product domains. Include in $C_{P,\bullet}$ the larger-product absolute coefficient row constant for the difference of the perturbed and unperturbed reconstructions at output rates $(m_{\mathrm{rate}},b_1)$ in \cref{ch16:thm:controlled-perturbation}. These rates satisfy its conditions by item~(3), since $C_{\mathrm{alloc}}$ includes its geometric constant. Then we fix $\sigma_*>0$ below $\sigma_0$, below all preconditioned displacement margins, and below
+\[
+ \frac{\lambda_*R_W}{6C_{\mathrm{en},J}\rho_{\mathrm{cl}}},\qquad \min_\bullet\frac{\rho_\bullet}{64C_{P,\bullet}\rho_{\mathrm{cl}}}.
+\]
+If a constant vanishes, the corresponding upper bound is not needed. Only fixed positive upper bounds occur. In particular, the perturbation term in the radius $R_{\mathrm{en}}$ of the enclosing product domain is accounted for before the removed layer is chosen.
+
+\paragraph{Step 4: boundary radii, removed layers, and frozen coordinates.}
+We choose each outer boundary radius so that its contribution is at most $\rho_\bullet/16$, and set $\rho_{\partial,\bullet}=R_{\partial,\bullet}/K_*$. Since $a_{W,\bullet}>0$, a finite common width $w_{\mathrm{bd}}$ makes each contribution from distant parts of the boundary at most $\rho_\bullet/16$. The torus contribution was made smaller than this in Step~1. Once $\beta_{\mathrm{rec}}$ is chosen below with $C_{F,\bullet}\beta_{\mathrm{rec}}<\rho_\bullet/64$, and since $C_{P,\bullet}\sigma_*\rho_{\mathrm{cl}}<\rho_\bullet/64$ by Step~3, the sum at zero fluctuation satisfies
+\begin{equation}\label{ch20:eq:zero-white-sum}
+ A_{0,\bullet}<\Bigl(\frac1{16}+\frac1{16}+\frac1{16}+\frac1{64}+\frac1{64}\Bigr)\rho_\bullet=\frac7{32}\rho_\bullet<\rho_\bullet/4.
+\end{equation}
+The individual bounds give the full sum condition of item~(5), with every summand counted.
+
+The brackets in the two inequalities for $s_{\mathrm{er}}$ are fixed finite numbers. For example, if $Y=A_J(1+E)+K_J\sigma_*+1$, then $s_{\mathrm{er}}\ge1+\alpha^{-1}\log(4Y/\sigma_*)$ suffices for the first inequality, and the same calculation with $Y^{\mathrm{cl}}=A_J^{\mathrm{cl}}+K_J^{\mathrm{cl}}\sigma_*$ yields the second. We take an integer above these bounds and above $\max(2,w_{\mathrm{bd}})$. If a bracket vanishes, its inequality holds already.
+
+We now choose $\beta_{\mathrm{rec}}>0$ below the minimum of the coordinate-domain, product, and boundary radii and of the bound $\lambda_*R_W/(6C_{\mathrm{en},J})$ used for the radius of the enclosing product domain. On every label with reduced radius, $\beta_{\mathrm{rec}}$ below one quarter of the corresponding inner boundary radius makes the frozen fraction at most $1/4$. The bound for the boundary-completion difference in \cref{ch15:lem:freezing} is $8\beta_{\mathrm{rec}}E_\bullet/\rho_\bullet$ at uniform radius; the fixed conversion to the spatially varying radius changes only its constant on the larger domain. This is part~(2) of that lemma. Its hypothesis on the torus rate holds for both functions, since their torus norms have the rate $a_{\mathbb T}$ and $\sqrt3\,(a+\alpha)<a_{\mathbb T}$ by item~(3). We fix a constant $C_{\mathrm{bc},\bullet}\ge8$ for the simultaneous substitution of all frozen coordinates and every required conversion, including the boundary layer, the neighborhoods where gauge transformations are extended at the lattices of introduction, the based transports of frozen links across the boundary, and the initial step. If these substitutions are made in several fixed stages, we take the sum of their converted bounds in this constant. The number of frozen labels, of components, and of earlier RG steps does not enter, since the estimate of \cref{ch15:lem:freezing} already bounds the union. We require
+\begin{equation}\label{ch20:eq:complete-freeze-budget}
+ C_{\mathrm{bc},\bullet}E_\bullet\beta_{\mathrm{rec}}/\rho_\bullet\le\sigma_*/8,\qquad
+ \beta_{\mathrm{rec}}<\frac14\min\{\rho_\bullet,\rho_{\partial,\bullet}\}\quad(\bullet\in\{\mathrm q,\mathrm{cl}\}).
+\end{equation}
+Then the sum of these differences is below the bound $\sigma_*/4$ required in item~(5). We also require $\beta_{\mathrm{rec}}<\min(\pi/4,\epsilon_{\mathrm{en},J}/4)$, where $\epsilon_{\mathrm{en},J}$ is the fixed margin of \cref{ch18:thm:all-point-enclosure}. The geometric argument of Step~6 provides these bounds in the analytic coordinates at the lattice of introduction. We include the bound for frozen coordinates used in \eqref{ch20:eq:zero-white-sum}. All these choices are compatible, since each is an upper bound with a fixed positive right side.
+
+For a large-field decomposition with the hypotheses on incoming radii and boundaries verified in Step~9, these conditions preserve the initial norm bound. If the input norm is at most $\sigma_*$, the last nonlinear term in \cref{ch17:thm:controlled-kernel} is at most one after the coupling bound is chosen in Step~7. Then its output is bounded by $Y$, and its output after removal of the layer of width $s_{\mathrm{er}}$ is bounded by $\sigma_*/2$. Adding the boundary-completion difference, we obtain at most $3\sigma_*/4$. The classical calculation uses $Y^{\mathrm{cl}}$ and gives the same bound $3\sigma_*/4$. The initial norm is at most $\sigma_*$ once the initial substitution has been checked. Step~9 provides this initialization and the input hypotheses at every step, so no errors are summed over earlier RG steps.
+
+\paragraph{Step 5: the majorant of the reconstruction maps, the working radius, and the support radius.}
+The coefficient constants of \cref{ch12:lem:deterministic-prolongation-reserve} were computed on the fixed larger domains. Recall that $\alpha_*=C_{\mathrm{CP}}/B$. Since $B\ge3$ and $C_{\mathrm{CP}}^2/B\le1/4$, we have $0<\alpha_*\le1/(2\sqrt B)<1$. For the coefficients in that lemma, the choice of $\beta_J$ gives, for every $m\ge2$,
+\[
+ \alpha_*\beta_J^{m-1}\ge\alpha_*\frac{A_J}{\alpha_*R_J^2}R_J^{-(m-2)}=A_JR_J^{-m},
+\]
+where we used $\beta_J\ge A_J/(\alpha_*R_J^2)$ and $\beta_J\ge R_J^{-1}$. The linear term is also bounded by $\alpha_*$. This proves the majorant $\varphi$ in \eqref{ch20:eq:center-majorant} and its derivative bound at every fixed input, in the volume normalization of that lemma. We choose $r_{\mathrm{eff}}>0$ inside the domains of item~(3) and below $(1-\alpha_*)/(8\beta_J)$. Then $\beta_Jr_{\mathrm{eff}}<1/8$, and we have
+\begin{equation}\label{ch20:eq:center-margin}
+ \sup_{\abs v\le r_{\mathrm{eff}}}\norm{D\widehat P(v)}_{\mathrm{root}}\le\varphi'(r_{\mathrm{eff}})=\frac{\alpha_*}{(1-\beta_Jr_{\mathrm{eff}})^2}\le\frac{64}{49}\alpha_*,\qquad a_{\mathrm{map}}\sqrt B\le\frac{32}{49}.
+\end{equation}
+
+We choose $r$ below all positive bounds displayed in item~(6), including the bound from path lengths, the bound from frozen coordinates, and $r_{\mathrm{eff}}/4$. Further upper bounds used for the protected neighborhoods below are imposed in the same choice. We include $r<\min(1,\epsilon_{\mathrm{en},J}/4)$ and
+\begin{equation}\label{ch20:eq:relative-collar-gates}
+ K_B^2r/A_8<c,\qquad C_{\mathrm{an},J}C_{\mathrm{col}}r<\beta_{\mathrm{rec}}/2,\qquad C_{\mathrm{ad},J}r<\beta_{\mathrm{rec}},
+\end{equation}
+which hold after decreasing $r$, since all constants in \eqref{ch20:eq:saving-constants} are fixed. In particular, $\beta_{\mathrm{rec}}>C_{\mathrm{conv},J}r$. With $R_{\mathrm{buf}}=C_{\mathrm{map},J}r$ and a fixed $C_{\mathrm{map},J}\ge(10M)^J$, the requirement $R_{\mathrm{buf}}<\rho$ and the margins of the larger charts are again upper bounds on $r$. No lower bound on $r$ occurs.
+
+We also choose the radii $P$ and $Q_{\mathrm{DB}}$ explicitly. On a fixed smaller joint product, the bound of \cref{ch12:lem:deterministic-prolongation-reserve} provides a finite $C_{\mathrm{free},J}\ge1$ such that the free increment of the reconstruction is at most $C_{\mathrm{free},J}\max_i\abs{\zeta_i}$. For $\abs v\le r$ we have
+\[
+ \abs{\widehat P(v)}\le\frac{\alpha_*r}{1-\beta_Jr}\le\frac{32}{31}\cdot\frac{r}{2\sqrt B}<\frac r3,
+\]
+where we used $\beta_Jr<1/32$ and, in the last inequality, $B\ge3$. For the torus map of \cref{ch10:thm:whole-image-gauge} we also take $Cr<1/2$ and $r<\min(r_J/4,1/(4C_J))$; by the $J$-uniform condition we have $B^{-1}Z(r)\le2Cr/B<r/3$. We choose
+\begin{equation}\label{ch20:eq:db-whole-image-gate}
+ 0<Q_{\mathrm{DB}}=q_{\mathrm{DB},J}r,\qquad q_{\mathrm{DB},J}\le\min\{1/2,1/(12C_{\mathrm{free},J}),1/(24C_J)\}.
+\end{equation}
+Then $r+Q_{\mathrm{DB}}<r_J$ and $1-C_J(r+Q_{\mathrm{DB}})>1/2$. The majorant of the free part of the torus map is then below $2C_JQ_{\mathrm{DB}}\le r/12$, and the hypotheses of \cref{ch10:thm:whole-image-gauge} for coarse fields in $B_r$ hold, including the domain before the pole of its majorant and $\mathfrak M_J(r,Q_{\mathrm{DB}})<r/2$. The same $Q_{\mathrm{DB}}$ works for the free part of the reconstruction maps, since $C_{\mathrm{free},J}Q_{\mathrm{DB}}\le r/12$. We take $P=Q_{\mathrm{DB}}/2$, decreasing the fixed proportionality factor if necessary so that every intermediate coordinate-domain condition holds. Then every input logarithm is smaller than $r/3+r/12<r/2$. At zero coarse field and zero fluctuation all these intermediate maps vanish, and their finite coefficient bounds at fixed $J$ and the positive margins of the coordinate and product domains justify this simultaneous decrease. It is made when $r$ is chosen, before the coupling. The enclosing constant $\mathscr L_{\mathrm{en}}$ of \cref{ch11:def:literal-selection} can be bounded on the larger fixed domains, and taking $r$ smaller first makes the part of its curvature bound without the coupling strictly less than $1/2$, as required in item~(6). The remaining term $t^2(1+E)$ is controlled in Step~7.
+
+The three contributions to the radius of the enclosing product domain give
+\begin{equation}\label{ch20:eq:physical-enclosure}
+ r+\beta_{\mathrm{rec}}+\sigma_*\rho_{\mathrm{cl}}\le\frac{\lambda_*R_W}{2C_{\mathrm{en},J}},\qquad
+ R_{\mathrm{en}}=\frac{2C_{\mathrm{en},J}}{\lambda_*}(r+\beta_{\mathrm{rec}}+\sigma_*\rho_{\mathrm{cl}})\le R_W.
+\end{equation}
+For either radius, each of the two terms subtracted in the denominator of item~(6) is at most $1/4$, since $C_{T,\bullet}K_*\rho_\bullet\le1/4$ and, by the choice of $R_W$, $C_{T,\bullet}R_W\le1/4$. The denominator is then at least $1/2$, and the increment from the fluctuations is at most
+\[
+ (2C_{T,\bullet}+C_{\Delta,\bullet})R_{\mathrm{en}}\le(2C_{T,\bullet}+C_{\Delta,\bullet})R_W\le\rho_\bullet/8.
+\]
+Together with \eqref{ch20:eq:zero-white-sum}, this gives the bound $3\rho_\bullet/8$ at spatial exponent zero. Write $S_b^0$ for the absolute image row of the unperturbed reconstruction at exponent $b$, and $\Delta S_b$ for the absolute coefficient row of the difference of the perturbed and unperturbed reconstructions on the same products. The interpolation of \cref{ch16:lem:strict-two-radius-images} and \eqref{ch20:eq:interpolation-choice}, applied to the unperturbed coefficients, gives
+\[
+ S_{m_{\mathrm{rate}}}^0\le S_{\vartheta c}^0
+       <(\sqrt3/4)\rho_\bullet,
+\]
+where the choice in Step~2 includes $m_{\mathrm{rate}}<\vartheta c$. Applying \cref{ch16:thm:controlled-perturbation} at output rates $(m_{\mathrm{rate}},b_1)$ and the bound on $\sigma_*$ in Step~3 now gives
+\[
+ \Delta S_{m_{\mathrm{rate}}}
+       \le C_{P,\bullet}\sigma_*\rho_{\mathrm{cl}}
+       \le\rho_\bullet/64,
+ \qquad
+ S_{m_{\mathrm{rate}}}
+       \le S_{m_{\mathrm{rate}}}^0+\Delta S_{m_{\mathrm{rate}}}
+       <\left(\frac{\sqrt3}{4}+\frac1{64}\right)\rho_\bullet
+       <\rho_\bullet/2.
+\]
+This is the required absolute weighted image bound for both input functions on the entire enclosing product. The higher exponent included in $c_{\mathrm{prim},J}$ belongs to the unperturbed construction; inherited perturbative networks use the separate inequalities against $Ba$ and $B\alpha$.
+
+\paragraph{Step 6: widths, the curvature threshold, and the large-field decompositions.}
+Let $R_{\mathrm{cell}}$, $W$, $\varrho$, and $r_F$ be as in item~(7). We may also require $8BA_8/r\ge s_{\mathrm{er}}$ at the initial choice of $r$; replacing the width of the removed layer by $\varrho$ only decreases the left sides of its exponential inequalities. We now verify the geometric hypotheses of \cref{ch18:thm:history-cover}, using \cref{ch18:thm:fat-cell-admission} for the neighborhoods in which gauge transformations are extended. Here $R_{\mathrm{cell}}\ge R_0$, and the output side after each RG step must be at least $8R_{\mathrm{cell}}$; both follow from the choice of $A_8$ and from the minimum side in Step~11. Whenever $\delta R_{\mathrm{cell}}^2\le1$ and $\eta\le C_Br$, the constants of the estimate on large cells satisfy
+\begin{equation}\label{ch20:eq:fat-cell-specialization}
+ \begin{split}
+ K_R&=1+\eta R_{\mathrm{cell}}+\delta R_{\mathrm{cell}}^2\le K_B,\\
+ K_R^2/R_{\mathrm{cell}}&\le K_B^2r/A_8<c,\qquad
+ CK_R^{10}/R_{\mathrm{cell}}\le C_{\mathrm{col}}r<\beta_{\mathrm{rec}}/(2C_{\mathrm{an},J}),
+ \end{split}
+\end{equation}
+where we used $rR_{\mathrm{cell}}\le A_8+r\le A_8+1$. Away from the two prescribed boundary layers of cells, the bound is $C'/R_{\mathrm{cell}}<r/4$. Then the fixed conversion for products of links and \eqref{ch20:eq:relative-collar-gates} give the margin $r/2$ in the bulk and the bound for frozen analytic coordinates required by \cref{ch18:thm:history-cover}. These small representatives are used only for their existence, not for a change of variables in a probability.
+
+To protect older data, we mark, in each lattice where data were introduced, both endpoints of every older frozen link, both endpoints of every transported frozen coordinate, and all prescribed tree roots and coefficient locations attached to frozen records. We exclude every current block of the coarse lattice whose centered lift to any of these lattices meets a mark. A gauge transformation supported in the remaining active blocks has a lift that is constant on blocks and equals the identity at every mark, by the corresponding clause of \cref{ch18:thm:fat-cell-admission}; hence every older frozen link and transport is preserved exactly. The newly chosen roots of the current constraint coordinates are fixed separately by the current based gauge, as in that theorem; they are not added to the persistent exclusion marks unless attached to a frozen record. The endpoints of the current links across the boundary are fixed by the target-dependent gauge of \cref{ch16:lem:strict-hybrid-gauge}, and their records are protected at subsequent steps if those links are frozen. The union of the persistent exclusions protects the data of all earlier RG steps at once, without a product of losses over these steps.
+
+We fix the block-aligned input mesh $S=B\lceil C_{\mathrm{mesh},J}R_{\mathrm{cell}}/B\rceil$, where $C_{\mathrm{mesh},J}\ge1$ was fixed in Step~3, large enough for the layer of large cells around the active blocks and for the full dependence radius of the constraint, tree, and transport paths. Then $R_{\mathrm{cell}}\le S\le(C_{\mathrm{mesh},J}+B)R_{\mathrm{cell}}$, so $S\asymp_JR_{\mathrm{cell}}$. At an initial RG step from the Wilson measure, the input side $n_{\mathrm{input}}$ is divisible by $B$. When $n_{\mathrm{input}}\ge8S$, this mesh partitions each coordinate circle into block-aligned intervals with lengths in $[S/2,2S]$: we distribute the $n_{\mathrm{input}}/B$ blocks among $\lfloor n_{\mathrm{input}}/S\rfloor$ intervals as evenly as possible.
+
+At the initial step, the procedure of \cref{ch18:thm:history-cover} tests the input plaquettes before a representative is chosen, and keeps only those closed large cells whose full dependence sets avoid the excluded dependencies. Every plaquette of the resulting complex, including each boundary plaquette, is tested good. We restrict the active blocks to the interior by one full layer of large cells and by the fixed dependence radius. This places every plaquette that depends on an active variable, and every relevant constraint, tree, and transport path, inside this closed complex. There are no older protected data at the initial step. The curvature condition below implies the estimate on large cells there, and the remaining complement consists of arbitrary compact data. This is the initial covering construction of \cref{ch18:thm:history-cover}; it is not a restriction of the Wilson measure to $D_r$.
+
+The three upper bounds $d_{\mathrm{SG}}$, $B_*/(96M^3)$, and $\delta_*^2/(2\pi^2)$ for $d_{\mathrm{cut}}$ are fixed and positive; the first is given explicitly below. Since $d_*=d_{\mathrm{cut}}/2$, the mesh condition $\pi\sqrt{2d_*}S^2\le1$ is the additional bound $d_{\mathrm{cut}}\le1/(\pi^2S^4)$. Since $S\ge R_{\mathrm{cell}}$, it also implies $\pi\sqrt{2d_*}R_{\mathrm{cell}}^2\le1$ for the estimate on large cells. For the link bound $r/2$ we use \cref{ch04:thm:small-curvature-admission} with support radius $r/2$; one may take
+\[
+ d_{\mathrm{SG}}=\min\{\delta_{\mathrm{SG}}^2/(2\pi^2),\ r^4/(8192\pi^2C_{\mathrm{SG}}^4)\},\qquad m\ge8C_{\mathrm{SG}}/r,
+\]
+where the second condition is a condition on the side $m$. Strict inequalities in the threshold and in the side give the link bound $r/2$. The constants $K_M,K_1,\kappa_0,c_A^{\mathrm{act}},\alpha_W,K_W$ are those of \cref{ch19:thm:classical-source-payment} for arbitrary fields. Its hypotheses require the Borel extension of $T_M$ and complete predecessor patches, both of which we use. We use no improvement of $K_M$ based on tests at an untested stopping level; such an improvement would require an energy hypothesis at the base and tests at the top plaquettes.
+
+With these conditions, \cref{ch18:thm:history-cover} gives, for each finite sequence of RG steps starting from a stopped measure or from the protected initial step, a finite Borel partition of the support of the starting measure into large-field decompositions. Its tests use the iterates of $T_M$, including its Borel extension, and every test is kept. Its geometric constants $C_{\mathrm{cov},J}$ do not depend on the widths, and the counts keep the widths explicitly:
+\begin{equation}\label{ch20:eq:coverage-counts}
+ \begin{gathered}
+ R_{t+1}(f)\le B^{-1}R_t(f)+C_{\mathrm{cov},J}(W+R_{\mathrm{cell}}+1),\qquad
+ R_{\mathrm{first}}(f)\le C_{\mathrm{cov},J}(W+R_{\mathrm{cell}}+1),\\
+ N_{\mathrm{first}}(f)\le C_{\mathrm{cov},J}(BW+R_{\mathrm{cell}}+1)^3,\qquad
+ N_{\mathrm{later}}(f)\le C_{\mathrm{cov},J}(W+R_{\mathrm{cell}}+1)^3,\\
+ F_J=C_{\mathrm{cov},J}(W+R_{\mathrm{cell}}+1)^3.
+ \end{gathered}
+\end{equation}
+Here, for a threshold failure $f$, $R_t(f)$ is the radius of the neighborhood attributed to $f$ at the output of the $t$-th following RG step, and $R_{\mathrm{first}}(f)$ is its radius at creation. The counts $N_{\mathrm{first}}(f)$ and $N_{\mathrm{later}}(f)$ bound the numbers of labels of normalization factors attributed to $f$ at its creation and at each later step, and $F_J$ bounds the number of plaquettes of the insertion at the stopping level affected by $f$. The affected sets include the full excluded neighborhoods: the protected neighborhoods, the touching cells, the boundary layers of frozen coordinates, the links across the boundary, the cores enlarged by the fixed layer, and the attachments at the lattices of introduction, together with the closed excluded sets at the initial step. They are not just the smaller predecessor sets used in the energy estimate. For the fixed finite family of stopping levels in Step~10, we enlarge $C_{\mathrm{cov},J}$ to count the discarded plaquettes of the insertion whose full dependence sets meet these excluded sets. The family of remainders is bounded independently of the number of averaging steps. This enlargement keeps the local dependence at fixed $J$, and all dependence on widths remains in the polynomials of \eqref{ch20:eq:coverage-counts}. These counts are subadditive under unions of fixed complements, and they, rather than local norm constants that do not depend on widths, determine $F_J$ and $C_{\mathrm{ch},J}$. The only side conditions used for this cover are $8R_{\mathrm{cell}}$ for outputs and $8S$ for the input at the initial step; both are imposed in Step~11. If the active region is empty, the construction stops, and all its frozen data are kept.
+
+\paragraph{Step 7: the coupling bound.}
+With $A_{\mathrm w}$ fixed, we set $c_J^{\log}=A_{\mathrm w}(J-1)\log M/2$, so that $p^+=A_{\mathrm w}\log(1/t)+c_J^{\log}$. All fluctuation products used with \cref{ch17:thm:controlled-kernel} have radii $p(t)\le p_i\le p^+$. In the choice of the coupling bound we impose the two remainder conditions also with $p^+$:
+\begin{equation}\label{ch20:eq:log-family-gates}
+ \begin{gathered}
+ C_Tt^2[(p^+)^4+E(p^+)^2]\le(1-q_{\mathrm{CA}})/2,\\
+ C_Jt^2(E+\sigma_*)[(p^+)^4+(E+\sigma_*)(p^+)^2]\le1,\qquad tp^+<R_{\mathrm{en}}.
+ \end{gathered}
+\end{equation}
+These imply the conditions of item~(8) with the common radius $p(t)$ and the conditions for every product in the family of logarithmic radii. No radius of size $R_{\mathrm{en}}/t$ enters a cluster expansion: the enclosing product domain is used only for the Hessian, for the mean, and for the comparison with the auxiliary measure. Every inequality of item~(8) involving $t$, after multiplication by a fixed positive denominator if necessary, is bounded by finitely many terms $Ct^\varepsilon[1+\log(1/t)]^k$. For the interaction radius, for example, we first impose $C_Jtp^+\le1/2$; then its denominator is at least $1/2$, and
+\[
+ \mathfrak s(t)\le2C_Jt[(p^+)^3+p^++(E+\sigma_*)p^+]\longrightarrow0.
+\]
+The other bound for discs has the same limit. We apply \cref{ch20:lem:scalar-gates} to all these inequalities, to $tp(t)<P$ and $tp^+<R_{\mathrm{en}}$, and to every fixed bound for free coordinates, for these coarse-field derivatives of the normalized log density on the fixed fluctuation product, and for Jacobians. We choose $t_*$ for the two conditions on the potential and the mean, and then $g_*\le t_*$ for the remaining inequalities. These include the curvature condition of item~(8) involving $t^2(1+E)$, the conditions $g_*^2\le\alpha_W$, $g_*^2\le2\kappa_*$, and $a_0g_*<\min(r/2,1)$, and the bound $t[p(t)^3+Ep(t)]\le c_*/2$ for the auxiliary discs, with the constant $c_*$ of \cref{ch10:thm:common-analytic-class}. For the bound on the reconstruction amplitude in \cref{ch12:lem:deterministic-prolongation-reserve} we require in addition
+\begin{equation}\label{ch20:eq:cap-ceiling}
+ C_{\mathrm{free},J}tp(t)<(1-a_{\mathrm{map}})r_{\mathrm{eff}}/2\qquad(0<t\le g_*),
+\end{equation}
+which is possible by the same argument. Together with $b_0\le r<r_{\mathrm{eff}}/4$ and $a_{\mathrm{map}}<1$, this keeps the recursion for the amplitude bound inside the working ball, since $a_{\mathrm{map}}r_{\mathrm{eff}}$ plus this forcing term is strictly below $r_{\mathrm{eff}}$. All these conditions hold on the interval $0<t\le g_*$.
+
+\paragraph{Step 8: the effective interaction on the torus.}
+We now attach the constants to the recursion that defines the small-field event. We start with $R_0=0$ and use the common fluctuation product $p_i=p(t)$ and the full formula for the auxiliary integral in \cref{ch10:thm:common-analytic-class}. At every step the input effective interaction is invariant on overlapping charts, has vanishing first derivatives at the identity, and has the total color, translation, and inversion symmetries; these hold at $R_0=0$ and are preserved by that theorem. Its hypothesis on the enlarged image is \eqref{ch20:eq:outer-torus-domains}, and the unscaled fluctuation inputs lie in the product domain by the coupling conditions of Step~7. The conversion of coefficients at the same radius is valid by the checks of supports and symmetries in Step~1. If $\mathcal B_{\rho,a_{\mathbb T}}(R_k)\le E$, then we have
+\begin{equation}\label{ch20:eq:actual-torus-ball}
+ \begin{split}
+ \mathcal B_{\rho,a_{\mathbb T}}(R_{k+1})
+ &\le C_G+q_{\mathrm{CA}}E+C_Tt^2E[p(t)^4+Ep(t)^2]\\
+ &\le\frac12(1-q_{\mathrm{CA}})E+q_{\mathrm{CA}}E+\frac12(1-q_{\mathrm{CA}})E=E,
+ \end{split}
+\end{equation}
+where we used $C_G\le(1-q_{\mathrm{CA}})E/2$ and item~(8). The norm does not change when a constant is subtracted. This proves the bound, at the fixed radius and with the torus rate, at every finite depth of the form $kJ$. The constants $C_G$ and $C_T$ were chosen after $J$ and the outer radii, and neither was used to choose $J$.
+
+We apply \cref{ch11:thm:deep-buffer-law} to the same parameters. The condition on the product for coarse fields in $B_r$ was checked in \eqref{ch20:eq:db-whole-image-gate}, and $tp(t)<P$ and the intermediate margins for coordinates, the classical action, and the Jacobians hold. The support of the starting measure is $D_r$, the fluctuation cutoff is the same common radius, the constrained Hessians are the same positive Hessians of the classical action, and the triangular determinant and the constant $A_{\mathrm{coord}}$ are unchanged. At every coarse field in $D_r$, the integral of the Wilson density over the fiber of the block averaging map, restricted by the conditions of the small-field event, equals the auxiliary integral just used. At preceding classical depth $aJ$ we write $r_{aJ}=R_a-R_a(\Id)$. The stopped measure used as a starting measure in \cref{ch19:thm:all-phase-window} is then
+\begin{equation}\label{ch20:eq:actual-stopped-input}
+ \widehat Z^{-1}\one_{D_r}e^{-E_{aJ,\mathrm{sat}}/g^2-r_{aJ,\mathrm{sat}}}\,dH,\qquad \mathcal B_{\rho,a_{\mathbb T}}(r_{aJ})\le E,
+\end{equation}
+where the subscript $\mathrm{sat}$ denotes the gauge-invariant extension to $D_r$. All removed values $R_a(\Id)$ and all constants from coordinates and Gaussian integrals stay in the normalization constant. With the convention that unnormalized densities are written $\exp(\Lambda-E/g^2-R)$, the update is $\Lambda_{a+1}=\Lambda_a+\log A_{\mathrm{coord}}-R_+(\Id)$. The same holds at every allowed starting side and preceding depth, since the two cited theorems are uniform in these parameters. In particular, this is the recursion on the torus used in \cref{ch19:thm:all-phase-window}; no new analytic class is assumed.
+
+The reconstruction maps give the same effective interaction. At coarse fields in $B_r$, invariance on overlapping charts and the gauge transformations depending only on the coarse field preserve the full fiber integral, including its constant, by \cref{ch12:thm:replacement-family}. On the common outer domain both auxiliary formulas are holomorphic. Equality on a real open ball of coarse fields implies equality of all real Taylor derivatives there, and hence of the holomorphic series. Their nonconstant parts, and the bound \eqref{ch20:eq:actual-torus-ball}, coincide; no $J$-uniform bound of all orders for the reconstruction maps is used in this identification.
+
+\paragraph{Step 9: the hypotheses of the regional estimates.}
+We take the large-field decompositions of \cref{ch18:thm:history-cover}, with the geometric conditions verified above. The controlled analytic functions are evaluated in the simultaneous gauge representatives, provided by the cover, in which all frozen coordinates are small. The protection of Step~6 preserves all older frozen data and their attachments exactly. The new analytic coordinates in the neighborhoods where gauge transformations are extended have the bound checked in Step~6, and $C_{\mathrm{conv},J}\ge C_{\mathrm{ad},J}$ covers the initial representative of size $r$ (not $r/2$) after a stopped measure. Frozen logarithms of single links have Euclidean norm equal to their group distance, and the larger constant $C_{\mathrm{an},J}$ covers the other fixed products. We conclude that every substitution of analytic frozen coordinates, including the initial one, satisfies
+\begin{equation}\label{ch20:eq:actual-saved-values}
+ \abs{c_j^\sharp}\le\min\{\beta_{\mathrm{rec}},\phi_\bullet(j)/4\}\qquad\text{for both spatially varying radii}.
+\end{equation}
+Plaquettes with energy of order one and arbitrary distant data are frozen group variables, and they are never substituted into an analytic coordinate. We do not claim that an arbitrary independent gauge transformation at the endpoints preserves the norm of a frozen logarithm. The bounds for small frozen coordinates are used in the simultaneous representatives provided by the cover, with older marks fixed; the later comparison of measures is the conclusion of \cref{ch19:thm:all-phase-window} for representatives satisfying the reconstruction identities. Color rotations at the roots, without perturbation, preserve the relevant free norms, since they act by isometries of the adjoint representation.
+
+At a step starting from a stopped measure, the incoming action on the torus and \eqref{ch20:eq:actual-stopped-input} have no boundary perturbation before the substitution. At a step starting from the Wilson measure, $R_0=0$ and the active Wilson action is the exact restriction; the action of the fixed complement stays with its compact variables and its normalizing constant. The first substitution of analytic coordinates creates only the stated boundary-completion differences. The initial boundary norms are at most $\sigma_*$, by \eqref{ch20:eq:complete-freeze-budget}, with their constants kept in the full action and in the normalization constant. This proves the initialization $x_0,x_0^{\mathrm{cl}}\le\sigma_*$ for both kinds of starting measure.
+
+After each substitution at the output, the zone of reduced radius is removed, and all remaining labels have distance at least $s_{\mathrm{er}}\ge w_{\mathrm{bd}}$ from the fixed complement. \Cref{ch15:lem:freezing} then gives the uniform incoming radii $\rho$ and $\rho_{\mathrm{cl}}$ on the next list $D_{\mathrm{in}}$ of active labels, with the lattices of introduction of its coefficient locations and the volumes of its variables. This is the uniform input norm required in \cref{ch16:thm:controlled-perturbation}; no derivative is estimated with a reduced radius at the boundary of the output. Its adjustment for the completion adds only the boundary-completion difference already accounted for, and we have $\mathcal X^{\mathrm{cl}}(\overline P)\le2\sigma_*$. The input for the effective interaction has $\mathcal X(f)\le\sigma_*$, and its part on the torus is the effective interaction in \eqref{ch20:eq:actual-torus-ball}.
+
+\Cref{ch18:thm:history-cover} also places every older incoming complement and its older coefficient locations in the next current fixed complement, up to its fixed buffer for the dependence of paths. In input units this gives, with $B_s=B$ for each integrated step,
+\begin{equation}\label{ch20:eq:input-wall-compatibility}
+ d_{D_{\mathrm{in}}}(i)\ge Bd_{\mathrm{current}}(e)-B\dist(e,i/B)-C_{\mathrm{buf},J}.
+\end{equation}
+Indeed, a point of the older complement nearest to $i$, divided by $B$, lies in the current fixed complement up to $C_{\mathrm{buf},J}/B$, so $d_{\mathrm{current}}(i/B)\le(d_{D_{\mathrm{in}}}(i)+C_{\mathrm{buf},J})/B$; the triangle inequality from $e$ to $i/B$ and a rearrangement yield \eqref{ch20:eq:input-wall-compatibility}. Additional fixed complements only enlarge the current complement and preserve this implication. At an initialization without boundary, the input marked by the boundary vanishes. The input norm and the norm of differences use this same list and uniform radius, and every input image and connecting segment lies strictly inside it, by the weighted image bound of half the radius and the product domains of Step~2.
+
+We conclude that the hypotheses of \cref{ch16:thm:controlled-perturbation} on conditional displacements, frozen real data, uniform radii, and boundary compatibility hold after any number of RG steps. The inequalities for the rates required there are included in the choice of rates in Step~2 and in $m_{\mathrm{rate}}+b_1<c_{\mathrm{prim},J}/C_{\mathrm{alloc}}$. For each complete RG step we use the common fluctuation product, or one of the products with logarithmic radii in an auxiliary comparison. By the bounds \eqref{ch20:eq:conditional-force-gate}, \eqref{ch20:eq:complete-freeze-budget}, \eqref{ch20:eq:log-family-gates}, and \eqref{ch20:eq:actual-saved-values}, all hypotheses of \cref{ch17:thm:controlled-kernel} hold. Combining its output estimate, the removal of the boundary layer, and the new boundary-completion difference, we obtain the recursion with bound $3\sigma_*/4$ of Step~4. By induction, these hypotheses hold again at the next complete RG step.
+
+We now apply \cref{ch18:thm:all-point-enclosure} to each covered large-field decomposition. Its construction hypotheses and its hypotheses on the two images have been checked, and $r+\beta_{\mathrm{rec}}<\epsilon_{\mathrm{en},J}$ by our choices. For every point of every fiber in the support, over compatible fixed data, we have $g_i\abs{w_i}\le\delta_{\mathrm{en}}$ by that theorem. Since $g_i\ge\lambda_*t$, this implies
+\begin{equation}\label{ch20:eq:covered-point-enclosure}
+ \abs{w_i}\le\delta_{\mathrm{en}}/(\lambda_*t)=R_{\mathrm{en}}/(2t).
+\end{equation}
+Conversely, every point of the enclosing product domain satisfies $\abs{g_iw_i}\le R_{\mathrm{en}}$. The full coordinate, sequential, and image margins apply on the enclosing product domain, while the points of the support keep a margin of half the radius.
+
+By \cref{ch17:lem:complete-white-potential}, on the enclosing product domain we have
+\begin{equation}\label{ch20:eq:complete-curvature}
+ \norm{D_w^2(V-\abs w^2/2)}_{\mathrm{row,col}}\le\frac{C_0(R_{\mathrm{en}}+t^2\mathcal L_V)}{(1-AR_{\mathrm{en}})^3}\le\frac{1/16+1/16}{(1-1/4)^3}=\frac8{27}<\frac12,
+\end{equation}
+where we used $R_{\mathrm{en}}\le R_W\le1/(16C_0)$, $C_0t_*^2\mathcal L_V\le1/16$, and $AR_{\mathrm{en}}\le A/(16C_0)\le1/4$, the last since $C_0\ge2A^3$ and $A\ge1$. The separate condition for the mean also holds. Convexity is asserted only in the fluctuation variables; all inverses above are inverses of constrained Hessians in the free coordinates.
+
+We also check the hypotheses of the comparison on the enclosing product domain in \cref{ch18:lem:enclosure-comparison}, which compares the outgoing density with the integral over the fluctuation cutoff domain. Its hypotheses are those of \cref{ch18:thm:all-point-enclosure}, verified above, the conditions on the enclosing product domain verified in Steps~5 and~7, and an incoming density bound \eqref{ch18:eq:comparison-hypothesis}. At the first RG step after either kind of starting measure, this bound holds with equality. At a later step, it is the incoming bound at the representatives satisfying the reconstruction identities provided by the induction from fine to coarse scales in \cref{ch18:thm:slice-induction}, whose hypotheses are the conditions verified in this step. We next check the measurability required by the comparison. For fixed finite geometry and fixed real frozen data, the enclosing product domain $\mathcal K=\prod_i\overline B_{\R^3}(0,R_{\mathrm{en}}/t)$ is compact and has finite positive Lebesgue measure when an active fluctuation coordinate is present. The support and the fluctuation product are Borel sets: the tests of the decomposition use finitely many Borel iterates of $T_M$ and finitely many inequalities, and the inverse coordinates and their dependence on frozen data are Borel by Step~3. Every indicator of a support or of an event of the decomposition is a Borel function $\chi$ with values in $[0,1]$. The conditional fluctuation potential $V$ is real and smooth on a neighborhood of $\mathcal K$, by the margins on the full product and the positive real constrained Hessians. In particular, for fixed data there exist finite numbers $V_{\min}$ and $V_{\max}$ bounding $V$ on $\mathcal K$, and
+\begin{equation}\label{ch20:eq:finite-white-normalizer}
+ 0<e^{-V_{\max}}\abs{\mathcal K}\le Z_{\mathcal K}=\int_{\mathcal K}e^{-V(w)}\,dw\le e^{-V_{\min}}\abs{\mathcal K}<\infty.
+\end{equation}
+No uniform bound on these extrema is needed for the normalization. The integrand is jointly Borel, and integration over each fixed compact product, after rescaling its balls to unit balls, preserves Borel dependence on the parameters, by the fact on parameter integrals recalled in Step~3. The comparison then applies to a measurable finite normalizing constant. For an empty active region the product has mass one, the nonconstant norm vanishes, the determinant is one, and the fluctuation integral is one. All factors independent of the field keep their places in the normalization constant.
+
+\paragraph{Step 10: stopping levels and the insertion interval.}
+We fix the finite family of stopping levels and remainders of \cref{ch19:thm:all-phase-window}, with finite constants for side ratios and conversions. Explicitly, for a scale $j$ and a starting level $b$ divisible by $J$, let $t_{\mathrm{align}}=J\lfloor(j-1)/J\rfloor$ and $u_{\mathrm{ph}}=j-1-t_{\mathrm{align}}\in\{0,\dots,J-1\}$. For each fixed offset $r_{\mathrm{stop}}\in\N_0$ of the family, the integrated sequence of RG steps ends at $t_{\mathrm{stop}}=t_{\mathrm{align}}-r_{\mathrm{stop}}J\ge b$. Every integrated step consists of $J$ averaging steps, and the remaining insertion at the stopping level is
+\begin{equation}\label{ch20:eq:full-macro-source-phase}
+ C\longmapsto Q_j^{\mathcal T}\bigl(T_M^{r_{\mathrm{stop}}J+u_{\mathrm{ph}}}C\bigr),\qquad
+ n_{t_{\mathrm{stop}}}=M^{r_{\mathrm{stop}}J+u_{\mathrm{ph}}}n_{j-1},\qquad n_{j-1}\in4\N.
+\end{equation}
+Indeed $j-1-t_{\mathrm{stop}}=r_{\mathrm{stop}}J+u_{\mathrm{ph}}$, and every level between $t_{\mathrm{stop}}$ and $j-1$ belongs to the given finite sequence of lattices, whose last side is $n_{j-1}\ge u\ge4$. These iterates of $T_M$ are defined, with the required pairs of integer lattices; a large side alone would not justify this. We use the conversion of predecessor sets for arbitrary fields, with its fixed constant $K_{\mathrm{src}}$, without adding a regularity test at the stopping level. The side ratio to $n_{j-1}$ is $M^{r_{\mathrm{stop}}J+u_{\mathrm{ph}}}\le\chi_*$, after taking the maximum over the fixed finite family. If no complete RG step fits, we apply the clause of the same theorem for a bounded side ratio at the starting measure, with the exponent $j-1-b$ and the side identity $n_b=M^{j-1-b}n_{j-1}$; in this case the exponent is bounded by the same fixed bound. Every remainder is kept as part of the insertion, and none requires an integrated step of fewer than $J$ averaging steps, a short recursion for the normalization constant, or a new output radius.
+
+We fix a covered large-field decomposition of length $\ell=t_{\mathrm{stop}}-b$, with the set $F$ of coarse links kept at the stopping level. We use the list $\mathcal P_{\mathrm{orig}}=\mathcal P_{j-1}^{\mathcal T}$ at scale $j-1$ and $Q_{\mathrm{orig}}(V)=Q_j^{\mathcal T}(T_M^{j-1-b}V)$, with the coefficient $4/h_{n_{j-1}}$. The exponent and the side identity in \eqref{ch20:eq:full-macro-source-phase} are the hypotheses of \cref{ch19:lem:compact-wilson-source-cap}. Using the full excluded sets and the enlarged count in \eqref{ch20:eq:coverage-counts}, we obtain, at every value $(c,b_{\mathrm{rec}})$ of the coarse field and the frozen coordinates,
+\begin{equation}\label{ch20:eq:compact-source-cap}
+ Q_{\mathrm{orig}}(V)\le K_W\mathcal V_{m;F}(c)/g_m^2+8F_J\sum_{f\in\mathcal X}n_{\ell_f}/\gamma,\qquad m=n_{t_{\mathrm{stop}}},\quad K_W=48K_1/\alpha_W,
+\end{equation}
+where $\mathcal X$ is the set of threshold failures of the decomposition, $n_{\ell_f}$ is the side at which $f$ was created, and $\mathcal V_{m;F}$ is the compact minimal action of \cref{ch19:lem:compact-wilson-source-cap}. We include both the predecessor insertion and the total-action insertion of \cref{ch19:thm:all-phase-window,ch19:lem:all-face-source-cap}, and enlarge $F_J$ to count all their affected plaquettes. Only then do we choose $s_0>0$ in the full interval of \cref{ch19:thm:all-phase-window}, in particular with $s_0K_W\le1/4$ and $s_0\le\theta c_A^{\mathrm{act}}d_*/(16F_J)$, where $\theta=1/2$, and we impose $s_0\le\kappa_0/(2\max\{K_M,48K_1\})$ for the total-action insertion. Each bound is fixed and positive before the coupling. We write $\Psi_F=\mathcal V_{m;F}$, $\lambda_s=1/2-sK_W\in[1/4,1/2]$, $P_0=4\theta c_A^{\mathrm{act}}d_*$, and $H_{\mathcal X}=\sum_fn_{\ell_f}/\gamma$. At every value of the coarse field and the frozen coordinates, the action bound and the gauge-invariant threshold tests imply
+\begin{equation}\label{ch20:eq:compact-source-budget}
+ sQ_{\mathrm{orig}}(V)-\frac{\Psi_F(c)}{2g_m^2}-\theta A_{\mathcal X}(b_{\mathrm{rec}})\le-\lambda_s\frac{\Psi_F(c)}{g_m^2}-\frac{3P_0}4H_{\mathcal X}.
+\end{equation}
+Indeed $\theta A_{\mathcal X}\ge P_0H_{\mathcal X}$ by the threshold tests, and $8sF_J\le P_0/8\le P_0/4$. We use this inequality in the sense of image measures, as in \eqref{ch19:eq:source-cap-pushforward}; no factorization of the full insertion through the coarse variables is asserted. The invariant density bound without weight has been extended to the whole configuration space before this multiplication. We complete its Wilson factor once, at the coefficient $\lambda_s$, using \eqref{ch19:eq:completed-source-envelope}. The scalar and completion factors attributable to the threshold failures are at most $P_0H_{\mathcal X}/4$ after the same choice of minimum side, which leaves $a_{\mathrm{act}}H_{\mathcal X}$ with $a_{\mathrm{act}}=P_0/2$. The constants for the stopping partition-function ratio are chosen uniformly for $\lambda_s\in[1/4,1/2]$, with $g_m^2\le\alpha_W$ and the fixed coupling bound $g_{\mathrm{anc}}$. The denominator is the same centered trial integral on the torus, and the partition function $Z_\nu$ of the starting measure is unchanged. This argument uses only the positive action bound, and it adds no constant and no further surface logarithm. It includes the decompositions of \cref{ch19:lem:compact-wilson-source-cap} that become empty early.
+
+We define $s_b$, $a_b$, and $\bar c$ as in item~(9). The full affected sets were fixed before this sequence of choices: an enlargement for the finite family affects only these later choices and $C_v,C_s,C_b,n_0$, never $J$ or an earlier analytic constant. We apply \cref{ch20:lem:unrestricted-window-onsets} with $\Gamma=\gamma_0$ to obtain the moment constants and their common minimum side; its hypotheses on the local product domains, the protection of older data, the norm bounds, and the insertions for the remainders have been checked above. Its surface coefficient is kept with $C_s\ge9\chi_*^2$.
+
+\paragraph{Step 11: the minimum side.}
+All geometric thresholds, including $8R_{\mathrm{cell}}$, $8S$, $8C_{\mathrm{SG}}/r$, and every fixed margin near flat configurations, are finite lower bounds on the side. We also fix a coupling bound $0<g_{\mathrm{anc}}<1$ for the stopping partition-function ratios of \cref{ch19:thm:classical-source-payment}, on the fixed intervals of coefficients of the Wilson action used in \cref{ch19:thm:all-phase-window}, whose lower endpoint is $1/4$. It depends on the fixed torus domains, $r$, the norm bounds, and that interval, and it is uniform in the depth, the side, and $\gamma$. We take $g_{\mathrm{end}}=\min\{1,g_*,g_{\mathrm{anc}},\sqrt{\alpha_W}\}>0$ and impose
+\begin{equation}\label{ch20:eq:endpoint-coupling-gate}
+ n_0\ge\gamma_0/g_{\mathrm{end}}^2,\qquad g_m=\sqrt{\gamma/m}\le g_{\mathrm{end}}\qquad(m\ge n_0,\ 0<\gamma\le\gamma_0).
+\end{equation}
+This verifies the completion at the stopping level, the uniform bound on the stopping partition-function ratio, and every coupling bound of an integrated averaging step. At the output of a complete RG step we have $g_m=\sqrt M\,t_{\max}$, and the coupling restriction at the stopping level is checked directly from the bound on the side; it is not inferred from $t_{\max}\le g_*$ alone. The two side conditions of the cover hold separately: an output after an RG step has side at least $u\ge n_0\ge8R_{\mathrm{cell}}$, and an input at the initial step has side at least $u\ge n_0\ge8S$. They need no congruence condition on $u$ beyond $u\in4\N$; an integrated step has input side $Bm$ with $m\in4\N$, and every intermediate side is at least four.
+
+We fix $r_{\mathrm{flat}}>0$ from \cref{ch11:lem:flat-lifts}, below $r$ and below all fixed margins of one RG step for the real classical action, the constraint, and the gauge transformations; these are uniform in the preceding depth and are fixed before $\gamma$. We impose, with strict inequality,
+\begin{equation}\label{ch20:eq:whole-flat-side}
+ 2\pi/n_0<\min\{r/2,r_{\mathrm{flat}}\}.
+\end{equation}
+\Cref{ch11:lem:flat-lifts} then applies at every $u\ge n_0$ and every finite $K$ for the same parameters: constant commuting links have distance at most $2\pi/u$ from the identity, the averaging steps preserve their holonomies, all free normalized fluctuation variables vanish, and all coordinate-domain conditions hold. This uses the uniform margin of that lemma near all flat configurations, not an open neighborhood of the flat set that depends on the cutoff.
+
+The factors attached to threshold failures and the ratios of the sums over decompositions are controlled by \cref{ch20:lem:scalar-gates}, with $x=m/\gamma$ and $k\le2$. The errors at the endpoints in \cref{ch19:lem:original-prefix-onsets} have the forms $C_JX_c$ and $C_JW_a$ with fixed positive exponents; the finite family of remainders adds only finitely many constants and ratios of scales. Explicitly, for every transition $0\le a<K$, we take the minimum side so large that the exterior error $z_a$ and the cutoff error $\delta_a$ of that lemma are at most $1/4$; the exterior error is the positivity condition on $d_t$ in the comparison of \cref{ch11:thm:admitted-white-comparison}. Then $z_a<1$ and $\epsilon_a=\delta_a/(1-z_a)\le1/3<1$, and every rejection estimate and every domination by reciprocals applies. The error $\epsilon_t$ of the regional comparison on the enclosing product domain in \cref{ch18:lem:enclosure-comparison} is likewise made at most $1/4$; in particular, every reduction through the auxiliary measure and its annular region has error strictly below one. We make the ratios of successive envelopes at most $1/2$, and the sum of the $\epsilon_a$ so small that every reciprocal product has logarithm at most one; this achieves $C_\delta=1$ before the final enlargement of $n_0$. The measures for the initial segments are defined up to $a=K$, but no quantity of a next transition is used at $a=K$; when $K=0$ these products and lists are empty.
+
+For the entropy, at $m\ge4$ and $x=m/\gamma\ge e$, the quantity $\mathcal A_\gamma(m)$ of \eqref{ch20:eq:entropy-per-cell} satisfies
+\[
+ \mathcal A_\gamma(m)\le D_0(1+\log x),\qquad D_0=1+24C_vM^3+C_sM^2(1+\log M)+C_b'/8,
+\]
+since $4/m\le1$, $8/m^3\le1/8$, and $\log(Mm/\gamma)=\log M+\log x$. Increasing $n_0$ makes this at most $a_bx/2$, uniformly in $\gamma$. The ratio with exponent $\bar c$ is made at most $1/2$ by \eqref{ch20:eq:tail-ratios}. These conditions become stronger as the minimum side increases.
+
+Finally we keep the exact correction at the initial scale from \cref{ch19:lem:original-prefix-onsets}. With $\beta=4N/\gamma\ge4N/\gamma_0\ge e$, its positive term divided by $\beta$ is at most
+\[
+ \frac{C_{\mathrm{LT}}\gamma_0}{4N}+\frac{9\gamma_0\log(4N/\gamma_0)}{N^2}\longrightarrow0,
+\]
+where we used that $1/\beta$ and $\log\beta/\beta$ are decreasing for $\beta\ge e$. We require this to be at most $d_*/4$. The exponent at the initial scale is then at most $-\beta d_*/32=-d_*N/(8\gamma)$, at all larger sides and all couplings in the interval. We choose $n_0\in4\N$ above this threshold and all preceding ones. The logarithmic correction at the initial scale is not replaced by a bound along a fixed sequence of sides.
+
+\paragraph{Step 12: the reconstruction maps and the identity of coarse fields.}
+The nested domains and the tolerances for coefficients and derivatives used in \cref{ch12:thm:replacement-family} are fixed. Its thresholds at fixed lattices can now be increased for the smaller inner image margins, by \cref{ch12:lem:deterministic-prolongation-reserve}: below the threshold the earlier bound holds, and above it the bound for the limit plus the same fixed tolerance holds. This increase therefore cannot enlarge $C_{\mathrm{CP}}$, $A_J$, $R_J$, or $\beta_J$. There are countably many pairs of finite lattices and preceding depths, and we fix the maps on all of them at once, rather than choosing a new limit or threshold at some coarse side. Each choice concerns classical maps on domains of free coordinates and has no argument depending on the coupling, the field, or an observation. The coarse fields, kernels, cutoffs, and Jacobians are preserved, by \cref{ch12:thm:replacement-family}.
+
+The bound on the reconstruction amplitude in \cref{ch12:lem:deterministic-prolongation-reserve} applies to these maps. To check its parameters, we fix $u\ge n_0$ and let $H=L/u$, $a_j=HB^{-j}$, and $g_3^2=\gamma/L$. Then
+\[
+ t_j=M^{(J-1)/2}g_3\sqrt{a_j},\qquad t_1^2=\gamma/(Mu)\le g_*^2,\qquad t_{j+1}=t_j/\sqrt B,
+\]
+where $t_1^2\le\gamma_0/n_0\le g_{\mathrm{end}}^2\le g_*^2$ by \eqref{ch20:eq:endpoint-coupling-gate}. Here $p(t_j)\ge1$. The free input is at most $t_jp(t_j)$, all products remain in the common working ball by \eqref{ch20:eq:cap-ceiling}, and $b_0\le r$. Then the amplitude bound and its sum give
+\begin{equation}\label{ch20:eq:side-uniform-forced-cap}
+ \begin{gathered}
+ b_j\le C_{\mathrm{cap},J}\bigl[r\alpha_*^j+g_3\sqrt{a_j}\,p(t_j)\bigr],\\
+ \sum_{j=1}^kb_{j-1}\le C_{\mathrm{cap},J}\bigl[r/(1-\alpha_*)+g_3\sqrt H\,(p(t_1)+1)\bigr].
+ \end{gathered}
+\end{equation}
+The constant does not depend on $H$, $u$, $\gamma$, or the length of the finite chain. We used the deterministic bound of \cref{ch12:lem:deterministic-prolongation-reserve}, not a stochastic bound at fixed $H$, and made no new choice at a coarse side.
+
+Finally, the path-length condition gives the identity of coarse fields, even before a test that may fail. In a representative whose link distances are at most $s$, a product of $l$ links has distance at most $ls$, by repeated use of the triangle inequality for the bi-invariant distance. The two tree paths have total length at most $3(M-1)$; adjoining the straight segment of $M$ links and the inverse of the reference path of $M$ links gives the closed paths of the based loop holonomies, of length at most $5M-3$. If $(5M-3)s<\pi$, all these based loop holonomies have principal logarithms. In \eqref{ch01:eq:ordinary-map}, the exponential of the average logarithm then has distance at most $(5M-3)s$, and multiplication by the reference transport gives the bound $(6M-3)s\le10Ms$. Starting from $s=r$, induction gives the link bound $(10M)^ir$ before averaging step $i<J$, so the condition $(5M-3)(10M)^{J-1}r<\pi$ covers each of the next $J$ averaging steps. For a next RG step with $0\le a<K$, the input side is $uB^{K-a}=M^Jm$ with $m=uB^{K-a-1}\ge n_0\ge4$, so each of these $J$ averaging steps has a valid pair of input and output lattices. There is no next step at $a=K$.
+
+For an arbitrary input in $D_r$, we apply this argument to a small periodic representative. Under a gauge transformation, the based loop holonomies are conjugated at their basepoint, and their distances and their membership in the exceptional set are unchanged. Conjugation commutes with the principal logarithm and with the exponential, and the reference transport transforms in the usual way at its endpoints. The same covariance holds for the Borel extension, since $-\Id$ is central. Then $T_M$ and all its iterates are gauge covariant, and the conclusion transfers back without taking a logarithm of the gauge transformation. On an initial segment that passes the tests, the current coarse field lies in $D_r$, and the same argument applies to the next coarse field. The inverse coordinates in \cref{ch11:def:literal-selection} satisfy the identity for one averaging step on this coordinate domain; composing the $J$ identities shows that the coarse field produced by the construction equals $T_M^J$ of the finer field, even when a later cutoff fails. A gauge transformation depending only on the coarse field and equal to the identity at the tree roots preserves this identity, as well as the kernels and Jacobians, by \cref{ch12:thm:replacement-family}.
+
+All local estimates were evaluated before the later widths, and all side conditions used fixed constants and the bound $\gamma_0$. This proves the stated dependences, and the absence of any dependence on the number of elapsed RG steps, on shapes, or on depths. The single choice of $J$ used only the $J$-uniform geometric constants and torus rates, the $J$-uniform series $Z$, and the finitely many coarse-field derivative bounds of the reconstruction maps at zero fluctuation; the full joint norms and the norms of the gauge transformations of the reconstruction maps were fixed after $J$. The full radii were restored only after complete RG steps, and the remainders were included in the fixed family of insertions. This completes the proof of \cref{ch20:thm:common-parameters}.
+
+\section{Parameters below an arbitrary coupling ceiling}\label{ch20:sec:finite-ceiling}
+
+In this subsection we prove \cref{ch20:thm:finite-ceiling-parameters}.
+
+\begin{proof}[Proof of \cref{ch20:thm:finite-ceiling-parameters}]
+We start with parameters given by \cref{ch20:thm:common-parameters} with $\gamma_0=1$. The argument works for every $J$ obtained from that construction; it does not select a new $J$. We keep its $J$, the analytic domains and rates on the torus and on block regions, the margins of the product domains for free coordinates, the cutoff amplitude, the widths of boundary layers, removed layers, and protected neighborhoods, the margins near flat configurations, $g_*$, the interval for $s$, the family of remainders, and the numbers $s_0$, $d_*$, $a_b$, and $\bar c$. Before the curvature threshold is chosen, $\delta_*$ is normalized to $(0,1]$, which keeps the range of \cref{ch04:thm:energy-near-contraction}. The parameters include $K_W$ and $g_*^2\le\alpha_W$, and the stopping partition-function ratio is controlled for coefficients in $[1/4,1/2]$ before the side is enlarged. The deterministic column bounds come from \cref{ch12:lem:deterministic-prolongation-reserve}; no stochastic estimate is used in this choice. All these quantities are constructed from the local results cited in \cref{ch20:thm:common-parameters}, whose hypotheses concern $g_i$, $t$, and fixed products and contain no upper bound on $\gamma$. In particular, the classical constants, the coefficient constants of the reconstruction maps, and the $J$-uniform constants are not chosen again using a later probability constant. The reconstruction maps of \cref{ch12:lem:deterministic-prolongation-reserve,ch12:thm:replacement-family} are fixed on the same countable family of pairs of finite lattices; they depend on deterministic domains, not on the coupling. Their exact identities and the margin $32/49$ are unchanged.
+
+At these parameters we apply \cref{ch19:thm:all-phase-window,ch19:lem:finite-ceiling-windows-and-prefixes} for the ceiling $\Gamma$, without a restriction on the number of averaging steps. We obtain $C_v,C_s,C_b$, and we set $C_b'=C_b+1+\log2$. Only the later probability constants and thresholds use these constants, so their possible dependence on $\Gamma$ creates no cycle with an earlier choice. We choose the final side at least $\Gamma/g_{\mathrm{end}}^2$ and above every earlier geometric and flat threshold. For every side $m\ge n_\Gamma$ of a stopping lattice we have $g_m^2=\gamma/m\le\Gamma/n_\Gamma\le g_{\mathrm{end}}^2$, and also $t_k^2=\gamma/(Mn_{(k+1)J})\le\Gamma/(Mn_\Gamma)\le g_{\mathrm{end}}^2\le g_*^2$. These inequalities verify the coupling bounds at the stopping level and for the integrated steps, respectively. The separately imposed flat thresholds give $2\pi/n_\Gamma<\min(r/2,r_{\mathrm{flat}})$. All inequalities involving local small parameters hold on $0<t\le g_*$, including every fixed power of $t$ multiplied by a logarithmic cutoff, and they hold at these sides on the new coupling interval.
+
+We apply \cref{ch20:lem:unrestricted-window-onsets}. At $x=m/\gamma\ge e$ we have
+\[
+ \mathcal A_\gamma(m)=24C_vM^3+\frac{4C_sM^2}{m}\log(Mm/\gamma)+\frac{8C_b'}{m^3}\le D_0(1+\log x),
+\]
+with the same $D_0=1+24C_vM^3+C_sM^2(1+\log M)+C_b'/8$ as in Step~11 of \cref{ch20:sec:parameter-proof}, since $m\ge4$. \Cref{ch17:lem:finite-ceiling-endpoint-gates} makes this at most $a_bx/2$ uniformly on $x\ge n_\Gamma/\Gamma$. The same lemma makes all ratios at the endpoints at most $1/2$ and the exterior errors at most $1/4$, and it makes the cutoff errors and the logarithms of the reciprocal products as small as prescribed; in particular $C_\delta\le1$. The ratio over scales satisfies $M^3e^{-\bar c(M-1)n_\Gamma/\Gamma}\le1/2$. The exact positive term at the initial scale, divided by $\beta$, is bounded by the vanishing expression in \cref{ch19:lem:finite-ceiling-windows-and-prefixes}. Finally, the constant $C^\Gamma_{\mathrm{ch},J}$ for the factors attached to threshold failures at the ceiling $\Gamma$ is absorbed there, before the moment constants and the final side are used. All these requirements become stronger as the minimum side increases, and we take their maximum, rounded up to an element of $4\N$.
+
+The amplitude bounds of \cref{ch12:lem:deterministic-prolongation-reserve} require only $t_1^2=\gamma/(Mu)\le g_*^2$ and the common working ball. The coupling condition just verified provides this, and under this hypothesis the bound is uniform in $H=L/u$ and $g_3$. The conditions from path lengths and the coordinate-domain conditions are deterministic in $r$, $M$, and $J$, and they are unchanged. The conditions listed in this proof are the only places where the proof of \cref{ch20:thm:common-parameters} uses the bound $\gamma\le\gamma_0$. Hence every conclusion of that theorem holds, with the same local dependences and with the fixed $\Gamma$ entering only the probability constants. No support radius or reconstruction map changes at a larger coarse side.
+\end{proof}
+
+\section{Every sufficiently large number of averaging steps}\label{ch20:sec:large-J}
+
+\Cref{ch26:chapter} compares the limits obtained along the sequences $n_*M^{JK}$ for two consecutive values of $J$, so it needs the construction of \cref{ch20:thm:common-parameters} for every sufficiently large $J$. No uniformity of the constants in $J$ is asserted.
+
+\begin{lemma}\label{ch20:lem:all-large-macro-depths}
+Fix $L>0$, an odd integer $M\ge3$, a ceiling $0<\Gamma\le1$, and the $J$-uniform constants in item~\textup{(1)} of \cref{ch20:thm:common-parameters}. There exists a finite $J_0$ such that, for every integer $J\ge J_0$, there exist a tuple $\Theta_J$, a positive local coupling bound $g_{*,J}$, and $n_{\mathrm{sf},J}\in4\N$, chosen before the coupling and the side, for which all conclusions of \cref{ch20:thm:common-parameters,ch20:thm:literal-payment} hold with $B=M^J$, simultaneously for
+\[
+ 0<\gamma\le\Gamma,\qquad u\in4\N,\ u\ge n_{\mathrm{sf},J},\qquad N=uB^K,\quad K\ge0.
+\]
+In particular, two consecutive values of $J$ can be fixed before $\gamma$ is varied. Neither the tuples nor any later constants or thresholds are asserted to be uniform in $J$.
+\end{lemma}
+
+\begin{proof}
+We verify the additional quantifier ``for all $J\ge J_0$'' in the proof of \cref{ch20:thm:common-parameters}; it is not inferred from the existence statement. We fix the outer rate on the torus, the boxes, and the analytic-radius enlargement factor $K_*$. The series for the conditional constrained minimizers at zero fluctuation of \cref{ch08:lem:aligned-zero-white,ch10:thm:whole-image-gauge} has a $J$-uniform majorant $Z(v)\le Cv/(1-Cv)$ and a $J$-uniform spatial rate. The finitely many coarse-field derivative bounds of the reconstruction maps at zero fluctuation, as opposed to the full analytic norm of their gauge transformations, are also $J$-uniform, by \cref{ch12:thm:replacement-family,ch12:lem:deterministic-prolongation-reserve}. The additional identity at fixed $J$ for hierarchical trees in \cref{ch08:lem:aligned-zero-white} does not change its $J$-uniform series, and only that series is used here. Thus all constants in the following list are fixed before $J$:
+\begin{equation}\label{ch20:eq:pre-J-lower-bounds}
+ \begin{gathered}
+ B\ge B_{\mathrm{geom}},\quad C_P(a_{\mathbb T})/B<1/4,\quad C_{\mathrm{CP}}^2/B\le1/4,\\
+ C_\bullet K_*/B<1/32,\quad C^{\mathbb T}_{\mathrm{geom}}b_{\mathbb T}/B\le a_{\mathbb T},\quad C_{\mathrm{cen}}/B<1/8,\quad B^{-1}\le\delta_0(a_{\mathbb T}).
+ \end{gathered}
+\end{equation}
+These are the conditions of item~(1) of \cref{ch20:thm:common-parameters} and \eqref{ch20:eq:torus-spatial-gate}; the rate $a_{\mathbb T}<a_{\mathrm{cen}}/8$ and the threshold $\delta_0(a_{\mathbb T})$ are fixed before $J$. The finitely many additional image conditions on first derivatives use the same series and derivative bounds; they are also strict lower bounds on $B$ with fixed finite right sides. The maximum of their thresholds is exceeded by $M^J$ for every $J\ge J_0$. This uses the exception for $J$-uniform constants in item~(2) of \cref{ch01:conv:constants}, not a bound on a joint free map.
+
+The constants $C_{\mathrm{alloc}}$ and $C_g$ in \cref{ch17:thm:carried-networks} do not depend on $J$. We choose $C^{\mathrm{geom}}_*\ge\max(1,C_g)$ and keep $B_{\mathrm{geom}}=256C_{\mathrm{alloc}}(C^{\mathrm{geom}}_*+1)$. For each fixed $J$ above the threshold we set $\alpha=a/16$, $m_{\mathrm{rate}}=C^{\mathrm{geom}}_*(a+\alpha)$, and $b_1=8C^{\mathrm{geom}}_*\alpha$. The inequalities against $Ba$ and $B\alpha$ reduce to
+\[
+ \frac{25}{16}C^{\mathrm{geom}}_*<B/C_{\mathrm{alloc}},\qquad 8C^{\mathrm{geom}}_*<B/C_{\mathrm{alloc}}.
+\]
+We decrease $a>0$ below the positive bounds at fixed $J$ from the initial spatial decay rate and the image exponent, and so that $\sqrt3\,(a+\alpha)<a_{\mathbb T}$. No further inequality on supports or connecting lengths remains.
+
+We also check the later choices. At each fixed $J$ there are finitely many product domains for initial segments. The positive lower bounds for the constrained Hessians and the radii of the inverses in \cref{ch16:lem:admitted-products,ch16:lem:strict-two-radius-images} have a positive finite minimum, and the coordinate, analytic, and reconstruction domains are chosen within them. The contraction on the torus satisfies $q_{\mathrm{CA}}<1/4$, and the bound $E\ge2C_G/(1-q_{\mathrm{CA}})$ is finite by \cref{ch10:thm:common-analytic-class}. The preliminary perturbation bound, the radius of the enclosing product domain, and the image bounds of \cref{ch17:lem:complete-white-potential,ch17:thm:controlled-kernel} can be chosen positive on the fixed domains at this $J$. The widths of boundary layers and removed layers can be increased after their output constants are computed, and the bound for frozen coordinates, the working radius, and the support radius can then be decreased. In particular, $(5M-3)(10M)^{J-1}r<\pi$ is an upper bound on $r$, not on $J$.
+
+The bound on derivatives follows the same order of choices. Its linear coefficient is $\alpha_*=C_{\mathrm{CP}}/B$, and by \eqref{ch20:eq:pre-J-lower-bounds} we have $\alpha_*\sqrt B\le1/2$. At this fixed $J$, $\beta_J$ is finite by \cref{ch12:lem:deterministic-prolongation-reserve}. The restriction $\beta_Jr_{\mathrm{eff}}/(1-\alpha_*)<1/8$ implies $\beta_Jr_{\mathrm{eff}}<1/8$, and hence
+\[
+ a_{\mathrm{map}}\sqrt B\le\frac{1/2}{(1-\beta_Jr_{\mathrm{eff}})^2}\le\frac{32}{49}.
+\]
+This requires no new choice of $J$. The remaining conditions for the fluctuations and the interaction are finitely many inequalities $C_Jt^\varepsilon\log^b(1/t)\le c_J$ with $\varepsilon,c_J>0$, including the fixed additive term $A_{\mathrm w}(J-1)\log M/2$ in a logarithmic radius. They hold after decreasing $g_{*,J}>0$, by \cref{ch20:lem:scalar-gates}.
+
+We next check items~(7)--(10). We normalize $0<\delta_*\le1$ before fixing $d_{\mathrm{cut}}$. The product domains, the block-aligned initial mesh $S$, the classical lower bound $\alpha_W>0$, the count $F_J$, and the constant for the normalization factors are all fixed at this $J$. By \cref{ch19:lem:compact-wilson-source-cap}, $K_W=48K_1/\alpha_W<\infty$ and the insertion satisfies
+\[
+ Q_{\mathrm{orig}}\le K_W\mathcal V_{m;F}/g_m^2+8F_J\sum_fn_{\ell_f}/\gamma.
+\]
+We enlarge $F_J$ for the finitely many remainders. The interval of \cref{ch19:thm:all-phase-window} allows
+\[
+ 0<s_0\le\min\Bigl\{\frac12,\ \frac{\kappa_*}2c_E^{-(J-1)},\ \frac1{4K_W},\ \frac{\theta c_A^{\mathrm{act}}d_*}{16F_J},\ \frac{\kappa_0}{2\max\{K_M,48K_1\}},\ s_{\mathrm{short},J}\Bigr\},
+\]
+where $s_{\mathrm{short},J}>0$ is the minimum of its finitely many conditions for short scale intervals and $\theta=1/2$. Every entry is positive once $J$ is fixed, and $\lambda_s=1/2-sK_W\in[1/4,1/2]$. The action bound keeps at least $3P_0/4$ of the coefficient of the threshold failures, with $P_0=4\theta c_A^{\mathrm{act}}d_*$, and the later scalar threshold uses at most $P_0/4$, so that $P_0/2$ remains. The compact minimum in the action bound uses the partition function of the starting measure once; no factorization of the insertion through the coarse variables is needed. We decrease $g_{*,J}>0$ to impose $g_{*,J}^2\le\alpha_W$ and every local condition already listed. We choose the bounds for the stopping partition-function ratio and its numerator on the fixed interval $[1/4,1/2]$, and let $g_{\mathrm{end},J}>0$ be their minimum with $1$ and $g_{*,J}$. Finally, we increase the minimum side to include $n_{\mathrm{sf},J}\ge\Gamma/g_{\mathrm{end},J}^2$ and all fixed geometric and scalar thresholds and the thresholds for initial segments. The latter are conditions on the minimum side, by \cref{ch19:lem:original-prefix-onsets}; for $\Gamma\le1$ their uniform scalar thresholds also follow from \cref{ch20:lem:scalar-gates}.
+
+These are exactly the later choices in \cref{ch20:thm:common-parameters}, and none of them requires enlarging $J$ using a constant already computed at that $J$. By \cref{ch20:thm:shell-induction,ch20:thm:literal-payment}, we then obtain the bound on the small-field failure probability on $0<\gamma\le\Gamma$. The positive exponent $\min(5/24,1/2,-\log q_{\mathrm{CP}}/\log B)/2$ of \cref{ch20:rem:flow-exponents} is also available at each fixed $J$.
+\end{proof}
+
+\begin{corollary}\label{ch20:cor:finite-ceiling-macro-depths}
+Fix $L>0$, an odd integer $M\ge3$, and $0<\Gamma<\infty$. There exists a finite $J_0$ such that, for every $J\ge J_0$, there are a tuple $\Theta_J$, $g_{*,J}>0$, and $n_{\Gamma,J}\in4\N$, fixed before $\gamma$, the side, and the number of renormalization group steps, for which every conclusion of \cref{ch20:thm:finite-ceiling-parameters,ch20:thm:finite-ceiling-payment} holds on $0<\gamma\le\Gamma$ with this prescribed $J$. In particular, consecutive values of $J$ can be fixed before the coupling. No constant or threshold is asserted to be uniform in $J$.
+\end{corollary}
+
+\begin{proof}
+We apply \cref{ch20:lem:all-large-macro-depths} with the ceiling one. Its check of the $J$-uniform conditions provides $J_0$ and parameters for $\gamma\le1$ for every $J\ge J_0$. The constant $K_W=48K_1/\alpha_W$ is fixed after the classical lower bound $\alpha_W$ and before $s_0$, and the normalization $\delta_*\le1$ is fixed before the curvature threshold; neither changes a $J$-uniform lower bound on $B=M^J$ or imposes an upper bound on $J$. The interval for $s$ is a finite minimum of positive numbers at fixed $J$, and the coupling bound at the endpoints is positive. For each prescribed $J\ge J_0$, we apply the construction in the proof of \cref{ch20:thm:finite-ceiling-parameters} to these parameters. That construction changes only the later probability constants and the final minimum side, and it keeps this $J$ and the deterministic bounds of \cref{ch12:lem:deterministic-prolongation-reserve}. By \cref{ch20:thm:finite-ceiling-payment}, we then obtain the bounds for all finite numbers of RG steps on the interval $0<\gamma\le\Gamma$. For two values $J$ and $J+1$ one may take the larger of the two minimum sides, with no uniformity as $J$ varies.
+\end{proof}

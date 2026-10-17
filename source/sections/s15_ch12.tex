@@ -1,0 +1,1007 @@
+\chapter{Conditional kernels and reconstruction maps}\label{ch12:chapter}
+
+In this section we prove that the renormalization group construction on the small-field event converges at every fixed resolution. That is, we fix the side $n_0$ of the coarse lattice and a number $l$ of RG steps counted from the coarse side, and we let the total number $k$ of RG steps tend to infinity. At a fixed resolution all objects are finite dimensional. In \Cref{ch12:thm:fixed-resolution-cutoff}, we show that one RG step contracts effective interactions in the weighted analytic coefficient norm, uniformly in the lattice side and in the preceding depth, and we deduce the convergence of the effective interactions and of the stopped measures at each fixed level. \Cref{ch12:thm:white-kernel-limit} proves the convergence of the conditional fluctuation kernels, and \cref{ch12:lem:backward-law} writes the conditioned Wilson measure as an iteration of these kernels. In \Cref{ch12:thm:replacement-family}, we construct the reconstruction maps $\RepMap$, and in \cref{ch12:thm:representative-prefixes} we prove that the finite-scale reconstructions converge in law. \Cref{ch12:lem:deterministic-prolongation-reserve} gives amplitude bounds for the reconstruction that are uniform in the mesh and in the coupling, and \cref{ch12:lem:finite-ceiling-compact-prefixes} makes the convergence uniform for the coupling in compact subintervals of $(0,\infty)$. The inputs are the classical convergence and the bounds for the zero-fluctuation reconstruction of \cref{ch08:thm:classical-cutoff,ch08:lem:aligned-zero-white}, and the density and the cluster expansion of one RG step (\cref{ch09:thm:sequential-density,ch09:thm:supported-log-holomorphy,ch09:cor:supported-mark-two-powers}). We also use the gauge transformations and the invariant ball of \cref{ch10:thm:whole-image-gauge,ch10:thm:common-analytic-class}, and the identification of the auxiliary integral with the conditioned Wilson measure (\cref{ch11:thm:all-point-torus-chart,ch11:thm:deep-buffer-law}). The later sections approximate the flowed field by the field reconstructed from finitely many RG steps (\cref{s3:fixed,s3:stochastic}). \Cref{ch13:chapter,ch14:chapter,ch23:chapter,ch24:chapter,ch25:chapter,ch26:chapter,ch27:chapter,ch28:chapter,ch29:chapter,ch30:chapter,ch31:chapter,ch32:chapter} use the reconstruction maps, the conditional kernels, the convergence of finite-scale reconstructions, and the amplitude bounds, and \cref{ch20:chapter} uses the deterministic constants and the order in which they are chosen.
+
+The splitting of the fine field into a constrained minimizer and normalized fluctuations, and the integration of the fluctuations scale by scale, are Bałaban's \cite{Balaban1985Variational,Balaban1985UV,Balaban1988Convergent}. We combine the standard renormalization group contraction with the cluster expansion estimates of \cref{ch09:chapter} to obtain the limits of the conditional kernels and a compatible family of representatives for this construction. These estimates go back to Kotecký and Preiss \cite{KoteckyPreiss1986} and use the finite tree-graph bound in Dimock's exposition \cite[Appendix~B]{Dimock2013v2}. The selection of a holomorphic subsequence is the normal-family argument in finitely many variables, and the limits follow from the contraction in the usual way.
+
+\section{Scales, measures, and conventions}\label{ch12:sec:setup}
+
+Throughout this section $L>0$ is fixed, $M\ge3$ is odd, $J\ge1$, and $B=M^J$. One averaging step is one application of the block averaging map $\Block$ of \cref{ch01:def:block-map}, and one RG step consists of $J$ averaging steps. We fix the side $n_0\in4\N$ of the coarse lattice, let $H=L/n_0$, and for $j\ge0$ set
+\[
+ n_j=n_0B^j,\qquad a_j=HB^{-j},\qquad g_j^2=\frac{\gamma}{n_j}=g_3^2a_j .
+\]
+We call $\Lat{n_j}$ the lattice of level $j$. If the finest lattice has level $k$, the lattices form the chain
+\[
+ \Lat{n_0}\xleftarrow{\ \Macro\ }\Lat{n_1}\xleftarrow{\ \Macro\ }\cdots
+ \xleftarrow{\ \Macro\ }\Lat{n_k}.
+\]
+The fluctuations are integrated from right to left, toward coarser lattices, and the fine field is reconstructed from left to right. The number of averaging steps between the finest lattice and level $j$ is
+\[
+ d_j^k=J(k-j),
+\]
+and we call it the preceding depth at level $j$. The RG step from level $j$ to level $j-1$ has $J$ intermediate scales, indexed by $0\le i<J$, with couplings
+\[
+ g_{j,i}=t_jM^{(i-J+1)/2},\qquad
+ t_j=M^{(J-1)/2}g_j=g_{j-1}/\sqrt M .
+\]
+Here $t_j$ is the largest of these couplings, and the ratios $g_{j,i}/t_j$ are fixed powers of $M$. With $p(t)=A_{\mathrm w}\log(1/t)$ we write $p_j=p(t_j)$. The normalized fluctuation variables $w_j=(w_{j,i,e})$ of this RG step are restricted to the fluctuation cutoff domain $\Omega_{p_j}$, the product of the three-dimensional balls $\{\abs{w_{j,i,e}}\le p_j\}$; it does not depend on $k$. We write $q_{j,i}=g_{j,i}w_{j,i}$ for the coupling-scaled fluctuation inputs of the reconstruction. Since the inverse square roots of the constrained Hessians remain inside the reconstruction maps, $q_{j,i}$ is not a free logarithmic coordinate of the fiber.
+
+\paragraph{The three measures.}
+Let
+\[
+ \nu^k=\SelectedLaw{n_0B^k}{n_0}{\gamma}
+\]
+be the conditioned Wilson measure of \cref{ch01:def:selected-law}, with the small-field event of \cref{ch01:eq:literal-event} and \cref{ch11:def:literal-selection}. In the comparison notation, the comparison index $s$ gives $n_s=n_*B^s$, $H_s=L/n_s$, and $\nu_{K,s}=\SelectedLaw{N_K}{n_s}{\gamma}$ with $N_K=n_*B^K$. Then $n_0=n_s$ and $k=K-s$, the meshes of the reconstruction are $a_j=H_sB^{-j}$, $0\le j\le K-s$, and the preceding depths are $J(K-s-j)$. At level $j$ three different measures occur.
+\begin{enumerate}
+\item The marginal of $\nu^k$ at level $j$, that is, the law of $V^{d_j^k}$ under $\nu^k$.
+\item The stopped measure $\StoppedLaw_j^k$ of \cref{ch12:thm:fixed-resolution-cutoff}. It is obtained by integrating out the finer levels and imposing the small-field restrictions only up to level $j$.
+\item The conditional fluctuation kernel $k_j^k(\theta,dw)$ of \cref{ch12:thm:white-kernel-limit}, the conditional law of the fluctuation variables of the RG step from level $j$ to level $j-1$ given the field $e^\theta$ at level $j-1$.
+\end{enumerate}
+The marginal in (1) also carries the restrictions at the coarser levels $j-1,\ldots,0$, and in general it differs from the stopped measure. At the coarse level $j=0$ no coarser restriction remains, and (1) and (2) coincide (\cref{ch12:lem:terminal-selector-tv}). The kernel (3) does not change when coarser restrictions are imposed, once the field at level $j-1$ has been fixed (\cref{ch12:thm:white-kernel-limit}).
+
+\paragraph{Effective interactions.}
+We write functions of a configuration near the identity in logarithmic coordinates, $R(e^\xi)$, and use the norm
+\[
+ \Anorm{\rho}{\asp}{R}=\sum_{m\ge2}\frac{\rho^{m-2}}{m!}\norm{D^mR(0)}_{\asp,\mathrm{root}}
+\]
+of \cref{ch01:def:analytic-norms}. The tensor norm fixes one index, sums the absolute values of the coefficients over the remaining indices with the weight $e^{\asp\Tree}$, where $\Tree$ is the length of a shortest connected network through the locations of the indices, and takes the supremum over the fixed index. For maps between lattices of different meshes the input-fixed sums carry the volume factor $a_{\mathrm{out}}^3/a_{\mathrm{in}}^3$ of \cref{ch01:def:analytic-norms}; we call them volume-normalized column sums. A function $R$ on $B_\rho$ is invariant under gauge transformations within $B_\rho$ if $R(U^h)=R(U)$ whenever $U$ and $U^h$ both lie in $B_\rho$, as in \cref{ch10:def:image-and-overlap-gates}; then $R_{\mathrm{sat}}(U)=R(U^h)$ for $U^h\in B_\rho$ defines its gauge-invariant extension to $D_\rho$. For a lattice $\Lambda$ and the parameters $\rho,\asp,E$ fixed in \cref{ch12:thm:fixed-resolution-cutoff}, let $\mathcal A_E=\mathcal A_E(\Lambda)$ be the set of functions $R$ given by an absolutely convergent Taylor series on $B_\rho$ that are real on real configurations, invariant under lattice translations, the spatial inversion, global color rotations, and gauge transformations within $B_\rho$, and satisfy
+\[
+ R(I)=0,\qquad DR(I)=0,\qquad \Anorm{\rho}{\asp}{R}\le E .
+\]
+These are the symmetries of the recursion of \cref{ch10:thm:common-analytic-class,ch11:thm:deep-buffer-law}. The norm $\mathcal B_{\rho,\asp}$ vanishes on constants.
+
+\paragraph{Constants.}
+A constant denoted $C_J$, $c_J$, or similar depends only on $M$, $J$, the fixed larger construction domains and their radius ratios, the spatial exponents, the factor $K_*$, and the norm ceilings. It is independent of the lattice side and of the preceding depth; this is the dependence described in item~(2) of \cref{ch01:conv:constants}. A subscript $\Lambda$ allows, in addition, dependence on a fixed lattice pair. Such constants occur only in convergence moduli and never in the estimates that are used to choose $J$. We write $\norm{\mu-\nu}_{\TV}=\sup_A\abs{\mu(A)-\nu(A)}$ for the total variation distance.
+
+\section{Finite-dimensional analytic bounds and product domains}\label{ch12:sec:analytic}
+
+We begin with three elementary facts about total variation, which are used repeatedly below.
+
+\begin{lemma}\label{ch12:lem:tv-tools}
+\begin{enumerate}
+\item Let $\mu$ be a $\sigma$-finite measure on a measurable space $X$, and let $V,V'$ be real measurable functions on $X$ with $\sup_X\abs{V-V'}\le\delta$ and $0<\int e^{-V}d\mu<\infty$. Let $\pi$ and $\pi'$ be the probability measures proportional to $e^{-V}\mu$ and $e^{-V'}\mu$. Then the ratio of their normalizers lies in $[e^{-\delta},e^\delta]$, the density $d\pi'/d\pi$ takes values in $[e^{-2\delta},e^{2\delta}]$, and
+\[
+ \norm{\pi-\pi'}_{\TV}\le e^{2\delta}-1 .
+\]
+\item Let $\eta,\eta'$ be probability measures on a measurable space $X_0$, and for $1\le j\le l$ let $K_j,K_j'$ be probability kernels from $X_0\times\cdots\times X_{j-1}$ to $X_j$. Then $P=\eta K_1\cdots K_l$ and $P'=\eta'K_1'\cdots K_l'$ satisfy
+\[
+ \norm{P-P'}_{\TV}\le\norm{\eta-\eta'}_{\TV}
+ +\sum_{j=1}^l\sup_h\norm{K_j(h,\cdot)-K_j'(h,\cdot)}_{\TV}.
+\]
+\item Let $P,P'$ be probability measures on a measurable space $X$, and let $F,F'$ be measurable maps from $X$ into a set $\mathcal K$ of diameter at most $D_*$ in a finite-dimensional normed space. Put $\norm{F-F'}_\infty=\sup_X\norm{F-F'}$. For every bounded real function $f$ that is uniformly continuous on $\mathcal K$, with modulus of continuity $\omega_f$,
+\[
+ \Bigl\lvert\int f(F)\,dP-\int f(F')\,dP'\Bigr\rvert
+ \le2\norm f_\infty\norm{P-P'}_{\TV}+\omega_f(\norm{F-F'}_\infty),
+\]
+and
+\[
+ W_1(F_*P,F'_*P')\le\norm{F-F'}_\infty+D_*\norm{P-P'}_{\TV}.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (1), let $Z,Z'$ be the two normalizers. Since $e^{-\delta}e^{-V}\le e^{-V'}\le e^{\delta}e^{-V}$, we have $e^{-\delta}Z\le Z'\le e^\delta Z$. The density $d\pi'/d\pi=e^{V-V'}Z/Z'$ therefore lies in $[e^{-2\delta},e^{2\delta}]$. For an event $A$ we have $\abs{\pi(A)-\pi'(A)}\le\int\abs{1-d\pi'/d\pi}\,d\pi\le e^{2\delta}-1$, where we used $1-e^{-2\delta}\le e^{2\delta}-1$.
+
+For (2), first observe that a measurable function $u$ with values in $[0,1]$ satisfies $\abs{\int u\,d\mu-\int u\,d\mu'}\le\norm{\mu-\mu'}_{\TV}$ for probability measures $\mu,\mu'$; indeed $u=\int_0^1\one_{\{u>s\}}\,ds$. We replace first $\eta$ by $\eta'$, and then the kernels one at a time. Fix an event $A$ in the product space. Since the function obtained by integrating $\one_A$ against $K_1\cdots K_l$ takes values in $[0,1]$, the first replacement changes the probability of this event by at most $\norm{\eta-\eta'}_{\TV}$. In the replacement of $K_j$ by $K_j'$, the integral of $\one_A$ against the later kernels is again a $[0,1]$-valued function of $(h,x_j)$, and the change is at most $\sup_h\norm{K_j(h,\cdot)-K_j'(h,\cdot)}_{\TV}$. Summing these changes proves (2).
+
+For (3), we have
+\[
+ \Bigl\lvert\int f(F)\,dP-\int f(F')\,dP'\Bigr\rvert
+ \le\int\abs{f(F)-f(F')}\,dP+\Bigl\lvert\int f(F')\,dP-\int f(F')\,dP'\Bigr\rvert .
+\]
+The first term is at most $\omega_f(\norm{F-F'}_\infty)$. For the second, the function $(f(F')+\norm f_\infty)/(2\norm f_\infty)$ takes values in $[0,1]$, and the observation in the proof of (2) bounds it by $2\norm f_\infty\norm{P-P'}_{\TV}$. For the Wasserstein bound, let $\lambda=P+P'$, let $u,u'$ be the densities of $P,P'$ with respect to $\lambda$, and set $m=\min(u,u')$ and $\vartheta_0=\int m\,d\lambda=1-\norm{P-P'}_{\TV}$. If $\vartheta_0=1$ then $P=P'$ and we couple $x$ with itself. Otherwise let $\Gamma$ be the sum of the image of $m\lambda$ under $x\mapsto(x,x)$ and of the product measure $(1-\vartheta_0)^{-1}(u-m)\lambda\otimes(u'-m)\lambda$. Its marginals are $P$ and $P'$, and it gives mass at least $\vartheta_0$ to the diagonal. Then
+\[
+ \int\norm{F(x)-F'(x')}\,d\Gamma(x,x')\le\norm{F-F'}_\infty+(1-\vartheta_0)D_*,
+\]
+and $(F\times F')_*\Gamma$ couples $F_*P$ and $F'_*P'$. This completes the proof.
+\end{proof}
+
+In particular, for the bounded-Lipschitz distance, whose test functions are bounded by one and have Lipschitz constant at most one, part (3) gives the bound $2\norm{P-P'}_{\TV}+\norm{F-F'}_\infty$.
+
+\paragraph{Box supports.}
+The cluster expansion of \cref{ch09:chapter} assigns interactions to connected sets of boxes. We partition each periodic coordinate direction of the coarse lattice into intervals of integer length between $\mathscr L$ and $2\mathscr L$, or use one interval when the direction is shorter than $\mathscr L$, as in \cref{ch09:def:supported-coefficient-norms}. The products of these intervals are the boxes. Each scalar variable has a fixed location in the torus, as in \cref{ch01:def:analytic-norms}; the coarse field has nine scalar components (three orientations and three colors) at each vertex. The first lemma bounds the length of a network through the locations of the coarse-field variables in a connected set of boxes.
+
+\begin{lemma}\label{ch12:lem:target-support-geometry}
+Fix an integer $\mathscr L\ge1$ in units of the coarse lattice. There exists a constant $C_{\mathrm{box}}(\mathscr L)$, depending only on $\mathscr L$ and on the fixed metric and location conventions, such that every nonempty connected set $Y$ of boxes satisfies
+\begin{equation}\label{ch12:eq:target-support-geometry}
+ \Tree(\text{locations of the coarse-field variables in }Y)\le C_{\mathrm{box}}(\mathscr L)\abs Y .
+\end{equation}
+The constant is independent of the side of the torus, the preceding depth, $J$, the couplings, the degree of a coefficient, and the density of the fluctuation variables. The bound also holds for every subset or repeated list of these locations, and for every union of connected box sets whose intersection graph is connected.
+\end{lemma}
+
+\begin{proof}
+Set $q=2\mathscr L+2$, and let $c_{\mathrm{met}}\ge1$ bound the length of a coordinate segment of unit length and the distance from the location of a link variable to an endpoint of the link. A lifted box, together with a collar of one cell for the locations of its link variables, lies in an integer cube of side at most $q$. The coordinate grid of this cube has at most $3q(q+1)^2$ edges. There are at most $9(q+1)^3$ locations of scalar variables in the cube, and we attach each of them to a grid point by a segment of length at most $c_{\mathrm{met}}$. This gives a connected network of length at most $12c_{\mathrm{met}}(q+1)^3$ containing every such location in the box.
+
+Fix a grid vertex in each box. A traversal of the connected box graph selects $\abs Y-1$ adjacencies that connect all boxes. For each selected adjacency we join the two chosen grid vertices by a periodic coordinate path. Since the boxes are adjacent, this path has length at most $c_{\mathrm{met}}(6q+3)\le9c_{\mathrm{met}}q$. These paths and the grids form one connected network containing all these locations in $Y$, so we may take
+\[
+ C_{\mathrm{box}}(\mathscr L)=c_{\mathrm{met}}\{12(q+1)^3+9q\}.
+\]
+In a periodic direction shorter than $\mathscr L$ we project the grid of the cube to the torus, which can only decrease its length; for an adjacency across the periodic boundary we use a shortest periodic coordinate path, which obeys the same bound. No lower bound on the side in terms of $\mathscr L$ was used. Repeated labels occupy the same location, and restricting the list of locations requires no new segment. Finally, a union of connected box sets whose intersection graph is connected is itself a connected box set, so the bound applies to it with its own cardinality.
+\end{proof}
+
+The next lemma makes the support assignment of \cref{ch09:lem:supported-activities} explicit. It assigns a connected box set to a coefficient and bounds the resulting support-counting factor by the length of the network of the coefficient.
+
+\begin{lemma}\label{ch12:lem:box-assignment}
+Fix deterministic choices of shortest paths. Let $N\ge1$ points be given, together with a connected network of length $\ell$ containing them. Join the points by a minimal spanning tree, replace each edge of the tree by its three coordinate segments along shortest periodic displacements, and let $Y$ be the set of boxes met by the resulting network, including the boxes of the points. Then $Y$ is a nonempty connected box set. There exist constants $c_0,C_{\mathrm{geom}}\ge1$ depending only on the metric conventions, and a constant $C_{\mathscr L}$ depending only on $\mathscr L$ and the metric conventions, such that
+\begin{equation}\label{ch12:eq:box-assignment-size}
+ \abs Y\le c_0\Bigl(N+1+\frac{C_{\mathrm{geom}}\ell}{\mathscr L}\Bigr),
+ \qquad \dist(x,u)\le C_{\mathrm{geom}}\ell+C_{\mathscr L}
+\end{equation}
+for every box $x\in Y$ and every given point $u$, where the distance is measured from a fixed point of the box. Consequently, for $h,\mu>0$ and
+\[
+ K\ge e^{hc_0},\qquad \beta\ge C_{\mathrm{geom}}\Bigl(\frac{hc_0}{\mathscr L}+\mu\Bigr),\qquad
+ C_h=e^{hc_0+\mu C_{\mathscr L}},
+\]
+we have
+\begin{equation}\label{ch12:eq:box-assignment-weight}
+ \one_{\{x\in Y\}}e^{h\abs Y}\le C_hK^Ne^{\beta\ell}e^{-\mu\dist(x,u)}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+A minimal spanning tree on the $N$ points has at most $N-1$ edges, and its length is at most twice the length of any connected network containing the points; indeed, traversing such a network twice and shortcutting between successive points gives a path through all of them. The comparison between coordinate segments and the metric, together with this factor two, is included in $C_{\mathrm{geom}}$. A coordinate segment of length $l'$ meets at most a fixed multiple of $2+l'/\mathscr L$ boxes. Summing over the at most $3(N-1)$ segments gives the first bound in \eqref{ch12:eq:box-assignment-size}. The second follows by moving along the network from $u$ to the box $x$ and then inside the box. Inserting \eqref{ch12:eq:box-assignment-size} into $e^{h\abs Y}$ and using $\mu\dist(x,u)\le\mu C_{\mathrm{geom}}\ell+\mu C_{\mathscr L}$, we obtain \eqref{ch12:eq:box-assignment-weight}.
+\end{proof}
+
+\paragraph{Order of the spatial choices.}
+We now fix the spatial parameters, in an order that keeps them independent of $J$. Fix a decay rate $b>0$ strictly below the common spatial rate of the classical and image bounds of \cref{ch08:lem:aligned-zero-white,ch10:thm:whole-image-gauge,ch10:thm:common-analytic-class}. We choose $\mathscr L$ using this rate alone, so that $8c_0C_{\mathrm{geom}}/\mathscr L\le b/4$. We fix $\mu>0$ with $C_{\mathrm{geom}}\mu\le b/4$; this sets aside a part of $b$ for summing over the distance between a box and the location of a variable. With $h=8$ and $K=e^{8c_0}$ in \cref{ch12:lem:box-assignment}, the factor $K^N$ is absorbed by multiplying every input radius by $K$; we take the factor $K_*\ge2$ of \cref{ch10:thm:common-analytic-class} so large that $K<4K_*$, so that these enlarged radii stay inside the products of \cref{ch12:lem:product-reserves} below. Next we choose the spatial exponent $\asp$ of the effective interactions so that
+\begin{equation}\label{ch12:eq:pre-J-spatial-gates}
+ \begin{gathered}
+ 0<\asp<\min\{b/4,a_{\mathrm{cen}}/8\},\qquad
+ \asp C_{\mathrm{box}}(\mathscr L)\le2,\\
+ C_P(\asp)/B<1/4,\qquad
+ C_{\mathrm{geom}}b/B\le\asp ,
+ \end{gathered}
+\end{equation}
+where $C_P$ is the constant of \cref{ch08:thm:principal-contraction}. The condition $\asp<a_{\mathrm{cen}}/8$, where $a_{\mathrm{cen}}$ is the rate of \cref{ch08:lem:aligned-zero-white}, is the restriction imposed in \cref{ch10:thm:common-analytic-class}. Indeed, the zero-fluctuation reconstruction used below is the representative of \cref{ch08:lem:aligned-zero-white}, and \cref{ch08:thm:principal-contraction} gives the contraction for this representative only at output rates below $a_{\mathrm{cen}}/8$, with the constant $C_P(\asp)$ at the rate $\asp$. The first two conditions determine $\asp$ after $\mathscr L$. Only then do we choose $J$, so that the last two conditions and the condition $M^{-J}Z(4K_*\rho)\le\rho/4$ of \cref{ch10:thm:common-analytic-class} hold. All constants in these conditions are fixed before $J$, and $M^{-J}\to0$, so they hold for all large $J$. The scale $\mathscr L$ is not chosen again after $\asp$ or $J$, and no exponent is decreased during the iteration. In the common parameter choice of \cref{ch20:thm:common-parameters}, the torus exponent denoted $\asp$ in this section is $a_{\mathbb T}$, distinct from the smaller regional boundary exponent chosen after $J$. By \eqref{ch12:eq:target-support-geometry}, these choices give
+\[
+ \asp\Tree\le2\abs Y
+\]
+for the locations of the coarse-field variables in every connected box set $Y$, including subsets and repetitions of these locations. This inequality does not involve a radius.
+
+\paragraph{Nested analytic product domains.}
+The next lemma fixes the complex products on which the reconstruction is controlled.
+
+\begin{lemma}\label{ch12:lem:product-reserves}
+Let $C_{\mathrm{im},J}$ and $r_J$ be the constants of \cref{ch10:thm:whole-image-gauge}, and let
+\[
+ \mathfrak M_J(u,v)=B^{-1}Z(u)+\frac{C_{\mathrm{im},J}v}{1-C_{\mathrm{im},J}(u+v)}
+\]
+be its row majorant. Before the radius $r$ of the small-field domain and the coupling ceiling are chosen, the common product of coarse-field and fluctuation-input variables can be fixed with radii $u_\circ=4K_*\rho$ and $v_\circ=4K_*s_J$, such that
+\begin{equation}
+ \begin{gathered}
+ u_\circ+v_\circ<r_J,\qquad
+ C_{\mathrm{im},J}(u_\circ+v_\circ)\le1-\eta_{\mathrm{im}}<1,\\
+ B^{-1}Z(u_\circ)\le\rho/4,\qquad
+ \mathfrak M_J(u_\circ,v_\circ)<\rho/2
+ \end{gathered}\label{ch12:eq:reserved-product-gates}
+\end{equation}
+for a fixed $\eta_{\mathrm{im}}>0$, and every intermediate classical, logarithm, and Haar disintegration domain condition holds with a margin. Every smaller product lies in this domain and has denominator at least $\eta_{\mathrm{im}}$. For each $0<r\le\rho$ there exists $Q_{\mathrm{act}}>0$, depending on $r$, at most $s_J$, and at most any previously chosen positive bound on the inputs $q$, such that
+\begin{equation}
+ r+Q_{\mathrm{act}}<r_J,\qquad
+ 1-C_{\mathrm{im},J}(r+Q_{\mathrm{act}})>0,\qquad
+ \mathfrak M_J(r,Q_{\mathrm{act}})<r/2. \label{ch12:eq:actual-product-gates}
+\end{equation}
+After the coupling ceiling is reduced so that $tp(t)\le Q_{\mathrm{act}}$, these conditions hold on every product $\{\norm\theta_\infty<r\}\times\{\max_i\norm{g_iw_i}_\infty\le tp(t)\}$ used in the construction. All these choices are deterministic and independent of the coupling, the lattice side, and the preceding depth.
+\end{lemma}
+
+\begin{proof}
+The series $Z$ of \cref{ch08:lem:aligned-zero-white} is chosen before $J$, and the choice of $J$ in \cref{ch10:thm:common-analytic-class} gives $B^{-1}Z(4K_*\rho)\le\rho/4$. After $J$ has been fixed, we take $\rho$ strictly below $r_J/(8K_*)$ and so small that $4K_*C_{\mathrm{im},J}\rho<1/4$, within the common classical and Haar disintegration domains. Then we choose $s_J>0$ so small that $u_\circ+v_\circ<r_J$, that $C_{\mathrm{im},J}(u_\circ+v_\circ)<1/2$, and that the second term of $\mathfrak M_J(u_\circ,v_\circ)$ is strictly below $\rho/4$. This reduction keeps the intermediate margins of \cref{ch10:thm:whole-image-gauge}. No radius is changed during a recursion. We denote the positive margin of the denominator by $\eta_{\mathrm{im}}$. Since the coefficients of all majorants are nonnegative, the domain and denominator conditions remain valid on smaller products.
+
+The ratio $Z(u)/u$ is nondecreasing, because the series of $Z$ has nonnegative coefficients and no constant term. Hence $B^{-1}Z(r)\le r/(16K_*)$ for $r\le\rho$. We take $Q_{\mathrm{act}}$ strictly below
+\[
+ \min\Bigl\{s_J,\ \frac{r_J-r}{2},\ \frac{1-C_{\mathrm{im},J}r}{2C_{\mathrm{im},J}},\
+ \frac{r(1-C_{\mathrm{im},J}r)}{16C_{\mathrm{im},J}}\Bigr\},
+\]
+and below any previously chosen bound on the inputs; every entry of the minimum is positive. The denominator is then at least $(1-C_{\mathrm{im},J}r)/2$, and the second term of $\mathfrak M_J(r,Q_{\mathrm{act}})$ is less than $r/8$. Thus $\mathfrak M_J(r,Q_{\mathrm{act}})<r/(16K_*)+r/8<r/2$. Since the product lies in the outer product, it has all intermediate margins. Finally, $tp(t)\to0$ as $t\downarrow0$, so one ceiling works on the whole interval of smaller couplings.
+\end{proof}
+
+\paragraph{A Taylor tail estimate.}
+The last lemma of this section compares values, derivatives, and coefficient norms at a fixed lattice size.
+
+\begin{lemma}\label{ch12:lem:reserved-tail}
+On a fixed finite lattice $\Lambda$ with edge set $\mathcal E_\Lambda$, let $D_\Lambda=3\abs{\mathcal E_\Lambda}$. Every function $F$ given by a Taylor series in logarithmic coordinates with $F(I)=0$ and $DF(I)=0$ satisfies
+\[
+ \sup_{\norm\xi_\infty\le\rho}\abs{F(e^\xi)}\le D_\Lambda\rho^2\Anorm{\rho}{\asp}{F}.
+\]
+The same bound holds on $D_\rho$ if $F$ is invariant under gauge transformations within $B_\rho$. Values on a closed coordinate ball mean the continuous extension of the absolutely convergent Taylor series. For $0<\sigma<1$ and $s\ge1$, the sum over all indices of the absolute values of the coefficients of $D^sF$ at points of $B_{\sigma\rho}$ is at most
+\[
+ s!\,D_\Lambda\rho^{2-s}(1-\sigma)^{-s}\Anorm{\rho}{\asp}{F}.
+\]
+Suppose a family $F_\alpha$ has a common bound on $\mathcal B_{\rho_1,\asp}$ for some $\rho_1>\rho$, with the same spatial exponent. If each fixed Taylor coefficient tensor of $F_\alpha$ is Cauchy, uniformly in an additional parameter, then $F_\alpha$ is Cauchy in $\mathcal B_{\rho,\asp}$, uniformly in that parameter. This also holds for vector-valued maps and for joint products of coarse-field and fluctuation-input variables, including every volume-normalized column sum and every fixed spatial difference, provided the inner and outer radii of each group of variables have a common ratio less than one.
+\end{lemma}
+
+\begin{proof}
+We write $F(e^\xi)=\sum_{s\ge2}D^sF(0)[\xi^{\otimes s}]/s!$. Summing first over one scalar coordinate and then over the remaining ones gives at most $D_\Lambda$ times the supremum of the sums with one fixed index. Dropping the spatial weights, which are at least one, and using $\abs{\xi_e}\le\rho$, we obtain the value bound. Differentiation produces the falling factorial $m(m-1)\cdots(m-s+1)$ in degree $m$. Its product with $\sigma^{m-s}$ is at most $s!(1-\sigma)^{-s}$, because $\binom ms(1-\sigma)^s\sigma^{m-s}\le1$ is one term of the binomial expansion of $((1-\sigma)+\sigma)^m=1$. Summing against the coefficient norms gives the derivative bound. Gauge invariance within $B_\rho$ changes none of these values, since a single gauge transformation is used at the point of evaluation.
+
+Let $u_m=\norm{D^mF(0)}_{\asp,\mathrm{root}}/m!$. If $\mathcal B_{\rho_1,\asp}(F)\le C$, then
+\begin{equation}
+ \sum_{m>h}\rho^{m-2}u_m\le C(\rho/\rho_1)^{h-1}. \label{ch12:eq:tail}
+\end{equation}
+For a difference of two members of the family we use twice the common bound. For fixed $h$ there are finitely many coefficients, indices, and labels, and their weighted sums converge. We choose $h$ first in \eqref{ch12:eq:tail} and then the indices of the family. This proves the Cauchy property without decreasing $\rho$ or $\asp$.
+
+For a joint vector series we group the monomials by total degree. If the ratio of each inner radius to the corresponding outer radius is at most $\zeta<1$, the part of degree greater than $h$ has norm at most $C\zeta^{h+1}$. A fixed input contributes a degree factor, which is absorbed by using an intermediate ratio between $\zeta$ and one. At a fixed lattice size the volume factors, the spatial weights, and the difference matrices are fixed finite numbers, so the argument applies to all these sums and differences. It also shows that locally uniform holomorphic convergence, together with a common absolute bound on a larger product, gives convergence in these norms.
+\end{proof}
+
+Here and below the Cauchy formula in several variables means the iterated one-variable formula on circles inside the polydisc. If a function is bounded by $C$ on these circles, the formula bounds the coefficient of $\xi^\alpha$ by $Cr^{-\alpha}$. In coordinate dimension $D$ there are $\binom{m+D-1}{D-1}$ multi-indices of degree $m$, a polynomial in $m$. On every strictly smaller polydisc, the sums of the absolute values of the coefficients are then finite. This justifies the finite-dimensional uses of locally uniform holomorphic convergence below.
+
+\section{Contraction and limits at fixed resolution}\label{ch12:sec:operators}
+
+\paragraph{The auxiliary transformation.}
+Fix a lattice pair of one RG step: a coarse lattice of side $m\ge4$ and the fine lattice of side $Bm$, with $d\ge0$ preceding averaging steps. Fix $0<t\le g_*$, and let $g_i=t\lambda_i$ with $\lambda_i=M^{(i-J+1)/2}$ for $0\le i<J$. We write $c=e^\theta$ for the coarse field and $q_i=g_iw_i$ for the inputs. Let ${\RawRecon}_d(\theta,q)$ be the reconstruction of the fine field in the block axial gauge, built from the conditional constrained minimizers, the constrained Hessians, and their inverse square roots, as in \cref{ch09:lem:centered-white-coarea,ch09:thm:sequential-density}. Let $\Omega_d(\theta)$ be the gauge transformation of \cref{ch10:thm:whole-image-gauge}; it depends only on $\theta$ and equals the identity at the vertices of the coarse lattice. Define
+\[
+ \phi_d(\theta,q)=\Log\bigl[{\RawRecon}_d(\theta,q)^{\Omega_d(\theta)}\bigr],\qquad
+ P_dR(\theta)=R(e^{\phi_d(\theta,0)}).
+\]
+Thus $P_dR$ is the pullback of $R$ by the zero-fluctuation reconstruction. Let $H_{d,J}(\theta,w)$ be the fluctuation exponent of \cref{ch09:thm:sequential-density}. It contains the classical remainder, the nonconstant parts of the Haar disintegration densities, and the differences of the determinant terms; the determinant of a finer intermediate scale is evaluated at the argument determined by the coarser fluctuation variables. Let $\pi_p$ be the normalized product of standard Gaussian measures on $\R^3$ restricted to balls of radius $p=p(t)$, one factor for each three-dimensional block of fluctuation variables. Let
+\[
+ z_p=\int_{\{v\in\R^3:\abs v\le p\}}e^{-\abs v^2/2}\,dv ,
+\]
+let $f_i$ be the number of free group variables at the intermediate scale $i$, so that the cutoff domain is a product of $\sum_if_i$ balls, and let $\mathsf B_{\mathrm{ref}}(\theta)$ be the zero-fluctuation Jacobian term of \cref{ch09:thm:sequential-density}. For an input effective interaction $R$, produced by the integrations at finer scales, we set
+\begin{equation}
+ \begin{split}
+ A_R(\theta,w)&=R(e^{\phi_d(\theta,(g_iw_i))})-P_dR(\theta),\\
+ \Xi_R(\theta)&=\int e^{-H_{d,J}(\theta,w)-A_R(\theta,w)}\,d\pi_p(w),\\
+ D_dR&=-\log\Xi_R+\log\Xi_0,\\
+ Q_d&=\mathsf B_{\mathrm{ref}}-\Bigl(\sum_if_i\Bigr)\log z_p-\log\Xi_0 .
+ \end{split}\label{ch12:eq:operator}
+\end{equation}
+By \cref{ch09:thm:sequential-density,ch11:thm:deep-buffer-law}, $Q_d+P_dR+D_dR$ is the effective interaction produced by one RG step from $R$, before normalization at the identity. The three terms are the newly generated effective interaction, the pullback at zero fluctuation, and the fluctuation correction to the pullback. In the gauge of $\phi_d$, they are the terms $Q_{d,J}^{\mathrm w}$, $\mathcal P_\delta R$, and $\mathcal D_JR$ of \eqref{ch10:eq:one-step-recursion}, with $d_0=d$, up to field-independent constants. We define the auxiliary transformation
+\[
+ \widehat{\mathcal M}_{d,t}R=(Q_d+P_dR+D_dR)-(Q_d+P_dR+D_dR)(I).
+\]
+The field-independent factors $\prod_i\mathcal J_i(I,0)g_i^{3f_i}$, the Haar disintegration density at the identity, and the powers of the couplings, are kept in the normalization constant of \cref{ch11:thm:deep-buffer-law}, together with the subtracted value at the identity; they are never estimated by $\mathcal B_{\rho,\asp}$. The integral $\Xi_R$ carries no indicator of $D_r$ on the fine lattice, and it is defined for complex $\theta$ in the larger analytic product domain of \cref{ch12:lem:product-reserves}. At a coarse field in $B_r$, the image condition of the next theorem implies that this indicator would equal one on the whole cutoff domain. There $\Xi_R$ is the normalized Gaussian fluctuation factor in the fiber formula of \cref{ch11:thm:deep-buffer-law}(2). Multiplying it by the classical, zero-fluctuation, Gaussian, and coordinate prefactors in that formula gives the density of the pushforward under $\Macro$, before global normalization (\cref{ch11:thm:deep-buffer-law}).
+
+\begin{theorem}\label{ch12:thm:fixed-resolution-cutoff}
+Fix odd $M\ge3$, $J\ge1$, $B=M^J$, and the parameters of \cref{ch10:thm:common-analytic-class,ch11:thm:deep-buffer-law}: the radii $0<r<\rho$, the spatial exponent $\asp>0$, the ceiling $E$ for effective interactions, the coefficient $A_{\mathrm w}>0$, and the coupling ceiling $g_*>0$, with $p(t)=A_{\mathrm w}\log(1/t)>0$ for $0<t\le g_*$. Fix a lattice pair of one RG step with coarse side $m\ge4$, a coupling $0<t\le g_*$, and the couplings $g_i=t\lambda_i$ of its intermediate scales. Assume that the image under $\phi_d$ of the complex product of \cref{ch12:lem:product-reserves}, with radii $4K_*\rho$ and $4K_*s_J$, lies strictly inside $B_{\rho/2}$; that for $\norm\theta_\infty<r$ the real product $\{\max_i\norm{q_i}_\infty\le tp(t)\}$ is mapped into $B_{r/2}$; and that all intermediate classical, logarithm, and Haar disintegration domain conditions hold. Then, after one initial reduction of $g_*$, all $R_1,R_2\in\mathcal A_E$ satisfy
+\begin{align*}
+ \mathcal B_{\rho,\asp}\bigl(\widehat{\mathcal M}_{d,t}R_1-\widehat{\mathcal M}_{d,t}R_2\bigr)
+ &\le\bigl\{q_{\mathrm{pr}}+C_Jt^2[p(t)^4+(\epsilon_1+\epsilon_2)p(t)^2]\bigr\}
+ \Anorm{\rho}{\asp}{R_1-R_2}\\
+ &\le\vartheta\,\Anorm{\rho}{\asp}{R_1-R_2},
+\end{align*}
+where $\epsilon_i=\Anorm{\rho}{\asp}{R_i}$, $0\le q_{\mathrm{pr}}<1/4$, and $\vartheta=(1+q_{\mathrm{pr}})/2<1$. The reduction of $g_*$ imposes $p(t)\ge1$, by taking $g_*\le e^{-1/A_{\mathrm w}}$, and
+\[
+ t[p(t)^3+2Ep(t)]\le c_J/2,\qquad C_Jt^2[p(t)^4+2Ep(t)^2]\le(1-q_{\mathrm{pr}})/2
+\]
+for all $0<t\le g_*$. At this fixed lattice pair and fixed $t$,
+\[
+ \sup_{R\in\mathcal A_E}\mathcal B_{\rho,\asp}\bigl(\widehat{\mathcal M}_{d,t}R-\widehat{\mathcal M}_{d',t}R\bigr)\longrightarrow0\qquad(d,d'\to\infty),
+\]
+at the same radius and exponent. The conditional constrained minimizers, the constrained Hessians, the analytic branches of their square roots and inverse square roots that are positive at real arguments, the Haar disintegration densities, and the reconstructions ${\RawRecon}_d$ converge locally uniformly and holomorphically on smaller product domains, with every fixed derivative.
+
+Now fix $n_0\in4\N$ and $\gamma>0$ for which the construction of \cref{ch11:thm:deep-buffer-law} applies, and use the hierarchy of \cref{ch12:sec:setup}. For $0\le j\le k$ let $R_j^k$ be the effective interaction at level $j$ given by \cref{ch11:thm:deep-buffer-law}; thus $R_k^k=0$, $R_{h-1}^k=\widehat{\mathcal M}_{J(k-h),t_h}R_h^k$ for $1\le h\le k$, and $R_h^k\in\mathcal A_E(\Lat{n_h})$. The stopped measure at level $j$ is
+\[
+ d\StoppedLaw_j^k=\widehat Z_{j,k}^{-1}\one_{D_r}\exp\{-E_{J(k-j),\mathrm{sat}}/g_j^2-R_{j,\mathrm{sat}}^k\}\,dH_{n_j},\qquad R_j^k(I)=0 .
+\]
+For every fixed $j$ there exists $R_j^\infty\in\mathcal A_E(\Lat{n_j})$ such that
+\[
+ \Anorm{\rho}{\asp}{R_j^k-R_j^\infty}\longrightarrow0,\qquad
+ \norm{\StoppedLaw_j^k-\StoppedLaw_j^\infty}_{\TV}\longrightarrow0\qquad(k\to\infty),
+\]
+where $\StoppedLaw_j^\infty$ has the density of the same form with $E_{\infty,\mathrm{sat}}$ and $R_{j,\mathrm{sat}}^\infty$, the same indicator $\one_{D_r}$, and a positive finite normalizer. The contraction constants have the dependence described in item~(2) of \cref{ch01:conv:constants}; they are uniform in the side and in the preceding depth for fixed analytic parameters. The continuity moduli and the convergence thresholds may in addition depend on the fixed lattices and on $j$, $t$, $p(t)$, $L$, and $\gamma$. No rate that is uniform in the resolution, in the number of RG steps, or as $\gamma\to0$ is asserted.
+\end{theorem}
+
+Here $E_\infty$ is the limit of the effective classical actions $E_d$ at the fixed lattice (\cref{ch08:thm:classical-cutoff}), and $E_{\infty,\mathrm{sat}}$ is its gauge-invariant extension.
+
+\begin{remark}
+The second-order gain in the coupling has the following heuristic origin. Suppose that a reconstruction has the expansion $F(\theta,tw)=F(\theta,0)+tL_\theta w+O(t^2)$. For a difference $\Delta$ of two effective interactions we then have
+\[
+ \Delta(F(\theta,tw))-\Delta(F(\theta,0))=tD\Delta(F(\theta,0))[L_\theta w]+O(t^2).
+\]
+Since the first term is linear in $w$, it has mean zero under the reference measure $\pi_p$, which is invariant under $w\mapsto-w$. The derivative of the negative logarithm of the fluctuation integral in the direction $\Delta$ is the expectation of this difference under the interacting conditional measure. Its leading term is the reference expectation, which vanishes, and the interaction contributes another factor of $t$. \Cref{ch12:lem:supported-difference} and the cluster expansion of \cref{ch09:thm:supported-log-holomorphy} make this argument uniform in the volume and in the degree of the coefficients, in the norm $\mathcal B_{\rho,\asp}$. The cancellation is a property of the reference measure on each support; it does not use any symmetry of the interacting conditional measure.
+\end{remark}
+
+\paragraph{Local interaction decompositions.}
+For a family $\boldsymbol A=(A_Y)$ indexed by nonempty connected box sets $Y$, where $A_Y(\theta,w)=\sum_\nu A_{Y,\nu}(w)\theta^\nu$ depends only on the coarse-field and fluctuation variables located in $Y$, we use the norm
+\begin{equation}\label{ch12:eq:supported-norm}
+ \norm{\boldsymbol A}_{\mathscr S_h}=\sup_x\sum_{Y\ni x}e^{h\abs Y}\sum_\nu\rho^{\abs\nu}\sup_{w\in\Omega_p}\abs{A_{Y,\nu}(w)}
+\end{equation}
+of \cref{ch09:thm:supported-log-holomorphy}, with coarse-field radius $\rho$ and the cutoff radius $p\ge1$ of the RG step; the supremum is over boxes $x$. The next lemma gives an explicit decomposition of the fluctuation interactions into such families, with a bound on the difference family that is linear in the norm of the difference.
+
+\begin{lemma}\label{ch12:lem:supported-difference}
+Assume the hypotheses of \cref{ch12:thm:fixed-resolution-cutoff} at a fixed lattice pair and preceding depth $d$, with $p=p(t)\ge1$. Let $R_1,R_2\in\mathcal A_E$, $\Delta=R_1-R_2$, $\delta=\Anorm{\rho}{\asp}{\Delta}$, $\epsilon_i=\Anorm{\rho}{\asp}{R_i}$, and $R_s=R_2+s\Delta$ for $0\le s\le1$. For $z\in\C$ replace the couplings $g_i$ by $z\lambda_i$, both in the inputs $q_i=z\lambda_iw_i$ of $\phi_d$ and in the classical remainder of $H_{d,J}$, as in \cref{ch09:conv:auxiliary-baseline}, and keep fixed the cutoff radius $p$ and all parameters on which the input effective interaction depends. There exists $C_J$ such that, for $C_J\abs zp<1$, there exist families $\boldsymbol H(z)$, $\boldsymbol A_s(z)$, and $\boldsymbol A_\Delta(z)$, holomorphic in $z$ with values in $\mathscr S_8$, with the following properties.
+\begin{enumerate}
+\item Their sums over $Y$ are, respectively, the exponent $H_{d,J}$ with $g_i=z\lambda_i$, the function $R_s(e^{\phi_d(\theta,(z\lambda_iw_i))})-R_s(e^{\phi_d(\theta,0)})$, and the same function with $R_s$ replaced by $\Delta$.
+\item $\boldsymbol A_s=\boldsymbol A_0+s\boldsymbol A_\Delta$, and $\boldsymbol H(0)=\boldsymbol A_s(0)=\boldsymbol A_\Delta(0)=0$.
+\item On each $Y$ the coefficient of $z$ in $A_{\Delta,Y}(z)$ is a linear function of the fluctuation variables.
+\item They satisfy
+\begin{equation}\label{ch12:eq:marked-primitive}
+ \begin{split}
+ \norm{\boldsymbol H(z)}_{\mathscr S_8}&\le\frac{C_J\abs z(p^3+p)}{1-C_J\abs zp},\\
+ \norm{\boldsymbol A_s(z)}_{\mathscr S_8}&\le\frac{C_J\abs z(\epsilon_1+\epsilon_2)p}{1-C_J\abs zp},\\
+ \norm{\boldsymbol A_\Delta(z)}_{\mathscr S_8}&\le\frac{C_J\abs z\delta p}{1-C_J\abs zp}.
+ \end{split}
+\end{equation}
+\end{enumerate}
+Supports that wrap around the torus are allowed.
+\end{lemma}
+
+\begin{proof}
+The family $\boldsymbol H$ is the local interaction decomposition, constructed in the proof of \cref{ch09:lem:marked-insertion}, of the auxiliary fluctuation interaction of \cref{ch09:conv:auxiliary-baseline} at the parameter $\zeta=z$; it is built from the decompositions of \cref{ch09:lem:supported-activities}, whose item~(4) allows a complex parameter. By stationarity of the conditional constrained minimizers and the normalization of the fluctuation variables by the constrained Hessians, the classical remainder has no terms of degree zero, one, or two in the fluctuation variables, and its coefficients of degree $m\ge3$ carry the factor $z^{m-2}$. The coefficients of the Haar disintegration and determinant terms of degree $m\ge1$ carry the factor $z^m$. The coefficient bounds of \cref{ch09:lem:supported-activities}(4) are therefore bounds for a power series in $z$, and the bound \eqref{ch09:eq:auxiliary-baseline-norm} in the proof of \cref{ch09:lem:marked-insertion} is the first inequality in \eqref{ch12:eq:marked-primitive}, after enlarging $C_J$. In particular $\boldsymbol H(0)=0$.
+
+We now construct $\boldsymbol A_\Delta$. The construction is linear in the interaction, and we define $\boldsymbol A_s$ by the same construction applied to $R_s$; this proves the first assertion of (2). Since $\Anorm{\rho}{\asp}{R_s}\le(1-s)\epsilon_2+s\epsilon_1\le\epsilon_1+\epsilon_2$, the bound for $\boldsymbol A_s$ follows from the bound for $\boldsymbol A_\Delta$ with $\delta$ replaced by $\epsilon_1+\epsilon_2$.
+
+\emph{Coefficients.} We write
+\[
+ \Delta(e^\xi)=\sum_{n\ge2}\frac1{n!}\sum_{j_1,\ldots,j_n}\Delta_n(j_1,\ldots,j_n)\prod_{r=1}^n\xi_{j_r},
+ \qquad
+ \phi_{d,j}(\theta,q)=\sum_{\abs\alpha+\abs\eta\ge1}\phi_{j;\alpha\eta}\,\theta^\alpha q^\eta ,
+\]
+where $j,j_r$ range over the scalar coordinates of the fine lattice, and $\alpha$ and $\eta$ are multi-indices in the coarse-field variables and the inputs. Since $\phi_d(0,0)=0$, substitution gives, for $\abs\alpha+\abs\eta=N$,
+\begin{equation}\label{ch12:eq:inherited-coefficient}
+ [\theta^\alpha q^\eta]\,\Delta(e^{\phi_d(\theta,q)})
+ =\sum_{n=2}^N\frac1{n!}\sum_{j_1,\ldots,j_n}
+ \sum_{\substack{\alpha_1+\cdots+\alpha_n=\alpha,\ \eta_1+\cdots+\eta_n=\eta\\ \abs{\alpha_r}+\abs{\eta_r}\ge1}}
+ \Delta_n(j_1,\ldots,j_n)\prod_{r=1}^n\phi_{j_r;\alpha_r\eta_r}.
+\end{equation}
+No further multinomial factor occurs, since each $\phi_{j;\alpha\eta}$ is already the coefficient of a monomial. An occurrence $o$ consists of $n$, the indices $j_1,\ldots,j_n$, and an ordered allocation $(\alpha_r,\eta_r)_{r\le n}$ in \eqref{ch12:eq:inherited-coefficient}. To $\Delta_n(j_1,\ldots,j_n)$ we assign a shortest connected network through the locations of $j_1,\ldots,j_n$, and to each $\phi_{j_r;\alpha_r\eta_r}$ a shortest connected network through the location of $j_r$ and the locations of its inputs. The union $\mathcal N_o$ is a connected network through the locations of all external variables of $o$, and its length $\ell_o$ is at most the sum of the lengths of these networks. Let $N_o$ be the number of external variables of $o$, counted with multiplicity.
+
+\emph{The families.} We keep the occurrences with $\abs\eta\ge1$. For such an occurrence, let
+\[
+ a_o(z)=\frac{z^{\abs\eta}}{n!}\Delta_n(j_1,\ldots,j_n)\prod_{r=1}^n\phi_{j_r;\alpha_r\eta_r}\prod_l\lambda_{i(l)}^{\eta_l},
+\]
+where $l$ runs over the inputs and $i(l)$ is the intermediate scale of the input $l$. Let $Y_o$ be the box set assigned by \cref{ch12:lem:box-assignment} to the locations of the external variables of $o$ and the network $\mathcal N_o$, and define
+\[
+ A_{\Delta,Y}(\theta,w;z)=\sum_{o:\,Y_o=Y}a_o(z)\,\theta^\alpha w^\eta .
+\]
+The occurrences with $\eta=0$ sum to $\Delta(e^{\phi_d(\theta,0)})$. Hence, once absolute convergence is established below,
+\[
+ \sum_YA_{\Delta,Y}(z)=\Delta(e^{\phi_d(\theta,(z\lambda_iw_i))})-\Delta(e^{\phi_d(\theta,0)}),
+\]
+which is (1) for $\boldsymbol A_\Delta$. Since every coefficient carries a positive power of $z$, we have $\boldsymbol A_\Delta(0)=0$, and the coefficient of $z$ collects the occurrences with $\abs\eta=1$, which are linear in $w$. This proves (2) and (3).
+
+\emph{Spatial weights.} The networks of $\Delta_n$ have lengths measured in units of the fine lattice; in units of the coarse lattice these lengths are divided by $B$. By the last condition in \eqref{ch12:eq:pre-J-spatial-gates} and $C_{\mathrm{geom}}\ge1$, a weight $e^{b\ell}$ on this part, with $\ell$ in coarse units, is at most the weight $e^{\asp\Tree}$ in fine units, which is included in $\delta$. The networks attached to the coefficients of $\phi_d$ are weighted by the spatial rate of the bounds of \cref{ch10:thm:whole-image-gauge}, which exceeds $b$. With $h=8$, $K=e^{8c_0}$, and the choices of $\mathscr L$ and $\mu$ made before \eqref{ch12:eq:pre-J-spatial-gates}, the exponent $\beta$ in \cref{ch12:lem:box-assignment} is at most $b/2$, so the weight $e^{\beta\ell_o}$ is covered by these two weights.
+
+\emph{The bound.} In \eqref{ch12:eq:supported-norm} we bound the supremum over $w\in\Omega_p$ by the sum of the absolute values of the coefficients of $w^\eta$ times $p^{\abs\eta}$; since $\abs{\lambda_i}\le1$, the input $l$ then has radius at most $\abs zp$. For an occurrence $o$ and a box $x\in Y_o$ we apply \eqref{ch12:eq:box-assignment-weight}, with $u$ the location of an input $l$ of $o$, and we sum over all inputs $l$ with their multiplicities $\eta_l\ge1$; this overcounts each occurrence. The factor $K^{N_o}$ is absorbed by multiplying the coarse-field radius $\rho$ and the input radius $\abs zp$ by $K$. For a fixed input $l$, the weighted sum over the occurrences containing $l$ is bounded by the calculus of nonnegative coefficient bounds of \cref{ch02:lem:coefficient-algebra}. The outer coefficient $\Delta_n$ is summed with one index fixed, the branch $r$ containing $l$ is summed by its volume-normalized column sum at $l$, and the remaining branches by their row sums. Let
+\[
+ F_\Delta(y)=\sum_{n\ge2}\frac{\norm{D^n\Delta(0)}_{\asp,\mathrm{root}}}{n!}y^n,
+\]
+let $c_q(U,V)$ be the majorant of the input-fixed column sums of $\phi_d$ at a fixed free input, in which every input, including the fixed one, is weighted by its radius, as in \cref{ch10:thm:whole-image-gauge}(1), and let
+\[
+ \Gamma_J=\max_l\frac{v_l}{v_{\mathrm{fine}}}\le M^{3J},
+\]
+where $v_l$ is the cell volume at the mesh of the input $l$ and $v_{\mathrm{fine}}$ the cell volume of the fine lattice. The factor $\Gamma_J$ converts the volume-normalized column sum of $\phi_d$ into the counting sum used in the norm of $\Delta$. Choosing the branch that contains $l$ produces the derivative of $F_\Delta$. With $S_J(\mu)=D_J\sum_{r\ge0}(r+2)^3e^{-\mu r}$, where $D_J(r+2)^3$ bounds the number of inputs at distance between $r$ and $r+1$ from a point, we obtain
+\begin{equation}\label{ch12:eq:supported-bound-raw}
+ \norm{\boldsymbol A_\Delta(z)}_{\mathscr S_8}
+ \le C_8S_J(\mu)\Gamma_JF_\Delta'\bigl(\mathfrak M_J(K\rho,K\abs zp)\bigr)\,c_q(K\rho,K\abs zp).
+\end{equation}
+Let $U_0=4K_*\rho$ and $V_0=4K_*s_J$ be the radii of \cref{ch12:lem:product-reserves}. Since $\sum_{n\ge2}\rho^{n-2}\norm{D^n\Delta(0)}_{\asp,\mathrm{root}}/n!=\delta$, we have, for $0\le y\le\rho/2$,
+\[
+ F_\Delta'(y)\le\delta\rho\sum_{n\ge2}n2^{1-n}=3\delta\rho .
+\]
+By \cref{ch10:thm:whole-image-gauge}(1), $c_q\le V\partial_V\widetilde{\mathfrak M}_J$ for a majorant $\widetilde{\mathfrak M}_J(U,V)=B^{-1}\widetilde Z(U)+C_{\mathrm{im},J}V/(1-C_{\mathrm{im},J}(U+V))$ of the same form. Since $\partial_V[C_{\mathrm{im},J}V/(1-C_{\mathrm{im},J}(U+V))]=C_{\mathrm{im},J}(1-C_{\mathrm{im},J}U)/(1-C_{\mathrm{im},J}(U+V))^2$, and the denominator is at least $\eta_{\mathrm{im}}$ on the product of \cref{ch12:lem:product-reserves}, the quantity $L_J=\sup_{0<V\le V_0}c_q(U_0,V)/V$ is at most $C_{\mathrm{im},J}\eta_{\mathrm{im}}^{-2}$. Let
+\[
+ B_\Delta=3\Gamma_J\rho\,C_8S_J(\mu)L_JK,
+\]
+and choose $C_J\ge\max\{1,B_\Delta,K/V_0\}$. If $C_J\abs zp<1$, then $K\abs zp<V_0$, and $K\rho<U_0$ because $K<4K_*$; hence $\mathfrak M_J(K\rho,K\abs zp)\le\mathfrak M_J(U_0,V_0)<\rho/2$ by \eqref{ch12:eq:reserved-product-gates}. Inserting these bounds into \eqref{ch12:eq:supported-bound-raw}, we find
+\[
+ \norm{\boldsymbol A_\Delta(z)}_{\mathscr S_8}\le B_\Delta\delta\abs zp\le\frac{C_J\abs z\delta p}{1-C_J\abs zp}.
+\]
+The factor $\delta$ enters through the single tensor $\Delta_n$, never through the sum of two norms. The bound is uniform in $\abs z\le r_0$ for every $r_0<(C_Jp)^{-1}$. The series defining $\boldsymbol A_\Delta$ therefore converges absolutely in $\mathscr S_8$ and is holomorphic in $z$, and all regroupings used above are justified. This proves (4).
+\end{proof}
+
+\begin{proof}[Proof of \cref{ch12:thm:fixed-resolution-cutoff}]
+The proof has seven steps. Step~1 identifies the transformation. Step~2 extracts the contraction of the pullback $P_d$ from the estimate of \cref{ch10:thm:common-analytic-class}. Step~3 proves the Lipschitz bound, using \cref{ch12:lem:supported-difference} and the second-order cancellation. Steps~4 and~5 compare two preceding depths at a fixed lattice pair: Step~4 shows that each fixed coefficient tensor of the output converges, uniformly over $\mathcal A_E$, and Step~5 deduces convergence in $\mathcal B_{\rho,\asp}$ from a bound at a larger radius. Step~6 combines the contraction with this continuity to construct $R_j^\infty$, and Step~7 passes to the stopped measures.
+
+\paragraph{Step 1: the transformation.}
+All products used in this proof are subproducts of the products of \cref{ch12:lem:product-reserves}. In particular, on the cutoff domain $\max_i\norm{g_iw_i}_\infty\le tp(t)\le Q_{\mathrm{act}}$, so that $r+Q_{\mathrm{act}}<r_J$ and the denominator of the majorant is positive. The complex product of the auxiliary integral satisfies \eqref{ch12:eq:reserved-product-gates}, with its intermediate domain conditions. Thus the rational bound of \cref{ch10:thm:whole-image-gauge} is used only inside its domain. As explained before the theorem, $Q_d+P_dR+D_dR$ is the effective interaction produced from $R$ before normalization, $\widehat{\mathcal M}_{d,t}R$ subtracts its value at the identity, and at a coarse field in $B_r$ the prefactors of \cref{ch11:thm:deep-buffer-law}(2) times $\Xi_R$ give the conditional fiber density before global normalization.
+
+\paragraph{Step 2: contraction of the pullback.}
+Let $F$ have the symmetries of $\mathcal A_E$, be invariant under gauge transformations within $B_\rho$, and satisfy $F(I)=0$, $DF(I)=0$, and $\Anorm{\rho}{\asp}{F}<\infty$; we do not require $\Anorm{\rho}{\asp}{F}\le E$. For each fixed $h>0$, the estimate of \cref{ch10:thm:common-analytic-class} applies to the input $hF$ on a sufficiently small interval of couplings, which may depend on $h$. Its constants $C_G$, $C_T$, and $q_P$ are fixed before the ceiling of the invariant ball is chosen. The estimate holds at the rate $\asp$. Indeed, $\asp<a_{\mathrm{cen}}/8$ by \eqref{ch12:eq:pre-J-spatial-gates}, and the pullback $P_d$ is the evaluation at the representative $e^{B^{-1}\overline A_{d,J}}$ of \cref{ch08:lem:aligned-zero-white} (\cref{ch10:thm:whole-image-gauge}), for which \cref{ch08:thm:principal-contraction} applies at every rate below $a_{\mathrm{cen}}/8$. At the fixed lattice pair, as $t\downarrow0$ with $p=A_{\mathrm w}\log(1/t)$, the fluctuation exponent and the term containing the input tend to zero uniformly on a smaller complex product domain: they are bounded by $C_{\Lambda,J}t(p^3+p)$ and $C_{\Lambda,J}h\Anorm{\rho}{\asp}{F}tp$, respectively. Here the factors $g_i^{-2}$ in the classical remainder have already canceled against its first two orders in the inputs. Since the coarse-field radius of this product exceeds $\rho$, \cref{ch12:lem:reserved-tail} implies that the same convergence holds in $\mathcal B_{\rho,\asp}$. This gives $D_d(hF)\to0$ in this norm. The estimate with zero input implies $\Anorm{\rho}{\asp}{Q_d}\le C_G$. Using the estimate with input $hF$ and the triangle inequality, we find
+\[
+ h\Anorm{\rho}{\asp}{P_dF}\le2C_G+q_Ph\Anorm{\rho}{\asp}{F}
+ +C_Tt^2h\Anorm{\rho}{\asp}{F}\bigl(p^4+h\Anorm{\rho}{\asp}{F}p^2\bigr)+\Anorm{\rho}{\asp}{D_d(hF)}.
+\]
+The pullback $P_d$ does not depend on $t$ or $p$. Letting $t\downarrow0$, we obtain $h\Anorm{\rho}{\asp}{P_dF}\le2C_G+q_Ph\Anorm{\rho}{\asp}{F}$. Dividing by $h$ and letting $h\to\infty$, we conclude that
+\begin{equation}
+ \Anorm{\rho}{\asp}{P_dF}\le q_{\mathrm{pr}}\Anorm{\rho}{\asp}{F},\qquad q_{\mathrm{pr}}=q_P<1/4. \label{ch12:eq:principal}
+\end{equation}
+All auxiliary limits in this step are taken on one fixed lattice, and the resulting constant $q_P$ is the constant of \cref{ch10:thm:common-analytic-class}, which is the same for every lattice and depth. Inputs of arbitrary finite norm were used only in that estimate, before its restriction to $\epsilon\le E$. The order of the two limits matters: the small-coupling limit is taken at fixed $h$.
+
+\paragraph{Step 3: the Lipschitz bound.}
+Let $R_1,R_2,\Delta,\delta,\epsilon_i,R_s$ be as in \cref{ch12:lem:supported-difference}. The segment $R_s$ stays in the class of real, symmetric, gauge-invariant functions with $R_s(I)=0$, $DR_s(I)=0$, and $\Anorm{\rho}{\asp}{R_s}\le\epsilon_1+\epsilon_2$. We hold fixed all parameters of the input effective interaction and the cutoff radius, and we vary only the current couplings, through $g_i=z\lambda_i$. Set
+\begin{equation}\label{ch12:eq:aux-disc}
+ R_z=\frac{c_J}{p^3+(\epsilon_1+\epsilon_2)p},
+\end{equation}
+where $c_J\le\min\{s_J,(2C_J)^{-1},\eta_0/(8C_J)\}$, with $C_J$ from \cref{ch12:lem:supported-difference} and $\eta_0$ from \cref{ch09:thm:supported-log-holomorphy}. For $\abs z\le R_z$ we have $\abs zp\le c_J/p^2\le c_J$, so $C_J\abs zp\le1/2$, and the inputs with radii enlarged by $K$ stay inside \eqref{ch12:eq:reserved-product-gates}, with all intermediate domain conditions and denominators keeping strict margins. By \eqref{ch12:eq:marked-primitive} and $p\le p^3$, the family $\boldsymbol U_s(z)=\boldsymbol H(z)+\boldsymbol A_s(z)$ satisfies
+\[
+ \norm{\boldsymbol U_s(z)}_{\mathscr S_8}\le2C_J\abs z(p^3+p+(\epsilon_1+\epsilon_2)p)\le4C_J\abs z(p^3+(\epsilon_1+\epsilon_2)p)\le4C_Jc_J\le\eta_0/2 .
+\]
+This choice depends only on $J$. Since the sum of $\boldsymbol U_s$ at $z=t$ is $H_{d,J}+A_{R_s}$, \cref{ch09:thm:supported-log-holomorphy} implies that $-\log\Xi_{R_s}=\sum_Y\mathcal L_Y(\boldsymbol U_s(t))$. Since $\partial_s\boldsymbol A_s=\boldsymbol A_\Delta$, the derivative of the fluctuation correction along the segment is given by the family
+\[
+ \boldsymbol F_s(z)=D\boldsymbol{\mathcal L}(\boldsymbol U_s(z))[\boldsymbol A_\Delta(z)],
+\]
+and by \eqref{ch09:eq:supported-log-cauchy} and \eqref{ch12:eq:marked-primitive}, we have
+\begin{equation}\label{ch12:eq:marked-log}
+ \norm{\boldsymbol F_s(z)}_{\mathscr S_2}\le C_J\abs z\delta p\qquad(\abs z\le R_z),
+\end{equation}
+after enlarging $C_J$. At $z=t$ the sum of $\boldsymbol F_s(t)$ over $Y$ is the expectation of $A_\Delta$ under the interacting conditional measure, not under the reference measure.
+
+Both $\boldsymbol U_s$ and $\boldsymbol A_\Delta$ vanish at $z=0$. By \cref{ch12:lem:supported-difference}(3), the coefficient of $z$ in $\boldsymbol A_\Delta$ is linear in the fluctuation variables on each support, so its expectation under the symmetric reference measure $\pi_p$ vanishes before the sums over supports and over coefficients are taken. The terms containing a further factor of the interaction, including the differences of the Haar disintegration and determinant terms, are of degree at least two in $z$. Applying \cref{ch09:cor:supported-mark-two-powers} with $a=2C_J\delta p$, which bounds $\norm{\boldsymbol A_\Delta(z)}_{\mathscr S_8}/\abs z$ on the disc by \eqref{ch12:eq:marked-primitive}, and with $R=R_z$, we obtain
+\begin{equation}\label{ch12:eq:two-powers}
+ \norm{\boldsymbol F_s(t)}_{\mathscr S_2}\le C_Jt^2\delta[p^4+(\epsilon_1+\epsilon_2)p^2],\qquad 0<t\le R_z/2,
+\end{equation}
+after enlarging $C_J$ once more.
+
+The fluctuation correction, its value at zero fluctuation, and its derivative along the segment are invariant under translations and global color rotations, by \cref{ch09:thm:sequential-density}. The coordinate changes map zero fluctuations to zero fluctuations, and the first derivatives with respect to the coarse field vanish at the identity. Every support of the logarithm is a union of supports of the decomposition whose intersection graph is connected. By \cref{ch12:lem:target-support-geometry} and \eqref{ch12:eq:pre-J-spatial-gates}, we have $\asp\Tree\le2\abs Y$ for the locations of the coarse-field variables in each such support, including subsets and repetitions. The conversion of local interaction decompositions into the norm $\mathcal B_{\rho,\asp}$ in \cref{ch10:thm:common-analytic-class}, with nine types of scalar indices, therefore applies to \eqref{ch12:eq:two-powers} at the radius $\rho$, with the factor $9\rho^{-2}$. We integrate in $s$ and add \eqref{ch12:eq:principal}. The common term $Q_d$ cancels in the difference, and the subtraction of the values at the identity does not change $\mathcal B_{\rho,\asp}$. This gives the factor
+\[
+ q_{\mathrm{pr}}+C_Jt^2[p^4+(\epsilon_1+\epsilon_2)p^2],
+\]
+after enlarging $C_J$. One reduction of $g_*$ imposes $p(t)\ge1$, by taking $g_*\le e^{-1/A_{\mathrm w}}$, together with $t[p(t)^3+2Ep(t)]\le c_J/2$, which gives $t\le R_z/2$ when $\epsilon_1+\epsilon_2\le2E$, and $C_Jt^2[p(t)^4+2Ep(t)^2]\le(1-q_{\mathrm{pr}})/2$, for all $0<t\le g_*$. The factor is then at most $\vartheta=(1+q_{\mathrm{pr}})/2$.
+
+\paragraph{Step 4: changing the preceding depth.}
+By \cref{ch08:thm:classical-cutoff}, all classical data of the RG step converge on strictly smaller product domains as the preceding depth tends to infinity. These data are the conditional constrained minimizers, the constrained Hessians, the analytic branches of their square roots and inverse square roots that are positive at real arguments, every Haar disintegration density, and the triangular reconstruction. The Hessians here are those of the intermediate scales, with their couplings $g_i$; no inverse of a Hessian in the coarse-field variables is needed. In particular $H_{d,J}$ and $\mathsf B_{\mathrm{ref}}$ converge with every fixed derivative, since their formulas in \cref{ch09:thm:sequential-density} are finite compositions of these data on products where all domain conditions hold.
+
+It remains to control the term with the input effective interaction, uniformly in $R\in\mathcal A_E$. For two depths $d,d'$ we use the same gauge transformation $\Omega_d$ on both reconstructions ${\RawRecon}_d$ and ${\RawRecon}_{d'}$. The arguments stay in the common product \eqref{ch12:eq:reserved-product-gates}. The product with radii enlarged by $K$ has radii strictly below $u_\circ$ and $v_\circ$, so their sum is less than $r_J$ and the denominator of the majorant is at least $\eta_{\mathrm{im}}$. Every intermediate map keeps its strict domain margin on this product. The bounds of \cref{ch10:thm:whole-image-gauge} for the gauge transformation and its inverse, together with the convergence of the reconstructions, put the image $\Log[{\RawRecon}_{d'}^{\Omega_d}]$ in $B_{3\rho/4}$ for all sufficiently large pairs of depths, while $\phi_d$ has image in $B_{\rho/2}$. All these bounds hold on a smaller complex product which still contains the output radius $\rho$ and the cutoff domain. At depth $d'$ we compare $R(\exp\Log[{\RawRecon}_{d'}^{\Omega_d}])$ with $R(e^{\phi_{d'}})$. On real inputs these are evaluations of the gauge-invariant extension $R_{\mathrm{sat}}$ at two gauge-equivalent representatives of the same reconstruction, both in $B_\rho$, so they agree. Both functions are holomorphic on the comparison product, and their difference vanishes on an open real box. By the one-variable identity theorem applied in each coordinate, it vanishes identically. We may therefore compare the depths $d$ and $d'$ in the common gauge $\Omega_d$. Since the derivative bound of \cref{ch12:lem:reserved-tail} on $B_{3\rho/4}$ is uniform over $\mathcal A_E$, this term and each of its fixed derivatives change by $o(1)$ as $d,d'\to\infty$, uniformly over $\mathcal A_E$, without any assumption on the behavior of the sequence $\Omega_d$.
+
+Since the cutoff domain and its couplings do not change, the integrands on this fixed finite product, together with their fixed derivatives in the coarse field, are uniformly Cauchy. By \cref{ch09:thm:supported-log-holomorphy}, the logarithm of each partition function is the sum of a local interaction decomposition over the finitely many boxes of the lattice, with a bound in $\mathscr S_2$. This sum is bounded on the chosen complex product, and the modulus of each partition function has a positive lower bound there. Its branch agrees with the real logarithm at real coarse fields. Comparing the ratio of two close partition functions on a disc about one, we find that the logarithms, normalized at the identity, converge together with every fixed coefficient tensor of the output, uniformly in $R\in\mathcal A_E$.
+
+\paragraph{Step 5: convergence in the norm.}
+Fix $\rho<\rho_1<2\rho$ so close to $\rho$ that the products with coarse-field radius $\rho_1$, enlarged by $K$, still lie in the larger analytic product domain. The argument of the input effective interaction stays below its input radius $\rho$, also at the output radius $\rho_1$. Positive composition and the two expansions of \cref{ch09:lem:supported-activities,ch09:thm:hard-core-log} use the same connected box sets and their unions with connected intersection graph. Hence \cref{ch12:lem:target-support-geometry} still gives $\asp\Tree\le2\abs Y$ at this larger output radius. The output is translation invariant and has vanishing first derivative at the identity, as in Step~3. The conversion of \cref{ch10:thm:common-analytic-class}, now with factor $9\rho_1^{-2}$, gives
+\begin{equation}
+ \sup_{d,\,R\in\mathcal A_E}\mathcal B_{\rho_1,\asp}\bigl(\widehat{\mathcal M}_{d,t}R\bigr)\le C_{\Lambda,J,t,p,E}. \label{ch12:eq:outer-output}
+\end{equation}
+Only sufficiently large $d$ are needed here; the finitely many smaller depths have finite bounds and are included after enlarging the constant. At the radius $\rho_1$ the bound need not be $E$. Applying \cref{ch12:lem:reserved-tail} to \eqref{ch12:eq:outer-output} and to the convergent coefficient tensors of Step~4, we obtain the continuity statement at exactly the radius $\rho$ and the exponent $\asp$. Nothing in this argument identifies the auxiliary integral at coarse fields outside $B_r$ with a conditional integral of the conditioned measure.
+
+\paragraph{Step 6: contraction over finitely many scales.}
+Fix $j$ and a positive integer $m$. If $k,k'\ge j+m$, the two hierarchies have the same lattices and couplings at the levels $j,\ldots,j+m$, and their effective interactions at level $j+m$ lie in $\mathcal A_E$ by \cref{ch11:thm:deep-buffer-law}. For $h=j+1,\ldots,j+m$, define
+\[
+ \varepsilon_h(k,k')=\sup_{R\in\mathcal A_E}\mathcal B_{\rho,\asp}\bigl(\widehat{\mathcal M}_{J(k-h),t_h}R-\widehat{\mathcal M}_{J(k'-h),t_h}R\bigr).
+\]
+For fixed $m$ and $h$ this tends to zero as $k,k'\to\infty$, by Step~5. Inserting and subtracting at each level the first operator applied to the second input, and using the contraction and the triangle inequality, we obtain
+\begin{equation}
+ \Anorm{\rho}{\asp}{R_j^k-R_j^{k'}}\le2E\vartheta^m+\sum_{h=j+1}^{j+m}\vartheta^{h-j-1}\varepsilon_h(k,k'). \label{ch12:eq:suffix}
+\end{equation}
+We let $k,k'\to\infty$ at fixed $m$, and then $m\to\infty$. The space of coefficient sequences with finite norm is complete: each coefficient tensor has a limit, Fatou's lemma bounds the weighted sums of the limit, and the Cauchy property makes the tails uniform. The limit series converges absolutely on the same ball and defines $R_j^\infty$ with $\Anorm{\rho}{\asp}{R_j^k-R_j^\infty}\to0$. Its value and first derivative at the identity vanish. Reality, the symmetries, and the identities expressing gauge invariance within $B_\rho$ pass to the pointwise limit, which defines $R_{j,\mathrm{sat}}^\infty$ on $D_\rho$. Thus $R_j^\infty\in\mathcal A_E$.
+
+\paragraph{Step 7: stopped measures.}
+The stopped density in the statement is the density of \cref{ch11:thm:deep-buffer-law} after $k-j$ RG steps, with preceding depth $J(k-j)$. Its classical term converges by \cref{ch08:thm:classical-cutoff} on this fixed lattice, and the gauge-invariant extension preserves the uniform bound on $B_r$. Combining this with Step~6 and the value bound of \cref{ch12:lem:reserved-tail}, we obtain
+\begin{equation}
+ \delta_{j,k}=\sup_{D_r}\Bigl\lvert\frac{E_{J(k-j),\mathrm{sat}}-E_{\infty,\mathrm{sat}}}{g_j^2}+R_{j,\mathrm{sat}}^k-R_{j,\mathrm{sat}}^\infty\Bigr\rvert\longrightarrow0. \label{ch12:eq:exponent}
+\end{equation}
+Here $g_j>0$ is fixed. At this finite volume, the limiting weight is bounded above and below by positive constants on $D_r$. Since $D_r$ contains a real open neighborhood of the identity of positive Haar measure, the limiting normalizer is positive and finite. By \cref{ch12:lem:tv-tools}(1), the total variation distance between $\StoppedLaw_j^k$ and $\StoppedLaw_j^\infty$ is at most $e^{2\delta_{j,k}}-1$, which proves the convergence of the stopped measures. The identification $n_0=n_s$, $k=K-s$ follows from \cref{ch01:def:selected-law}. All the nonuniform constants introduced in \eqref{ch12:eq:outer-output}--\eqref{ch12:eq:exponent} concern fixed finite resolutions or fixed positive couplings, as asserted.
+\end{proof}
+
+\section{Conditional fluctuation kernels and the coarse-level measure}\label{ch12:sec:kernels}
+
+We now identify the conditional law of the fluctuation variables of one RG step, given the field at the coarser level, and prove its convergence. We then write the conditioned Wilson measure as an iteration of these kernels, starting from its marginal on the coarse lattice.
+
+\begin{theorem}\label{ch12:thm:white-kernel-limit}
+In the hierarchy of \cref{ch12:thm:fixed-resolution-cutoff}, fix $j\ge1$ and $k\ge j$, and recall $d_j^k=J(k-j)$, $t_j=M^{(J-1)/2}g_j$, $p_j=p(t_j)$, and the cutoff domain $\Omega_{p_j}$ of the RG step from level $j$ to level $j-1$, which does not depend on $k$. For a field $c=e^\theta\in B_r$ at level $j-1$, the conditional fluctuation kernel of level $j$ is
+\[
+ k_j^k(\theta,dw)=\frac{\one_{\Omega_{p_j}}(w)\,e^{-V_j^k(\theta,w)}\,dw}{\int_{\Omega_{p_j}}e^{-V_j^k(\theta,v)}\,dv},
+\]
+with the conditional fluctuation potential
+\[
+ \begin{split}
+ V_j^k(\theta,w)={}&\tfrac12\abs w^2+H_{d_j^k,J}(\theta,w)\\
+ &+R_{j,\mathrm{sat}}^k\bigl({\RawRecon}_{d_j^k}(\theta,(g_{j,i}w_i)_i)\bigr)-R_{j,\mathrm{sat}}^k\bigl({\RawRecon}_{d_j^k}(\theta,0)\bigr).
+ \end{split}
+\]
+Here $H_{d,J}$ is the fluctuation exponent of \cref{ch09:thm:sequential-density}, including every difference of determinant terms that depends on coarser fluctuation variables; only terms independent of $w$ have been canceled. The reconstruction uses the inputs $g_{j,i}w_i$, with their fixed ratios, and contains every inverse square root of the constrained Hessians. There exists a limiting potential $V_j^\infty$ on the same product such that
+\[
+ \Delta_{j,k}=\sup_{e^\theta\in B_r,\,w\in\Omega_{p_j}}\abs{V_j^k(\theta,w)-V_j^\infty(\theta,w)}\longrightarrow0,
+ \qquad
+ \sup_{e^\theta\in B_r}\norm{k_j^k(\theta,\cdot)-k_j^\infty(\theta,\cdot)}_{\TV}\le e^{2\Delta_{j,k}}-1 .
+\]
+The reconstructions ${\RawRecon}_{d_j^k}$ converge uniformly on this product. The limiting density and the limiting reconstruction are Borel and continuous in $\theta$ on the smaller coordinate chart, and all normalizers are positive. The formula defines a version of the conditional law at every field in $B_r$, including fields of zero probability. Restrictions at coarser levels are functions of the field at level $j-1$, and they cancel from this conditional law wherever it is used. The constants have the fixed-resolution dependence of \cref{ch12:thm:fixed-resolution-cutoff}. No total variation statement is made for the images of these kernels under reconstruction maps that depend on $k$.
+\end{theorem}
+
+\begin{proof}
+Here $t_j=g_{j-1}/\sqrt M=M^{(J-1)/2}g_j$ is the largest coupling of the intermediate scales, and $g_{j,i}=t_jM^{(i-J+1)/2}$, $0\le i<J$. Thus the cutoff domain, its radii, and all ratios of couplings are fixed once $j$, $L$, $\gamma$, and the hierarchy are fixed.
+
+We apply \cref{ch09:thm:sequential-density} with preceding depth $d_j^k$. Its telescoping identity for the classical action contributes $\abs w^2/2$ and the classical remainder. Its triangular determinant contributes the factors $g_{j,i}^{3f_i}$, the zero-fluctuation terms $(1/2)\log\det K_i$, and the differences of these terms that depend on coarser fluctuation variables. Its Haar disintegration densities contribute their values at the identity and all nonconstant differences. The unnormalized fiber is therefore exactly
+\[
+ C_j^k(c)\,\one_{\Omega_{p_j}}(w)\,e^{-V_j^k(\theta,w)}\,dw,
+\]
+where $C_j^k(c)>0$ collects the factors that depend only on the field $c$, including the value of the input effective interaction at zero fluctuation, and $V_j^k$ is the displayed potential. By \cref{ch11:thm:deep-buffer-law}, the indicator of $D_r$ at level $j$ and all intermediate domain indicators equal one on the whole product, at every field in $B_r$. Dividing this fiber by its own integral gives the formula for the kernel.
+
+For the convergence, we first compare the same input effective interaction $R$ at two preceding depths, using the common gauge transformation of Step~4 in the proof of \cref{ch12:thm:fixed-resolution-cutoff}. Both images lie in $B_{3\rho/4}$ on a common complex product. The difference of the reconstructions tends uniformly to zero, and the derivative bounds for $R$ on $B_{3\rho/4}$ are uniform over $\mathcal A_E$. Next we replace $R_j^k$ by $R_j^\infty$ on this image. By the value bound of \cref{ch12:lem:reserved-tail}, this changes the potential by at most $D_{\Lambda_j}\rho^2\Anorm{\rho}{\asp}{R_j^k-R_j^\infty}$, where $D_{\Lambda_j}$ is the number of scalar link coordinates at level $j$. We apply these two comparisons at $w$ and at $w=0$. The classical and Haar disintegration terms converge by \cref{ch08:thm:classical-cutoff}. Thus the potentials are uniformly Cauchy on the closed product of fields and fluctuation variables, which gives $\Delta_{j,k}\to0$.
+
+To define the limiting potential, we fix any sufficiently late depth $d$ and use its gauge transformation $\Omega_d$ as a comparison gauge. It puts the image of the limiting reconstruction in $B_{3\rho/4}$, so $R_j^\infty$ can be evaluated holomorphically there. Two such choices agree on real data, by gauge invariance within $B_\rho$, and hence as holomorphic functions, by the coordinatewise identity argument of Step~4. The convergence of the reconstructions themselves follows from \cref{ch08:thm:classical-cutoff} and does not involve this interaction.
+
+By \cref{ch12:lem:tv-tools}(1), applied to Lebesgue measure on $\Omega_{p_j}$, the total variation distance is at most $e^{2\Delta_{j,k}}-1$, uniformly in the field. The integrals are positive, since the product has positive Lebesgue measure. On every closed smaller coordinate chart the limiting potential is continuous and bounded, so its exponential has a positive integral which depends continuously on $\theta$. This proves that the normalized density is Borel and continuous in $\theta$, and that the limiting reconstruction is continuous. In particular the density defines a version of the conditional law even at fields of zero probability.
+
+Finally, once the field at level $j-1$ is fixed, a restriction at a coarser level has the form $a(c)\in\{0,1\}$, because all further averaging maps are deterministic. At a field used by the conditioned measure we have $a(c)=1$, and it cancels between the fiber and its normalizer. For a general nonnegative factor depending only on $c$ the same cancellation holds wherever the factor is positive. This proves the last assertion.
+\end{proof}
+
+\begin{lemma}\label{ch12:lem:backward-law}
+Fix $k\ge1$ and the conditioned Wilson measure $\nu^k$, with meshes $a_j=HB^{-j}$ and preceding depths $d_j^k=J(k-j)$. Fix a Borel map $S_0$, independent of $k$, from $D_r$ on the coarse lattice $\Lat{n_0}$ to $\{\theta:\norm\theta_\infty<r\}$ such that $e^{S_0(U)}$ is gauge equivalent to $U$; such a map exists and is constructed in the proof. Let $\theta_0=S_0(V^{Jk})$, where $V^{Jk}$ is the coarse field of $U\sim\nu^k$. Given $\theta_0,w_1,\ldots,w_{j-1}$, let $w_j$ have the law $k_j^k(\theta_{j-1},\cdot)$, and put
+\[
+ U_0=e^{\theta_0},\qquad
+ U_j=e^{\theta_j},\quad \theta_j=\Phi_{d_j^k,j}\bigl(\theta_{j-1},(g_{j,i}w_{j,i})_i\bigr),
+ \qquad \Macro U_j=U_{j-1}\quad(1\le j\le k).
+\]
+Here $\Phi_{d,j}$ is either the map $\phi_d$ of \cref{ch12:sec:operators}, built with the gauge transformations of \cref{ch10:thm:whole-image-gauge}, or the logarithmic coordinate representation $\widehat\Phi_{d,\Lambda_j}$ of the reconstruction map of \cref{ch12:thm:replacement-family} below; in both cases the gauge transformation depends only on the field at level $j-1$ and equals the identity at the vertices of $\Lat{n_{j-1}}$. Then the following hold.
+\begin{enumerate}
+\item The gauge orbits $([U_0],\ldots,[U_k])$ have the law of the gauge orbits $([V^{Jk}],[V^{J(k-1)}],\ldots,[V^0])$ under $\nu^k$.
+\item If the field at level $j-1$ is replaced by another gauge-equivalent representative in $B_r$, the kernels correspond under a triangular change of fluctuation coordinates with orthogonal diagonal blocks, which preserves the balls of the cutoff domain and the normalized density.
+\item Restrictions at coarser levels that are functions of the field at level $j-1$ do not change the conditional law at level $j$.
+\end{enumerate}
+The map $S_0$ need not be constant on gauge orbits.
+
+Suppose in addition that, on the products used in the construction,
+\[
+ \norm{\Phi_{d,j}(\theta,q)}_\infty\le a_{\mathrm{cap}}\norm\theta_\infty+C_{\mathrm{rec},J}\max_i\norm{q_i}_\infty,
+ \qquad a_{\mathrm{cap}}=C_{\mathrm{CP}}/B,\qquad a_{\mathrm{cap}}\sqrt B<1,
+\]
+where $C_{\mathrm{CP}}\ge1$ is fixed before $J$. Put $b_j=\norm{\theta_j}_\infty$. Then on every sample, uniformly in $k$, $j$, and $d_j^k$,
+\[
+ b_j\le a_{\mathrm{cap}}b_{j-1}+C_{\mathrm{rec},J}t_jp_j,\qquad
+ b_j\le ra_{\mathrm{cap}}^j+C_{\mathrm{cap},J}g_3\sqrt{a_j}\,p_j,
+\]
+for any $C_{\mathrm{cap},J}\ge M^{(J-1)/2}C_{\mathrm{rec},J}/(1-a_{\mathrm{cap}}\sqrt B)$. For $2\le l\le k$,
+\[
+ \sum_{j=l}^kb_{j-1}\le C_J\bigl\{ra_{\mathrm{cap}}^{l-1}+g_3\sqrt{a_{l-1}}\,(p_l+1)\bigr\};
+\]
+for $l=1$ one adds the term $b_0<r$. These constants have the dependence described in item~(2) of \cref{ch01:conv:constants}, and they may depend on $(1-a_{\mathrm{cap}}\sqrt B)^{-1}$; the physical parameters and the mesh factors are displayed explicitly.
+\end{lemma}
+
+\begin{proof}
+We first construct $S_0$. The gauge group of the coarse lattice is a finite product of compact matrix groups and has a countable dense subset $(h_m)_{m\ge1}$. For $U\in D_r$ the set of gauge transformations carrying $U$ into the open set $B_r$ is nonempty and open, so some $h_m$ does so; we choose the least such $m$ and set $S_0(U)=\Log(U^{h_m})$. The sets $\{U:U^{h_m}\in B_r\}$ are open, and removing from each of them the finitely many earlier ones gives Borel sets on which the choice is constant. Thus $S_0$ is Borel and independent of $k$, and it carries every field in $D_r$ into $B_r$.
+
+At fixed $k$, the density of $\nu^k$ disintegrates, by the fiber formula of \cref{ch11:thm:deep-buffer-law}, into its coarse marginal and the normalized kernels of \cref{ch12:thm:white-kernel-limit}. To verify this without choosing an abstract version of the conditional law, we multiply the unnormalized fiber by a bounded test function of the coarse field and a bounded test function of the fluctuation variables, and integrate. By Fubini's theorem and the exact fiber normalizer, we obtain the proposed conditional integral. We repeat this finite calculation from the coarse side to the fine side. At each repetition, all remaining restrictions at coarser levels are factors depending only on the coarser field, and they cancel. Integrating the resulting iterated product against the coarse marginal constructs the finite random hierarchy of the statement.
+
+For changes between coarse representatives in $B_r$, we use part~(3) of \cref{ch10:thm:actual-compact-cut}. The enlarged-domain reconstruction hypothesis inherited from \cref{ch12:thm:fixed-resolution-cutoff} places both intermediate reconstructions in the required comparison domains, with margins. The transition is triangular in the intermediate scales and has orthogonal color rotations and block permutations on its diagonal, so it preserves every ball, the Gaussian term $\abs w^2/2$, and Lebesgue measure, with absolute Jacobian one. The representative change after reconstruction is given by \cref{ch10:thm:whole-image-gauge}(4). For the initial coarse field, which lies in $D_r$ but possibly outside $B_r$, the passage to the representative $e^{S_0(U)}$ uses the gauge invariance of the input density and of the restriction event in parts~(1)--(3) of \cref{ch10:thm:actual-compact-cut}, not the chart theorem of \cref{ch09:thm:sequential-density}. The Haar disintegration density and the gauge-invariant extension of the input effective interaction transform by the same identity, so the normalized conditional density is preserved. This proves (2). Once the field at level $j-1$ is fixed, the gauge transformation in $\Phi$ does not depend on the fluctuation variables and equals the identity at every vertex of $\Lat{n_{j-1}}$. By gauge covariance of the block averaging map we have
+\[
+ \Macro\bigl({\RawRecon}_d(c,q)^{\Omega(c)}\bigr)=\bigl(\Macro{\RawRecon}_d(c,q)\bigr)^{\Omega|_{\Lat{n_{j-1}}}}=c,
+\]
+which proves the relation $\Macro U_j=U_{j-1}$ at every step. The same computation applies to the reconstruction maps of \cref{ch12:thm:replacement-family}, which have these properties by construction. We conclude that every function of the tuple that is invariant under gauge transformations at each level has the same expectation as under $\nu^k$, which is (1). Assertion (3) is the last part of \cref{ch12:thm:white-kernel-limit}.
+
+On the cutoff domain $\max_i\norm{g_{j,i}w_{j,i}}_\infty\le t_jp_j$, and the assumed bound on $\Phi$ implies the first recurrence. We write $a=a_{\mathrm{cap}}$, $\xi=a\sqrt B<1$, and $c_B=M^{(J-1)/2}$. Since $b_0<r$ and $t_i=c_Bg_3\sqrt{a_i}=c_Bg_3\sqrt{a_j}B^{(j-i)/2}$, iteration gives
+\begin{equation}
+ \begin{split}
+ b_j&\le ra^j+C_{\mathrm{rec},J}\sum_{i=1}^ja^{j-i}t_ip_i
+ =ra^j+c_BC_{\mathrm{rec},J}g_3\sqrt{a_j}\sum_{i=1}^j\xi^{j-i}p_i\\
+ &\le ra^j+\frac{c_BC_{\mathrm{rec},J}}{1-\xi}g_3\sqrt{a_j}\,p_j .
+ \end{split}\label{ch12:eq:cap-iteration}
+\end{equation}
+In the last inequality we used $p_i\le p_j$, which holds since $p_j=p_1+(j-1)c_p$ with $c_p=A_{\mathrm w}\log B/2>0$. This gives the second bound on $b_j$, on every sample. Only a constant depending on $J$ is enlarged here; $C_{\mathrm{CP}}$ and $a_{\mathrm{cap}}$ stay fixed.
+
+For $l\ge2$, let $x=B^{-1/2}$. Using $\sqrt{a_h}=\sqrt{a_{l-1}}\,x^{h-l+1}$, $p_h=p_{l-1}+(h-l+1)c_p$, and the sums $\sum_{h\ge0}x^h=(1-x)^{-1}$ and $\sum_{h\ge0}hx^h=x(1-x)^{-2}$, we obtain
+\begin{equation}
+ \begin{split}
+ \sum_{j=l}^kb_{j-1}
+ &\le\frac{ra^{l-1}}{1-a}+C_{\mathrm{cap},J}g_3\sqrt{a_{l-1}}\Bigl(\frac{p_{l-1}}{1-x}+\frac{c_px}{(1-x)^2}\Bigr)\\
+ &\le C_J\bigl\{ra^{l-1}+g_3\sqrt{a_{l-1}}\,(p_l+1)\bigr\},
+ \end{split}\label{ch12:eq:calculation-18}
+\end{equation}
+where $C_J\ge\max\{(1-a)^{-1},C_{\mathrm{cap},J}[(1-x)^{-1}+c_px(1-x)^{-2}]\}$. For $l=1$ we separate $b_0<r$ and apply this calculation from $j=2$.
+\end{proof}
+
+\begin{lemma}\label{ch12:lem:terminal-selector-tv}
+In the hierarchy of \cref{ch12:thm:fixed-resolution-cutoff}, fix $n_0$, $L,\gamma>0$, and the Borel map $S_0$ of \cref{ch12:lem:backward-law}, independent of $k$. Let $\nu_{0,\mathrm{full}}^k$ be the marginal of $\nu^k$ on the coarse lattice, that is, the law of $V^{Jk}$. Then $\nu_{0,\mathrm{full}}^k=\StoppedLaw_0^k$, and the laws $\eta_0^k=(S_0)_*\nu_{0,\mathrm{full}}^k$ and $\eta_0^\infty=(S_0)_*\StoppedLaw_0^\infty$ of the coarse logarithm satisfy
+\[
+ \norm{\eta_0^k-\eta_0^\infty}_{\TV}\le\norm{\StoppedLaw_0^k-\StoppedLaw_0^\infty}_{\TV}\longrightarrow0 .
+\]
+The limiting stopped measure has a positive normalizer. The map $S_0$ need only be Borel. The convergence has the dependence of \cref{ch12:thm:fixed-resolution-cutoff} at the fixed coarse side.
+\end{lemma}
+
+\begin{proof}
+We integrate the density of $\nu^k$ down to the coarse lattice, using \cref{ch11:thm:deep-buffer-law}. All $k$ restrictions on the fluctuation variables and the indicator of $D_r$ on the coarse lattice have been included, and no restriction at a coarser level remains. The normalized density is exactly that of $\StoppedLaw_0^k$. Applying \Cref{ch12:thm:fixed-resolution-cutoff} with $j=0$, we obtain its total variation limit and the positive limiting normalizer. For every Borel set $A$,
+\[
+ \abs{\eta_0^k(A)-\eta_0^\infty(A)}=\abs{\StoppedLaw_0^k(S_0^{-1}A)-\StoppedLaw_0^\infty(S_0^{-1}A)}\le\norm{\StoppedLaw_0^k-\StoppedLaw_0^\infty}_{\TV}.
+\]
+Taking the supremum over $A$, as in \cref{ch02:lem:bounded-transfer}, completes the proof; no continuity of $S_0$ is needed.
+\end{proof}
+
+\section{A fixed family of reconstruction maps}\label{ch12:sec:family}
+
+The gauge transformations $\Omega_d$ of \cref{ch10:thm:whole-image-gauge} are auxiliary: they change only the representative in which the input effective interaction is evaluated, and the conditional measures do not depend on them. However, \cref{ch10:thm:whole-image-gauge} asserts nothing about their convergence as the preceding depth tends to infinity, so the reconstructed fields need not converge. To fix this, we use that at a fixed lattice pair the gauge transformations form a bounded family of holomorphic functions of finitely many variables, so they have a convergent subsequence. We choose one subsequential limit and use it at every preceding depth beyond a deterministic threshold. The exact averaging identities and the conditional densities are preserved, because the new gauge transformation is the identity at the vertices of the coarse lattice and this interaction is gauge invariant. This is not a gauge fixing on the space of gauge orbits. The threshold must be large enough to preserve certain bounds, and we keep track of the order in which the constants are chosen:
+\begin{equation}\label{ch12:eq:order-of-choices}
+ \begin{gathered}
+ \text{$C_{\mathrm{CP}}$ and the spatial parameters}\ \longrightarrow\ J\ \longrightarrow\ \text{joint coefficient bounds on larger domains}\\
+ \longrightarrow\ \beta_J,\ r_{\mathrm{eff}},\ r\ \longrightarrow\ Q_{\mathrm{act}},\ \text{coupling ceiling, thresholds }d_0(\Lambda).
+ \end{gathered}
+\end{equation}
+The constants $\beta_J$ and $r_{\mathrm{eff}}$ appear in \cref{ch12:lem:deterministic-prolongation-reserve}. The thresholds can be increased at the last step without changing any earlier constant. The choice of the limiting gauge depends on the lattice pair and on the domains, and not on the coupling.
+
+\begin{theorem}\label{ch12:thm:replacement-family}
+Fix nested complex domains $\mathscr D_{\mathrm{in}}\Subset\mathscr D_{\mathrm{mid}}\Subset\mathscr D_{\mathrm{out}}$ of coarse-field and input variables, with radius ratios less than one, such that all real products of coarse fields and inputs used in the construction lie in $\mathscr D_{\mathrm{in}}$ with a margin. The domains and the coefficient ceilings depend only on $M$, $J$, and the larger construction domains, and not on the lattice side or the preceding depth.
+\begin{enumerate}
+\item On each fixed lattice pair $\Lambda$ of one RG step, choose once a holomorphic subsequential limit $\Omega_{\infty,\Lambda}$, on the middle domain of coarse fields, of the gauge transformations $\Omega_{d,\Lambda}$ of \cref{ch10:thm:whole-image-gauge} as $d\to\infty$. It is periodic, takes values in $\SU$ at real arguments, equals the identity at $\theta=0$ and at the vertices of the coarse lattice, is equivariant under global color rotations, and has a bounded holomorphic inverse on that domain. Let ${\RawRecon}_{\infty,\Lambda}$ be the limit of the reconstructions ${\RawRecon}_{d,\Lambda}$ given by \cref{ch12:thm:fixed-resolution-cutoff}, and put
+\[
+ \Phi_{\infty,\Lambda}(c,q)=\Log\bigl[{\RawRecon}_{\infty,\Lambda}(c,q)^{\Omega_{\infty,\Lambda}(c)}\bigr].
+\]
+Then the whole sequence $\Log[{\RawRecon}_{d,\Lambda}^{\Omega_{\infty,\Lambda}}]$ converges to $\Phi_{\infty,\Lambda}$ on $\mathscr D_{\mathrm{in}}$ in every fixed derivative and every fixed spatial difference, and in the weighted analytic coefficient norm, including all output-fixed row sums and all volume-normalized column sums. The modulus of convergence may depend on $\Lambda$.
+\item Fix first tolerances, independent of $J$, for the finitely many quantities bounded in (3) below, and a tolerance depending on $J$ for the joint coefficient norm on $\mathscr D_{\mathrm{in}}$. There exist finite deterministic thresholds $d_0(\Lambda)$, which also enforce the image conditions into $B_r$ at real coarse fields in $B_r$ and into $B_\rho$ on the complex product, such that
+\[
+ \widehat\Omega_{d,\Lambda}(c)=
+ \begin{cases}\Omega_{d,\Lambda}(c),&d<d_0(\Lambda),\\ \Omega_{\infty,\Lambda}(c),&d\ge d_0(\Lambda),\end{cases}
+\]
+and
+\[
+ \RepMap_{d,\Lambda}(c,q)={\RawRecon}_{d,\Lambda}(c,q)^{\widehat\Omega_{d,\Lambda}(c)},
+ \qquad
+ \widehat\Phi_{d,\Lambda}=\Log\RepMap_{d,\Lambda},
+\]
+define maps $\widehat\Phi_{d,\Lambda}$ that satisfy the same strict domain conditions on the whole products and have common joint coefficient bounds, with all row and column sums, uniformly in $\Lambda$ and $d$. The thresholds depend only on the lattice pair, the deterministic domains, and the tolerances; they do not depend on the coupling, on samples, on sources, on an observation scale, on a position, or on the total number of RG steps. We call $\RepMap_{d,\Lambda}$ the reconstruction map and $\widehat\Phi_{d,\Lambda}$ its logarithmic coordinate representation.
+\item Write $\widehat\Phi_{d,\Lambda}(c,0)=B^{-1}\overline A_{d,\Lambda}(c)$, and let $\nabla_{1/B}$ denote the first differences at spacing $1/B$, in units of the coarse lattice. The field $\overline A_{d,\Lambda}$ is a new representative of the gauge orbit of the classical background field; it is not claimed to equal the field of \cref{ch08:lem:aligned-zero-white}. Set
+\[
+ G_{d,\Lambda}(\theta)=\bigl(\overline A_{d,\Lambda}(\theta),\nabla_{1/B}\overline A_{d,\Lambda}(\theta)\bigr),
+\]
+and let $\mathscr D_\theta=\{\norm\theta_\infty\le r_\theta\}$ be a closed polydisc of coarse fields contained in the coarse-field factor of $\mathscr D_{\mathrm{in}}$ and in the ball $\norm\theta_\infty<r_{\mathrm{cen}}$ of \cref{ch08:lem:aligned-zero-white}. There exists $C_{\mathrm{CP}}\ge1$, independent of $J$, $\Lambda$, $d$, and $r_\theta$, with the following properties. For every $\theta\in\mathscr D_\theta$ we have $\norm{G_{d,\Lambda}(\theta)}_\infty\le C_{\mathrm{CP}}\norm\theta_\infty$. The output-fixed row sum and every input-fixed column sum of $D_\theta G_{d,\Lambda}(0)$ are at most $C_{\mathrm{CP}}$. For every $\theta\in\mathscr D_\theta$ and $1\le s\le3$, the output-fixed row sum and every input-fixed column sum of $D_\theta^sG_{d,\Lambda}(\theta)$ are at most $s!\,C_{\mathrm{CP}}^{s+1}$. These sums are those of \cref{ch01:def:analytic-norms}, with the spatial weight at the rate $a_{\mathrm{cen}}$ of \cref{ch08:lem:aligned-zero-white}, which is fixed before $J$, and with the column volume factor $B^{-3}$. In particular the linear coefficient of $c\mapsto\widehat\Phi_{d,\Lambda}(c,0)$ at $c=I$ has row and column sums at most $C_{\mathrm{CP}}/B$. The full joint constants may depend on $J$. The constant $C_{\mathrm{CP}}$ is enlarged before $J$ is chosen, and $J$ is then chosen so that
+\[
+ a_{\mathrm{cap}}=C_{\mathrm{CP}}/B,\qquad \qanc=C_{\mathrm{CP}}^2/B<1,
+\]
+with a margin; one may require $\qanc\le1/4$. The tolerances preserve these conditions.
+\item Let $\widehat L_{d,\Lambda}$ be the derivative at $c=I$ of $c\mapsto\widehat\Phi_{d,\Lambda}(c,0)$. In this item and in Step~4 of the proof, let $H$ denote the mesh of the coarse lattice of the pair $\Lambda$ (not the mesh $L/n_0$ of level zero), and let $a=H/B$ be the mesh of its fine lattice. Then for every coarse logarithm $\theta$, every orientation $i$, and every color,
+\[
+ a^2\sum_{x}(\widehat L_{d,\Lambda}\theta)_i(x)=H^2\sum_{u}\theta_i(u),
+\]
+where $x$ runs over the vertices of the fine lattice and $u$ over those of the coarse lattice. In words, for each coarse link and color, the linearized zero-fluctuation reconstruction has the same componentwise integral as the piecewise constant embedding of the coarse potential.
+\item The reconstruction maps preserve the exact averaging identity $\Macro e^{\widehat\Phi_{d,\Lambda}(c,q)}=c$, the gauge orbit of the zero-fluctuation reconstruction, the cutoff domains, the Haar disintegration densities, and the conditional fluctuation kernels.
+\end{enumerate}
+The constants have the dependence described in item~(2) of \cref{ch01:conv:constants}; among them, only the finitely many bounds in (3) are chosen before $J$. No convergence or uniqueness of the sequence $\Omega_{d,\Lambda}$ itself is asserted.
+\end{theorem}
+
+\begin{proof}
+The proof has five steps: we choose the limiting gauge transformation, prove convergence of the whole sequence in the fixed limiting gauge, choose the thresholds, prove the identity (4), and verify the preservation statements.
+
+\paragraph{Step 1: a limiting gauge transformation at a fixed lattice pair.}
+On a fixed lattice pair $\Lambda$ there are finitely many coarse-field coordinates and finitely many matrix entries at the vertices. We take the three domains inside the common product of \cref{ch12:lem:product-reserves}, with strict nested margins. Their sums of radii are less than $r_J$, the denominator of the rational majorant is at least $\eta_{\mathrm{im}}$, and all intermediate classical, logarithm, and Haar disintegration domain conditions hold. By \cref{ch10:thm:whole-image-gauge}, the gauge transformations have holomorphic logarithms $\kappa_d$ in the identity chart, uniformly bounded on the outer domain. By Cauchy's formula, every Taylor coefficient is bounded there. We enumerate the coefficients of all matrix entries and choose nested subsequences along which the first coefficient, the second, and so on converge; along the diagonal subsequence, all coefficients converge. Such subsequences exist, since each coefficient lies in a fixed closed disc of $\C$.
+
+On every strictly smaller polydisc the Cauchy bounds make the tail of the coefficient series uniformly summable: in coordinate dimension $D$ there are $\binom{m+D-1}{D-1}$ monomials of degree $m$, and the ratio of radii is bounded by a number less than one. Hence the diagonal series converges uniformly on compact subsets of the middle domain, and so do its fixed derivatives after a further reduction of the domain. Its sum $\kappa_\infty$ is holomorphic there, and we set $\Omega_{\infty,\Lambda}=\exp\kappa_\infty$. The exponential series gives convergence of the corresponding gauge transformations. The bounded inverse entries have the same subsequential limit, and passing to the limit in $\Omega_d\Omega_d^{-1}=I$, we see that the limiting inverse is holomorphic and bounded. Periodicity, the identity at zero and at the coarse vertices, equivariance under global color rotations, and the values in $\SU$ at real arguments are closed conditions and pass to the limit; for the last one, a limit of unitary matrices of determinant one is unitary with determinant one. We choose one such subsequence for each $\Lambda$.
+
+By \cref{ch08:thm:classical-cutoff}, the reconstructions ${\RawRecon}_{d,\Lambda}$ converge along the whole sequence of depths. Along the chosen subsequence both the gauge transformations and the reconstructions converge, so their gauge-transformed logarithms converge to $\Phi_{\infty,\Lambda}$. The logarithm stays on its branch: the bound on the images has a strict gap to the boundary of the branch, and the same bound holds in the limit. Passing to the limit coefficient by coefficient in each nonnegative weighted sum and applying Fatou's lemma, we obtain for $\Phi_{\infty,\Lambda}$ the joint coefficient bounds of the unmodified maps, including its column sums; these bounds may depend on $J$. In the same way, we obtain separately the bounds of \cref{ch08:lem:aligned-zero-white}(2) for the pair $G_{\infty,\Lambda}$ formed by the field $B\Phi_{\infty,\Lambda}(\cdot,0)$ and its first differences $\nabla_{1/B}$ in units of the coarse lattice. These are the value bound and the row and column sums of its first three derivatives in the coarse field at every point of $\mathscr D_\theta$. Indeed, \cref{ch08:lem:aligned-zero-white}(2) holds at every point of the ball $\norm\theta_\infty<r_{\mathrm{cen}}$, and at a fixed lattice pair these derivatives are finite arrays whose entries converge along the chosen subsequence. Although \cref{ch08:lem:aligned-zero-white} gives bounds of all orders that are independent of $J$, only the finitely many bounds listed in (3) are kept with a constant independent of $J$ in the construction below.
+
+\paragraph{Step 2: the whole sequence in the fixed limiting gauge.}
+We define
+\begin{equation}
+ \Psi_d(c,q)=\Log\bigl[{\RawRecon}_{d,\Lambda}(c,q)^{\Omega_{\infty,\Lambda}(c)}\bigr]. \label{ch12:eq:fixed-gauge-map}
+\end{equation}
+For all sufficiently large $d$ this map is defined on a neighborhood of the inner product contained in the larger analytic domain, and it converges locally uniformly and holomorphically to $\Phi_{\infty,\Lambda}$, with every fixed derivative, because the gauge transformation in \eqref{ch12:eq:fixed-gauge-map} does not depend on $d$. We now show that it also converges in the coefficient norm.
+
+All operations needed below preserve nonnegative coefficient bounds with fixed indices; this is the calculus of nonnegative coefficient bounds of \cref{ch02:lem:coefficient-algebra}. For a product of coefficient tensors, the union of their networks connects the external indices, so the exponential weight of the product is at most the product of the weights. An output-fixed sum uses the row sums of all factors; an input-fixed sum uses the column sums of the factors on the path from that input to the output, and the row sums of the others. The intermediate volume factors cancel, and only the ratio of the volumes of the external output and of the fixed input remains. Expanding derivatives of compositions, with factorials divided out, sums the partitions as in the composition of nonnegative power series. Matrix products contribute only a factor depending on the fixed matrix dimension. The series
+\[
+ e^X=\sum_{m\ge0}X^m/m!,\qquad \log(I+Y)=\sum_{m\ge1}(-1)^{m+1}Y^m/m
+\]
+give the same conclusion for the exponential and the logarithm on products strictly inside their domains of convergence; the second series is used only where $\norm Y<1$ with a fixed margin.
+
+To apply these facts uniformly before any threshold is imposed, we recover a link of the reconstruction from the gauge-transformed link by
+\begin{equation}
+ ({\RawRecon}_d)_e=\Omega_d(x)^{-1}e^{\phi_{d,e}}\Omega_d(y),\qquad e=(x,y). \label{ch12:eq:calculation-20}
+\end{equation}
+The gauge transformation $\Omega_d$, its inverse, and the map $\phi_d$ have the common bounds of \cref{ch10:thm:whole-image-gauge} on a larger product domain. The input product is strictly inside \eqref{ch12:eq:reserved-product-gates}, so its denominator is positive and its intermediate margins hold. The limiting gauge transformation has the same bounds, by Fatou's lemma. Using \eqref{ch12:eq:calculation-20}, then multiplying by the limiting gauge transformation and applying the logarithm series, we obtain a joint bound, depending on $J$, for \eqref{ch12:eq:fixed-gauge-map} on an intermediate product domain. The construction domains are chosen inside this product at the outset, with these margins. This preliminary bound need not carry the small factor $B^{-1}$ of the zero-fluctuation reconstruction. Its constants and radii are independent of $\Lambda$, of $d$, and of the working radius chosen later. At fixed $\Lambda$ each fixed coefficient tensor of \eqref{ch12:eq:fixed-gauge-map} converges, and \cref{ch12:lem:reserved-tail} controls the tail in the degree on $\mathscr D_{\mathrm{in}}$. Then the whole sequence converges in the coefficient norm, including every volume-normalized column sum. Each fixed spatial difference is a fixed finite difference matrix at this lattice size, so the same argument applies to it. The modulus may depend on $\Lambda$. This proves (1).
+
+\paragraph{Step 3: finitely many derivatives, then thresholds.}
+Let $C_0\ge1$ be a common constant for the quantities in (3) of the unmodified maps, that is, for the pair $G_d$ formed by $B\phi_d(\cdot,0)$ and its first differences $\nabla_{1/B}$. These quantities are the value bound on $\mathscr D_\theta$, the row and column sums of $D_\theta G_d(0)$, and the row and column sums of $D_\theta^sG_d(\theta)$ for $1\le s\le3$ and every $\theta\in\mathscr D_\theta$. Since the unmodified zero-fluctuation map is $B^{-1}\overline A_{d,J}$ of \cref{ch08:lem:aligned-zero-white} (\cref{ch10:thm:whole-image-gauge}), and \cref{ch08:lem:aligned-zero-white}(2) holds at every point of the ball $\norm\theta_\infty<r_{\mathrm{cen}}$, the constant $C_0$ is independent of $J$, $\Lambda$, and $d$. We prescribe errors at most one in this finite list of scaled quantities, smaller if necessary to keep a chosen strict condition. We enlarge $C_{\mathrm{CP}}$ to cover $C_0$ and these errors. Then $C_{\mathrm{CP}}$ serves directly as the constant in the value bound and as the bound for the row and column sums of the linear coefficient tensor, and it can be chosen so that the bounds of orders $1\le s\le3$ have the form $s!\,C_{\mathrm{CP}}^{s+1}$. This enlargement uses no analytic radius depending on $J$ and no modulus of convergence. We choose $J$ using this enlarged constant, with $C_{\mathrm{CP}}^2/B\le1/4$ and the earlier conditions of \cref{ch10:thm:common-analytic-class} and \eqref{ch12:eq:pre-J-spatial-gates}. The construction of Steps~1 and~2 is then carried out for this $J$.
+
+We also prescribe one error, depending on $J$, in the full joint coefficient norm on the inner product. By the convergence just proved, for each fixed $\Lambda$ there exists a finite $d_0(\Lambda)$ such that, for every $d\ge d_0(\Lambda)$, the map \eqref{ch12:eq:fixed-gauge-map} differs from $\Phi_{\infty,\Lambda}$ by at most this error, and the quantities in (3) for $B\Psi_d(\cdot,0)$ and its first differences differ from those of $G_{\infty,\Lambda}$ by at most the prescribed errors, uniformly in $\theta\in\mathscr D_\theta$. At a fixed lattice pair these are finitely many entries of finitely many arrays, and they converge uniformly on the closed set $\mathscr D_\theta$ by Step~2, since $\mathscr D_\theta$ lies in the inner domain. We include in this finite list of requirements the image conditions on the real and complex products and every intermediate logarithm, classical, and Haar disintegration margin. The limiting images have strict margins, inherited from the common bounds of the unmodified maps, and the convergence on these product domains allows us to keep half of each margin. All image requirements concern the inputs $q_i$, on fixed products that contain every product $\{\max_i\norm{g_iw_i}_\infty\le tp(t)\}$ used in the construction, so they do not involve the coupling. For the image into $B_r$ we take the whole product $\{\norm\theta_\infty\le r\}\times\{\max_i\norm{q_i}_\infty\le Q_{\mathrm{act}}\}$ of \eqref{ch12:eq:actual-product-gates}, including $r+Q_{\mathrm{act}}<r_J$ and the positive denominator. On this product, the limiting image satisfies the strict bound inherited from the majorant of the unmodified maps, and the convergence in the fixed gauge keeps half of its margin above the threshold. The image into $B_\rho$ is treated in the same way on a smaller product domain inside \eqref{ch12:eq:reserved-product-gates}. The intermediate domain conditions belong to the reconstruction ${\RawRecon}_{d,\Lambda}$, which is unchanged. These requirements use $Q_{\mathrm{act}}$ itself, not the varying radius $tp(t)$.
+
+The piecewise family of (2) now has the asserted bounds: below the threshold we use the bounds of the unmodified maps, and above it the bounds of the limit plus the prescribed errors. The maximum of the two is independent of $\Lambda$ and $d$, even if the thresholds diverge with the lattice size. Each threshold is a deterministic property of finitely many classical maps, domains, and tolerances.
+
+In (3), $\overline A_{d,\Lambda}=B\widehat\Phi_{d,\Lambda}(\cdot,0)$ is a representative of the gauge orbit of the classical background field. Its preserved bounds give $a_{\mathrm{cap}}=C_{\mathrm{CP}}/B$ and, under the choice of $J$ in (3), $a_{\mathrm{cap}}\sqrt B\le1/2$. The full joint constants may depend on $J$.
+
+\paragraph{Step 4: preservation of componentwise integrals.}
+We prove the identity in (4) directly, by differentiating one averaging step at $I$. For an array $X$ of logarithms on the links of the fine lattice, we write $X(\sigma)$ for the signed sum of $X$ along a path $\sigma$, and $X_i(x)$ for the value on the link from $x$ to $x+e_i$. Differentiating the exponent and the reference path in \cref{ch01:def:block-map}, we obtain
+\begin{equation}
+ \begin{split}
+ (D\Block(I)X)_i(v)&=M^{-3}\sum_{x\in\mathsf B_M(v)}\sum_{s=0}^{M-1}X_i(x+se_i)+h_X(v)-h_X(v+Me_i),\\
+ h_X(v)&=M^{-3}\sum_{x\in\mathsf B_M(v)}X(\sigma_{v,x}).
+ \end{split}\label{ch12:eq:ordinary-mass}
+\end{equation}
+Here the derivative of the reference transport cancels the derivative of the reference transport subtracted inside the logarithm, and the paths $\sigma_{v+Me_i,x+Me_i}$ are translates of $\sigma_{v,x}$. Summing over the periodic coarse vertices $v$ removes the last two terms. For each $s$ the blocks $\mathsf B_M(v)$ partition the fine vertices, and translation by $se_i$ permutes them. Thus every oriented fine link is counted exactly $M$ times in the double sum, and
+\begin{equation}
+ \sum_v(D\Block(I)X)_i(v)=M^{-2}\sum_xX_i(x). \label{ch12:eq:shell-mass}
+\end{equation}
+Multiplying by the square of the coarse mesh converts this into the equality of the integrals of the two piecewise constant potentials, logarithm divided by mesh. Applying \eqref{ch12:eq:shell-mass} $J$ times gives the factor $B^{-2}$ for $\Macro$.
+
+Every reconstruction map satisfies the exact averaging identity, since its gauge transformation is the identity at the coarse vertices. At zero fluctuation this reads $\Macro e^{\widehat\Phi_{d,\Lambda}(\theta,0)}=e^\theta$, and its derivative at $\theta=0$ gives $D(\Macro)(I)\widehat L_{d,\Lambda}\theta=\theta$. With the coarse mesh $H$ and the fine mesh $a=H/B$, \eqref{ch12:eq:shell-mass} yields, for each orientation and color,
+\begin{equation}
+ a^2\sum_x(\widehat L_{d,\Lambda}\theta)_i(x)=H^2\sum_u\theta_i(u). \label{ch12:eq:column-mass}
+\end{equation}
+If $\theta=Hv$ for a coarse potential $v$ in physical units, the two sides are exactly the integrals of the fine linearized reconstruction $a^{-1}\widehat L_{d,\Lambda}\theta$ and of the piecewise constant embedding of $v$. Taking $v$ supported on one oriented coarse link and one color proves (4).
+
+\paragraph{Step 5: preservation of the conditional measures.}
+At a fixed coarse field, the reconstruction map is a fixed fine gauge transformation applied after the unchanged reconstruction ${\RawRecon}_{d,\Lambda}$. It fixes the coarse vertices, preserves the product Haar measure and the gauge orbit of the classical background field, and changes neither the fluctuation variables nor the cutoff domain. The Haar disintegration density, the triangular determinant, and the fluctuation exponent of \cref{ch09:thm:sequential-density} are those of ${\RawRecon}_{d,\Lambda}$. The input effective interaction takes the same value at the two representatives, by gauge invariance within $B_\rho$, since both representatives lie in its domain. Thus the fiber and its normalizer are unchanged, and so is the conditional fluctuation kernel. This proves (5).
+\end{proof}
+
+\section{Convergence of finite-scale reconstructions}\label{ch12:sec:prefixes}
+
+We now use the reconstruction maps of \cref{ch12:thm:replacement-family} in every hierarchy. For the RG step from level $j$ to level $j-1$ let $\Lambda_j$ be its lattice pair, and use the preceding depth $d_j^k=J(k-j)$. With the coarse logarithm $\theta_0$ and the fluctuation variables $w_1,\ldots,w_l$ of \cref{ch12:lem:backward-law}, the finite-scale reconstruction is defined by
+\[
+ F_0^k=\theta_0,\qquad F_j^k=\widehat\Phi_{d_j^k,\Lambda_j}\bigl(F_{j-1}^k,(g_{j,i}w_{j,i})_i\bigr)\qquad(1\le j\le l).
+\]
+
+\begin{theorem}\label{ch12:thm:representative-prefixes}
+Use the reconstruction maps of \cref{ch12:thm:replacement-family} at the preceding depths $d_j^k=J(k-j)$ in every hierarchy.
+\begin{enumerate}
+\item For every finite $k$, the replacement of $\Omega_d$ by $\widehat\Omega_d$ is a gauge transformation that depends only on the coarse field and equals the identity at the coarse vertices, applied after the same reconstruction ${\RawRecon}_d$. At each coarse field in $B_r$ it preserves the small-field event, every ball of the cutoff domain, the coordinates of the reconstruction, the effective classical action, the Haar disintegration density, the triangular determinant, the gauge-invariant extension of the input effective interaction, the normalizer, and the conditional fluctuation kernel. It preserves the exact averaging identities at every level, and the gauge invariance within $B_\rho$ after the triangular change of fluctuation coordinates that accompanies a change of the coarse representative.
+\item Fix $l<\infty$, $L,\gamma>0$, and the Borel map $S_0$ of \cref{ch12:lem:backward-law}. As $k\to\infty$, the joint law $P_l^k$ of $(\theta_0,w_1,\ldots,w_l)$ converges in total variation. The law of the finite-scale reconstruction $(F_0^k,\ldots,F_l^k)$ converges weakly and in bounded-Lipschitz distance. Since these reconstructions have a common compact range, it also converges in $W_1$ for any norm on the finite-dimensional space of logarithmic fields. The limiting laws are compatible: they are the finite iterations of one limiting coarse-level law, the kernels $k_j^\infty$, and the maps $\Phi_{\infty,\Lambda_j}$, and the limit for $l$ is a marginal of the limit for $l+1$. All these objects are Borel.
+\end{enumerate}
+No total variation statement is made for the laws of the reconstructed fields. The constants and moduli have the dependence of \cref{ch12:thm:fixed-resolution-cutoff} at fixed $l$. The construction requires neither a limit of fields in a space of distributions nor a modulus that is uniform in $l$.
+\end{theorem}
+
+\begin{remark}
+The restriction to weak convergence for the reconstructed fields is necessary. The reconstruction maps depend on $k$, and pushforwards by maps that move with $k$ do not preserve total variation convergence. For example, if $x_k\to x$ with $x_k\ne x$, then $\delta_{x_k}\to\delta_x$ weakly, while $\norm{\delta_{x_k}-\delta_x}_{\TV}=1$. The coordinates $(\theta_0,w_1,\ldots,w_l)$, on the other hand, live on fixed products, and there total variation convergence holds.
+\end{remark}
+
+\begin{proof}
+At a fixed coarse field, the replacement changes no coordinate of the reconstruction, no fluctuation variable, no ball, and no Jacobian. The indicators of $D_r$ are gauge invariant, and the new representative satisfies the strict domain conditions of \cref{ch12:thm:replacement-family}. Gauge covariance preserves the averaging identity, and gauge invariance within $B_\rho$ preserves the effective classical action and the input effective interaction. By \cref{ch11:thm:deep-buffer-law}, every factor of the fiber, the normalizer, and the conditional fluctuation kernel are therefore preserved.
+
+For a change of the coarse representative, we write $C'=C^{\widetilde h}$ for the reconstructions, after the triangular change of fluctuation coordinates. The convention \eqref{ch01:eq:lattice-gauge} gives
+\begin{equation}\label{ch12:eq:replacement-overlap}
+ (C')^{\widehat\Omega(c')}=\bigl(C^{\widehat\Omega(c)}\bigr)^{\widehat\Omega(c')\widetilde h\widehat\Omega(c)^{-1}} .
+\end{equation}
+The change of coordinates preserves every ball and has absolute Jacobian one, by \cref{ch10:thm:actual-compact-cut}(3), on the comparison domains of the enlarged-domain reconstruction hypothesis. Both representatives lie in the domain of this interaction, so its values at them agree. This proves the gauge invariance within $B_\rho$ without any equivariance of the limiting gauge transformation under local gauge transformations, and completes the proof of (1).
+
+By \cref{ch12:lem:terminal-selector-tv}, $\eta_0^k\to\eta_0^\infty$ in total variation. Fix $l<\infty$ and define
+\[
+ X_l=\{\norm{\theta_0}_\infty\le r\}\times\prod_{j=1}^l\Omega_{p_j}.
+\]
+The domain of each reconstruction map strictly contains its closed product. By \cref{ch12:lem:backward-law,ch12:thm:replacement-family}, the reconstructions $F_j^k$ are defined on $X_l$ and have a common compact range. For $k$ large, each of the finitely many depths $d_j^k$, $j\le l$, exceeds its threshold $d_0(\Lambda_j)$. The gauge transformation is then the fixed limiting one, and \cref{ch12:thm:replacement-family}(1) implies uniform convergence of each map. Let $u_{j,k}=\norm{F_j^k-F_j^\infty}_\infty$, let $v_{j,k}$ be the supremum distance between $\widehat\Phi_{d_j^k,\Lambda_j}$ and $\Phi_{\infty,\Lambda_j}$ on the smaller product domain, and let $\omega_{\Phi_j}$ be the modulus of continuity of $\Phi_{\infty,\Lambda_j}$ in its first argument there. Adding and subtracting $\Phi_{\infty,\Lambda_j}(F_{j-1}^k,\cdot)$, we obtain
+\begin{equation}\label{ch12:eq:calculation-25}
+ u_{j,k}\le v_{j,k}+\omega_{\Phi_j}(u_{j-1,k}),\qquad u_{0,k}=0,\qquad v_{j,k}\longrightarrow0 .
+\end{equation}
+By induction on $j$, $F_j^k\to F_j^\infty$ uniformly on $X_l$ for every $j\le l$.
+
+By \cref{ch12:thm:white-kernel-limit}, the limiting density is continuous on the compact product of fields and fluctuation variables, and its continuous positive normalizer has a positive minimum. Hence the limiting kernel is uniformly continuous in the field, in $L^1(dw)$ and therefore in total variation; let $\omega_{k_j}$ be its modulus. For points $h=(\theta_0,w_1,\ldots,w_{j-1})$ of the coordinate space, define
+\[
+ K_j^k(h,dw)=k_j^k(F_{j-1}^k(h),dw),\qquad K_j^\infty(h,dw)=k_j^\infty(F_{j-1}^\infty(h),dw).
+\]
+The two kernels are evaluated at different reconstructed fields, so the comparison contains a term for this discrepancy. By \cref{ch12:thm:white-kernel-limit},
+\begin{equation}\label{ch12:eq:calculation-26}
+ \sup_h\norm{K_j^k(h,\cdot)-K_j^\infty(h,\cdot)}_{\TV}\le e^{2\Delta_{j,k}}-1+\omega_{k_j}(u_{j-1,k})\longrightarrow0 .
+\end{equation}
+Every term of the conditional fluctuation potential is kept here, including the input effective interaction, the Haar disintegration terms, and the differences of the determinant terms.
+
+By \cref{ch12:lem:backward-law}, $P_l^k=\eta_0^kK_1^k\cdots K_l^k$ is the law of the coordinates. We define $P_l^\infty=\eta_0^\infty K_1^\infty\cdots K_l^\infty$. \Cref{ch12:lem:tv-tools}(2) implies that
+\begin{equation}\label{ch12:eq:coordinate-tv}
+ \norm{P_l^k-P_l^\infty}_{\TV}\le\norm{\eta_0^k-\eta_0^\infty}_{\TV}+\sum_{j=1}^l\sup_h\norm{K_j^k(h,\cdot)-K_j^\infty(h,\cdot)}_{\TV}\longrightarrow0 .
+\end{equation}
+
+We write $F^k=(F_0^k,\ldots,F_l^k)$. The ranges lie in a common compact subset of the finite-dimensional space of logarithmic fields, of diameter $D_l$. For every continuous $f$ on this set, \cref{ch12:lem:tv-tools}(3) gives
+\begin{equation}\label{ch12:eq:calculation-28}
+ \Bigl\lvert\int f(F^k)\,dP_l^k-\int f(F^\infty)\,dP_l^\infty\Bigr\rvert\le2\norm f_\infty\norm{P_l^k-P_l^\infty}_{\TV}+\omega_f(\norm{F^k-F^\infty}_\infty),
+\end{equation}
+which proves weak and bounded-Lipschitz convergence. For a fixed norm, \cref{ch12:lem:tv-tools}(3) also gives
+\[
+ W_1\bigl((F^k)_*P_l^k,(F^\infty)_*P_l^\infty\bigr)\le\norm{F^k-F^\infty}_\infty+D_l\norm{P_l^k-P_l^\infty}_{\TV}\longrightarrow0 .
+\]
+The limiting coarse-level law is a Borel pushforward, and the limiting maps and kernels are continuous on their product domains. Integrating the last probability kernel to one proves the compatibility. Only finitely many lattices, thresholds, and moduli were used.
+\end{proof}
+
+\section{Deterministic amplitude bounds for the reconstruction}\label{ch12:sec:amplitude}
+
+The bounds of \cref{ch12:lem:backward-law} assume a linear bound on the reconstruction maps. We now derive such bounds, in a nonlinear form, from the joint coefficient bounds of \cref{ch12:thm:replacement-family}. The constants are uniform in the mesh of the coarse lattice and in the coupling; this uniformity is used in \cref{ch14:chapter,ch20:chapter,ch28:chapter,ch30:chapter}.
+
+\begin{lemma}\label{ch12:lem:deterministic-prolongation-reserve}
+For the reconstruction maps of \cref{ch12:thm:replacement-family} write $\widehat P_{d,\Lambda}(c)=\widehat\Phi_{d,\Lambda}(c,0)$ and $\widehat L_{d,\Lambda}=D\widehat P_{d,\Lambda}(0)$. Fix the larger joint domains and one common joint coefficient bound, with all row sums and volume-normalized column sums of \cref{ch01:def:analytic-norms}, before the working radius and the radius $r$ are chosen. Let $a_m$ be the larger of the row and column norms of the homogeneous part of degree $m$ of $\widehat P_{d,\Lambda}$. There exist $A_J,R_J>0$, uniform in $\Lambda$ and $d$, such that
+\[
+ a_1\le\alpha_*=C_{\mathrm{CP}}/B,\qquad a_m\le A_JR_J^{-m}\quad(m\ge2).
+\]
+After a fixed reduction of the radius, which absorbs the degree factors produced by fixing an input, choose
+\[
+ \beta_J\ge\max\{1,R_J^{-1},A_J/(\alpha_*R_J^2)\}.
+\]
+Then, uniformly in $\Lambda$ and $d$,
+\[
+ \widehat P\prec\varphi(z)=\frac{\alpha_*z}{1-\beta_Jz},\qquad
+ \widehat P-\widehat L\prec\frac{\alpha_*\beta_Jz^2}{1-\beta_Jz}.
+\]
+Here $\prec$ means that each $a_m$ (with $m\ge2$ in the second relation) is at most the coefficient of $z^m$ of the series on the right, and that a fixed input is bounded by the corresponding derivative of the same series. The full joint series in the coarse field and the inputs, not only these coefficients, has a common domain depending on $J$, with its column sums, and the bounds (3) and the identity (4) of \cref{ch12:thm:replacement-family} hold at the same time.
+
+Choose $J$, using the constant $C_{\mathrm{CP}}$, so that $B\alpha_*^2=\qanc\le1/4$, and only afterwards choose
+\[
+ 0<r_{\mathrm{eff}}<\rho,\qquad \frac{\beta_Jr_{\mathrm{eff}}}{1-\alpha_*}<\frac18,\qquad 0<r<r_{\mathrm{eff}}/4 .
+\]
+On the working ball $\{\norm\theta_\infty\le r_{\mathrm{eff}}\}$,
+\[
+ \norm{D\widehat P}\le a_{\mathrm{map}}=\frac{\alpha_*}{(1-\beta_Jr_{\mathrm{eff}})^2}\le\frac{64}{49}\alpha_*,\qquad
+ a_{\mathrm{map}}\sqrt B\le\frac{32}{49}<1 .
+\]
+The bounds on the inputs and the coupling ceiling can then be chosen so that every image of the reconstruction, and every repeated zero-fluctuation reconstruction, lies in the working domain. Increasing the thresholds $d_0(\Lambda)$ to obtain these smaller image margins changes none of $C_{\mathrm{CP}}$, $A_J$, $R_J$, $\beta_J$, or the joint bound. These constants have the dependence described in item~(2) of \cref{ch01:conv:constants}; they are independent of $r$, of the thresholds, of the coupling, of the side, of the depth, and of the lattice offset, and among them only $C_{\mathrm{CP}}$ is independent of $J$.
+
+The same joint bounds give the following amplitude bound. Let $H>0$, $a_j=HB^{-j}$, $t_j=c_Bg_3\sqrt{a_j}$ with $c_B=M^{(J-1)/2}$, and $p_j=A_{\mathrm w}\log(1/t_j)\ge1$. Consider any finite chain $\theta_j=\widehat\Phi_{d_j,\Lambda_j}(\theta_{j-1},q_j)$, $1\le j\le k$, of logarithmic representations of reconstruction maps in the working ball, with $b_0=\norm{\theta_0}_\infty\le r$ and inputs $\max_i\norm{q_{j,i}}_\infty\le t_jp_j$, and put $b_j=\norm{\theta_j}_\infty$. There exists a constant $C_{\mathrm{free},J}$, determined by the joint bounds, such that
+\[
+ b_j\le\frac{\alpha_*b_{j-1}}{1-\beta_Jb_{j-1}}+C_{\mathrm{free},J}t_jp_j .
+\]
+Choose a coupling ceiling $\tau$, after the working radii, so that these chains stay in the working ball. Then, whenever $t_1\le\tau$, uniformly in $H$, $g_3$, $k$, the preceding depths, the sides, and the lattice offset,
+\[
+ b_j\le C_{\mathrm{cap},J}r\alpha_*^j+C_{\mathrm{cap},J}g_3\sqrt{a_j}\,p_j,\qquad
+ \sum_{j=1}^kb_{j-1}\le C_{\mathrm{cap},J}\Bigl[\frac r{1-\alpha_*}+g_3\sqrt H\,(p_1+1)\Bigr].
+\]
+The constant $C_{\mathrm{cap},J}$ may depend on the joint bounds, $A_{\mathrm w}$, $M$, $J$, $r_{\mathrm{eff}}$, $\beta_J$, and $\tau$, but not on $H$ or on the coupling. These bounds hold on every sample; they are not moment bounds.
+\end{lemma}
+
+\begin{proof}
+We first build the majorant $\varphi$ from the joint bounds and choose the radii. We then prove the amplitude bounds in two passes. The first pass uses the ratio $a_{\mathrm{map}}$ and bounds the sum of the amplitudes uniformly; the second uses this sum to recover the smaller ratio $\alpha_*$, which is what makes the forcing summable.
+
+\paragraph{Step 1: the majorant.}
+We fix the common joint coefficient bound of \cref{ch12:thm:replacement-family} on a larger product domain, before any working radius is chosen, and restrict it to $q=0$. If its coarse-field radius is $R_0$ and its bound is $A_0$, then the norm of degree $m$ is at most $A_0R_0^{-m}$. The row and every volume-normalized column use the same bound. Fixing an input produces at most a degree factor $m$, which is absorbed by replacing $R_0$ with $R_0/2$, since $m2^{-m}$ is bounded; a fixed finite list of such factors is absorbed by a further fixed reduction. This gives $A_J,R_J>0$ as in the statement for every $m\ge2$. The linear coefficient has the separate bound $a_1\le C_{\mathrm{CP}}/B=\alpha_*$ from \cref{ch12:thm:replacement-family}(3). Only this last bound is needed uniformly before $J$ is fixed.
+
+We choose $\beta_J$ at least the displayed maximum; it may be increased to cover the inverse radius of the fixed joint product as well. For $m\ge2$,
+\begin{equation}
+ \alpha_*\beta_J^{m-1}\ge\frac{A_J}{R_J^2}\beta_J^{m-2}=A_JR_J^{-m}(\beta_JR_J)^{m-2}\ge A_JR_J^{-m}. \label{ch12:eq:majorant-coeff}
+\end{equation}
+These are the coefficients of $\varphi(z)=\alpha_*z/(1-\beta_Jz)$, whose first coefficient is treated separately. Subtracting the linear term gives the second majorant. In a nonnegative coefficient series, a derivative with respect to a fixed input marks that input and differentiates the same series. The same calculation therefore proves the statement for fixed inputs, with the volume normalization of the column of that input. The full joint series and the identities of \cref{ch12:thm:replacement-family} are those already proved there; restricting to $q=0$ does not replace them.
+
+\paragraph{Step 2: the working radii.}
+We first choose $J$ with $C_{\mathrm{CP}}^2/B\le1/4$. In particular $\alpha_*<1$ and $\alpha_*\sqrt B\le1/2$. All constants defining $\beta_J$ are now fixed. We choose $r_{\mathrm{eff}}$ as small as necessary inside the coarse-field radius of the common product domain, with the displayed inequality, and then $0<r<r_{\mathrm{eff}}/4$. Such choices exist since $\beta_J$ is finite. Differentiating the nonnegative series, we have on this working ball
+\[
+ \norm{D\widehat P}\le\varphi'(r_{\mathrm{eff}})=\frac{\alpha_*}{(1-\beta_Jr_{\mathrm{eff}})^2}.
+\]
+The working inequality implies $\beta_Jr_{\mathrm{eff}}<(1-\alpha_*)/8<1/8$. The last display is therefore at most $(64/49)\alpha_*$, and its product with $\sqrt B$ is at most $32/49$. Since $\widehat P(0)=0$, the zero-fluctuation image of the working ball lies in the strictly smaller ball of radius $a_{\mathrm{map}}r_{\mathrm{eff}}$.
+
+For the remaining choices, we note that the common joint series gives a continuous nonnegative majorant $G_J(u,v)$, with $G_J(u,0)=0$, for $\widehat\Phi(\theta,q)-\widehat P(\theta)$ on the working ball $\norm\theta_\infty\le r_{\mathrm{eff}}$. We choose a fixed $v_*>0$ so small that
+\[
+ G_J(r_{\mathrm{eff}},v_*)<(1-a_{\mathrm{map}})r_{\mathrm{eff}}/4,
+\]
+and, after a further reduction, the image condition into $B_r$ and every intermediate domain margin hold. For example, at a coarse field in $B_r$ the zero-fluctuation reconstruction is at most $a_{\mathrm{map}}r<r/2$, and we choose the bound on the inputs so that their contribution is less than $r/2-a_{\mathrm{map}}r$. This number is positive, since $a_{\mathrm{map}}\le32/(49\sqrt B)<1/2$ for $B\ge3$. The coupling ceiling is then reduced so that $tp(t)$ is below that bound for every smaller coupling. These choices of fixed domains and ceilings do not depend on the coupling.
+
+If necessary, we increase each threshold $d_0(\Lambda)$ to impose these more restrictive image conditions, by the same convergence in the fixed gauge. For depths below the enlarged threshold we use the unmodified family, whose bounds satisfy the chosen requirements. For depths above it we keep the prescribed tolerances for the joint norm and for the quantities in \cref{ch12:thm:replacement-family}(3), and add only these image requirements. Thus increasing a threshold changes none of the earlier coefficient constants. The order of the choices is the joint bound, then $\beta_J$, then $r_{\mathrm{eff}}$ and $r$, and then the bounds on the inputs and the coupling ceiling, as in \eqref{ch12:eq:order-of-choices}. This proves the first part of the lemma.
+
+\paragraph{Step 3: a uniform bound for the inputs and a first recursion.}
+All products in the rest of the proof are closed subproducts of the common product of \cref{ch12:lem:product-reserves}; in particular their sums of radii are less than $r_J$ and the denominators of the majorants are positive. Fix $v_0>0$ such that the product with coarse-field radius $r_{\mathrm{eff}}$ and input radius $2v_0$ lies in the common joint coefficient domain, with a margin. Differentiating the nonnegative joint series in one input, and using the factor two in the radius, we find that every output-fixed absolute row sum of the derivative with respect to all fluctuation inputs is bounded by one constant $C_{\mathrm{free},J}<\infty$, uniformly in the lattice pair, the preceding depth, and the lattice offset. Integrating $D_q\widehat\Phi(\theta,sq)q$ over $0\le s\le1$ and using its absolute row sum, we obtain
+\begin{equation}
+ \norm{\widehat\Phi_{d,\Lambda}(\theta,q)-\widehat\Phi_{d,\Lambda}(\theta,0)}_\infty\le C_{\mathrm{free},J}\max_i\norm{q_i}_\infty,
+ \qquad \norm\theta_\infty\le r_{\mathrm{eff}},\quad \max_i\norm{q_i}_\infty\le v_0 . \label{ch12:eq:uniform-free-row}
+\end{equation}
+The number of output links is never summed in this estimate. The inverse square roots of the constrained Hessians remain inside $\widehat\Phi$, whose inputs are exactly $q_i=g_iw_i$. Combining \eqref{ch12:eq:uniform-free-row} with the majorant of $\widehat P$, which gives $\norm{\widehat P(\theta)}_\infty\le\varphi(\norm\theta_\infty)$, we obtain
+\begin{equation}
+ b_j\le\varphi(b_{j-1})+f_j,\qquad f_j=C_{\mathrm{free},J}t_jp_j,\qquad \varphi(b)=\frac{\alpha_*b}{1-\beta_Jb}. \label{ch12:eq:forced-recursion}
+\end{equation}
+
+Let $a=a_{\mathrm{map}}$, $x=B^{-1/2}$, and $\kappa_{\mathrm w}=A_{\mathrm w}\log B/2$. We choose the common ceiling $\tau>0$, after the working radii, so that
+\begin{equation}
+ \tau\le e^{-1},\qquad A_{\mathrm w}\log(1/\tau)\ge1,\qquad \tau p(\tau)\le v_0,\qquad C_{\mathrm{free},J}\tau p(\tau)\le(1-a)r_{\mathrm{eff}}/4 . \label{ch12:eq:forced-ceiling}
+\end{equation}
+We also keep every previously imposed image and domain condition, by decreasing $\tau$ if necessary. For $0<t\le\tau$ both $tp(t)$ and $t(p(t)+1)$ are increasing functions of $t$, since their derivatives are $A_{\mathrm w}(\log(1/t)-1)$ and $A_{\mathrm w}(\log(1/t)-1)+1$. Thus these conditions hold for every $t_j$ whenever $t_1\le\tau$. Since $\varphi(b)\le ab$ on the working ball, \eqref{ch12:eq:forced-recursion} implies
+\[
+ b_j\le ab_{j-1}+f_j .
+\]
+It also keeps the chain in the working ball. Starting from $b_0\le r<r_{\mathrm{eff}}/4$, if $b_{j-1}\le r_{\mathrm{eff}}/2$, then \eqref{ch12:eq:forced-ceiling} gives $b_j\le ar_{\mathrm{eff}}/2+(1-a)r_{\mathrm{eff}}/4<r_{\mathrm{eff}}/2$. By induction, every evaluation in \eqref{ch12:eq:forced-recursion} takes place in the same working ball.
+
+The identities $t_j=t_1x^{j-1}$ and $p_j=p_1+\kappa_{\mathrm w}(j-1)$ give
+\begin{equation}
+ \sum_{j\ge1}t_jp_j=t_1\Bigl\{\frac{p_1}{1-x}+\frac{\kappa_{\mathrm w}x}{(1-x)^2}\Bigr\}\le D_Jt_1(p_1+1),\qquad
+ D_J=\frac1{1-x}+\frac{\kappa_{\mathrm w}x}{(1-x)^2}. \label{ch12:eq:forcing-sum}
+\end{equation}
+For a finite chain, the infinite sum is an upper bound for the forcing. Iterating the linear recursion and summing its nonnegative terms, we obtain
+\begin{equation}
+ \sum_{h=0}^{k-1}b_h\le\frac{r+C_{\mathrm{free},J}D_Jt_1(p_1+1)}{1-a}\le S_*=\frac{r_{\mathrm{eff}}/4+C_{\mathrm{free},J}D_J\tau(p(\tau)+1)}{1-a}. \label{ch12:eq:rough-cap-sum}
+\end{equation}
+This bound is independent of $H$, $g_3$, $k$, the lattice pairs, and their preceding depths. In particular $S_*$ contains neither $p_1$ nor $H$ as a varying parameter.
+
+\paragraph{Step 4: the sharper ratio.}
+Set
+\[
+ K_\beta=\frac1{1-\beta_Jr_{\mathrm{eff}}}\le\frac87,\qquad
+ \zeta_h=\frac{\alpha_*}{1-\beta_Jb_h},\qquad
+ C_{\mathrm{prod}}=\exp(K_\beta\beta_JS_*).
+\]
+For $0\le y\le\beta_Jr_{\mathrm{eff}}$ we have $-\log(1-y)=\int_0^y(1-s)^{-1}ds\le K_\beta y$. Since $b_h\le r_{\mathrm{eff}}/2$, every finite product satisfies
+\begin{equation}
+ \prod_{h=u}^v\zeta_h\le\alpha_*^{v-u+1}\exp\Bigl(K_\beta\beta_J\sum_{h=u}^vb_h\Bigr)\le C_{\mathrm{prod}}\alpha_*^{v-u+1}, \label{ch12:eq:center-products}
+\end{equation}
+where we used \eqref{ch12:eq:rough-cap-sum}; for an empty product we use $1\le C_{\mathrm{prod}}$. Since $\varphi(b_h)=\zeta_hb_h$, successive substitution in $b_j\le\zeta_{j-1}b_{j-1}+f_j$ gives
+\begin{equation}
+ \begin{split}
+ b_j&\le b_0\prod_{h=0}^{j-1}\zeta_h+\sum_{i=1}^jf_i\prod_{h=i}^{j-1}\zeta_h
+ \le C_{\mathrm{prod}}r\alpha_*^j+C_{\mathrm{prod}}C_{\mathrm{free},J}\sum_{i=1}^j\alpha_*^{j-i}t_ip_i\\
+ &\le C_{\mathrm{prod}}r\alpha_*^j+\frac{C_{\mathrm{prod}}C_{\mathrm{free},J}}{1-\alpha_*\sqrt B}\,t_jp_j .
+ \end{split}\label{ch12:eq:sharp-forced-cap}
+\end{equation}
+In the last inequality we used $t_i=t_jB^{(j-i)/2}$, $p_i\le p_j$, and $\alpha_*\sqrt B\le1/2$. Substituting $t_j=c_Bg_3\sqrt{a_j}$, we obtain the pointwise bound of the statement, with the ratio $\alpha_*$ rather than $a$.
+
+Summing \eqref{ch12:eq:sharp-forced-cap} over $h=1,\ldots,k-1$, treating $b_0\le r$ separately, and using \eqref{ch12:eq:forcing-sum}, we obtain
+\begin{equation}
+ \begin{split}
+ \sum_{h=0}^{k-1}b_h
+ &\le\frac{C_{\mathrm{prod}}r}{1-\alpha_*}+\frac{C_{\mathrm{prod}}C_{\mathrm{free},J}D_J}{1-\alpha_*\sqrt B}\,t_1(p_1+1)\\
+ &=\frac{C_{\mathrm{prod}}r}{1-\alpha_*}+\frac{C_{\mathrm{prod}}C_{\mathrm{free},J}D_Jc_Bx}{1-\alpha_*\sqrt B}\,g_3\sqrt H\,(p_1+1).
+ \end{split}\label{ch12:eq:sharp-cap-sum}
+\end{equation}
+For the last two displays, we may take any
+\begin{equation}
+ C_{\mathrm{cap},J}\ge C_{\mathrm{prod}}\max\Bigl\{1,\frac{C_{\mathrm{free},J}c_B}{1-\alpha_*\sqrt B},\frac{C_{\mathrm{free},J}D_Jc_Bx}{1-\alpha_*\sqrt B}\Bigr\}. \label{ch12:eq:uniform-cap-constant}
+\end{equation}
+It may also be enlarged to cover the constant $C_{\mathrm{cap},J}$ of \cref{ch12:lem:backward-law}. This constant depends only on the joint bounds, the working radii, and the ceiling. Thus it is uniform in $H$ and $g_3$ subject to the single condition $t_1\le\tau$, and in the length of the chain, the sides, the lattice offset, and the preceding depths. The constant $C_{\mathrm{CP}}$ is not enlarged in this proof.
+\end{proof}
+
+\section{Uniformity on compact intervals of couplings}\label{ch12:sec:compact}
+
+In this section the coupling varies in a compact interval $I=[\gamma_-,\gamma_+]$ with $0<\gamma_-\le\gamma_+<\infty$. The lattice of level $j$ has side $n_j=nB^j$ for a fixed coarse side $n\in4\N$, and $a_j=(L/n)B^{-j}$, $g_j^2=\gamma/n_j$, $t_j=M^{(J-1)/2}g_j$, and $d_j^k=J(k-j)$. On a fixed lattice pair $\Lambda$ the largest coupling of the intermediate scales is $t=c_\Lambda\sqrt\gamma$ for a constant $c_\Lambda>0$, with the fixed ratios $\lambda_i$. Constants with a subscript $I$ may depend on both endpoints of $I$, on $n$, $L$, $M$, $J$, the fixed parameter collection $\Theta$ of \cref{ch20:thm:common-parameters}, the analytic parameters and exponents, moment orders, and fixed lists of times and observables; constants for a fixed lattice pair may also depend on that pair. None of them depends on the value of $\gamma\in I$, on the preceding depth, or on a finer mesh. This is the dependence described in item~(7) of \cref{ch01:conv:constants}; these constants are neither the constants of item~(3) nor constants chosen before $J$. Since the cutoff radius $p(t_j)$ depends on $\gamma$, we use the rescaled fluctuation variables $v_j=w_j/p(t_j)$, which live on the fixed product $\Omega_1$ of unit balls.
+
+\begin{theorem}\label{ch12:lem:finite-ceiling-compact-prefixes}\label{ch12:lem:compact-coupling-operators}\label{ch12:thm:compact-coupling-prefixes}
+Fix the parameters and products of \cref{ch12:thm:fixed-resolution-cutoff}, with its coupling ceiling $g_*$, a coarse side $n\in4\N$, and $I=[\gamma_-,\gamma_+]$ with $0<\gamma_-\le\gamma_+<\infty$. Assume that the image, product, and coupling conditions of \cref{ch12:thm:fixed-resolution-cutoff} hold for every $\gamma\in I$. Then the following hold.
+\begin{enumerate}
+\item On every fixed lattice pair $\Lambda$, at the same radius and exponent,
+\begin{equation}\label{ch12:eq:compact-coupling-operator-limit}
+ \lim_{d,d'\to\infty}\sup_{\gamma\in I}\sup_{R\in\mathcal A_E}\mathcal B_{\rho,\asp}\bigl(\widehat{\mathcal M}_{d,t}R-\widehat{\mathcal M}_{d',t}R\bigr)=0 .
+\end{equation}
+The contraction factor $\vartheta<1$ of \cref{ch12:thm:fixed-resolution-cutoff} is the same for all $\gamma\in I$. At each finite $d$ the transformation is jointly continuous in $(\gamma,R)$ in this norm. After the substitution $w=p(t)v$, the classical data and the reconstruction maps converge uniformly in $\gamma\in I$ on every fixed smaller product domain, with every fixed derivative and every fixed spatial difference.
+\item For every fixed $j$, the effective interactions $R_j^k$ and the stopped measures $\StoppedLaw_j^k$ converge uniformly in $\gamma\in I$, in $\mathcal B_{\rho,\asp}$ and in total variation respectively, and the limits are continuous in $\gamma$ in these norms.
+\item For every fixed $l$, the joint law of the coarse logarithm and of the rescaled fluctuation variables $(v_1,\ldots,v_l)$ converges in total variation, uniformly in $\gamma\in I$. The laws of the finite-scale reconstructions converge in bounded-Lipschitz distance and in $W_1$, for any norm on the finite-dimensional space of logarithmic fields, uniformly in $\gamma\in I$. The limiting laws are continuous in $\gamma$ in these distances, and they are compatible.
+\end{enumerate}
+All moduli have the dependence described above, at fixed $l$. No rate that is uniform in $l$, and no statement as $\gamma\to0$, is asserted.
+\end{theorem}
+
+The hypothesis holds in particular when $I\subset(0,\gamma_0]$ and the hierarchy satisfies the hypotheses of \cref{ch12:thm:fixed-resolution-cutoff} for every $\gamma\le\gamma_0$. The theorem does not by itself guarantee that these hypotheses hold for a given coarse side and an arbitrary upper endpoint $\gamma_+$.
+
+\begin{proof}
+The proof follows the proofs of \cref{ch12:thm:fixed-resolution-cutoff,ch12:thm:white-kernel-limit,ch12:thm:representative-prefixes}. The new point is that every estimate is proved uniformly in $\gamma\in I$ on fixed products; uniform convergence is never deduced from pointwise convergence and compactness of $I$.
+
+\paragraph{Step 1: rescaling.}
+On a fixed lattice pair, let $t=c_\Lambda\sqrt\gamma$, $t_\pm=c_\Lambda\sqrt{\gamma_\pm}$, $p_-=p(t_+)>0$, and $p_+=p(t_-)<\infty$. Let $D$ be the finite number of scalar fluctuation variables, and we change variables $w=p(t)v$, $v\in\Omega_1$. The Jacobian $p(t)^D$ cancels from normalized integrals and from logarithms normalized at the identity. For the Gaussian reference the remaining normalizer is
+\begin{equation}\label{ch12:eq:compact-coupling-unit-normalizer}
+ Z_p^{\mathrm{unit}}=\int_{\Omega_1}e^{-p^2\abs v^2/2}\,dv,\qquad
+ \abs{\Omega_1}e^{-p_+^2\sup_{\Omega_1}\abs v^2/2}\le Z_p^{\mathrm{unit}}\le\abs{\Omega_1} .
+\end{equation}
+The scalar factor $z_p^{D/3}$ of \eqref{ch12:eq:operator} satisfies the exact relation $z_p^{D/3}=p^DZ_p^{\mathrm{unit}}$, so no normalization is discarded. Every input is $q_i=\lambda_itp(t)v_i$, with fixed $\lambda_i>0$ and $t\in[t_-,t_+]$. By \cref{ch12:lem:product-reserves} and the hypothesis, these inputs lie in one closed subproduct of the larger analytic product domain, and we also use its complex enlargement in the coarse field and a slightly larger input product. Their margins were chosen before the coupling.
+
+\paragraph{Step 2: classical data.}
+In \cref{ch09:lem:centered-white-coarea}, the conditional constrained minimizer minimizes $E_d\circ b$, the constrained Hessian is its second derivative in the free variables, and its square root is the analytic branch that is positive at real arguments. These objects do not depend on $\gamma$; the coupling enters only through $q_i=g_iw_i$ and the explicit divisors $g_i^2$ of the action. The finitely many ratios of couplings are fixed powers of $M$. By \cref{ch08:thm:classical-cutoff}, the minimizers, the constrained Hessians, their square roots and inverses, the Haar disintegration densities, and the reconstructions converge with every fixed derivative on this one product of inputs. The formulas of \cref{ch09:thm:sequential-density} are finite compositions of these data, with factors $g_i^{-1}\le(\lambda_it_-)^{-1}$ and bounded $p$ and $p^{-1}$. Thus their substitutions converge uniformly in $\gamma\in I$, including every fixed derivative in the coarse field of the classical and Haar disintegration exponent, with all dependences of the determinant terms on coarser fluctuation variables. This proves the last assertion of (1).
+
+\paragraph{Step 3: the input effective interaction.}
+We use the same gauge transformation $\Omega_d$ of \cref{ch10:thm:whole-image-gauge} on the two reconstructions being compared; its derivatives in the coarse field and its inverse are bounded on the common product domain. One image lies in $B_{\rho/2}$, and the uniform convergence of the reconstructions puts the other in $B_{3\rho/4}$ for all sufficiently large pairs of depths, uniformly over the product of Step~1 and over $\gamma\in I$. By \cref{ch12:lem:reserved-tail}, every $R\in\mathcal A_E$ satisfies
+\begin{equation}\label{ch12:eq:compact-coupling-inherited-jets}
+ \sup_{B_{3\rho/4}}\abs{D^sR}\le C_{s,\Lambda}\rho^{2-s}E .
+\end{equation}
+Using the chain rule and the integral of $DR$ along the segment between the two images, we find that every fixed derivative of the term with the input effective interaction converges, uniformly in $R$ and in $\gamma$. Gauge invariance within $B_\rho$ identifies these evaluations with the values of $R_{\mathrm{sat}}$, and the coordinatewise identity argument of Step~4 in the proof of \cref{ch12:thm:fixed-resolution-cutoff} identifies the holomorphic extensions. No convergence of $\Omega_d$ is needed.
+
+\paragraph{Step 4: the partition functions.}
+The integrands on $\Omega_1$ are now uniformly Cauchy, together with each fixed derivative in the coarse field. On the finite set $\mathcal Q_\Lambda$ of boxes of the lattice, let $\boldsymbol U_{d,t,R}$ be the local interaction decomposition of \cref{ch12:lem:supported-difference}, after the zero-fluctuation terms and the Gaussian factor have been removed. Its reference measure is the product probability
+\[
+ d\pi_p^{\mathrm{unit}}(v)=(Z_p^{\mathrm{unit}})^{-1}e^{-p^2\abs v^2/2}\one_{\Omega_1}(v)\,dv .
+\]
+The estimates of \cref{ch12:lem:supported-difference} for the supports, the support-counting factors, and the radii give $\norm{\boldsymbol U_{d,t,R}}_{\mathscr S_8}\le\eta_0/2$ on the same enlarged product of coarse fields, uniformly in $\gamma\in I$, $d$, and $R$. These smallness conditions hold throughout $I$ by hypothesis; the bounds involve only the fixed domains, their radius ratios, and bounded $p$, $t$, $t^{-1}$, and $E$. \Cref{ch09:thm:supported-log-holomorphy} applies to this family of coefficients in the coarse field, allows scalar coefficients, and has constants independent of the reference probability and of the number of fluctuation variables. It gives a family $\boldsymbol{\mathcal L}$ with
+\[
+ -\log\Xi_{d,t,R}=\sum_Y\mathcal L_Y,\qquad
+ \norm{\boldsymbol{\mathcal L}}_{\mathscr S_2}\le C\norm{\boldsymbol U_{d,t,R}}_{\mathscr S_8}.
+\]
+Every support is nonempty, so on the complex product
+\[
+ \Bigl\lvert\sum_Y\mathcal L_Y\Bigr\rvert\le\sum_Y\sum_\nu\rho^{\abs\nu}\abs{\mathcal L_{Y,\nu}}\le\abs{\mathcal Q_\Lambda}\norm{\boldsymbol{\mathcal L}}_{\mathscr S_2}\le C\abs{\mathcal Q_\Lambda}\eta_0/2 .
+\]
+The branch of the logarithm vanishes at zero interaction and agrees with the real logarithm on real data. This proves that the normalized complex partition functions do not vanish and satisfy
+\begin{equation}\label{ch12:eq:compact-coupling-complex-partition}
+ \abs{\log\Xi_{d,t,R}}\le C_{\Lambda,I,E},\qquad \abs{\Xi_{d,t,R}}\ge e^{-C_{\Lambda,I,E}} .
+\end{equation}
+Comparing the ratio of two close partition functions on a disc about one, we find that their logarithms normalized at the identity, and their fixed coefficient tensors, are uniformly Cauchy. The uniform lower bound \eqref{ch12:eq:compact-coupling-complex-partition} is not inferred from positivity of the normalizers at real arguments.
+
+\paragraph{Step 5: the transformations.}
+Fix $\rho<\rho_1<2\rho$ so close to $\rho$ that the enlarged product with coarse-field radius $\rho_1$ still lies in the larger analytic product domain. Using the same composition bounds and bounds for local interaction decompositions, followed by the conversion used for \eqref{ch12:eq:outer-output}, we obtain
+\begin{equation}\label{ch12:eq:compact-coupling-outer-output}
+ \sup_{\gamma\in I,\,d,\,R\in\mathcal A_E}\mathcal B_{\rho_1,\asp}\bigl(\widehat{\mathcal M}_{d,t}R\bigr)\le C_{\Lambda,I,E}.
+\end{equation}
+Indeed, the argument of the input effective interaction stays below its input radius $\rho$, the fixed connected box sets still satisfy $\asp\Tree\le2\abs Y$, and the conversion factor is $9\rho_1^{-2}$; none of these facts depends on $t$. The finitely many small depths are included in the bound, on their own product domains. We split the difference of two outputs at a Taylor degree $h$. Its tail is at most $2C_{\Lambda,I,E}(\rho/\rho_1)^{h-1}$, by \cref{ch12:lem:reserved-tail}. We choose $h$ first, and then $d,d'$ so large that the finitely many remaining tensors are close, by Step~4. This proves \eqref{ch12:eq:compact-coupling-operator-limit} in the coefficient norm at the unchanged $\rho$ and $\asp$.
+
+At a finite depth $d$ the rescaled integrand and $Z_p^{\mathrm{unit}}$ depend continuously on $t>0$. The same logarithm and tail argument proves continuity in the norm for fixed $R$. The contraction of \cref{ch12:thm:fixed-resolution-cutoff}, applied at a fixed parameter to two inputs, implies continuity in $R$. Its conditions on $t$, $p(t)$, and $E$ hold for every $\gamma\in I$ by hypothesis, so the factor $\vartheta$ is unchanged. This proves (1).
+
+\paragraph{Step 6: effective interactions and stopped measures.}
+For fixed $j$ and $m$ we take the supremum over $I$ in \eqref{ch12:eq:suffix}. By (1),
+\begin{equation}\label{ch12:eq:compact-coupling-suffix}
+ \sup_{\gamma\in I}\Anorm{\rho}{\asp}{R_j^k-R_j^{k'}}\le2E\vartheta^m+\sum_{h=j+1}^{j+m}\vartheta^{h-j-1}\varepsilon_{h,I}(k,k'),\qquad \varepsilon_{h,I}(k,k')\longrightarrow0,
+\end{equation}
+where $\varepsilon_{h,I}$ is the supremum over $\gamma\in I$ of the quantity $\varepsilon_h$ of \eqref{ch12:eq:suffix}. We choose $m$ first and then $k,k'$. By the completeness of the coefficient space, proved in Step~6 of the proof of \cref{ch12:thm:fixed-resolution-cutoff}, we obtain the uniform limit $R_j^\infty(\gamma)\in\mathcal A_E$. Each finite effective interaction is continuous in $\gamma$, since it is a finite composition of transformations that are continuous by (1), starting from the zero interaction on the finest lattice. The uniform limit is then continuous as well.
+
+On the fixed domain $D_r$ at level $j$, the difference of the classical terms in \eqref{ch12:eq:exponent} is divided by $g_j^2\ge\gamma_-/n_j$. Using the value bound of \cref{ch12:lem:reserved-tail}, we obtain
+\begin{equation}\label{ch12:eq:compact-coupling-stopped-exponent}
+ \delta_{j,k,I}=\sup_{\gamma\in I}\sup_{D_r}\Bigl\lvert\frac{E_{J(k-j),\mathrm{sat}}-E_{\infty,\mathrm{sat}}}{g_j^2}+R_{j,\mathrm{sat}}^k-R_{j,\mathrm{sat}}^\infty\Bigr\rvert\longrightarrow0 .
+\end{equation}
+At this fixed volume all these exponents are bounded uniformly in $\gamma\in I$. This common domain contains an open neighborhood of the identity of positive Haar measure, so the normalizers have a positive lower bound uniform in $\gamma$. By \cref{ch12:lem:tv-tools}(1), the total variation distance is at most $e^{2\delta_{j,k,I}}-1$, which proves the uniform convergence of the stopped measures. The same bounds and the fixed domain prove continuity in $\gamma$ in total variation, both at finite $k$ and in the limit. In particular, with the fixed Borel map $S_0$ of \cref{ch12:lem:backward-law,ch12:lem:terminal-selector-tv}, the coarse-level laws $\eta_0^k$ and $\eta_0^\infty$ converge in total variation uniformly in $\gamma$ and depend continuously on $\gamma$. No continuity of $S_0$ is needed. This proves (2).
+
+\paragraph{Step 7: kernels and finite-scale reconstructions.}
+For the potential of \cref{ch12:thm:white-kernel-limit}, with all its terms, we write
+\[
+ \widetilde V_j^k(\gamma,\theta,v)=V_j^k(\gamma,\theta,p_j(\gamma)v),\qquad v\in\Omega_1 .
+\]
+By Steps~2 and~3 and \eqref{ch12:eq:compact-coupling-stopped-exponent}, we have
+\begin{equation}\label{ch12:eq:compact-coupling-kernel-potential}
+ \Delta_{j,k,I}=\sup_{\gamma,\theta,v}\abs{\widetilde V_j^k-\widetilde V_j^\infty}\longrightarrow0 ,
+\end{equation}
+where all suprema are over closed smaller product domains. Each finite potential is jointly continuous in $(\gamma,\theta,v)$, and so is the uniform limit, which is bounded there. The integral of $e^{-\widetilde V_j^\infty}$ over $\Omega_1$ is at least $\abs{\Omega_1}\exp(-\sup\abs{\widetilde V_j^\infty})>0$. Thus the limiting normalized kernel on the unit product is jointly continuous in $(\gamma,\theta)$ in total variation, with one modulus $\omega_{j,I}$ in the field. By \cref{ch12:lem:tv-tools}(1), the finite kernel differs from it in total variation by at most $e^{2\Delta_{j,k,I}}-1$, uniformly in the field and in $\gamma$.
+
+The thresholds $d_0(\Lambda_j)$ of \cref{ch12:thm:replacement-family} do not depend on the coupling. For a fixed $l$, all gauge transformations are therefore the fixed limiting ones once $k$ is large. After the substitution $q_i=g_{j,i}(\gamma)p_j(\gamma)v_i$, the reconstruction maps converge uniformly on the common compact product of $\gamma$ and the coordinates, and their first derivatives in the coarse field are uniformly bounded. Let $F_j^k$ be the finite-scale reconstruction, and let $u_{j,k,I}=\sup_{\gamma,h}\abs{F_j^k(\gamma,h)-F_j^\infty(\gamma,h)}$. Then
+\begin{equation}\label{ch12:eq:compact-coupling-reconstruction}
+ u_{0,k,I}=0,\qquad u_{j,k,I}\le v_{j,k,I}+C_{j,I}u_{j-1,k,I},\qquad v_{j,k,I}\longrightarrow0,
+\end{equation}
+where $v_{j,k,I}$ is the uniform distance between the maps and $C_{j,I}$ bounds the first derivative of the limiting map. Since there are finitely many $j\le l$, all $u_{j,k,I}$ tend to zero. Evaluated along the reconstruction, the kernels differ by at most $e^{2\Delta_{j,k,I}}-1+\omega_{j,I}(u_{j-1,k,I})$. Using the disintegration of \cref{ch12:lem:backward-law} and \cref{ch12:lem:tv-tools}(2), we obtain
+\begin{equation}\label{ch12:eq:compact-coupling-prefix-telescope}
+ \sup_{\gamma\in I}\norm{P_l^k(\gamma)-P_l^\infty(\gamma)}_{\TV}\le\sup_{\gamma\in I}\norm{\eta_0^k-\eta_0^\infty}_{\TV}+\sum_{j=1}^l\bigl\{e^{2\Delta_{j,k,I}}-1+\omega_{j,I}(u_{j-1,k,I})\bigr\}\longrightarrow0 .
+\end{equation}
+This bound accounts for the whole finite-scale reconstruction, including the dependence of later fields on earlier fluctuation variables. The logarithmic fields have a common compact range, by the amplitude bounds. \Cref{ch12:lem:tv-tools}(3), as in \eqref{ch12:eq:calculation-28}, implies uniform convergence in bounded-Lipschitz distance, and its coupling bound gives uniform convergence in $W_1$, with error at most $\norm{F^k-F^\infty}_\infty+D_l\norm{P_l^k-P_l^\infty}_{\TV}$. The continuity in $\gamma$ of the coarse-level laws and of the kernels in total variation, and the continuity of the limiting reconstruction maps, prove the continuity of the limiting laws. Compatibility is the disintegration identity. This proves (3).
+\end{proof}

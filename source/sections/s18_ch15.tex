@@ -1,0 +1,1185 @@
+\chapter{Local coordinates and constrained minimizers on block regions}\label{ch15:chapter}
+
+This section begins the large-field analysis. Its subject is a block region: a union of final blocks of $s\le J$ consecutive averaging steps, possibly disconnected and with holes, on which the configuration is integrated while the configuration on the fixed complement is held fixed. On a block region, we construct coordinates adapted to the block averaging constraints, compute Haar measure in these coordinates, and construct the constrained minimizers of the effective classical action, with weighted bounds on all their Taylor coefficients. All estimates are uniform in the shape, the topology, and the number of components of the block region.
+
+We need these objects for the following reason. As explained in \cref{s3:largefield}, the exponential-moment bound for blocked Wilson actions (\cref{ch19:thm:all-phase-window}) runs the renormalization group in a localized form. The configurations are partitioned according to the regions where some averaged plaquette has large curvature (\cref{ch18:thm:history-cover}). Outside these regions, background fields, fluctuation integrals, and effective interactions are constructed on arbitrary unions of blocks, and the link variables in the excluded regions are held fixed as frozen coordinates. This section supplies the finite-dimensional part of that construction. \Cref{ch16:chapter} compares the constructions on a block region with those on the whole torus, and \cref{ch17:chapter} integrates the fluctuations on block regions and tracks the normalization constants. Further, \cref{ch18:chapter} uses the change of variables and the coercivity estimate at the first block integration to write exact densities, and \cref{ch20:chapter} uses the substitution estimates in its choice of parameters.
+
+\Cref{ch15:def:regional-norm} introduces coefficient norms with exponential weights in the distance to the boundary of the block region, and \cref{ch15:lem:boundary-algebra} shows that these norms are stable under contractions, inverses, inverse square roots, and Schur complements. \Cref{ch15:lem:local-endpoint-dependence} proves that the iterated block averaging map is local for every output side $m\ge4$. \Cref{ch15:lem:regional-coarea} computes the pushforward of Haar measure in the local constraint coordinates of a block region, under the hypothesis that the fiber is covered by the chosen chart. \Cref{ch15:lem:minimum-calculus} records the derivatives of constrained minimum values, and \cref{ch15:lem:freezing} states how coefficient norms, normalization constants, and determinants change when variables are frozen. The main result is \cref{ch15:thm:regional-gap-and-center}: the constrained Hessian of the effective classical action on a block region is bounded below by a constant that does not depend on the region, and the constrained minimizer is analytic, with weighted coefficient bounds. Its coercivity estimate rests on the patch inequality of \cref{ch15:lem:patch-coercivity}. \Cref{ch15:lem:bare-gap} identifies the objective of the first block integration with the Wilson action on the block region and gives the exact form and range of its Hessian, as needed in \cref{ch18:chapter}. Finally, \cref{ch15:lem:wall-networks} shows that connected expressions containing a perturbation in the fixed complement decay exponentially into the block region, without a factor proportional to the volume of the complement.
+
+The inputs are the coefficient calculus of \cref{ch02:lem:coefficient-algebra}, the local constraint coordinates and Haar disintegration of \cref{ch03:lem:relative-coarea}, the nested minimization identity and the weighted coefficient bounds for the effective classical actions in \cref{ch07:thm:bellman,ch07:thm:all-root-classical}, the triangular change of variables of \cref{ch09:thm:sequential-density}, the domains of \cref{ch11:def:literal-selection}, and, from \cref{ch11:thm:terminal-anchor}, only the inequality $E_{d,\mathrm{sat}}\ge\kappa_*E_0$ for the effective classical action at every depth $d\ge0$. The geometry of \cref{ch04:lem:cones-and-cells} is used only for a comparison.
+
+Two observations organize the argument. The first concerns coercivity. Let $u$ be a linearized variation that satisfies the tree gauge conditions and the linearized block averaging constraints of the block region. If $u$ has zero curl on a single final block, then $u$ is a gradient there, the tree conditions make its potential constant on the block, and hence $u$ vanishes on the block. On two adjacent final blocks, the constraint on the coarse bond between them equates the two constants. Coercivity on these two kinds of patches, a covering with bounded overlap, and an explicit extraction of the free coordinates from $u$ give a lower bound on the constrained Hessian that does not see the topology of the region. The second observation concerns locality. A connected contraction of coefficient tensors that contains a perturbation in the fixed complement must connect each of its external indices in the block region to the complement. Its length therefore bounds the distance of these indices to the boundary, and summing over the positions in the complement with exponential weights gives decay without a volume factor.
+
+The constructions are analytic near the identity. Whether every point of a fiber of the block averaging map lies in the chart is a hypothesis of \cref{ch15:lem:regional-coarea}; it is verified in \cref{ch18:chapter}. Frozen coordinates from earlier block integrations are fixed real parameters: we never differentiate in them or continue them to complex values. Constant terms are tracked separately from the nonconstant Taylor series, and the coefficient norms never bound them.
+
+Charts adapted to the averaging constraints and constrained minimizers of the action (background fields) are central ingredients of Ba\l aban's renormalization group. Configurations with prescribed averages and the axial gauge conditions on them are introduced in \cite[\S\S A--B]{Balaban1985Regular}; the minimizers, their analytic dependence on the coarse field, and the decay of their derivatives are constructed in \cite[Theorem~1, p.~279, and \S G, Proposition~9, p.~309]{Balaban1985Variational}. We follow that method, but the block regions, the centered averaging map, the constraint coordinates, and the coefficient norms are different, and we prove the estimates needed here directly. The weighted inverse bounds adapt the exponential conjugation of Combes and Thomas \cite{CombesThomas1973}. Gauge fixing along trees by successive Haar translations, the analytic implicit function theorem, the formulas for derivatives of minimum values, Schur complements, the resolvent identity, and the integral formula for inverse square roots are standard.
+
+\section{Block regions, coordinates, and constants}\label{ch15:sec:setting}
+
+Fix an odd integer $M=2R_M+1\ge3$ and an integer $J\ge1$. Throughout this section $1\le s\le J$ and $m\ge4$ are integers, and we consider $s$ consecutive averaging steps $T_M^s$, from the lattice of side $M^sm$ (the input lattice) to the lattice of side $m$ (the output lattice). The lattices of sides $M^{s-i}m$, $0\le i\le s$, are the levels, indexed by $i$; the integrated intermediate scales have $i<s$. The level $i=0$ is the input lattice and $i=s$ the output lattice. Distances are measured in units of the output mesh. The final blocks are the centered blocks of $M^s$ input sites per direction at the vertices of the output lattice; they are described precisely in \cref{ch15:sec:coordinates}. A block region is a union $\Omega$ of final blocks. The fixed complement consists of the input vertices and links not in $\Omega$, and the boundary $W$ of $\Omega$ is the set of positions of the input links with one endpoint in $\Omega$ and the other in the fixed complement. A block region may be empty, may be disconnected, may have holes, and may contain isolated final blocks.
+
+\paragraph{Labels and positions.}
+A scalar coordinate is one component of the logarithm of a link variable. It is specified by its link, its color, and the level on which the link lives; a frozen coordinate also records the scale at which it was introduced. Coordinates that differ in direction, color, scale, or scale of introduction are different labels, even if their positions coincide. Each label is assigned the position of its link, embedded in output units. Inner products on lists of coordinates are counting inner products. Volume-normalized column sums carry the factors $a_{\mathrm{out}}^3/a_{\mathrm{in}}^3$ of \cref{ch01:def:analytic-norms}. Changing the counting unit across at most $J$ scales changes a counting sum by a factor depending only on $M$ and $J$, and it introduces no volume factor. In analytic formulas we write $E_d(A)$ for $E_d(e^A)$ on the identity chart.
+
+\paragraph{Coordinates.}
+We use the coordinates listed in \cref{ch15:tab:coordinates}. The coarse field, the free coordinates, and the tree coordinates are defined precisely in \cref{ch15:def:internal-coordinates,ch15:lem:regional-coarea}, and the normalized fluctuation variables in \cref{ch15:lem:freezing}. The logarithms $c$ of the coarse links, the free coordinates $z$, and the logarithms $\xi$ of the frozen coordinates introduced at the current block integration are analytic variables, and they may be complexified on the construction chart. The frozen coordinates $\Rec$ introduced at earlier block integrations are fixed real parameters. \Cref{ch15:fig:block-region} shows the different kinds of links in a two-dimensional sketch.
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright}p{1.35cm}>{\raggedright}p{5.05cm}>{\raggedright}p{3.6cm}>{\raggedright\arraybackslash}p{3.4cm}@{}}
+\toprule
+Symbol & Meaning & Reference measure & Analytic role\\
+\midrule
+$c$ & logarithms of the coarse links of $\Omega$, that is, of the bonds joining two final blocks of $\Omega$ & Haar measure $dH(e^c)$ of the group values & variable; complexified\\
+$z_i$ & free logarithmic coordinates at intermediate scale $i$, on the free edges $\mathcal F_i$ & Lebesgue measure, with the density $J_i$ of \cref{ch15:lem:regional-coarea} & variable; complexified\\
+$w_i$ & normalized fluctuation variables, $z_i=a_i+g_iK_i^{-1/2}w_i$ & Lebesgue measure & variable\\
+$\mathfrak f$ & tree coordinates (gauge transformations at the nonroot vertices of the trees) & product of Haar probability measures & integrated; never differentiated\\
+$\xi$ & logarithms of the frozen coordinates introduced at the current block integration & Haar measure on the group values & small; complexified\\
+$\Rec$ & frozen coordinates introduced at earlier block integrations, at their scales of introduction & product Haar measure & fixed and real; never differentiated\\
+\bottomrule
+\end{tabular}
+\caption{The coordinates used on a block region.}
+\label{ch15:tab:coordinates}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\setlength{\unitlength}{0.78cm}
+\begin{picture}(10,6.6)(0,0.4)
+\multiput(1,1)(1,0){6}{\circle*{0.14}}
+\multiput(1,2)(1,0){6}{\circle*{0.14}}
+\multiput(1,3)(1,0){6}{\circle*{0.14}}
+\multiput(1,4)(1,0){3}{\circle*{0.14}}
+\multiput(1,5)(1,0){3}{\circle*{0.14}}
+\multiput(1,6)(1,0){3}{\circle*{0.14}}
+\multiput(4,4)(1,0){3}{\circle{0.16}}
+\multiput(4,5)(1,0){3}{\circle{0.16}}
+\multiput(4,6)(1,0){3}{\circle{0.16}}
+\put(2,2){\circle*{0.3}}
+\put(5,2){\circle*{0.3}}
+\put(2,5){\circle*{0.3}}
+\put(1,2){\line(1,0){2}}
+\multiput(1,1)(1,0){3}{\line(0,1){2}}
+\put(4,2){\line(1,0){2}}
+\multiput(4,1)(1,0){3}{\line(0,1){2}}
+\put(1,5){\line(1,0){2}}
+\multiput(1,4)(1,0){3}{\line(0,1){2}}
+\multiput(1.1,1)(0.2,0){10}{\circle*{0.05}}
+\multiput(1.1,3)(0.2,0){10}{\circle*{0.05}}
+\multiput(4.1,1)(0.2,0){10}{\circle*{0.05}}
+\multiput(4.1,3)(0.2,0){10}{\circle*{0.05}}
+\multiput(1.1,4)(0.2,0){10}{\circle*{0.05}}
+\multiput(1.1,6)(0.2,0){10}{\circle*{0.05}}
+\multiput(3.1,1)(0.2,0){5}{\circle*{0.05}}
+\multiput(3.1,3)(0.2,0){5}{\circle*{0.05}}
+\multiput(1,3.1)(0,0.2){5}{\circle*{0.05}}
+\multiput(3,3.1)(0,0.2){5}{\circle*{0.05}}
+\linethickness{2.4pt}
+\put(3,2){\line(1,0){1}}
+\put(2,3){\line(0,1){1}}
+\thinlines
+\multiput(4,3.05)(0,0.3){3}{\line(0,1){0.2}}
+\multiput(5,3.05)(0,0.3){3}{\line(0,1){0.2}}
+\multiput(6,3.05)(0,0.3){3}{\line(0,1){0.2}}
+\multiput(3.05,4)(0.3,0){3}{\line(1,0){0.2}}
+\multiput(3.05,5)(0.3,0){3}{\line(1,0){0.2}}
+\multiput(3.05,6)(0.3,0){3}{\line(1,0){0.2}}
+\put(3.5,3.5){\dashbox{0.2}(3,3){}}
+\put(6.8,5.25){\makebox(0,0)[l]{\small fixed}}
+\put(6.8,4.75){\makebox(0,0)[l]{\small complement}}
+\put(6.8,2){\makebox(0,0)[l]{\small block region $\Omega$}}
+\end{picture}
+\caption{A two-dimensional sketch of a block region with $M=3$ and $s=1$: three final blocks (filled sites, with enlarged roots) and one final block of the fixed complement (open sites, dashed square). Solid lines are tree edges. The two thick edges are the eliminated edges of the two coarse bonds of $\Omega$. Dotted lines are free edges. Dashed edges are links across the boundary; they are not coordinates of the block region, and they carry frozen coordinates.}
+\label{ch15:fig:block-region}
+\end{figure}
+
+\paragraph{Uniform constants.}
+In this section a constant is called uniform if it depends only on the following data: $M$ and $J$; the radius $r_E$ of the identity chart on which the effective classical actions $E_d$ are controlled, the bound $C_E$ on their weighted Taylor coefficients with each index fixed, and their spatial rate $a_E>0$, all from \cref{ch07:thm:all-root-classical}; the constant $\kappa_*>0$ in the lower bound \eqref{ch15:eq:flat-floor} below; the radii of the local constraint coordinates of \cref{ch03:lem:relative-coarea}, strictly smaller than their radii of definition, and the coefficient bounds of the finite group products that define them; the label density $v_J$ of \eqref{ch15:eq:label-density}; and fixed ratios of radii and fixed differences of spatial rates, stated where they are used. Uniform constants are independent of $L$, $\gamma$, $m$, $N$, $K$, the depth $d_0$, the number of preceding block integrations, the number of components and the shape of the block region, the values of the frozen coordinates $\Rec$, and every width chosen later (boundary strips, interior restriction distances, protected neighborhoods, and cells). A bound for a general analytic input may depend in addition on the coefficient bound and the inverse bound assumed for that input. No uniformity as $J\to\infty$ is claimed. This is the dependence described in item~(3) of \cref{ch01:conv:constants}. Frozen coordinates are fixed before Taylor coefficients are taken or degrees are summed.
+
+\section{Coefficient norms with boundary decay}\label{ch15:sec:norms}
+
+In the regional estimates, distances between label positions are periodic shortest-path distances on the common refined position graph: the periodic cubic lattice of mesh $(2M^s)^{-1}\le1$ in output units, which contains the endpoints and the midpoints of the links of all levels. Its vertices need not carry a coordinate. In this section $\dist$ denotes this graph distance, and the boundary distance uses it. The connecting-network length $\Tree$ uses the associated periodic $\ell^1$ metric, with internal vertices allowed. If $d_2$ and $\mathsf t_2$ denote the Euclidean distance and network length of \cref{ch01:def:analytic-norms}, then $d_2\le\dist\le\sqrt3d_2$ and $\mathsf t_2\le\Tree\le\sqrt3\mathsf t_2$. A coefficient bound imported at Euclidean rate $b$ is therefore used at graph rate $b/\sqrt3$. The regional norms below are the graph-metric variants of the norms of \cref{ch01:def:analytic-norms} and \eqref{ch01:eq:regional-norm}, written out for a block region.
+
+\begin{definition}\label{ch15:def:regional-norm}
+Fix the data of \cref{ch15:sec:setting} and a block region $\Omega$. Assume that the positions of the labels satisfy the density bound
+\begin{equation}\label{ch15:eq:label-density}
+ \#\{y:R\le\dist(x,y)<R+1\}\le v_J(R+2)^3\qquad(R\ge0)
+\end{equation}
+for every label position $x$, where the count is over labels $y$. For a label $i$, let $d_\Omega(i)$ be the graph distance, on the refined position graph, from its position to the set of positions outside $\Omega$. When a position is removed from a block region, all labels at that position are removed together. A different convention for the positions of link endpoints changes these distances by at most a fixed amount, which is absorbed in the widths below.
+
+Let $\rho>0$, $\asp>0$, and $\awall>0$, and let $\phi$ be a spatially varying analytic radius on $\Omega$, with $0<\phi(i)\le\rho$. Let $f(v;\Rec)=\sum_\nu f_\nu(\Rec)v^\nu$ be a function of the variables $v=(v_i)_{i\in\Omega}$ of the block region, given by its Taylor series in $v$, which depends on the frozen coordinates $\Rec$. Define
+\[
+ \mathcal X_\Omega^\phi(f)=
+ \sup_{\Rec}\rho^{-2}
+ \sum_{k\ge1}\sup_{i\in\Omega}e^{\awall d_\Omega(i)}
+ \sum_{|\nu|=k}\frac{\nu_i}{k}|f_\nu(\Rec)|
+                 e^{\asp\Tree(\nu)}\phi^\nu .
+\]
+Here $\Tree(\nu)$ is the length of a shortest connecting network for the positions of the labels in $\supp\nu$, with internal vertices allowed, measured in the periodic $\ell^1$ metric of the refined position graph (the graph-metric variant of the length in \cref{ch01:def:analytic-norms}), and $\phi^\nu=\prod_i\phi(i)^{\nu_i}$. The supremum over $i$ is taken inside the sum over degrees, and the supremum over $\Rec$ outside it; $\Rec$ ranges over the given compact set of real values of the frozen coordinates, each at the scale at which it was introduced. The norm involves no derivative in $\Rec$ and no complex value of $\Rec$. The constant term $f(0;\Rec)$ is not part of the norm: it is kept in the effective classical action or in the normalization constant $\ScalarLedger$. All nonconstant degrees, including degree one, enter the norm. The norm of a function on the empty block region is zero. If the fixed complement is empty, a boundary perturbation is required to have zero nonconstant part, and its norm is zero. For the effective classical action we use the same definition with its own radius $\rcl$, its own radius function, and its own rates.
+
+For $K_*\ge2$, $w_{\mathrm{bd}}\ge1$, and $0<\rho_\partial\le\rho$ we use the radius
+\[
+ \phi(i)=\begin{cases}\rho_\partial,&d_\Omega(i)<w_{\mathrm{bd}},\\
+                         \rho,&d_\Omega(i)\ge w_{\mathrm{bd}},\end{cases}
+ \qquad \WideProfile=\sqrt{K_*}\,\phi,
+ \qquad\InflatedProfile=K_*\phi,
+\]
+which is smaller in the boundary strip of width $w_{\mathrm{bd}}$. The enlarged radii $\WideProfile$ and $\InflatedProfile$ are used in \cref{ch16:chapter,ch17:chapter}, on correspondingly larger analytic domains.
+
+For a coefficient tensor with a set $A$ of external indices and Taylor multi-index $\nu$, put $S=A\cup\supp\nu$ and
+\[
+ \Tree_W(S)=\inf_{w\in W}\Tree(S\cup\{w\}).
+\]
+The bulk and boundary coefficient norms of such a tensor at rate $a$ are the sums of the absolute values of its coefficients at the given radii, with weights $e^{a\Tree(S)}$ and $e^{a\Tree_W(S)}$ respectively, in which one external index is fixed and all other indices are summed; the norm is the maximum over the choice of the fixed index. Differentiated analytic inputs count as external indices. Column sums at input indices are volume-normalized as in \cref{ch01:def:analytic-norms}. A tensor has a bulk bound or a boundary bound if the corresponding norm is bounded by a stated constant. The algebraic properties of these norms are collected in \cref{ch15:lem:boundary-algebra}.
+\end{definition}
+
+\begin{remark}\label{ch15:rem:two-weights}
+The weight $e^{a\Tree_W(S)}$ of the boundary coefficient norm and the weight $e^{\asp\Tree(\nu)+\awall d_\Omega(i)}$ in $\mathcal X_\Omega^\phi$ are different, and a boundary bound at rate $a$ does not by itself bound $\mathcal X_\Omega^\phi$ with $\asp=\awall=a$. The two are related by the length inequalities \eqref{ch15:eq:network-lengths} and \eqref{ch15:eq:weight-conversion} in the proof of \cref{ch15:lem:wall-networks}, at the cost of a fixed fraction of the rate.
+\end{remark}
+
+For example, freezing the variable $y$ at the value $c$ in the function $vy+y^2$ produces the linear term $cv$ and the constant $c^2$. This is why the norm $\mathcal X_\Omega^\phi$ includes degree one, and why constants are tracked separately (see \cref{ch15:lem:freezing}).
+
+\begin{lemma}\label{ch15:lem:boundary-algebra}
+Use the norms of \cref{ch15:def:regional-norm}. Fix radii and rates, together with strictly smaller radii and rates; the bounds below hold at the smaller radii and rates, with constants depending only on these choices, on $v_J$, and on the stated bounds of the factors.
+\begin{enumerate}
+\item For a scalar function $f$, a label $i$, and $k\ge1$,
+\begin{equation}\label{ch15:eq:root-fraction}
+ \sum_{|\nu|=k}\frac{\nu_i}{k}|f_\nu|e^{a\Tree(\nu)}
+ =\frac1{k!}\sum_{i_2,\ldots,i_k}
+       |D^kf(0)_{i,i_2,\ldots,i_k}|e^{a\Tree(i,i_2,\ldots,i_k)}.
+\end{equation}
+In particular, a bound on the Taylor tensors of $f$ with each index fixed in turn is the same as a bound on the absolute values of its coefficients.
+\item A connected product, contraction, or analytic composition of tensors, in which one factor has a boundary bound and the other factors have bulk bounds, has a boundary bound at every remaining external index. This includes at most $J$ Schur complements of constrained Hessians in the free coordinates.
+\item For $u>0$ put $S_J(u)=8v_J\sum_{r\ge0}(r+1)^3e^{-ur}$. For a matrix $K$ on a list of labels let $\|K\|_b$ be the maximum of its absolute row and column sums with weight $e^{b\dist(x,y)}$. Let $K_0=K_0^{\mathsf T}\ge\lambda I$ be real with $\|K_0\|_b\le Q$, and put
+\[
+ \mu=\frac{b\lambda}{8(Q+\lambda)},\qquad C_R=2S_J(\mu/2).
+\]
+Let $L$ be a complex symmetric matrix, analytic in further variables, with bulk coefficient bounds on a larger radius such that $C_R\|L\|_{\mu/2}\le\lambda/4$, where the norm includes the absolute values of all coefficients at that radius. Then $(K_0+L)^{-1}$ and the inverse square root $(K_0+L)^{-1/2}$, obtained by holomorphic continuation from the positive inverse square root of $K_0$, have bulk coefficient bounds at rate $\mu/2$, depending only on $b$, $\lambda$, $Q$, $v_J$, and the ratio of the radii.
+\item For two matrices $A$ and $B$ as in (3) on a common list, a boundary bound on $A-B$ gives boundary bounds on $A^{-1}-B^{-1}$ and $A^{-1/2}-B^{-1/2}$, through the ordered identities
+\[
+ A^{-1}-B^{-1}=-A^{-1}(A-B)B^{-1}
+\]
+and
+\[
+ A^{-1/2}-B^{-1/2}=-\frac1\pi\int_0^\infty
+ t^{-1/2}(A+t)^{-1}(A-B)(B+t)^{-1}\,dt.
+\]
+\end{enumerate}
+The lower bound $\lambda$ is a hypothesis on the free coordinates only, not on the coarse field. All constants are uniform.
+\end{lemma}
+
+\begin{proof}
+We begin with the identity \eqref{ch15:eq:root-fraction}. Fix $\nu$ with $|\nu|=k$ and $\nu_i>0$. An ordered list $(i_2,\ldots,i_k)$ whose multiplicities are $\nu-e_i$ occurs $(k-1)!/\prod_j(\nu-e_i)_j!$ times in the sum on the right, and for each such list the derivative is $\nu!f_\nu$. Multiplying these two numbers and dividing by $k!$, we obtain $\nu_i/k$, which proves \eqref{ch15:eq:root-fraction}. In particular, a bound on Taylor tensors with each index fixed is an absolute coefficient bound, not a bound on a derivative in a single direction.
+
+Next we prove (2). When two factors are contracted at a label, we join their connecting networks at that label. The union spans every remaining external label, and if the first factor carries a boundary bound, it also reaches the point of $W$ of that factor. Hence
+\begin{equation}\label{ch15:eq:wall-union}
+ \Tree_W(S_{\mathrm{ext}})
+       \le\Tree_W(S_1)+\sum_{r\ge2}\Tree(S_r),
+\end{equation}
+where $S_{\mathrm{ext}}$ is the set of external labels of the contraction and $S_r$ the label set of the $r$-th factor. We fix any remaining external index. On the branch leading to that label we use the corresponding input-column bound, and on the other branches we use output-row bounds; these are the contractions of \cref{ch02:lem:coefficient-algebra}, with the same counting measures. A connected matrix cycle with an external insertion can be cut at that insertion, and successive absolute row and column sums give the same bound. (This does not apply to a disconnected scalar trace.) Multiplication of majorant series with nonnegative coefficients sums over the partitions of the Taylor labels, and division by the Taylor factorials turns the multinomial factors into ordinary products of power series. The same reasoning, applied to a composition with its majorant on the given radius, proves (2) for compositions. Fixing a specified analytic input only changes the fixed index. An external index within distance $R_0$ of $W$ may instead be joined to $W$ at the price of a factor $e^{aR_0}$. No step involves a sum over the positions of $W$.
+
+For (3) we first record a density sum. By the density bound \eqref{ch15:eq:label-density}, we have, for every $u>0$ and every subset of a periodic list of labels,
+\begin{equation}\label{ch15:eq:density-sum}
+ \sup_x\sum_y e^{-u\dist(x,y)}
+ \le 8v_J\sum_{r\ge0}(r+1)^3e^{-ur}=S_J(u).
+\end{equation}
+Here we divided the displacements according to $r\le\dist(x,y)<r+1$ and used $(r+2)^3\le8(r+1)^3$. The series is finite, since for large $r$ the ratio of successive summands is at most $e^{-u/2}<1$.
+
+We now adapt the exponential conjugation of Combes and Thomas \cite{CombesThomas1973} to the matrix $K_0$. Let $q$ be a real function that is one-Lipschitz for the distance on the labels, and let $D_q=\operatorname{diag}(e^{\mu q(x)})$. The entries of $D_qK_0D_q^{-1}-K_0$ are $(K_0)_{xy}(e^{\mu(q(x)-q(y))}-1)$, so the maximum of its unweighted absolute row and column sums is at most
+\[
+ Q\sup_{r\ge0}e^{-br}(e^{\mu r}-1)
+ \le\frac{Q\mu}{b-\mu}\le\frac\lambda8 .
+\]
+For the first inequality we used $e^{\mu r}-1\le\mu re^{\mu r}$ and $re^{-(b-\mu)r}\le(b-\mu)^{-1}$; the second follows from the definition of $\mu$. The Euclidean operator norm is bounded by the row and column sums: by the Cauchy--Schwarz inequality,
+\[
+ \|Av\|_2^2\le\Bigl(\sup_x\sum_y|A_{xy}|\Bigr)\Bigl(\sup_y\sum_x|A_{xy}|\Bigr)\|v\|_2^2 .
+\]
+For $t\ge0$ the matrix $(K_0+t)^{-1}$ has operator norm at most $(\lambda+t)^{-1}$. The Neumann series for the conjugated resolvent therefore converges, and we obtain $\|D_q(K_0+t)^{-1}D_q^{-1}\|_2\le2/(\lambda+t)$. Taking $q(x)=\dist(x,y)$ for a fixed $y$ and reading off the $(x,y)$ entry, we find
+\[
+ |(K_0+t)^{-1}_{xy}|\le
+       \frac{2e^{-\mu\dist(x,y)}}{\lambda+t},\qquad
+ \|(K_0+t)^{-1}\|_{\mu/2}\le\frac{C_R}{\lambda+t},
+\]
+where the second bound follows from the first and \eqref{ch15:eq:density-sum}.
+
+Next let $L$ be the perturbation in (3). Since $C_R\|L\|_{\mu/2}/\lambda\le1/4$, we have
+\begin{equation}\label{ch15:eq:coefficient-resolvent}
+ (K_0+L+t)^{-1}
+  =\sum_{n\ge0}[-(K_0+t)^{-1}L]^n(K_0+t)^{-1},\qquad
+ \|(K_0+L+t)^{-1}\|_{\mu/2}
+       \le\frac{4C_R}{3(\lambda+t)} .
+\end{equation}
+The series converges absolutely in the coefficient norms, uniformly for $t\ge0$. Bounds with every index fixed, and on the derivatives in the further variables, follow by inserting the differentiated perturbation and its connecting network into this series, or by differentiating its scalar geometric majorant on a strictly smaller radius. Here we use that $L$ has bulk coefficient bounds with every index fixed; a pointwise bound on a matrix-valued function would not suffice.
+
+For the inverse square root we use the scalar identity $\pi^{-1}\int_0^\infty t^{-1/2}(x+t)^{-1}\,dt=x^{-1/2}$ for $x>0$, which follows from the substitution $t=xu^2$. Diagonalization gives the same formula for a real positive matrix. Expanding the resolvents as in \eqref{ch15:eq:coefficient-resolvent} proves the formula for the complex perturbations of (3), and shows that it defines the branch obtained by holomorphic continuation from the positive inverse square root. Multiplying out the two resolvents, we have
+\[
+ (A+t)^{-1}-(B+t)^{-1}
+   =-(A+t)^{-1}(A-B)(B+t)^{-1}.
+\]
+At $t=0$ this is the first identity in (4), and integrating it against $\pi^{-1}t^{-1/2}\,dt$ gives the second. The order of the factors matters, since they need not commute. By (2) and \eqref{ch15:eq:coefficient-resolvent}, the integrand of the second identity has a boundary bound by a constant times $t^{-1/2}(\lambda+t)^{-2}$ times the boundary norm of $A-B$, and $\int_0^\infty t^{-1/2}(\lambda+t)^{-2}\,dt=\pi/(2\lambda^{3/2})$. The integral therefore preserves absolute coefficient bounds and the boundary weight. This proves (3) and (4).
+
+Finally we treat Schur complements, completing the proof of (2). If
+$K=\left(\begin{smallmatrix}A&B\\B^{\mathsf T}&C\end{smallmatrix}\right)\ge\lambda I$, then $A\ge\lambda I$ and
+\begin{equation}\label{ch15:eq:schur-lower}
+ v^{\mathsf T}(C-B^{\mathsf T}A^{-1}B)v
+ =\min_u (u,v)^{\mathsf T}K(u,v)\ge\lambda|v|^2,
+\end{equation}
+where the equality follows by substituting the minimizer $u=-A^{-1}Bv$. In the coefficient norms the Schur complement is bounded by $\|C\|+\|B^{\mathsf T}\|\|A^{-1}\|\|B\|$. To compare two Schur complements, we replace the three factors of the product one at a time; each of the resulting terms contains one difference, possibly the inverse difference of (4), and therefore has a boundary bound by (2). For at most $J$ successive eliminations we obtain a finite recursion: starting from a bound $Q_0$, the next bound can be taken to be $Q_{k+1}=Q_k+Q_k^2I_k$, where $I_k$ is the preceding inverse bound from \eqref{ch15:eq:coefficient-resolvent}. We choose the finitely many intermediate rates and radii in advance and take their minimum; there is no loss depending on the Taylor order or on the number of sites. The lower bounds used here are lower bounds for matrices in the free coordinates, and all constants depend only on the quantities listed in the statement.
+\end{proof}
+
+\section{Local coordinates and Haar disintegration on block regions}\label{ch15:sec:coordinates}
+
+The coordinates of a block region are obtained by solving, scale by scale, only the block averaging constraints of the coarse bonds that join two blocks of the region, with the local constraint coordinates of \cref{ch03:lem:relative-coarea}.
+
+We set $R^{(t)}=(M^t-1)/2$ for $t\ge0$, so that $R^{(0)}=0$ and $R^{(1)}=R_M$. In input lattice units, the final block with anchor $v$ has the vertices $v+[-R^{(s)},R^{(s)}]^3\cap\Z^3$. Balanced base-$M$ digits give the disjoint decomposition
+\begin{equation}\label{ch15:eq:balanced-nesting}
+ [-R^{(s)},R^{(s)}]^3\cap\Z^3
+ =\bigsqcup_{x\in[-R^{(s-1)},R^{(s-1)}]^3\cap\Z^3}
+       (Mx+[-R_M,R_M]^3\cap\Z^3).
+\end{equation}
+To see this in one coordinate, we write an integer uniquely as $Mq+r$ with $-R_M\le r\le R_M$; since $MR^{(s-1)}+R_M=R^{(s)}$, the integers in $[-R^{(s)},R^{(s)}]$ are exactly those with $|q|\le R^{(s-1)}$. We apply this in each of the three coordinates and iterate. The internal links of a block region have both endpoints in $\Omega$, and the links across the boundary of the block region have exactly one endpoint in $\Omega$. At every intermediate scale we use exactly the blocks of this nested partition that lie in $\Omega$.
+
+\begin{lemma}\label{ch15:lem:local-endpoint-dependence}
+Let $M\ge3$ be odd, and let $s\ge1$ and $m\ge4$ be integers. On the input lattice of side $M^sm$, the value of $T_M^s$ at a final link with endpoints $v$ and $v+M^se_i$ depends only on the input links with both endpoints in the union of the two centered $M^s$-blocks at $v$ and $v+M^se_i$. The tree paths of all intermediate scales inside a final block stay in that block. The same holds for the Borel extension of $T_M$ by the reference-path transport of \cref{ch01:def:block-map}. No divisibility of $m$ by four is needed.
+\end{lemma}
+
+\begin{proof}
+We begin with one averaging step and write $x=v+\delta$ with $\delta\in[-R_M,R_M]^3\cap\Z^3$. The coordinate-ordered path $\sigma_{v,x}$ stays in the block at $v$, since each coordinate of each intermediate vertex lies between its initial and final value. The path $\sigma_{v+Me_i,x+Me_i}$ stays in the translated block for the same reason. Along the straight segment from $x$ to $x+Me_i$, the transverse coordinates stay equal to $\delta_j$, and the longitudinal coordinate lies in $[-R_M,M+R_M]$. Since $M=2R_M+1$, we have
+\[
+ [-R_M,M+R_M]\cap\Z
+ =([-R_M,R_M]\cap\Z)\,\sqcup\,
+       ([M-R_M,M+R_M]\cap\Z).
+\]
+Every vertex of the segment lies in one of the two endpoint blocks, and its only link between the blocks joins the two adjacent boundary vertices. The reference path from $v$ to $v+Me_i$ satisfies the same containment. Therefore every contour, based loop holonomy, and tree path in the definition \eqref{ch01:eq:ordinary-map} of the output uses only links with both endpoints in the union of the two blocks. The test whether some based loop holonomy equals $-I$ reads these same holonomies, and the exceptional output is the reference transport, so the Borel extension has no additional dependence.
+
+For the induction, suppose that the assertion holds for $r$ averaging steps. A one-step formula for a link at the next scale reads links whose endpoints lie in its two endpoint $M$-blocks on the current lattice. Each such link, pulled back through $r$ steps, reads only the two centered $M^r$-blocks at its endpoints, by the induction hypothesis. By \eqref{ch15:eq:balanced-nesting}, these blocks partition the two centered $M^{r+1}$-blocks at the endpoints. All links that are read, including links between the smaller blocks, therefore have their endpoints in the union of the two large blocks. A tree path inside one block of the current lattice pulls back to tree paths in its smaller blocks and to the links joining these, all inside the same final block. This proves both assertions for $r+1$ steps, including the exceptional outputs. When $m\ge4$ the two final blocks lift injectively to a rectangular box in $\Z^3$; alternatively, the same coordinate containment can be read periodically. No step used a tiling, a reflection, or a congruence condition on the side.
+\end{proof}
+
+\begin{remark}\label{ch15:rem:cones-comparison}
+When $m\in4\N$, the dependence in \cref{ch15:lem:local-endpoint-dependence} agrees with the geometry of \cref{ch04:lem:cones-and-cells}, applied with $D=s$ and $n=m$. The reflection and tiling conclusions of that lemma are not needed here. For the other sides $m\ge4$, and for all shapes of block regions, \cref{ch15:lem:local-endpoint-dependence} is the dependence statement used below; it requires no filling across a hole.
+\end{remark}
+
+When we solve only the block averaging constraints of the internal coarse bonds, their eliminated-edge equations keep their independence and their derivatives after restriction to $\Omega$: by \cref{ch15:lem:local-endpoint-dependence}, an internal equation reads only links in its two endpoint blocks, and it contains no eliminated edge other than its own. The following definition makes the construction explicit and fixes the linear maps used in the coercivity estimates of \cref{ch15:sec:gap,ch15:sec:bare}.
+
+\begin{definition}\label{ch15:def:internal-coordinates}
+Fix $1\le s\le J$ and $m\ge4$, put $n=M^sm$, and work in input lattice units on $(\Z/n\Z)^3$. For an anchor $a\in(M^s\Z/n\Z)^3$, let $\mathsf B_s(a)=a+\{-R^{(s)},\ldots,R^{(s)}\}^3$ be the final block at $a$. Let $\mathcal K$ be the set of anchors of the final blocks of $\Omega$, let $\Omega_0=\bigcup_{a\in\mathcal K}\mathsf B_s(a)$ be the vertex set of $\Omega$, and let $\Omega_i=\Omega_0\cap(M^i\Z/n\Z)^3$ for $0\le i\le s$, so that $\Omega_s=\mathcal K$.
+\begin{enumerate}
+\item \emph{Edges.} For $0\le i\le s$, let $\mathcal L_i$ be the set of positive edges of length $M^i$ with both endpoints in $\Omega_i$. Thus $\mathcal L_0=L_\Omega$ is the set of internal links of $\Omega$, including the links that join two final blocks of $\Omega$, and $\mathcal L_s$ is the set of coarse bonds. An input link with exactly one endpoint in $\Omega_0$ is a link across the boundary of the block region; such links are not coordinates of the block region. A reversed edge carries the opposite cochain value and the inverse group value.
+\item \emph{Blocks and trees.} For $i<s$ the blocks $\mathsf B_i(a)=a+M^i\{-R_M,\ldots,R_M\}^3$, $a\in\Omega_{i+1}$, partition $\Omega_i$, by \eqref{ch15:eq:balanced-nesting}. Write $\pi_i(x)=a$ for $x\in\mathsf B_i(a)$. For $x\in\mathsf B_i(a)$, let $\sigma_{a,x}$ be the path from $a$ to $x$ with steps of length $M^i$ that changes the coordinates in the order $1,2,3$. In each block these paths form a tree rooted at $a$, and $\mathcal T_i\subset\mathcal L_i$ is the union of these trees.
+\item \emph{Eliminated and free edges.} For a bond $c'=(a,a+M^{i+1}e_k)\in\mathcal L_{i+1}$, its eliminated edge is
+\[
+ e^*_i(c')=(a+R_MM^ie_k,\,a+(R_M+1)M^ie_k)\in\mathcal L_i .
+\]
+Let $\mathcal D_i=\{e^*_i(c'):c'\in\mathcal L_{i+1}\}$, and let $\mathcal F_i=\mathcal L_i\setminus(\mathcal T_i\cup\mathcal D_i)$ be the set of free edges at scale $i$. No constraint and no free coordinate is attached to a link across the boundary.
+\item \emph{Linearized maps.} For $c'=(a,a+M^{i+1}e_k)\in\mathcal L_{i+1}$ and $x\in\mathsf B_i(a)$, let
+\[
+ F_{i,c',x}=\sigma_{a,x}[x,x+M^{i+1}e_k]\,
+               \sigma_{a+M^{i+1}e_k,x+M^{i+1}e_k}^{-1},
+\]
+a path with steps of length $M^i$. With $[\omega:e]$ the signed number of traversals of the edge $e$ by the path $\omega$, define the scalar matrices
+\[
+ (Q_i)_{c'e}=M^{-3}\sum_{x\in\mathsf B_i(a)}[F_{i,c',x}:e],
+ \qquad \Pi^{\mathcal T}_i u=u|_{\mathcal T_i},
+\]
+which act on three colors by tensoring with $I_3$. Put $Q_{[0,0)}=I$ and $Q_{[0,i)}=Q_{i-1}\cdots Q_0$, and define
+\begin{equation}\label{ch15:eq:constraint-map}
+ G_\Omega u=
+ \bigl((\Pi^{\mathcal T}_iQ_{[0,i)}u)_{0\le i<s},\ Q_{[0,s)}u\bigr)
+\end{equation}
+for edge cochains $u$ on $\mathcal L_0$. The last component prescribes zero variation of every coarse bond of $\Omega$; no bond to a final block outside $\Omega$ is constrained. The kernel $\ker G_\Omega$ is the space of linearized variations of the block region.
+\item \emph{Reconstruction.} For a group field $b$ on $\mathcal L_{i+1}$, its coarse-field lift is
+\begin{equation}\label{ch15:eq:internal-lift}
+ (\mathcal H_i b)_e=
+ \begin{cases}
+ I,&\pi_i(x)=\pi_i(y),\\
+ b_{(\pi_i(x),\pi_i(y))},&\pi_i(x)\ne\pi_i(y),
+ \end{cases}
+ \qquad e=(x,y)\in\mathcal L_i,
+\end{equation}
+with the orientation convention in the second line. Start with $U^{(s)}=\exp(c)$ on $\mathcal L_s$ and descend by
+\begin{equation}\label{ch15:eq:internal-reconstruction}
+ U^{(i)}_e=
+ \exp\bigl(\Gamma_{U^{(i+1)},e}(z_i)\bigr)
+                       (\mathcal H_iU^{(i+1)})_e,
+ \qquad e\in\mathcal L_i .
+\end{equation}
+Here $\Gamma_b$ is the map of local constraint coordinates of \cref{ch03:lem:relative-coarea} at the target $b=U^{(i+1)}$, solving only the constraints indexed by $\mathcal L_{i+1}$ for the logarithms on the eliminated edges $\mathcal D_i$, with free entries $z_i\in(\R^3)^{\mathcal F_i}$ and zero entries on $\mathcal T_i$. All products are taken on a common identity chart, smaller than the chart of definition, on which these finitely many inverses exist. Write $\Phi_\Omega(c,z)=U^{(0)}$ for the resulting field on $\mathcal L_0$. Thus $\Phi_\Omega$ receives the logarithm $c$ of the coarse field on $\mathcal L_s$, not its group value. The logarithms $c$ of the coarse links, the free coordinates $z=(z_0,\ldots,z_{s-1})$, and the logarithms $\xi$ of the current frozen coordinates are independent parameters of this chart. The reference measure of the coarse links is Haar measure of their group values, written $dH(c)$ in \cref{ch15:lem:regional-coarea}; in these coordinates it is $dH(e^c)=\prod_ec_{\mathrm{Haar}}j_H(c_e)\,d^3c_e$, with the product over the coarse links, not Lebesgue measure.
+\item \emph{Tree-path transports to the basepoints.} For $x\in\Omega_0$ let $x_0=x$ and $x_{i+1}=\pi_i(x_i)$. For $1\le k\le s$ and a configuration $U$ on $\mathcal L_0$, let
+\begin{equation}\label{ch15:eq:anchoring}
+ \Theta_{x,k}(U)=U^{(k-1)}(\sigma_{x_k,x_{k-1}})\cdots
+                         U^{(0)}(\sigma_{x_1,x_0}),
+\end{equation}
+where $U^{(i)}=T_M^iU$ on $\mathcal L_i$; this is a transport with endpoints $x_k$ and $x$. A frozen coordinate on a link across the boundary at $x$ that is based at the level-$k$ ancestor $x_k$ is represented by its based transport, obtained by multiplying the link value from the left by $\Theta_{x,k}$; a link across the boundary frozen at the first block integration is based at the root of its final block, $k=s$. We write $\Theta_x=\Theta_{x,s}$.
+\end{enumerate}
+\end{definition}
+
+On the reconstruction we have $T_M^i\Phi_\Omega(c,z)=U^{(i)}$ on $\mathcal L_i$, since each $\Gamma$ solves the constraints of the internal bonds, and these read only internal links by \cref{ch15:lem:local-endpoint-dependence}. Each factor in \eqref{ch15:eq:anchoring} is a transport along a tree path, and the tree links of \eqref{ch15:eq:internal-reconstruction} are equal to $I$. Hence $\Theta_{x,k}(\Phi_\Omega(c,z))=I$ identically, also at nonzero $(c,z)$ in the chart. In particular, the based tree gauge transformations fix both endpoints of a frozen coordinate represented by its based transport. The intermediate factors with $k<s$ only describe the based transport at an earlier scale; they are not additional frozen coordinates. The coarse output on a bond across the boundary of the block region is evaluated from the reconstructed field after this construction; it is not a prescribed target. The frozen coordinates supply the based transports of frozen links across the boundary and the links of the fixed complement, each at the scale at which it was introduced. Arguments of an analytic torus action outside the block region that were outside earlier block regions are set to zero (logarithm zero), as described in \cref{ch15:thm:regional-gap-and-center}. Arbitrary data deep in the fixed complement are never arguments of an analytic function.
+
+\begin{lemma}\label{ch15:lem:regional-coarea}
+Fix $1\le s\le J$, a block region $\Omega$, and Borel sets $\mathcal S_{c,\Rec}$ of free coordinates $z$ in the chart of \cref{ch15:def:internal-coordinates}, depending measurably on the coarse links $c$ and on the frozen coordinates $\Rec$. For tree coordinates $\mathfrak f$, that is, a gauge transformation at the nonroot vertices of the trees of all scales, let $U(c,z,\mathfrak f;\Rec)$ be the configuration obtained from $\Phi_\Omega(c,z)$ by the based gauge transformation $\mathfrak f$ and completed outside $\Omega$ by the frozen coordinates. Let the incoming finite positive measure have a Borel density $p(U,\Rec)$ with respect to the product of Haar probability measures on the links of $\Omega$ and Haar measures on the independently introduced frozen coordinates, each at the scale at which it was introduced; any normalizing constant of the incoming measure is included in $p$. Let $\chi(U,\Rec)$ be the product of all indicators carried by the incoming measure: those of the large-field decomposition, of the coordinate domains, of the small-field conditions of \cref{ch11:def:literal-selection}, and of the fluctuation cutoffs. Assume coverage of the fiber by the chart: every configuration $U$ with $p(U,\Rec)\chi(U,\Rec)>0$ has the form $U(c,z,\mathfrak f;\Rec)$ with $z\in\mathcal S_{c,\Rec}$, after the based tree gauge transformation that fixes its coarse field and the based transports of its frozen coordinates.
+
+Then the pushforward of the measure with density $p\chi$ to $(c,\Rec)$ has the density
+\[
+ p^{\mathrm{out}}(c,\Rec)=
+ \int dH(\mathfrak f)\int_{\mathcal S_{c,\Rec}}
+  \chi(U(c,z,\mathfrak f;\Rec),\Rec)\,
+  p(U(c,z,\mathfrak f;\Rec),\Rec)
+                         \prod_{i=0}^{s-1}J_i\,\prod_{i=0}^{s-1}dz_i
+\]
+with respect to $dH(c)\prod_{e}dH(b_{\mathrm{rec},e})$, where the product is over the independently introduced frozen coordinates, $dH(\mathfrak f)$ is the product of Haar probability measures, and we use the letter $c$ both for the coarse links and for their logarithms. If $f_i$ is the number of free group variables at scale $i$, the Haar disintegration density at scale $i$ is
+\[
+ J_i=c_{\mathrm{Haar}}^{f_i}
+ \frac{\prod_{e\in\mathcal L_i\setminus\mathcal T_i}
+                         j_H(\Gamma_{i,e})}
+      {\prod_{c'\in\mathcal L_{i+1}}
+       \det D_{X_{e^*_i(c')}}\COconstraint_{b,c'}(\Gamma_i)},
+ \qquad j_H(X)=\sinc^2(|X|/2),\qquad
+ c_{\mathrm{Haar}}=\frac1{16\pi^2},
+\]
+where $\Gamma_i=\Gamma_{U^{(i+1)}}(z_i)$ and $\COconstraint_{b,c'}$ is the block averaging constraint of $c'$ at the target $b=U^{(i+1)}$. All Haar factors of the eliminated edges appear in the numerator. The determinants are positive on the real chart and continue holomorphically, without zeros, to its complex neighborhood. There is no further Haar density of the coarse field, no Gram determinant, no gauge-orbit volume, and no Jacobian of a field-dependent choice of gauge. The formula is an identity tested against nonnegative Borel functions, and the displayed integral defines the density at every covered target.
+
+When a frozen coordinate is introduced on a link $e$ across the boundary at a fixed field $v$ of the block region, the change from the link value $a_e$ to the based transport $\widehat b_e=U_v(\sigma_e)a_e$, where $U_v(\sigma_e)$ is the tree-path transport of $e$ to its basepoint in the field $v$, is a Haar translation that is triangular in the coordinates. Frozen coordinates introduced earlier are unchanged, and a blocked image of an earlier frozen coordinate is a function of the existing coordinates, not an additional Haar coordinate. If $p\chi$ is invariant under the based tree gauge transformations that fix the coarse field and the frozen coordinates, the integral over $\mathfrak f$ equals one and may be omitted; otherwise it remains in the formula. The identities are finite-dimensional, and the analytic bounds of the chart are uniform. Coverage is a hypothesis of this lemma.
+\end{lemma}
+
+\begin{proof}
+We first fix one scale and the frozen coordinates. On each block we can remove a leaf of its rooted tree: we replace the variable on that edge by the transport from the root to the leaf, and translate the variables on the other edges at the leaf accordingly. At fixed values of the remaining variables this is a left or right Haar translation. We remove the leaves successively. The inverse map reconstructs each edge variable from the transports to its endpoints and its based value, so this is a bijective triangular change of group coordinates. It gives Haar probability measure in each tree variable at a nonroot vertex and in each based link outside the trees. No division by a stabilizer or by an orbit volume occurs, also for a single isolated block.
+
+For an internal bond its eliminated-edge equation is the equation of \cref{ch03:lem:relative-coarea} on its two endpoint blocks. Its determinant equals $\det(M^{-2}I_3)>0$ at zero and stays positive on the real chart. We compute the normalization when only internal equations are solved. Let $n_i$ be the number of internal group links outside $\mathcal T_i$ and $q_i$ the number of internal constraints, so that $f_i=n_i-q_i$. At a fixed target $c_{i+1}$ we write $U_e=e^{X_e}U_{0,e}(c_{i+1})$, where $U_0$ is the coarse-field lift. Right translation preserves Haar measure, and these $n_i$ factors have the density $c_{\mathrm{Haar}}^{n_i}\prod_e j_H(X_e)$ with respect to $dX$, by the coordinate formula for Haar measure in \eqref{ch01:eq:haar-coordinates}.
+
+The tested pushforward can be computed by inserting a unit point mass at $T_\Omega U=c_{i+1}$ with respect to Haar measure on the targets, where $T_\Omega$ denotes the internal outputs of $T_M$. More explicitly, if $\delta_H$ is the density of the unit point mass at the identity, then
+\[
+ \int dH(c_{i+1})\,
+  \delta_H\bigl((T_\Omega U)c_{i+1}^{-1}\bigr)\,G(c_{i+1},U)
+                =G(T_\Omega U,U)
+\]
+for nonnegative tests $G$. This notation only expresses a change of variables. In logarithmic coordinates $Y$ at the identity it reads $\delta_H(e^Y)=c_{\mathrm{Haar}}^{-1}\delta_0(Y)$, since $j_H(0)=1$. The logarithms of the constraints are $Y_{c'}=\COconstraint_{b,c'}(X)$. The local substitution $(X_{e^*_i(c')})_{c'}\mapsto(Y_{c'})_{c'}$, with the free logarithms fixed, has Jacobian equal to the product of the eliminated-edge determinants, since each equation contains no other eliminated variable. We obtain
+\[
+ c_{\mathrm{Haar}}^{n_i-q_i}
+   \frac{\prod_{e\in\mathcal L_i\setminus\mathcal T_i}j_H(\Gamma_{i,e})}
+        {\prod_{c'}\det D_{X_{e^*_i(c')}}
+                      \COconstraint_{b,c'}(\Gamma_i)}\,dz_i
+   =J_i\,dz_i,
+\]
+with the Haar density of every solved eliminated edge still in the numerator. The point-mass calculation can equivalently be carried out by first making this invertible local substitution and then integrating the unit mass in $Y$; no global disintegration theorem is needed. This proves the identity for continuous tests on compact subsets of the chart. Exhaustion of the open chart and monotone approximation extend it to nonnegative Borel tests. The reference measure $dH(c_{i+1})$ is already present in this calculation; expressing it once more in logarithms and keeping its density as another factor would count it twice.
+
+We apply this one-scale identity to a nonnegative Borel test of the coarse links and frozen coordinates, multiplied by the Borel function $p\chi$, keeping the tree variables in the integrand. The internal output Haar variables of scale $i$ are the internal input Haar variables of scale $i+1$. Repeated nonnegative integration therefore gives the product of the $J_i$, Lebesgue measure in all free logarithms, Haar probability measure in each tree variable of each scale, and Haar measure on the coarse links. This proves the displayed formula against every nonnegative Borel test. Restricting each free integral to $\mathcal S_{c,\Rec}$ and keeping $\chi$ records the domain of the chart. The coverage hypothesis says that the image of this domain under the based tree gauge transformations contains every point that is pushed forward; without it the argument proves only the identity restricted to the chart.
+
+The local coordinate formulas are Borel, their domains are Borel, and their Jacobians are continuous on the chart. After extension of the integrand by zero outside these domains, the integral is a Borel function of $(c,\Rec)$: this holds first for indicators of rectangles, then for nonnegative simple functions, and then by increasing approximation. At an exceptional target its value may be $+\infty$; since the incoming measure is finite, it is finite almost everywhere. No unspecified almost-everywhere density enters the pointwise formula.
+
+When a frozen coordinate is introduced, we hold the field $v$ of the block region fixed. For every nonnegative Borel function $G$,
+\[
+ \int G(v,U_v(\sigma_e)a_e)\,dH(a_e)
+       =\int G(v,\widehat b_e)\,dH(\widehat b_e),
+\]
+by left invariance of Haar measure. Iterating over the newly frozen links and then integrating over $v$ proves the assertion on Haar translations, although the translations depend on $v$. If the orientation gives a right translation instead, right invariance gives the same identity. An earlier frozen coordinate is not changed by this operation, and a later blocked value computed from it is a function on the existing coordinate space, not a new independent coordinate. This proves the statement on the reference measure of the frozen coordinates; it makes no claim of probabilistic independence under the density.
+
+If $p\chi$ is invariant under the based gauge transformations in the statement, its value in these coordinates does not depend on $\mathfrak f$, since these gauge transformations fix both the target and the endpoints of the based transports of the frozen coordinates. Each Haar probability factor of the tree variables then integrates to one. Finally, the determinants do not vanish on the complex neighborhood of the chart, by the local inverse bounds of \cref{ch03:lem:relative-coarea}. Since there are at most $J$ scales, each with bounded stencils and fixed radii, the analytic constants of the chart are uniform. The measure identity itself needs no analyticity of $p$.
+\end{proof}
+
+\section{Derivatives of constrained minima}\label{ch15:sec:minimum-calculus}
+
+The constrained minimizers below are stationary points of an objective in the free coordinates, with the coarse field and the current frozen coordinates as parameters. The identities below hold at complex arguments; positivity of the Hessian, and hence minimization, enters only at real data.
+
+\begin{lemma}\label{ch15:lem:minimum-calculus}
+Let $F(u,y;\Rec)$ be holomorphic on a finite-dimensional complex product and real at real arguments, where $u$ denotes free coordinates and $y$ parameters. Let $a(y)$ be a holomorphic branch of solutions of $F_u(a(y),y;\Rec)=0$ along which $A=F_{uu}$ is invertible. All derivatives below are evaluated at $(a(y),y;\Rec)$, with the frozen coordinates $\Rec$ fixed. For a direction $\eta$ of the parameters (the coarse field or the current frozen coordinates), set $V_\eta=(-A^{-1}F_{uy}\eta,\eta)$, and let $F^{\min}(y)=F(a(y),y)$. Then
+\[
+ Da\,\eta=-A^{-1}F_{uy}\eta,\qquad
+ DF^{\min}=F_y,\qquad
+ D^2F^{\min}=F_{yy}-F_{yu}A^{-1}F_{uy},
+\]
+and
+\[
+ D^3F^{\min}[\eta_1,\eta_2,\eta_3]
+           =D^3F[V_{\eta_1},V_{\eta_2},V_{\eta_3}].
+\]
+At intermediate scale $i$ the effective classical action is $M^iF^{\min}$, and each of its derivatives carries the same factor $M^i$. Successive and joint constrained minimizers agree wherever all the conditional branches and the joint branch are defined in their stated domains and unique there.
+
+If $F=E\circ\Psi$, then for any directions $u,v$ of the free coordinates or of the parameters,
+\[
+ F_{uv}=\Psi_u^{\mathsf T}E''(\Psi)\Psi_v
+                             +E'(\Psi)\Psi_{uv}.
+\]
+The second term is present also at a constrained minimizer. In particular, differentiation in a current frozen coordinate $\xi$ gives $D_\xi a=-F_{uu}^{-1}F_{u\xi}$, where $F_{u\xi}$ contains both terms. At complex arguments, transposes are bilinear transposes. Higher derivatives of $a$ require only the inverse of $F_{uu}$. Weighted coefficient bounds on these derivatives hold in the coefficient norms on smaller fixed products, with constants depending on the coefficient bounds of $F$, on the bound for $F_{uu}^{-1}$, and on uniform data. No inverse of a Hessian in the coarse field or in the frozen coordinates is used, and no derivative in a frozen coordinate $\Rec$ is taken.
+\end{lemma}
+
+\begin{proof}
+We begin with the existence and uniqueness of the branch near a given point of it. At that point the matrix $A_*=F_{uu}$ is invertible, so the map $u\mapsto u-A_*^{-1}F_u(u,y)$ has derivative zero there. By continuity, there exist a ball of free coordinates on which this derivative has norm at most $1/2$ and a smaller neighborhood of parameters on which the map moves the base point by less than a quarter of the radius of that ball. The iteration is then a contraction of the ball into itself, and the analytic implicit-series statement of \cref{ch02:lem:coefficient-algebra} gives its holomorphic solution. Local uniqueness identifies this solution with the given branch, and these local constructions agree on their common neighborhoods.
+
+Let $L(y)=(a(y),y)$, with $\Rec$ fixed. Differentiating $F_u\circ L=0$, we obtain
+\[
+ A\,Da\,\eta+F_{uy}\eta=0.
+\]
+This proves the formula for $Da$ and shows that $DL\,\eta=V_\eta$. The first derivative of $F\circ L$ is $F_y$, since $F_u=0$. Differentiating this equality once more and inserting the formula for $Da$, we find the stated Schur complement formula for $D^2F^{\min}$.
+
+For the third derivative it is convenient to keep the tangent vectors. For every vector $h$ of free coordinates and every parameter direction $\eta$, we have
+\begin{equation}\label{ch15:eq:horizontal-orthogonality}
+ D^2F[(h,0),V_\eta]
+       =h^{\mathsf T}(A\,Da\,\eta+F_{uy}\eta)=0.
+\end{equation}
+The second derivative can also be written $D^2(F\circ L)[\eta_1,\eta_2]=D^2F[V_{\eta_1},V_{\eta_2}]$. Its derivative in the direction $\eta_3$ consists of $D^3F[V_{\eta_1},V_{\eta_2},V_{\eta_3}]$ and two further terms, in each of which one of the vectors $V$ is differentiated. A differentiated $V$ has the form $(D^2a[\eta_j,\eta_3],0)$, so both further terms vanish by \eqref{ch15:eq:horizontal-orthogonality}. This proves the polarized identity for the third derivative.
+
+By the chain rule, before any stationarity is imposed, we have
+\[
+ D_uD_v(E\circ\Psi)
+   =(D_u\Psi)^{\mathsf T}E''(\Psi)D_v\Psi
+          +E'(\Psi)D_uD_v\Psi .
+\]
+Stationarity of the constrained objective says only that $E'(\Psi)\Psi_u=0$ for the free directions $u$; it does not remove $E'(\Psi)\Psi_{uv}$. Taking $v$ to be the direction of a current frozen coordinate, we obtain the formula for $D_\xi a$. Since these are polynomial identities between derivatives, their holomorphic versions use the same bilinear transpose, without complex conjugation of the parameters.
+
+We now turn to higher derivatives. Differentiating $F_u\circ L=0$ in $r$ given directions and using the chain rule indexed by the partitions $\pi$ of these directions, we obtain
+\[
+ 0=\sum_{\pi}
+ D^{|\pi|}F_u(L)
+       \bigl[D^{|B|}L[\eta_j:j\in B]:B\in\pi\bigr].
+\]
+For $r\ge2$ the partition with a single block contributes $A\,D^ra$, since the higher derivatives of the second component of $L$ vanish. Every other partition contains only derivatives of $a$ of order less than $r$. The new derivative is therefore obtained by solving one linear equation with the matrix $A$. For $r=1$ this is the formula for $Da$ proved above.
+
+A quantitative bound uses given coefficient majorants for $F$ and for the inverse $A^{-1}$. On a product where these bounds hold, we divide the partition formula by $r!$, use the contraction bounds of \cref{ch02:lem:coefficient-algebra}, and pass to a strictly smaller product of parameters. After the derivative condition for the preconditioned nonlinear map has been imposed, the solution is bounded by the majorant series $Y$ with nonnegative coefficients determined by
+\[
+ Y=Ct+\kappa Y+\frac{C(t+Y)^2}{1-C(t+Y)},\qquad \kappa<1 .
+\]
+By the implicit-series statement of \cref{ch02:lem:coefficient-algebra}, we obtain the factorial bounds and their versions with a specified input index; the boundary-weighted version is \cref{ch15:lem:boundary-algebra}(2). The constants depend only on these coefficient bounds, the bound for $A^{-1}$, and uniform data. The hypotheses of this quantitative application are verified for the objective of a block region in \cref{ch15:thm:regional-gap-and-center}.
+
+To compare successive and joint minimizers, we split the free coordinates as $(u,v)$. At a stationary point of the partial minimum value as a function of $v$, the formula $DF^{\min}=F_y$ implies $F_v=0$, while the conditional minimizer already satisfies $F_u=0$. It is therefore the joint stationary point in the given domain. Conversely, the joint stationary point satisfies the conditional stationarity equations, and uniqueness of their branches identifies it with the successive construction. This argument applies only where the conditional minimizers and the joint point lie in their stated domains, and it asserts nothing about other branches. Finally, one application of the nested minimization identity of \cref{ch07:thm:bellman} multiplies the minimum value by $M$, so after $i$ steps the factor is $M^i$. Multiplication by a positive constant does not change the minimizer, and every derivative of the value carries the same factor.
+\end{proof}
+
+\section{Freezing variables}\label{ch15:sec:freezing}
+
+When a block region shrinks, the variables at the removed labels are frozen: they are replaced by fixed values, which become frozen coordinates. The next lemma describes how the coefficient norm, a torus interaction, the effective density, and the triangular determinant behave under this substitution.
+
+\begin{lemma}\label{ch15:lem:freezing}
+Use the norms and the position convention of \cref{ch15:def:regional-norm}. Let $D$ be a set of labels of a block region, with the radius $\phi$ of \cref{ch15:def:regional-norm} for $D$, let $s_{\mathrm{er}}\ge\max\{2,w_{\mathrm{bd}}\}$, let $I\subset\{i\in D:d_D(i)\ge s_{\mathrm{er}}\}$, and let $F=D\setminus I$. The labels in $F$ are frozen. Since $s_{\mathrm{er}}\ge w_{\mathrm{bd}}$, every label of $D$ at which $\phi<\rho$ lies in $F$; the set $I$ may omit further labels of $D$, which are additional holes. Let $c=(c_j)_{j\in F}$ satisfy $|c_j|\le\eta\phi(j)$ with $0\le\eta\le1/4$. For a function $v$ on $I$, write $v\oplus c$ for the variables on $D$ equal to $v$ on $I$ and to $c$ on $F$, and for an analytic function $f$ set $T_cf(v)=f(v\oplus c)-f(0\oplus c)$. The following statements hold.
+\begin{enumerate}
+\item For $i\in I$ we have $d_D(i)\ge d_I(i)+s_{\mathrm{er}}-1$, and
+\[
+ \mathcal X_I^\rho(T_cf)
+ \le(1-\eta)^{-2}e^{-\awall(s_{\mathrm{er}}-1)}
+                                      \mathcal X_D^\phi(f)
+ \le2e^{-\awall(s_{\mathrm{er}}-1)}\mathcal X_D^\phi(f).
+\]
+The norm on the left includes every remaining nonconstant degree, including degree one. The same statement holds with the separate classical radius and rates.
+\item Let $r_{\mathbb T}$ be a function on the torus with no linear term and $\mathcal B_{\rho,\bar a}(r_{\mathbb T})\le E$, where $\mathcal B_{\rho,\bar a}$ is the torus norm of \cref{ch01:def:analytic-norms}, with the Euclidean network length, and $\bar a\ge\sqrt3(\asp+\awall)$, and assume $|c_j|\le\beta=\eta\rho$ for $j\in F$. The boundary-completion difference
+\[
+ G_cr_{\mathbb T}(v)=r_{\mathbb T}(v,c)-r_{\mathbb T}(0,c)
+                        -r_{\mathbb T}(v,0)+r_{\mathbb T}(0),
+\]
+that is, the difference between the substitution of the frozen values $c$ and the substitution of zero, satisfies $\mathcal X_I^\rho(G_cr_{\mathbb T})\le8\eta E$. All torus labels outside $D$ are set to zero in these evaluations. The analogous difference for the effective classical action has its own radius and bound.
+\item Consider a joint density, relative to its given reference measure, of the form
+\[
+ Z^{-1}e^{\ScalarLedger(\Rec)}\,W(\Rec)\,
+             e^{-E(v,c;\Rec)/g^2-R(v,c;\Rec)}\chi(v,c,\Rec),
+\]
+where $W(\Rec)\ge0$ is a weight depending only on the frozen coordinates (not to be confused with the boundary $W$). Freezing $c$ gives the same joint measure, with the same $Z$, the same indicators, and the same effective classical action $E$, with the enlarged frozen coordinates $(\Rec,c)$, and with
+\[
+ R_{\mathrm{new}}(v)=R(v,c)-R(0,c),\qquad
+ \ScalarLedger_{\mathrm{new}}=\ScalarLedger-R(0,c).
+\]
+If the effective classical action is centered as well, its factor $e^{-E(0,c;\Rec)/g^2}$ remains as an external factor. No partition function at fixed frozen coordinates is introduced. At uniform radius, write $R=r_{\mathbb T}|_D+f$ with $r_{\mathbb T}$ as in (2), and set
+\[
+ \epsilon_D(f)=\sum_{k\ge2}\rho^{k-2}\sup_{i\in D}
+     e^{\awall d_D(i)}\sum_{|\nu|=k}\frac{\nu_i}{k}|f_\nu|e^{\asp\Tree(\nu)},
+ \qquad\ell_D(f)=\sup_{i\in D}e^{\awall d_D(i)}|f_{e_i}|.
+\]
+If $\|c\|_\infty\le\beta\le\rho/4$, then
+\[
+ |R(0,c;\Rec)-R(0;\Rec)|
+ \le |F|\bigl\{\beta\ell_D(f)+\beta^2[\epsilon_D(f)+E]\bigr\}.
+\]
+This bounds the change of the constant term; it does not bound $R(0;\Rec)$ itself.
+\item Consider a sequential normalization by the constrained Hessians,
+\[
+ z_i=a_i(c_{i+1};\Rec)+g_iK_i(c_{i+1};\Rec)^{-1/2}w_i,
+ \qquad c_{i+1}=c_{i+1}(w_{>i}),
+\]
+where $c_{i+1}$ denotes the coarser fields as functions of the coarser normalized fluctuation variables, and let $d_i=3f_i$ be the number of scalar free coordinates at scale $i$. The Jacobian determinant of $w\mapsto z$ is
+\[
+ \prod_i g_i^{d_i}
+          \det K_i(c_{i+1}(w_{>i});\Rec)^{-1/2}.
+\]
+Adding and subtracting half of $\log\det K_i(\widehat c_{i+1};\Rec)$, where $\widehat c_{i+1}=c_{i+1}(0)$, splits this single determinant into its value at zero fluctuation and the logarithmic difference containing all the dependence on the coarser normalized fluctuation variables. Missing Gaussian coordinates and all factors at zero fluctuation remain explicit.
+\end{enumerate}
+At frozen coordinates represented by their based transports, we have the identity $f(v\oplus c)=T_cf(v)+f(0\oplus c)$. Every algebraic identity above is finite-dimensional. All bounds are uniform and independent of additional holes, of the number of preceding block integrations, of the widths chosen later, and of the number of frozen labels except through the displayed factor $|F|$.
+\end{lemma}
+
+\begin{proof}
+We begin with the distance inequality in (1). If $I$ is empty there is no nonconstant coefficient to estimate. If $D$ has no boundary, the boundary perturbation is zero by the convention of \cref{ch15:def:regional-norm}. Otherwise let $i\in I$, and let $h=(2M^s)^{-1}\le1$ be the mesh of the refined position graph. We choose a shortest path $i=x_0,\ldots,x_k$ of vertices of this graph with $x_k$ outside $D$, so that $kh=d_D(i)$, and we set $s'=\lceil s_{\mathrm{er}}/h\rceil$. Since $kh=d_D(i)\ge s_{\mathrm{er}}$ and $k$ is an integer, we have $k\ge s'$. The vertex $x_{k-s'+1}$ is at distance at most $(s'-1)h<s_{\mathrm{er}}$ from the complement of $D$, so it is not a position of $I$. We conclude that
+\[
+ d_I(i)\le(k-s'+1)h
+ \le d_D(i)-s_{\mathrm{er}}+h
+ \le d_D(i)-s_{\mathrm{er}}+1 .
+\]
+Additional holes can only decrease $d_I$. This proves the distance inequality, with the exact term $-1$. Removing all labels at a position together is what makes this a statement on the graph of positions. The fixed buffer of \cref{ch15:def:regional-norm} transfers the same argument to another convention for link endpoints.
+
+Next we prove the coefficient bound in (1). We fix the earlier frozen coordinates and an allowed $c$, and for each input degree $m$ we set
+\[
+ A_m=\rho^{-2}\sup_{i\in D}e^{\awall d_D(i)}
+    \sum_{|\nu|=m}\frac{\nu_i}{m}|f_\nu|
+                 e^{\asp\Tree(\nu)}\phi^\nu .
+\]
+A monomial of degree $m$ splits uniquely as $(\nu_I,\nu_F)$, of degrees $k\ge1$ and $j\ge0$ with $m=k+j$. Every remaining radius is $\rho$, since all labels with smaller radius are frozen. For a fixed index $i\in I$, the new factor $\nu_i/k$ is at most $m/k$ times the old factor $\nu_i/m$, and $m/k\le1+j$. Substituting the frozen values costs at most a factor $\eta^j$, and $\Tree(\nu_I)\le\Tree(\nu)$. The distance inequality contributes the factor $q=\exp[-\awall(s_{\mathrm{er}}-1)]$. Combining these factors, we find that the outgoing summand of degree $k$ is at most $q\sum_{j\ge0}(1+j)\eta^jA_{k+j}$; coinciding outgoing monomials are bounded by the triangle inequality. We sum over $k$ after taking the suprema over the fixed index. Since all terms are nonnegative, we obtain
+\[
+ \sum_{k\ge1}q\sum_{j\ge0}(1+j)\eta^j A_{k+j}
+ \le q\Bigl(\sum_{j\ge0}(1+j)\eta^j\Bigr)\sum_{m\ge1}A_m
+ =q(1-\eta)^{-2}\sum_{m\ge1}A_m .
+\]
+This includes $k=1$, even when the linear term comes from a monomial of high degree. No binomial factor for the choice of frozen factors appears, since the two label sets are fixed. The suprema over the earlier frozen coordinates and over the allowed real values $c$ are taken after this inequality and the degree sums. Since $(1-\eta)^{-2}\le16/9<2$, this proves the two inequalities in (1). For the classical statement we replace the three parameters by the classical radius and rates in the same calculation; the partition of labels and the ratios of the factors $\nu_i/k$ are unchanged.
+
+We now explain why the outgoing norm has uniform radius. We write $\phi_{\mathrm{cl}}$ for the classical radius function. When all labels with smaller radius are frozen, we have
+\begin{equation}\label{ch15:eq:uniform-surviving-radius}
+ \phi|_I\equiv\rho,\qquad
+ \phi_{\mathrm{cl}}|_I\equiv\rho_{\mathrm{cl}} .
+\end{equation}
+Indeed, $d_D(i)\ge s_{\mathrm{er}}\ge w_{\mathrm{bd}}$ excludes every remaining position from the boundary strip, and additional holes remove labels without changing the radius at the remaining ones. This means that $\mathcal X_I^\rho(T_cf)$ is the norm with the uniform radius $\rho$ at every remaining variable, and its classical counterpart has uniform radius $\rho_{\mathrm{cl}}$. These are the incoming norms at uniform radius for the next calculation on the same list of labels, with their existing scales of introduction. The new values $c$ are fixed real frozen coordinates, not additional variables with the radius $\rho$, and no extension beyond an earlier analytic domain is asserted, since each remaining variable already had the radius $\rho$.
+
+For (2), only monomials that meet both $I$ and $F$ contribute to $G_cr_{\mathbb T}$. For any fixed index $i\in I$, the network of such a monomial reaches the complement of $I$, so its $\ell^1$ length is at least $d_I(i)$, as well as at least $\Tree(\nu_I)$. Since the torus norm uses the Euclidean network length $\mathsf t_2$ and $\Tree\le\sqrt3\mathsf t_2$, we obtain
+\[
+ \asp\Tree(\nu_I)+\awall d_I(i)
+      \le(\asp+\awall)\Tree(\nu)
+      \le\sqrt3(\asp+\awall)\mathsf t_2(\nu)
+      \le\bar a\mathsf t_2(\nu).
+\]
+We use \eqref{ch15:eq:root-fraction} for the torus norm. The degree calculation above now has $j\ge1$, and its incoming sum is at most $E$. We obtain the stronger estimate
+\[
+ \mathcal X_I^\rho(G_cr_{\mathbb T})
+       \le[(1-\eta)^{-2}-1]E\le4\eta E\le8\eta E .
+\]
+For the middle inequality we wrote the bracket as $\eta(2-\eta)/(1-\eta)^2$ and used $\eta\le1/4$. This calculation counts the linear term produced by the substitution. Setting the other torus labels to zero only deletes coefficients. For the classical difference we replace the radius, the rates, and the bound by their classical counterparts in the same calculation, with the same factor $\sqrt3$ in the rate hypothesis.
+
+For (3), the statement on the measure is an algebraic identity with the given reference measure. Indeed,
+\[
+ e^{\ScalarLedger-R(0,c)}e^{-[R(v,c)-R(0,c)]}
+                   =e^{\ScalarLedger-R(v,c)} .
+\]
+The weight $W(\Rec)$, every indicator, and the term $E(v,c;\Rec)/g^2$ are unchanged. Splitting $E$ into $E(v,c)-E(0,c)$ and $E(0,c)$ gives the external classical factor in the statement. Fubini's theorem with the given reference measure proves the identity of joint measures, with the same $Z$; no normalization at fixed frozen coordinates has taken place. If the frozen variables are based transports, the identity is evaluated at those same values; it is a substitution in existing variables.
+
+Only monomials supported in $F$ contribute to $R(0,c;\Rec)-R(0;\Rec)$. At each degree $m$, we assign such a monomial to its labels with weights $\nu_i/m$, whose sum is one, and drop the network and distance weights, which are at least one. In degree one the sum is at most $|F|\beta\ell_D(f)$. For $m\ge2$ we use $\beta^m\le\beta^2\rho^{m-2}$. Summing over $i\in F$ and then over $m$ bounds the contribution of $f$ by $|F|\beta^2\epsilon_D(f)$ and that of the torus part by $|F|\beta^2E$. The constant terms cancel in this difference, which is why the bound says nothing about an arbitrary incoming $R(0;\Rec)$. This proves the bound on the change of the constant term.
+
+Finally we prove (4). We order the blocks of free coordinates from the coarser scales to the finer ones. The sequential map has the blocks
+\[
+ z_i=a_i(c_{i+1};\Rec)+
+         g_i K_i(c_{i+1};\Rec)^{-1/2}w_i,
+ \qquad c_{i+1}=c_{i+1}(w_{>i}).
+\]
+Its derivative is block triangular, with diagonal blocks $g_iK_i(c_{i+1}(w_{>i});\Rec)^{-1/2}$, so the determinant is the product in the statement. This is the triangular argument of \cref{ch09:thm:sequential-density}, applied to the list of free coordinates of the block region; the dimensions $d_i=3f_i$ are those of this list, not of the torus. With $L_i(w)=\log\det K_i(c_{i+1}(w_{>i});\Rec)$ and $\widehat L_i=\log\det K_i(\widehat c_{i+1};\Rec)$, the splitting reads
+\[
+ \det D_wz
+  =\Bigl(\prod_i g_i^{d_i}\Bigr)
+       e^{-\frac12\sum_i\widehat L_i}
+       e^{-\frac12\sum_i[L_i(w)-\widehat L_i]} .
+\]
+The second exponential contains all the dependence on the coarser normalized fluctuation variables. This is one determinant, with its real positive branch and its analytic continuation. If some free labels are absent, their Gaussian coordinates are absent from this product and remain explicit in any comparison, and the factors at zero fluctuation remain constant factors. The only estimates were sums of coefficients with a fixed index and graph distances, and neither introduces a dependence on the number of preceding block integrations, the number of holes, or the later widths, beyond the displayed factor $|F|$.
+\end{proof}
+
+\section{Coercivity and analytic constrained minimizers}\label{ch15:sec:gap}
+
+We first prove the patch inequality, which bounds a linearized variation of a block region by its curl on single final blocks and on pairs of adjacent final blocks. The patches and the restriction maps are defined explicitly, so that the inequality applies both to the effective classical action (\cref{ch15:thm:regional-gap-and-center}) and to the Wilson action at the first block integration (\cref{ch15:lem:bare-gap}).
+
+\begin{definition}\label{ch15:def:patches}
+Use the notation of \cref{ch15:def:internal-coordinates}. The set $\mathfrak P_\Omega$ of patches of $\Omega$ consists of every final block $\mathsf B_s(a)$ with $a\in\mathcal K$ and of every union $\mathsf B_s(a)\cup\mathsf B_s(a+M^se_k)$ of two adjacent final blocks with both anchors in $\mathcal K$. For $P\in\mathfrak P_\Omega$, let $\mathcal E(P)$ be the set of positive input edges with both endpoints in $P$, and $\mathcal P(P)$ the set of elementary positive plaquettes with all four vertices in $P$; thus $P$ is a complete cuboid, with its boundary edges and faces. Construct $\mathcal L_i(P)$, $Q^P_i$, and $\Pi^{\mathcal T,P}_i$ by the rules of \cref{ch15:def:internal-coordinates}, using only the final block or blocks of $P$, and let
+\begin{equation}\label{ch15:eq:patch-constraints}
+ G_P h=\bigl((\Pi^{\mathcal T,P}_iQ^P_{[0,i)}h)_{0\le i<s},\ Q^P_{[0,s)}h\bigr),\qquad
+ \mathcal V_P=\ker G_P .
+\end{equation}
+For a single block $\mathcal L_s(P)$ is empty, and for a pair it consists of its one coarse bond. The tree conditions are imposed at every scale, not only at the finest one. Let $d_P$ be the signed plaquette incidence matrix (the curl) of the cuboid $P$. For an edge cochain $u$ on $\mathcal L_0$, the restriction to the patch is $(R_Pu)_e=u_e$ for $e\in\mathcal E(P)$. For a patch that crosses a periodic seam we use the orientations induced by its rectangular lift.
+\end{definition}
+
+\begin{lemma}\label{ch15:lem:patch-coercivity}
+Use \cref{ch15:def:internal-coordinates,ch15:def:patches}. Let $\dot{\mathcal H}_i$ be the derivative of the coarse-field lift $\mathcal H_i$ at the identity, let $I_{\mathcal F_i}$ and $I_{\mathcal D_i}$ be the inclusions of coordinates on $\mathcal F_i$ and $\mathcal D_i$ into cochains on $\mathcal L_i$, and let $\Pi_{\mathcal F_i}$ be the restriction to $\mathcal F_i$. Define
+\begin{equation}\label{ch15:eq:raw-embedding}
+ \Gamma'_i=I_{\mathcal F_i}-M^2I_{\mathcal D_i}Q_iI_{\mathcal F_i},\qquad
+ A_\Omega z=\sum_{i=0}^{s-1}\dot{\mathcal H}_0\cdots\dot{\mathcal H}_{i-1}\Gamma'_i z_i,
+\end{equation}
+where the product preceding $\Gamma'_0$ is the identity, and
+\begin{equation}\label{ch15:eq:extraction}
+ (B_{\mathrm{ext}}v)_i=
+ \Pi_{\mathcal F_i}(I-\dot{\mathcal H}_iQ_i)Q_{[0,i)}v .
+\end{equation}
+For a matrix $B$ write $\|B\|_\infty=\sup_x\sum_y|B_{xy}|$ and $\|B\|_1=\sup_y\sum_x|B_{xy}|$. The following statements hold.
+\begin{enumerate}
+\item The map $A_\Omega$ is the derivative of $\Log\Phi_\Omega(0,\cdot)$ at $z=0$. It maps the free coordinates bijectively onto $\ker G_\Omega$, and $B_{\mathrm{ext}}$ is its inverse on $\ker G_\Omega$.
+\item We have
+\[
+ \|A_\Omega\|_\infty\le J(1+4M^3),\qquad
+ \|A_\Omega\|_1\le M^{2(J-1)}(1+24M^3),
+\]
+\[
+ \|B_{\mathrm{ext}}\|_\infty\le b_\infty=(1+4M)(4M)^{J-1},\qquad
+ \|B_{\mathrm{ext}}\|_1\le b_1=(1+24M^3)\sum_{i=0}^{J-1}(24M)^i .
+\]
+Consequently $\|z\|_2\le C_{\mathrm{ext},J}\|A_\Omega z\|_{\mathcal L_0}$ with $C_{\mathrm{ext},J}=\max(1,\sqrt{b_\infty b_1})$. Every nonzero entry of $A_\Omega$ or $B_{\mathrm{ext}}$ joins two positions at periodic maximum distance at most $R_{M,J}=2\sum_{i=0}^{J-1}M^{i+1}$ in input units, hence also in output units.
+\item Let $u\in\ker G_\Omega$, and let $du$ be the curl of any edge cochain on all input edges that agrees with $u$ on $\mathcal L_0$. For every patch $P$, we have $R_Pu\in\mathcal V_P$ and $(d_PR_Pu)_p=(du)_p$ for $p\in\mathcal P(P)$.
+\item There is $\sigma_J>0$, depending only on $M$ and $J$, such that $\|h\|^2\le\sigma_J^{-1}\|d_Ph\|^2$ for every patch $P$ and every $h\in\mathcal V_P$. For every $u\in\ker G_\Omega$,
+\begin{equation}\label{ch15:eq:patch-inequality}
+ \|u\|_{\mathcal L_0}^2\le\sum_{P\in\mathfrak P_\Omega}\|R_Pu\|^2
+ \le\sigma_J^{-1}\sum_{P\in\mathfrak P_\Omega}\|d_PR_Pu\|^2
+ \le\frac{7}{\sigma_J}\sum_{p\in\mathcal P_\Omega}|(du)_p|^2,
+\end{equation}
+where $\mathcal P_\Omega=\bigcup_{P\in\mathfrak P_\Omega}\mathcal P(P)$.
+\end{enumerate}
+All constants are independent of $m$, of the block region, of its number of components and holes, and of its topology. For an empty list of free coordinates all statements hold with the conventions for zero-dimensional spaces.
+\end{lemma}
+
+\begin{proof}
+We begin with the derivatives of the block averaging map at the identity. Differentiating the averaging formula \eqref{ch01:eq:ordinary-map} at the identity gives $Q_i$: the derivative of the reference transport in the averaged logarithm cancels the derivative of the final reference factor. The exceptional rule plays no role, since all based loop holonomies are close to $I$ in a neighborhood of the identity. For a scalar vertex function $\varphi$ and a bond $c'=(a,a+M^{i+1}e_k)$, each contour $F_{i,c',x}$ telescopes, and hence
+\begin{equation}\label{ch15:eq:gradient-blocking}
+ (Q_i\nabla\varphi)_{c'}=\varphi(a+M^{i+1}e_k)-\varphi(a).
+\end{equation}
+This holds at every scale, and it uses only the contours of internal bonds; no gradient is extended across a hole.
+
+The derivative $\dot{\mathcal H}_i$ copies a coarse value to each edge of the interface of its bond and vanishes on the interiors of the blocks. We have
+\begin{equation}\label{ch15:eq:lift-identities}
+ Q_i\dot{\mathcal H}_i=I,\qquad \Pi^{\mathcal T}_i\dot{\mathcal H}_i=0,\qquad
+ Q_iI_{\mathcal D_i}=M^{-2}I .
+\end{equation}
+For the first identity, each contour of $c'$ crosses the interface of $c'$ exactly once, with positive orientation, and its tree parts lie in block interiors. The second holds since tree edges lie in block interiors. For the third, a contour of a different bond never uses the eliminated edge of $c'$, and among the $M^3$ contours of $c'$ exactly $M$ use $e^*_i(c')$, each once with positive orientation. Since tree paths stay in their blocks, these identities hold also for an internal bond next to a final block outside $\Omega$.
+
+The linearized constraint at the identity is $Q_iX=0$ for a cochain $X$ on $\mathcal L_i$ with zero tree entries, and \eqref{ch15:eq:lift-identities} gives its unique solution with free entries $z_i$:
+\[
+ \Gamma'_i z_i=I_{\mathcal F_i}z_i-M^2I_{\mathcal D_i}Q_iI_{\mathcal F_i}z_i,\qquad
+ \Pi^{\mathcal T}_i\Gamma'_i=0,\quad Q_i\Gamma'_i=0,\quad \Pi_{\mathcal F_i}\Gamma'_i z_i=z_i .
+\]
+No inversion of a matrix of unbounded range occurs, since the coefficient matrix of the eliminated edges is $M^{-2}I$. Thus $\Gamma'_i$ is the derivative at zero of the local constraint coordinates at the identity target. Since $\Gamma_b(0)=0$ for every target $b$, differentiating \eqref{ch15:eq:internal-reconstruction} at $(c,z)=(0,0)$, we obtain
+\[
+ u_s=0,\qquad u_i=\dot{\mathcal H}_iu_{i+1}+\Gamma'_iz_i,\qquad
+ u_0=A_\Omega z,
+\]
+where $u_i$ is the derivative of $\Log U^{(i)}$ in the direction $z$. By \eqref{ch15:eq:lift-identities}, we have $u_i=Q_{[0,i)}u_0$, $\Pi^{\mathcal T}_iu_i=0$, and $u_s=0$, so $u_0\in\ker G_\Omega$. Conversely, let $v\in\ker G_\Omega$ and set
+\[
+ v_i=Q_{[0,i)}v,\qquad
+ z_i=\Pi_{\mathcal F_i}(v_i-\dot{\mathcal H}_iv_{i+1}).
+\]
+The cochain $v_i-\dot{\mathcal H}_iv_{i+1}$ has zero tree entries and satisfies $Q_i(v_i-\dot{\mathcal H}_iv_{i+1})=v_{i+1}-v_{i+1}=0$. By \eqref{ch15:eq:lift-identities} its eliminated entries are determined by its free entries, so it equals $\Gamma'_iz_i$. Since $v_s=0$, descending induction shows that $v=A_\Omega z$. We conclude that $A_\Omega$ maps the free coordinates bijectively onto $\ker G_\Omega$, with inverse \eqref{ch15:eq:extraction}. This is the successive extraction of the averaged fields and of their free coordinates, written as a matrix, and it proves (1).
+
+Next we prove (2). A contour has at most $4M-3$ steps, so
+\[
+ \|Q_i\|_\infty\le4M,\qquad \|Q_i\|_1\le24M,
+ \qquad \|\dot{\mathcal H}_i\|_\infty\le1,\qquad\|\dot{\mathcal H}_i\|_1\le M^2 .
+\]
+For the column bound for $Q_i$, an interior edge of a block occurs in the contours of at most the six bonds incident to its block, and an interface edge only in the contours of its own bond; each such row has absolute sum at most $4M$. A bond has $M^2$ interface edges, which gives the column bound for $\dot{\mathcal H}_i$. We obtain $\|\Gamma'_i\|_\infty\le1+4M^3$ and $\|\Gamma'_i\|_1\le1+24M^3$, and the bounds for $A_\Omega$ follow from \eqref{ch15:eq:raw-embedding}, since a column of $A_\Omega$ belongs to a single scale $i\le J-1$. For $B_{\mathrm{ext}}$ we multiply the row and column bounds of the factors in \eqref{ch15:eq:extraction}; stacking over $i$ takes the maximum of the row bounds and the sum of the column bounds. By the Cauchy--Schwarz inequality, we have $\|Bv\|_2^2\le\|B\|_\infty\|B\|_1\|v\|_2^2$, and therefore $\|z\|_2=\|B_{\mathrm{ext}}A_\Omega z\|_2\le C_{\mathrm{ext},J}\|A_\Omega z\|_{\mathcal L_0}$. These estimates apply to each color and to the Euclidean norms over the colors.
+
+We now prove the range bound. We assign to each edge its midpoint. Each nonzero entry of $Q_i$, $\dot{\mathcal H}_i$, or $\Gamma'_i$ joins positions at periodic maximum distance at most $2M^{i+1}$, so every product in \eqref{ch15:eq:raw-embedding} or \eqref{ch15:eq:extraction} has range at most $R_{M,J}$. Dividing coordinates by $M^s\ge1$ only decreases this range. All these estimates hold after restriction to a block region: only equations of internal bonds were used, and deleting other equations does not increase a row sum, a column sum, or a range.
+
+We now prove (3). For a patch $P$ and each $i$, let $r^P_i$ select the edges of $\mathcal L_i(P)$ among those of $\mathcal L_i$. Since all contours of a bond stay in its two complete endpoint blocks (\cref{ch15:lem:local-endpoint-dependence}), we have the matrix identity
+\[
+ Q^P_ir^P_i=r^P_{i+1}Q_i ,
+\]
+where the right side has zero coefficients on the input edges outside $P$; these zeros come from the supports of the contours, not from an extension of $u$ by zero. The same identity holds for the rows of the trees. Iterating it and using $G_\Omega u=0$, we obtain $G_PR_Pu=0$, that is, $R_Pu\in\mathcal V_P$. This holds for every patch, including the patches next to the boundary of $\Omega$. Every plaquette in $\mathcal P(P)$ has its four edges in $\mathcal E(P)\subset\mathcal L_0$, so $(d_PR_Pu)_p=(du)_p$ for $p\in\mathcal P(P)$.
+
+Next we show that the curl is injective on each space $\mathcal V_P$. A single block or an adjacent pair lifts injectively to a rectangular cuboid in $\Z^3$: its longest side has at most $2M^s-1$ links, which is less than $n/2$ since $m\ge4$. Let $h\in\mathcal V_P$ with $d_Ph=0$. A closed cochain on a rectangular cuboid is a gradient, as we now recall. Fix a corner $o$, and for a vertex $x$ let $\tau_x$ be the coordinate-ordered path from $o$ to $x$. For an edge $(x,y)$, the closed chain $\tau_x+(x,y)-\tau_y$ is an integer combination of elementary squares in the cuboid: we move the last coordinate step through the portions of $\tau_x$ in later coordinates, and all squares used lie between the relevant coordinate values, hence in the cuboid. Pairing with $h$ shows that $\varphi(x)=h(\tau_x)$ satisfies $h_{xy}=\varphi(y)-\varphi(x)$. By \eqref{ch15:eq:gradient-blocking}, $Q^P_{[0,i)}h$ is the gradient of the values of $\varphi$ at the anchors of scale $i$. The tree equations at the finest scale make $\varphi$ constant on each block of the first scale. If $\varphi$ is constant on the blocks of scale $i$, the tree equations at scale $i$ equate these constants along a connected tree in each block of scale $i+1$. After $s$ steps $\varphi$ is constant on each final block. On a single block this implies $h=0$. On a pair, the remaining equation of $G_P$ for its coarse bond says, by \eqref{ch15:eq:gradient-blocking}, that the two final constants agree, so $h=0$ on the pair as well. No equation with an endpoint in a final block outside $\Omega$ was used.
+
+For $1\le s\le J$ there are finitely many cuboids of these types, including the directions of the pairs. For each one with $\mathcal V_P\ne\{0\}$, we take an orthonormal basis matrix $B_P$ of $\mathcal V_P$ and let $\sigma_P$ be the least eigenvalue of $B_P^{\mathsf T}d_P^{\mathsf T}d_PB_P$, which is positive by the injectivity just proved; if $\mathcal V_P=\{0\}$ we set $\sigma_P=1$. Let $\sigma_J$ be the minimum of these finitely many numbers. It depends only on $M$ and $J$, and we have $\|h\|^2\le\sigma_J^{-1}\|d_Ph\|^2$ for $h\in\mathcal V_P$.
+
+It remains to prove the covering and overlap bounds in \eqref{ch15:eq:patch-inequality}. Every edge of $\mathcal L_0$ has its endpoints either in one final block or in two adjacent final blocks of $\Omega$; the first kind is covered by the single block and the second by the pair. This gives the first inequality, including for isolated blocks. The second inequality follows from (3) and the bound on each $\mathcal V_P$. For the third, fix a plaquette $p$ and one of its vertices $x$. Every patch containing $p$ contains $x$, hence the final block of $x$. There are at most seven such patches: that block and the pairs formed with its six possible neighbors. So each plaquette occurs in at most seven of the sets $\mathcal P(P)$; a plaquette that meets three or four final blocks may occur in none. Using (3), we obtain \eqref{ch15:eq:patch-inequality}.
+\end{proof}
+
+We now state the main result. Its objective is the effective classical action at depth $d_0$, evaluated on the reconstruction of a block region and completed outside $\Omega$ as described in the statement.
+
+\begin{theorem}\label{ch15:thm:regional-gap-and-center}
+Fix $M$ and $J$, and let $\kappa_*>0$ be the constant of \cref{ch11:thm:terminal-anchor}. Then
+\begin{equation}\label{ch15:eq:flat-floor}
+ E_{d_0}''(0)\ge\kappa_*\operatorname{curl}^{\mathsf T}\operatorname{curl}
+ \qquad\text{for every depth }d_0\ge0,
+\end{equation}
+as quadratic forms on real link variations. Let $1\le s\le J$, $m\ge4$, let $\Omega$ be a block region and $d_0\ge0$ a depth, and set
+\[
+ F_R(c,z;\xi)=E_{d_0}(\Psi_R(c,z;\xi)).
+\]
+Here $\Psi_R(c,z;\xi)$ is the logarithm, on all links of the torus, of the reconstruction $\Phi_\Omega(c,z)$ of \cref{ch15:def:internal-coordinates}, completed outside $\Omega$ by the small values with logarithms $\xi$ prescribed by the current frozen coordinates (at the first block integration, by the completion of \cref{ch15:def:bare-completion}), and with logarithm zero at the torus labels that lay outside earlier block regions. The parameters $\xi$ may be complexified on the construction chart. Frozen coordinates from earlier block integrations and arbitrary data in the fixed complement are not arguments of this analytic action. The following statements hold with uniform constants and radii; in particular they are independent of the widths chosen later, of the shape of $\Omega$ (which may contain isolated final blocks), of $d_0$, and of the values of the frozen coordinates.
+\begin{enumerate}
+\item On a common list of coordinates, the linearizations at zero $E_1$ and $E_0$ of the reconstruction on $\Omega$ and of the reconstruction on the whole torus with the complementary coordinates set to zero, defined in \eqref{ch15:eq:embedding-definitions}, satisfy $E_1=E_0+D_W$; here $E_0$ and $E_1$ denote linear embeddings, not effective classical actions. Both indices of every nonzero entry of $D_W$ lie in a band of fixed width $L_J$ around the boundary $W$, the weighted rows and columns of $D_W$ are at most $C_J$, and its rank is at most $C_J|W|$. On matched coordinates in the common chart, the nonlinear formulas for the outputs in $\Omega$ of the two reconstructions agree away from this band. Prescribed values in the fixed complement may differ; their effect is estimated as a bounded source in \cref{ch15:lem:wall-networks}. Coarse outputs on bonds across the boundary of the block region that are not prescribed are holomorphic functions of $(c,z;\xi)$, with all their derivatives. This compares two embeddings; it does not identify their fibers.
+\item There are $\nu_J,C_{\mathrm{ext},J},\lambda_J,Q_J>0$ with the following properties. Let $u=D_z\Psi_R(0)z$; its restriction to $L_\Omega=\mathcal L_0$ lies in $\ker G_\Omega$. Then
+\[
+ \|\operatorname{curl}u\|_2^2\ge\nu_J\|u\|_{L_\Omega}^2,
+ \qquad \|z\|_2\le C_{\mathrm{ext},J}\|u\|_{L_\Omega},
+\]
+\[
+ K_R^0=F_{R,zz}(0)\ge\lambda_J I,\qquad
+ \lambda_J=\kappa_*\nu_J/C_{\mathrm{ext},J}^2,
+ \qquad\|K_R^0\|_{a_J}\le Q_J .
+\]
+One may take $\nu_J=\sigma_J/7$ and $C_{\mathrm{ext},J}$ as in \cref{ch15:lem:patch-coercivity}. Every principal block of $K_R^0$ and every real Schur complement of $K_R^0$ is bounded below by $\lambda_JI$. Let $z_H$ be the free coordinates of the torus outside $\Omega$. On the common list $(z_L,z_H)$, the Hessian at $(c,z,\xi)=0$ of the interpolation between the joint objective on the torus and $F_R+\|z_H\|_2^2/2$ is bounded below by $\lambda_{U,J}I$, where $\lambda_{U,J}=\min(\lambda_J,\lambda_{T,J},1)>0$ and $\lambda_{T,J}$ is the corresponding flat bound on the torus.
+\item There are radii $r_{a,J},r_{z,J},\rho_J,\beta_{\mathrm{rec},J}>0$, a rate $a_J>0$, and an inverse bound $I_J$ such that, on an open product containing
+\[
+ \|c\|_\infty\le2\rho_J,\qquad
+ \|z\|_\infty\le r_{z,J},\qquad
+ \|\xi\|_\infty\le2\beta_{\mathrm{rec},J},
+\]
+the reconstruction lies in $B_{r_{a,J}}$, inside the identity chart on which $E_{d_0}$ is controlled, and
+\[
+ \|F_{R,zz}-K_R^0\|_{a_J}
+ \le Q_J(\|c\|_\infty+\|z\|_\infty+\|\xi\|_\infty)
+                                      \le\lambda_J/8 .
+\]
+Mixed derivative matrices, and tensors of order $l\ge2$ with each index fixed in turn, are bounded by $l!C_J^{l+1}$. The inverse of the complex free Hessian has weighted row-column norm at most $I_J$ at a fixed smaller rate.
+\item Choose the parameter radii below the solution radius so that
+\[
+ I_JQ_J(2\rho_J+2\beta_{\mathrm{rec},J})<r_{z,J}/16,
+ \qquad
+ 8G_J(2\rho_J+r_{z,J}+2\beta_{\mathrm{rec},J})
+                      <\min(r_{\Gamma,J},r_E),
+\]
+where $G_J$ and $r_{\Gamma,J}$ are the coefficient bound and the radius of the reconstruction in \eqref{ch15:eq:raw-majorant}. Then there exists a unique holomorphic stationary point $z_R=z_R(c;\xi)$ in the free box,
+\[
+ F_{R,z}(c,z_R;\xi)=0,\qquad
+ \|z_R\|_\infty\le C_J(\|c\|_\infty+\|\xi\|_\infty)
+                                      <r_{z,J}/8 .
+\]
+It has factorial coefficient bounds on output rows and on volume-normalized input columns on a smaller fixed product. For real data it is the unique minimizer of $F_R(c,\cdot\,;\xi)$ in the convex free box.
+\item Conditional minimizers over initial segments of the scales exist on smaller products of the coarser free coordinates around this joint minimizer, chosen so that the bounds \eqref{ch15:eq:prefix-margins} on the Hessian and on the inverse times the gradient hold. No claim is made on other slices of the joint box.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of \cref{ch15:thm:regional-gap-and-center}]
+The proof has six steps. In the first, we construct the reconstruction with coefficient bounds that do not depend on the size of the lattice, and compare the embeddings on $\Omega$ and on the torus. In the second, the patch inequality gives the coercivity of the curl. In the third, we derive \eqref{ch15:eq:flat-floor} from \cref{ch11:thm:terminal-anchor} and obtain the lower bound on $K_R^0$. In the fourth, we bound the Hessian on a complex product and choose the radii. In the fifth, we construct the minimizer by a contraction argument, and in the sixth, the conditional minimizers. All constants are constructed on larger products before any of the later widths is chosen. If the list of free coordinates is empty, the minimizer is empty and the matrices are zero-dimensional, so we assume that it is nonempty.
+
+\paragraph{Step 1: local charts and comparison of embeddings.}
+For one averaging step the reconstruction is the eliminated-edge solution of \cref{ch03:lem:relative-coarea}, restricted to internal bonds as in \cref{ch15:def:internal-coordinates}. Let $L_M$ bound its stencil radius in output units of one step. Its local scalar majorants can be chosen of the form $G_Mt/(1-G_Mt)$ on a fixed radius. This absolute coefficient bound does not depend on the size of the lattice, for the following reason. Each defining group product reads a bounded number $n_M$ of variables. Matrix exponentials are bounded coefficientwise by $e^t$, and on $\|V-I\|<1$ the logarithm has the convergent series $\sum_{k\ge1}(-1)^{k+1}(V-I)^k/k$. The inverse of the linear coefficient of an eliminated edge is $M^2I_3$, and the nonlinear equation for that edge has zero constant term and a quadratic remainder after its linear part is removed. On a sufficiently small fixed radius, the implicit-series statement of \cref{ch02:lem:coefficient-algebra} gives $G_M$ and factorial coefficients for the local inverse. Since only $n_M$ variables occur in each local equation, summing over its finite stencil, also with any input fixed, we obtain absolute row and column bounds.
+
+By composing at most $J$ such maps, with the embeddings of positions, we obtain numbers $G_J,L_J,r_{\Gamma,J}>0$ such that the logarithm $\Psi_R$ of the reconstruction is holomorphic, vanishes at zero, and has a majorant series with nonnegative coefficients on that radius, with the bounds
+\begin{equation}\label{ch15:eq:raw-majorant}
+ \|\Psi_R\|_{\mathrm{coeff}}
+    \le\frac{G_J T}{1-G_JT},\qquad
+ \|D^l\Psi_R\|_{\mathrm{all\ indices}}
+    \le l!G_J^{l+1}\quad(l\ge1)
+\end{equation}
+on a fixed smaller product. Here $T=r_c+r_z+r_\xi$, where $r_c$, $r_z$, and $r_\xi$ are the maximal radii of the coarse logarithms $c$, of the free coordinates $z$, and of the current frozen coordinates $\xi$, respectively; the second bound absorbs the fixed ratios of radii. The first norm is a row majorant for the image; the derivative bounds include every input column. One may take $L_J\ge\sum_{i=0}^{J-1}M^iL_M$, and enlarge $G_J$ for the finitely many compositions. There are at most a fixed multiple of $JM^{3J}$ labels per unit cube of the output lattice, and $v_J$ includes this multiplicity. Volume-normalized input columns acquire their mesh-volume ratios under composition, by \cref{ch02:lem:coefficient-algebra}, and these factors are bounded by fixed powers of $M^J$.
+
+We now compare the embeddings, before any minimization. Let $\Psi_T(c_T,z_T)$ be the logarithm of the reconstruction on the whole torus, and let $P_L$ insert the free coordinates of $\Omega$ into the list of free coordinates of the torus, with zero in every other slot. At matched data we use $c_T=c\oplus0$ and $z_T=P_Lz$. The two linearized embeddings on this common list are
+\begin{equation}\label{ch15:eq:embedding-definitions}
+ E_1z=D_z\Psi_R(0,0;0)z,\qquad
+ E_0z=\frac{d}{dt}\Psi_T(0,tP_Lz)\Big|_{t=0}.
+\end{equation}
+The symbols $E_0$ and $E_1$ in this formula and in \eqref{ch15:eq:ambient-embeddings} denote linear embeddings, not effective classical actions.
+All current frozen coordinates and logarithms of the coarse links vanish in these derivatives, and both reconstructions vanish there. At one scale, the equations on $\Omega$ and on the torus for an internal bond have the same two endpoint blocks, the same internal target, and the same free values, so their eliminated-edge solutions agree by local uniqueness. The additional equations of the torus concern bonds meeting the complement. Descending through the scales, a change in such an equation can propagate only through the accumulated stencil of width $L_J$ of \cref{ch15:lem:local-endpoint-dependence}. Therefore, with matching free values in $\Omega$ and zero complementary torus values, the nonlinear formulas for the outputs in $\Omega$ agree outside a band of fixed width around $W$. Prescribed values in the fixed complement are separate formulas and may differ there. An input in $\Omega$ farther than one further stencil from the band cannot affect a changed formula, and we enlarge $L_J$ once to include that stencil. Differentiating with the conventions of \eqref{ch15:eq:embedding-definitions}, we obtain
+\begin{equation}\label{ch15:eq:ambient-embeddings}
+ E_1=E_0+D_W,\qquad
+ (D_W)_{ex}=0\ \text{unless $e,x$ lie in the $L_J$-band around $W$}.
+\end{equation}
+Here the $L_J$-band is the set of positions within distance $L_J$ of $W$. The weighted row and column bounds follow from the finite range, \eqref{ch15:eq:raw-majorant}, and the density bound. We cover the band by balls of radius $L_J+1$ around the positions of $W$. Each ball contains at most $Cv_J(L_J+2)^3$ labels, so the number of nonzero output rows of $D_W$, and hence its rank, is at most $C_J|W|$.
+
+Every coarse output on a bond across the boundary of the block region that is not prescribed is obtained by applying the finite group products of $T_M^s$ to the reconstructed field. In the chart it is a holomorphic function of $(c,z,\xi)$, with all its derivatives given by these products and \eqref{ch15:eq:raw-majorant}. No equation sets it to a prescribed value, so \eqref{ch15:eq:ambient-embeddings} compares two embeddings of a common list and asserts no equality of their fibers.
+
+\paragraph{Step 2: coercivity of the curl.}
+Let $u=D_z\Psi_R(0)z$. On $\mathcal L_0$ it equals $A_\Omega z$, by \cref{ch15:lem:patch-coercivity}(1), so its restriction lies in $\ker G_\Omega$. Then \eqref{ch15:eq:patch-inequality} implies
+\[
+ \|u\|_{\mathcal L_0}^2\le\frac7{\sigma_J}\sum_{p\in\mathcal P_\Omega}|(du)_p|^2
+ \le\frac7{\sigma_J}\|\operatorname{curl}u\|_2^2,
+\]
+where $\operatorname{curl}u$ is the curl of the completed variation on all plaquettes of the torus. In the last inequality we used that restricting a sum of squares to the plaquettes of the patches can only decrease it; since these plaquettes have all their edges in $\mathcal L_0$, variations of the completed boundary values induced by the tree-path transports to the basepoints do not enter. This proves the first inequality of (2) with $\nu_J=\sigma_J/7$. The second inequality is \cref{ch15:lem:patch-coercivity}(2); it shows in particular that a nonzero vector of free coordinates is visible on the internal links, also for an isolated final block.
+
+\paragraph{Step 3: the lower bound on the Hessian at the identity.}
+The quadratic form $E_{d_0}''(0)$ is the Hessian at the identity, that is, the effective Maxwell quadratic form of \cref{ch05:thm:flat-precision} (see \cref{ch07:thm:bellman}). We derive \eqref{ch15:eq:flat-floor} from \cref{ch11:thm:terminal-anchor}, which gives $E_{d,\mathrm{sat}}\ge\kappa_*E_0$ for every integer $d\ge0$ on the domain of the gauge-invariant extension $E_{d,\mathrm{sat}}$ of $E_d$, whether or not an effective interaction is attached to that depth. We choose a ball of link logarithms at the identity that is contained both in the construction chart of that extension and in the domain used here; on it, $E_{d,\mathrm{sat}}$ equals the analytic function $E_d$. For a fixed real variation $u$, we choose $|t|$ so small that $tu$ lies in this ball. Then for every $d_0\ge0$ we have $E_{d_0}(tu)\ge\kappa_*E_0(tu)$, with the same $\kappa_*$. Both functions vanish at zero and are stationary there: for $E_{d_0}$ this follows from \cref{ch07:thm:bellman,ch07:thm:all-root-classical} by induction from the Wilson action. Further, $E_0(tu)=t^2\|\operatorname{curl}u\|_2^2/2+O(t^3)$, by expanding the plaquette product and using $4q(e^X)=|X|^2/2+O(|X|^4)$. Dividing the inequality by $t^2/2$ and letting $t\to0$ proves \eqref{ch15:eq:flat-floor} for every integer depth. Only this inequality from \cref{ch11:thm:terminal-anchor} has been used, and this step gives no positivity at a nonflat coarse field.
+
+By \cref{ch15:lem:minimum-calculus}, the Hessian of $E_{d_0}\circ\Psi_R$ at zero has no term involving the gradient of the action, since $DE_{d_0}(0)=0$. Using \eqref{ch15:eq:flat-floor} and Step 2, we obtain
+\begin{equation}\label{ch15:eq:regional-flat-gap}
+ z^{\mathsf T}K_R^0z
+ \ge\kappa_*\|\operatorname{curl}D_z\Psi_R(0)z\|_2^2
+ \ge\frac{\kappa_*\nu_J}{C_{\mathrm{ext},J}^2}\|z\|_2^2 ,
+\end{equation}
+which is the claimed value of $\lambda_J$. The same patch construction with every final block of the torus gives a lower bound $\lambda_{T,J}>0$ for the joint free Hessian on the torus. Every principal block of either joint matrix has the same lower bound, and \eqref{ch15:eq:schur-lower} implies the same lower bound for its real Schur complements. On the common list $(z_L,z_H)$, where $z_L$ are the free coordinates of $\Omega$, the interpolating Hessian at the identity is
+\[
+ H_t^0=(1-t)H_T^0+t(K_R^0\oplus I_H),\qquad 0\le t\le1,
+\]
+where $H_T^0$ is the joint Hessian at the identity on the torus and $I_H$ the identity on the $z_H$ coordinates. It is bounded below by $\lambda_{U,J}=\min(\lambda_J,\lambda_{T,J},1)>0$. This is a convex combination of two objectives on a common list of coordinates, not an identification of fibers. All the flat and nonflat estimates below can be chosen uniformly in $t$, using this common lower bound and the maximum of the two coefficient bounds.
+
+\paragraph{Step 4: analytic products and the inverse of the free Hessian.}
+Let $b_J>0$ be smaller than the rate $a_E$ of the torus tensors after the transfer of positions to output units and the conversion to the graph metric; this conversion divides a Euclidean rate by $\sqrt3$. We include the finite-stencil weights of \eqref{ch15:eq:raw-majorant}. We compose the torus tensors of \cref{ch07:thm:all-root-classical} with the majorant series of $\Psi_R$, using \cref{ch02:lem:coefficient-algebra}. The scalar composition converges on a fixed product, and after enlarging $C_J$ and $Q_J$ we have
+\begin{equation}\label{ch15:eq:objective-tensors}
+ \|D^l F_R\|_{b_J,\mathrm{all\ indices}}
+          \le l!C_J^{l+1}\quad(l\ge2),\qquad
+ \|K_R^0\|_{b_J}\le Q_J .
+\end{equation}
+The mixed matrices in $z$, $c$, and $\xi$ satisfy the same bound after enlargement. The labels of $\xi$ have their positions on the input lattice and their own density, not the density of the output lattice. The volume-normalized column bounds follow from the contraction rule, with the volume factors kept in each factor.
+
+At a general point of the product, the Hessian is
+\begin{equation}\label{ch15:eq:nonflat-hessian}
+ F_{R,zz}=\Psi_{R,z}^{\mathsf T}E_{d_0}''(\Psi_R)\Psi_{R,z}
+                              +E_{d_0}'(\Psi_R)\Psi_{R,zz},
+\end{equation}
+and the last term, which contains the gradient of the action, is kept. The gradient bound $\|E_{d_0}'(A)\|_\infty\le C_E\|A\|_\infty$ is part of \cref{ch07:thm:all-root-classical}. We integrate the third-derivative bound of the composed objective along the segment from zero to $(c,z,\xi)$, which lies in its product domain. In the weighted row-column norm, we obtain
+\begin{align}
+ \|F_{R,zz}(c,z;\xi)-K_R^0\|_{b_J}
+      &\le Q_J(\|c\|_\infty+\|z\|_\infty+\|\xi\|_\infty),
+       \label{ch15:eq:hessian-lipschitz}\\
+ \|F_{R,z}(c,0;\xi)\|_\infty
+      &\le Q_J(\|c\|_\infty+\|\xi\|_\infty).
+       \label{ch15:eq:force-bound}
+\end{align}
+These estimates also follow by expanding all the terms of \eqref{ch15:eq:nonflat-hessian}; integrating the complete third derivative ensures that none of the terms involving the gradient of the action or the second derivative of the coordinates is omitted.
+
+We apply \cref{ch15:lem:boundary-algebra}(3) with the lower bound $\lambda_{U,J}$, the bound $Q_J$, and the rate $b_J$ to every flat principal block of free coordinates and to every interpolating Hessian. We obtain a common smaller rate $a_J>0$ and a flat inverse bound; we take $I_J$ so large that it bounds these inverses and their perturbations. For example, the constants $\mu$ and $C_R$ of that lemma give the flat bound $C_R/\lambda_{U,J}$ and the perturbed bound $4C_R/(3\lambda_{U,J})$ on a sufficiently small coefficient product. We enlarge $I_J$ and $Q_J$ if necessary; these enlargements precede every choice of radius. Bounds at the rate $b_J$ imply the same bounds at the rate $a_J$.
+
+We now choose the radii, on a product larger than the one in the statement. Let $r_0=\min(r_{\Gamma,J},r_E)$, where $r_E$ is replaced by a strictly smaller radius of the torus chart if necessary. We first choose $r_{z,J}>0$, and then $\rho_J,\beta_{\mathrm{rec},J}>0$, so that, with $T_+=2r_{z,J}+4\rho_J+4\beta_{\mathrm{rec},J}$,
+\begin{equation}\label{ch15:eq:radius-choices}
+ \begin{gathered}
+ Q_J T_+<\min\{\lambda_{U,J}/8,(8I_J)^{-1}\},\qquad
+                8G_JT_+<r_0,\\
+ I_JQ_J(4\rho_J+4\beta_{\mathrm{rec},J})<r_{z,J}/16 .
+ \end{gathered}
+\end{equation}
+We also require that the nonconstant part of the Hessian on this product satisfies the condition of \cref{ch15:lem:boundary-algebra}(3) with the factor $1/4$ in \eqref{ch15:eq:coefficient-resolvent}. By \eqref{ch15:eq:objective-tensors} this perturbation tends to zero with $T_+$, so this is one more upper bound on the radii. All these inequalities can be satisfied: we first choose $r_{z,J}$ to satisfy the two inequalities that involve it alone, with strict inequality, and then make the two parameter radii sufficiently small. We choose $r_{a,J}<r_E$ larger than the bound on the image in \eqref{ch15:eq:raw-majorant} at $T_+$, which is possible by the inequality $8G_JT_+<r_0$.
+
+These choices hold on the open product defined by $\|z\|_\infty<2r_{z,J}$, $\|c\|_\infty<4\rho_J$, and $\|\xi\|_\infty<4\beta_{\mathrm{rec},J}$, which contains the closed product of the statement. In particular the right side of \eqref{ch15:eq:hessian-lipschitz} is at most $\lambda_{U,J}/8\le\lambda_J/8$ there, the image lies in $B_{r_{a,J}}$, and \eqref{ch15:eq:radius-choices} implies both inequalities on the parameter radii in (4). The inverse of the complex free Hessian is bounded by $I_J$ at its smaller rate by the resolvent series \eqref{ch15:eq:coefficient-resolvent}, not by a positivity argument at complex data. This proves (3).
+
+\paragraph{Step 5: the constrained minimizer and its coefficients.}
+On the free box we use the map
+\[
+ \mathcal T_{c,\xi}(z)=z-(K_R^0)^{-1}F_{R,z}(c,z;\xi).
+\]
+By \eqref{ch15:eq:hessian-lipschitz} and \eqref{ch15:eq:radius-choices}, its derivative has maximal row norm at most $1/8$. By \eqref{ch15:eq:force-bound}, its value at zero is at most $I_JQ_J(\|c\|_\infty+\|\xi\|_\infty)<r_{z,J}/16$ on the larger parameter product. Thus it maps the closed box of radius $r_{z,J}$ into itself, strictly. Starting at zero, its iterates satisfy $\|z^{(n+1)}-z^{(n)}\|_\infty\le8^{-n}r_{z,J}/16$. Their geometric sum converges to a fixed point in the box, and it is unique, since the distance between two fixed points would be at most one eighth of itself. Since $\|z_R\|_\infty\le\|\mathcal T_{c,\xi}(0)\|_\infty+\|z_R\|_\infty/8$, we have
+\[
+ \|z_R\|_\infty\le\frac87 I_JQ_J
+           (\|c\|_\infty+\|\xi\|_\infty)<r_{z,J}/8 ,
+\]
+which gives the stated $C_J$. The iterates are holomorphic, and their convergence is geometric and uniform on compact subsets of the product. By the Cauchy integral formula in each coordinate, the limit is holomorphic: the integral of the uniform tail tends to zero, also on each smaller contour used for derivatives.
+
+For the absolute coefficient bounds with each index fixed, we use the majorant version of this iteration. We subtract the flat linear part. By \eqref{ch15:eq:objective-tensors}, the nonlinear remainder is quadratic and has the majorant $C_J(t+Y)^2/[1-C_J(t+Y)]$. The coefficients of the solution, and their versions with a specified input index, are therefore bounded by the majorant series $Y$ with nonnegative coefficients determined by
+\begin{equation}\label{ch15:eq:center-majorant}
+ Y=C_Jt+\tfrac12Y+\frac{C_J(t+Y)^2}{1-C_J(t+Y)} .
+\end{equation}
+All hypotheses of the implicit-series statement of \cref{ch02:lem:coefficient-algebra} have now been checked: zero constant term, a bounded inverse of the linear part, tensor bounds with each index fixed, the bound $1/8$ on the derivative, and a strictly larger product. The lemma therefore gives factorial coefficient bounds on a smaller fixed product. Fixing a chosen current input index in the same majorant series, we obtain the bound on volume-normalized columns. One spatial rate is used throughout, with at most the single initial reduction for external trees described in \cref{ch02:lem:coefficient-algebra}.
+
+At real data the objective and the chart are real. Complex conjugation maps a stationary point in the box to a stationary point in the same box, and uniqueness shows that $z_R$ is real. Throughout the box the real Hessian is at least $7\lambda_{U,J}I/8$, by \eqref{ch15:eq:hessian-lipschitz} and \eqref{ch15:eq:radius-choices}. For a real $z$ in the convex box, by Taylor's formula at $z_R$ with $h=z-z_R$, we have
+\[
+ F_R(c,z;\xi)-F_R(c,z_R;\xi)
+  =\int_0^1(1-t)h^{\mathsf T}
+       F_{R,zz}(c,z_R+th;\xi)h\,dt
+  \ge\frac{7\lambda_{U,J}}{16}\|h\|_2^2 .
+\]
+We conclude that $z_R$ is the unique minimizer in the box. This proves (4).
+
+\paragraph{Step 6: domains for the conditional minimizers.}
+It remains to specify the domains of the conditional minimizers. Let $I$ be an initial segment of the scales, write $z=(u,y)$ with $u=z_I$ and $y=z_{I^c}$, and let $z^0=z_R(c;\xi)$. We use the parameters $v=y-z^0_{I^c}$ and solve for $h=u-z^0_I$. The matrix $A_I=F_{R,uu}(c,z^0;\xi)$ has a common inverse bound $I'_J$, by the estimates for principal blocks proved above. We choose a solution radius $r_I>0$ inside the larger domain, and then a smaller radius $\eta_I>0$ for the coarser parameters $v$, such that throughout the corresponding product
+\begin{equation}\label{ch15:eq:prefix-margins}
+ \begin{split}
+ \|A_I^{-1}(F_{R,uu}-A_I)\|_{\mathrm{coeff}}&\le1/4,\\
+ \|A_I^{-1}F_{R,u}(c,z_I^0,z_{I^c}^0+v;\xi)\|_{\mathrm{coeff}}
+                                       &\le r_I/8 .
+ \end{split}
+\end{equation}
+The first condition holds after shrinking the product, by the convergent majorant of the third derivative. In the second, the gradient vanishes at $v=0$, and its change is
+\[
+ \int_0^1F_{R,uy}(c,z_I^0,z_{I^c}^0+tv;\xi)v\,dt .
+\]
+Its coefficient norm is at most $Q'_J\|v\|$, by the bounds on mixed derivatives, so $I'_JQ'_J\eta_I\le r_I/8$ suffices. The solution radius is chosen first and the parameter radius second; they are not equal.
+
+The map $h\mapsto h-A_I^{-1}F_{R,u}$ now has derivative at most $1/4$ and value at most $r_I/8$ at $h=0$. It maps the box of radius $r_I/2$ into itself, and the convergence and majorant arguments of Step 5 apply. The conditional minimizer $a_I$ is holomorphic, real at real data, and satisfies
+\[
+ a_I(c,z_{I^c}^0;\xi)=z_I^0,\qquad
+ D_y a_I=-F_{R,uu}^{-1}F_{R,uy}.
+\]
+Since there are at most $J$ initial segments, their solution radii and parameter radii have a common positive minimum. For a sequential application we also choose a smaller radius for the fluctuation inputs. The finite composition of these conditional minimizers and of their inverse square roots equals the joint minimizer when all the inputs $g_iw_i$ vanish, and its deviation has a majorant $C_{\mathrm{seq},J}t/(1-C_{\mathrm{seq},J}t)$. We choose $r_q>0$ so that this expression is less than a quarter of the least of the preceding solution and parameter radii. All sequential images then lie in the domains of the conditional minimizers. This is a choice for finitely many scales, independent of the number of sites. \Cref{ch15:lem:minimum-calculus} identifies successive and joint minimizers there and gives the factors $M^i$. The real lower bounds for principal blocks and Schur complements persist there by \eqref{ch15:eq:schur-lower}, and their complex coefficient bounds follow from the Schur calculus of \cref{ch15:lem:boundary-algebra}.
+
+The conditions \eqref{ch15:eq:prefix-margins} are part of the smaller products just constructed. Every constant used to obtain them comes from the finite local formulas, the tensor bounds on the torus, the constants of the patch inequality, and the density bound. Taking maxima and minima over $s\le J$ and over initial segments therefore gives uniform constants, independent in particular of isolated final blocks, of the later widths, and of the values of the frozen coordinates. This completes the proof.
+\end{proof}
+
+\section{The first block integration}\label{ch15:sec:bare}
+
+At depth zero, we identify the completed objective with the part of the Wilson action that depends on $(c,z)$, and we give the exact form and range of its Hessian, uniformly in the arbitrary frozen group values deep in the fixed complement, as used in \cref{ch18:chapter}. The restriction and extraction maps are those of \cref{ch15:lem:patch-coercivity}.
+
+\begin{definition}\label{ch15:def:bare-completion}
+Use \cref{ch15:def:internal-coordinates} at the first block integration, and let $\mathcal E(\Lambda)$ be the set of all positive input links.
+\begin{enumerate}
+\item \emph{Dependencies.} Collect in a finite list all contours $F_{i,c',x}$ with $c'\in\mathcal L_{i+1}$, their reference paths and tree paths, and the tree-path transports \eqref{ch15:eq:anchoring} to the basepoints of frozen coordinates on links across the boundary, with the edges of the coarser scales expanded recursively through the definition of $T_M$. The formulas of the local constraint coordinates and of the Haar disintegration densities are included in this list. Let $\mathcal E^{\mathrm{dep}}_\Omega$ be the union of the input links on which these formulas depend. If a further formula at the boundary is to be used analytically, its input links are added to this list before the near links are fixed.
+\item \emph{Near and deep links.} Let $\mathcal P_{\mathrm{inc}}$ be the set of plaquettes $p$ with at least one edge in $\mathcal L_0$, and set
+\begin{equation}\label{ch15:eq:near-deep}
+ \mathcal E^{\mathrm{near}}_\Omega=
+ \Bigl(\mathcal E^{\mathrm{dep}}_\Omega\cup\bigcup_{p\in\mathcal P_{\mathrm{inc}}}\partial p\Bigr)
+                      \setminus\mathcal L_0,
+ \qquad
+ \mathcal E^{\mathrm{deep}}_\Omega=\mathcal E(\Lambda)\setminus(\mathcal L_0\cup\mathcal E^{\mathrm{near}}_\Omega).
+\end{equation}
+Further links may be added to $\mathcal E^{\mathrm{near}}_\Omega$; none is needed below.
+\item \emph{Near values.} Assume that every near link carries a value in the identity chart. The near values $b^{\mathrm{near}}$ are independent small group values on $\mathcal E^{\mathrm{near}}_\Omega$: on a link with both endpoints outside $\Omega_0$ the value itself, and on a link across the boundary its based transport. If a link $(x,y)$ across the boundary is first given by its value $a_{xy}$, we set $b_e=\Theta_x(U)a_{xy}$ at fixed field of the block region; this is the Haar translation of \cref{ch15:lem:regional-coarea}, and all indicators are kept under this substitution. The logarithms of the near values are denoted $\xi$.
+\item \emph{Completion.} For a link $e=(x,y)$ across the boundary, with $x\in\Omega_0$, $y\notin\Omega_0$, and based transport $b_e$, set
+\begin{equation}\label{ch15:eq:crossing-completion}
+ U^{\mathrm{act}}_{xy}=\Theta_x(\Phi_\Omega)^{-1}b_e ;
+\end{equation}
+for a positive link whose endpoint in $\Omega_0$ is its terminal endpoint, we apply this rule to the reversed link and invert. On the remaining links we set
+\begin{equation}\label{ch15:eq:actual-completion}
+ U^{\mathrm{act}}_e(c,z;\xi,\eta)=
+ \begin{cases}
+ \Phi_{\Omega,e}(c,z),&e\in\mathcal L_0,\\
+ b_e,&e\in\mathcal E^{\mathrm{near}}_\Omega\text{ with both endpoints outside }\Omega_0,\\
+ \eta_e,&e\in\mathcal E^{\mathrm{deep}}_\Omega,
+ \end{cases}
+\end{equation}
+where $\eta\in\SU^{\mathcal E^{\mathrm{deep}}_\Omega}$ are the frozen group variables in the fixed complement on the deep links (the deep frozen group variables); they are arbitrary real group values, not small analytic logarithms. The analytic completion $U^{\mathrm{an}}(c,z;\xi)$ is defined by the same rules with $\eta_e=I$ on the deep links, and we write $\Psi_R=\Log U^{\mathrm{an}}$, componentwise on the chart.
+\item \emph{Varying plaquettes.} Let $f_p(c,z;\xi)=4q(U^{\mathrm{an}}_p(c,z;\xi))$, and
+\begin{equation}\label{ch15:eq:minimal-varying}
+ \mathcal P_{\min}=
+ \{p\in\mathcal P_{\mathrm{inc}}:f_p(\cdot,\cdot\,;\xi)\text{ is nonconstant in }(c,z)\text{ for some small real }\xi\}.
+\end{equation}
+Fix a list $\mathcal P_{\mathrm{var}}$ with $\mathcal P_{\min}\subseteq\mathcal P_{\mathrm{var}}\subseteq\mathcal P_{\mathrm{inc}}$, and define the objective of the first block integration
+\begin{equation}\label{ch15:eq:bare-objective}
+ F_{\mathrm{bare}}(c,z;\xi)=\sum_{p\in\mathcal P_{\mathrm{var}}}f_p(c,z;\xi).
+\end{equation}
+\end{enumerate}
+\end{definition}
+
+Every link across the boundary is a near link: if $x\in\Omega_0$ is the endpoint of such a link in direction $k$, a step from $x$ in a transverse direction toward the interior of the final block of $x$ gives a plaquette that contains the link and an edge of $\mathcal L_0$, since a final block has at least three vertices per side. This holds also at corners and at periodic seams. The requirement that the near values lie in the identity chart is the condition imposed on the protected neighborhoods in \cref{ch18:chapter}; the conversion between the value $a_{xy}$ and the based transport $b_e$ is a finite group product, whose smallness is also controlled there. Since $\Theta_x(\Phi_\Omega(c,z))=I$, the value \eqref{ch15:eq:crossing-completion} of such a link equals $b_e$ on the reconstruction. Hence, at fixed frozen coordinates, the derivatives in $(c,z)$ of all links outside $\Omega$ vanish. Completion by zero means logarithm zero, that is, the group value $I$; it does not mean solving the block averaging constraints of the torus with the missing targets set to zero. Coarse outputs on bonds across the boundary of the block region are evaluated by $T_M$ on the completion, and they are not imposed as additional equations. Exceptional values of the Borel extension of $T_M$ at the deep frozen group variables are kept in the measure, and no logarithm of such a value enters $U^{\mathrm{an}}$.
+
+The list $\mathcal P_{\min}$ is fixed on the chart, not chosen anew at each value of the frozen coordinates. A plaquette function outside $\mathcal P_{\min}$ is also independent of the complex variables: its derivatives in $(c,z)$ vanish on the real product, hence, by the identity theorem applied successively in each scalar coordinate, on the complex product. If the split is made before some internal constraint coordinates are eliminated, the list of varying plaquettes may be larger than $\mathcal P_{\min}$. All conclusions below hold for every fixed list between $\mathcal P_{\min}$ and $\mathcal P_{\mathrm{inc}}$.
+
+For the statement of the next lemma, let $d_{\mathrm{var}}u=((du)_p)_{p\in\mathcal P_{\mathrm{var}}}$, let $\iota_\Omega$ be the extension by zero from edge cochains on $\mathcal L_0$ to all input links, and let $\widehat A_\Omega=\iota_\Omega A_\Omega$, with $A_\Omega$ as in \eqref{ch15:eq:raw-embedding}. For a patch $P$ define a linear map from cochains on the varying plaquettes to cochains on the plaquettes of $P$ by
+\begin{equation}\label{ch15:eq:varying-restriction}
+ (R_P^{(2)}v)_p=
+ \begin{cases}
+ v_p,&p\in\mathcal P(P)\cap\mathcal P_{\mathrm{var}},\\
+ 0,&p\in\mathcal P(P)\setminus\mathcal P_{\mathrm{var}}.
+ \end{cases}
+\end{equation}
+
+\begin{lemma}\label{ch15:lem:bare-gap}
+Use \cref{ch15:def:bare-completion}. The following statements hold.
+\begin{enumerate}
+\item For $p\in\mathcal P_{\mathrm{inc}}$, the plaquette variables of $U^{\mathrm{act}}$ and $U^{\mathrm{an}}$ agree for every $\eta$. The sum of the Wilson terms of the plaquettes not in $\mathcal P_{\mathrm{var}}$, evaluated at $U^{\mathrm{act}}$, is independent of $(c,z)$; denote it by $E_{\mathrm{hole}}(\xi,\eta)$. Then
+\begin{equation}\label{ch15:eq:bare-split}
+ S_W(U^{\mathrm{act}})=F_{\mathrm{bare}}(c,z;\xi)+E_{\mathrm{hole}}(\xi,\eta)
+\end{equation}
+and
+\begin{equation}\label{ch15:eq:bare-identification}
+ E_0(\Psi_R(c,z;\xi))
+       =F_{\mathrm{bare}}(c,z;\xi)+C_\Omega(\xi),
+ \qquad
+ C_\Omega(\xi)=\sum_{p\notin\mathcal P_{\mathrm{var}}}
+                                      f_p(0,0;\xi),
+\end{equation}
+where $E_0=S_W$ is the Wilson action. The function $C_\Omega$ is not the energy of the deep frozen group variables. Every derivative that involves $(c,z)$ is the same on the two sides of \eqref{ch15:eq:bare-identification}.
+\item Let $u=D_z\Log U^{\mathrm{an}}(0,0;0)z$ and $K_\Omega=\partial_z^2F_{\mathrm{bare}}(0,0;0)$. Only the variables of the block region and the near values vanish here; the deep frozen group variables $\eta$ are arbitrary, and the same $u$ on the varying plaquettes and the same $K_\Omega$ are obtained from $U^{\mathrm{act}}$, independently of $\eta$. Then $u=\widehat A_\Omega z$, and for every patch $P$,
+\begin{equation}\label{ch15:eq:bare-restriction}
+ R_Pu\in\mathcal V_P,\qquad
+ d_PR_Pu=R_P^{(2)}d_{\mathrm{var}}u .
+\end{equation}
+Further,
+\begin{equation}\label{ch15:eq:bare-cover}
+ \|u\|_{\mathcal L_0}^2\le\sum_{P\in\mathfrak P_\Omega}\|R_Pu\|^2,
+ \qquad
+ \sum_{P\in\mathfrak P_\Omega}
+       \|R_P^{(2)}d_{\mathrm{var}}u\|^2
+                        \le7\|d_{\mathrm{var}}u\|^2,
+\end{equation}
+\begin{equation}\label{ch15:eq:bare-coercive}
+ \|d_{\mathrm{var}}u\|^2\ge\frac{\sigma_J}7\|u\|_{\mathcal L_0}^2,
+ \qquad z=B_{\mathrm{ext}}u|_{\mathcal L_0},\qquad
+ \|z\|_2\le C_{\mathrm{ext},J}\|u\|_{\mathcal L_0},
+\end{equation}
+with $\sigma_J$, $B_{\mathrm{ext}}$, and $C_{\mathrm{ext},J}$ as in \cref{ch15:lem:patch-coercivity}.
+\item We have
+\begin{equation}\label{ch15:eq:bare-hessian}
+ K_\Omega=\widehat A_\Omega^{\mathsf T}d_{\mathrm{var}}^{\mathsf T}
+                           d_{\mathrm{var}}\widehat A_\Omega,
+ \qquad
+ \lambda_{M,J}I\le K_\Omega\le Q_{M,J}I,
+ \qquad
+ \lambda_{M,J}=\frac{\sigma_J}{7C_{\mathrm{ext},J}^2},
+\end{equation}
+where $Q_{M,J}=16a_1a_\infty$ with $a_\infty=J(1+4M^3)$ and $a_1=M^{2(J-1)}(1+24M^3)$. In positions measured in output units,
+\begin{equation}\label{ch15:eq:bare-range}
+ (K_\Omega)_{ab}=0\qquad\text{if }\dist_\infty(a,b)>D_{M,J}=2R_{M,J}+2 .
+\end{equation}
+Principal submatrices of $K_\Omega$ satisfy the same lower bound, the same upper bound, and the same range condition. Real Schur complements of $K_\Omega$ are bounded below by $\lambda_{M,J}$ and have uniform exponentially weighted row and column bounds; no finite range is asserted for them.
+\item There are a chart radius $\epsilon_{M,J}>0$ and a constant $C_{\mathrm{lip}}$, depending in addition only on a fixed choice of the local analytic chart, such that for real $(c,z,\xi)$ with $\max(\|c\|_\infty,\|z\|_\infty,\|\xi\|_\infty)\le\epsilon_{M,J}$,
+\begin{equation}\label{ch15:eq:bare-small-data}
+ \partial_z^2F_{\mathrm{bare}}(c,z;\xi)\ge\tfrac12\lambda_{M,J}I .
+\end{equation}
+\end{enumerate}
+All constants depend only on $M$, $J$, and the coordinate conventions, and are independent of $m$, of the block region, of its number of components and holes, of its topology, of the widths of the protected neighborhoods, and of the deep frozen group variables. No uniformity as $J\to\infty$ is claimed. For an empty list of free coordinates the statements on matrices and on the extraction hold with the conventions for zero-dimensional spaces. By \eqref{ch15:eq:bare-identification}, $K_\Omega$ is the matrix $K_R^0$ of \cref{ch15:thm:regional-gap-and-center} at depth zero, where \eqref{ch15:eq:flat-floor} holds with $\kappa_*=1$, and \eqref{ch15:eq:bare-hessian} is the corresponding case of that theorem, with $\nu_J=\sigma_J/7$.
+\end{lemma}
+
+\begin{proof}
+We begin with (1). Let $p\in\mathcal P_{\mathrm{inc}}$. By \eqref{ch15:eq:near-deep}, each edge of $p$ lies in $\mathcal L_0$ or in $\mathcal E^{\mathrm{near}}_\Omega$, so the deep values do not enter $U^{\mathrm{act}}_p$, and $U^{\mathrm{act}}_p=U^{\mathrm{an}}_p$ for every $\eta$. A plaquette outside $\mathcal P_{\mathrm{inc}}$ has no edge in $\mathcal L_0$. On the reconstruction its edges are constant in $(c,z)$: links across the boundary are equal to $b_e$, other near links to $b_e$, and deep links to $\eta_e$. Its Wilson term is therefore independent of $(c,z)$. A plaquette in $\mathcal P_{\mathrm{inc}}\setminus\mathcal P_{\mathrm{var}}$ is not in $\mathcal P_{\min}$, so its term is independent of $(c,z)$ as well. This proves that $E_{\mathrm{hole}}$ is independent of $(c,z)$, and \eqref{ch15:eq:bare-split} follows by splitting the sum over all plaquettes. The same argument for $U^{\mathrm{an}}$ shows that $E_0(\Psi_R)=F_{\mathrm{bare}}+\sum_{p\notin\mathcal P_{\mathrm{var}}}f_p(c,z;\xi)$ with each summand independent of $(c,z)$ and hence equal to $f_p(0,0;\xi)$. This proves \eqref{ch15:eq:bare-identification}. If the list $\mathcal P_{\mathrm{var}}$ contains additional plaquettes whose terms are constant in $(c,z)$, only the complementary constants change.
+
+Next we prove (2). On $\mathcal L_0$ the derivative $u$ equals $A_\Omega z$, by \cref{ch15:lem:patch-coercivity}(1). The links outside $\Omega$ are constant in $z$ at zero near-link logarithms and fixed deep frozen group variables, as noted after \cref{ch15:def:bare-completion}, so $u=\widehat A_\Omega z$. The first assertion of \eqref{ch15:eq:bare-restriction} is \cref{ch15:lem:patch-coercivity}(3). Let $p\in\mathcal P(P)$. All four edges of $p$ belong to $\mathcal L_0$, so $p\in\mathcal P_{\mathrm{inc}}$, and the link variables of $U^{\mathrm{act}}$ and $U^{\mathrm{an}}$ on $p$ are equal, independently of the deep frozen group variables. At $(c,z,\xi)=0$ all these links are equal to $I$. The Wilson expansion of a single term is
+\begin{equation}\label{ch15:eq:wilson-expansion}
+ f_p(0,tz;0)=\tfrac12t^2|(du)_p|^2+O(t^3).
+\end{equation}
+Indeed, the first derivative of the plaquette product is the signed sum of the derivatives of its four edge logarithms, and $4q(e^X)=|X|^2/2+O(|X|^4)$. If $p\notin\mathcal P_{\mathrm{var}}$, then $f_p(0,tz;0)$ is constant, equal to its value zero at $t=0$, and \eqref{ch15:eq:wilson-expansion} implies $(du)_p=0$. This holds for every $u\in\ker G_\Omega$, since $A_\Omega$ maps onto $\ker G_\Omega$ by \cref{ch15:lem:patch-coercivity}(1); it does not assert that every plaquette of a patch is a varying plaquette. On a varying plaquette of $P$ the entries of $d_PR_Pu$ are those of $du$, and on the other plaquettes of $P$ both sides vanish. This proves the second assertion of \eqref{ch15:eq:bare-restriction}.
+
+The first inequality of \eqref{ch15:eq:bare-cover} is the first inequality of \eqref{ch15:eq:patch-inequality}. The second follows since every plaquette lies in at most seven of the sets $\mathcal P(P)$, as shown in the proof of \cref{ch15:lem:patch-coercivity}. Using the bound $\|h\|^2\le\sigma_J^{-1}\|d_Ph\|^2$ on $\mathcal V_P$ and \eqref{ch15:eq:bare-restriction}, we obtain
+\[
+ \|u\|_{\mathcal L_0}^2\le\sum_P\|R_Pu\|^2
+ \le\sigma_J^{-1}\sum_P
+                      \|R_P^{(2)}d_{\mathrm{var}}u\|^2
+ \le\frac7{\sigma_J}\|d_{\mathrm{var}}u\|^2 .
+\]
+Together with \cref{ch15:lem:patch-coercivity}(1) and (2), this proves \eqref{ch15:eq:bare-coercive}.
+
+For (3), all varying plaquettes have only internal or near links, by \eqref{ch15:eq:near-deep}. At their common zero they are identity plaquettes, even when the deep links are arbitrary. Summing \eqref{ch15:eq:wilson-expansion} over the varying plaquettes proves the formula for $K_\Omega$ in \eqref{ch15:eq:bare-hessian}. In particular, the term in the Hessian of a composition that involves the gradient of the action vanishes here, since each plaquette term has zero first derivative at the identity; it is not being dropped at a nonflat field. The lower bound follows from \eqref{ch15:eq:bare-coercive}: we have $z^{\mathsf T}K_\Omega z=\|d_{\mathrm{var}}u\|^2\ge(\sigma_J/7)\|u\|_{\mathcal L_0}^2\ge\lambda_{M,J}\|z\|_2^2$.
+
+For the upper bound and the range, note that each row of the curl matrix has four entries, and each positive edge lies in four plaquettes, so its row and column norms are at most $4$. Using \cref{ch15:lem:patch-coercivity}(2) for $A_\Omega$, we find that $16a_1a_\infty$ bounds both the operator norm and the unweighted absolute row and column norms of $K_\Omega$. If $(K_\Omega)_{ab}\ne0$, then two edges in the supports of the columns $a$ and $b$ of $A_\Omega$ belong to a common plaquette, so their midpoints are within maximum distance $2$ in input units. Since each column of $A_\Omega$ is supported within maximum distance $R_{M,J}$ of its label, this proves \eqref{ch15:eq:bare-range}. This is a finite range after the elimination of the trees and of the eliminated edges, before any minimization over a whole scale; no orthonormal basis of $\ker G_\Omega$ was used as coordinates.
+
+We record the cases at the boundary. If a final block of $\Omega$ is next to the fixed complement, all trees of that block and all equations used for its restriction still lie in the complete block, and a pair is used only when both of its blocks lie in $\Omega$. No missing target of a link across the boundary is set to zero: such a link is fixed through \eqref{ch15:eq:crossing-completion}, and its tree-path transport to the basepoint is identically $I$ on the reconstruction. Plaquettes that contain an internal link and a near link belong to $\mathcal P_{\mathrm{inc}}$, have only small links, and contribute nonnegative squares of curls at zero; the estimate above is already obtained from the plaquettes of the patches. If a plaquette of a patch has become constant in $(c,z)$ after the elimination of the constraints, \eqref{ch15:eq:wilson-expansion} shows that its curl vanishes, so no missing energy term is needed, and no boundary condition is imposed on a face of a hole.
+
+At the boundary between near and deep links, a plaquette containing a deep link cannot contain a link of $\mathcal L_0$, by \eqref{ch15:eq:near-deep}. All its links are constant on the reconstruction, and it belongs to $E_{\mathrm{hole}}$ even when some of its other links are near links. Likewise, a deep link occurs in none of the formulas for the coordinates and the Haar disintegration densities. Changing $\eta$ therefore changes neither $A_\Omega$, $B_{\mathrm{ext}}$, $F_{\mathrm{bare}}$, nor any of their derivatives in $(c,z)$. There is no smallness or branch condition on $\eta$, and no derivative in $\eta$ is taken. In particular, an exceptional value of the Borel averaging map at the deep frozen group variables cannot affect an internal formula or the matrices above.
+
+Next we treat principal submatrices and Schur complements. Principal submatrices keep the lower bound, the upper bound, and the range. For a decomposition $K=\left(\begin{smallmatrix}K_{II}&K_{IR}\\K_{RI}&K_{RR}\end{smallmatrix}\right)$ of a matrix with $\lambda I\le K\le QI$, the real Schur complement satisfies
+\begin{equation}\label{ch15:eq:bare-schur}
+ \lambda\|y\|^2\le
+ y^{\mathsf T}(K_{RR}-K_{RI}K_{II}^{-1}K_{IR})y
+ =\min_x(x,y)^{\mathsf T}K(x,y)\le Q\|y\|^2 .
+\end{equation}
+The lower inequality uses $\lambda(\|x\|^2+\|y\|^2)\ge\lambda\|y\|^2$, and the upper one the choice $x=0$. This proves the lower bound for the Schur complement of every initial segment of the scales. The factors $M^i$ of the effective classical actions multiply whole quadratic forms and lie between $1$ and $M^J$.
+
+We now prove locality without asserting a finite range for Schur complements. In output units, the number of scalar labels in a ball of radius $r$ is at most $v_{M,J}(r+2)^3$ for a fixed $v_{M,J}$. Indeed, there are at most $J$ scales and at most $9M^{3J}$ scalar edge labels per scale and per unit cube of the output lattice, with a fixed enlargement for the boundaries of the cubes. For a principal matrix $K$ of $K_\Omega$ let $a=2Q_{M,J}$ and $T=I-K/a$. Its operator norm is at most $q=1-\lambda_{M,J}/a<1$. The matrix $T^k$ has range $kD_{M,J}$ in the maximum distance, hence range at most $3kD_{M,J}$ in the graph distance $\dist$, its entries are bounded by $q^k$ in absolute value, and its rows and columns are supported on at most $C_{M,J}(k+1)^3$ labels. For $b>0$ so small that $qe^{3bD_{M,J}}<1$, the series
+\begin{equation}\label{ch15:eq:bare-neumann}
+ K^{-1}=a^{-1}\sum_{k\ge0}T^k,\qquad
+ K^{-1/2}=a^{-1/2}\sum_{k\ge0}
+                       \binom{2k}{k}4^{-k}T^k
+\end{equation}
+converge in the norm $\|\cdot\|_b$ of \cref{ch15:lem:boundary-algebra}(3), uniformly, since their scalar majorants are constant multiples of $\sum_{k\ge0}(k+1)^3(qe^{3bD_{M,J}})^k$; the second series is the binomial series of $(1-x)^{-1/2}$, whose coefficients are at most one. The norm $\|\cdot\|_b$ is submultiplicative by the triangle inequality for the distance, so a Schur complement $S$ satisfies
+\[
+ \|S\|_b\le\|K\|_b+\|K\|_b^2\|K_{II}^{-1}\|_b,
+ \qquad S\ge\lambda_{M,J}I ,
+\]
+and these bounds can be repeated through the at most $J$ eliminations of initial segments.
+
+Finally we bound the inverse and the inverse square root of such an exponentially localized matrix directly. Suppose $S\ge\lambda I$ and $\|S\|_b\le H$. For a one-Lipschitz real function $f$ and $W_f=\operatorname{diag}(e^{\mu f})$ with $0<\mu<b$, we have
+\[
+ \|W_fSW_f^{-1}-S\|_2\le\frac{H\mu}{b-\mu},
+\]
+by $|e^t-1|\le|t|e^{|t|}$, the inequality $re^{-(b-\mu)r}\le1/(b-\mu)$, the row and column bounds, and the Cauchy--Schwarz inequality. We choose $\mu$ so that the right side is at most $\lambda/2$. The Neumann series about $S+tI$ then bounds the conjugated resolvent by $2/(\lambda+t)$ for every $t\ge0$. Taking $f=\dist(\cdot,y)$, we obtain
+\[
+ |(S+tI)^{-1}_{xy}|\le
+          \frac{2e^{-\mu\dist(x,y)}}{\lambda+t} .
+\]
+The density of labels sums this bound in the weighted norm at rate $\mu/2$. At $t=0$ it bounds $S^{-1}$, and the formula
+\[
+ S^{-1/2}=\frac1\pi\int_0^\infty
+                         t^{-1/2}(S+tI)^{-1}\,dt
+\]
+bounds $S^{-1/2}$, since $\int_0^\infty t^{-1/2}(\lambda+t)^{-1}\,dt=\pi/\sqrt\lambda$. The integral formula follows by orthogonal diagonalization of the positive matrix and the substitution $t=\lambda x^2$ in the scalar integral. This proves the assertions on Schur complements in (3), without a finite range for them.
+
+It remains to prove (4). We fix local constraint coordinates of \cref{ch03:lem:relative-coarea} on strictly smaller charts. Their finite-dimensional analytic bounds and \eqref{ch15:eq:internal-reconstruction} give a common complex product $\max(\|c\|_\infty,\|z\|_\infty,\|\xi\|_\infty)<2\delta$, for some $\delta>0$ depending only on $M$, $J$, and the radii of these charts. To check that $\delta$ does not depend on the region, we start at scale $s$, reduce its target and free radii so that its image lies strictly inside the target chart of the next scale, and repeat at most $J$ times. Since the inverse at one scale depends on at most $6M^3$ links, this finite sequence of choices does not depend on the number of blocks. The completion outside $\Omega$ is by constants on the reconstruction.
+
+On this product each $f_p$ depends on at most $N_*$ scalar labels, and each label occurs in the dependency lists of at most $N_{\mathrm{inc}}$ plaquettes; both numbers depend only on the finite stencils and on $M$ and $J$. There are finitely many patterns of final blocks of $\Omega$ in one stencil. Let $C_3$ be the maximum, over these patterns and all scalar indices, of the absolute values of the third derivatives of a single $f_p$ on the closed product of radius $\delta$. It is finite, since each local function is holomorphic on the larger product and the list of functions and of their arguments is finite; this also describes exactly how $C_3$ depends on the chart. Integrating the third derivative from zero to $x=(c,z,\xi)$ and summing over the second free index, we obtain
+\[
+ \|\partial_z^2F_{\mathrm{bare}}(x)-K_\Omega\|_\infty
+       \le C_{\mathrm{lip}}\|x\|_\infty,
+ \qquad C_{\mathrm{lip}}=N_{\mathrm{inc}}N_*^2C_3 .
+\]
+The column bound is the same by symmetry, so this is also a bound on the operator norm. The calculation differentiates the whole composition, including the term with the gradient of the action at nonzero $x$. We take $\epsilon_{M,J}\le\min(\delta,\lambda_{M,J}/(2\max(1,C_{\mathrm{lip}})))$. For real data the Hessian is real symmetric, and \eqref{ch15:eq:bare-small-data} follows. All plaquette functions in $F_{\mathrm{bare}}$ are independent of $\eta$ before differentiation, so the uniformity in the deep frozen group variables persists.
+\end{proof}
+
+\section{Decay of connected boundary perturbations}\label{ch15:sec:networks}
+
+We finally consider expressions, built from the objects of \cref{ch15:thm:regional-gap-and-center}, that contain one perturbation located in the fixed complement or near the boundary: for example the difference between the reconstructions on $\Omega$ and on the torus, or a bounded source in the fixed complement. A contraction network is a finite contraction, or a convergent sum of contractions, of the following tensors: the tensors of the chart and of the effective classical action, with coefficient bounds with each index fixed; inverses of constrained Hessians; at most $J$ Schur complements; and the convergent Neumann and implicit-function series of these operations. Its coefficients are summed with the convergent coefficients of these operations, so a network may contain arbitrarily many inverse or implicit vertices. One constant cannot, however, bound expressions of unbounded algebraic complexity; multiplying an allowed expression by a large scalar already destroys any common bound. We therefore consider families of networks with one common scalar majorant. A perturbation factor has a stated bound on its amplitude. If it depends analytically on current variables, these variables occur among its external indices and satisfy the coefficient bounds of the family; a fixed real source needs only its amplitude bound. The perturbation factor must lie in the same connected component of the network as the external index in the block region.
+
+\begin{lemma}\label{ch15:lem:wall-networks}
+Use the products of \cref{ch15:thm:regional-gap-and-center}. Let $H$ be the fixed complement, let $H_{L_J}$ be its enlargement by the fixed width $L_J$, and for $b>0$ put
+\[
+ S_J(b)=C v_J\sum_{r\ge0}(r+1)^3e^{-br}<\infty .
+\]
+\begin{enumerate}
+\item On every periodic subset of labels we have $\sup_x\sum_ye^{-b\dist(x,y)}\le S_J(b)$. For $0<a<b$ and every position $u$ in $\Omega$,
+\[
+ e^{a\dist(u,W)}\sum_{h\in H_{L_J}}e^{-b\dist(u,h)}
+                                     \le e^{aC_J}S_J(b-a).
+\]
+\item Let $\mathfrak N$ be a family of connected contraction networks, each with at least one external index in $\Omega$ and with a perturbation factor at a position of $H_{L_J}$ in the same connected component. The perturbation may be a bounded source $s_h$ at any position $h$ of $H_{L_J}$, with $|s_h|\le s_*$. Assume that the diagram sums of all members of $\mathfrak N$ are bounded, on one common coefficient product and including all mesh-volume factors, by one common scalar majorant $\mathcal P$ with nonnegative coefficients. Then there are $c_J,C_J>0$, depending only on uniform data, on $\mathcal P$, and on $s_*$, such that every tensor $T_l$ of order $l\ge1$ in $\mathfrak N$ with a specified external index $i_1$ in $\Omega$ satisfies
+\[
+ \sup_{i_1\in\Omega} e^{c_J\dist(i_1,W)}
+ \sum_{i_2,\ldots,i_l}
+ e^{c_J\Tree(i_1,\ldots,i_l)}
+                     |T_l(i_1,\ldots,i_l)|\le l!C_J^{l+1}.
+\]
+A single fixed reduction of the spatial rate suffices, independently of the Taylor order and of the number of contractions.
+\item For a member of $\mathfrak N$ with output index $e$ and Taylor series $T_e(v)=\sum_\nu f_{e;\nu}v^\nu$, and an input index $x$, let
+\[
+ \mathcal C_{ex}=\sum_{\nu:\nu_x>0}\nu_x|f_{e;\nu}|\,r^{\nu-e_x}
+\]
+be the entrywise absolute coefficient envelope of $\partial_xT_e$ at the radii $r$ of a strictly smaller coefficient product. Let $v_e$ and $v_x$ be the mesh volumes of the lattices on which $e$ and $x$ live. Then
+\begin{equation}\label{ch15:eq:input-output-envelope}
+ \sup_{x\in\Omega}\sum_{e\in\Omega}\frac{v_e}{v_x}\,
+ e^{c_J[\dist(e,W)+\dist(e,x)]}\,r_x\,\mathcal C_{ex}\le C_J .
+\end{equation}
+In particular, if $x$ and $e$ lie in $\Omega$, then $\mathcal C_{ex}\le C_Je^{-c_J[\dist(e,W)+\dist(e,x)]}$, where the fixed conversions of radii and mesh volumes are absorbed in $C_J$. For two Hessian indices $e$ and $f$ in $\Omega$,
+\[
+ |T_{ef}|\le C_Je^{-c_J[\dist(e,f)+\dist(e,W)+\dist(f,W)]},
+\]
+with factorial joint versions that include every differentiated background and free index in the external network. These statements also apply to derivatives in the current frozen coordinates on their construction chart, at the density of their labels.
+\end{enumerate}
+Traces confined to $H$, which have no external index in $\Omega$, remain sums over $H$; no bound on them independent of the size of $H$ is asserted. Differences of coordinates deep in $H$ need only be bounded on their construction domain; they need not be exponentially small. The constants do not depend on the volume of $H$, on the area of $W$, on the shape or number of components of $\Omega$, on the number of preceding block integrations, or on the widths chosen later.
+\end{lemma}
+
+\begin{proof}
+We begin with (1). The first bound is \eqref{ch15:eq:density-sum}, with $C=8$, possibly enlarged to account for a fixed change between positions of links and of their endpoints. It holds on every periodic subset, since restriction deletes terms from a sum of nonnegative terms. A shortest path from a position $u$ in $\Omega$ to a position in $H$ crosses $W$. If $h\in H_{L_J}$ lies in $\Omega$, we add a path of length at most $L_J$ to $H$ and then its crossing of $W$. In both cases
+\begin{equation}\label{ch15:eq:live-hole-distance}
+ \dist(u,W)\le\dist(u,h)+C_{\mathrm{band},J},
+\end{equation}
+where the fixed buffer for link endpoints is included in $C_{\mathrm{band},J}$. Multiplying termwise by $e^{a\dist(u,W)}$ and using \eqref{ch15:eq:density-sum}, we obtain
+\[
+ e^{a\dist(u,W)}\sum_{h\in H_{L_J}}e^{-b\dist(u,h)}
+ \le e^{aC_{\mathrm{band},J}}
+       \sum_h e^{-(b-a)\dist(u,h)}
+ \le e^{aC_{\mathrm{band},J}}S_J(b-a).
+\]
+This proves (1), after enlarging $C_J$. The bound sums over all of $H$, with no separate constant for each face of the boundary.
+
+Next we record how a network acquires its distance to the boundary. For the coefficient of each factor we choose a connected network spanning its external indices and Taylor labels, with length as close as desired to its shortest connecting length, and for each matrix propagator a shortest path between its endpoints. Joining these networks at the contracted labels gives a connected network $\mathcal N$ of total length $\ell$. If $S$ is the set of its external positions, then
+\begin{equation}\label{ch15:eq:network-lengths}
+ \Tree(S)\le\ell,\qquad
+ \dist(i,W)\le\ell+C_{\mathrm{band},J}
+            \quad(i\in S\cap\Omega).
+\end{equation}
+For the second inequality, we follow a route in $\mathcal N$ from $i$ to its perturbation vertex $h\in H_{L_J}$ and use \eqref{ch15:eq:live-hole-distance}. The same route reaches a point of $W$, after a segment of length at most $C_{\mathrm{band},J}$ if necessary, so also $\Tree_W(S)\le\ell+C_{\mathrm{band},J}$. Adding these inequalities, we obtain for all rates $a,\alpha\ge0$ and every external index $i$ in $\Omega$
+\begin{equation}\label{ch15:eq:weight-conversion}
+ e^{a\Tree(S)+\alpha\dist(i,W)}\le e^{\alpha C_{\mathrm{band},J}}e^{(a+\alpha)\ell},
+ \qquad
+ e^{a\Tree_W(S)}\le e^{aC_{\mathrm{band},J}}e^{a\ell}.
+\end{equation}
+This is how the two weights of \cref{ch15:rem:two-weights} are related: both are bounded by the weight of the total length of the joined network, at a fixed rate. For two external indices $e$ and $f$ in $\Omega$ we have the three inequalities
+\begin{equation}\label{ch15:eq:two-live-lengths}
+ \dist(e,f)\le\ell,\qquad
+ \dist(e,W)\le\ell+C_{\mathrm{band},J},\qquad
+ \dist(f,W)\le\ell+C_{\mathrm{band},J}
+\end{equation}
+simultaneously; they do not require a separate perturbation for each index. Summing them, we find, for every $c\ge0$,
+\begin{equation}\label{ch15:eq:two-index-weight}
+ e^{c[\dist(e,f)+\dist(e,W)+\dist(f,W)]}
+ \le e^{2cC_{\mathrm{band},J}}e^{3c\ell}.
+\end{equation}
+
+We now divide the spatial rate. Let $b_0>0$ be a common rate for the coefficients of the factors, including the smaller rate of the inverse of the free Hessian. We take all contraction and implicit-series estimates first at the rate $b_0/2$, and we choose $0<c_J\le b_0/32$. A factor $e^{b_0\ell}$ is available in the absolute product bounds at the rate $b_0$. We use at most $e^{b_0\ell/4}$ of it for the desired external network and the distances in \eqref{ch15:eq:network-lengths} and \eqref{ch15:eq:two-live-lengths}. For example, the network length plus one distance to the boundary is at most $2\ell+C_{\mathrm{band},J}$, and the network length plus the three distances in \eqref{ch15:eq:two-live-lengths} is at most $4\ell+2C_{\mathrm{band},J}$. The choice of $c_J$ covers either sum and leaves a positive fixed fraction of $b_0\ell$ for the internal summations. The fixed added lengths contribute at most the factor $e^{2c_JC_{\mathrm{band},J}}$.
+
+Next we give the summation. We orient a finite tree of contractions toward the specified external index and sum the labels on the outermost branches first, using the corresponding row bounds. On the unique branch containing a specified input index we use the input-column bound instead. The network weights multiply by \eqref{ch15:eq:wall-union}, and \cref{ch02:lem:coefficient-algebra} gives the product of the bounds for the factors, with the normalization of the columns unchanged. A redundant edge or a matrix cycle with a fixed external index is bounded by a further absolute row sum after cutting it at an attached vertex; alternatively, its propagators can be expanded into their convergent chains. All internal sums then use the same row and column bounds. In particular, a final sum over a bounded source $s_h$, $h\in H_{L_J}$, uses
+\[
+ \sum_{h\in H_{L_J}} |s_h|e^{-u\dist(i,h)}
+        \le\|s\|_\infty S_J(u),
+\]
+or the weighted version proved in (1), rather than the bound $|H|\|s\|_\infty$. Only one source insertion is needed; further perturbation vertices already present in a coefficient do not require independent sums of this kind.
+
+A fixed product or composition has a finite scalar majorant, obtained by multiplying or composing the majorants of the factors. Each inverse or resolvent series is an infinite sum of chains with geometric ratio at most $1/4$ on the larger product, as in \eqref{ch15:eq:coefficient-resolvent}. The perturbation in an inverse difference stays in its single difference factor. A difference of Schur complements is the finite telescoping sum of \cref{ch15:lem:boundary-algebra}, and at most $J$ such operations have a fixed complexity. The common majorant $\mathcal P$ bounds the number of summed chains and contractions. The division of the spatial rate is applied once to each complete joined network, not anew at each vertex of an infinite expansion.
+
+For an implicit series we make this precise. Let $Y(t)$ be the solution with nonnegative coefficients of \eqref{ch15:eq:center-majorant}. A derivative in a parameter that inserts the perturbation once gives an equation whose majorant satisfies
+\begin{equation}\label{ch15:eq:marked-majorant}
+ Z\preceq H(t,Y(t))+A(t)Z,\qquad
+ A(t)=\tfrac12+
+ \partial_Y\frac{C_J(t+Y)^2}{1-C_J(t+Y)}\Big|_{Y=Y(t)} .
+\end{equation}
+Here $\preceq$ denotes domination of coefficients, and $H(t,Y)$ is the series with the source inserted (not to be confused with the fixed complement $H$); its constant and higher coefficients have the bounds with a fixed index just proved. The implicit series is obtained by repeated substitution, so all its coefficients are bounded by those of
+\[
+ \sum_{n\ge0}A(t)^nH(t,Y(t))
+                =\frac{H(t,Y(t))}{1-A(t)} .
+\]
+We choose a radius $t_0>0$ strictly inside the radius of the solution such that $A(t_0)\le3/4$; this is possible since $Y(0)=0$ and $A(0)=1/2$. The series converges absolutely at $t_0$, and its value is at most $4H(t_0,Y(t_0))$. This is a bound on the value of a series with nonnegative coefficients; it is not the false coefficientwise inequality $Z_l\le4H_l$. A derivative in another analytic input differentiates this convergent series on a strictly smaller radius, where the additional geometric denominators are bounded; this gives the estimate with a specified input index. All indices are allowed, since all factor tensors and all inserted inverses were controlled with every index fixed.
+
+For example, consider the interpolation from Step 3 of the proof of \cref{ch15:thm:regional-gap-and-center}, and let $d_a=\Psi_R-\Psi_T$ on the common list of link variables. Its changed formulas in $\Omega$ are confined to the band of width $L_J$, and its values in the fixed complement are bounded on the construction domain. The difference of the two objectives is
+\begin{equation}\label{ch15:eq:marked-objective}
+ \Delta F=\int_0^1
+    DE_{d_0}(\Psi_T+t d_a)[d_a]\,dt+\tfrac12\|z_H\|_2^2 .
+\end{equation}
+The segment of integration lies in the torus chart, by the choice of radii in that proof. If a derivative in a current or free variable acts on $d_a$, the changed formula keeps its perturbation. If it acts on the action or on another argument of the chart, the tensor of the action connects that derivative to the remaining position of $d_a$. The auxiliary quadratic form has only indices in the complement, and it reaches an index in $\Omega$ only through a connected contraction. A derivative at a remote background position therefore cannot disconnect the perturbation. Differentiating the stationarity equation in the interpolation parameter, we obtain $\dot z=-F_{zz}^{-1}(\Delta F)_z$, which is an instance of \eqref{ch15:eq:marked-majorant}. This verifies that the implicit networks used here have a perturbation connected to every external index, rather than an unrelated scalar factor.
+
+To pass from convergence to the factorial bounds in (2), we fix a common radius $t_1$ with $0<t_1<t_0$ and let $D_J$ bound the preceding majorants with a fixed index there, after the division of the spatial rate. If $a_l$ denotes their Taylor coefficients of order $l$, normalized as in \eqref{ch15:eq:root-fraction}, nonnegativity implies $a_lt_1^l\le D_J$. Hence the derivative tensors of order $l$ are bounded by $l!D_Jt_1^{-l}$. Taking $C_J\ge\max(D_J,t_1^{-1},1)$ proves the bound in (2). Every degree sum and every supremum over the fixed index in this argument has been taken at fixed frozen coordinates, and the uniform bound permits the final supremum over their real values.
+
+For (3), we keep both the input index $x$ and the output index $e$ in the complete network before summing the other leaves. The length then covers $\dist(e,W)$ and $\dist(e,x)$ at the rate $c_J$. For each differentiated occurrence we have $\dist(e,W)+\dist(e,x)\le2\ell+C_{\mathrm{band},J}$, by \eqref{ch15:eq:network-lengths}. Summing the differentiated majorant series on a smaller product over $e$, with the input column of $x$ and its volume normalization, we obtain \eqref{ch15:eq:input-output-envelope}. Each entry is then at most $(v_x/v_e)r_x^{-1}C_Je^{-c_J[\dist(e,W)+\dist(e,x)]}$; since at most $J$ scales are involved and $r_x$ is a fixed radius of the smaller product, this gives the entrywise bound after enlarging $C_J$. This bound includes the multiplicity of the input in the differentiated series; it is not only a bound on a first derivative at zero. For two Hessian indices we use \eqref{ch15:eq:two-live-lengths}. A background or free coefficient of order $k$ is bounded by
+\[
+ \frac{(k+2)!}{k!}C_J^{k+3}R^k
+       =C_J^3(k+1)(k+2)(C_JR)^k ,
+\]
+whose sum over $k$ is $2C_J^3/(1-C_JR)^3$ for $C_JR<1$. The external network at this order includes both Hessian indices and all $k$ further leaves. Reducing $R$ by a fixed factor gives the bound on $T_{ef}$ and its joint factorial versions. Derivatives in the current frozen coordinates use the same tensors and the same counting, at the density of the labels on the input lattice.
+
+No step of the proof estimates a trace confined to the complement by fixing an index in $\Omega$, and no step requires decay of a coordinate difference at a position deep in the complement. For example, a prescribed small link $\exp(\varepsilon\tau_a)$ in the complement can differ from the corresponding link $I$ of the torus completion by the logarithm $\varepsilon\tau_a$, whatever its distance from $W$; its effect at an index in $\Omega$ is bounded instead by \eqref{ch15:eq:live-hole-distance} and the convergent sum over sources. All choices used only fixed coefficient bounds, the density of labels, and fixed rates, so no volume, area, number of components, number of preceding block integrations, or later width enters $c_J$ and $C_J$. The empty block region and the convention for a block region without boundary give the remaining degenerate cases.
+\end{proof}

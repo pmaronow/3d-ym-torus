@@ -1,0 +1,596 @@
+\chapter{Finite-dimensional integration and concentration inequalities}\label{ch02:chapter}
+
+This section collects the finite-dimensional tools used throughout the renormalization group analysis. Each statement concerns a fixed finite lattice, a finite set of coordinates, or a fixed finite-dimensional measure; where we say so, the constants do not depend on the dimension. The results fall into three groups. The first group concerns gauge integration and Gaussian algebra. \Cref{ch02:lem:haar-and-forests} records the normalization of Haar measure on $\SU$, exact integration in a spanning-tree gauge, and analytic estimates for products of group elements near the identity, and \cref{ch02:lem:hodge-schur} decomposes closed periodic one-cochains and eliminates positive definite quadratic blocks. The second group is the calculus of the analytic coefficient norms of \cref{ch01:def:analytic-norms}: compositions, localized inverses and square roots, logarithms of determinants, and implicit functions (\cref{ch02:lem:coefficient-algebra}). The third group is probabilistic. \Cref{ch02:thm:reflecting-concentration} proves logarithmic Sobolev, covariance, and quadratic concentration inequalities for uniformly log-concave measures on products of balls, \cref{ch02:lem:bounded-transfer} controls conditioning, parameter derivatives, and gauge-invariance identities, and \cref{ch02:lem:seven-traces} shows that seven traces determine a triple of $\SU$ matrices up to simultaneous conjugation.
+
+The only inputs are the definitions of \cref{ch01:chapter}: the Wilson measure and the normalization of the Lie algebra (\cref{ch01:def:ensemble}), the coefficient norms (\cref{ch01:def:analytic-norms}), and the convention on constants (\cref{ch01:conv:constants}). Spanning-tree gauges and the estimates for products of group elements enter the construction of the block averaging map and the gauge fixing in \cref{ch03:chapter,ch04:chapter}, and the local Wilson flow in \cref{ch21:chapter}. The Gaussian elimination is used for the linearized theory in \cref{ch05:chapter}. The coefficient calculus underlies all analytic estimates in \cref{ch03:chapter,ch05:chapter,ch06:chapter,ch07:chapter,ch09:chapter,ch15:chapter}. The concentration theorem is the probabilistic input for the conditional fluctuation kernels in \cref{ch10:chapter,ch13:chapter,ch14:chapter,ch17:chapter,ch23:chapter,ch24:chapter,ch25:chapter,ch30:chapter}. The conditioning lemma is used in \cref{ch12:chapter,ch25:chapter,ch26:chapter,ch29:chapter}, and the seven traces in \cref{ch27:chapter,ch31:chapter,ch32:chapter}.
+
+\section{Haar measure, spanning-tree gauges, and products of group elements}\label{ch02:sec:haar}
+
+The following facts are standard for the compact group $\SU$ and for lattice gauge theory; we record them with the normalizations of \cref{ch01:sec:model}, which fix the constants used later. Gauge fixing along a spanning tree is the maximal-tree gauge, which we call the spanning-tree gauge. Bałaban used such gauges systematically in the renormalization group context \cite{Balaban1985Regular}.
+
+\begin{lemma}\label{ch02:lem:haar-and-forests}
+Let $\mathcal K$ be a finite oriented cubical complex, with vertex set $\mathcal V$, set of positive links $\mathcal E$, and set of positive plaquettes $\mathcal P$. Then the following statements hold.
+\begin{enumerate}
+\item For every $\beta\ge0$,
+\[
+ Z_{\mathcal K}(\beta)=\int e^{-\beta\sum_{p\in\mathcal P}q(U_p)}\prod_{e\in\mathcal E}dH(U_e)
+ \quad\text{satisfies}\quad e^{-2\beta\abs{\mathcal P}}\le Z_{\mathcal K}(\beta)\le1,
+\]
+and the normalized density defines a gauge-invariant Borel probability measure.
+\item The measure $H$ is the Haar probability measure, and for $X=x^a\tau_a$ with $0\le r=\abs X<2\pi$,
+\[
+ \frac12\tr e^X=\cos(r/2),\qquad
+ dH(e^X)=c_{\mathrm{Haar}}j_H(X)\,d^3x,
+\]
+where $c_{\mathrm{Haar}}=1/(16\pi^2)$ and $j_H(X)=\sinc^2(r/2)$.
+For $0\le u\le2\pi$ and $U,V\in\SU$,
+\[
+ H\{\rho_G<u\}=\frac{u-\sin u}{2\pi},\qquad
+ \frac{\rho_G(U)^2}{2\pi^2}\le q(U)\le\frac{\rho_G(U)^2}{8},
+\]
+and $\rho_G(UV)\le\rho_G(U)+\rho_G(V)$.
+Further, $q(e^X)\ge(r^2/8)(1-r^2/48)$ for $0\le r\le2\pi$, and on every ball $\{\abs X\le r_0\}$ with $r_0<2\pi$ we have $q(e^X)=r^2/8+O(r^4)$ and $\log j_H(X)=-r^2/12+O(r^4)$, with constants depending only on $r_0$. For $0<u\le1$,
+\[
+ c_{\mathrm{ball}}u^3\le H\{\rho_G<u\}\le\frac{u^3}{12\pi},\qquad
+ c_{\mathrm{ball}}=\frac{\sinc^2(1/2)}{12\pi}\ge\frac1{16\pi}.
+\]
+\item Left and right translations preserve Haar measure. For every $k\in\SU$, $\Ad(k)\in\mathrm{SO}(3)$; it preserves the norm of $\su$, Lebesgue measure, and the balls centered at the origin. The map $\Ad:\SU\to\mathrm{SO}(3)$ is surjective. These statements concern $\SU$, not conjugation by elements of its complexification $\SL$.
+\item Choose a spanning tree in each connected component of $\mathcal K$, with one root per component. Let $h_x$ be the transport from the root to $x$ along the tree, and set $V_{xy}=h_xU_{xy}h_y^{-1}$. The map
+\[
+ U\longmapsto\bigl((h_x)_{x\text{ not a root}},(V_e)_{e\text{ not in the forest}}\bigr)
+\]
+is a smooth bijection, and it carries product Haar measure to product Haar measure; $V_e=I$ on the forest. Hence, for an integrand invariant under the gauge transformations equal to $I$ at the tree roots, integration over the tree variables contributes a factor one and leaves the same integrand expressed in the remaining variables $V$. If $\mathcal K$ is connected, there remain $\abs{\mathcal E}-\abs{\mathcal V}+1$ independent group variables, together with the simultaneous conjugation at the root, and no stabilizer volume is divided out. The same statements hold for a partition of $\mathcal K$ into blocks, each equipped with a rooted spanning tree, with gauge transformations equal to $I$ at every tree root.
+\item Fix a length $\ell$, a distance from the singularity of the logarithm (the eigenvalue $-1$), and a smaller complex coordinate polydisc inside the larger domain. Every map given by a product of at most $\ell$ factors of the form $e^{\pm X_j}$, and every logarithm of such a product relative to a reference product on the specified chart, has absolute Taylor derivatives of order $s$ bounded by $s!C^s$ for all $s\ge1$, where $C$ depends only on $\ell$, these domains, and the norm of $\su$. Factors in $\SU$ may be included if the relative products keep the same distance from the singularity. For small complex $u,v,a\in\su_\C$ and $0\le\epsilon\le1$,
+\[
+ \epsilon^{-1}\Log(e^ue^{\epsilon a}e^{-u-\epsilon v})
+ =\Ad(e^u)a-\int_0^1\Ad(e^{tu})v\,dt+\epsilon\mathscr R_\epsilon(u,v,a),
+\]
+where the left side at $\epsilon=0$ is defined by analytic continuation, and the remainder $\mathscr R_\epsilon$ is holomorphic, has bounds of the same type, vanishes to order at least two in $(a,v)$, and satisfies $\mathscr R_\epsilon(u,0,a)=0$.
+\end{enumerate}
+All constants have the dependence described in item (1) of \cref{ch01:conv:constants}; for a fixed length $\ell$ they do not depend on the number of cells, on $L$, on the coupling, or on the depth.
+\end{lemma}
+
+\begin{proof}
+\emph{Quaternions and Haar measure.} Let $t_a=2\tau_a$. Multiplying the Pauli matrices, we find
+\begin{equation}\label{ch02:eq:quaternion-product}
+ t_at_b=-\delta_{ab}I+\epsilon_{abc}t_c,\qquad
+ (aI+v\cdot t)(bI+w\cdot t)=(ab-v\cdot w)I+(aw+bv+v\times w)\cdot t.
+\end{equation}
+Then $\SU$ is the unit sphere $\{a^2+\abs v^2=1\}$ in $\R^4$, and inversion is $(a,v)\mapsto(a,-v)$. Left and right multiplications by a unit quaternion are linear maps of $\R^4$ preserving the norm, so the normalized surface measure on the sphere is left and right invariant. It is the unique invariant probability measure. Indeed, if $H_1,H_2$ are two such measures, integrating a continuous function $f(uv)$ against $H_1(du)H_2(dv)$ in the two orders gives $H_1(f)=H_2(f)$. Equality on continuous functions identifies the Borel measures, since continuous approximations of the indicators of closed and open sets give equality on these sets, and hence on the $\sigma$-algebra they generate.
+
+Since $(x\cdot\tau)^2=-r^2I/4$, we have $e^{x\cdot\tau}=\cos(r/2)I+\sin(r/2)(x/r)\cdot t$, with the value at $r=0$ obtained by continuity; in particular $\tr e^X/2=\cos(r/2)$. In the polar coordinates $a=\cos\vartheta$, $v=\sin\vartheta\,\omega$, $0<\vartheta<\pi$, the area element of the sphere is $\sin^2\vartheta\,d\vartheta\,d\omega$, where $\omega$ ranges over the unit two-sphere of area $4\pi$; the total area is $2\pi^2$. Substituting $r=2\vartheta$ and $d^3x=r^2dr\,d\omega$, we obtain
+\[
+ \frac{\sin^2(r/2)}{4\pi^2r^2}\,d^3x=\frac1{16\pi^2}\sinc^2(r/2)\,d^3x.
+\]
+The omitted point $-I$ has measure zero. The radial density is $\pi^{-1}\sin^2(r/2)\,dr$, and integrating it from $0$ to $u$, we obtain the formula for $H\{\rho_G<u\}$, including $u=0$ and $u=2\pi$.
+
+\emph{The distance.} The quantity $r$ is twice the round-sphere distance from $I$. By the exponential formula, every logarithm of $U=aI+v\cdot t$ has norm at least $2\arccos a$, and the logarithm displayed above attains this value. Great-circle arcs are shortest: for a curve $z(s)$ on the sphere, the derivative of its polar angle has absolute value at most $\abs{z'(s)}$, as one sees by differentiating its scalar product with the initial point. Left multiplication preserves the round metric. Concatenating a shortest arc from $I$ to $U$ with the left translate by $U$ of a shortest arc from $I$ to $V$, we obtain $\rho_G(UV)\le\rho_G(U)+\rho_G(V)$.
+
+\emph{The plaquette function.} For $r\in[0,2\pi]$ we have $q(e^X)=2\sin^2(r/4)$. On $[0,\pi/2]$, the sine lies above its chord by concavity, $\sin x\ge2x/\pi$, and $\sin x\le x$. These two inequalities imply the quadratic lower and upper bounds. Integrating $\sin x\ge x-x^3/6$, we obtain $1-\cos x\ge x^2/2-x^4/24$, and the inequality for the sine follows by integrating $x-\sin x\ge0$ twice. Setting $x=r/2$ yields the additional lower bound. By Taylor's formula with integral remainder, $\abs{q(e^X)-r^2/8}\le r^4/384$. The function $g(r)=\log\sinc^2(r/2)+r^2/12$ is even and satisfies $g(0)=g''(0)=0$, as the expansion $\sinc(r/2)=1-r^2/24+O(r^4)$ shows; its odd derivatives at $0$ vanish as well. Its fourth derivative is bounded on every interval $[-r_0,r_0]$ with $r_0<2\pi$, and by the same remainder formula $\abs{g(r)}\le C(r_0)r^4$. For $0<u\le1$, the function $\sinc s$ decreases on $[0,1/2]$, since $(s\cos s-\sin s)'=-s\sin s\le0$. Writing $\sin^2(r/2)=(r^2/4)\sinc^2(r/2)$ in the radial density, we obtain the two bounds on $H\{\rho_G<u\}$. Finally $\sinc(1/2)\ge1-1/24=23/24$, whose square exceeds $3/4$; this implies $c_{\mathrm{ball}}\ge1/(16\pi)$.
+
+\emph{Partition functions.} The function $q$ is continuous on $\SU$ with values in $[0,2]$. Every plaquette transport is a product of link variables and their inverses, and its trace is invariant under gauge transformations, since the intermediate vertex factors cancel. Under a gauge transformation each link variable undergoes a left and a right translation, so product Haar measure is invariant. The integrand lies between $e^{-2\beta\abs{\mathcal P}}$ and $1$. Integrating, we obtain the bounds on $Z_{\mathcal K}(\beta)$, and dividing by $Z_{\mathcal K}(\beta)$ gives a gauge-invariant probability measure. Neither connectedness nor periodicity of $\mathcal K$ is needed.
+
+\emph{The adjoint representation.} Conjugation preserves the inner product $-2\tr(XY)$ and the bracket, so $\Ad(k)$ is orthogonal on $\su$. Its determinant is $+1$, since $\SU$ is connected and the determinant equals $1$ at $I$. In particular, $\Ad(k)$ preserves the norm, Lebesgue measure, and the balls centered at the origin. For surjectivity, note that $R(\vartheta)=\Ad(e^{\vartheta n\cdot\tau})$ solves $R'v=n\times Rv$; it is the rotation by $\vartheta$ about the unit vector $n$. Since every element of $\mathrm{SO}(3)$ has a fixed unit vector (its nonreal eigenvalues come in conjugate pairs, and the remaining real eigenvalue is $1$) and acts on the orthogonal complement as a plane rotation, it is one of these rotations.
+
+\emph{Spanning-tree gauges.} We orient each forest link from the parent to the child, replacing $U_e$ by $U_e^{-1}$ when the given orientation is opposite; inversion preserves Haar measure. Set $h_o=I$ at every root and recursively $h_y=h_xU_{xy}$. Then $V_{xy}=h_xU_{xy}h_y^{-1}=I$ on the forest. Conversely, arbitrary $h_x$ at the vertices that are not roots and arbitrary $V_e$ off the forest determine $U$ uniquely by $U_{xy}=h_x^{-1}V_{xy}h_y$, with $V_{xy}=I$ on forest links. All these maps are finite products and inverses, hence smooth. We list the vertices in increasing distance from their roots along the forest. Conditionally on the earlier forest links, $h_y=h_xU_{xy}$ is Haar distributed and independent of all earlier $h$'s. By induction, the joint law of the forest variables is product Haar measure. Conditionally on them, every link off the forest is translated on the left and on the right by fixed matrices. Its Haar factor is therefore unchanged, and these factors remain independent. This proves the product identity, first for products of functions and then by approximation for all integrable functions.
+
+If the integrand is invariant under the gauge transformations equal to $I$ at the roots, substituting the gauge transformation $h$ makes it a function of $V$ alone, and the product Haar integral over $h$ contributes a factor one. A connected complex has $\abs{\mathcal V}-1$ tree links, which gives the stated number of remaining group variables. For a gauge transformation $k$ we have $h_x(U^k)=k_oh_x(U)k_x^{-1}$ and $V_e(U^k)=k_oV_e(U)k_o^{-1}$, which leaves the conjugation at the root. We do not take a quotient by it, and no stabilizer factor appears. Applying the recursion in every block, with the links between blocks among the variables off the forest, proves the version for blocks with rooted spanning trees.
+
+\emph{Products of group elements.} Matrix exponentials are given by their absolutely convergent series, and inversion on $\SL$ is polynomial in the matrix entries. In a complex neighborhood of a compact set of unitary matrices whose eigenvalues stay at a fixed distance from $-1$, the formula
+\begin{equation}\label{ch02:eq:local-log-integral}
+ \Log W=\int_0^1(W-I)\bigl((1-s)I+sW\bigr)^{-1}\,ds
+\end{equation}
+defines a holomorphic logarithm. Indeed, on the compact real set the matrices $(1-s)I+sW$ have smallest singular value bounded below uniformly in $s\in[0,1]$, and half of this bound persists on a fixed smaller complex neighborhood, by the identity for differences of inverses. For diagonal unitary matrices the formula reduces to the scalar principal logarithm, by direct integration; conjugation extends it to all unitary matrices of the set, and the identity $e^{\Log W}=W$ continues to the neighborhood by analytic continuation. On a connected neighborhood of $I$ its trace vanishes, since $\det W=1$ and the trace is continuous with value zero at $I$.
+
+A product of at most $\ell$ factors involves at most $3\ell$ scalar coordinates. On the larger polydisc its matrix norm and the norms of the relevant logarithms are bounded by a constant $B$ depending on $\ell$ and the domains: each exponential is bounded by the exponential of the matrix norm of its exponent, each logarithm by \eqref{ch02:eq:local-log-integral}, and factors in $\SU$ have matrix norm one. If the smaller polydisc has coordinate margin $\delta>0$, the Cauchy integral in each coordinate bounds a derivative of multi-index $\alpha$ by $B\alpha!\delta^{-\abs\alpha}$. To see this, we insert the absolutely convergent power series into the circle integrals; the integral of $z^k/z^{j+1}$ over a circle around zero vanishes for $k\ne j$ and equals $2\pi i$ for $k=j$. Summing all ordered derivatives of total order $s$ introduces at most a factor $(3\ell)^s$, which gives the bound $s!C^s$ for the absolute derivative tensor. Where the branches are defined, $\Log(kWk^{-1})=k(\Log W)k^{-1}$ and $\Log(W^{-1})=-\Log W$, by the same formula and analytic continuation.
+
+\emph{The expansion with a removable singularity.} Let $B(\epsilon)=\Log(e^ue^{\epsilon a}e^{-u-\epsilon v})$. For small fixed complex $u,v,a$ it is holomorphic in $\abs\epsilon<1+\delta_0$, with uniform bounds, and $B(0)=0$. Differentiating the exponential series, we obtain
+\[
+ \frac{d}{d\epsilon}e^{-u-\epsilon v}\Big|_{\epsilon=0}=-\int_0^1e^{-(1-t)u}ve^{-tu}\,dt.
+\]
+Since the derivative of $\Log$ at $I$ is the identity, $B'(0)=\Ad(e^u)a-\int_0^1\Ad(e^{tu})v\,dt$. The product depends on $a,v$ only through $(\epsilon a,\epsilon v)$, and the coefficient of $\epsilon^k$ in $B$ is therefore homogeneous of degree $k$ in $(a,v)$. Hence
+\[
+ \mathscr R_\epsilon=\int_0^1(1-t)B''(t\epsilon)\,dt
+\]
+is holomorphic, vanishes to order at least two in $(a,v)$, and satisfies the bounds just proved. Using Taylor's formula along the segment $t(a,v)$ and the bound on second derivatives, we find on a fixed smaller complex ball
+\begin{equation}\label{ch02:eq:removable-remainder-order}
+ \norm{\mathscr R_\epsilon(u,v,a)}\le C(\abs a+\abs v)^2,\qquad 0\le\epsilon\le1,
+\end{equation}
+with $C$ depending only on the product, the larger complex domain, and its margin. At $v=0$ the product is $\exp(\epsilon\Ad(e^u)a)$, its logarithm is $\epsilon\Ad(e^u)a$, and the remainder vanishes. Every argument concerns a fixed product or an exact identity, and the stated dependence of the constants follows.
+\end{proof}
+
+\section{Closed one-cochains and Gaussian elimination}\label{ch02:sec:hodge}
+
+Parts (1) and (2) of the next lemma are the discrete Poincaré lemma and the fact that the first real cohomology of the three-torus is $\R^3$; part (3) is Gaussian elimination by Schur complements \cite{Bhatia1997}. The harmonic part $c$ is kept as data throughout.
+
+\begin{lemma}\label{ch02:lem:hodge-schur}
+The following statements hold.
+\begin{enumerate}
+\item On every finite contractible rectangular box in $\Z^3$, a real closed one-cochain is the coboundary of a function on the vertices.
+\item On the periodic cubic lattice of side $n\ge4$, every real closed one-cochain $\alpha$ has a unique decomposition $\alpha=\nabla f+c$, where $f$ is periodic with mean zero and $c$ is constant in each link direction. Moreover $c_i=n^{-3}\sum_x\alpha_i(x)$. The decomposition holds in each color separately and after rescaling to physical units. Thus requiring the spatial mean of $\alpha$ to vanish removes exactly $c$, and not a gauge degree of freedom.
+\item Let a real symmetric nonnegative quadratic form on a finite-dimensional space of fixed coordinates $c$ and integration coordinates $z\in\R^f$ have matrix
+\[
+ \mathsf A=\begin{pmatrix}A&B\\B^{\mathsf T}&K\end{pmatrix},\qquad K>0.
+\]
+For every $c$, including all specified harmonic coordinates,
+\[
+ \frac12(c,z)^{\mathsf T}\mathsf A(c,z)
+ =\frac12c^{\mathsf T}(A-BK^{-1}B^{\mathsf T})c
+   +\frac12(z+K^{-1}B^{\mathsf T}c)^{\mathsf T}K(z+K^{-1}B^{\mathsf T}c),
+\]
+and
+\[
+ \int_{\R^f}e^{-\frac12(c,z)^{\mathsf T}\mathsf A(c,z)}\,dz
+ =(2\pi)^{f/2}(\det K)^{-1/2}e^{-\frac12c^{\mathsf T}(A-BK^{-1}B^{\mathsf T})c}.
+\]
+Successive minimization, or successive Gaussian integration, over the blocks of any ordered decomposition of $z$ gives the same Schur complement and the same product of determinants as simultaneous elimination. Conditionally on $c$, the Gaussian measure in $z$ has mean $-K^{-1}B^{\mathsf T}c$ and covariance $K^{-1}$. A Gaussian measure defined on a specified orthogonal complement of a null space, by a quadratic form positive there, has covariance equal to the inverse on that complement and zero on the null space.
+\end{enumerate}
+These are exact finite-dimensional statements; in particular, no lower bound on eigenvalues uniform in the side $n$ is asserted.
+\end{lemma}
+
+\begin{proof}
+\emph{Boxes.} We regard a one-cochain $\alpha$ as an antisymmetric function on oriented links; closedness means that its signed sum around every unit square vanishes. On $\Z^3$, a finite path can be sorted by coordinate direction by adjacent interchanges of steps in different directions. Each interchange crosses exactly one unit square and preserves the integral of $\alpha$, and adjacent opposite steps in one direction cancel. Then every closed path has integral zero, since after sorting its total displacement in each direction is zero and all steps cancel. Inside a rectangular box we integrate from a fixed corner, first in direction $1$, then in direction $2$, then in direction $3$. Interchanging an additional final step in direction $i$ with the later coordinate segments uses only the squares of the intervening rectangle, which lies in the box, and closedness makes the two path integrals equal. The resulting vertex function has coboundary $\alpha$ on every link. Boxes with a side of length zero are covered by omitting the absent direction.
+
+\emph{The periodic lattice.} We lift a periodic closed cochain to $\Z^3$. The argument just given produces a function $f_0$ on $\Z^3$ with $f_0(x+e_i)-f_0(x)=\alpha_i(x)$. Since $\alpha$ is periodic, $f_0(x+ne_i)-f_0(x)=P_i$ does not depend on $x$, because its difference across every link is zero; equivalently, $P_i$ is the integral of $\alpha$ along any straight cycle winding once in direction $i$. Set $c_i=P_i/n$. The function $f(x)=f_0(x)-\sum_ic_ix_i$ is periodic and satisfies $\alpha=\nabla f+c$; subtracting its average makes its mean zero. If $\nabla f+c=0$, then summing over a winding cycle gives $nc_i=0$. Then all differences of $f$ vanish, and the mean-zero condition implies $f=0$, which proves uniqueness. Because the sum of $\nabla_if$ over all periodic vertices telescopes to zero, we have $c_i=n^{-3}\sum_x\alpha_i(x)$, and the mean condition removes exactly the three constants. For cochains with values in $\su$, the argument applies to each real component. For physical potentials we use $\nabla_a=a^{-1}\nabla$ and integrate $a\alpha$ along paths; the conclusion has the same form, with $c_i=P_i/(na)$.
+
+\emph{Gaussian elimination.} If we expand the right side of the completion of the square, its cross term is $c^{\mathsf T}Bz$, and the added constant $c^{\mathsf T}BK^{-1}B^{\mathsf T}c/2$ cancels the subtracted one. After the translation $z\mapsto z-K^{-1}B^{\mathsf T}c$, an orthogonal diagonalization of the positive matrix $K$ reduces the integral to products of $\int_\R e^{-kt^2/2}dt=\sqrt{2\pi/k}$. To diagonalize $K$, we maximize its Rayleigh quotient on the unit sphere to obtain an eigenvector, restrict to the orthogonal complement of this eigenvector, and induct on the dimension. The value of the one-dimensional integral follows by squaring it and using polar coordinates in the plane. We obtain the Gaussian formula, with the convention that the integral is one if $f=0$. The same completion of the square with a linear term in $z$, differentiated at zero, gives the conditional mean and covariance.
+
+For successive elimination, write $z=(z_1,z_2)$ and $K=\left(\begin{smallmatrix}K_{11}&K_{12}\\K_{21}&K_{22}\end{smallmatrix}\right)$. Both $K_{11}$ and $K_{22}-K_{21}K_{11}^{-1}K_{12}$ are positive definite, since their quadratic forms are the restriction of the form of $K$ and the minimum of that form over $z_1$. The change of variables $z_1\mapsto z_1+K_{11}^{-1}K_{12}z_2$ has determinant one, and by block multiplication we have
+\[
+ \det K=\det K_{11}\,\det\bigl(K_{22}-K_{21}K_{11}^{-1}K_{12}\bigr).
+\]
+The unique joint minimizer in $z$ solves $Kz=-B^{\mathsf T}c$; solving the first block and substituting gives the successive minimizers. The minimum value is therefore the same Schur form. By the determinant identity and the Gaussian formula, successive integration gives the same normalization. Induction over the blocks proves the statement for every ordered decomposition; for nonnegative integrands the repeated integrals are justified directly. No harmonic coordinate is discarded, since the vector $c$ was arbitrary throughout.
+
+On the given orthogonal complement of a null space, we diagonalize the restricted positive form. In the resulting coordinates the Gaussian measure is a product of independent one-dimensional Gaussian measures with variances equal to the inverse eigenvalues; embedding this measure by setting the null coordinates equal to zero, we obtain the stated covariance. This construction lives on the complement; it is not a Lebesgue integral along null directions.
+\end{proof}
+
+\section{Analytic coefficient bounds and implicit functions}\label{ch02:sec:coefficients}
+
+The following lemma is the calculus of the coefficient norms of \cref{ch01:def:analytic-norms}. Its first parts are combinatorial. A Taylor coefficient of a composite map is a finite or absolutely convergent sum of products of Taylor coefficients of the constituents. We bound the absolute value of the sum by the sum of absolute values. The spatial weight survives because the connecting networks of the factors can be joined at the contracted indices, and the volume factors in the column sums telescope. The simplest instance is a product of two kernels, $T$ from mesh $a_{\mathrm{mid}}$ to mesh $a_{\mathrm{out}}$ and $S$ from mesh $a_{\mathrm{in}}$ to mesh $a_{\mathrm{mid}}$. In counting coordinates the kernel of $TS$ is $\sum_jT_{ij}S_{jk}$, without any volume factor, and its column sum at a fixed input $k$ carries the factor
+\[
+ \frac{a_{\mathrm{out}}^3}{a_{\mathrm{in}}^3}=\frac{a_{\mathrm{out}}^3}{a_{\mathrm{mid}}^3}\cdot\frac{a_{\mathrm{mid}}^3}{a_{\mathrm{in}}^3},
+\]
+so that column norms are submultiplicative. For a composition with one fixed input, we use column sums along the chain of factors that joins this input to the output, and row sums for all other factors. The later parts concern inverses and square roots of matrices with a spectral gap. The exponential decay of an inverse follows from the conjugation argument of Combes and Thomas \cite{CombesThomas1973}, and square roots are represented by the standard resolvent integral \cite{Bhatia1997}; the proof keeps track of the spatial weights and of all fixed indices. Bounds by coefficientwise majorant series are a classical tool of constructive renormalization group methods; the volume-normalized columns, the arbitrary fixed inputs, and the traces with a fixed external index are specific to our use.
+
+Throughout this section, all indices are scalar indices and all sums are counting sums. A contraction identifies two indices of the same kind (same lattice and scale of introduction); an identification of indices of different kinds must first be represented by an explicitly bounded transfer kernel. We fix a rate $\asp\ge0$ and write $\abs T=\abs T_{\asp}$ for the norm \eqref{ch01:eq:tensor-norm}, $R(T)$ for its row norm, and $C_r(T)$ for its volume-normalized column sums. For a scalar tensor we use the sums \eqref{ch01:eq:scalar-root} with one index fixed; on several meshes, a scalar tensor may instead be normalized by a reference volume $v_*$, which multiplies each summand with the index $i_r$ fixed by $v_*/v_{i_r}$. Distances and network lengths are those of \cref{ch01:def:analytic-norms}, measured in units of the current output lattice spacing. For a matrix $B=(B_{xy})$ of blocks indexed by a finite metric space $(X,d)$, we write
+\[
+ \norm B_c=\max\Bigl\{\sup_x\sum_ye^{cd(x,y)}\norm{B_{xy}},\ \sup_y\sum_xe^{cd(x,y)}\norm{B_{xy}}\Bigr\},\qquad c\ge0,
+\]
+where $\norm{B_{xy}}$ is the operator norm of the block.
+
+\begin{lemma}\label{ch02:lem:coefficient-algebra}
+The following statements hold.
+\begin{enumerate}
+\item \emph{Substitution.} For tensors $T(o;j_1,\dots,j_k)$ and $S_r(j_r;\mathbf l_r)$, $1\le r\le k$, the tensor
+\[
+ U(o;\mathbf l_1,\dots,\mathbf l_k)=\sum_{j_1,\dots,j_k}T(o;j_1,\dots,j_k)\prod_{r=1}^kS_r(j_r;\mathbf l_r)
+\]
+has every output-row norm and every volume-normalized input-column norm bounded by $\abs T\prod_r\abs{S_r}$. In particular compatible matrix products are submultiplicative in the row norm and in the volume-normalized column norm; for counting-coordinate kernels from mesh $a_{\mathrm{in}}$ to mesh $a_{\mathrm{out}}$ the column factor is exactly $a_{\mathrm{out}}^3/a_{\mathrm{in}}^3$, and a contraction introduces no further volume factor. The same bound holds for a scalar outer tensor normalized by a reference volume. For a scalar outer tensor with counting sums on mesh $a_{\mathrm{old}}$, the sum with a new input $l$ fixed acquires the factor $v_l/v_{\mathrm{old}}$, maximized over the possible kinds of the replaced inputs. Pointwise products with a common output index satisfy the product bound, and a shared index may be represented by the equality tensor $\one_{o=i_1=\cdots=i_r}$, whose norm is one when all its ports are of the same kind.
+\item \emph{Contraction diagrams.} Consider a finite connected diagram of tensors, in which shared indices are represented by equality tensors and every contracted index identifies two ports, and fix one external index. Choose a spanning tree of the graph of factors, rooted at the factor containing the fixed index, and attach every other factor $V$ to its parent through a port $j(V)$. For a vector factor $V$ with output $o(V)$, let $A_V=\abs V$ if $j(V)=o(V)$ and $A_V=(v_{j(V)}/v_{o(V)})\abs V$ if $j(V)$ is an input; for the factor containing the fixed index use the same rule at that index; for a scalar factor use its sum with the corresponding port fixed. Then the sum over all indices except the fixed one of the absolute value of the diagram, weighted by $e^{\asp\Tree}$ of the locations of the external indices, is at most $\prod_VA_V$. If the fixed index is an external input $l$, the volume-normalized column of the diagram is obtained by multiplying by $v_o/v_l$, where $o$ is the output of the diagram; for the substitution trees of part (1) the volume ratios cancel exactly. A diagram without a fixed external index is not covered; for example $\tr I$ equals the number of indices. An externally differentiated trace is covered if the differentiated tensor has the bound with the input fixed and \emph{all} of its matrix ports and other Taylor inputs summed; a row bound alone does not suffice.
+\item \emph{Majorant series.} Products, substitutions, and summable connected diagrams of analytic maps with absolute majorants (in the sense of \cref{ch01:def:analytic-norms}) are bounded coefficientwise by the corresponding products, compositions, and diagram sums of the nonnegative scalar majorants, with the bounds of parts (1) and (2). The domain of the conclusion is the common product of polydiscs on which these scalar series converge absolutely. For $F\circ G$ it suffices that the scalar majorant of $G$ maps the domain strictly inside the coefficient domain of $F$; for formal substitution take $G(0)=0$, and otherwise require this absolute image condition, so that the substitutions into the constant terms also converge. The coefficients with one fixed input are bounded by the derivative of the same scalar majorant; no second Taylor factorial occurs.
+\item \emph{Smaller domains.} If $A(s)=\sum_nA_ns^n$ with $A_n\ge0$ converges at $R>0$, then for $0<r<R$ and every fixed $j\ge0$,
+\[
+ A^{(j)}(r)\le R^{-j}\sup_{n\ge j}(n)_j(r/R)^{n-j}A(R),
+\]
+where $(n)_j=n(n-1)\cdots(n-j+1)$. If the majorant $\sum_kb_ks^k$ satisfies $\sum_kb_kR^k\le B$, the coefficients of degree $s$ of its translate to a background of size $r_1<R$ are at most $B(R-r_1)^{-s}$. Thus evaluation, translation to a background, and a fixed finite number of derivatives are controlled on a smaller coefficient domain, at the same spatial rate. These statements concern absolute coefficient series; they are not Cauchy estimates for directional values.
+\item \emph{Resolution into occurrences.} Every expression built by these operations has an exact coefficient resolution, indexed by its constituent coefficient occurrences, its contracted indices, and its partitions of derivatives. Assign to each constituent occurrence a connected network through the locations of its ports and Taylor indices, and to each contraction the common location; the network of a resolved occurrence is the union of these networks. Its external monomial has its exact multi-index, and its fluctuation index set is the set of blocks of fluctuation variables with a positive exponent; the locations of background variables need not lie in that set. The weighted total variation of the resolution satisfies the same scalar diagram bounds, provided the assigned networks satisfy the constituent bounds. Let $W$ be a specified boundary. If a designated constituent occurrence is assigned, by hypothesis, a connected network meeting $W$, then every resolved occurrence containing this designated factor has a connected network meeting $W$, and its weighted total variation satisfies the corresponding diagram bound, provided the constituent bounds include the weights of these assigned networks. Marking an input for differentiation does not by itself provide such a visit.
+\item \emph{Networks and trees.} Let $\Tree_{\mathrm{MST}}(S)$ be the length of a minimal spanning tree on a finite set $S$ of locations. Then $\Tree(S)\le\Tree_{\mathrm{MST}}(S)\le2\Tree(S)$. A bound at rate $\asp$ with shortest networks therefore gives a bound at rate $\asp/2$ with spanning trees on the locations of the external indices; this reduction is made once, independently of the order of the tensors.
+\item \emph{Inverses.} Let $(X,d)$ be a finite metric space, with blocks of a fixed finite dimension, such that $\#\{y:d(x,y)\le R\}\le D(1+R)^v$ for all $x\in X$ and $R\ge0$. Let $K=K^*\ge\lambda I>0$ satisfy, for some $a>0$,
+\[
+ \max\Bigl\{\sup_x\sum_{y\ne x}e^{ad(x,y)}\norm{K_{xy}},\ \sup_y\sum_{x\ne y}e^{ad(x,y)}\norm{K_{xy}}\Bigr\}\le H.
+\]
+Let $b=\min\{a/2,a\lambda/(4H)\}$ if $H>0$ and $b=a/2$ if $H=0$; then the same maximum with weights $e^{bd(x,y)}-1$ is at most $\lambda/2$. For every $0<b'<b$,
+\[
+ \norm{(K^{-1})_{xy}}\le2\lambda^{-1}e^{-bd(x,y)},\qquad
+ \norm{K^{-1}}_{b'}\le2\lambda^{-1}\mathcal S(b-b';D,v),
+\]
+where $\mathcal S(c;D,v)=D\sum_{k\ge0}(k+2)^ve^{-ck}$. No upper bound on the diagonal of $K$ is needed, and the bounds do not depend on $\abs X$.
+\item \emph{Perturbations and square roots.} In the setting of part (7), put $C_{\mathrm{inv}}=\norm{K^{-1}}_{b'}$. For every complex matrix $E$ with $\norm E_{b'}\le(2C_{\mathrm{inv}})^{-1}$, we have $\norm{(K+E)^{-1}}_{b'}\le2C_{\mathrm{inv}}$, and the inverse is a holomorphic function of $E$. If also $K\le\Lambda I$, there exists $\eta_0>0$, depending only on $a,H,\lambda,\Lambda,D,v,b'$, such that for $\norm E_a<\eta_0$ the branches $(K+E)^{1/2}$ and $(K+E)^{-1/2}$ continuing the positive roots exist and are bounded in $\norm\cdot_{b'/2}$ by constants depending only on these data. If $E=E(\theta)$ has an absolute majorant with all fixed indices on a fixed analytic ball, the coefficients of these roots in $\theta$ have absolute bounds with every fixed index, with constants depending in addition only on that majorant and on the ratios of the analytic radii.
+\item \emph{Logarithms of determinants.} In the setting of part (8), $D\log\det K=\tr(K^{-1}DK)$, and the derivatives of positive order of $\log\det(K+E(\theta))$ in $\theta$ have absolute bounds with any fixed external index, with one reduction of the rate independent of the order. The undifferentiated $\log\det K$ is not bounded independently of $\abs X$.
+\item \emph{Implicit functions.} Let $\Phi(\theta,u)$ be an analytic map of input variables $\theta=(\theta_j)$ and unknowns $u=(u_o)$, with values indexed like $u$, defined on a product of polydiscs, with $\Phi(0,0)=0$. Assume that for all $k,l\ge0$ the output-row norm and every input-column norm, at any fixed input $\theta_j$ or $u_o$, of the coefficient tensor $D^k_\theta D^l_u\Phi(0,0)/(k!\,l!)$ are at most the coefficient of $t^kY^l$ in
+\[
+ \Phi^+(t,Y)=At+\kappa Y+\frac{A(t+Y)^2}{1-C(t+Y)},\qquad A,C>0,\quad0\le\kappa<1.
+\]
+In particular the linear map $D_u\Phi(0,0)$ has row and column norms at most $\kappa$. Let $\delta=1-\kappa$, $r=\min\{1,(4C)^{-1},\delta/(32A)\}$, and $t_0=\min\{r,\delta r/(4A)\}$, and assume that the domain of $\Phi$ contains a neighborhood of the closed product $\{\max_j\abs{\theta_j}\le t_0,\ \max_o\abs{u_o}\le r\}$. Then the scalar equation $Y=\Phi^+(t,Y)$ has a unique solution $Y(t)$ with $\abs{Y(t)}\le r$ for $\abs t<t_0$; it is analytic, $Y(0)=0$, and its Taylor coefficients are nonnegative. For $\max_j\abs{\theta_j}<t_0$ the system $u=\Phi(\theta,u)$ has a unique solution $u(\theta)$ with $\max_o\abs{u_o}\le r$, and for every $k$ the output-row norm and every input-column norm of $D^ku(0)/k!$ are at most the coefficient of $t^k$ in $Y(t)$. For a fixed input $\theta_j$, the derivative $\partial_{\theta_j}u$ has coefficient tensors bounded by the coefficients of
+\[
+ Y'(t)=\frac{A+A\varphi'(t+Y(t))}{1-\kappa-A\varphi'(t+Y(t))},\qquad\varphi(s)=\frac{s^2}{1-Cs},
+\]
+whose denominator satisfies $\abs{1-\kappa-A\varphi'(t+Y(t))}\ge5\delta/8$ for $\abs t<t_0$. In particular, all derivatives of positive order satisfy bounds $s!C_1^s$ at the same spatial rate, also after translation to a background in a fixed smaller ball, where $C_1$ depends only on $A,C,\kappa$ and the radius ratios, and not on the number of coordinates. If a parameter enters $\Phi$ with a variation of majorant $H(t,Y)$, the variation of the solution has majorant $Z(t)$ with $Z(t)\le H(t,Y(t))/(1-\partial_Y\Phi^+(t,Y(t)))$ for $0\le t<t_0$; this bounds the value of the majorant series at $t$, and it is not a coefficientwise inequality.
+\end{enumerate}
+The constants in parts (1)--(6) are as displayed. In parts (7)--(10) they have the dependence described in item (1) of \cref{ch01:conv:constants}, through the displayed data. When the counting bound for the indices depends on $J$ (with $D=D_J$), the constants depend on this fixed $J$, and no uniformity as $J\to\infty$ follows. Bounds obtained from part (10) for a class of expressions require one common scalar majorant for the whole class; expressions of arbitrary algebraic complexity are not covered without such a majorant.
+\end{lemma}
+
+\begin{proof}[Proof of \cref{ch02:lem:coefficient-algebra}]
+We first prove parts (1)--(6), which are bookkeeping for absolute sums, then the inverse estimates (7)--(9), and finally the implicit function statement (10).
+
+\paragraph{Step 1: substitution.} For matrices, the row norm of $\sum_jT_{ij}S_{jk}$ satisfies
+\[
+ \sup_i\sum_ke^{\asp d(i,k)}\Bigl\|\sum_jT_{ij}S_{jk}\Bigr\|\le R(T)R(S),
+\]
+since $d(i,k)\le d(i,j)+d(j,k)$. For columns, the exact identity
+\begin{equation}\label{ch02:eq:physical-column-cancellation}
+ \frac{v_i}{v_k}=\frac{v_i}{v_j}\frac{v_j}{v_k},\qquad
+ \sup_k\sum_i\frac{v_i}{v_k}e^{\asp d(i,k)}\Bigl\|\sum_jT_{ij}S_{jk}\Bigr\|\le C(T)C(S)
+\end{equation}
+holds. If indices of several kinds occur, the sums include them with their volumes. This proves submultiplicativity and explains why the column factor of a counting-coordinate kernel must be exactly $a_{\mathrm{out}}^3/a_{\mathrm{in}}^3$.
+
+For the substitution tensor $U$, the union of the networks of $T$ and of the $S_r$, joined at the contracted indices, connects the locations of all external indices, which implies
+\[
+ \Tree(\text{locations of the external indices})\le\Tree(o,\mathbf j)+\sum_r\Tree(j_r,\mathbf l_r).
+\]
+We take absolute values before any summation. For an output row, we sum each inner branch by its row norm and then the outer tensor by its row norm. If an external input $l$ belonging to branch $r$ is fixed, we sum every other branch by its row norm, use the column of branch $r$ at $l$, and the $j_r$-column of the outer tensor. The volume factors telescope, since $v_o/v_l=(v_o/v_{j_r})(v_{j_r}/v_l)$ by \eqref{ch02:eq:physical-column-cancellation}. For a scalar outer tensor normalized by a reference volume the same computation applies, and for counting sums the only change is the factor $v_l/v_{\mathrm{old}}$. At a common output index the networks meet at that output, and a bound with an input fixed uses the column of the factor carrying the input and rows of the other factors. This proves part (1).
+
+\paragraph{Step 2: diagrams.} We replace every edge of the diagram outside the chosen spanning tree by two independently summed copies of its index, deleting the equality constraint between them; for nonnegative sums this can only increase the result. When a split edge is present we may enlarge the external network weight to include the locations of both copies, since the connected tree of factors still spans the locations of the given external indices. We orient the tree from the factor containing the fixed index. Starting at its leaves, we sum each factor over all its ports except the port of attachment to its parent, using the bounds $A_V$; we continue toward this factor and finally sum it over all ports except the fixed index. This proves the bound without any count of the internal indices. In a substitution tree, the factors other than rows lie on the path from the fixed input to the output, and the product of their volume ratios is $v_l/v_o$, which the external column normalization cancels. A diagram without a fixed external index has no factor at which to start, and it is excluded. This proves part (2).
+
+\paragraph{Step 3: majorant series and smaller domains.} We first consider Taylor polynomials and finite diagrams. For $G(0)=0$, the ordered derivative formula reads
+\[
+ D^N(F\circ G)(0)[u_1,\dots,u_N]=\sum_{n=0}^N\frac1{n!}\sum_{(B_1,\dots,B_n)}F_n\bigl[G_{\abs{B_1}}[u_{B_1}],\dots,G_{\abs{B_n}}[u_{B_n}]\bigr],
+\]
+where $(B_1,\dots,B_n)$ runs over the ordered partitions of $\{1,\dots,N\}$ into nonempty blocks, and the term $N=n=0$ is understood separately. For block sizes $m_1+\dots+m_n=N$ the number of ordered partitions is $N!/\prod_rm_r!$. Dividing by $N!$ therefore gives exactly the coefficient of $s^N$ in $\widehat F(\widehat G(s))$, and parts (1) and (2) bound each summand. Marking one input chooses its block and its position in the block, exactly as in $(\widehat F\circ\widehat G)'=(\widehat F'\circ\widehat G)\widehat G'$. This shows that the coefficient of order $N$ with one marked input is bounded by $Nh_N$, where $h_N$ is the Taylor-divided coefficient of the composite majorant. Inputs of different kinds may be marked by separate scalar variables. For infinite orders and diagrams, the nonnegative majorant series converge on the stated domain, and Tonelli's theorem and absolute convergence justify every grouping, contraction, substitution, and derivative; equality of the analytic functions follows from equality of their coefficients. The case $G(0)\ne0$ is handled in the same way under the absolute image condition. This proves part (3).
+
+For part (4), we write $r^{n-j}=R^{n-j}(r/R)^{n-j}$ termwise; then $A^{(j)}(r)=\sum_{n\ge j}(n)_jA_nR^{n-j}(r/R)^{n-j}\le R^{-j}\sup_{n\ge j}(n)_j(r/R)^{n-j}\sum_nA_nR^n$. The coefficient of degree $s$ of the translate of the majorant to a background of size $r_1<R$ is the binomial sum $\sum_{k\ge s}\binom ks b_kr_1^{k-s}$. By the binomial theorem, $\binom ks r_1^{k-s}(R-r_1)^s\le R^k$ for each $k\ge s$; multiplying by $b_k$, summing, and using $\sum_kb_kR^k\le B$, we obtain $\sum_{k\ge s}\binom ks b_kr_1^{k-s}\le B(R-r_1)^{-s}$. Evaluating extra inputs at a background can only remove locations of external indices from a network, and the same spatial rate therefore remains valid.
+
+For part (5), we keep a separate signed occurrence for every summand of the derivative formula, every tuple of contracted indices, and every refinement of a constituent network. Its coefficient is the product of the constituent coefficients and the displayed combinatorial factor, and its monomial is the product of their monomials. Grouping occurrences with equal multi-indices or equal networks is optional and can only decrease the total variation. The network inequality of Step 1 implies the weighted bound, and the convergence argument of this step justifies the infinite sums. If a designated constituent occurrence has an assigned network meeting $W$, the network of a resolved occurrence containing it is a union that contains this assigned network, and it retains the visit to $W$.
+
+\paragraph{Step 4: networks and trees.} The inequality $\Tree(S)\le\Tree_{\mathrm{MST}}(S)$ holds since a spanning tree on $S$ is a connecting network. Conversely, we delete the cycles of a competing network without increasing its length, traverse the resulting tree with every edge twice, shortcut the tour between successive points of $S$ by the triangle inequality, and delete its last edge. The result is a path through $S$ of length at most twice the length of the network. Taking infima, we find $\Tree_{\mathrm{MST}}(S)\le2\Tree(S)$, which implies $e^{(\asp/2)\Tree_{\mathrm{MST}}}\le e^{\asp\Tree}$. Joining the constituent trees once proves the assertion that the rate is halved only once. This proves part (6).
+
+\paragraph{Step 5: inverses.} For a block matrix $B$ with absolute row sums at most $r$ and column sums at most $c$, the Cauchy--Schwarz inequality gives
+\[
+ \sum_x\Bigl|\sum_yB_{xy}u_y\Bigr|^2\le r\sum_{x,y}\norm{B_{xy}}\abs{u_y}^2\le rc\sum_y\abs{u_y}^2,
+\]
+which implies $\norm B_{2\to2}\le\sqrt{rc}$. For $0<b\le a/2$ and $s\ge0$ we have $e^{bs}-1\le bse^{bs}\le(2b/a)e^{as}$, and with the choice of $b$ in part (7) the weighted off-diagonal sums are at most $(2b/a)H\le\lambda/2$; any smaller positive choice also works. Fix $y_0\in X$ and let $W_x=e^{bd(x,y_0)}I$ on the block of $x$. The matrix
+\[
+ B=WKW^{-1}-K,\qquad B_{xz}=\bigl(e^{b(d(x,y_0)-d(z,y_0))}-1\bigr)K_{xz},
+\]
+has zero diagonal, and by the triangle inequality each scalar factor is at most $e^{bd(x,z)}-1$ in absolute value. By the bound just proved, $\norm B_{2\to2}\le\lambda/2$. Since $K\ge\lambda I$, we have $\norm{K^{-1}}_{2\to2}\le1/\lambda$, and the geometric series for $(I+K^{-1}B)^{-1}$ yields $\norm{(WKW^{-1})^{-1}}_{2\to2}\le2/\lambda$. The $(x,y_0)$ block of this inverse is $e^{bd(x,y_0)}(K^{-1})_{xy_0}$, which proves the pointwise bound. The largest value of the weight never enters, and the diagonal of $K$ cancels from $B$.
+
+For $c>0$, decomposing into the shells $k\le d(x,y)<k+1$ and using the counting bound, we obtain
+\begin{equation}\label{ch02:eq:exponential-count}
+ \sup_x\sum_ye^{-cd(x,y)}\le D\sum_{k=0}^\infty(k+2)^ve^{-ck}=\mathcal S(c;D,v)<\infty.
+\end{equation}
+With $c=b-b'$ this bounds both weighted row and column sums of $K^{-1}$ by $2\lambda^{-1}\mathcal S(b-b';D,v)$. The fixed block dimension does not change the argument, since all entries were bounded in block operator norm. This proves part (7).
+
+\paragraph{Step 6: perturbations and square roots.} By submultiplicativity of $\norm\cdot_{b'}$ (Step 1, without volume factors), when $\norm E_{b'}\le(2C_{\mathrm{inv}})^{-1}$ the series
+\begin{equation}\label{ch02:eq:weighted-neumann}
+ (K+E)^{-1}=\sum_{r=0}^\infty(-K^{-1}E)^rK^{-1}
+\end{equation}
+converges absolutely in this norm, with sum bounded by $2C_{\mathrm{inv}}$. Uniform convergence on every smaller ball implies holomorphy by termwise differentiation, and multiplication of partial sums shows that the sum is the inverse.
+
+For the square roots, let $c_2=b'/2$. We apply the pointwise bound of Step 5 to $K+tI\ge(\lambda+t)I$, whose off-diagonal part is that of $K$ and whose commutator bound $\lambda/2\le(\lambda+t)/2$ persists. This gives, for all $t\ge0$,
+\begin{equation}\label{ch02:eq:shifted-inverse}
+ \norm{(K+tI)^{-1}}_{c_2}\le\frac{C_0}{\lambda+t},\qquad C_0=2\mathcal S(b-c_2;D,v).
+\end{equation}
+Fix $\eta_0<\min\{\lambda/(2C_0),\lambda/2\}$. Since $c_2<a$, we have $\norm E_{c_2}\le\norm E_a<\eta_0$, and expanding the shifted resolvents as in \eqref{ch02:eq:weighted-neumann}, we obtain $\norm{(K+E+tI)^{-1}}_{c_2}\le2C_0/(\lambda+t)$. Hence the absolutely convergent integral
+\begin{equation}\label{ch02:eq:inverse-square-root}
+ S(E)=\frac1\pi\int_0^\infty t^{-1/2}(K+E+tI)^{-1}\,dt
+\end{equation}
+has $\norm{S(E)}_{c_2}\le2C_0\lambda^{-1/2}$ and is holomorphic in $E$. The scalar identity $\pi^{-1}\int_0^\infty t^{-1/2}(k+t)^{-1}dt=k^{-1/2}$ (substitute $t=ks^2$ and integrate $2/(1+s^2)$) and diagonalization show that $S(E)$ is the positive inverse square root when $K+E$ is real symmetric and positive. For an arbitrary complex, possibly nonsymmetric $E$, let $M=K+E$. By the bound of Step 5, $\norm E_{2\to2}<\eta_0<\lambda/2$, which implies $\operatorname{Re}\ip u{Mu}\ge(\lambda/2)\abs u^2$. For real $d>\norm M_{2\to2}^2/\lambda$,
+\[
+ \norm{(I-M/d)u}^2\le\bigl(1-\lambda/d+\norm M_{2\to2}^2/d^2\bigr)\abs u^2<\abs u^2.
+\]
+With $T=I-M/d$, expanding $(M+tI)^{-1}$ in powers of $T$ and integrating termwise in \eqref{ch02:eq:inverse-square-root}, which is justified by $\norm T_{2\to2}<1$, identifies $S(E)$ with $d^{-1/2}\sum_{r\ge0}c_rT^r$, where $c_r=4^{-r}\binom{2r}r$ are the coefficients of $(1-z)^{-1/2}$; indeed, differentiating $(1-z)^{-1/2}$ at zero gives $c_0=1$ and $c_{r+1}=(r+1/2)c_r/(r+1)$. The square of this scalar series is $(1-z)^{-1}$, which gives $S(E)^2M=I$; all factors commute with $M$, being limits of its resolvents. This proves the root identity without a symmetry assumption on $E$. Multiplying by $K+E$ gives the square root; since $K\le\Lambda I$ implies $\norm K_{c_2}\le\Lambda+H$, this multiplication is bounded uniformly. All choices depend only on $a,H,\lambda,\Lambda,D,v,b'$.
+
+Suppose now that $E=E(\theta)$ has an absolute majorant with all fixed indices on a fixed analytic ball. We insert its Taylor series into the shifted Neumann series before taking any norm. Every coefficient is a contraction, with one external index fixed, of resolvents and differentiated factors $E$, to which Steps 1 and 2 apply with any fixed external index. For $r$ insertions, the resolvent integral is bounded by
+\[
+ \frac1\pi\int_0^\infty t^{-1/2}\Bigl(\frac{C_0}{\lambda+t}\Bigr)^{r+1}dt\le C_0^{r+1}\lambda^{-r-1/2}.
+\]
+Replacing $E$ by its majorant and using this bound, we obtain a nonnegative scalar series that bounds every absolute coefficient of $S(E(\theta))$ with any index fixed; its radius does not depend on the number of indices. Multiplication by $K+E$ gives the statement for the square root. The constant coefficient is controlled by \eqref{ch02:eq:shifted-inverse}, and every coefficient of positive degree contains a differentiated factor $E$. This proves part (8).
+
+\paragraph{Step 7: logarithms of determinants.} Expanding the determinant in columns, we have $D\det K=(\det K)\tr(K^{-1}DK)$, since the linear term of $\det(I+tB)$ is $t\tr B$. To localize the trace, we keep its two matrix indices $x,y$ open. By Steps 1 and 2, a joint coefficient $T_s(x,y;u_1,\dots,u_s)$ of the differentiated product has a weighted output-row bound $B_s$ at some fixed rate $c>0$. Fix an external input $u_j=u$ and close the trace by setting $y=x$. The network length before the trace is closed is at least both the network length of the locations of the remaining external indices and $d(x,u)$. Using half the rate for each, we find that the sum over the other external inputs, with their external weight at rate $c/2$, is at most $B_se^{-cd(x,u)/2}$ for fixed $x$. If $u\notin X$, let $x_0\in X$ be a nearest point; then $d(x,x_0)\le2d(x,u)$, and \eqref{ch02:eq:exponential-count} sums the last bound over $x$ with a factor at most $\mathcal S(c/4;D,v)$; for $u\in X$ take $x_0=u$. This gives an absolute bound with any external index fixed, with one reduction of the rate independent of $s$. For any volume normalization of the fixed external index, the column factors are propagated by \eqref{ch02:eq:physical-column-cancellation}; no total count of internal indices is inserted. Higher derivatives follow by differentiating the inverse, or from
+\[
+ \log\det(K+E)-\log\det K=\sum_{r\ge1}\frac{(-1)^{r+1}}r\tr\bigl((K^{-1}E)^r\bigr),
+\]
+which holds in the neighborhood of part (8); to see this, differentiate in a scalar multiple of $E$, use the geometric series for the inverse, and integrate from zero. At positive order a derivative of $E$ provides the fixed external index. Without such an index the bound fails: $K=2I$ gives $\log\det K=\abs X\log2$ times the block dimension. This proves part (9).
+
+\paragraph{Step 8: the scalar equation.} We write $\varphi(s)=s^2/(1-Cs)$, so that $\Phi^+(t,Y)=At+\kappa Y+A\varphi(t+Y)$. For $\abs t\le t_0$ and $\abs Y\le r$ we have $\abs{t+Y}\le2r$, $C\abs{t+Y}\le1/2$, and
+\[
+ \abs{At}+A\abs{\varphi(t+Y)}\le\frac{\delta r}4+8Ar^2\le\frac{\delta r}2.
+\]
+Moreover $\abs{\varphi'(s)}\le2\abs s/(1-C\abs s)+C\abs s^2/(1-C\abs s)^2\le12r$ for $\abs s\le2r$. The map $Y\mapsto\Phi^+(t,Y)$ therefore maps the closed disc of radius $r$ into itself, since $\kappa r+\delta r/2<r$, and its derivative is at most $\kappa+12Ar\le1-5\delta/8<1$. The iteration started at $Y=0$ converges uniformly, since successive differences decrease by this ratio, and the same estimate implies uniqueness in the disc. Since each iterate is holomorphic, the limit is holomorphic, and $Y(0)=0$. Every iterate has nonnegative Taylor coefficients, and they increase along the iteration; the limit therefore has nonnegative coefficients. Equivalently, the coefficient of degree $s$ of $Y$ is $(1-\kappa)^{-1}$ times a nonnegative expression in the earlier coefficients, with the source term at degree one.
+
+\paragraph{Step 9: the system.} For $\max_j\abs{\theta_j}\le t$ and $\max_o\abs{u_o}\le Y$, the row bounds of the hypothesis imply $\max_o\abs{\Phi_o(\theta,u)}\le\Phi^+(t,Y)$, since the weights $e^{\asp\Tree}$ are at least one; similarly the Lipschitz constant of $u\mapsto\Phi(\theta,u)$ in the maximum norm is at most $\partial_Y\Phi^+(t,Y)$. By Step 8, the Picard iteration $u^{(0)}=0$, $u^{(n+1)}=\Phi(\theta,u^{(n)})$ stays in the ball of radius $r$ and converges, and the small solution is unique. By part (3), each iterate $u^{(n)}$ has coefficient tensors bounded, in every output-row norm and every input-column norm, by the coefficients of the scalar iterate $Y^{(n)}$, where $Y^{(n+1)}=\Phi^+(t,Y^{(n)})$; the factorials cause no loss, since after division by $s!$ the counting of ordered partitions in Step 3 reproduces ordinary composition of power series. Passing to the limit coefficientwise, we obtain the bounds for $u(\theta)$. For the derivative in a fixed input $\theta_j$, we mark this input in the same expansion. The branch containing it uses column sums and all other branches use row sums. By Step 3, the resulting scalar recursion is the derivative of the scalar equation, which is solved by the displayed formula for $Y'(t)$. By the reverse triangle inequality and $A\abs{\varphi'}\le12Ar$, its denominator has modulus at least $1-\kappa-12Ar\ge5\delta/8$, and no further loss of the spatial rate occurs. All comparisons are made coefficient by coefficient, before summing over degrees.
+
+Translation to a background of size $r_1$ in a smaller ball is handled by part (4): the coefficients of order $s$ are bounded by $B(R-r_1)^{-s}$, and multiplying back by $s!$ and absorbing the prefactor for $s\ge1$ gives $s!C_1^s$, with $C_1$ depending only on the majorants and radius ratios. For a parameter entering $\Phi$ with variation majorant $H(t,Y)$, differentiating the fixed-point equation, we obtain the coefficientwise inequality $Z\preceq H+(\partial_Y\Phi^+)Z$ between majorant series, and repeated substitution bounds $Z$ by the Neumann series in $\partial_Y\Phi^+(t,Y(t))$. Evaluating at $0\le t<t_0$ gives the value bound $Z(t)\le H(t,Y(t))/(1-\partial_Y\Phi^+(t,Y(t)))$; it does not give $Z_n\le H_n/(1-q)$ for the individual coefficients. Since the only counting estimate in the proof was \eqref{ch02:eq:exponential-count}, all constants depend on the fixed $J$ when the counting constant is $D_J$. This proves part (10).
+\end{proof}
+
+\section{Concentration on products of balls}\label{ch02:sec:concentration}
+
+The conditional fluctuation kernels of \eqref{ch01:eq:complete-white-kernel} are measures of the form $Z^{-1}e^{-V}dw$ on a product of Euclidean balls, with a potential whose Hessian is bounded below. The next theorem gives the concentration inequalities for such measures used in later sections, with constants depending only on the lower Hessian bound. The variance, entropy, and gradient arguments are those of Brascamp and Lieb \cite{BrascampLieb1976}, Gross \cite{Gross1975}, and Bakry and Émery \cite{BakryEmery1985}. The representation of covariances by a one-form operator is the method of Helffer and Sjöstrand \cite{HelfferSjostrand1994}, whose relation to the Brascamp--Lieb inequality is discussed by Helffer \cite{Helffer1998}. The passage from entropy to exponential moments is the Herbst argument \cite[Section~2.3, Proposition~2.3, p.~149, and Corollary~2.4, p.~151]{Ledoux1999}. We must check that these arguments survive the boundary of the product of balls, including the intersections of faces. They do because the balls are convex: in the Bochner identity for the Neumann Laplacian, the second fundamental form of each sphere contributes the nonnegative term $p_x^{-1}\abs{(\nabla_xh)^{\mathrm{tan}}}^2$, and the faces of different factors meet transversally. We prove this realization explicitly rather than importing a statement on the whole space.
+
+\begin{theorem}\label{ch02:thm:reflecting-concentration}
+Let $X$ be a finite set, and for $x\in X$ let $q_x\ge1$ be integers and $p_x>0$. Let
+\[
+ \Omega=\prod_{x\in X}\{w_x\in\R^{q_x}:\abs{w_x}\le p_x\},\qquad
+ d\mu=Z^{-1}e^{-V(w)}\,dw\quad\text{on }\Omega,
+\]
+where $V$ is real and of class $C^2$ on a neighborhood of $\Omega$, and $D^2V\ge mI$ for some $m>0$. Let $q=\sum_xq_x$ and $\xi=w-\E_\mu w$. Then the following statements hold.
+\begin{enumerate}
+\item For every real $f\in H^1(\mu)$ and every real function $F$ that is Lipschitz for the Euclidean norm,
+\[
+ \Ent_\mu(f^2)\le\frac2m\E_\mu\abs{\nabla f}^2,\qquad
+ \Var_\mu(f)\le\frac1m\E_\mu\abs{\nabla f}^2,
+\]
+\[
+ \log\E_\mu e^{t(F-\E_\mu F)}\le\frac{t^2\Lip(F)^2}{2m}\qquad(t\in\R),
+\]
+where $\Ent_\mu(h)=\E_\mu[h\log h]-\E_\mu h\log\E_\mu h$. These constants do not depend on $\abs X$, on the $q_x$ and $p_x$, or on upper bounds for the diagonal blocks of the Hessian.
+\item Let $d$ be a metric on $X$ and $b>0$, and write $V_{xy}=D_{w_x}D_{w_y}V$. If
+\[
+ \max\Bigl\{\sup_x\sum_{y\ne x}(e^{bd(x,y)}-1)\sup_\Omega\norm{V_{xy}},\ \sup_y\sum_{x\ne y}(e^{bd(x,y)}-1)\sup_\Omega\norm{V_{xy}}\Bigr\}\le\frac m2,
+\]
+then for all real or complex $F,G\in H^1(\mu)$,
+\[
+ \abs{\Cov_\mu(F,G)}\le\frac2m\sum_{x,y}e^{-bd(x,y)}\norm{\nabla_xF}_{L^2(\mu)}\norm{\nabla_yG}_{L^2(\mu)},
+\]
+where the covariance is bilinear for complex functions. In particular, if $V_{xy}=0$ for $d(x,y)>r_0$ and the mixed blocks have row and column sums at most $H_0$, the hypothesis holds whenever $H_0(e^{br_0}-1)\le m/2$; exponentially decaying mixed Hessians are covered by the displayed condition.
+\item For every real symmetric $q\times q$ matrix $A$, the quadratic form $Q_A=\xi^{\mathsf T}A\xi$ satisfies
+\[
+ \log\E_\mu e^{t(Q_A-\E_\mu Q_A)}\le\frac{8t^2}{m^2}\norm A_{\mathrm{HS}}^2,\qquad\abs t\le\frac m{4\norm A_{\mathrm{op}}},
+\]
+and for every $\zeta\in\R^q$,
+\[
+ \log\E_\mu e^{\zeta\cdot\xi+t(Q_A-\E_\mu Q_A)}\le\frac{\abs\zeta^2}m+\frac{16t^2}{m^2}\norm A_{\mathrm{HS}}^2,\qquad\abs t\le\frac m{8\norm A_{\mathrm{op}}},
+\]
+where the range of $t$ is all of $\R$ if $A=0$.
+\item Suppose $q_x=3$ for all $x$. Let $\mathcal F$ be a family of distinct pairs $(e,f)$ of blocks such that every block belongs to at most $D_0$ pairs of $\mathcal F$, counting both orientations if both occur, and let $j_{ef}\in\R^3$. Then $\sum_{(e,f)\in\mathcal F}j_{ef}\cdot(\xi_e\times\xi_f)=\xi^{\mathsf T}A_j\xi$ for a real symmetric matrix $A_j$ with
+\[
+ \norm{A_j}_{\mathrm{op}}\le\frac{D_0}2\norm j_\infty,\qquad
+ \norm{A_j}_{\mathrm{HS}}^2\le D_0\sum_{(e,f)\in\mathcal F}\abs{j_{ef}}^2.
+\]
+If $\mu$ is invariant under the simultaneous rotation $w\mapsto(Rw_x)_x$ for every $R\in\mathrm{SO}(3)$, then this quadratic form has mean zero.
+\end{enumerate}
+All statements concern the measure $\mu$ on the fixed convex set $\Omega$, with its full potential $V$, and they are centered at the mean under $\mu$. They give no convexity statement for marginals of $\mu$ or for measures on nonconvex sets.
+\end{theorem}
+
+Steps 1--6 construct the Neumann realization $\mathcal L$ of $-\Delta+\nabla V\cdot\nabla$ and a realization $\mathcal A_1$ of the corresponding operator on vector fields, whose form contains the Hessian of $V$ and a nonnegative curvature term from the spheres. They also prove the commutation $\nabla\mathcal L^{-1}=\mathcal A_1^{-1}\nabla$, and establish the semigroup bound $\abs{\nabla P_th}\le e^{-mt}P_t\abs{\nabla h}$. Steps 7 and 8 derive the entropy bound and, from $\Cov(F,G)=\ip{\nabla F}{\mathcal A_1^{-1}\nabla G}$ and exponential conjugation, the covariance bound. Step 9 derives the quadratic moments by comparison with an auxiliary Gaussian vector and absorption of the relative entropy, without independent coordinates or a Hessian bound for the tilted measure, and Step 10 treats cross products. The construction of the operators in Steps 1 and 2 uses constants that may depend on the dimension, the radii, and the bounds of $e^{-V}$ on the fixed compact set $\Omega$; these constants do not enter the inequalities.
+
+\begin{proof}[Proof of \cref{ch02:thm:reflecting-concentration}]
+All Hilbert spaces in this proof use the measure $\mu$ unless indicated otherwise. We write $B_x=\{\abs{w_x}<p_x\}$, and $n_x$ for the outer normal of the face $\partial B_x\times\prod_{z\ne x}B_z$.
+
+\paragraph{Step 1: the scalar operator.} The Sobolev space $H^1(\Omega)$ consists of the $L^2$ functions with first distributional derivatives in $L^2$; the weighted and unweighted norms are equivalent, since $e^{-V}$ is bounded above and below on $\Omega$. Smooth functions on $\overline\Omega$ are dense in $H^1(\Omega)$, and the embedding $H^1(\Omega)\to L^2(\Omega)$ is compact. For both facts we extend functions to a fixed ambient rectangle. On a ball of radius $p$, we reflect the radial coordinate $r\in(p,3p/2)$ to $2p-r\in(p/2,p)$, multiply the reflected function by a smooth cutoff equal to one near $r=p$ and zero near $r=3p/2$, and set it zero beyond. The Jacobians on the annulus are bounded above and below and the values match at $r=p$; differentiation in the radial and tangential directions shows that this extension is bounded on $H^1$. For an interval we reflect at each endpoint. Applying these extensions successively in the finitely many factors gives a bounded extension operator into $H^1$ of a rectangle, and convolution with smooth approximate identities proves density. For compactness, we replace an extended function $u$ by its averages over a grid of cubes of side $\varepsilon$. Integrating $u(t)-u(s)=\int_s^tu'$ in each coordinate and using Cauchy--Schwarz, we bound the squared $L^2$ error by $C\varepsilon^2\norm{\nabla u}_2^2$. The averages lie in a fixed finite-dimensional space. From a bounded sequence in $H^1$ we may therefore extract, by a diagonal argument over $\varepsilon=2^{-k}$, a subsequence converging in $L^2$.
+
+The form $q_0(h,k)=\E_\mu\nabla h\cdot\nabla k$ on $H^1(\mu)$ is closed. For $f\in L^2(\mu)$, minimizing $q_0(h,h)+\norm h_2^2-2\ip fh$ gives a unique weak solution of $(I+\mathcal L)h=f$. Indeed, a minimizing sequence is bounded, and the parallelogram identity shows that it is Cauchy in the form norm. Its limit lies in $H^1$ since distributional derivatives pass to $L^2$ limits, the first variation gives the weak equation, and strict positivity of the form gives uniqueness. The solution operator $T=(I+\mathcal L)^{-1}$ is positive, self-adjoint, and compact by the compact embedding. It has a complete orthonormal eigenbasis. Indeed, we maximize $\ip{Tu}u$ on the unit sphere. A maximizing sequence has a weakly convergent subsequence, and the compactness of $T$ lets us pass to the limit in $\ip{Tu}u$; positivity forces the limit to have norm one, and the first variation shows that it is an eigenvector. We repeat this in the orthogonal complement of the eigenvectors already found. The eigenvalues tend to zero, since otherwise the images under $T$ of these orthonormal vectors would have no convergent subsequence. On the orthogonal complement of all the eigenvectors the supremum of $\ip{Tu}u$ is zero. By polarization $T$ vanishes there, and since $T$ is injective this complement is trivial. Hence $\mathcal L$ has an orthonormal basis of eigenfunctions with eigenvalues $0\le\lambda_\nu\to\infty$. Where its derivatives are defined, $\mathcal L=-\Delta+\nabla V\cdot\nabla$, with the weak Neumann condition. The kernel of $\mathcal L$ consists of the constants. Indeed, a function with zero energy has zero distributional gradient. It is therefore constant on each ball contained in $\Omega$, and these constants agree since $\Omega$ is connected. There also exists a positive gap on functions of mean zero, since otherwise normalized functions of mean zero with gradients tending to zero would converge, by compactness, to a constant of mean zero and norm one. This preliminary gap is used only for the existence of solutions of Poisson equations and for convergence to equilibrium.
+
+\paragraph{Step 2: a core for the unweighted Laplacian.} Let $A_0$ be the unweighted Neumann Laplacian on $\Omega$, with respect to $L^2(dw)$. On a single ball, the construction of Step 1 gives a Neumann eigenbasis. Its eigenfunctions are smooth up to the boundary, and weak Neumann solutions are in $H^2$. In the interior this is the standard difference-quotient argument. Testing the weak equation with $-D_{-h,j}(\chi^2D_{h,j}u)$, where $\chi$ is a cutoff and $D_{h,j}$ a difference quotient, gives
+\[
+ c\norm{\chi D_{h,j}\nabla u}_2^2\le\frac c2\norm{\chi D_{h,j}\nabla u}_2^2+C\bigl(\norm f_2^2+\norm u_{H^1}^2\bigr)
+\]
+for uniformly elliptic Lipschitz coefficients $a$. Here the leading term on the left is $\int\chi^2a(\cdot+he_j)D_{h,j}\nabla u\cdot D_{h,j}\nabla u$, and all remaining terms contain either $D_{h,j}a$, which is bounded by the Lipschitz constant of $a$, or a derivative of $\chi$. The right side $\int f[-D_{-h,j}(\chi^2D_{h,j}u)]$ is bounded by $C\norm f_2(\norm{\chi D_{h,j}\nabla u}_2+\norm{\nabla u}_2)$, by the line-integral bound for a difference quotient, and the inequality $rs\le\epsilon r^2+s^2/(4\epsilon)$ absorbs these terms. Uniformly bounded difference quotients yield weak second derivatives, since a subsequence converges weakly in $L^2$, and testing against smooth compactly supported functions identifies the limit as the distributional derivative. Near the boundary we use the inward normal distance $s\ge0$ and coordinates $y$ on the sphere; the metric has no mixed normal-tangential term and normal coefficient one, and its volume density $J$ is smooth and positive on a thin collar. The weak Neumann equation reads $-\partial_s(J\partial_su)-\partial_{y_\alpha}(Jg^{\alpha\beta}\partial_{y_\beta}u)=Jf$. Reflecting $u,J,g^{\alpha\beta},f$ evenly in $s$ gives Lipschitz, uniformly elliptic coefficients and a weak equation across $s=0$, since adding its tests on the two half-collars gives exactly the Neumann weak equation. The interior estimate then gives $H^2$ up to the boundary, and integration by parts identifies the zero normal derivative. For an eigenfunction, $f=\lambda u$, we repeat the tangential difference-quotient argument in the half-collar; at each order the commutators differentiate only the smooth metric coefficients and lower derivatives already controlled, so all tangential derivatives gain one more $H^1$ derivative. The equation then solves for $\partial_s^2u$, and differentiating it recovers successively the derivatives with two, three, and more normal indices; by induction $u\in H^k$ for every $k$. To deduce smoothness, we extend $u$ from a half-chart by a finite linear combination $\sum_jc_ju(y,-js)$ of reflections, whose coefficients solve the invertible Vandermonde system $\sum_jc_j(-j)^l=1$, $0\le l<k$; this gives an $H^k$ extension. We multiply it by an interior cutoff in an ambient rectangle with $q$ coordinates. Repeated integration in the $q$ coordinate directions and the Cauchy--Schwarz inequality bound the supremum of a derivative of order $r$ of a smooth function by $C\norm u_{H^{r+q}}$ on the rectangle. For example, the function itself is the iterated integral of $\partial_1\cdots\partial_qu$ from each coordinate to the far side of the support. Applying this bound to smooth approximations of the extension and to their differences, we see that their derivatives through order $r$ converge uniformly. It follows that the $H^{r+q}$ function has continuous derivatives of order $r$. Since $k$ is arbitrary, $u$ is smooth. For an interval the same conclusions follow from $-u''=f$ and the Neumann conditions at the endpoints.
+
+Finite products of these eigenfunctions are smooth, satisfy the Neumann condition on every face, and form an orthonormal basis of $L^2(dw)$ on $\Omega$, as one sees by expanding successively in each factor using Fubini's theorem. Their eigenvalues for $A_0$ are sums of eigenvalues of the factors. They form a core for $A_0$. Indeed, the weak equation shows that every $h\in D(A_0)$ has coefficients with $\sum_\nu(1+\lambda_\nu^2)\abs{h_\nu}^2<\infty$; conversely, if this sum is finite, the partial sums solve the weak equation and converge in the graph norm, which shows that $h\in D(A_0)$. The same argument with $1+\lambda_\nu$ describes the form domain; in particular, a function orthogonal to all product eigenfunctions in the form norm has $(1+\lambda_\nu)h_\nu=0$ for all $\nu$ and hence vanishes, which proves density in the form norm. Truncating the expansion therefore gives convergence in the graph norm and in the form norm.
+
+\paragraph{Step 3: the boundary identity.} For a function $h$ in this core, two integrations by parts, one factor at a time, give
+\begin{equation}\label{ch02:eq:neumann-core-identity}
+ \norm{D^2h}_{L^2(dw)}^2+\sum_x\int_{\partial B_x\times\prod_{z\ne x}B_z}p_x^{-1}\abs{(\nabla_xh)^{\mathrm{tan}}}^2\,dS=\norm{A_0h}_{L^2(dw)}^2.
+\end{equation}
+Indeed, the difference of the two bulk terms is the boundary integral of $(\Delta h)\partial_nh-D^2h(n,\nabla h)$. The first term vanishes. Differentiating $\partial_{n_x}h=0$ tangentially along the face of $x$, we find $D^2h(n_x,\nabla h)=-p_x^{-1}\abs{(\nabla_xh)^{\mathrm{tan}}}^2$, because $D_vn_x=p_x^{-1}v_x^{\mathrm{tan}}$. For an interval the curvature term is zero. By Fubini's theorem on the individual balls, the identity holds on the product. Since intersections of distinct faces have zero surface measure, there is no integral over a corner. Applied to differences of core functions, the identity shows that convergence in the graph norm of $A_0$ implies convergence in $H^2$ and in the boundary term.
+
+\paragraph{Step 4: the operator on vector fields.} Let $\mathcal H_1$ be the space of $H^1$ vector fields $u=(u_x)_{x\in X}$ with $u_x\cdot n_x=0$ on the face of $x$, in the sense of traces. Traces are continuous on $H^1$: in the collar, $\abs{u(y,0)}^2\le C\int_0^\varepsilon(\abs{u(y,s)}^2+\abs{u(y,s)}\abs{\partial_su(y,s)})\,ds$, and Cauchy--Schwarz applies. Smooth vector fields satisfying the face conditions are dense in $\mathcal H_1$. To see this, we reflect the normal component of $u_x$ oddly and its tangential components evenly in the local normal frame of the face of $x$. The odd component has zero trace, and no jump occurs. Near an intersection of faces we do this separately in each active ball factor; the reflections commute, since the normal frames of different factors depend on different variables. Convolving with a kernel that is even in every reflected normal coordinate and restricting to the product half-chart preserves the zero normal components. A partition of unity, constant in the normal coordinate near each face, and ordinary convolution in the interior complete the approximation, including near all corners.
+
+On $\mathcal H_1$ we define the symmetric form
+\begin{equation}\label{ch02:eq:oneform-form}
+ \begin{split}
+ q_1(u,v)={}&\E_\mu\sum_i\partial_iu\cdot\partial_iv+\E_\mu u^{\mathsf T}(D^2V)v\\
+ &+\sum_x\int_{\partial B_x\times\prod_{z\ne x}B_z}p_x^{-1}u_x^{\mathrm{tan}}\cdot v_x^{\mathrm{tan}}\,Z^{-1}e^{-V}\,dS.
+ \end{split}
+\end{equation}
+By the trace estimate, the boundedness of $D^2V$, and $D^2V\ge mI$, its norm is equivalent to the $H^1$ norm, and the form is therefore closed. The associated self-adjoint operator $\mathcal A_1$, obtained as in Step 1, satisfies
+\begin{equation}\label{ch02:eq:oneform-gap}
+ q_1(u,u)\ge m\norm u_2^2,\qquad\norm{\mathcal A_1^{-1}}_{2\to2}\le m^{-1}.
+\end{equation}
+Only this lower bound enters the final constants. Formally $\mathcal A_1=\mathcal LI+D^2V$; on the face of $x$ the tangential part of the block $u_x$ satisfies the Robin condition $\partial_{n_x}u_x^{\mathrm{tan}}+p_x^{-1}u_x^{\mathrm{tan}}=0$, while the other blocks satisfy the Neumann condition. At intersections of faces, the closed form \eqref{ch02:eq:oneform-form} is the definition.
+
+\paragraph{Step 5: gradient commutation.} Let $\mathcal Lh=g$ weakly. Testing with $e^V$ times an unweighted $H^1$ test function, we find that $A_0h=g-\nabla V\cdot\nabla h$ weakly in $L^2(dw)$. Since the right side is in $L^2$, we have $h\in D(A_0)$, and there exist core functions $h_j$ converging to $h$ in the graph norm of $A_0$. By \eqref{ch02:eq:neumann-core-identity}, $h_j\to h$ in $H^2$ and in the boundary term, and $\mathcal Lh_j\to g$ in $L^2(\mu)$. For a smooth vector field $v$ satisfying the face conditions, differentiation and integration by parts give
+\begin{equation}\label{ch02:eq:gradient-core-identity}
+ q_1(\nabla h_j,v)=\ip{\mathcal Lh_j}{d_V^*v},\qquad d_V^*v=-\operatorname{div}v+\nabla V\cdot v.
+\end{equation}
+Indeed, $\nabla\mathcal Lh_j=\mathcal L\nabla h_j+D^2V\nabla h_j$, and on the face of $x$ the normal derivative of the gradient, paired with $v$, equals $-p_x^{-1}(\nabla_xh_j)^{\mathrm{tan}}\cdot v_x^{\mathrm{tan}}$, while the other blocks have zero normal derivative there; these are exactly the boundary terms in \eqref{ch02:eq:oneform-form}. The scalar integration by parts produces no further term, since the normal traces of $v$ vanish. By density, \eqref{ch02:eq:gradient-core-identity} extends to $v\in\mathcal H_1$. Passing to the limit $j\to\infty$, and taking $g\in H^1$, we obtain
+\begin{equation}\label{ch02:eq:gradient-commutation}
+ \nabla h=\mathcal A_1^{-1}\nabla g.
+\end{equation}
+This uses only the $C^2$ regularity of $V$: $\nabla V$ is bounded, and the differentiation in \eqref{ch02:eq:gradient-core-identity} uses only continuous second derivatives of $V$.
+
+\paragraph{Step 6: semigroups and the gradient bound.} Using the eigenbasis of Step 1, we define $P_t=e^{-t\mathcal L}$ by multiplying the coefficients by $e^{-t\lambda_\nu}$. It preserves constants, positivity, and the interval $[0,1]$. For the last two properties, we solve $(I+s\mathcal L)h=f$ and test with $h^-$ and $(h-1)^+$. If $0\le f\le1$, the first test gives $h^-=0$ and the second $(h-1)^+=0$; since $P_t=\lim_k(I+(t/k)\mathcal L)^{-k}$ in $L^2$, these properties pass to $P_t$. Symmetry and $P_t1=1$ imply the invariance of $\mu$, and the preliminary gap implies $P_th\to\E_\mu h$ in $L^2$.
+
+The variational construction applied to $q_1$ on vector-valued $L^2$, with form domain $\mathcal H_1$ (dense, since it contains the compactly supported smooth vector fields, and compactly embedded by the scalar argument), gives the semigroup $e^{-t\mathcal A_1}$. For $h\in H^1$ and $t>0$, the spectral expansion puts $P_th$ and $\mathcal LP_th$ in the required domains, and \eqref{ch02:eq:gradient-core-identity} shows that $u_t=\nabla P_th$ solves $\partial_tu_t=-\mathcal A_1u_t$ weakly, with initial value $\nabla h$. Uniqueness follows by differentiating the squared norm of the difference of two solutions and using \eqref{ch02:eq:oneform-gap}. We conclude that $\nabla P_th=e^{-t\mathcal A_1}\nabla h$.
+
+We claim that
+\begin{equation}\label{ch02:eq:semigroup-domination}
+ \abs{e^{-t\mathcal A_1}u}\le e^{-mt}P_t\abs u.
+\end{equation}
+Let $u_t=e^{-t\mathcal A_1}u$ and $h_\varepsilon=(\abs{u_t}^2+\varepsilon^2)^{1/2}$. In the weak equation for $u_t$ we use the test field $\psi u_t/h_\varepsilon$, with $\psi\in H^1$ bounded and nonnegative; it belongs to $\mathcal H_1$, since multiplication by a scalar preserves the face conditions. The kinetic term equals
+\[
+ \nabla h_\varepsilon\cdot\nabla\psi+\psi\Bigl(\frac{\abs{\nabla u_t}^2}{h_\varepsilon}-\frac{\abs{\nabla h_\varepsilon}^2}{h_\varepsilon}\Bigr),
+\]
+whose second summand is nonnegative by Cauchy--Schwarz. The Hessian term is at least $m\psi\abs{u_t}^2/h_\varepsilon\ge m\psi(h_\varepsilon-\varepsilon)$, and every boundary curvature term is nonnegative. Hence $(\partial_t+\mathcal L+m)(h_\varepsilon-\varepsilon)\le0$ in the weak scalar sense. We compare with $e^{-mt}P_t\abs u$ and test the difference with its positive part; the squared $L^2$ norm of this positive part does not increase from zero. This comparison is justified first on intervals $[\delta,T]$, where the spectral solutions have time derivatives in $L^2$ and lie in the form domains, and then by continuity in $L^2$ as $\delta\downarrow0$; truncation of the tests and approximation in the form norm justify the chain rule, whose derivatives are bounded for fixed $\varepsilon$. Letting $\varepsilon\downarrow0$ proves \eqref{ch02:eq:semigroup-domination}. Combined with the previous paragraph, this gives
+\[
+ \abs{\nabla P_th}\le e^{-mt}P_t\abs{\nabla h}.
+\]
+
+\paragraph{Step 7: entropy, variance, and exponential moments.} Let $h$ be smooth, positive, and bounded above and below. Applying the positive operator $P_t$ to $(f-ch)^2/h\ge0$ for every rational $c$ and minimizing over $c$, we obtain the pointwise inequality $(P_tf)^2\le P_t(f^2/h)\,P_th$. With $f=\abs{\nabla h}$ and the gradient bound of Step 6, we obtain
+\begin{equation}\label{ch02:eq:entropy-gradient}
+ \frac{\abs{\nabla P_th}^2}{P_th}\le e^{-2mt}P_t\Bigl(\frac{\abs{\nabla h}^2}{h}\Bigr).
+\end{equation}
+By the weak equation and the chain rule for $\log P_th$, we have
+\[
+ -\frac d{dt}\E_\mu[(P_th)\log P_th]=\E_\mu\frac{\abs{\nabla P_th}^2}{P_th}.
+\]
+Since the bounds on $h$ persist under $P_t$, convergence of $P_th$ to its mean in $L^2$ implies convergence of the entropy integral to $(\E h)\log\E h$. Integrating in time and using \eqref{ch02:eq:entropy-gradient} and the invariance of $\mu$, we find $\Ent_\mu(h)\le(2m)^{-1}\E_\mu\abs{\nabla h}^2/h$. For bounded smooth $f$, substituting $h=f^2+\varepsilon$ and letting $\varepsilon\downarrow0$, we obtain $\Ent_\mu(f^2)\le(2/m)\E_\mu\abs{\nabla f}^2$. For general $f\in H^1$, we truncate, approximate by smooth functions, and use that the entropy is lower semicontinuous under convergence in $L^2$. Indeed, $s\log s$ is bounded below, and Fatou's lemma applies along an almost everywhere convergent subsequence, while the mean term converges in $L^1$. This proves the logarithmic Sobolev inequality.
+
+Expanding at $f=1+\varepsilon g$ with $g$ bounded, we find $\Ent((1+\varepsilon g)^2)=2\varepsilon^2\Var(g)+o(\varepsilon^2)$. Then the logarithmic Sobolev inequality implies the Poincaré inequality with constant $1/m$; truncation and density extend it to $H^1$. For a real Lipschitz $F$ let $\varphi(t)=\log\E_\mu e^{tF}$. Applying the logarithmic Sobolev inequality to $e^{tF/2}$, we find $t\varphi'(t)-\varphi(t)\le t^2\Lip(F)^2/(2m)$. Integrating $(\varphi(t)/t)'$ from zero proves the exponential moment bound for $t>0$, and applying it to $-F$ gives $t<0$. To justify the chain rule, we extend $F$ to a neighborhood by $\inf_{y\in\Omega}(F(y)+\Lip(F)\abs{x-y})$ and smooth; this preserves the Lipschitz constant and converges uniformly on $\Omega$; no differentiability of $F$ at the boundary is needed. This proves part (1).
+
+\paragraph{Step 8: covariances.} For real $G\in H^1$, we solve $\mathcal Lh=G-\E G$ with $\E h=0$, using the preliminary gap. By weak integration by parts and \eqref{ch02:eq:gradient-commutation}, we have
+\begin{equation}\label{ch02:eq:covariance-oneform}
+ \Cov_\mu(F,G)=\ip{\nabla F}{\mathcal A_1^{-1}\nabla G}_{L^2(\mu)},
+\end{equation}
+first for smooth $F$ and then for $F\in H^1$ by density. Complexifying gives the bilinear identity for complex $F,G$, with neither function conjugated; its absolute value is bounded by the Cauchy--Schwarz inequality in the complex Hilbert space.
+
+Fix $y_0\in X$ and set $W_x=e^{bd(x,y_0)}I_{q_x}$ on the components of the block $x$. This weight does not depend on $w$; it preserves the face conditions and commutes with the kinetic and boundary forms and with every diagonal block of the Hessian. In the closed-form realization, we obtain
+\[
+ W\mathcal A_1W^{-1}=\mathcal A_1+B,\qquad B_{xz}=\bigl(e^{b(d(x,y_0)-d(z,y_0))}-1\bigr)V_{xz}(w).
+\]
+Each block multiplier has norm at most $(e^{bd(x,z)}-1)\sup_\Omega\norm{V_{xz}}$. By the row-column bound of Step 5 in the proof of \cref{ch02:lem:coefficient-algebra} and the hypothesis of part (2), we have $\norm B_{2\to2}\le m/2$ on the direct sum of the block spaces $L^2(\mu)$. By \eqref{ch02:eq:oneform-gap} and a Neumann series, $\norm{(W\mathcal A_1W^{-1})^{-1}}\le2/m$, and the $(x,y_0)$ block satisfies
+\[
+ \norm{(\mathcal A_1^{-1})_{xy_0}}_{L^2\to L^2}\le\frac2me^{-bd(x,y_0)}.
+\]
+Inserting this bound into \eqref{ch02:eq:covariance-oneform} and applying Cauchy--Schwarz to each block pairing, we obtain the covariance bound of part (2), for real and complex functions. For an interaction of range $r_0$, every off-diagonal weight is at most $e^{br_0}-1$, which gives the stated criterion. Neither the individual $p_x,q_x$ nor an upper bound on the diagonal Hessian blocks entered.
+
+\paragraph{Step 9: quadratic moments.} The classical Hanson--Wright inequality concerns independent coordinates \cite{HansonWright1971}, and extensions based on concentration allow dependent vectors \cite[Theorem~2.5, p.~4]{Adamczak2015}; here we derive the required bounds directly from the logarithmic Sobolev inequality for $\mu$. Applying part (1) to the linear function $v\cdot w$, we obtain
+\begin{equation}\label{ch02:eq:linear-subgaussian}
+ \E_\mu e^{v\cdot\xi}\le e^{\abs v^2/(2m)}.
+\end{equation}
+If $A=0$, all quadratic statements follow from this. Let $A\ne0$, and let $Z_0$ be a standard Gaussian vector in $\R^q$, independent of $w$. Since $e^{\alpha\abs y^2}=\E e^{\sqrt{2\alpha}Z_0\cdot y}$ (completion of the square, as in \cref{ch02:lem:hodge-schur}) and all integrands are positive, we have for $\alpha\ge0$
+\[
+ \E_\mu e^{\alpha\abs{A\xi}^2}=\E_{Z_0}\E_\mu e^{\sqrt{2\alpha}(AZ_0)\cdot\xi}\le\E_{Z_0}e^{(\alpha/m)\abs{AZ_0}^2}=\det\bigl(I-(2\alpha/m)A^2\bigr)^{-1/2},
+\]
+provided $2\alpha\norm A_{\mathrm{op}}^2<m$. At $\alpha=m/(4\norm A_{\mathrm{op}}^2)$ all eigenvalues of $(2\alpha/m)A^2$ are at most $1/2$, and since $-\log(1-s)\le2s$ on $[0,1/2]$,
+\begin{equation}\label{ch02:eq:positive-quadratic}
+ \log\E_\mu e^{\alpha\abs{A\xi}^2}\le\frac{2\alpha}m\norm A_{\mathrm{HS}}^2.
+\end{equation}
+Now let $Q=\xi^{\mathsf T}A\xi$, $\psi(t)=\log\E_\mu e^{tQ}$, and $d\mu_t=e^{tQ-\psi(t)}d\mu$. All these quantities are finite and smooth in $t$, since the domain is compact. The relative entropy of $\mu_t$ with respect to $\mu$ is $D_t=t\psi'(t)-\psi(t)$; with $r=d\mu_t/d\mu$, integrating $r\log r\ge r-1$ against $\mu$, we find $D_t\ge0$. Applying the logarithmic Sobolev inequality to $e^{tQ/2}$ and using $\nabla Q=2A\xi$, we find $D_t\le(2t^2/m)\E_{\mu_t}\abs{A\xi}^2$. For any real random variable $Y$, the entropy inequality $\alpha\E_{\mu_t}Y\le D_t+\log\E_\mu e^{\alpha Y}$ holds (Jensen's inequality for the logarithm, applied to $e^{\alpha Y}d\mu/d\mu_t$ under $\mu_t$). With $Y=\abs{A\xi}^2$ and \eqref{ch02:eq:positive-quadratic}, we obtain
+\[
+ D_t\le\frac{8t^2\norm A_{\mathrm{op}}^2}{m^2}D_t+\frac{4t^2}{m^2}\norm A_{\mathrm{HS}}^2.
+\]
+For $\abs t\le m/(4\norm A_{\mathrm{op}})$ the first coefficient is at most $1/2$, which implies $D_t\le8t^2\norm A_{\mathrm{HS}}^2/m^2$. For $t>0$, integrating $(\psi(t)/t)'=D_t/t^2$ from zero, where $\psi(t)/t\to\E_\mu Q$, proves the first bound of part (3); replacing $A$ by $-A$ gives $t<0$. For the joint bound, by the Cauchy--Schwarz inequality and \eqref{ch02:eq:linear-subgaussian}, we have
+\[
+ \log\E_\mu e^{\zeta\cdot\xi+t(Q-\E Q)}\le\frac12\log\E_\mu e^{2\zeta\cdot\xi}+\frac12\log\E_\mu e^{2t(Q-\E Q)}\le\frac{\abs\zeta^2}m+\frac{16t^2}{m^2}\norm A_{\mathrm{HS}}^2,
+\]
+for $\abs t\le m/(8\norm A_{\mathrm{op}})$. This proves part (3).
+
+\paragraph{Step 10: cross products.} We write $J(j)v=j\times v$. A pair $(e,f)$ contributes the symmetric matrix with blocks $A_{ef}=-J(j_{ef})/2$ and $A_{fe}=A_{ef}^{\mathsf T}$, because $\xi_e^{\mathsf T}[-J(j_{ef})]\xi_f=j_{ef}\cdot(\xi_e\times\xi_f)$. Since $\norm{J(j)}_{\mathrm{op}}=\abs j$ and $\norm{J(j)}_{\mathrm{HS}}^2=2\abs j^2$, a single pair has block row sums $\abs{j_{ef}}/2$ and squared Hilbert--Schmidt norm $\abs{j_{ef}}^2$. Since at most $D_0$ pairs meet a block, the row-column bound implies $\norm{A_j}_{\mathrm{op}}\le D_0\norm j_\infty/2$; using $\abs{\sum_{k=1}^rb_k}^2\le r\sum_k\abs{b_k}^2$ with $r\le D_0$ in each repeated matrix entry, we obtain $\norm{A_j}_{\mathrm{HS}}^2\le D_0\sum\abs{j_{ef}}^2$. Pairs with $e=f$ contribute zero. If $\mu$ is invariant under simultaneous rotations, then $\E_\mu w$ is invariant and $\xi$ transforms as a vector. The law of $\xi$ therefore has the same invariance. The vector $\E(\xi_e\times\xi_f)$ is then fixed by every rotation, hence zero (a rotation by $\pi$ about an axis perpendicular to a nonzero vector reverses it). This proves part (4).
+\end{proof}
+
+\section{Conditioning, exponential moments, and gauge identities}\label{ch02:sec:conditioning}
+
+The next lemma gives conditioning bounds and identities for parameter derivatives and gauge transformations; the bound on large fields enters the proof through the comparison of a measure with its conditioning (see \eqref{s3:eq:transfer}). For a link $e$ and $a\in\{1,2,3\}$ we write $L_e^a$ and $R_e^a$ for the derivatives of a function of $U$ along $s\mapsto e^{s\tau_a}U_e$ and $s\mapsto U_ee^{s\tau_a}$ at $s=0$, all other link variables being fixed.
+
+\begin{lemma}\label{ch02:lem:bounded-transfer}
+Let $\mu$ be a probability measure on a measurable space, and let $S$ be a measurable event with $e=\mu(S^c)<1$. Put $\nu=\mu(\cdot\mid S)$. Then the following statements hold.
+\begin{enumerate}
+\item With $\norm{\mu-\nu}_{\TV}=\sup_A\abs{\mu(A)-\nu(A)}$, we have $\norm{\mu-\nu}_{\TV}=e$, and
+\[
+ \abs{\E_\mu F-\E_\nu F}\le2e\norm F_\infty
+\]
+for every bounded complex measurable $F$; if $0\le F\le A$, the bound is $eA$. The image measures of $\mu$ and $\nu$ under a common measurable map satisfy the same bound on the total variation distance. If $d\mu=Z^{-1}f\,d\omega$ with $f\ge0$, then the restricted partition function $Z_S=\int_Sf\,d\omega$ satisfies $Z_S/Z=1-e$, and $\abs{\log(Z_S/Z)}\le2e$ if $e\le1/2$.
+\item For nested events $S_0\supset S_1\supset\cdots\supset S_k$ of positive probability and $0\le i\le k$,
+\[
+ \mu(S_k)=\mu(S_i)\prod_{j=i}^{k-1}\mu(S_{j+1}\mid S_j).
+\]
+With $r_j=\mu(S_j\setminus S_{j+1}\mid S_j)$, it follows that $1-\mu(S_k)\le1-\mu(S_i)+\sum_{j=i}^{k-1}r_j$; the successive conditional failure probabilities are added without dividing by $\mu(S_i)$.
+\item For a real function $J$ with $\abs J\le R$, the tilted probability measure $\mu_J=e^J\mu/\E_\mu e^J$ satisfies $\mu_J(A)\le e^{2R}\mu(A)$ for every event $A$.
+\item Let $O_1,\dots,O_r$ be real measurable functions with $\abs{O_i}\le1$, and set $M_\mu(z)=\E_\mu e^{\sum_iz_iO_i}$ and $M_\nu(z)=\E_\nu e^{\sum_iz_iO_i}$ for $z\in\C^r$. If $\sum_i\abs{z_i}\le R$, then
+\[
+ \abs{M_\mu(z)-M_\nu(z)}\le2e^Re.
+\]
+If moreover $R<\log2$, the branches of $\log M_\mu$ and $\log M_\nu$ vanishing at $z=0$ satisfy
+\[
+ \abs{\log M_\mu(z)-\log M_\nu(z)}\le\frac{2e^R}{2-e^R}\,e,
+\]
+and their derivatives satisfy the corresponding Cauchy bounds on every smaller polydisc, with constants depending only on the two polydiscs and the order of the derivative.
+\item Let $\omega$ be a measure on a fixed domain, let $V(\theta,w)$ be real with $0<Z(\theta)=\int e^{-V(\theta,w)}\,d\omega(w)<\infty$, and let $F(\theta,w)$ be a function such that both $e^{-V}$ and $Fe^{-V}$ can be differentiated in $\theta$ under the integral. A sufficient condition is pointwise differentiability in $\theta$ together with an $\omega$-integrable envelope, uniform for $\theta$ near the given parameter, for
+\[
+ e^{-V}\bigl(1+\abs{\partial_\theta V}+\abs F+\abs{\partial_\theta F}+\abs{F\partial_\theta V}\bigr);
+\]
+joint $C^1$ regularity of $V$ and $F$ on a fixed compact domain and a neighborhood of the parameter suffices. Then, with $p_\theta=Z(\theta)^{-1}e^{-V(\theta,\cdot)}$,
+\[
+ \partial_\theta\log Z=-\E_\theta\partial_\theta V,\qquad
+ \partial_\theta\log p_\theta=-\partial_\theta V+\E_\theta\partial_\theta V,
+\]
+\[
+ \partial_\theta\E_\theta F=\E_\theta\partial_\theta F-\Cov_\theta(F,\partial_\theta V).
+\]
+These are identities for the full normalized density, and the covariance is bilinear for complex $F$.
+\item Let $\mu$ be the Wilson measure on a periodic lattice, or more generally a probability measure of the form in \cref{ch02:lem:haar-and-forests}(1), and let $\mathscr G_v^a=\sum_{e\text{ starts at }v}L_e^a-\sum_{e\text{ ends at }v}R_e^a$ be the gauge generator at the vertex $v$. Then for all $C^1$ functions $F$ and $J$, possibly complex,
+\[
+ \E_\mu\bigl[e^J(\mathscr G_v^aF+F\mathscr G_v^aJ)\bigr]=0.
+\]
+In a spanning-tree gauge, only the corresponding identity for the simultaneous conjugation at the root remains. If $S$ is invariant under the gauge transformations, the same identity holds under $\mu(\cdot\mid S)$, without any regularity of the boundary of $S$. The same conclusion holds in any finite joint coordinate representation whose full normalized measure is invariant. In particular, a triangular change of variables $w_i'=O_i(\theta,w_{i+1},\dots,w_r)w_i$ by orthogonal matrices $O_i$, independent of $w_i$, has Jacobian of absolute value one, preserves every product of balls centered at the origin, and its infinitesimal generator has zero flux through every face; the parameter-dependent normalizing factors remain in the joint derivative of the log-density.
+\item If $F$ is integrable but possibly unbounded and $e>0$, there is only the exact identity
+\[
+ \E_\mu F-\E_\nu F=e\bigl(\E_{\mu(\cdot\mid S^c)}F-\E_\nu F\bigr);
+\]
+an error tending to zero requires additional control of these integrals.
+\end{enumerate}
+All constants are explicit as displayed.
+\end{lemma}
+
+\begin{proof}
+\emph{Parts (1)--(3).} If $e=0$, then $\mu=\nu$ and there is nothing to prove. For $e>0$ let $\nu^c=\mu(\cdot\mid S^c)$. Splitting every integral over $S$ and $S^c$, we obtain
+\begin{equation}\label{ch02:eq:conditioning-mixture}
+ \mu=(1-e)\nu+e\nu^c.
+\end{equation}
+For an event $A$, we have $\mu(A)-\nu(A)=e(\nu^c(A)-\nu(A))$, where both $\nu(A)$ and $\nu^c(A)$ lie in $[0,1]$. This bounds the total variation distance by $e$, and $A=S$ attains it. For complex $F$, the two conditional expectations have absolute value at most $\norm F_\infty$, which gives $2e\norm F_\infty$; if $0\le F\le A$, their difference is at most $A$. A common measurable map replaces each test event by its preimage and therefore does not increase the total variation distance. In the density notation, $Z_S=\int_Sf\,d\omega=Z\mu(S)$, and for $0\le e\le1/2$ we have $-\log(1-e)=\int_0^e(1-t)^{-1}dt\le2e$.
+
+For nested events, consecutive conditional probabilities cancel:
+\[
+ \prod_{j=i}^{k-1}\mu(S_{j+1}\mid S_j)=\prod_{j=i}^{k-1}\frac{\mu(S_{j+1})}{\mu(S_j)}=\frac{\mu(S_k)}{\mu(S_i)}.
+\]
+Induction on the number of factors gives $1-\prod_j(1-r_j)\le\sum_jr_j$, the induction step being $1-(1-a)(1-b)=a+b-ab\le a+b$. Since $\mu(S_k)=\mu(S_i)\prod_j(1-r_j)\ge\mu(S_i)-(1-\prod_j(1-r_j))$, we obtain $1-\mu(S_k)\le1-\mu(S_i)+\sum_jr_j$. For $\abs J\le R$, the density of $\mu_J$ with respect to $\mu$ is at most $e^R/e^{-R}=e^{2R}$.
+
+\emph{Part (4).} Let $T(z)=\sum_iz_iO_i$; on the ball $\sum_i\abs{z_i}\le R$ we have $\abs{T(z)}\le R$ and $\abs{e^{T(z)}}\le e^R$. Applying part (1) to $e^{T(z)}$, we obtain $\abs{M_\mu-M_\nu}\le2e^Re$. By the exponential series, we have $\abs{M_\mu(z)-1}\le e^R-1$ and $\abs{M_\nu(z)-1}\le e^R-1$. If $R<\log2$, these values lie in the open disc of center $1$ and radius $e^R-1<1$, where the series of $\log(1+w)$ defines the branch vanishing at the origin. Integrating its derivative $1/u$ along the segment between the two values, on which $\abs u\ge2-e^R$, we find
+\[
+ \abs{\log M_\mu(z)-\log M_\nu(z)}\le(2-e^R)^{-1}\abs{M_\mu(z)-M_\nu(z)}.
+\]
+The functions are holomorphic, since bounded observables allow termwise integration of the exponential series. If a smaller polydisc has coordinate distances $\delta_i>0$ to a larger one inside the ball, the Cauchy formula gives
+\[
+ \abs{\partial^\alpha(\log M_\mu-\log M_\nu)}\le\alpha!\prod_i\delta_i^{-\alpha_i}\frac{2e^R}{2-e^R}\,e
+\]
+at every point of the smaller polydisc.
+
+\emph{Part (5).} Fix $\theta_0$ and a neighborhood on which the integrable envelope $B(w)$ is valid. We write $g_\theta=e^{-V(\theta,\cdot)}$ and $h_\theta=F(\theta,\cdot)e^{-V(\theta,\cdot)}$. Their pointwise derivatives are $\partial_\theta g_\theta=-(\partial_\theta V)e^{-V}$ and $\partial_\theta h_\theta=(\partial_\theta F-F\partial_\theta V)e^{-V}$. The envelope bounds $\abs{g_\theta}$, $\abs{h_\theta}$, and both derivatives by $B$, and the mean value theorem, applied to real and imaginary parts, bounds the difference quotients by $2B$. By dominated convergence, with $N(\theta)=\int F(\theta,w)e^{-V(\theta,w)}\,d\omega(w)$, we have
+\begin{equation}\label{ch02:eq:score-dominated-derivatives}
+ \partial_\theta Z=-\int(\partial_\theta V)e^{-V}\,d\omega,\qquad
+ \partial_\theta N=\int(\partial_\theta F-F\partial_\theta V)e^{-V}\,d\omega.
+\end{equation}
+For a vector parameter the argument applies to each coordinate derivative. Since $0<Z<\infty$, dividing by $Z$ gives the first identity, and differentiating $\log p_\theta=-V-\log Z$ gives the second. The quotient rule for $\E_\theta F=N/Z$ yields the third; the covariance is finite because the envelope also controls $\abs{F\partial_\theta V}e^{-V}$. For the sufficient condition on a compact domain $\Omega$, choose a compact neighborhood of the parameter inside the domain of $C^1$ regularity. Joint continuity bounds $\abs V$, $\abs F$, $\abs{\partial_\theta V}$, and $\abs{\partial_\theta F}$ by some $C\ge1$ there. Moreover $e^{-V(\theta_0,w)}\ge e^{-C}$ and $Z(\theta_0)<\infty$ imply $\omega(\Omega)\le e^CZ(\theta_0)<\infty$. Then the constant $e^C(1+3C+C^2)$ is an integrable envelope, uniformly on this neighborhood. No boundary term occurs, since the domain is fixed. In particular, a term of $V$ that depends only on $\theta$ cancels in the derivative of $\log p_\theta$ only together with its contribution to $\log Z$; it cannot be deleted from a joint density.
+
+\emph{Part (6).} Let $k(s)$ equal $e^{s\tau_a}$ at $v$ and $I$ at all other vertices. By \cref{ch02:lem:haar-and-forests}, $\mu$ is invariant under $U\mapsto U^{k(s)}$, which gives
+\[
+ \int(Fe^J)(U^{k(s)})\,d\mu(U)=\int Fe^J\,d\mu.
+\]
+Differentiation at $s=0$ is valid for $C^1$ functions on the compact manifold of configurations. On a link starting at $v$ the derivative is $L_e^a$, and on a link ending at $v$ it is $-R_e^a$; their sum is $\mathscr G_v^a$, and the product rule gives the identity, for real or complex $J$. In a spanning-tree gauge, the conjugation at the root described in \cref{ch02:lem:haar-and-forests} acts on every remaining link by $U_e\mapsto kU_ek^{-1}$; its derivative is $\sum_{e\notin T}(L_e^a-R_e^a)$, and the same change of variables gives the remaining identity. No generator at a vertex other than the root is used on the gauge-fixed configurations. If $S$ is invariant, we insert $\one_S$ into the integral before the change of variables and divide by $\mu(S)>0$. Neither the regularity of $\partial S$ nor a derivative of $\one_S$ is needed, since the indicator is unchanged for every $s$.
+
+For the triangular change of variables, given the transformed variables of higher index, we solve for $w_i$ using $O_i^{-1}$, proceeding downward. This shows that the map is invertible, and it preserves the product of balls. Its Jacobian matrix is block triangular with orthogonal diagonal blocks $O_i$, and its determinant therefore has absolute value one. For a differentiable one-parameter family of such maps, the generator is $Y_i=B_i(\theta,w_{>i})w_i$ with $B_i^{\mathsf T}=-B_i$. Hence
+\[
+ \operatorname{div}_{w_i}Y_i=\tr B_i=0,\qquad w_i\cdot Y_i=0\quad\text{on }\abs{w_i}=p_i,
+\]
+and the flux through every face vanishes; intersections of faces carry no additional flux, since the map preserves each radius $\abs{w_i}$. Under the assumed invariance of the full joint probability measure, we obtain the gauge-invariance identity by differentiating the change-of-variables identity. If this measure is written with conditional factors $Z(\theta)^{-1}e^{-V(\theta,w)}$, their parameter derivatives are the derivatives of the normalized log-densities computed in part (5); a derivative of an unnormalized conditional density is never substituted into a joint identity.
+
+\emph{Part (7).} The identity \eqref{ch02:eq:conditioning-mixture} applies to an integrable $F$ when $e>0$, and both conditional integrals are finite since both events have positive probability. Without further control there is no small error: on a two-point space, give $S^c$ probability $e$ and take $F=e^{-2}\one_{S^c}$; then $\E_\nu F=0$ and $\E_\mu F=e^{-1}$.
+\end{proof}
+
+\section{Invariant functions of three holonomies}\label{ch02:sec:traces}
+
+The weak-coupling results concern continuous functions of the three holonomies $H_1,H_2,H_3$ around the coordinate cycles of the torus, with a common basepoint, that are invariant under simultaneous conjugation. The next lemma shows that such functions are exactly the continuous functions of seven traces. If we write $H_i=a_iI+v_i\cdot t$, the traces of $H_i$ and $H_iH_j$ determine the scalar parts $a_i$ and the Gram matrix of the vectors $v_i$. The trace of $H_1H_2H_3$ determines in addition the orientation $\det(v_1,v_2,v_3)$, and a triple of vectors is determined up to rotation by its Gram matrix and its orientation. These seven coordinates are the case of three generators in the classical theory of trace coordinates of Horowitz \cite{Horowitz1972Characters}; the argument below proves the separation and the continuous factorization for all triples in $\SU$, including those of deficient rank.
+
+\begin{lemma}\label{ch02:lem:seven-traces}
+Define $\mathfrak p:\SU^3\to[-1,1]^7$ by the normalized traces of $H_1,H_2,H_3,H_1H_2,H_1H_3,H_2H_3,H_1H_2H_3$, in this order. For all $H,H'\in\SU^3$,
+\[
+ \mathfrak p(H)=\mathfrak p(H')\quad\Longleftrightarrow\quad\text{there exists }k\in\SU\text{ with }H_i'=kH_ik^{-1}\text{ for }i=1,2,3.
+\]
+This includes all triples of deficient rank and the central triples. Explicitly, if $H_i=a_iI+2v_i^a\tau_a$ with $a_i^2+\abs{v_i}^2=1$, the normalized trace of $H_iH_j$ is $a_ia_j-v_i\cdot v_j$, and that of $H_1H_2H_3$ is
+\[
+ a_1a_2a_3-a_3v_1\cdot v_2-a_1v_2\cdot v_3-a_2v_1\cdot v_3-\det(v_1,v_2,v_3).
+\]
+The map induced by $\mathfrak p$ from the quotient of $\SU^3$ by simultaneous conjugation onto $\mathfrak p(\SU^3)$ is a homeomorphism. Every continuous function $F:\SU^3\to\C$ invariant under simultaneous conjugation has the form $F=f\circ\mathfrak p$, where $f$ is continuous on $\mathfrak p(\SU^3)$ and extends to a continuous function on $[-1,1]^7$ with $\norm f_\infty\le\norm F_\infty$. In particular, if the trace vectors $\mathfrak p(H^{(k)})$ of random triples $H^{(k)}$ converge jointly in distribution, then for every such $F$ the expectations $\E F(H^{(k)})$ converge, to the expectation of $f$ under the limiting law, which is supported on $\mathfrak p(\SU^3)$.
+\end{lemma}
+
+The lemma concerns one triple of matrices and its seven traces; it does not by itself relate lattice holonomies to continuum observables.
+
+\begin{proof}
+By \eqref{ch02:eq:quaternion-product}, $H_i=a_iI+v_i\cdot t$ with $t_a=2\tau_a$; the scalar part $a_i$ is the normalized trace, and $a_i^2+\abs{v_i}^2=1$. The scalar part of $H_iH_j$ is $a_ia_j-v_i\cdot v_j$. Multiplying once more, we find that the scalar part of $H_1H_2H_3$ is
+\[
+ (a_1a_2-v_1\cdot v_2)a_3-(a_1v_2+a_2v_1+v_1\times v_2)\cdot v_3,
+\]
+which expands to the stated formula, with the minus sign in front of $\det(v_1,v_2,v_3)=(v_1\times v_2)\cdot v_3$ for our choice of $\tau_a$.
+
+Suppose $\mathfrak p(H)=\mathfrak p(H')$. Then $a_i=a_i'$, the Gram matrices $(v_i\cdot v_j)$ and $(v_i'\cdot v_j')$ agree (including the diagonal entries $1-a_i^2$), and $\det(v_1,v_2,v_3)=\det(v_1',v_2',v_3')$. We define a map between the spans by $T(\sum_ic_iv_i)=\sum_ic_iv_i'$. Equality of the Gram matrices shows that $T$ is well defined, since if $\sum_ic_iv_i=0$ then $\abs{\sum_ic_iv_i'}^2$ is the same quadratic form in $c$ and vanishes, and that $T$ is an isometry onto the span of the $v_i'$. Completing orthonormal bases of the two spans to bases of $\R^3$, we extend $T$ to an orthogonal map $R$. If the common rank is three, equality of the nonzero determinants implies $\det R=1$. If the rank is at most two and $\det R=-1$, we compose $R$ with the reflection in a direction perpendicular to the span of the $v_i'$; this fixes every $v_i'$ and changes the determinant to $+1$. Rank zero covers the central triples. In every case some $R\in\mathrm{SO}(3)$ maps each $v_i$ to $v_i'$. By the surjectivity of $\Ad$ (\cref{ch02:lem:haar-and-forests}) there exists $k\in\SU$ with $\Ad(k)=R$. Since conjugation does not change the scalar parts, we have $H_i'=kH_ik^{-1}$. Conversely, simultaneous conjugation preserves the trace of every product, by cyclicity of the trace.
+
+Let $Q_0$ be the quotient of $\SU^3$ by simultaneous conjugation, with the quotient topology, and let $A=\mathfrak p(\SU^3)$. Then $Q_0$ is compact, as a continuous image of a compact space, and so is $A$. Since the polynomial map $\mathfrak p$ is continuous and constant on equivalence classes, it induces a continuous map $Q_0\to A$, which is bijective by what we just proved. A closed subset of $Q_0$ is compact, and its image is compact and hence closed in the metric space $A$. Thus the inverse map is continuous, and the induced map is a homeomorphism.
+
+A continuous invariant function $F$ descends to a continuous function on $Q_0$, which defines a continuous function $f_A$ on $A$ with $\norm{f_A}_\infty=\norm F_\infty$. We construct a continuous extension to the cube. For a real continuous function $g$ on the compact set $A$ with $\abs g\le B$, set $g_T(x)=\inf_{y\in A}\{g(y)+T\abs{x-y}\}$ for $x\in[-1,1]^7$. By the triangle inequality $g_T$ is $T$-Lipschitz, and $g_T\le g$ on $A$. Given $\varepsilon>0$, choose $\delta>0$ from the uniform continuity of $g$, and $T$ with $T\delta\ge2B$. For $x\in A$, the terms with $\abs{x-y}\le\delta$ are at least $g(x)-\varepsilon$, and the remaining terms are at least $-B+T\delta\ge B\ge g(x)$. Thus $g-\varepsilon\le g_T\le g$ on $A$, and clipping $g_T$ to $[-B,B]$ preserves its continuity and this approximation, and it bounds the result by $B$ on the cube. Let $M=\norm{f_A}_\infty$. If $M=0$, extend by zero. Otherwise let $r_0=f_A$. If $\norm{r_k}_\infty\le B_k=2^{-k}M$, apply this construction to the real and imaginary parts of $r_k$, with errors at most $B_k/(2\sqrt2)$; this gives a continuous complex function $h_k$ on the cube with $\norm{h_k}_\infty\le\sqrt2B_k$ and $\norm{r_k-h_k|_A}_\infty\le B_k/2$, and we set $r_{k+1}=r_k-h_k|_A$. Since $\sum_k\sqrt2B_k<\infty$, the series $h=\sum_kh_k$ converges uniformly on the cube. Then $h$ is continuous, and $h=f_A$ on $A$ since the residuals tend to zero uniformly. Composing $h$ with the radial retraction of $\C$ onto the closed disc of radius $M$,
+\[
+ z\longmapsto\begin{cases}z,&\abs z\le M,\\ Mz/\abs z,&\abs z>M,\end{cases}
+\]
+which is continuous and fixes the values of $f_A$, gives a continuous extension $f$ with $\norm f_\infty\le M$. Finally, $\E F(H^{(k)})=\E f(\mathfrak p(H^{(k)}))$. Since $f$ is bounded and continuous on the cube, convergence in distribution of the traces implies convergence of the expectations. The limiting law, a probability measure on the cube, is supported on the closed set $A$, since the nonnegative continuous function $\dist(\cdot,A)$ has expectation zero under every approximating law and hence under the limit. The limit of the expectations is therefore the integral of the intrinsically defined function $f_A$.
+\end{proof}

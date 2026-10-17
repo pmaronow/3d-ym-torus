@@ -1,0 +1,546 @@
+\chapter{Notation and conventions}\label{ch01:chapter}
+
+This section fixes the notation and conventions used in the rest of the paper. \Cref{s2:chapter} introduced the lattice model, the Wilson flow, admissible approximations of loops, and the trajectory space, and \cref{s3:chapter} described the objects of the renormalization group analysis informally. Here we give the precise definitions that the later sections cite. A definition here fixes the meaning of a symbol; the existence of the object, its analytic properties, and the probability estimates for it are proved where it is constructed, and we say where in each case. A choice of letter never implies a uniformity: the parameters on which a constant depends are listed in each statement, or by reference to an item of \cref{ch01:conv:constants}. We write $\N=\{1,2,\dots\}$; depths and the index $K$ may also be zero.
+
+\Cref{ch01:sec:model,ch01:sec:hierarchy,ch01:sec:measures} fix the lattice model, the block averaging map, and the measures of the renormalization group analysis: the Wilson measure, the small-field event, the conditioned Wilson measure, the stopped measure, and the conditional fluctuation kernel. \Cref{ch01:sec:norms,ch01:sec:polymers,ch01:sec:flow,ch01:sec:current,ch01:sec:orbits,ch01:sec:weak} fix the analytic coefficient norms, the conventions for polymer expansions and exponential moments, the flow conventions, the heat-smoothed circulation, the continuum trajectory space, and the weak-coupling observables, and \cref{ch01:sec:constants} describes the dependence of constants.
+
+\section{The periodic lattice and the Wilson measure}\label{ch01:sec:model}
+
+The following definition restates the model of \cref{s2:model} in the notation of the later sections, where $n$ denotes a lattice side.
+
+\begin{definition}\label{ch01:def:ensemble}
+Let $L>0$ and let $n\ge4$ be an integer. Set
+\[
+ \Lat n=(L/n)\Z^3/(L\Z)^3,\qquad a_n=L/n.
+\]
+A positive link is a pair $(x,x+a_ne_i)$ with $x\in\Lat n$ and $i\in\{1,2,3\}$, and $\Links n$ is the set of these $3n^3$ links. A positive plaquette is the positively oriented boundary $p_{ij}(x)$ of the square spanned by $a_ne_i$ and $a_ne_j$ at $x$, with $i<j$, and $\Faces n$ is the set of these $3n^3$ plaquettes. A configuration is an element $U$ of $\Conf n=\SU^{\Links n}$. For the reversed link $\bar e$ of a positive link $e$ we set $U_{\bar e}=U_e^{-1}$, and the transport along a path $e_1\cdots e_m$ is the ordered product $U_{e_1}\cdots U_{e_m}$. Writing $U_i(x)$ for the variable on the link $(x,x+a_ne_i)$, we have
+\[
+ U_{p_{ij}(x)}=U_i(x)U_j(x+a_ne_i)U_i(x+a_ne_j)^{-1}U_j(x)^{-1}.
+\]
+Let $H$ be the Haar measure on $\SU$ with $H(\SU)=1$, and let $H_n=\bigotimes_{e\in\Links n}H$. Let $\gamma>0$, and set
+\[
+ q(U)=1-\frac12\tr U,\qquad S_W(U)=4\sum_{p\in\Faces n}q(U_p),\qquad h_n=g_n^2=\frac{\gamma}{n},\qquad \gamma=g_3^2L.
+\]
+The Wilson measure is the probability measure
+\[
+ d\mu_{n,\gamma}(U)=Z_{n,\gamma}^{-1}e^{-S_W(U)/h_n}\,dH_n(U)
+\]
+on $\Conf n$, where $Z_{n,\gamma}$ is the normalizing constant.
+\end{definition}
+
+Since $S_W/h_n=(4n/\gamma)\sum_pq(U_p)$, this is the measure \eqref{s2:eq:wilson}. The parameter $\gamma$ is the dimensionless coupling, $g_3^2=\gamma/L$ is the continuum coupling, and $h_n=g_n^2=g_3^2a_n$ is the lattice coupling at side $n$; in the usual notation the inverse coupling is $\beta_n=4/h_n$. The letter $n$ always denotes a lattice side, the number of sites in each coordinate direction, and never a depth. We write $d$ and $d_0$ for classical depths (numbers of preceding averaging steps over which the classical action has been minimized), and $\ell$ for the index of an averaging step. The plaquette action is Wilson's \cite{Wilson1974}; the factor four and the identification $h_n=g_3^2a_n$ are our normalization, explained in the following remark.
+
+\begin{remark}\label{ch01:rem:normalization}
+Let $A$ be a smooth $\su^3$-valued function on $\Torus$, and set $U_e=\exp(a_nA_i(x))$ for $e=(x,x+a_ne_i)$. By the Baker--Campbell--Hausdorff formula, $\Log U_{p_{ij}(x)}=a_n^2F_{ij}(x)+O(a_n^3)$ uniformly in $x$, where $F_{ij}=\partial_iA_j-\partial_jA_i+[A_i,A_j]$. By \eqref{ch01:eq:haar-coordinates} below, $q(e^X)=\abs X^2/8+O(\abs X^4)$. Since $h_n=g_3^2a_n$ and $\abs{\Faces n}=3n^3$, we obtain
+\[
+ \frac{S_W(U)}{h_n}=\frac{1}{2g_3^2}\sum_{x\in\Lat n}\sum_{i<j}a_n^3\abs{F_{ij}(x)}^2+O(a_n)\longrightarrow\frac{E_L(A)}{2g_3^2}\qquad(n\to\infty),
+\]
+where $E_L(A)=\sum_{i<j}\int_{\Torus}\abs{F_{ij}}^2\,dx$ is the Yang--Mills energy \eqref{s2:eq:energy}. This computation concerns smooth configurations only; it says nothing about typical configurations under $\mu_{n,\gamma}$.
+\end{remark}
+
+\paragraph{Gauge transformations.}
+A lattice gauge transformation is an element $k$ of $\LatticeGauge n=\SU^{\Lat n}$. It acts on configurations by
+\begin{equation}\label{ch01:eq:lattice-gauge}
+ (U^k)_{xy}=k_xU_{xy}k_y^{-1},\qquad (U^k)^l=U^{lk}.
+\end{equation}
+A based gauge transformation is a lattice gauge transformation equal to the identity at specified vertices, its roots. Under a gauge transformation, the transport around a closed path is conjugated by the value at its basepoint. Hence, among the functions of a tuple of holonomies along closed paths with a common basepoint, only those invariant under simultaneous conjugation are gauge invariant, while a based gauge transformation whose roots include the basepoint leaves these holonomies unchanged. All gauge transformations in this paper are periodic; we do not consider twisted boundary conditions.
+
+\paragraph{The Lie algebra.}
+Let $\tau_a=-i\sigma_a/2$, where $\sigma_1,\sigma_2,\sigma_3$ are the Pauli matrices. For $X=x^a\tau_a$ and $Y=y^a\tau_a$ in $\su$ we use
+\[
+ [\tau_a,\tau_b]=\epsilon_{abc}\tau_c,\qquad \ip XY=-2\tr(XY),\qquad \abs X=\abs x.
+\]
+Then $(\tau_a)$ is an orthonormal basis, and the bracket corresponds to the cross product in $\R^3$. This is the inner product of \cref{s2:model}, and on $\Conf n$ we use the product of the corresponding bi-invariant Riemannian metrics. The group distance from the identity is
+\[
+ \rho_G(U)=\min\{\abs X:e^X=U\}\in[0,2\pi].
+\]
+In analytic calculations, $\Log$ denotes the logarithm near the identity, continued holomorphically only inside a specified complex neighborhood of the identity. The principal real logarithm is defined on $\SU\setminus\{-I\}$ and satisfies $\abs{\Log U}<2\pi$. There is no continuous logarithm on all of $\SU$.
+
+In these coordinates the Haar measure and the plaquette function are given by
+\begin{equation}\label{ch01:eq:haar-coordinates}
+ \begin{gathered}
+ dH(e^X)=\frac1{16\pi^2}\sinc^2(\abs X/2)\,d^3X\quad(\abs X<2\pi),\\
+ q(e^X)=1-\cos(\abs X/2)=\frac{\abs X^2}8+O(\abs X^4),\qquad
+ \sinc z=\frac{\sin z}{z},\quad \sinc0=1.
+ \end{gathered}
+\end{equation}
+Integrating the first formula in polar coordinates, we find $H\{\rho_G<\varepsilon\}=(\varepsilon-\sin\varepsilon)/(2\pi)$ for $0\le\varepsilon\le2\pi$; for $\varepsilon\ge2\pi$ this probability is one. These identities, and the estimates for products of finitely many group elements near the identity, are proved in \cref{ch02:lem:haar-and-forests}. We write $c_{\mathrm{Haar}}=1/(16\pi^2)$ for the constant in the coordinate density and $j_H(X)=\sinc^2(\abs X/2)$ for its variable factor. The constant $c_{\mathrm{Haar}}$ is unrelated to the lower-bound constants in partition-function estimates with open boundary conditions.
+
+\section{Lattice refinements and the block averaging map}\label{ch01:sec:hierarchy}
+
+Fix an odd integer $M=2R_M+1\ge3$ and an integer $J\ge1$, and set $B=M^J$. At total depth $K\ge0$ the fine side is $N=n_*B^K$ with $n_*\in4\N$, and for $0\le\ell\le JK$ we set
+\[
+ n_\ell=N/M^\ell,\qquad a_{n_\ell}=L/n_\ell,\qquad g_\ell^2=h_\ell=\gamma/n_\ell,\qquad V^\ell=T_M^\ell U,
+\]
+where $T_M$ is the block averaging map of \cref{ch01:def:block-map} below. Increasing $\ell$ moves toward the infrared. Since $M$ is odd, all the sides $n_\ell$ are divisible by four. Schematically,
+\[
+ U\in\Conf N\xrightarrow{\ T_M\ }V^1\in\Conf{n_1}\xrightarrow{\ T_M\ }\cdots\xrightarrow{\ T_M\ }V^{JK}\in\Conf{n_*},
+\]
+and the scales are as follows.
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+averaging step $\ell$ & side $n_\ell$ & mesh $a_{n_\ell}$ & coupling $g_\ell^2$\\
+\midrule
+$0$ & $N$ & $L/N$ & $\gamma/N$\\
+$\ell$ & $NM^{-\ell}$ & $LM^\ell/N$ & $\gamma M^\ell/N$\\
+$JK$ & $n_*$ & $L/n_*$ & $\gamma/n_*$\\
+\bottomrule
+\end{tabular}
+\end{center}
+As in \cref{s3:rg}, one application of $T_M$ is an averaging step, and a renormalization group step (RG step) consists of $J$ consecutive averaging steps, $V^{(k+1)J}=T_M^JV^{kJ}$, with blocking factor $B$.
+
+We also use compositions of $s$ averaging steps, $1\le s\le J$, from an input side $M^sm$ to an output side $m\ge4$, with an arbitrary preceding classical depth $d_0$. The fields on the $s$ lattices of sides $Mm,\dots,M^sm$ are integrated. We call these lattices the integrated scales of the composition, and reserve the term intermediate scales for the $J$ lattices of an RG step. The largest coupling of an integrated scale is attained at side $Mm$ and is denoted by
+\[
+ t_{\max}^2=\frac{\gamma}{Mm}.
+\]
+If the integrated scales are numbered $i=0,\dots,s-1$, from side $M^sm$ for $i=0$ to side $Mm$ for $i=s-1$, then the coupling $g_i$ of scale $i$ (not its square) satisfies $g_i/t_{\max}=M^{(i-s+1)/2}$. These ratios lie between $\lambda_*=M^{-(J-1)/2}$ and $1$. The physical mesh is always denoted by $a$, never by $h$.
+
+The equivalence relation $n\sim_Mn'$ and the classes $[n]_M$ were defined in \cref{s2:main}, and the index $[n_*]$ of the continuum measure $\lambda_{L,\gamma,[n_*]}$ refers to the class $[n_*]_M$. The measure is first constructed along the sides $n_*B^K$; by \cref{ch26:thm:full-M-ladder}, it is the measure attached to the whole class. The small-field event and the bounds on its complement are always formulated with RG steps of $J$ averaging steps.
+
+\begin{definition}\label{ch01:def:block-map}
+We work in fine lattice units, so that the fine lattice is $\Z^3$ with its periodic identification and the coarse vertices are the points of $M\Z^3$. For a coarse vertex $v$, the centered block of $v$ is
+\[
+ \mathsf B_M(v)=v+\bigl([-R_M,R_M]^3\cap\Z^3\bigr).
+\]
+For $x\in\mathsf B_M(v)$, let $\sigma_{v,x}$ be the lattice path from $v$ to $x$ that changes the coordinates in the order $1,2,3$, each monotonically. For the coarse link $c=(v,v+Me_i)$, let $C_c$ be the straight path from $v$ to $v+Me_i$, called the reference path, and for $x\in\mathsf B_M(v)$ let
+\[
+ F_{c,x}=\sigma_{v,x}[x,x+Me_i]\,\sigma_{v+Me_i,x+Me_i}^{-1}.
+\]
+The paths $F_{c,x}$ and $C_c$ both go from $v$ to $v+Me_i$, so $U(F_{c,x})U(C_c)^{-1}$ is the holonomy of the closed path $F_{c,x}C_c^{-1}$ based at $v$; we call these matrices the based loop holonomies of $c$. If none of the based loop holonomies $U(F_{c,x})U(C_c)^{-1}$, $x\in\mathsf B_M(v)$, equals $-I$, define
+\begin{equation}\label{ch01:eq:ordinary-map}
+ (T_MU)_c=
+ \exp\Bigl\{M^{-3}\sum_{x\in\mathsf B_M(v)}\Log\bigl(U(F_{c,x})U(C_c)^{-1}\bigr)\Bigr\}U(C_c),
+\end{equation}
+where $\Log$ is the principal logarithm. If one of these based loop holonomies equals $-I$, set $(T_MU)_c=U(C_c)$. The variable on a reversed coarse link is the inverse of the variable on the positive link. For $J\ge1$, $T_M^J$ denotes the $J$-fold iterate of $T_M$.
+\end{definition}
+
+The second clause, the Borel extension of the block averaging map, is part of the definition: $T_M$ is defined on the whole configuration space. The iterate $T_M^J$ is never replaced by a separately defined average with blocking factor $B$.
+
+This construction follows Bałaban's averaging operation \cite[(15), p.~19, and (42), p.~23]{Balaban1985Averaging}: one transports the fine link variables to a reference path, averages the logarithms of the based loop holonomies, and exponentiates. The centered blocks, the particular paths, and the Borel extension are specific to this paper. Under a gauge transformation $k$, every based loop holonomy is conjugated by $k_v$. The principal logarithm commutes with conjugation, and the exceptional value $-I$ is invariant under conjugation. Hence $T_M(U^k)=(T_MU)^{k'}$, where $k'$ is the restriction of $k$ to the coarse vertices. The following properties are proved in \cref{ch03:prop:map-properties}: $T_M$ is Borel and gauge covariant; it is covariant under translations by coarse vectors and under the reflections preserving the coarse lattice, including at the exceptional values; the identity $T_MU_0(b)=b$ below holds; and the blocks of iterates of $T_M$ are nested. The constraint coordinates described next are constructed in \cref{ch03:lem:relative-coarea}.
+
+\paragraph{Constraint coordinates.}
+Let $b$ be a coarse configuration. The coarse-field lift $U_0(b)$ is the fine configuration equal to $I$ on every link inside a block and to $b_c$ on every link from $\mathsf B_M(v)$ to $\mathsf B_M(v+Me_i)$, for $c=(v,v+Me_i)$. Each path $F_{c,x}$, and the path $C_c$, crosses exactly one such interface link, so all based loop holonomies of $U_0(b)$ equal $I$ and $T_MU_0(b)=b$. In each block, the links of the paths $\sigma_{v,x}$ form a spanning tree rooted at the coarse vertex (\cref{ch03:prop:map-properties}). A based gauge transformation with roots at the coarse vertices sets the variables on these block trees equal to $I$; this is the block axial gauge. For the coarse link $c=(v,v+Me_i)$, the eliminated edge is the interface link
+\[
+ e^*_c=(v+R_Me_i,\,v+(R_M+1)e_i)
+\]
+on the reference path. We write $U=e^XU_0(b)$ on the links outside the block trees. The block averaging constraint for $c$ reads
+\[
+ \mathsf C_{b,c}(X)=\Log\bigl((T_MU)_cb_c^{-1}\bigr)=0,\qquad D_{X_{e^*_c}}\mathsf C_{b,c}(0)=M^{-2}I_3.
+\]
+To compute the derivative, note that $X_{e^*_c}$ enters $U(C_c)$ and, through $U(C_c)^{-1}$, the $M^3-M$ based loop holonomies with $x$ off the line through $v$ in direction $e_i$; those with $x$ on this line do not depend on $X_{e^*_c}$. At $X=0$ the derivative is therefore $(1-(M^3-M)M^{-3})I_3=M^{-2}I_3$. Near $X=0$ the constraints are solved by local constraint coordinates $X=\Gamma_b(z)$, where the free logarithmic coordinates $z$ are the logarithms on the links outside the block trees other than the eliminated edges. On this branch, the Haar disintegration density with respect to $dH_m(b)\,dz$ is
+\begin{equation}\label{ch01:eq:haar-disintegration}
+ \mathscr J_b(z)=c_{\mathrm{Haar}}^{f}\,
+ \frac{\prod_{e\text{ outside the block trees}}j_H(\Gamma_{b,e}(z))}{\prod_c\det D_{X_{e^*_c}}\mathsf C_{b,c}(\Gamma_b(z))},
+\end{equation}
+where $f$ is the number of independent free group variables; for one averaging step from side $Mm$ to side $m$, $f=2((Mm)^3-m^3)$. The numerator includes the Haar factors $j_H$ of the eliminated edges, and there is no additional Haar density for the coarse field, no Gram determinant, and no residual gauge-volume factor. The formula is used only on the local branch, on which the determinants are positive, and with all domain indicators retained; the precise statement, with its domain, is \cref{ch03:lem:relative-coarea}. This change of variables is the spanning-tree-gauge form of the disintegration of Haar measure for this averaging constraint. Spanning-tree gauges are standard in lattice gauge theory, and Bałaban used them in the renormalization group context \cite{Balaban1985Regular}.
+
+Under product Haar measure, the integral over the gauge transformations at the vertices of the block trees other than their roots has mass one. We keep this integral explicitly until the gauge invariance of the integrand has been established. In the constructions on block regions of \cref{ch15:chapter,ch16:chapter,ch17:chapter,ch18:chapter}, some group variables are frozen coordinates. The based transport of a frozen coordinate $b_e$, which carries it to its basepoint, is $\widehat b_e=U(\sigma_e)b_e$. If the variables of the block region are held fixed, the change $b_e\mapsto\widehat b_e$ is a triangular Haar translation, and it preserves product Haar measure. Frozen coordinates remain indexed by the lattice on which they were frozen.
+
+\section{Effective actions, the small-field event, and conditioned measures}\label{ch01:sec:measures}
+
+\paragraph{The effective classical action and the effective interaction.}
+For $d\ge0$, $E_d$ denotes the effective classical action at preceding classical depth $d$, and $E_0=S_W$. It is the value of the constrained minimization problem on the local branch constructed in \cref{ch06:chapter,ch07:chapter}, and it satisfies
+\[
+ E_{d+1}(c)=M\min_zE_d(b(c,z))
+\]
+on the common domain of these local constructions (\cref{ch07:thm:bellman}). Here $b(c,z)$ parametrizes the configurations on the intermediate lattice whose average is $c$, and the factor $M$ is the change of units in three dimensions. This notation does not refer to an unrestricted minimum over the compact fiber of $T_M^d$. Following Bałaban \cite{Balaban1985Variational}, we call the constrained minimizer the background field. We write $R_d$ for the effective interaction that accompanies $E_d$ in the effective density, and $\Lambda$ for the normalization constant in the log density, which collects the factors independent of the field. The analytic norm of $R_d$ controls no additive constant.
+
+\paragraph{Normalized fluctuation variables.}
+In an RG step, the free logarithmic coordinates $z_i$ of the intermediate scale $i$ are written as
+\begin{equation}\label{ch01:eq:normalized-fluctuations}
+ z_i=z_i^*(c,z_{>i})+g_iK_i(c,z_{>i})^{-1/2}w_i,
+\end{equation}
+where $c$ is the coarse field, $z_{>i}$ are the coordinates of the coarser intermediate scales, and $z_i^*$ is the conditional constrained minimizer. Further, $K_i$ is the constrained Hessian (a positive definite matrix) in the free coordinates of scale $i$ at $z_i^*$, $K_i^{-1/2}$ is the inverse of its positive square root, and $g_i$ is the coupling of scale $i$. The $w_i$ are the normalized fluctuation variables; they differ from $z_i/g_i$. The map $w\mapsto z$ is triangular, with diagonal blocks $g_iK_i^{-1/2}$. Its Jacobian is therefore exactly
+\[
+ \prod_ig_i^{3f_i}\det K_i(c,z_{>i})^{-1/2},
+\]
+where $f_i$ is the number of free group variables of scale $i$. Its value at $w=0$ and the logarithm of its ratio to that value are two parts of this single factor; neither is counted twice. The change of variables is carried out in \cref{ch09:lem:centered-white-coarea}.
+
+\paragraph{Reconstruction maps.}
+We write $\RepMap$ for the fixed family of reconstruction maps of \cref{ch12:thm:replacement-family}. These maps differ from the reconstructions in the depth-dependent gauge representatives by gauge transformations that depend only on the coarse field and equal the identity at the coarse roots. On each fixed lattice, the depths at which the family switches representatives are finite and deterministic, and they do not depend on the coupling, on configurations, or on observables. The family preserves the conditional fluctuation kernels and the fluctuation cutoffs defined below. Its construction, and the preservation of the analytic coefficient bounds on the larger domains, are in \cref{ch12:chapter}. The hat does not assert equality with the depth-dependent representatives.
+
+\paragraph{The small-field event.}
+The following definition makes the description in \cref{s2:largefield} precise.
+
+\begin{definition}\label{ch01:def:selected-law}
+Let $0<r<\rho$, where $\rho$ is the analytic radius of \cref{ch01:sec:norms}, and set
+\[
+ B_r=\{\exp A:\max_e\abs{A_e}<r\},\qquad D_r=\mathcal GB_r,
+\]
+where $\mathcal GB_r$ is the set of all $U^k$ with $U\in B_r$ and $k$ a lattice gauge transformation.
+We call $B_r$ the small-link domain and $D_r$ the gauge-invariant small-field domain. Fix the parameters of \cref{ch11:def:literal-selection}; in particular $J$, $r$, $\rho$, and $A_{\mathrm w}>0$ are fixed. Let $u\in4\N$, $K\ge0$, $N=uB^K$, $V^\ell=T_M^\ell U$, and let $\gamma>0$ be such that $t_k<1$ for $0\le k<K$, where
+\[
+ t_k^2=\frac{\gamma}{Mn_{(k+1)J}},\qquad p_{\mathrm w}(t)=A_{\mathrm w}\log(1/t).
+\]
+For $0\le k<K$, let $\mathcal A_{k,J}(U)$ be the event that the $k$-th RG step, from $V^{kJ}$ to $V^{(k+1)J}$ at preceding classical depth $kJ$, is defined at $U$. This means that each pair formed by an intermediate coarse field and the free coordinates of the next finer scale lies in the local branch of the constraint coordinates and in the domains of the background field and of the Haar disintegration density, with positive Jacobian determinants, as specified in \cref{ch11:def:literal-selection}. On $\mathcal A_{k,J}(U)$, let $w_{k,i,e}(U)$ be the normalized fluctuation variables of this step, obtained by inverting the step. The small-field event is
+\begin{equation}\label{ch01:eq:literal-event}
+ \begin{split}
+ S_{N,u,\gamma}={}&\{U\in D_r\}\ \cap\
+ \bigcap_{k=0}^{K-1}\Bigl[
+    \mathcal A_{k,J}(U)
+    \cap\Bigl\{\max_{i,e}\abs{w_{k,i,e}(U)}\le p_{\mathrm w}(t_k)\Bigr\}
+    \cap\{V^{(k+1)J}\in D_r\}\Bigr].
+ \end{split}
+\end{equation}
+For $K=0$, the event is $\{U\in D_r\}$.
+\end{definition}
+
+The domain conditions in $\mathcal A_{k,J}$ are the inverse-branch, classical-domain, and positive-Jacobian conditions of the construction, with their fixed radii. There is no additional $D_r$ condition at an intermediate scale inside an RG step. The coupling $t_k$ is the largest coupling of an integrated scale in the $k$-th RG step, and it is largest for $k=K-1$, where $t_{K-1}^2=\gamma/(Mu)$. The condition $t_k<1$ for all $k$ therefore means $\gamma<Mu$ when $K\ge1$, and it ensures that the thresholds $p_{\mathrm w}(t_k)$ are positive. The analysis in \cref{ch11:chapter} restricts $\gamma$ further, by requiring $t_k\le t_*$ for a small upper bound $t_*$.
+
+\begin{lemma}\label{ch01:lem:positive-mass}
+Under the assumptions of \cref{ch01:def:selected-law}, $\mu_{N,\gamma}(S_{N,u,\gamma})>0$.
+\end{lemma}
+
+\begin{proof}
+We show that $S_{N,u,\gamma}$ contains a nonempty open set. Near the identity configuration $I$ all based loop holonomies in \eqref{ch01:eq:ordinary-map} are close to $I$, so the first clause of \cref{ch01:def:block-map} applies and the iterates $T_M^\ell$ are real analytic on a neighborhood of $I$, with $T_M^\ell(I)=I$. At $U=I$, every intermediate coarse field equals $I$ and every free coordinate vanishes. The background field of the coarse field $I$ is $I$, since $I$ minimizes the Wilson action, so the conditional constrained minimizers vanish as well. Each domain condition in \cref{ch11:def:literal-selection} is a strict inequality on the logarithms of the coarse fields, on the free coordinates, on $\Gamma_c(z)$, and on the classical data, or the positivity of a determinant. At $U=I$ these quantities equal zero, and the determinants equal $\det(M^{-2}I_3)=M^{-6}>0$. By \cref{ch03:lem:relative-coarea} and the constructions of \cref{ch07:chapter,ch09:chapter}, the inverse coordinates of the RG steps are continuous functions of $U$ near $I$. Hence there exists a neighborhood $O_1$ of $I$ contained in $\bigcap_{k<K}\mathcal A_{k,J}$. On $O_1$, the variables $w_{k,i,e}$ are continuous and vanish at $I$. Since $p_{\mathrm w}(t_k)>0$ for every $k$, there exists a smaller neighborhood $O_2\subset O_1$ of $I$ on which $\max_{i,e}\abs{w_{k,i,e}}\le p_{\mathrm w}(t_k)$ for all $k<K$. Finally, $B_r$ is open, $I\in B_r\subset D_r$, and the maps $T_M^{(k+1)J}$ are continuous at $I$ with value $I$. Hence there exists a neighborhood $O\subset O_2$ of $I$ on which $U$ and all $V^{(k+1)J}$ lie in $B_r$, and $O\subset S_{N,u,\gamma}$.
+
+Since $0\le q\le2$, we have $S_W\le24N^3$, and $Z_{N,\gamma}\le1$. The density of $\mu_{N,\gamma}$ with respect to $H_N$ is therefore at least $e^{-24N^3/h_N}$. The Haar measure of a compact group gives positive mass to every nonempty open set, so
+\[
+ \mu_{N,\gamma}(S_{N,u,\gamma})\ge e^{-24N^3/h_N}H_N(O)>0.\qedhere
+\]
+\end{proof}
+
+\paragraph{The three measures.}
+Let $m\ge4$ be a lattice side and $d\ge0$ a preceding classical depth for which $E_d$ and $R_d$ have been constructed. Let $E_{d,\mathrm{sat}}$ be the gauge-invariant extension of $E_d$ to $D_\rho$, $E_{d,\mathrm{sat}}(U)=E_d(U^k)$ for $U^k\in B_\rho$ (\cref{ch08:thm:compact-overlap}), and let $\overline R_d=R_d-R_d(I)$ be the centered effective interaction, extended to $D_r$ in the same way. The stopped measure at side $m$ and depth $d$ is
+\[
+ d\widehat\nu=\widehat Z^{-1}\one_{D_r}e^{-E_{d,\mathrm{sat}}/g_m^2-\overline R_d}\,dH_m,\qquad \overline R_d=R_d-R_d(I).
+\]
+Under the hypotheses of \cref{ch11:thm:terminal-anchor}, we have $E_{d,\mathrm{sat}}\ge\kappa_*E_0\ge0$ and $\abs{\overline R_d}\le C$ on $D_r$, for constants $\kappa_*,C$ depending on the fixed lattice. The integrand is then a strictly positive bounded Borel function. Since $D_r$ contains the nonempty open set $B_r$, we have $0<\widehat Z<\infty$. The stopped measure is defined only in this situation.
+
+Whenever $\mu_{N,\gamma}(S_{N,u,\gamma})>0$, in particular under the assumptions of \cref{ch01:def:selected-law}, we compare the three measures
+\begin{equation}\label{ch01:eq:three-measures}
+ \mu_{N,\gamma},\qquad
+ \nu_{N,u,\gamma}=\mu_{N,\gamma}(\,\cdot\mid S_{N,u,\gamma}),\qquad
+ \widehat\nu,
+\end{equation}
+namely the Wilson measure, the conditioned Wilson measure, and the stopped measure just defined. At an intermediate stopping side, the marginal of the conditioned Wilson measure generally differs from the stopped measure, because it also includes the restrictions of the remaining coarser RG steps. At the terminal side $m=u$ no such restriction remains, and the law of $V^{KJ}$ under $\nu_{N,u,\gamma}$ is the stopped measure at depth $KJ$ (\cref{ch11:thm:terminal-anchor}(9)). An exponential-moment estimate over a range of scales that starts from the unconditioned Wilson measure uses $\mu_{N,\gamma}$ itself, without a $D_r$ restriction.
+
+\paragraph{The auxiliary integral.}
+For coarse fields outside $B_r$, in the larger analytic domain, the effective interaction is defined recursively by an analytic, positive product integral, the auxiliary integral of \cref{ch11:thm:deep-buffer-law}. It is not the conditional integral of the preceding restricted measure, although the two agree for coarse fields in $B_r$. The reconstructions it uses for coarse fields in the larger domain need only take values in $B_\rho$. This distinction between the radii $r$ and $\rho$ is part of the construction in \cref{ch11:chapter}.
+
+\paragraph{The conditional fluctuation kernel.}
+Fix a coarse field $c$ in the domain of an RG step. The conditional fluctuation kernel of the normalized fluctuation variables $w=(w_{i,e})$ of the step is
+\begin{equation}\label{ch01:eq:complete-white-kernel}
+ k(c,dw)=\frac{\one_{\Omega_p}(w)e^{-V(c,w)}\,dw}{\int_{\Omega_p}e^{-V(c,w)}\,dw},
+ \qquad \Omega_p=\prod_{i,e}\{w_{i,e}\in\R^3:\abs{w_{i,e}}\le p_i\}.
+\end{equation}
+Here the conditional fluctuation potential $V(c,w)$ contains $\abs w^2/2$, all higher-order terms of the classical action in the fluctuations, the terms from the Haar disintegration density and from the Jacobian of \eqref{ch01:eq:normalized-fluctuations} that depend on $w$, and the input effective interaction, produced by the integrations at finer scales, evaluated at the reconstructed field. Terms that depend on $c$ but not on $w$ cancel in the normalized kernel, and only there. For the kernels arising from the small-field event, $p_i=p_{\mathrm w}(t_k)$ for all intermediate scales of the $k$-th RG step. Products of truncated Gaussian measures serve as reference measures in expansions; they are not the conditional law. All conditional means, covariances, and derivatives of the conditional log-density refer to $k(c,dw)$ on its convex domain $\Omega_p$. In particular, for a differentiable parameter $\lambda$ on which $V$ depends, with the coupling, the radii $p_i$, and the coordinates $w$ held fixed, the normalized log-density derivative on $\Omega_p$ is $\partial_\lambda\log k=-\partial_\lambda V+\E_{k}\partial_\lambda V$ (\cref{ch10:lem:fixed-domain-calculus}). The kernel and its potential are constructed in \cref{ch10:thm:complete-white-law}.
+
+\paragraph{The comparison lattice.}
+For the index $s\ge0$ of the comparison lattice we write $n_s=n_*B^s$ for its side, $H_s=L/n_s$ for its mesh, and $\nu_{K,s}=\nu_{N_K,n_s,\gamma}$ for $K\ge s$, where $N_K=n_*B^K$. The corresponding backward reconstruction sequence has physical meshes $a_j=H_sB^{-j}$, $0\le j\le K-s$, and preceding classical depths $J(K-s-j)$. Once the coarse field of a step is fixed, its conditional fluctuation kernel is not changed by the restrictions at coarser scales, since these are functions of the coarse field alone.
+
+\section{Analytic coefficient norms}\label{ch01:sec:norms}
+
+Effective interactions, background fields, and reconstruction maps are controlled by weighted sums of absolute values of Taylor coefficients. A bound of this kind controls derivatives on smaller domains (\cref{ch02:lem:coefficient-algebra}), is stable under products and substitutions, and measures locality through an exponential weight in the length of a network connecting the locations of the coefficient. Norms of this type are used throughout constructive renormalization group methods \cite{Brydges1986,GawedzkiKupiainen1983b,Balaban1987RGI}; the coefficient norm with boundary decay \eqref{ch01:eq:regional-norm} is specific to this paper. All indices below are scalar indices, which include orientation and color.
+
+\begin{definition}\label{ch01:def:analytic-norms}
+\emph{Indices and networks.} Let $I_\sigma$ be finite index sets, each with a location map $x:I_\sigma\to\Torus$, a mesh $a_\sigma>0$, and the volume $v_\sigma=a_\sigma^3$, and write $v_i=v_\sigma$ for $i\in I_\sigma$. The assigned location $x(i)$ of an index is its position on the lattice on which it was introduced. Different indices may have the same location, and index sets introduced at different scales remain different. Distances and network lengths in the coefficient weights are measured in units of the current output lattice spacing $a_{\mathrm{ref}}$, that is, $d(x,y)=d_{\mathrm{phys}}(x,y)/a_{\mathrm{ref}}$, where $d_{\mathrm{phys}}$ is the periodic Euclidean distance on $\Torus$; all index sets are embedded in this common metric, and $\dist$ below denotes $d$. The boundary graph distance $d_\Omega$ and the boundary widths below are also expressed in output-mesh units. For a finite set $S$ of locations let
+\[
+ \Tree(S)=\inf\{\operatorname{length}(\mathcal N):\mathcal N\text{ a finite connected metric network containing }S\}.
+\]
+Lengths are measured with $d$. Internal vertices are allowed, networks may wrap around the torus, and $\Tree(\{x\})=0$.
+
+\emph{Tensor norms.} Let $\asp\ge0$. For a tensor $T(o;i_1,\dots,i_k)$ with an output index $o$ and input indices $i_1,\dots,i_k$, set
+\begin{equation}\label{ch01:eq:tensor-norm}
+ \begin{aligned}
+ R_{\asp}(T)&=\sup_o\sum_{i_1,\dots,i_k}e^{\asp\Tree(x(o),x(i_1),\dots,x(i_k))}\abs{T(o;i_1,\dots,i_k)},\\
+ C_{\asp,r}(T)&=\sup_{i_r}\sum_{o,(i_s)_{s\ne r}}\frac{v_o}{v_{i_r}}\,e^{\asp\Tree(x(o),x(i_1),\dots,x(i_k))}\abs{T(o;i_1,\dots,i_k)},\qquad1\le r\le k,\\
+ \abs T_{\asp}&=\max\{R_{\asp}(T),C_{\asp,1}(T),\dots,C_{\asp,k}(T)\}.
+ \end{aligned}
+\end{equation}
+The row norm $R_{\asp}$ fixes the output and sums over all inputs; the volume-normalized column sum $C_{\asp,r}$ fixes the $r$-th input and sums over all other indices, including the output. For a kernel $K(x,y)$ from mesh $a_{\mathrm{in}}$ to mesh $a_{\mathrm{out}}$, this reads
+\[
+ \norm K_{\mathrm{row},\asp}=\sup_x\sum_ye^{\asp\dist(x,y)}\abs{K(x,y)},
+ \qquad
+ \norm K_{\mathrm{col},\asp}=\sup_y\frac{a_{\mathrm{out}}^3}{a_{\mathrm{in}}^3}\sum_xe^{\asp\dist(x,y)}\abs{K(x,y)}.
+\]
+For positive input radii $r_i$ we write $T[r](o;\mathbf i)=T(o;\mathbf i)\prod_{s}r_{i_s}$, so that every input, including a fixed one, contributes its radius. Normalizations of fields by couplings are written separately.
+
+\emph{Majorant series.} For an analytic map
+\[
+ F_o(u)=\sum_{k\ge0}\frac1{k!}\sum_{i_1,\dots,i_k}F_k(o;i_1,\dots,i_k)u_{i_1}\cdots u_{i_k},\qquad F_k=D^kF(0),
+\]
+an absolute majorant is a convergent series $\widehat F(s)=\sum_kf_ks^k$ with $f_k\ge0$ and $\abs{F_k}_{\asp}/k!\le f_k$. There is exactly one Taylor factorial.
+
+\emph{Scalar functions.} For a symmetric tensor $A(i_1,\dots,i_k)$ without output, $k\ge1$, set
+\begin{equation}\label{ch01:eq:scalar-root}
+ \abs A^{\mathrm{sc}}_{\asp}=\max_r\sup_{i_r}\sum_{(i_s)_{s\ne r}}e^{\asp\Tree(x(i_1),\dots,x(i_k))}\abs{A(i_1,\dots,i_k)},
+\end{equation}
+and write $\norm{D^kR(0)}_{\asp,\mathrm{root}}=\abs{D^kR(0)}^{\mathrm{sc}}_{\asp}$. For an analytic scalar function $R$ of the link coordinates on the torus with $DR(0)=0$, set
+\[
+ \Anorm{\rho}{\asp}{R}=\sum_{k\ge2}\frac{\rho^{k-2}}{k!}\norm{D^kR(0)}_{\asp,\mathrm{root}}.
+\]
+
+\emph{Functions on a block region.} Let $\Omega$ be a set of scalar labels of the variables that are still varied or integrated in a block region, let $W$ be its boundary as in \cref{ch15:sec:setting}, and let $0<\phi_i\le\rho$ be a radius profile. Here $d_\Omega(i)$ is the graph distance, on the refined position graph of \cref{ch15:sec:norms}, from the position of $i$ to the set of positions outside $\Omega$, as in \cref{ch15:def:regional-norm}; it is expressed in units of the current output mesh. It differs from the periodic Euclidean distance $d$ used for the connecting networks. Sections 18--20 use the graph-metric variant of \eqref{ch01:eq:regional-norm} fixed before \cref{ch15:def:regional-norm}, in which network lengths are also measured in the $\ell^1$ metric of that graph; a coefficient bound at a Euclidean decay rate is used there at that rate divided by $\sqrt3$. Let $b_{\mathrm{rec}}$ range over the admissible set of real frozen coordinates of \cref{ch15:def:regional-norm}. For $f(v;b_{\mathrm{rec}})=\sum_\nu f_\nu(b_{\mathrm{rec}})v^\nu$, with $v=(v_i)_{i\in\Omega}$ and $\phi^\nu=\prod_i\phi_i^{\nu_i}$, set
+\begin{equation}\label{ch01:eq:regional-norm}
+ \Wallnorm{\Omega}{\phi}{f}=
+ \sup_{b_{\mathrm{rec}}\ \mathrm{real}}\rho^{-2}
+ \sum_{k\ge1}\sup_{i\in\Omega}e^{\awall d_\Omega(i)}
+ \sum_{\abs\nu=k}\frac{\nu_i}{k}\abs{f_\nu(b_{\mathrm{rec}})}
+                       e^{\asp\Tree(\nu)}\phi^\nu,
+\end{equation}
+where $\Tree(\nu)$ is the network length of the locations of the indices in the support of $\nu$, and $\asp,\awall>0$. The order of the operations in \eqref{ch01:eq:regional-norm}, namely the supremum over frozen coordinates, the sum over degrees, the supremum over the fixed label, and the sum over coefficients, is part of the definition. Constants have norm zero, and degree one is included. If $\Omega$ is empty, the norm is zero. If $\Omega$ has no boundary, \eqref{ch01:eq:regional-norm} is applied only to functions with vanishing nonconstant part, whose norm is then zero; effective interactions on the full torus are measured by $\mathcal B_{\rho,\asp}$. The classical version of these norms has its own radius $\rho_{\mathrm{cl}}$ and its own profile and rate parameters.
+\end{definition}
+
+A bound on $\abs T_{\asp}$ controls the row and every volume-normalized column; it is stronger than a bound on the output rows alone or on an operator norm of $T$ contracted with given directions. In \eqref{ch01:eq:scalar-root} the sums with one index fixed are counting sums. We write $\abs A^{\mathrm{sc},*}_{\asp}$ for the convention that multiplies each summand with the index $i_r$ fixed by $v_*/v_{i_r}$, for a reference volume $v_*$. Then
+\[
+ \abs A^{\mathrm{sc}}_{\asp}\le\max_i\frac{v_i}{v_*}\,\abs A^{\mathrm{sc},*}_{\asp},\qquad
+ \abs A^{\mathrm{sc},*}_{\asp}\le\max_i\frac{v_*}{v_i}\,\abs A^{\mathrm{sc}}_{\asp},
+\]
+where the maxima are over the possible fixed indices. On one mesh we choose $v_*$ equal to its volume, and the two conventions agree; on several meshes the conversion is kept explicitly. The assumption $DR(0)=0$ in the definition of $\mathcal B_{\rho,\asp}$ concerns the effective interactions. A constant is stored separately in $\Lambda$ and is never bounded by $\mathcal B_{\rho,\asp}$. The precise definitions on block regions, including the frozen coordinates and the labels, are in \cref{ch15:def:regional-norm}.
+
+\begin{remark}\label{ch01:rem:factorial}
+The weight $\nu_i/k$ in \eqref{ch01:eq:regional-norm} is the sum \eqref{ch01:eq:scalar-root} with the index $i$ fixed, for a single monomial. Indeed, let $\abs\nu=k$ and $\nu_i>0$. The derivative $D_iD_{i_2}\cdots D_{i_k}(f_\nu v^\nu)(0)$ is nonzero for exactly $(k-1)!/[(\nu_i-1)!\prod_{j\ne i}\nu_j!]$ ordered tuples $(i_2,\dots,i_k)$, and each nonzero value has modulus $\abs{f_\nu}\prod_j\nu_j!$. Hence
+\[
+ \frac1{k!}\sum_{i_2,\dots,i_k}\abs{D_iD_{i_2}\cdots D_{i_k}(f_\nu v^\nu)(0)}=\frac{\nu_i}{k}\abs{f_\nu}.
+\]
+Multiplying by $\phi^\nu$ shows that \eqref{ch01:eq:regional-norm} is the profile version of the scalar norm \eqref{ch01:eq:scalar-root}, with the index $i$ fixed. Replacing $\nu_i/k$ by $\nu_i$, or adding a factor $1/k!$ to the multiindex coefficients, would change the norm.
+\end{remark}
+
+Rescaling an input transfers its locations, its network lengths, and its volume factors explicitly. Replacing a shortest connecting network by a tree on the locations of the external indices reduces the exponent once, from $\asp$ to $\asp/2$ (\cref{ch02:lem:coefficient-algebra}); there is no loss at every derivative order. Derivatives in analytic series are divided by $k!$. A bound on the values of a holomorphic function, or a pointwise bound on its Hessian, does not replace a bound on its absolute coefficients.
+
+\paragraph{Radius profiles.}
+For a boundary width $w_{\mathrm{bd}}$, the spatially varying analytic radius is
+\[
+ \phi(i)=
+ \begin{cases}\rho_\partial,&d_\Omega(i)<w_{\mathrm{bd}},\\
+               \rho,&d_\Omega(i)\ge w_{\mathrm{bd}},\end{cases}
+ \qquad \psi_{\mathrm{prof}}=\sqrt{K_*}\,\phi,
+ \qquad\widehat\phi=K_*\phi,
+\]
+where $0<\rho_\partial\le\rho$ and $K_*\ge2$ is a fixed enlargement factor of the analytic radii. The classical profile is defined separately. The symbol $\psi$ without a subscript is reserved for an observable cutoff (\cref{ch01:def:toron-observables}). We keep the following radii distinct.
+\begin{center}
+\begin{tabular}{lp{0.62\textwidth}}
+\toprule
+$r$ & radius of the small-link domain $B_r$ in the small-field event\\
+$\rho,\rho_{\mathrm{cl}}$ & analytic radii for the effective interaction and the effective classical action\\
+$R_{\mathrm{raw}}$ & larger radius of the initial construction\\
+$R_{\mathrm{buf}}=C_{\mathrm{map},J}r$ & radius of the analytic extension around coarse fields\\
+$R_{\mathrm{cell}}=\lceil A_8/r\rceil$ & side length of the enlarged cells\\
+$R_W$ & radius imposed on the variables $g_iw_i$\\
+$R_{\mathrm{en}}$ & radius of the enclosing product domain\\
+$\beta_{\mathrm{rec}}$ & bound on the frozen coordinates\\
+\bottomrule
+\end{tabular}
+\end{center}
+Here $A_8$ is the sufficiently large constant of \cref{ch18:thm:fat-cell-admission}. None of these radii is the inverse coupling $\beta_n=4/h_n$. The width $s_{\mathrm{er}}$ of a removed boundary layer, the separation widths, and the numbers of elapsed RG steps are distinct geometric variables. Frozen coordinates from earlier steps are fixed real parameters; they are neither differentiated nor continued to complex values. Newly frozen variables were analytic variables before the substitution.
+
+\paragraph{Normalization constants.}
+Effective densities have the form $\exp(\Lambda-E/g^2-R)$, multiplied by domain indicators. The centered effective interaction is $R-R(I)$, and in such a density the constant $R(I)$ is moved into $\Lambda$. If some variables are fixed at the value $c$ by substitution, we set
+\[
+ R_{\mathrm{new}}(v)=R(v,c)-R(0,c),\qquad
+ \Lambda_{\mathrm{new}}=\Lambda-R(0,c),
+\]
+which is the identity $e^{\Lambda-R(v,c)}=e^{\Lambda-R(0,c)}e^{-[R(v,c)-R(0,c)]}$. The classical action is kept in full. A substitution does not remove a first derivative by translating a conditional minimizer, so $R_{\mathrm{new}}$ has in general terms of degree one, which \eqref{ch01:eq:regional-norm} includes. The full determinant and the normalization factor of every eliminated Gaussian coordinate are included exactly once in the density. Their field-independent factors are collected in $\Lambda$; their remaining field dependence is kept in the effective interaction and in the conditional fluctuation potential. This is proved in \cref{ch15:lem:freezing,ch17:thm:real-scalar-ledger}. A comparison of densities on block regions is first a statement at representatives satisfying the reconstruction identities of \cref{ch18:thm:slice-induction}; only the resulting gauge-invariant bound in terms of the Wilson action is afterwards extended to all representatives (\cref{ch19:thm:invariant-wilson-envelope}).
+
+\section{Polymers and exponential moments of blocked actions}\label{ch01:sec:polymers}
+
+\paragraph{Polymer expansions.}
+A polymer $\Polymer$ is a nonempty connected set of the specified block labels. Polymer activities $\Activity(\Polymer;c)$ arise from the finite product expansion displayed at each use. The hard-core polymer partition function is
+\[
+ \Xi(c)=\sum_{\{\Polymer_1,\dots,\Polymer_m\}\ \mathrm{pairwise\ compatible}}\ \prod_{i=1}^m\Activity(\Polymer_i;c),
+\]
+where the empty family contributes one. Compatibility is determined by the incompatibility relation specified at each expansion (disjointness of supports, or the exclusion relation). The norm of the polymer activities combines absolute coefficient majorants on the given radii, the spatial weight $e^{\asp\Tree}$, and a size weight $e^{\kappa_{\mathrm{pol}}\abs{\Polymer}}$, and it takes the supremum over sites $v$ of the sum over the polymers containing $v$, $\sup_v\sum_{\Polymer\ni v}$. The precise incompatibility relation and size weight are part of the corresponding theorem (\cref{ch09:lem:supported-activities,ch09:thm:hard-core-log}). Boundary visits and fixed inputs of a coefficient are kept in the networks through the expansion of the product into polymer activities (\cref{ch09:lem:supported-activities}) and the cluster expansion of $\log\Xi$ (\cref{ch09:thm:hard-core-log}), and through their analogues on block regions in \cref{ch17:chapter}. The support of a polymer activity alone does not give a new decay rate. We use the cluster expansion in the form of Kotecký and Preiss \cite{KoteckyPreiss1986}, with the tree-graph bound as presented by Fernández and Procacci \cite{FernandezProcacci2007} and by Dimock \cite[Appendix~B, Theorem~27, p.~39, and (323), p.~42]{Dimock2013v2}; see also Brydges \cite{Brydges1986}.
+
+\paragraph{Reflected block tilings.}
+These conventions are used in the bound on large fields in \cref{ch19:chapter,ch20:chapter}. At averaging step $j$, a reflected block tiling $\mathcal T$ consists of $\mathfrak m_j=n_j^3/8$ disjoint coarse cells of $2\times2\times2$ sites. Each cell contains the sets of finer plaquettes on which the internal coarse plaquettes of the cell depend; the plaquettes crossing between cells are not tested in this tiling. The eight translates of $\mathcal T$ cover all plaquettes. We write
+\[
+ Q_j^{\mathcal T}=\frac4{h_{n_{j-1}}}\sum_{p\in\mathcal P_{j-1}^{\mathcal T}}q(V_p^{j-1})
+\]
+for the blocked action of the finer plaquettes of the cells, and $R_{<j}^{\mathcal T}(d_{\mathrm{cut}})$ for the product over the cells of the indicators of the earlier small-field conditions. The threshold for a bad cell is $d_*=d_{\mathrm{cut}}/2$. The indicator stays inside the expectation that is raised to the power $1/\mathfrak m_j$ in the chessboard estimate. Reflection positivity of the unconditioned Wilson measure was proved by Osterwalder and Seiler \cite{OsterwalderSeiler1978}. By \cref{ch03:thm:original-chessboard}, it holds for the bounded Borel gauge-invariant functions of the fine links with both endpoints in the union of the blocks over the coarse vertices of one open half torus. For an observable supported in a reflection half, the pullback by the iterated block averaging map belongs to this class and intertwines the reflection, including at the exceptional values. This gives reflection positivity of the averaged measure. We never use reflection positivity for a fixed fiber or for a conditioned measure. The chessboard estimate is that of Fröhlich, Israel, Lieb, and Simon \cite{FILS1978,FILS1980}, in the form of Biskup \cite[Theorem~5.8, p.~44]{Biskup2009}.
+
+\paragraph{Exponential moments.}
+The bound on the exponential moments of blocked actions has the form
+\[
+ \log\E_{\mu_{N,\gamma}}\bigl[e^{sQ_j^{\mathcal T}};R_{<j}^{\mathcal T}\bigr]
+ \le 3C_vn_{j-1}^3+C_sn_{j-1}^2\log(1/g_{n_{j-1}})+C_b',
+ \qquad 0\le s\le s_0,
+\]
+with fixed constants $C_v,C_s,C_b',s_0$. It is proved, together with the induction over averaging steps under the Wilson measure, in \cref{ch19:thm:all-phase-window,ch20:chapter}. If a stopped side is $m=\chi_{\mathrm{stop}}n_{j-1}$, a coefficient $9$ of $m^2$ becomes $9\chi_{\mathrm{stop}}^2$ in units of $n_{j-1}^2$. At the finest, unconditioned scale the bound contains the correction $36\log\beta_N/N$, with $\beta_N=4/h_N$, which is kept until the parameters are chosen uniformly in the coupling (\cref{ch03:thm:original-chessboard}).
+
+\section{Heat semigroup, Wilson flow, and flow data}\label{ch01:sec:flow}
+
+For a physical mesh $a$, let $D_{a,i}^\pm$ be the componentwise forward and backward differences in direction $i$, in physical units, and let $\Delta_a=\sum_iD_{a,i}^-D_{a,i}^+$. The lattice heat semigroup is the componentwise scalar semigroup $P_t^a=e^{t\Delta_a}$, which retains the constant mode. The cardinal interpolation of directed-edge fields (\cref{ch13:lem:cardinal-columns}) preserves constants and integrals of columns, and it is the identity when the input and output meshes coincide; its volume-normalized columns use its own input mesh.
+
+The Wilson flow $\Phi^{\mathrm W}_s$ is the flow of the vector field $-\nabla\sum_pq(U_p)$, where the gradient is taken with respect to the product metric on $\Conf n$ given by $\ip XY=-2\tr(XY)$. Its version in physical time is
+\[
+ \Psi_t^{(N)}=\Phi^{\mathrm W}_{4t/a_N^2},
+\]
+as in \cref{s2:model}. This conversion of time contains no coupling factor; the factor $4/a_N^2$ is the normalization for which the linear part of the flow is the heat equation in physical units. The flow is Lüscher's \cite{Luscher2010WilsonFlow}. In logarithmic coordinates $U=e^{aA}$, after we add the gauge-damping term of \cref{ch21:lem:wilson-local-algebra} (a lattice version of the gauge fixing of Zwanziger \cite{Zwanziger1981}, DeTurck \cite{DeTurck1983}, and Donaldson \cite{Donaldson1985}), the linear part of the equation is the scalar heat equation $\partial_tA=\Delta_aA$ in each component. We write $\mathcal N_a$ for the bilinear coefficient of this gauge-damped lattice equation, in the order in which its arguments appear and with all its lattice shifts (\cref{ch21:lem:wilson-local-algebra}). Set
+\[
+ \mathcal Q_a(u,v)(t)=\int_0^tP_{t-s}^a\mathcal N_a(u(s),v(s))\,ds,
+ \qquad\mathcal B_a(u,v)=\mathcal Q_a(u,v)+\mathcal Q_a(v,u).
+\]
+The coefficient $\mathcal N_a$ and the bilinear Duhamel term $\mathcal Q_a$ need not be symmetric in their two arguments; their symmetrization $\mathcal B_a$ is symmetric. The letter $Q$ alone is reserved for the constant-mode quartic form of \cref{ch01:sec:weak}.
+
+\begin{definition}\label{ch01:def:enhancement}
+Fix $1/2<\alpha_{\mathrm{fl}}<2/3$, and set $\beta_{\mathrm{fl}}=\alpha_{\mathrm{fl}}-1/2$ and $\kappa_{\mathrm{fl}}=1-3\alpha_{\mathrm{fl}}/2>0$. For a fixed time horizon $T>0$ and a mesh $a$, let $v_a(t)=t+a^2$, and define, with $\alpha=\alpha_{\mathrm{fl}}$,
+\[
+ \begin{split}
+ \Xnorm{\alpha}{a}(x)&=\sup_{0\le t\le T}
+  \bigl\{v_a(t)^{\alpha/2}\norm{x(t)}_\infty
+       +v_a(t)^{(\alpha+1)/2}\norm{D_ax(t)}_\infty\bigr\},\\
+ \Ynorm{\alpha}{a}(y)&=\sup_{0\le t\le T}
+  \bigl\{v_a(t)^{\beta_{\mathrm{fl}}}\norm{y(t)}_\infty
+       +v_a(t)^\alpha\norm{D_ay(t)}_\infty\bigr\}.
+ \end{split}
+\]
+Here $\norm{D_ax}_\infty$ is the maximum over all componentwise differences $D^\pm_{a,i}x$ and their shifts occurring in the Wilson-flow equation. For $0<\sigma_{\mathrm{sm}}<1-\alpha_{\mathrm{fl}}$ and $\sigma=\sigma_{\mathrm{sm}}$, set
+\[
+ \begin{split}
+ \Hnorm{\sigma}{a}(f)&=\sup_{0\le t\le T}
+  \bigl\{v_a(t)^{\sigma/2}\norm{P_t^af}_\infty
+       +v_a(t)^{(\sigma+1)/2}\norm{D_aP_t^af}_\infty\bigr\},\\
+ \Vnorm{\sigma}{a}(f)&=\sup_{0\le t\le T}v_a(t)^{\sigma/2}\norm{P_t^af}_\infty.
+ \end{split}
+\]
+For a physical initial potential $A_0$ on mesh $a$, the linear heat evolution is $x(t)=P_t^aA_0$, the quadratic Picard term is $y=\mathcal Q_a(x,x)$, and together they form the linear and quadratic flow data, measured in the norms $\Xnorm{\alpha}{a}$ and $\Ynorm{\alpha}{a}$.
+\end{definition}
+
+The weights express heat scaling: $x(t)$ is of size $v_a(t)^{-\alpha/2}$ and $y(t)$ of size $v_a(t)^{1/2-\alpha}$, and each difference costs a further factor $v_a(t)^{-1/2}$. Flow data on different meshes are compared by the cross-mesh comparison \eqref{ch21:eq:comparison-metric} of \cref{ch21:def:two-grade-datum}, whose four components are interpolated separately and weighted in time.
+
+\paragraph{Further exponents.}
+The constant $C_{\mathrm{CP}}$, which controls finitely many derivatives of the conditional constrained minimizers and of their propagated contributions, is uniform in $J$. It is chosen before $J$, including every enlargement used later in an amplitude bound or a derivative bound, and $J$ is then chosen with $C_{\mathrm{CP}}^2/B\le1/4$. We write $a_{\mathrm{cap}}=C_{\mathrm{CP}}/B$ for the contraction factor in the amplitude bound \eqref{ch12:eq:cap-iteration} of the backward reconstruction (\cref{ch12:lem:backward-law}). The decay exponent at the coarse end of the reconstruction is a different number: $\kappa_{\mathrm{term}}=-\log a_{\mathrm{cap}}/\log B>1/2$ when $a_{\mathrm{cap}}\sqrt B<1$, and the contraction factor of the propagated contributions of coarser scales is $q_{\mathrm{anc}}=Ba_{\mathrm{cap}}^2<1$. A localization exponent is denoted by $\xi$, not by $\gamma$. A tail exponent $\tau_{\mathrm{tail}}$ is chosen with
+\[
+ 0<\tau_{\mathrm{tail}}<\min\{\sigma_{\mathrm{sm}},1/2,-\log q_{\mathrm{anc}}/\log B\}.
+\]
+
+\paragraph{Logarithms along the flow.}
+Let $A=x+y+r$ be the solution on $[0,T]$ of the gauge-damped flow equation on mesh $a$ whose linear and quadratic flow data satisfy $\Xnorm{\alpha}{a}(x)+\Ynorm{\alpha}{a}(y)\le R$, with the remainder $r$ bounded as in \cref{ch21:thm:enhanced-local-flow}. Then
+\[
+ a\sup_{t\le T}\abs{A(t)}
+ \le C_Ra^{1-\alpha_{\mathrm{fl}}}
+       +C_Ra^{2-2\alpha_{\mathrm{fl}}}
+       +C_Ra(T+a^2)^{1-3\alpha_{\mathrm{fl}}/2}\longrightarrow0\qquad(a\to0),
+\]
+at fixed $T$. The first two terms come from $a\norm{x(t)}_\infty\le Ra\,v_a(t)^{-\alpha/2}$ and $a\norm{y(t)}_\infty\le Ra\,v_a(t)^{1/2-\alpha}$, evaluated at $t=0$. The last term increases with time; its maximum is $O_R(a)$, attained at $t=T$, and does not keep the mesh power of its value at $t=0$. The smooth solutions of the continuum flow are constructed from deterministic results for the flow with smooth data and from heat-kernel calculus \cite[Theorem~1.2 and Lemma~1.3, p.~3; Lemmas~C.2--C.3, pp.~55--56; Corollary~C.6, p.~58; Lemmas~C.12--C.13, p.~61]{CCHeat2022v4}. We do not use the theorem of Cao and Chatterjee on random initial data as a hypothesis on Wilson fields.
+
+\section{The heat-smoothed circulation}\label{ch01:sec:current}
+
+The short-distance results are proved for the following linear functional of the reconstructed field.
+
+\begin{definition}\label{ch01:def:heat-current}
+Fix $L>0$, $\gamma>0$, $g_3^2=\gamma/L$, $\sigma>0$, smooth loops $\ell_1,\dots,\ell_m$ in $\R^3$, and the index $s$ of the comparison lattice, and let $K\ge s$ and $N_K=n_*B^K$. Let $\widehat\theta_{K-s}$ be the link logarithm, in the gauge fixed by the reconstruction maps $\RepMap$, of the configuration on $\Lat{N_K}$ reconstructed from the lattice of side $n_s$ by $K-s$ RG steps, and let $A^{K,s}=a_{N_K}^{-1}\widehat\theta_{K-s}$ be the corresponding physical initial potential. For $a_{N_K}\le\varepsilon$ and $x\in\Torus$, let $\ell_{i,K,\varepsilon}$ be the closed lattice path in $\Lat{N_K}$ approximating $x+\varepsilon\ell_i$ that is specified in \cref{ch28:def:closed-current-target}. The heat-smoothed circulation is
+\[
+ I_i^{K,s}(\varepsilon,x)=\frac{a_{N_K}}{\sqrt{g_3^2\varepsilon}}
+ \sum_{e\in\ell_{i,K,\varepsilon}}\operatorname{sgn}(e)
+       \bigl(P_{\sigma\varepsilon^2}^{a_{N_K}}A^{K,s}\bigr)_{\operatorname{dir}(e)}
+                                     \bigl(x_{\mathrm{positive}}(e)\bigr).
+\]
+Here $\operatorname{dir}(e)$ is the direction of the link $e$, $x_{\mathrm{positive}}(e)$ is the starting point of its positive orientation, and $\operatorname{sgn}(e)=1$ if $e$ is traversed in the positive direction and $-1$ otherwise; a backward edge thus contributes the negative of the value on its positive edge.
+\end{definition}
+
+In this range, the paths $\ell_{i,K,\varepsilon}$ have physical length and diameter at most $C_\ell\varepsilon$, and they have zero winding for $\varepsilon\le\varepsilon_{\mathrm{loop}}$ of \cref{ch28:def:closed-current-target}. The functional annihilates periodic lattice gradients. Indeed, if $A_j(y)=D^+_{a,j}f(y)$ with $a=a_{N_K}$, then $P^a_tA=D^+_aP^a_tf$. Each traversed edge contributes $\pm(P^a_tf(\text{end})-P^a_tf(\text{start}))/a$, with the sign making it the increment along the path, and these increments sum to zero around a closed path. The zero winding also removes the pairing with constant one-forms. The scalar heat semigroup acts on the field at the finest mesh. It is not the nonlinear Wilson flow, and the comparison with flowed Wilson loops is a separate result (\cref{ch29:lem:actual-flow-trace-reduction}). The normalization $1/\sqrt{g_3^2\varepsilon}$ is the scale of the circulation of the Gaussian free field after heat smoothing at time $\sigma\varepsilon^2$; the analysis is in \cref{ch28:chapter,ch29:chapter}.
+
+\section{Gauge orbits and the trajectory space}\label{ch01:sec:orbits}
+
+\begin{definition}\label{ch01:def:orbit-space}
+A smooth connection is an element $A$ of $\SpaceA=C^\infty(\Torus;\su^3)$. We write
+\[
+ F_{ij}(A)=\partial_iA_j-\partial_jA_i+[A_i,A_j],\qquad D_i=\partial_i+[A_i,\cdot\,].
+\]
+A gauge transformation $k\in\SpaceG=C^\infty(\Torus;\SU)$ acts by $A^k=kAk^{-1}-(dk)k^{-1}$. The parallel transport along a piecewise $C^1$ path $\ell$ is the solution of $H'(s)=H(s)A(\ell(s))\dot\ell(s)$, $H(0)=I$; it transforms by $H^k(s)=k(\ell(0))H(s)k(\ell(s))^{-1}$. The Yang--Mills heat flow is $\partial_tA_i=\sum_jD_jF_{ji}$, and $(\Phi_t)_{t\ge0}$ is the semigroup it induces on $\SpaceA/\SpaceG$. The trajectory space $\OrbitSpace$, the regularized Wilson loops $W_{\ell,\chi,t}$, and the Wilson topology $\WilsonTopology$ are as in \cref{s2:def:trajectories}. Let $(\ell_j,t_j)_{j\ge1}$ be the fixed enumeration used in \cref{ch26:thm:wilson-borel-space}, formed from its countable dense family of piecewise $C^1$ loops, which contains loops in every winding class, and the times in $L^2\mathbb Q_{>0}$. Set $w_j(X)=\tr\Hol_{\ell_j}X(t_j)/2$ and
+\[
+ d_c(X,Y)=\sum_{j\ge1}2^{-j}\abs{w_j(X)-w_j(Y)},\qquad X,Y\in\OrbitSpace.
+\]
+\end{definition}
+
+Differentiating $k(\ell(0))H(s)k(\ell(s))^{-1}$ shows that it solves the transport equation for $A^k$, which confirms the sign of the gauge action and the order of the transport. Our gauge transformation $k$ is the inverse of the gauge variable used by Cao and Chatterjee \cite[(1.1), p.~2]{CCState2023v4}. The trajectory space follows the proposal of Charalambous and Gross \cite{CharalambousGross2013} and is a version of the state space of Cao and Chatterjee \cite{CCState2023v4}. By definition $d_c$ is a pseudometric. In \cref{ch26:thm:wilson-borel-space} we prove that it separates points of $\OrbitSpace$, that both topologies are separable, and that they have the same Borel $\sigma$-algebra. We do not assert that $(\OrbitSpace,d_c)$ is complete.
+
+The Yang--Mills energy is
+\[
+ E_L(A)=\sum_{i,j}\int_{\Torus}-\tr\bigl(F_{ij}(A)^2\bigr)\,dx=\sum_{i<j}\int_{\Torus}\abs{F_{ij}(A)}^2\,dx,
+\]
+since $-\tr(F_{ij}^2)=\abs{F_{ij}}^2/2$. It carries no coupling factor; for smooth configurations the exponent of the Wilson measure tends to $E_L/(2g_3^2)$ (\cref{ch01:rem:normalization}). Under the rescaling to the unit torus, $\widetilde A(y)=LA(Ly)$, the flow time becomes $t/L^2$ and $E_1(\widetilde A)=LE_L(A)$.
+
+The maps $\pi_K$ of \cref{ch26:thm:energy-constrained-matching} are Borel maps on the lattice configuration space, invariant under all periodic lattice gauge transformations. They are chosen by a deterministic diagonal sequence of matching levels, fixed before any configuration is sampled. Their Wilson-loop coordinates approximate the flowed lattice Wilson loops in the sense of \cref{s2:thm:main}(3); the maps do not embed lattice holonomies exactly. We use the compactness of energy sublevel sets and the continuity of the flow semigroup under the hypotheses of the cited results, which concern the quotient of Sobolev connections in $H^1$ by gauge transformations in $W^{2,2}$ \cite[Theorem~3.51, pp.~35--36; Lemma~3.68, p.~40]{CCState2023v4}.
+
+\section{Observables near commuting holonomies}\label{ch01:sec:weak}
+
+\begin{definition}\label{ch01:def:toron-observables}
+Fix $\theta>0$ and the flow time $t=\theta L^2$. Let $H_1,H_2,H_3\in\SU$ be the holonomies of $X(t)$ around the three coordinate cycles, based at a common point. Their seven trace coordinates are the normalized traces of $H_i$, of $H_iH_j$ for $i<j$, and of $H_1H_2H_3$. In a fixed neighborhood of the identity write $X=(x_i)_{i=1}^3=(\Log H_i)_{i=1}^3\in\su^3\simeq\R^9$. The cone of commuting triples is
+\[
+ \CommMan=\{(y_i)=(\vartheta_iu)_{i=1}^3:\Toron\in\R^3,\ u\in S^2\},
+ \qquad (\Toron,u)\sim(-\Toron,-u).
+\]
+Fix $0<r_0<r_1<\pi$, and let $\mathsf P=\{(\vartheta_iu)_i\in\CommMan:r_0\le\abs{\Toron}\le r_1\}$, a compact subset of the regular part of $\CommMan$ with nonempty relative interior. For $y=(\vartheta_iu)_i\in\mathsf P$, the normal space to $\CommMan$ at $y$ is
+\[
+ \NormalFiber y=\Bigl\{b=(b_1,b_2,b_3):b_i\perp u,\ \sum_i\vartheta_ib_i=0\Bigr\},\qquad
+ \dim\NormalFiber y=4,
+\]
+and on a fixed tubular neighborhood of $\mathsf P$ we use the unique coordinates $X=y+b$ with $y\in\CommMan$ and $b\in\NormalFiber y$. Let $\Pi_{\Toron}=I-\Toron\Toron^{\mathsf T}/\abs{\Toron}^2$. In unit-torus variables put, for $m\in\Z^3$,
+\[
+ k_m=2\pi m+\Toron,\qquad\lambda_m=\abs{k_m}^2,\qquad
+ R_i(m,\Toron)=
+ \begin{cases}1,&m_i=0,\\
+ \vartheta_i/(2\pi m_i+\vartheta_i),&m_i\ne0,\end{cases}
+\]
+\[
+ d_i(\Toron,\theta)=\sum_{m\in\Z^3}
+            \frac{e^{-2\theta\lambda_m}}{\lambda_m}R_i(m,\Toron)^2,
+ \qquad D=\operatorname{diag}(d_1,d_2,d_3),
+\]
+and define the normal covariance
+\begin{equation}\label{ch01:eq:normal-covariance}
+ \Sigma_\theta(y)=
+  \bigl(\Pi_{\Toron}D\Pi_{\Toron}\bigr)\big|_{\Toron^\perp}\otimes I_{u^\perp}.
+\end{equation}
+Let $0\le\psi_0\le1$ be a smooth function on $\mathsf P$, invariant under simultaneous conjugation and compactly supported in the relative interior of $\mathsf P$, that vanishes on a nonempty open set and is bounded below by a positive constant on another nonempty open set. Multiply it by a fixed smooth function $\chi$ of the normal variable, invariant under simultaneous conjugation, supported in the tube, with $0\le\chi\le1$ and $\chi=1$ near $b=0$ (for example a function of $\abs b$), to obtain $\psi(y+b)=\psi_0(y)\chi(b)$. Fix a larger tube containing the support of $\psi$ and the supports of all tangential insertions used later, and set
+\[
+ q_*(y+b)=\frac12\,b^{\mathsf T}\Sigma_\theta(y)^{-1}b
+\]
+throughout this larger tube, with a fixed bounded, continuous, nonnegative extension outside it that is invariant under simultaneous conjugation. All these functions are invariant under simultaneous conjugation, and they are extended by zero outside the identity chart, so that they define invariant functions of $(H_1,H_2,H_3)$. The observables $\ObsB=\psi$ and $\ObsA=\psi q_*$ are fixed bounded functions, and the normalized regression residual variance $\SchurStat$ is defined from them as in \cref{s2:weak}.
+\end{definition}
+
+The tangent vectors to $\CommMan$ at a regular point are $(\delta\vartheta_iu+\vartheta_i\delta u)_i$ with $\delta u\perp u$; their orthogonal complement is $\NormalFiber y$. Hence the regular part of the cone has dimension five and its normal space has dimension four. By the tubular neighborhood theorem, the coordinates $X=y+b$ near $\mathsf P$ are unique; the tip of the cone is excluded. The matrix $\Sigma_\theta(y)$ is the covariance, divided by $\gamma$, of the linearized response of the flowed logarithms at the flat connection $y$. It is derived and compared with the lattice in \cref{ch27:thm:flowed-log-covariance}; its definition does not assert that the nonlinear law of $b$ is Gaussian. The regression coefficient $\Cov(\ObsA,\ObsB)/\Var(\ObsB)$ in $\SchurStat$ depends on the measure, and $\SchurStat$ is defined for measures under which $\Var(\ObsB)>0$ and $\E\ObsB^2>0$. We prescribe $q_*$ on the larger tube, and not only on the support of $\psi$, so that $q_*$ equals the prescribed quadratic form on the support of every insertion of \cref{s2:thm:regular}(2).
+
+\begin{remark}\label{ch01:rem:covariance-positive}
+The series defining $d_i$ converges uniformly on $\mathsf P$, and $\Sigma_\theta(y)$ is positive definite. Indeed, $\abs{\vartheta_i}\le\abs{\Toron}<\pi$, so $\abs{k_m}\ge2\pi\abs m-\pi\ge\pi\abs m$ for $m\ne0$, while $k_0=\Toron\ne0$. For $m_i\ne0$ we have $\abs{2\pi m_i+\vartheta_i}>\pi>\abs{\vartheta_i}$, so $\abs{R_i}\le1$. Since $\theta>0$, the sum of $e^{-2\theta\lambda_m}/\lambda_m$ over $m\ne0$ converges uniformly. The summand with $m=0$ gives $d_i\ge e^{-2\theta\abs{\Toron}^2}\abs{\Toron}^{-2}>0$ for each $i$, hence $\Pi_{\Toron}D\Pi_{\Toron}\ge e^{-2\theta\abs{\Toron}^2}\abs{\Toron}^{-2}$ on $\Toron^\perp$. The hypothesis $\theta>0$ is needed: at $\theta=0$, the summands with $m_i=0$ have $R_i=1$, and the sum of $1/\abs{2\pi m+\Toron}^2$ over this plane diverges logarithmically.
+\end{remark}
+
+\paragraph{Central triples.}
+The central triples are the triples $(\pm I,\pm I,\pm I)$ of central elements; they are points of the moduli space of flat connections. Near them we set $r_\gamma=\gamma^{1/4}$ and define the constant-mode quartic form
+\[
+ Q(Y)=\frac12\sum_{i<j}\abs{y_i\times y_j}^2,\qquad Y=(y_1,y_2,y_3)\in\R^9.
+\]
+The quartic reference measure $m_Q=e^{-Q(Y)}\,dY$ is locally finite and has infinite total mass; it is never normalized globally. The divergence of the corresponding reduced SU(2) integral is known from the matrix-integral literature \cite{KrauthNicolaiStaudacher1998,AustingWheater2001Convergence}; we give a proof in our coordinates in \cref{ch27:chapter,ch32:chapter}. Test functions are compactly supported and invariant under the simultaneous adjoint rotation of the three vectors $y_i$. A radial cutoff is a function $\chi(\abs Y)$ with $\chi$ smooth, nonnegative, not identically zero, compactly supported, and constant near zero; the comparison of the dilation statistic with the reference measures (\cref{ch32:thm:corrected-reference-ward}) additionally requires $\chi(0)>0$. Every observable expressed in logarithmic coordinates vanishes outside a fixed identity chart. We write $\rho_{\mathrm{rad}}=\abs X/r_\gamma$ for the rescaled radial variable, to distinguish it from the analytic radius $\rho$.
+
+\begin{definition}\label{ch01:def:references}
+The following comparison measures are distinct constructions. Each depends on the fixed choices stated in it, and the results about them hold for every such fixed choice.
+\begin{enumerate}
+\item \emph{Abelian Maxwell measure with Haar cycle holonomies.} Embed a fixed $U(1)$ subgroup in $\SU$. Take the transverse Maxwell Gaussian field of the nonconstant modes with values in this subgroup, with a fixed normalization of its covariance, and independent uniformly distributed constant phases in $(\R/4\pi\Z)^3$. Smooth at the fixed observation time and take the Abelian holonomies around the three coordinate cycles. All these triples commute. A common random conjugation does not change invariant test functions.
+\item \emph{Gaussian holonomies with independent Haar factors.} Let $a$ be a centered Gaussian field with three colors and covariance $\gamma C$, for a fixed covariance $C$, and let $\mathsf S_t$ be a fixed smoothing. Let $U_1^0,U_2^0,U_3^0$ be independent Haar distributed elements of $\SU$, independent of $a$, and set $H_i=U_i^0\Hol_i(\mathsf S_ta)$. The triple $(H_1,H_2,H_3)$ has the product Haar law at every coupling.
+\item \emph{Gaussian holonomies with Gaussian constant modes.} Set $H_i=\Hol_i(\mathsf S_ta)$, without the Haar factors, where $a$ includes Gaussian constant modes with covariance proportional to $\gamma$. Assume that the scalar color projections $(x,i,v)\mapsto\ip v{(\mathsf S_ta)_i(x)}/\sqrt\gamma$, indexed by $\Torus\times\{1,2,3\}\times S^2$, have a centered separable Gaussian realization with continuous paths and bounded variance, whose law does not depend on $\gamma$. Its supremum is then measurable and almost surely finite. The resulting Gaussian supremum estimate is \cref{ch31:lem:gaussian-supremum}, and it is used only for this measure.
+\item \emph{Conditional normal Gaussian measure.} On the patch $\mathsf P$ of \cref{ch01:def:toron-observables}, choose a fixed smooth positive probability density for $y$ that charges two nonempty open sets $O_0$ and $O_+$, invariant under simultaneous conjugation, with $\psi_0=0$ on $O_0$ and $\psi_0$ bounded below by a positive constant on $O_+$, as in \cref{ch31:def:regular-observables}. Conditionally on $y$, let $b\sim N(0,\gamma\Sigma_\theta(y))$ on $\NormalFiber y$, and push the joint law forward by $X=y+b$. A fixed tube cutoff equal to one near the zero section, followed by normalization, changes bounded moments by exponentially small amounts. For these choices $\SchurStat$ is defined for all sufficiently small $\gamma$ and has leading term $2\gamma^2$ (\cref{ch31:lem:reference-comparisons}).
+\item \emph{Mixture of normalized conditional normal Gaussian measures.} Let $y$ have a fixed probability density $\alpha(y)\,d\mathrm{vol}_{\CommMan}(y)$ on a small neighborhood of the tip of $\CommMan$, with $\alpha\ge0$ continuous and strictly positive at the tip. Given $y\ne0$, let $b\sim N(0,\gamma\Sigma_\theta(y))$ be the normalized Gaussian measure on $\NormalFiber y$, and push the joint law forward by $X=y+b$. Assume that $\abs y^2\Sigma_\theta(y)\to I_{\NormalFiber y}$ as $y\to0$, uniformly in the direction of $y$, with the corresponding uniform upper and lower bounds on $\abs y^2\Sigma_\theta(y)$; here $\abs y=\abs{\Toron}$. The associated weighted normal-bundle measure is
+\[
+ d\mu_{13}\ \propto\ \abs y^4e^{-\abs y^2\abs b^2/2}\,d\mathrm{vol}_{\CommMan}(y)\,db.
+\]
+Expectations of the form $\langle\cdot\rangle_{\chi,\mu_{13}}$ are normalized by $\int\chi(\abs{y+b})\,d\mu_{13}$.
+\end{enumerate}
+\end{definition}
+
+The factor $\abs y^4$ in $\mu_{13}$ comes from the normalization of the four-dimensional Gaussian measure: $\det(\gamma\Sigma_\theta(y))^{-1/2}$ is of order $\gamma^{-2}\abs y^4$, since $\abs y^2\Sigma_\theta(y)\to I$. Under the scaling $(y,b)=\gamma^{1/4}(Y,B)$, the tangential volume, the normal volume, and this normalization contribute the factor $\gamma^{5/4}$. After division by $\gamma^{5/4}$, the joint densities converge for $Y\ne0$ to $(2\pi)^{-2}\alpha(0)\abs Y^4e^{-\abs Y^2\abs B^2/2}$ relative to $d\mathrm{vol}_{\CommMan}(Y)\,dB$. Since $y\perp b$, we have $\abs{y+b}^2=\abs y^2+\abs b^2$, and the uniform covariance bounds give dominated convergence on compact sets of outputs $Y+B$; this is the scaling limit of \cref{ch32:thm:corrected-reference-ward}. The weighted volume element has dilation degree $5+4+4=13$, which explains the index of $\mu_{13}$. The mixture differs from the quartic reference measure $m_Q$, and omitting the conditional normalization would change the comparison. The value of $\alpha$ at $y=0$ is irrelevant, since $\{y=0\}$ is a null set.
+
+\section{Dependence of constants}\label{ch01:sec:constants}
+
+Each quantitative statement in this paper either lists the parameters on which its constants depend, or refers to one of the items of the following definition, with any additional fixed parameters listed in the statement. In quantifier form, all fixed data precede the choice of the constants, and every quantity said to vary follows that choice.
+
+\begin{definition}\label{ch01:conv:constants}
+A constant has the dependence described in item (k) if the corresponding statement holds as follows.
+\begin{enumerate}
+\item[(1)] \emph{Finite-dimensional estimates.} Algebraic identities hold in every finite dimension stated. Constants in analytic estimates for products of a bounded number of group elements depend only on the number of factors and on the distance to the boundary of the logarithmic chart. Estimates for measures on products of convex balls depend only on the stated bounds on the Hessian of the potential in the free coordinates and on the weighted interaction, and not on the dimension or on the radii of the individual balls.
+\item[(2)] \emph{Classical estimates on the torus.} Constants depend on $M$, on the fixed larger physical and analytic domains, on the spatial decay rates, and on fixed upper bounds for the norms involved. Bounds stated uniformly in depth are independent of the lattice side, of the preceding classical depth, and of the coarse field in the stated domain. The explicitly named constants controlling finitely many derivatives, and the Taylor coefficient majorant $Z$ of the aligned zero-fluctuation minimizer in \cref{ch08:lem:aligned-zero-white}, together with its radius, its coefficient constant, and its spatial rate, are uniform in $J$: they are fixed before $J$ is chosen. Joint coefficient bounds in the coarse field and the free coordinates, and coefficient bounds for the gauge transformations of the reconstruction maps, are bounds at fixed $J$; for the reconstruction maps, only the specified finitely many derivatives of the zero-fluctuation reconstruction are uniform in $J$.
+\item[(3)] \emph{Local estimates on block regions.} Each constant $C_J,c_J,\lambda_J$, local radius, or upper bound for an output norm depends only on $M$ and $J$, on the fixed larger initial and analytic domains and their radius ratios, on the spatial and boundary decay rates and the stated margins, on a bound on the number of indices per lattice cell, and on fixed upper bounds for the norms on the torus and of the perturbations. It is independent of $L,\gamma,m,N,K,d_0$, of the number of elapsed RG steps, of the shape and topology of the block region, of the numbers of connected components of the block region and of the fixed complement, and of the values of the real frozen coordinates. Where a theorem says so, it is also independent of the later boundary widths, widths of removed boundary layers, separation widths, and enlarged-cell widths; such a constant is evaluated on the larger domain before these widths are chosen. This applies only to the theorems on block regions proved in this paper; it does not extend an estimate on the full torus to arbitrary regions.
+\item[(4)] \emph{Estimates for the small-field failure probability.} Constants may depend on $L$, on the coupling ceiling $\gamma_0$ and the parameter tuple $\Theta$ of \cref{ch20:thm:common-parameters}, on $M$ and $J$, and on the fixed allowed number of averaging steps and enlargement of the stopping scale, but not on the coupling $\gamma$, on the lattice side, on the number of RG steps on the fine side or the preceding depth, or on the age, geometry, or widths of a large-field decomposition. The constant $C_{u,q}$ may in addition depend on fixed $u$ and $q$. In a statement uniform in $0<\gamma\le\Gamma$, these constants and the minimal admissible side may in addition depend on the fixed ceiling $\Gamma<\infty$; they are independent of $\gamma\in(0,\Gamma]$. This does not change the dependence of the constants in items (3) and (7).
+\item[(5)] \emph{Short-distance estimates.} Constants may depend on fixed $L,\gamma,M,J$, on the family of loops, on $\sigma$, and on the fixed index $s$ of the comparison lattice. They are uniform in the remaining number of RG steps on the fine side, in the point $x$, and in the allowed lattice offsets, in the range $a\le\varepsilon\le\varepsilon_0(s)$. No uniformity as $s\to\infty$ or as $\gamma\downarrow0$ is asserted.
+\item[(6)] \emph{Weak-coupling estimates.} Constants may depend on fixed $n,L,\theta,M,J$, on the compact subsets of the regular part of $\CommMan$, on the test functions, and on the larger margins, all fixed before $\gamma$. They are independent of the number of RG steps on the fine side, of the preceding depth, and of the coupling below the ceiling. Constants $C_m$ attached to a fixed number $m$ of RG steps may grow with $m$; constants in tail bounds at the coupling-dependent scale may not. These are estimates on the full torus.
+\item[(7)] \emph{Flow estimates.} Deterministic estimates for the flow on a set where the linear and quadratic flow data are bounded by $R$ may depend on $R$, on positive waiting times, on the time horizon, and on the margins within the chosen coordinate charts. Constants in stochastic estimates and in convergence statements at fixed coupling, and the deterministic diagonal sequence of matching levels, may also depend on that coupling, on the coarse side, and on the observables. No rate that is uniform as a restart time tends to zero, or as the coupling varies, is implied.
+\end{enumerate}
+\end{definition}
+
+We claim no useful bound as $J\to\infty$ for the joint constants at fixed $J$ or for the constants on block regions; this concerns only these fixed-$J$ constants, and not the constants in item (2) that are stated to be uniform in $J$. The order in which the parameters are chosen is established in \cref{ch20:thm:common-parameters}: first the constants uniform in $J$, then $J$, then the local constants at fixed $J$, and then the geometric widths. In particular, $J$ is not enlarged after the constants on block regions at fixed $J$ have been computed.
+
+\paragraph{Probabilistic conventions.}
+For a random vector in a finite-dimensional space, the bounded-Lipschitz distance uses the test functions bounded by one with Lipschitz constant at most one with respect to the Euclidean norm. For probability measures we use $\norm{\mu-\nu}_{\TV}=\sup_A\abs{\mu(A)-\nu(A)}$, so that $\abs{\E_\mu f-\E_\nu f}\le2\norm f_\infty\norm{\mu-\nu}_{\TV}$ for every bounded measurable $f$. The covariance $\Cov(F,G)=\E(FG)-\E F\,\E G$ is complex bilinear when complex sources are used. Whenever a real minimum or a positive density is asserted, the holomorphic continuations involved take real values at real arguments, that is, $f(\overline z)=\overline{f(z)}$ in the chosen coordinates.

@@ -1,0 +1,757 @@
+\chapter{Fluctuation integration and cluster expansions}\label{ch09:chapter}
+
+In this section, we integrate out the fluctuations of a bounded number of averaging steps around the classical background field. We consider $s\le J$ consecutive averaging steps, from a lattice of side $M^sm$ to a coarse lattice of side $m\ge4$, starting from the effective classical action $E_{d_0}$ of some depth $d_0\ge0$; for $s=J$ this is one renormalization group step. Given a coarse field $c$, the fine configurations whose average is $c$ are described by free logarithmic coordinates at each intermediate scale. We center these coordinates at the conditional constrained minimizer, normalize them by the coupling and the constrained Hessian, and integrate the resulting normalized fluctuation variables $w$ over a fixed product $\Omega_p$ of three-dimensional balls.
+
+There are three main results. The first is an exact formula for this integral, for one averaging step in \cref{ch09:lem:centered-white-coarea} and for $s\le J$ averaging steps in \cref{ch09:thm:sequential-density}. The second is a convergent polymer expansion of the logarithm of the fluctuation partition function, with volume-independent bounds on all its derivatives of positive order (\cref{ch09:thm:hard-core-log,ch09:thm:supported-log-holomorphy,ch09:prop:one-step-interaction}). The third, \cref{ch09:lem:marked-insertion}, concerns an input effective interaction $R$, produced by the integrations at finer scales. It shows that integrating out the fluctuations replaces $R$ by its value on the zero-fluctuation reconstruction plus a correction of second order in the coupling. We do not estimate the probability of the domain of integration under the Wilson measure here; this is done in \cref{ch20:chapter}.
+
+We use the conventions of \cref{ch01:chapter}, the absolute coefficient calculus of \cref{ch02:lem:coefficient-algebra}, the constraint coordinates and the exact Haar disintegration of \cref{ch03:lem:relative-coarea}, and the conditional constrained minimizers, the nested minimization identity, and the coefficient bounds for $E_d$ of \cref{ch07:thm:bellman,ch07:thm:all-root-classical}. In \cref{ch10:chapter}, the results are used to construct the renormalization group recursion on the small-field event and to describe the conditional fluctuation kernel; they are also used in \cref{ch11:chapter,ch12:chapter,ch20:chapter}. \Cref{ch15:chapter,ch17:chapter} reuse the triangular change of variables and the graph combinatorics, and \cref{ch27:chapter,ch28:chapter,ch31:chapter} use the coordinates of \cref{ch09:thm:sequential-density} and its dimension counts.
+
+\paragraph{The integral over one averaging step.}
+We first describe the identity of \cref{ch09:lem:centered-white-coarea} informally. Let $b(c,z)$ be the fine configuration with average $c$ and free logarithmic coordinates $z$, and let $F(c,z)=E_{d_0}(b(c,z))$. Let $z^*(c)$ be the minimizer of $F(c,\cdot)$ and $K(c)=D_z^2F(c,z^*(c))$ the constrained Hessian. The substitution
+\[
+ z=z^*(c)+gK(c)^{-1/2}w
+\]
+has Jacobian $g^{3f}\det K(c)^{-1/2}$, where $3f$ is the number of real free logarithmic coordinates. Since $z^*$ is stationary and $K^{-1/2}KK^{-1/2}=I$, we have
+\[
+ \frac{F(c,z)}{g^2}=\frac{F(c,z^*(c))}{g^2}+\frac12\abs w^2+O(g\abs w^3),
+\]
+and $F(c,z^*(c))/g^2=E_{d_0+1}(c)/(Mg^2)$ by the nested minimization identity. The Haar density of the free logarithmic coordinates is a reference constant times $e^{-\mathcal L_c(z)}$, and $\mathcal L_c(z)=\mathcal L_c(z^*(c))+O(g\abs w)$. Thus the integral over $w\in\Omega_p$ is the product of three factors that depend on $c$ (the exponential of the effective classical action at the coarse scale, the determinant $\det K(c)^{-1/2}$, and the Haar density at the minimizer) and of the integral of $e^{-\abs w^2/2-U(c,w)}$, where $U$ is small on $\Omega_p$. The determinant and the Haar density at the minimizer become part of the effective interaction as functions of $c$, and $E_{d_0+1}/(Mg^2)$ remains a separate term. We control the integral of $e^{-\abs w^2/2-U}$ by a polymer expansion about the product of truncated Gaussian measures on the balls. This product is only a reference measure. The conditional law of $w$, the conditional fluctuation kernel studied in \cref{ch10:chapter}, has density proportional to $e^{-\abs w^2/2-U}$.
+
+For several averaging steps the change of variables is triangular, from the coarsest intermediate scale to the finest. The minimizers, Hessians, and Haar densities at a finer scale depend on the fluctuations at all coarser scales, and the exact formula of \cref{ch09:thm:sequential-density} keeps these dependences.
+
+\paragraph{Organization.}
+\Cref{ch09:sec:coordinates} defines the coefficient norms and proves the exact formula for one averaging step. \Cref{ch09:sec:polymers} proves the cluster expansion in an absolute coefficient algebra, in a form that applies to arbitrary interactions with connected supports. \Cref{ch09:sec:one-step} constructs connected supports for the interaction of one averaging step and estimates the resulting effective interaction. \Cref{ch09:sec:sequential} treats $s\le J$ averaging steps, and \cref{ch09:sec:insertion} treats an input effective interaction. The order in which the constants are chosen is summarized in \cref{ch09:rem:order-of-choices}.
+
+\paragraph{Conventions.}
+All results of this section concern the periodic torus without a fixed complement. Distances are measured in units of the coarse lattice spacing. Unless stated otherwise, constants in the statements about one averaging step have the dependence described in item (2) of \cref{ch01:conv:constants}. That is, they depend only on $M$, on the fixed larger domains of the classical and Haar disintegration charts, and on fixed radius ratios, spatial decay rates, and norm bounds. They are independent of the depth $d_0$, of the side $m$, and of the coupling and cutoff parameters satisfying the stated inequalities. For $s\le J$ averaging steps, the constants may also depend on $J$, on the finitely many changes of scale between the lattices involved, and on the fixed box geometry, and no uniformity as $J\to\infty$ is claimed. Every factor that is independent of the field, and every factor that depends only on the coarse field, is kept explicitly in the formulas.
+
+We recall the coefficient norms of \cref{ch01:def:analytic-norms}. A tensor is bounded \emph{at every fixed index} if, at the spatial decay rate $b$, its output-fixed absolute row sum and each of its input-fixed absolute column sums, the latter with the volume normalization of \cref{ch01:def:analytic-norms}, are bounded. Every sum carries the weight $e^{b\Tree}$, where $\Tree$ is the length of a shortest connected network joining the locations of all indices of the coefficient; internal vertices are allowed. For a scalar function, we fix any one input index and sum over the others with the same weight, and we write $\norm{\cdot}_{b,\mathrm{root}}$ for the resulting norm of a derivative tensor. Scalar values are never included in these norms. A \emph{majorant series} of a family of tensors is a power series with nonnegative coefficients that dominate the corresponding sums of absolute coefficients.
+
+\paragraph{Attribution.}
+The organization of the integral into an effective classical action and connected local fluctuation terms follows Bałaban's renormalization group analysis of lattice gauge theories \cite{Balaban1987RGI,Balaban1988RGII}; its three-dimensional antecedent is the stability analysis in \cite{Balaban1985UV}. We adapt this organization to the block averaging map, the constraint coordinates, and the truncated domains used here, and we prove the expansion below. In particular, we do not use the four-dimensional coupling renormalization of \cite{Balaban1987RGI}. The cluster expansion combines the Mayer expansion with a convergence criterion of the type of Kotecký and Preiss \cite{KoteckyPreiss1986}. The bound on connected graph sums by spanning trees comes from Penrose's partition \cite{Penrose1967}, in the form described by Fernández and Procacci \cite[Section~4.1]{FernandezProcacci2007}; see also Brydges' exposition \cite{Brydges1986}. Dimock records the finite graph estimate in the constructive renormalization group setting \cite[Appendix~B, Theorem~27, p.~39, and (323), p.~42]{Dimock2013v2}. His analysis concerns a scalar field, and no other result of \cite{Dimock2013v2} is used. The weighted resolvent bounds use the Combes--Thomas method \cite{CombesThomas1973}, as in \cref{ch02:lem:coefficient-algebra}.
+
+\section{Coefficient norms and normalized fluctuation coordinates}\label{ch09:sec:coordinates}
+
+\begin{definition}\label{ch09:def:supported-coefficient-norms}
+Let $\mathscr L\ge1$ be an integer, the box scale; it is unrelated to the side length $L$ of the torus. Partition each periodic coordinate direction of the coarse lattice into integer intervals of lengths between $\mathscr L$ and $2\mathscr L$; a direction that is too short for such a partition forms a single interval. The products of these intervals are the \emph{boxes}. A \emph{support} is a nonempty connected set $X$ of boxes; sets that wind around the torus are allowed, and $\abs X$ denotes the number of boxes in $X$. A function is \emph{supported in} $X$ if it depends only on coordinates $\theta$ and $w$ (or $\theta$ and $q$, when those variables are used) whose locations lie in $X$.
+
+For a convergent series $f(\theta,w)=\sum_\nu f_\nu(w)\theta^\nu$ in the coarse-field coordinates $\theta$, whose coefficients are functions of $w$ on a fixed product $\Omega_p$, and for a family $\{f_X\}$ indexed by supports, set
+\begin{equation}\label{ch09:eq:coefficient-norm}
+ \norm f_{u,\mathrm{coeff};p}=\sum_\nu u^{\abs\nu}\sup_{w\in\Omega_p}\abs{f_\nu(w)},
+ \qquad
+ \norm{\{f_X\}}_{u,\kappa;p}=\sup_x\sum_{X\ni x}e^{\kappa\abs X}\norm{f_X}_{u,\mathrm{coeff};p},
+\end{equation}
+where $x$ ranges over the boxes. The coefficients are taken in the scalar link and color coordinates and include the Taylor factorials, that is, $f_\nu$ is the coefficient of the monomial $\theta^\nu$; replacing the scalar absolute value by a fixed norm on the three color components changes only fixed constants. When the functions do not depend on $w$ we omit $p$ from the notation.
+
+For an extensive scalar holomorphic function $f(\theta,q)$ of the coarse-field coordinates $\theta$ and of variables $q$, with $q_i=g_iw_i$ in the applications below, set
+\begin{equation}\label{ch09:eq:joint-seminorm}
+ \mathcal J_{u,v,b}(f)=\sum_{r+s\ge1}\frac{u^rv^s}{r!\,s!}\norm{D_\theta^rD_q^sf(0,0)}_{b,\mathrm{root}},
+\end{equation}
+where the tensor norm fixes any one index of $\theta$ or of $q$, sums over all other indices, and uses the weight $e^{b\Tree}$ and the volume normalization of \cref{ch01:def:analytic-norms}. The constant coefficient of $f$ is not restricted by $\mathcal J_{u,v,b}$. For a reconstructed field, which is vector valued, we use the analogous majorant series for the output-fixed rows and for all input-fixed volume-normalized columns. In a composition of $s$ averaging steps the variables $w_i$ and $q_i$ of the $i$-th step have mesh $M^{i-s}$, $0\le i<s$, and the number of their indices, for all these steps, located in a unit cube is at most $C_MsM^{3s}$.
+\end{definition}
+
+In \eqref{ch09:eq:coefficient-norm}, we take the supremum over $w\in\Omega_p$ of each coefficient in $\theta$ and then sum with the weights $u^{\abs\nu}$. This norm dominates the supremum of the function. The symbol $\mathcal J_{u,v,b}$ is unrelated to the Haar disintegration densities $\mathcal J_c$ introduced below.
+
+We now fix one averaging step, from side $Mm$ to side $m\ge4$, with input action $E_{d_0}$ of depth $d_0\ge0$. By \cref{ch03:lem:relative-coarea,ch07:thm:bellman}, the fine configuration with average $c$ is $b(c,z)=e^{\Gamma_c(z)}U_0(c)$, where $U_0(c)$ is the coarse-field lift, $\Gamma_c$ solves the block averaging constraint for the eliminated edges $e^*_a$, $a\in\Links m$, and $z$ are the free logarithmic coordinates. We write
+\[
+ B(\theta,z)=\Log b(e^\theta,z),\qquad F(\theta,z)=E_{d_0}(b(e^\theta,z)),
+ \qquad \mathcal L(\theta,z)=-\log\frac{\mathcal J_{e^\theta}(z)}{\mathcal J_I(0)},
+\]
+where $\mathcal J_c(z)$ is the Haar disintegration density of \cref{ch09:lem:centered-white-coarea} below; when $c$ rather than $\theta$ is the variable we also write $F(c,z)$. Let $z^*(c)$ be the conditional constrained minimizer of \cref{ch07:thm:bellman} and $K(\theta)=D_z^2F(\theta,z^*(e^\theta))$.
+
+\begin{lemma}\label{ch09:lem:local-calculus}
+There exist $a,A,R>0$, with the dependence described in item (2) of \cref{ch01:conv:constants} and independent of $d_0\ge0$ and $m\ge4$, and fixed products of coarse-field coordinates and free logarithmic coordinates, contained with fixed positive margins in the domains of \cref{ch03:lem:relative-coarea,ch07:thm:bellman,ch07:thm:all-root-classical}, on which the following bounds hold at the spatial decay rate $a$.
+\begin{enumerate}
+\item The map $B(\theta,z)$ has output-fixed absolute row sums and input-fixed volume-normalized column sums whose coefficients of order $k$ are bounded by $A^{k+1}k!$.
+\item The scalar functions $F(\theta,z)$ and $\mathcal L(\theta,z)$ have coefficients of every order $k\ge1$ bounded by $A^{k+1}k!$ with any one input index fixed.
+\item The minimizer $z^*(e^\theta)$ vanishes at $\theta=0$ and has majorant series for its rows and its columns of all orders, with the same factorial bounds.
+\item The coefficients of positive degree in $\theta$ of $K(\theta)$ may be bounded with either matrix index fixed, or with one coarse-field index fixed; in the latter case both matrix indices are summed. Their generating series is bounded by $Ax/(1-Ax)$ for $0\le x<R$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The output side is $m\ge4$, and the input action lives on the side $Mm\ge4$ and has depth $d_0\ge0$, so \cref{ch07:thm:bellman,ch07:thm:all-root-classical} apply. We fix $R>0$ such that the products $\norm\theta_\infty\le2R$, $\norm z_\infty\le2R$ lie inside the domain of the constraint coordinates and the domain of \cref{ch07:thm:bellman}, and such that $\norm{B(\theta,z)}_\infty<r_*/2$ there, where $r_*$ is the radius of \cref{ch07:thm:all-root-classical}. Such a choice exists since $B(0,0)=0$ and by the first-order bounds of \cref{ch03:lem:relative-coarea}. The last condition places the argument of $E_{d_0}$, and not only the coarse field, in the domain where its coefficient bounds hold. The resulting margins depend only on the data of one averaging step, and all later reductions of $R$ in this proof are made before $J$, $g$, and $p$ are chosen.
+
+Recall that if $\sum_\nu a_\nu z^\nu$ converges on a neighborhood of a product of circles of radii $R_j$, then by Cauchy's formula $\abs{a_\mu}\prod_jR_j^{\mu_j}$ is at most the supremum of the function on these circles. The same holds for coefficients with values in a Banach space.
+
+Each component of the solution $\Gamma$ in \cref{ch03:lem:relative-coarea} depends on a finite stencil of at most $n_M$ scalar coordinates, of diameter at most $d_M$ in the output lattice. At fixed $M$ there are only finitely many local types of such stencils, and the periodic identifications only identify members of this finite list. On a closed complex product strictly inside the domain, the holomorphic solutions are bounded by a fixed constant $A_0$. If the circle radius in each scalar coordinate is $R_0$, the coefficient of a multiindex $\nu$ is then at most $A_0R_0^{-\abs\nu}$. There are $\binom{n_M+k-1}{k}\le(2n_M)^k$ multiindices of degree $k\ge1$. Summing absolute coefficients therefore introduces a factor exponential in $k$, and multiplying by $k!$ gives the bound $A^{k+1}k!$ for the ordered derivative tensors. A fixed input belongs to at most $C_M$ stencils, which gives the column bounds. A tree on the $k+1$ locations of a coefficient has length at most $d_Mk$, so the exponential weight contributes another factor exponential in $k$. This proves the row and column bounds; no bound on directional derivatives is used. Finite products, exponentials, and the logarithm in the identity chart preserve such bounds, since their majorant series are dominated by products, by $e^x$, and by $\sum_{j\ge1}x^j/j$ on a fixed small disc.
+
+These are volume-normalized column bounds as well as counting bounds. In units of the coarse lattice spacing, the two meshes are $1$ and $M^{-1}$. The column factor, the output volume divided by the input volume, is therefore $1$, $M^{-3}$, or $M^3$, and we include these fixed factors in $A$. In compositions we use these factors as in \cref{ch02:lem:coefficient-algebra}, and the intermediate volumes cancel at each contraction. Since lengths measured in the units of the input lattice are multiplied by $M^{-1}$, the exponential bounds of the input lattice still hold at one fixed positive rate.
+
+The same reasoning applies to each term of $\mathcal L$. Each nonforest link contributes $-\log j_H(\Gamma_e)$, and each coarse link $a$ contributes $\log\det(M^2D_{X_{e^*_a}}\mathsf C_a)$. Here $j_H(0)=1$, and the matrix in the second logarithm equals $I$ at $z=0$. On a smaller product, their differences from $1$ and from $I$ have norm less than $1/2$, which ensures that the scalar and matrix logarithm series converge with uniform local coefficient bounds. The constant $\mathcal J_I(0)$ cancels exactly these values at zero. Each index belongs to a bounded number of these local terms, which gives the asserted bounds for their sum with one index fixed. This argument also specifies the real logarithms and their holomorphic continuations.
+
+For $F$, the product chosen above places every argument $B$ inside the radius $r_*$, and we use the factorial bounds for $E_{d_0}$ of \cref{ch07:thm:all-root-classical}. In a coefficient of the composition, we join the network of the outer tensor to the networks of the inserted $B$ tensors. If an input index is fixed, we use the column of the insertion containing it and rows for the other insertions. The contraction rule of \cref{ch02:lem:coefficient-algebra} then sums every internal index without a volume factor, and the exponential generating series is bounded by the composition of two convergent majorant series. Differentiating twice to form a Hessian introduces a factor $(k+1)(k+2)$ at coefficient degree $k$, which is absorbed on a fixed smaller radius.
+
+To bound all orders of the minimizer, let $K^0=D_z^2F(0,0)$ and write the stationarity equation as the implicit system
+\begin{equation}\label{ch09:eq:center-equation}
+ z=\Phi(\theta,z),\qquad \Phi(\theta,z)=-(K^0)^{-1}\{D_zF(\theta,z)-K^0z\}.
+\end{equation}
+We have $\Phi(0,0)=0$, and the linear part of $\Phi$ in $z$ vanishes at the origin. Its part linear in $\theta$ is bounded by $A\norm\theta$, and the remaining majorant series is bounded by $A(\norm\theta+x)^2/[1-A(\norm\theta+x)]$ when the unknown has majorant $x$. The rows and columns of $(K^0)^{-1}$ are bounded uniformly by \cref{ch07:thm:bellman}. We apply the implicit-series clause of \cref{ch02:lem:coefficient-algebra} with the majorant
+\[
+ x=A\norm\theta+\frac{A(\norm\theta+x)^2}{1-A(\norm\theta+x)},
+\]
+that is, with $\kappa=0$ in its notation, and we obtain a convergent majorant at every fixed index. Its unique small solution is the minimizer of \cref{ch07:thm:bellman}, by the uniqueness statement there.
+
+Finally we compose the tensor $D_z^2F$, which has two indices of $z$, with the minimizer. A coefficient of positive degree in $\theta$ contains a coarse-field index either in the outer tensor or in an inserted copy of $z^*$. Fixing that index and using the appropriate columns along its path, we sum over the two indices of $z$. The contractions and the majorant series just described prove the stated bound for $K-K^0$. Throughout the contractions we keep the shortest connected networks, and we replace them by trees on the external indices only once, as permitted by \cref{ch02:lem:coefficient-algebra}. This fixes one positive rate for every order.
+\end{proof}
+
+In the next lemma, $U$ denotes a scalar function of the coarse field and of $w$, not a configuration.
+
+\begin{lemma}\label{ch09:lem:centered-white-coarea}
+Fix an odd integer $M\ge3$. There exist $u_0,v_0,b,m_0,C,\sigma_0>0$ and $p_0\ge1$, with the dependence described in item (2) of \cref{ch01:conv:constants} and independent of $d_0\ge0$ and $m\ge4$, such that the following holds for the reconstruction $b(c,z)$ of \cref{ch07:thm:bellman}. Put
+\[
+ F(c,z)=E_{d_0}(b(c,z)),\quad z^*(c)=z_{d_0}^*(c),\quad K(c)=D_z^2F(c,z^*(c)),\quad S(c)=K(c)^{-1/2}.
+\]
+\begin{enumerate}
+\item There are $f=2(M^3-1)m^3$ independent $\SU$ variables, hence $3f$ real free logarithmic coordinates. Their density relative to the product Haar measure on the coarse configuration, including the Haar factors of the eliminated edges, is the Haar disintegration density
+\[
+ \mathcal J_c(z)=c_{\mathrm{Haar}}^f\frac{\prod_{e\text{ nonforest}}j_H(\Gamma_{c,e}(z))}{\prod_{a\in\Links m}\det D_{X_{e^*_a}}\mathsf C_{c,a}(\Gamma_c(z))},
+\]
+where $j_H(X)=\sinc^2(\abs X/2)$; its value at $c=I$, $z=0$ is $\mathcal J_I(0)=c_{\mathrm{Haar}}^fM^{6\abs{\Links m}}$.
+The integral over the forest variables has mass one. Set $\mathcal L_c(z)=-\log(\mathcal J_c(z)/\mathcal J_I(0))$ and $\mathcal L_0(c)=\mathcal L_c(z^*(c))$.
+\item For real $c$ the matrix $S(c)$ is real, symmetric, and positive definite, and $S$ extends holomorphically to $c=e^\theta$, $\norm\theta_\infty<u_0$. With $K^0=K(I)$, for every real $x\ge0$,
+\[
+ \norm{(K^0+xI)^{-1}}_{b,\mathrm{row+col}}\le\frac{C}{m_0+x},\qquad
+ S(c)=\frac1\pi\int_0^\infty x^{-1/2}(K(c)+xI)^{-1}\,dx.
+\]
+The coefficients of $S$ satisfy factorial bounds at every fixed index, with exponentially weighted rows and columns, and each coefficient of positive degree in $\theta$ may also be bounded with one coarse-field index fixed and both matrix indices summed.
+\item There exist $a_1,A,R>0$, chosen before $J$ and independent of $d_0,m,g,p$, and fixed products of radius $R$ contained with fixed positive margins in the larger classical and Haar disintegration domains, on which $B(\theta,z)$, $F(e^\theta,z)$, $\mathcal L_{e^\theta}(z)$, and $z^*(e^\theta)$ satisfy the bounds of \cref{ch09:lem:local-calculus} at the rate $a_1$, with coefficients of order $k\ge1$ bounded by $A^{k+1}k!$; for $B$ these are output-fixed rows and all input-fixed volume-normalized columns, and for the scalar functions any one input index is fixed. Scalar values are excluded, and no coupling or cutoff enters. The coefficients of positive degree of $K(e^\theta)$, $K^{1/2}=KS$, and $S=K^{-1/2}$ are bounded by $A^{k+1}k!$ with either matrix index fixed, or with a coarse-field index fixed and then both matrix indices and all other inputs summed; their series of positive degree are bounded by $Au/(1-Au)$. All these bounds also hold after translation to any background point of a fixed smaller product. The volume normalizations are those of \cref{ch01:def:analytic-norms} for this pair of lattices.
+\item Let $g>0$, $p\ge p_0$, and $\norm\theta_\infty<u_0$, and assume
+\begin{equation}\label{ch09:eq:one-step-conditions}
+ Cgp<\tfrac12,\qquad \sigma=C\Bigl\{\frac{gp^3}{1-Cgp}+gp\Bigr\}\le\sigma_0.
+\end{equation}
+Then, for every $w\in\Omega_p=\prod_{e=1}^f\{w_e\in\R^3:\abs{w_e}\le p\}$, the point $z=z^*(c)+gS(c)w$ satisfies $\norm z_\infty<v_0/2$, and $b(c,z)$ lies in the domain of the classical coefficient bounds. Let $z_p=\int_{\abs w\le p}e^{-\abs w^2/2}\,d^3w$, let $\pi_p$ be the product reference measure on $\Omega_p$ with density $z_p^{-f}\prod_e\one_{\abs{w_e}\le p}e^{-\abs{w_e}^2/2}$, and set
+\begin{equation}\label{ch09:eq:one-step-interaction}
+ U(c,w)=\frac{F(c,z^*+gSw)-F(c,z^*)}{g^2}-\frac12\abs w^2+\mathcal L_c(z^*+gSw)-\mathcal L_0(c).
+\end{equation}
+Then, with $g_+^2=Mg^2$,
+\begin{equation}\label{ch09:eq:one-step-integral}
+ \int_{z^*+gS\Omega_p}e^{-F(c,z)/g^2}\mathcal J_c(z)\,dz
+ =\mathcal J_I(0)g^{3f}e^{-E_{d_0+1}(c)/g_+^2}\det S(c)\,e^{-\mathcal L_0(c)}z_p^f\,\Xi(c),
+\end{equation}
+where $\Xi(c)=\E_{\pi_p}e^{-U(c,w)}$.
+These identities are exact for real $c$. For complex $c$ the left side is defined as the holomorphic continuation obtained by integrating over the same real product of $w$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We take $p_0=1$; any fixed larger $p_0$ also works. We use the products of \cref{ch09:lem:local-calculus} inside the domain of \cref{ch07:thm:bellman}, and we reduce their radii as follows.
+
+\paragraph{Step 1: the weighted resolvent at the identity.}
+Let $\lambda=m_0$ be the uniform lower bound of \cref{ch07:thm:bellman} for the Hessian $K^0$ on the real space of free logarithmic coordinates; it holds for every $m\ge4$. The indices of $z$ have bounded density and polynomial growth, with constants depending only on $M$. We apply the weighted inverse clause of \cref{ch02:lem:coefficient-algebra} to $K^0+xI$, $x\ge0$. Its lower bound is $\lambda+x$, and its off-diagonal entries are those of $K^0$. We fix $0<\beta_0<a$ by the condition of that clause for the lower bound $\lambda$; this choice works for every $x\ge0$. We obtain
+\[
+ \abs{(K^0+xI)^{-1}_{ef}}\le\frac{2e^{-\beta_0\dist(e,f)}}{\lambda+x}.
+\]
+For $0<b_0<\beta_0$, summing with the weight $e^{b_0\dist(e,f)}$ and using the polynomial growth just recalled, we obtain the row and column bound $C/(\lambda+x)$. The constant and the rate are independent of $x$, $d_0$, and $m$.
+
+\paragraph{Step 2: the inverse square root.}
+Let $\Delta K=K(c)-K^0$. On a smaller coarse-field product, \cref{ch09:lem:local-calculus}(4) implies that $\norm{(K^0+xI)^{-1}\Delta K}_{b_0}<1/2$ simultaneously for all $x\ge0$. Hence
+\begin{equation}\label{ch09:eq:resolvent-series}
+ (K(c)+xI)^{-1}=\sum_{j\ge0}\bigl[-(K^0+xI)^{-1}\Delta K\bigr]^j(K^0+xI)^{-1}
+\end{equation}
+converges in the weighted matrix algebra. We may integrate its majorant against $\pi^{-1}x^{-1/2}\,dx$, since $x^{-1/2}/(\lambda+x)$ is integrable. For a real eigenvalue $k>0$, the substitution $x=ky^2$ and $2\int_0^\infty(1+y^2)^{-1}dy=\pi$ give $\pi^{-1}\int_0^\infty x^{-1/2}(k+x)^{-1}dx=k^{-1/2}$. Diagonalizing the real symmetric matrix $K(c)$, we find that the integral is its positive symmetric inverse square root. The same integral of the normally convergent series defines the holomorphic continuation. By continuation from real data we have $S^{\mathsf T}=S$ and $S^{\mathsf T}KS=I$, with the transpose rather than the Hermitian adjoint.
+
+\paragraph{Step 3: coefficients of $S$.}
+Each coefficient of positive degree in $\theta$ of \eqref{ch09:eq:resolvent-series} differentiates at least one factor $\Delta K$. We fix the coarse-field index on that factor, sum both of its matrix indices by \cref{ch09:lem:local-calculus}(4), and contract the remaining resolvents using their rows and columns. Integrating the resulting convergent majorant series proves the asserted bounds for $S$, including the sum over both matrix indices when a coarse-field index is fixed. The undifferentiated term needs only the rows and columns of $(K^0+xI)^{-1}$. All radius reductions and the final rate are chosen here, before $g$ and $p$.
+
+\paragraph{Step 4: joint bounds and the positive square root.}
+The tensors of $B$, $F$, $\mathcal L$, and $z^*$ in part (3) are those of \cref{ch09:lem:local-calculus}; no fluctuation variable or cutoff enters their construction. For the matrix products, we fix $a_1>0$ such that $2a_1$ is at most both the rate of \cref{ch09:lem:local-calculus} and $b_0$; this leaves the factor two needed to replace a shortest connected network by a tree on the external indices. Since $S$ is a function of $K$, it commutes with $K$. The holomorphic matrix
+\begin{equation}\label{ch09:eq:positive-root}
+ P(c)=K(c)S(c)
+\end{equation}
+equals the positive symmetric square root $K(c)^{1/2}$ for real data, and $P^2=K$ on the complex product since $S^2K=I$. Then $P$ is the continuation of the positive square root, and its row and column bounds follow from submultiplicativity.
+
+We check the coefficient bounds for $P$. For a coarse-field multiindex $\nu$ we have $P_\nu=\sum_{\mu\le\nu}K_\mu S_{\nu-\mu}$, with the Taylor factorials included in the coefficients. If a matrix index is fixed, we use the row or column bound of the factor containing it and the compatible bound of the other factor. If a coarse-field index is fixed, we distinguish its position in the convolution. If it belongs to $K_\mu$, we use the bound for $K$ summing both matrix indices and then a row of $S$ at the common index. If it belongs to $S_{\nu-\mu}$, we use the corresponding bound for $S$ and the column of $K$ at the common index. Each contraction joins two networks at the shared index of $z$, so the exponential weight and the volume normalization are those of \cref{ch02:lem:coefficient-algebra}.
+
+To treat all orders at once, let $k(x),s(x)$ be majorant series of the coefficients of $K$ and $S$ with a matrix index fixed, including their constant terms, and let $k_{\mathrm t}(x),s_{\mathrm t}(x)$ be majorant series of their coefficients of positive degree with a coarse-field index fixed and both matrix indices summed. These four series converge, and the last two have no constant term. The contractions just described bound the coefficients of positive degree of $P$ by those of
+\begin{equation}\label{ch09:eq:positive-root-majorant}
+ k(x)s(x)-k(0)s(0),\qquad k_{\mathrm t}(x)s(x)+k(x)s_{\mathrm t}(x),
+\end{equation}
+for a fixed matrix index and a fixed coarse-field index, respectively. If such a series is bounded by $C_0$ on a circle of radius $r_0$, its coefficient of degree $k$ is at most $C_0r_0^{-k}$. Enlarging $A$ beyond $\max\{1,(1+C_0)/r_0\}$ for the finitely many series involved, we bound these coefficients by $A^k$ for $k\ge1$. This bounds the series of positive degree by $Au/(1-Au)$ and the ordered tensors of order $k$ by $A^{k+1}k!$. The same enlargement covers $B$, $F$, $\mathcal L$, $z^*$, $K$, and $S$.
+
+These bounds persist after translation to any background point of a fixed smaller product. Indeed, suppose that a tensor of order $n$, with one index fixed, is bounded by $C^{n+1}n!$. Expanding at a background point of radius $r$, we obtain for $k\ge1$ the order-$k$ bound
+\[
+ \sum_{j\ge0}\frac{r^j}{j!}C^{k+j+1}(k+j)!=\frac{C^{k+1}k!}{(1-Cr)^{k+1}}\le(2C)^{k+1}k!\qquad(Cr\le1/2).
+\]
+The fixed index remains a differentiated input or a matrix index, and the other legs at the background point are summed using the same rows or columns; removing these legs cannot increase the length of the remaining network. Thus one radius reduction and one enlargement of $A$ cover all orders and all these background points, without changing $a_1$. We take the least common radius $R$ and the least rate $a_1$, and we reduce $u_0$ to this radius if necessary. This proves part (3), with constants chosen before $J$, $g$, and $p$.
+
+\paragraph{Step 5: the Haar disintegration.}
+By \cref{ch03:lem:relative-coarea} there are $f=2((Mm)^3-m^3)=2(M^3-1)m^3$ independent $\SU$ variables, and the density is exactly $\mathcal J_c$. At $c=I$ and $z=0$ each of the $\abs{\Links m}$ determinants $\det D_{X_{e^*_a}}\mathsf C_{I,a}(0)=\det(M^{-2}I_3)$ equals $M^{-6}$, and each factor $j_H$ equals one, which gives $\mathcal J_I(0)=c_{\mathrm{Haar}}^fM^{6\abs{\Links m}}$. The Haar probability measure on the gauge transformations of the block forests has mass one. The forest integral contributes no further factor, since the integral uses the action at the representative in the block axial gauge. This proves part (1).
+
+\paragraph{Step 6: the domain.}
+By the bound $\norm{z^*(c)}\le C\norm\theta$ and the row bound for $S$, we have $\norm{z^*+gSw}\le C(u_0+gp)$. We choose $u_0$ and the threshold for $gp$ such that this is less than half of the least chart radius $v_0$ and the reconstruction stays inside the domain of the classical coefficient bounds. We achieve these requirements by enlarging the constant $C$ in \eqref{ch09:eq:one-step-conditions} before it is fixed; none of them depends on $p$, $g$, $d_0$, or $m$.
+
+\paragraph{Step 7: the change of variables.}
+For real $c$, the change of variables $z=z^*+gSw$ has Jacobian $g^{3f}\det S$. Stationarity removes the linear term of $F(c,\cdot)$ at $z^*$, and $S^{\mathsf T}KS=I$ turns its quadratic term into $\abs w^2/2$. By the nested minimization identity $E_{d_0+1}(c)=MF(c,z^*(c))$ of \cref{ch07:thm:bellman} and $g_+^2=Mg^2$, we have $F(c,z^*)/g^2=E_{d_0+1}(c)/g_+^2$. Substituting $\mathcal J_c(z)=\mathcal J_I(0)e^{-\mathcal L_c(z)}$ and extracting $e^{-\mathcal L_0(c)}$ leaves the integrand $e^{-\abs w^2/2-U(c,w)}$, whose integral over $\Omega_p$ is $z_p^f\Xi(c)$ by the definition of $\pi_p$. This proves \eqref{ch09:eq:one-step-integral}, with every scalar factor displayed. For complex $c$, we integrate over the same real product of $w$. Since the uniform chart margins and the convergent series justify integrating coefficient by coefficient, the result is the holomorphic continuation of the real identity.
+\end{proof}
+
+\section{Polymer expansions in the coefficient algebra}\label{ch09:sec:polymers}
+
+In this subsection, we fix a finite set of boxes as in \cref{ch09:def:supported-coefficient-norms}. A \emph{polymer} is a support, that is, a nonempty connected set of boxes. We prove the cluster expansion of a hard-core polymer gas whose activities take values in the coefficient algebra of \eqref{ch09:eq:coefficient-norm}. We then prove a version for arbitrary interactions with connected supports, which includes holomorphic dependence on the interaction and an estimate for the derivative with respect to an inserted interaction. These statements use only the norms and the independence of fluctuation variables in disjoint supports. They are applied to one averaging step in \cref{ch09:sec:one-step} and to several in \cref{ch09:sec:sequential}. The weighted incidence condition below is a version of the convergence criterion of Kotecký and Preiss \cite{KoteckyPreiss1986}, and we prove the bound we need by majorizing with rooted trees. The successive support weights $e^{8\abs X}$, $e^{5\abs P}$, and $e^{2\abs Y}$ below are chosen for convenience; only the gaps between them matter.
+
+\begin{lemma}\label{ch09:lem:tree-sum}
+Let $\mathcal S$ be a finite family of nonempty sets of boxes, not necessarily connected, with nonnegative weights $h_X$, $X\in\mathcal S$. Let $\kappa\ge0$ and suppose
+\[
+ \eta=\sup_x\sum_{X\ni x}h_Xe^{(\kappa+1)\abs X}\le1.
+\]
+Put $a_X=h_Xe^{\kappa\abs X}$. For $X\in\mathcal S$ let $T_X$ be the sum over finite rooted trees whose vertices carry elements of $\mathcal S$, repetitions allowed, whose root carries $X$, and in which the sets carried by adjacent vertices intersect, of the product of the weights $a_Y$ of all vertices, where a vertex with $j$ children receives the factor $1/j!$. Then $T_X\le a_Xe^{\abs X}$, and $\sum_{X\ni x}T_X\le\eta$ for every box $x$. In particular, the sum of $e^{\kappa\abs{\cup\mathcal F}}\prod_{X\in\mathcal F}h_X$ over all families $\mathcal F$ of distinct elements of $\mathcal S$ whose union contains $x$ and whose intersection graph is connected is at most $\eta$.
+\end{lemma}
+
+\begin{proof}
+For trees of height zero, we set $T_X^{(0)}=a_X$, and we define iteratively
+\begin{equation}\label{ch09:eq:tree-recursion}
+ T_X^{(n+1)}=a_X\exp\Bigl(\sum_{Y:\,Y\cap X\ne\varnothing}T_Y^{(n)}\Bigr).
+\end{equation}
+Expanding the exponential assigns the factor $1/j!$ to the $j$ children of each vertex, and induction on the height shows that $T_X^{(n)}$ is the sum over the trees of height at most $n$ described in the statement. Equivalently, for trees with $k$ vertices and a fixed root, one may label the other vertices $2,\ldots,k$ and divide by $(k-1)!$; grouping the labels among the subtrees of the root gives exactly the same factors $1/j!$. This verifies the count also when several vertices carry the same set.
+
+If $T_Y^{(n)}\le a_Ye^{\abs Y}$ for all $Y$, then
+\[
+ \sum_{Y:\,Y\cap X\ne\varnothing}T_Y^{(n)}\le\sum_{x\in X}\sum_{Y\ni x}a_Ye^{\abs Y}\le\eta\abs X\le\abs X,
+\]
+which implies $T_X^{(n+1)}\le a_Xe^{\abs X}$. Their limit $T_X$ satisfies the same bound, since the iterates increase. Summing over $X\ni x$, we obtain $\sum_{X\ni x}T_X\le\sup_x\sum_{X\ni x}h_Xe^{(\kappa+1)\abs X}=\eta$. A family $\mathcal F$ of $k$ distinct sets with connected intersection graph and union containing $x$ has a member containing $x$ and an intersection spanning tree rooted at it. Listing its other members in all orders cancels the factor $1/(k-1)!$, so the rooted tree sum counts $\prod_{X\in\mathcal F}a_X$ at least once. Finally, the inequality $\abs{\cup\mathcal F}\le\sum_{X\in\mathcal F}\abs X$ transfers the weight of the union to the vertex weights.
+\end{proof}
+
+\begin{lemma}\label{ch09:lem:penrose}
+For every finite simple graph $G$,
+\[
+ \Bigl\lvert\sum_{H}(-1)^{\abs{E(H)}}\Bigr\rvert\le\#\{\text{spanning trees of }G\},
+\]
+where the sum is over the connected spanning subgraphs $H$ of $G$.
+\end{lemma}
+
+This inequality is used by Dimock in \cite[Appendix~B, Theorem~27, p.~39, and (323), p.~42]{Dimock2013v2}. We prove it with the partition of connected subgraphs introduced by Penrose \cite{Penrose1967}; see also \cite[Section~4.1]{FernandezProcacci2007}.
+
+\begin{proof}
+For a graph with one vertex both sides equal one, and for a disconnected graph both sides vanish. Otherwise we order the vertices and root the graph at vertex $1$. For a connected spanning subgraph $H$, let $d_H(v)$ be the graph distance from $v$ to $1$ in $H$, and join each $v\ne1$ to its least neighbor in $H$ in the preceding distance layer. These edges form a spanning tree $T(H)$ with the same distances to $1$. For a spanning tree $T$, let $R(T)$ consist of the edges of $T$, of every edge of $G$ joining two vertices in the same distance layer of $T$, and of every edge of $G$ joining successive layers whose endpoint in the lower layer is not smaller than the parent in $T$ of its endpoint in the upper layer. No other edge belongs to $R(T)$. Then
+\[
+ T(H)=T\quad\Longleftrightarrow\quad T\subset H\subset R(T).
+\]
+Indeed, an edge of $H$ cannot skip a distance layer of $H$, and it cannot be joined to a smaller vertex of the preceding layer than the chosen parent. Conversely, adding edges of $R(T)\setminus T$ to $T$ changes no distance, since each such edge changes the layer by at most one, and it does not change the least parent. Thus the connected spanning subgraphs are partitioned into these intervals, and each interval contributes
+\[
+ \sum_{T\subset H\subset R(T)}(-1)^{\abs{E(H)}}=(-1)^{k-1}(1-1)^{\abs{E(R(T))\setminus E(T)}},
+\]
+where $k$ is the number of vertices. Its absolute value is at most one, and summing over spanning trees proves the inequality.
+\end{proof}
+
+\begin{theorem}\label{ch09:thm:hard-core-log}
+Fix a finite set of boxes and $u>0$. For each polymer $P$ let $\Activity(P)$ be a convergent power series in the coarse-field coordinates located in $P$, with $\norm{\Activity(P)}_{u,\mathrm{coeff}}<\infty$, and assume
+\begin{equation}\label{ch09:eq:activity-bound}
+ \sup_x\sum_{P\ni x}e^{5\abs P}\norm{\Activity(P)}_{u,\mathrm{coeff}}\le2\sigma,
+\end{equation}
+where $\sigma\le\sigma_0$ for an absolute constant $\sigma_0>0$. Let
+\[
+ \Xi=\sum_{\{P_1,\ldots,P_k\}\text{ pairwise disjoint}}\ \prod_{i=1}^k\Activity(P_i)
+\]
+be the partition function of the hard-core polymer gas, in which two polymers are compatible if they are disjoint; the empty family contributes one. Then the following statements hold.
+\begin{enumerate}
+\item We have $\log\Xi=\sum_Y\Psi_Y$, where
+\[
+ \Psi_Y=\sum_{k\ge1}\frac1{k!}\sum_{P_1\cup\cdots\cup P_k=Y}\varphi^T(P_1,\ldots,P_k)\prod_{i=1}^k\Activity(P_i).
+\]
+The inner sum is over ordered tuples of polymers, repetitions allowed, and $\varphi^T(P_1,\ldots,P_k)=\sum_H(-1)^{\abs{E(H)}}$, the sum being over the connected spanning subgraphs $H$ of the incompatibility graph on $\{1,\ldots,k\}$, in which $i\ne j$ are joined if $P_i\cap P_j\ne\varnothing$. A single polymer has coefficient one, and $\abs{\varphi^T}$ is at most the number of spanning trees of the incompatibility graph by \cref{ch09:lem:penrose}. All these series converge absolutely in the coefficient algebra.
+\item Each $\Psi_Y$ depends only on the coarse-field coordinates located in $Y$, and
+\[
+ \sup_x\sum_{Y\ni x}e^{2\abs Y}\norm{\Psi_Y}_{u,\mathrm{coeff}}\le C\sigma.
+\]
+\item $\Xi\ne0$ on $\norm\theta_\infty<u$, and $\log\Xi$ is the branch that vanishes at zero activity.
+\item Suppose that the number of coordinate labels in each box is bounded and that, for every support $Y$, all labels located in $Y$ can be joined by a network of length at most $C_{\mathrm{geom}}\abs Y$. Then there exists $b>0$ such that, on $\norm\theta_\infty\le u/2$, for every $s\ge1$,
+\[
+ \norm{D_\theta^s\log\Xi}_{b,\mathrm{root}}\le C^ss!\,\sigma.
+\]
+\end{enumerate}
+The constants in (1)--(3) are absolute; in particular they do not depend on the number of polymers. In (4) the constants depend in addition on $C_{\mathrm{geom}}$, on the bound on the number of labels per box, and on $u$, but not on the number of boxes or on $s$.
+\end{theorem}
+
+\begin{proof}
+We take $\sigma_0=1/4$.
+
+\paragraph{Step 1: the formal identity.}
+We give each polymer $P$ a formal variable $z_P$. The partition function is
+\[
+ \sum_{k\ge0}\frac1{k!}\sum_{P_1,\ldots,P_k}\prod_iz_{P_i}\prod_{i<j}\bigl(1-\one_{P_i\cap P_j\ne\varnothing}\bigr),
+\]
+since the last product removes all tuples with an intersecting pair, including repeated polymers. Expanding this product gives a sum over all graphs on $\{1,\ldots,k\}$, with the weight $-\one_{P_i\cap P_j\ne\varnothing}$ for each edge. Each graph has a unique partition of its vertices into connected components. For components of sizes $k_1,\ldots,k_l$, distributing the labels gives the factor $k!/(l!\prod_jk_j!)$, where the factor $1/l!$ accounts for equal components. Hence the sum over all graphs is the exponential of the sum over connected graphs, and comparing coefficients, we obtain the formula for $\Psi_Y$.
+
+\paragraph{Step 2: the bound.}
+Let $h_P=\norm{\Activity(P)}_{u,\mathrm{coeff}}$ and $a_P=h_Pe^{2\abs P}$. For every tuple, the incompatibility graph is a finite simple graph on the distinct indices $1,\ldots,k$, even if some of the listed polymers coincide, and its edges are the intersecting pairs. Thus \cref{ch09:lem:penrose} applies to every coefficient $\varphi^T$. If the union contains $x$, we choose a root polymer containing $x$, which replaces the factor $1/k!$ by the larger factor $1/(k-1)!$. By \cref{ch09:lem:tree-sum} with $\kappa=2$, we have
+\[
+ \sup_x\sum_{Y\ni x}e^{2\abs Y}\norm{\Psi_Y}_{u,\mathrm{coeff}}\le\sup_x\sum_{P\ni x}h_Pe^{3\abs P}\le2\sigma,
+\]
+provided $2\sigma\le1$. This proves the absolute convergence in the coefficient algebra, the bound in (2), and the fact that $\Psi_Y$ depends only on coordinates in $Y$.
+
+\paragraph{Step 3: the analytic branch.}
+We replace every activity by $\alpha\Activity(P)$ with $\alpha\in\C$. Since $\sigma\le1/4$, the bound of Step 2 holds for $\abs\alpha\le2$. Since the sum of all these bounds is finite at finite volume, the connected series and its exponential are convergent power series in $\alpha$ on this disc. By Step 1, their exponential and the polynomial $\Xi(\alpha)$ have the same Taylor coefficients at $\alpha=0$, which implies that they agree on the whole disc. At $\alpha=1$, this proves $\Xi=\exp(\sum_Y\Psi_Y)$, which gives $\Xi\ne0$ and identifies the branch. This argument does not use a volume-independent bound on the scalar $\log\Xi$.
+
+\paragraph{Step 4: derivatives.}
+For a scalar series $f_Y(\theta)=\sum_\nu f_{Y,\nu}\theta^\nu$ and $\norm\theta_\infty\le u/2$, the sum over all ordered derivative indices of order $s$ of the absolute values of the derivatives of $f_Y$ is bounded by
+\begin{equation}\label{ch09:eq:coefficient-to-jet}
+ \sum_{n\ge s}\sum_{\abs\nu=n}\abs{f_{Y,\nu}}(n)_s(u/2)^{n-s}\le2^{s+1}s!\,u^{-s}\norm{f_Y}_{u,\mathrm{coeff}},
+\end{equation}
+where $(n)_s=n(n-1)\cdots(n-s+1)$. To check the constant, we write $n=s+j$ and bound each $\binom{s+j}s2^{-j}$ by $\sum_{j\ge0}\binom{s+j}s2^{-j}=2^{s+1}$. Fixing one derivative index only reduces the sum, and makes it zero unless that index is located in $Y$. By hypothesis, all distinct labels in $Y$ can be joined by a network of length $C_{\mathrm{geom}}\abs Y$, and repeated labels add no length. We choose $b$ with $bC_{\mathrm{geom}}\le1$, multiply \eqref{ch09:eq:coefficient-to-jet} by the weight $e^{b\Tree}\le e^{\abs Y}$, and use the bound in (2), in which the fixed index determines a box. This proves (4), with a single factorial. For the boxes of \cref{ch09:def:supported-coefficient-norms}, whose labels have bounded density, the geometric hypothesis holds. Indeed, we join the centers of adjacent boxes of $Y$ and, inside each box, join its finitely many labels by a fixed tree; the total length is at most $C_{M,\mathscr L}\abs Y$.
+\end{proof}
+
+In the next theorem, we apply two expansions to an arbitrary interaction with connected supports: first the connected-component expansion of $\prod_X(1+(e^{-U_X}-1))$, which produces a hard-core polymer gas, and then the cluster expansion of \cref{ch09:thm:hard-core-log}.
+
+\begin{theorem}\label{ch09:thm:supported-log-holomorphy}
+Fix a finite set of boxes, a fixed product domain $\Omega$ for the fluctuation variables, each fluctuation variable being located in one box, and a product probability measure $\pi$ on $\Omega$. Fix $u>0$, and let $\mathscr A$ be the algebra of convergent series $f(\theta,w)=\sum_\nu f_\nu(w)\theta^\nu$ with bounded measurable coefficients and finite norm $\norm f_{\mathscr A}=\sum_\nu u^{\abs\nu}\sup_{w\in\Omega}\abs{f_\nu(w)}$. For $h\ge0$ let $\mathscr S_h$ be the Banach space of families $\boldsymbol U=(U_X)$, indexed by supports, such that each $U_X\in\mathscr A$ depends only on the fluctuation and coarse-field coordinates located in $X$, with the norm
+\[
+ \norm{\boldsymbol U}_{\mathscr S_h}=\sup_x\sum_{X\ni x}e^{h\abs X}\norm{U_X}_{\mathscr A}.
+\]
+Constant coefficients are allowed. There exist absolute constants $\eta_0,C>0$, independent of the number of boxes, of the dimension of the fluctuation variables, of $u$, and of $\pi$, such that the following holds for $\norm{\boldsymbol U}_{\mathscr S_8}<\eta_0$. Define the polymer activities
+\begin{equation}\label{ch09:eq:activity-formula}
+ \Activity(P)=\sum_{\mathcal F}\E_\pi\prod_{X\in\mathcal F}\bigl(e^{-U_X}-1\bigr),
+\end{equation}
+the sum being over the families $\mathcal F$ of distinct supports whose intersection graph is connected and whose union is $P$, and set
+\[
+ \mathcal L_Y(\boldsymbol U)=-\sum_{k\ge1}\frac1{k!}\sum_{P_1\cup\cdots\cup P_k=Y}\varphi^T(P_1,\ldots,P_k)\prod_{i=1}^k\Activity(P_i),
+\]
+with $\varphi^T$ as in \cref{ch09:thm:hard-core-log}. Then $\mathcal L_Y(\boldsymbol U)$ depends only on the coarse-field coordinates located in $Y$, and
+\begin{equation}\label{ch09:eq:supported-log-family-bound}
+ \sum_Y\mathcal L_Y(\boldsymbol U)=-\log\E_\pi e^{-\sum_XU_X},\qquad
+ \norm{\boldsymbol{\mathcal L}(\boldsymbol U)}_{\mathscr S_2}\le C\norm{\boldsymbol U}_{\mathscr S_8},
+\end{equation}
+where $\boldsymbol{\mathcal L}(\boldsymbol U)=(\mathcal L_Y(\boldsymbol U))_Y$. Here $\E_\pi e^{-\sum_XU_X}\ne0$, and the logarithm is the branch that vanishes at $\boldsymbol U=0$. Thus each connected cluster of interactions is assigned to the union of their supports. The map $\boldsymbol U\mapsto\boldsymbol{\mathcal L}(\boldsymbol U)$, from the open ball of radius $\eta_0$ in $\mathscr S_8$ to $\mathscr S_2$, is Fréchet holomorphic. For $\norm{\boldsymbol U}_{\mathscr S_8}\le\eta_0/2$ and every $\boldsymbol A\in\mathscr S_8$,
+\begin{equation}\label{ch09:eq:supported-log-cauchy}
+ \norm{D\boldsymbol{\mathcal L}(\boldsymbol U)[\boldsymbol A]}_{\mathscr S_2}\le C\norm{\boldsymbol A}_{\mathscr S_8}.
+\end{equation}
+If the segment $\boldsymbol U+s\boldsymbol A$, $0\le s\le1$, lies in the closed ball of radius $\eta_0/2$, then $\boldsymbol{\mathcal L}(\boldsymbol U+\boldsymbol A)-\boldsymbol{\mathcal L}(\boldsymbol U)$ is the integral of this derivative along the segment, and its $\mathscr S_2$ norm is at most $C\norm{\boldsymbol A}_{\mathscr S_8}$. If $\boldsymbol U$ depends holomorphically on a parameter in a Banach space, so does $\boldsymbol{\mathcal L}(\boldsymbol U)$. If $\theta$ is real and all $U_X$ and $A_X$ are real valued, then
+\[
+ \sum_YD\mathcal L_Y(\boldsymbol U)[\boldsymbol A]=\frac{\E_\pi\bigl[(\sum_XA_X)e^{-\sum_XU_X}\bigr]}{\E_\pi e^{-\sum_XU_X}}.
+\]
+The supports of the $A_X$ may lie anywhere relative to the box at which the norm $\mathscr S_2$ is evaluated. The constants are absolute, as in item (1) of \cref{ch01:conv:constants}; when these norms are converted to the torus norms of \cref{ch01:def:analytic-norms}, the conversion constants have the dependence described in item (2).
+\end{theorem}
+
+\begin{proof}
+By coefficient convolution, we have $\norm{fg}_{\mathscr A}\le\norm f_{\mathscr A}\norm g_{\mathscr A}$. The coefficientwise expectation $\E_\pi$ has norm at most one, and functions of the fluctuation variables in disjoint sets of boxes are independent under $\pi$, so their product has the product expectation. These are the operations of \cref{ch02:lem:coefficient-algebra}. At a fixed finite number of boxes, the spaces $\mathscr S_h$ are complete, since they are finite products of closed subspaces of weighted $\ell^1$ spaces of bounded measurable functions, with an equivalent finite maximum norm.
+
+\paragraph{Step 1: the connected-component expansion.}
+We write $F_X=e^{-U_X}-1$, $h_X=\norm{F_X}_{\mathscr A}$, and $\eta=\norm{\boldsymbol U}_{\mathscr S_8}$. For $\eta_0$ small, the exponential series in $\mathscr A$ implies that $h_X\le e^{\norm{U_X}_{\mathscr A}}-1\le2\norm{U_X}_{\mathscr A}$, and therefore $\sup_x\sum_{X\ni x}e^{8\abs X}h_X\le2\eta$. Since there are finitely many supports, we may expand $\E_\pi e^{-\sum_XU_X}=\E_\pi\prod_X(1+F_X)$ as the sum over families of distinct supports of $\E_\pi\prod_{X\in\mathcal F}F_X$. Each family has a unique decomposition into components whose intersection graphs are connected. Different components have disjoint unions, hence disjoint fluctuation variables, and the expectation factors. Grouping the families according to the unions of their components, we obtain exactly the hard-core gas with the activities \eqref{ch09:eq:activity-formula}; the empty family contributes one, and the coarse-field variables enter only as parameters. Since the expectation contracts the norm and $\sup_x\sum_{X\ni x}h_Xe^{6\abs X}\le2\eta\le1$, \cref{ch09:lem:tree-sum} with $\kappa=5$ gives
+\[
+ \sup_x\sum_{P\ni x}e^{5\abs P}\norm{\Activity(P)}_{\mathscr A}\le2\eta.
+\]
+
+\paragraph{Step 2: the cluster expansion.}
+Taking $\eta_0\le\sigma_0$, we apply \cref{ch09:thm:hard-core-log} to these activities, with $\sigma=\eta$. We obtain the absolute convergence of the series defining $\mathcal L_Y$, the statement about their supports, the nonvanishing of $\E_\pi e^{-\sum_XU_X}$, the branch, and \eqref{ch09:eq:supported-log-family-bound}. The repetitions are those of \cref{ch09:thm:hard-core-log}. Since each connected union is fixed before the coefficients are summed, these formulas define a family, although its sum could also be distributed over the supports in other ways.
+
+\paragraph{Step 3: holomorphy.}
+At a fixed number of boxes the activities are finite sums of products of entire functions of the $U_X$ in $\mathscr A$, hence holomorphic. We choose $\eta_0$ so small that the bounds of Step 2 still hold after every activity is multiplied by $2$, uniformly for $\norm{\boldsymbol U}_{\mathscr S_8}\le\eta_0$. Then the sum of all terms of the logarithm with $k\ge n$ polymers has $\mathscr S_2$ norm at most $C\eta_0\,2^{-n}$. Each sum with fixed $k$ is finite and holomorphic, and by this bound the series converges uniformly on the ball. To see that the limit is holomorphic, we fix around any point of the open ball a closed ball of radius $r$ inside it. By Cauchy's formula, the homogeneous Taylor polynomial of degree $j$ of each partial sum is bounded by $C\eta_0(\norm v/r)^j$, uniformly in the increment $v$. The uniform convergence implies that these polynomials converge uniformly on smaller balls, and the limits are continuous homogeneous polynomials, since polarization of the partial sums passes to the limit. For $\norm v<r$, their series converges geometrically, and by the one-variable Cauchy formula on the line through $v$, it equals the limit. This proves Fréchet holomorphy, and holomorphy after composition with holomorphic parameter families.
+
+\paragraph{Step 4: the derivative.}
+Let $a=\norm{\boldsymbol A}_{\mathscr S_8}>0$ and $r_v=\eta_0/(4a)$. For $\abs v\le r_v$, the output has norm at most $C\eta_0$, since the input $\boldsymbol U+v\boldsymbol A$ has norm at most $3\eta_0/4$. By Cauchy's formula, we have
+\[
+ D\boldsymbol{\mathcal L}(\boldsymbol U)[\boldsymbol A]=\frac1{2\pi i}\int_{\abs v=r_v}\frac{\boldsymbol{\mathcal L}(\boldsymbol U+v\boldsymbol A)}{v^2}\,dv,
+ \qquad \norm{D\boldsymbol{\mathcal L}(\boldsymbol U)[\boldsymbol A]}_{\mathscr S_2}\le4Ca.
+\]
+For $a=0$ there is nothing to prove. Renaming $C$, we obtain \eqref{ch09:eq:supported-log-cauchy}, and integrating along the segment proves the statement about differences. The norm sums all supports containing the chosen box after the circle integral. An inserted interaction need not contain that box, since the derivative acts at every position of the inserted interaction within a connected cluster.
+
+\paragraph{Step 5: real data.}
+At a fixed number of boxes the coefficient sums bound $\sum_XU_X$ and $\sum_XA_X$ uniformly on $\Omega$. The integrable constant envelope $\abs{\sum_XA_X}e^{\abs{\sum_XU_X}+v_0\abs{\sum_XA_X}}$ justifies differentiating $-\log\E_\pi e^{-\sum_X(U_X+vA_X)}$ under the integral at $v=0$, and the sum of the components of $D\boldsymbol{\mathcal L}(\boldsymbol U)[\boldsymbol A]$ is this derivative, which is the displayed formula. The envelope depends on the volume; we use it only to identify this sum, not in the estimates for the family.
+\end{proof}
+
+The derivative with respect to an inserted interaction gains a second power of a small parameter when the first-order term of the insertion has mean zero under $\pi$ on every support. This is the mechanism behind \cref{ch09:lem:marked-insertion}.
+
+\begin{corollary}\label{ch09:cor:supported-mark-two-powers}
+Assume the setting of \cref{ch09:thm:supported-log-holomorphy}. For $s\in[0,1]$ let $\zeta\mapsto\boldsymbol U_s(\zeta)$ and $\zeta\mapsto\boldsymbol A(\zeta)$ be holomorphic maps into $\mathscr S_8$ on a neighborhood of the closed disc $\abs\zeta\le R$ such that, uniformly in $s$,
+\[
+ \norm{\boldsymbol U_s(\zeta)}_{\mathscr S_8}\le\eta_0/2,\qquad
+ \norm{\boldsymbol A(\zeta)}_{\mathscr S_8}\le a\abs\zeta,\qquad
+ \boldsymbol U_s(0)=\boldsymbol A(0)=0.
+\]
+Assume that $\E_\pi A_X'(0)=0$ for every support $X$, as an identity of coefficients in $\theta$, where $A'=dA/d\zeta$. Set $\boldsymbol F_s(\zeta)=D\boldsymbol{\mathcal L}(\boldsymbol U_s(\zeta))[\boldsymbol A(\zeta)]$. Then $F_{s,Y}(0)=F_{s,Y}'(0)=0$ for every $s$ and every support $Y$, coefficient by coefficient, and
+\begin{equation}\label{ch09:eq:supported-mark-two-powers}
+ \norm{\boldsymbol F_s(t)}_{\mathscr S_2}\le\frac{2Ca\,t^2}{R},\qquad0<t\le R/2,
+\end{equation}
+where $C$ is the constant of \cref{ch09:thm:supported-log-holomorphy}. The same conclusion holds if the uniform bounds are assumed only on an open disc.
+\end{corollary}
+
+\begin{proof}
+By \eqref{ch09:eq:supported-log-cauchy}, we have $\norm{\boldsymbol F_s(\zeta)}_{\mathscr S_2}\le Ca\abs\zeta$. At zero interaction the derivative of the family is $\E_\pi A_Y$, support by support: in the first expansion $e^{-U_X}-1=-U_X+O(U_X^2)$, and in the second only the terms with a single polymer are linear. Terms with two interaction factors are of degree at least two in $\zeta$. Since $\boldsymbol U_s(0)=\boldsymbol A(0)=0$, the coefficient of $\zeta$ in $\boldsymbol F_s(\zeta)$ is $(\E_\pi A_Y'(0))_Y=0$. Thus $F_{s,Y}(0)=F_{s,Y}'(0)=0$ for every support and every coefficient in $\theta$; no cancellation between different supports is used.
+
+The family $\boldsymbol B_s(\zeta)=\boldsymbol F_s(\zeta)/\zeta$ extends holomorphically to $\zeta=0$, vanishes there, and has norm at most $Ca$. By Cauchy's formula for Banach-valued functions, we have $\norm{[\zeta^k]\boldsymbol B_s}_{\mathscr S_2}\le CaR^{-k}$. For $0<t\le R/2$, summing the series, we find
+\[
+ \norm{\boldsymbol F_s(t)}_{\mathscr S_2}\le\frac{Ca\,t^2}{R(1-t/R)}\le\frac{2Ca\,t^2}{R}.
+\]
+If the bounds hold only on an open disc, we apply this on smaller circles and pass to the limit. No regularity in $s$ is used.
+\end{proof}
+
+\section{Connected supports and the effective interaction of one averaging step}\label{ch09:sec:one-step}
+
+We now return to the fluctuation interaction $U(c,w)$ of one averaging step, defined in \eqref{ch09:eq:one-step-interaction}. The coarse-field coordinates and the normalized fluctuation variables have locations on the lattice, and the coefficient bounds of \cref{ch09:lem:local-calculus,ch09:lem:centered-white-coarea} decay exponentially in the length of a network joining these locations. In the next lemma, we convert this decay into a decomposition of $U$ into pieces supported on connected sets of boxes, with the summability over supports required by the norm \eqref{ch09:eq:coefficient-norm}, as needed to apply \cref{ch09:thm:hard-core-log,ch09:thm:supported-log-holomorphy}. A large box scale $\mathscr L$ makes the factor $e^{8\abs X}$, exponential in the number of boxes met by a network, compatible with the available spatial decay.
+
+\begin{lemma}\label{ch09:lem:supported-activities}
+Assume the setting of \cref{ch09:lem:centered-white-coarea}. Choose the box scale $\mathscr L$ sufficiently large, using a fixed part of the spatial decay rate of the classical coefficient bounds, and then reduce the coarse-field radius $u$ and the threshold for $gp$, once. Assign every joint Taylor monomial of $U$, in $\theta$ and $w$, to the set of boxes met by a rectilinear tree joining the locations of all its coarse-field coordinates and normalized fluctuation variables, chosen by a fixed deterministic rule described in the proof. This yields an exact decomposition $U=\sum_XU_X$ into functions supported on connected sets of boxes, including sets winding around the torus, with the following properties.
+\begin{enumerate}
+\item For degree $r$ in $\theta$ and degree $s$ in $w$, the absolute coefficient sums with one index of $w$ fixed and with the exponential weight of a connecting network at a fixed rate are bounded by
+\[
+ C^{r+s}g^{s-2}\quad(s\ge3)\ \text{for the classical part},\qquad
+ C^{r+s}g^s\quad(s\ge1)\ \text{for the part from }\mathcal L.
+\]
+The classical part of $U$, the first two terms of \eqref{ch09:eq:one-step-interaction}, has no terms of degree zero, one, or two in $w$, and every term of $U$ has degree at least one in $w$.
+\item The support assigned to a monomial satisfies $\abs X\le C(r+s+1+\Tree/\mathscr L)$, and
+\[
+ \norm{\{U_X\}}_{u,8;p}\le\sigma=C\Bigl\{\frac{gp^3}{1-Cgp}+gp\Bigr\}.
+\]
+\item If $\sigma\le\sigma_0$, then, with $F_X=e^{-U_X}-1$, the fluctuation partition function is the hard-core polymer gas
+\[
+ \Xi=\sum_{\{P_1,\ldots,P_k\}\text{ disjoint}}\prod_{i=1}^k\Activity(P_i),
+ \qquad
+ \Activity(P)=\sum_{\mathcal F}\E_{\pi_p}\prod_{X\in\mathcal F}F_X,
+ \qquad
+ \norm{\{\Activity(P)\}}_{u,5}\le2\sigma,
+\]
+where $\mathcal F$ ranges over the families of distinct supports whose intersection graph is connected and whose union is $P$. The empty family contributes one, and each activity depends only on coarse-field coordinates located in $P$.
+\item Statements (1)--(3) remain valid, with $g$ replaced by $\abs\zeta$ in all bounds and in \eqref{ch09:eq:one-step-conditions}, for the interaction
+\[
+ U(c,w;\zeta)=\frac{F(c,z^*+\zeta Sw)-F(c,z^*)}{\zeta^2}-\frac12\abs w^2+\mathcal L_c(z^*+\zeta Sw)-\mathcal L_0(c)
+\]
+with a complex parameter $\zeta$, extended holomorphically across $\zeta=0$; at $\zeta=g>0$ this is $U(c,w)$.
+\end{enumerate}
+The constants have the dependence described in item (2) of \cref{ch01:conv:constants}; they are independent of $d_0$, of $m$, of $g,p$ satisfying \eqref{ch09:eq:one-step-conditions}, and of the number of supports. The only independence used is that of the fluctuation variables in distinct boxes under the product measure $\pi_p$. The exact formula \eqref{ch09:eq:one-step-integral} concerns real $g$ only.
+\end{lemma}
+
+\begin{proof}
+We write $c=e^\theta$ and proceed in four steps.
+
+\paragraph{Step 1: expansion in the fluctuation variables.}
+At fixed $\theta$, we expand in the increment $gSw$ and obtain the normally convergent series
+\begin{align}
+ \frac{F(c,z^*+gSw)-F(c,z^*)}{g^2}-\frac12\abs w^2&=\sum_{s\ge3}\frac{g^{s-2}}{s!}D_z^sF(c,z^*)[Sw,\ldots,Sw],\label{ch09:eq:classical-remainder}\\
+ \mathcal L_c(z^*+gSw)-\mathcal L_c(z^*)&=\sum_{s\ge1}\frac{g^s}{s!}D_z^s\mathcal L_c(z^*)[Sw,\ldots,Sw].\label{ch09:eq:coarea-remainder}
+\end{align}
+The classical terms of degree one and two vanish by stationarity and by $S^{\mathsf T}KS=I$. Both series vanish at $w=0$ for every coarse field.
+
+\paragraph{Step 2: coefficient bounds.}
+We expand the coefficients further in $\theta$ and apply \cref{ch09:lem:local-calculus,ch09:lem:centered-white-coarea} and the contraction rule of \cref{ch02:lem:coefficient-algebra}. If an index of $w$ is fixed, the column of the factor $S$ containing it carries the fixed index to a tensor of $F$ or of $\mathcal L$ with one index fixed, and all other insertions use rows. The networks of the factors meet at the contracted indices, so their union joins all external locations. The joint coefficient of degree $(r,s)$ has the generating factor $1/(r!\,s!)$, and passing from total derivatives gives only the factor $(r+s)!/(r!\,s!)\le2^{r+s}$. Summing the composed majorant series proves the two coefficient bounds in (1), at one fixed rate $a>0$. The choice of the fixed occurrence of $w$, including multiplicities and colors, contributes at most another factor exponential in $r+s$, which is absorbed into $C$.
+
+\paragraph{Step 3: the supports.}
+Let $\mathscr L\ge1$ be an integer. If a periodic direction of the coarse lattice has length at least $2\mathscr L$, we divide it into integer intervals of lengths between $\mathscr L$ and $2\mathscr L$; this is possible by distributing the remainder among $\lfloor m/\mathscr L\rfloor$ intervals. A shorter direction forms one interval. The resulting boxes have bounded adjacency degree and contain at most $D_{M,\mathscr L}$ scalar labels.
+
+Consider a monomial with $k=r+s\ge1$ coordinate locations. We order all metric spanning trees of these locations and all shortest periodic coordinate paths by one fixed rule, choose a shortest metric spanning tree, and replace each of its edges by the chosen rectilinear path. The resulting network has length at most a fixed multiple of the length $\Tree$ of a shortest connected network joining the locations. Indeed, traversing every edge of such a network twice gives a closed walk of length $2\Tree$ through all locations. Shortcutting this walk yields a metric spanning tree of length at most $2\Tree$, and replacing an edge by a coordinate path changes its length by at most a factor depending on the dimension. We add the intersection points of the paths as vertices, delete cycles by the fixed rule, and prune branches that contain no location. The result is a rectilinear tree of no greater length. Let $X$ be the set of boxes met by this tree, including the boxes of the locations. It is connected, since the fixed rule assigns boundary points to adjacent boxes. A coordinate segment of length $l$ meets at most $C(1+l/\mathscr L)$ boxes. The unpruned paths consist of at most $3(k-1)$ segments, and the deletions do not add boxes. Applying the bound to these segments, we obtain
+\begin{equation}\label{ch09:eq:hull-size}
+ \abs X\le C_0\bigl(k+1+\Tree/\mathscr L\bigr).
+\end{equation}
+Supports winding around the torus occur, since the paths are periodic. If $x\in X$ and $e$ is the location of the fixed index of $w$, then
+\[
+ \dist(x,e)\le C_1\bigl\{\Tree+\mathscr L(k+1)\bigr\},
+\]
+where the distance to a box is measured to its center; another choice changes the constant by the diameter of a box.
+
+We choose $\mathscr L$ so large that $8C_0/\mathscr L<a/4$, and then $b_1>0$ so small that $b_1C_1<a/4$. Combining the two geometric bounds, we obtain the support-weight estimate
+\begin{equation}\label{ch09:eq:hull-payment}
+ \one_{x\in X}e^{8\abs X}\le CD_{\mathscr L}^ke^{a\Tree/2}e^{-b_1\dist(x,e)},
+\end{equation}
+with $D_{\mathscr L}=e^{8C_0+b_1C_1\mathscr L}$. Since the indices of $w$ have bounded density and polynomial growth, we have $\sup_x\sum_ee^{-b_1\dist(x,e)}\le C_{M,\mathscr L,b_1}$, uniformly in the side of the torus. This includes the case of a short direction, in which the number of labels in that direction is bounded by the box scale.
+
+\paragraph{Step 4: summation and the polymer gas.}
+We group the monomials, with their coefficients, according to their supports $X$; the sum $U_X$ depends only on coordinates located in $X$. We apply \eqref{ch09:eq:hull-payment} before summing over the location $e$ of the fixed index of $w$, and then the coefficient bounds of Step 2. This bounds the norm with support weight $e^{8\abs X}$ by
+\[
+ C\sum_{r\ge0}(Cu)^r\Bigl\{\sum_{s\ge3}C^sg^{s-2}p^s+\sum_{s\ge1}(Cgp)^s\Bigr\},
+\]
+where the constants include the factors $D_{\mathscr L}^{r+s}$. We reduce $u$ until $Cu\le1/2$ and the threshold for $gp$ until $Cgp<1/2$. Summing the geometric series and enlarging the constant in \eqref{ch09:eq:one-step-conditions}, we obtain the bound $C\{gp^3/(1-Cgp)+gp\}$. The absolute convergence proves both the identity $U=\sum_XU_X$ and the bound in (2). This estimate controls the sum of the separate coefficient suprema required by \eqref{ch09:eq:coefficient-norm}.
+
+The bounds of Steps 1--4 use $g$ only through the factors $g^{s-2}$ and $g^s$ of the series \eqref{ch09:eq:classical-remainder} and \eqref{ch09:eq:coarea-remainder}, and the domain condition $\norm{gSw}\le C\abs gp$. For a complex parameter $\zeta$ in place of $g$, the same series define $U(c,w;\zeta)$, which is holomorphic across $\zeta=0$ since the classical series starts at $\zeta^1$. The same estimates hold with $\abs\zeta$ in place of $g$. This proves (4) for the bounds in (1) and (2), and the argument for (3) below applies without change.
+
+For (3), we apply Step 1 of the proof of \cref{ch09:thm:supported-log-holomorphy} with $\pi=\pi_p$ and with $\eta$ replaced by $\sigma$. We obtain $\norm{F_X}_{u,\mathrm{coeff};p}\le2\norm{U_X}_{u,\mathrm{coeff};p}$, the hard-core representation of $\Xi$ with the displayed activities, and the bound $\norm{\{\Activity(P)\}}_{u,5}\le2\sigma$. This requires only the independence of the fluctuation variables in disjoint sets of boxes under $\pi_p$; the coarse-field variables are parameters. All constants were chosen using $M$, the fixed domains, and the spatial decay rates, so they have the stated dependence.
+\end{proof}
+
+We now combine the exact formula \eqref{ch09:eq:one-step-integral} with the cluster expansion. We define the effective interaction newly generated by the averaging step as
+\begin{equation}\label{ch09:eq:one-step-effective-interaction}
+ Q_{d_0}^{\mathrm w}(c)=\mathcal L_0(c)+\tfrac12\log\det K(c)-f\log z_p-\log\Xi(c).
+\end{equation}
+Since $\det S(c)=(\det K(c))^{-1/2}$, \cref{ch09:lem:centered-white-coarea} can be written as
+\[
+ \int_{z^*+gS\Omega_p}e^{-F(c,z)/g^2}\mathcal J_c(z)\,dz=\mathcal J_I(0)g^{3f}\exp\Bigl(-\frac{E_{d_0+1}(c)}{g_+^2}-Q_{d_0}^{\mathrm w}(c)\Bigr).
+\]
+
+\begin{proposition}\label{ch09:prop:one-step-interaction}
+Assume the setting of \cref{ch09:lem:supported-activities}, with $\sigma\le\sigma_0$. There exist $u_*\in(0,u_0]$ and $b>0$, with the dependence described in item (2) of \cref{ch01:conv:constants}, such that the following holds on $\norm\theta_\infty\le u_*$, uniformly in $d_0$, $m$, and in $g,p$ satisfying \eqref{ch09:eq:one-step-conditions}.
+\begin{enumerate}
+\item For every $s\ge1$,
+\[
+ \norm{D_\theta^sQ_{d_0}^{\mathrm w}}_{b,\mathrm{root}}\le C^ss!.
+\]
+The value of $Q_{d_0}^{\mathrm w}$ is not bounded uniformly in the volume.
+\item For real $c$ and $w\in\Omega_p$, the Hessian of $w\mapsto\abs w^2/2+U(c,w)$ is $I+E$, where $E$ is bounded by $C(gp+g^2)$ in a fixed exponentially weighted row-plus-column norm.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By \cref{ch09:lem:supported-activities}(3), the activities satisfy \eqref{ch09:eq:activity-bound}, and the labels have bounded density. Thus \cref{ch09:thm:hard-core-log}(4) implies that $\norm{D_\theta^s\log\Xi}_{b,\mathrm{root}}\le C^ss!\sigma$ on $\norm\theta_\infty\le u/2$.
+
+We next treat the determinant. Let $A(\theta)=(K^0)^{-1}(K(c)-K^0)$, and reduce the coefficient radius such that the row and column series of $A$ have norm less than $1/2$. On this radius, we have
+\begin{equation}\label{ch09:eq:determinant-series}
+ \tfrac12\log\det K(c)=\tfrac12\log\det K^0+\tfrac12\sum_{j\ge1}\frac{(-1)^{j+1}}j\tr A(\theta)^j,
+\end{equation}
+where the logarithm is the branch that is real for real $c$. To verify this, we replace $A$ by $hA$. Differentiating the determinant along its columns, we find $(d/dh)\log\det(I+hA)=\tr[(I+hA)^{-1}A]$, and integrating the Neumann series from $h=0$ to $h=1$ gives the formula. A coefficient of positive degree in $\theta$ differentiates at least one factor $A$. We fix the coarse-field index on such a factor and sum over its two matrix indices using \cref{ch09:lem:local-calculus}(4) and the rows and columns of $(K^0)^{-1}$; every other factor is contracted by rows and columns. The choice of the distinguished factor cancels the factor $1/j$. If $a(x)=Cx/(1-Cx)$ is a majorant series for $A$, the trace coefficients with one coarse-field index fixed are bounded by those of $Ca'(x)/(1-a(x))$ on a fixed smaller disc, and these coefficients are at most $C_1^{k+1}$. Translating to a background point in a fixed smaller product, we obtain factorial bounds for all derivatives of positive order. The network of a trace may contain a cycle. Deleting an edge leaves a network joining the same locations, so the weight of a shortest connected network is still available. The constant $\log\det K^0$ is extensive and is not estimated. The term $\mathcal L_0$ is the composition of $\mathcal L$ with the minimizer, and by \cref{ch09:lem:local-calculus} it has the same bounds with one index fixed. The constant $f\log z_p$ has no derivatives of positive order. Combining these bounds on $\norm\theta_\infty\le u_*$, where $u_*$ is the smaller of $u/2$ and the radius chosen for $A$, we obtain (1). Here the determinant term enters \eqref{ch09:eq:one-step-effective-interaction} with the positive sign, and the constant $-f\log z_p$ is kept.
+
+For (2), we fix a real coarse field. Up to a term independent of $w$, the potential is $g^{-2}F(c,z^*+gSw)+\mathcal L_c(z^*+gSw)$. Since $S$ depends only on $c$, its Hessian minus the identity is
+\[
+ S^{\mathsf T}\bigl\{D_z^2F(c,z^*+gSw)-K(c)\bigr\}S+g^2S^{\mathsf T}D_z^2\mathcal L_c(z^*+gSw)S.
+\]
+The third derivative of $F$ and the second derivative of $\mathcal L_c$ have fixed weighted bounds on the product, and $\norm{gSw}\le Cgp$ by the row bound for $S$. We conclude that the displayed matrix is bounded by $C(gp+g^2)$ in a fixed weighted row-plus-column norm.
+\end{proof}
+
+The last result for one averaging step concerns symmetries.
+
+\begin{proposition}\label{ch09:prop:one-step-symmetries}
+In the setting of \cref{ch09:lem:centered-white-coarea}, there exist fixed products of coarse-field logarithms $\theta$, free logarithmic coordinates $z$, and gauge parameters $\kappa$, independent of $d_0$ and $m$ and contained in the domains of that lemma, on which both the original and the transformed reconstructed configurations lie in the domains of \cref{ch03:lem:relative-coarea,ch07:thm:bellman,ch07:thm:all-root-classical}. We call them the common symmetry domains; they are constructed in the proof. Let $c=e^\theta$ be real, with $\theta$ in the common symmetry domain, and let $\tau$ be one of the following real operations on coarse fields: a translation by a vector of the coarse lattice; the spatial inversion, under which reversed links carry inverted matrices; a constant color conjugation; or a coarse gauge transformation $c\mapsto c^k$ with $\SU$-valued $k=e^\kappa$ and $\kappa$ real in the corresponding fixed parameter product. Then there exists an orthogonal map $O(c)$ of the free logarithmic coordinates, which permutes the three-component blocks, acts on each block by an orthogonal matrix, and does not depend on $z$, such that
+\[
+ z^*(\tau c)=O(c)z^*(c),\qquad K(\tau c)=O(c)K(c)O(c)^{\mathsf T},\qquad S(\tau c)=O(c)S(c)O(c)^{\mathsf T}.
+\]
+The induced map $w\mapsto O(c)w$ of the normalized fluctuation variables preserves $\Omega_p$, $\abs w^2$, Lebesgue measure, and $\pi_p$, and the Haar disintegration density and $\det K$ are preserved. Consequently the integral \eqref{ch09:eq:one-step-integral} and $Q_{d_0}^{\mathrm w}$ take the same values at $c$ and at $\tau c$. The resulting identities between analytic functions of the coarse field extend to the corresponding common complex domains.
+\end{proposition}
+
+\begin{proof}
+At depth zero the Wilson action is invariant under periodic gauge transformations, translations, the spatial inversion, and constant color conjugations: the plaquette variables are conjugated, relabeled, or inverted, and $q(U^{-1})=q(U)$. The transformations of the constraint coordinates in \cref{ch03:lem:relative-coarea} intertwine the reconstruction, and on the common symmetry domains they send $z$ to $O(c)z$, where $O(c)$ is as in the statement.
+
+We first prove the invariance of $E_d$ as an identity of analytic germs at the identity, by induction on the depth $d$. If the germ at depth $d$ is invariant, then the intertwining of the constraint coordinates carries the constrained objective to the transformed objective near $(c,z)=(I,0)$. The transformed stationary point is $O(c)z^*(c)$, which lies in the neighborhood where the minimizer of \cref{ch07:thm:bellman} is unique. The two stationary values agree, and multiplying by $M$ gives the invariance of the germ at depth $d+1$. Only a nonempty neighborhood is used in this induction, and no uniform radius is inferred from it.
+
+To obtain a uniform domain, we use the common holomorphic domains of \cref{ch03:lem:relative-coarea,ch07:thm:bellman,ch07:thm:all-root-classical}. We choose fixed smaller products in $(\theta,z,\kappa)$ on which both the original and the transformed reconstructed fields lie in these domains; these are the common symmetry domains of the statement. The finite-word bounds for the reconstruction and the local gauge word $e^{\kappa_x}e^{\theta_{xy}}e^{-\kappa_y}$ allow this choice independently of the depth. The differences between the two action values, and between the two constrained objectives, are holomorphic there and have zero germ by the induction. We claim that they vanish on the whole smaller product. Indeed, we restrict such a difference to the complex line $h\mapsto h(\theta,z,\kappa)$ through a fixed point of the product. The fixed margins allow a disc $\abs h<1+\eta$ for some $\eta>0$. Its Taylor series vanishes near $h=0$, and continuation through overlapping discs along $[0,1]$ shows that it vanishes at $h=1$. Translations and the spatial inversion are treated in the same way without $\kappa$, and a constant color conjugation preserves the radii and is kept fixed in the induction. Thus the identity of the objectives holds on the fixed products, and the uniqueness of the minimizer there implies that $z^*(\tau c)=O(c)z^*(c)$ on the common domain, without a loss of radius depending on the depth.
+
+Differentiating the objective identity twice, we obtain $K(\tau c)=OKO^{\mathsf T}$, and the integral formula for the inverse square root implies that $S(\tau c)=OSO^{\mathsf T}$. Then $w=S^{-1}(z-z^*)/g$ transforms as $w\mapsto O(c)w$, which preserves the product of balls, $\abs w^2$, Lebesgue measure, and the product reference measure $\pi_p$. By the exact Haar disintegration of \cref{ch03:lem:relative-coarea} and $\det(OKO^{\mathsf T})=\det K$, every remaining factor of the integral is preserved. This proves the identities for the integral and for $Q_{d_0}^{\mathrm w}$ at real coarse fields, without requiring the individual pieces $U_X$ to be invariant. The statements about balls, Lebesgue measure, and $\pi_p$ concern the real change of variables. The identities for $z^*$, $K$, $S$, and $Q_{d_0}^{\mathrm w}$ hold between functions that are holomorphic on the common complex symmetry domains, so they extend there by the identity theorem.
+\end{proof}
+
+The gauge parameter $\kappa$ in \cref{ch09:prop:one-step-symmetries} ranges over a fixed small product, and \cref{ch09:thm:sequential-density}(6) imposes this restriction at every scale. Transitions between coarse fields in the comparison domains of \cref{ch10:chapter} that are related by an arbitrary periodic gauge transformation are given by \cref{ch10:thm:actual-compact-cut}(3).
+
+\section{Several averaging steps}\label{ch09:sec:sequential}
+
+We now compose $s\le J$ averaging steps. At each scale, from the coarsest to the finest, we perform the change of variables of \cref{ch09:lem:centered-white-coarea} with the coarse field of that scale, which depends on the fluctuations already introduced. The following example shows the structure of the resulting change of variables in the simplest case.
+
+\begin{example}\label{ch09:ex:two-steps}
+Let $s=2$, and let $c_2=e^\theta$ be the coarse field. The coordinates of the coarser intermediate scale are $z_1=z_1^*(c_2)+g_1S_1(c_2)w_1$, and they determine the field $c_1=b_1(c_2,z_1)$, so that $c_1=c_1(w_1)$. The coordinates of the finer scale are
+\[
+ z_0=z_0^*(c_1(w_1))+g_0S_0(c_1(w_1))w_0.
+\]
+In the order $(w_1,w_0)$ the derivative of $w\mapsto(z_1,z_0)$ is block lower triangular,
+\[
+ D_wz=\begin{pmatrix}g_1S_1(c_2)&0\\ D_{w_1}z_0&g_0S_0(c_1(w_1))\end{pmatrix},\qquad
+ D_{w_1}z_0=Dz_0^*(c_1)D_{w_1}c_1+g_0DS_0(c_1)[D_{w_1}c_1]w_0.
+\]
+We write $D_i$ for the number of real coordinates of $z_i$, $i=0,1$. The off-diagonal block does not change the determinant, $\det D_wz=g_1^{D_1}\det S_1(c_2)\,g_0^{D_0}\det S_0(c_1(w_1))$, but it enters all later derivatives. The determinant of the finer scale depends on $w_1$. Let $\widehat c_1=c_1(0)=b_1(c_2,z_1^*(c_2))$ be the zero-fluctuation reconstruction of $c_1$. We split
+\[
+ \log\det K_0(c_1(w_1))=\log\det K_0(\widehat c_1)+\bigl[\log\det K_0(c_1(w_1))-\log\det K_0(\widehat c_1)\bigr].
+\]
+The first term depends only on $c_2$ and becomes part of the function $\mathsf B_{\mathrm{ref}}$ of \cref{ch09:thm:sequential-density}. The second depends on $w_1$ and is part of the fluctuation interaction $H_{d_0,2}$. The negative logarithmic Haar density at the minimizer of the finer scale is split in the same way. Replacing $c_1(w_1)$ by $\widehat c_1$ in these terms would not give an exact formula. Under the product reference measure, $w_1$ and $w_0$ are independent, but the interacting density need not factor. Its classical and Haar-density remainders can involve both variables, while the determinant and minimizer-density corrections displayed here depend only on $w_1$ and change its marginal weight.
+\end{example}
+
+In the theorem below, the field $c_i$ lives on the lattice of side $mM^{s-i}$, $0\le i\le s$, so that $c_0$ is the finest field and $c_s=e^\theta$ is the coarse field. The $i$-th averaging step, from side $mM^{s-i}$ to side $mM^{s-i-1}$, has input action $E_{d_0+i}$; we write $b_i(c,z)$ for its reconstruction, $\mathcal J_i(c,z)$ for its Haar disintegration density, and $z_i^*(c)$ for its conditional constrained minimizer, as in \cref{ch09:lem:centered-white-coarea}. The coupling of the coarsest integrated scale is $t$, and the couplings decrease by the factor $M^{-1/2}$ toward finer scales.
+
+\begin{theorem}\label{ch09:thm:sequential-density}
+Fix an odd integer $M\ge3$ and an integer $J\ge1$. There exist $u_J,v_J,b_J,c_J,C_J,\sigma_0>0$, uniform in the depth $d_0\ge0$ and in the side $m\ge4$, such that the following holds for every integer $1\le s\le J$. For $0\le i<s$ put
+\[
+ f_i=2(M^3-1)(mM^{s-i-1})^3,\qquad D_i=3f_i,\qquad g_i=tM^{(i-s+1)/2},
+\]
+and $g_s^2=Mg_{s-1}^2$. Given $c_s=e^\theta$, define successively, for decreasing $i$,
+\begin{gather*}
+ F_i(c,z)=E_{d_0+i}(b_i(c,z)),\qquad K_i(c)=D_z^2F_i(c,z_i^*(c)),\qquad S_i=K_i^{-1/2},\\
+ z_i=z_i^*(c_{i+1})+g_iS_i(c_{i+1})w_i,\qquad c_i=b_i(c_{i+1},z_i).
+\end{gather*}
+Let $\Omega_p^{\mathrm{all}}=\prod_{i<s}\prod_e\{w_{i,e}\in\R^3:\abs{w_{i,e}}\le p\}$, and let $\pi_p^{\mathrm{all}}$ be the product reference measure on it with density proportional to $e^{-\sum_i\abs{w_i}^2/2}$. Assume $p\ge p_0$, $\norm\theta_\infty<u_J$, and
+\begin{equation}\label{ch09:eq:sequential-conditions}
+ C_Jtp<\tfrac12,\qquad \sigma_J=C_J\frac{tp^3+tp}{1-C_Jtp}\le\sigma_0.
+\end{equation}
+Then the following statements hold.
+\begin{enumerate}
+\item For every $w\in\Omega_p^{\mathrm{all}}$ the reconstruction lies, with fixed margins, in every classical and Haar disintegration chart, and the recursion is a jointly holomorphic map of $\theta$ and of the variables $q_i=g_iw_i$ on a common larger product.
+\item In the order from coarser to finer scales,
+\[
+ \det D_wz=\prod_{i=0}^{s-1}g_i^{D_i}\det S_i(c_{i+1}).
+\]
+\item Put
+\[
+ U_i^{\mathrm{cl}}=\frac{F_i(c_{i+1},z_i)-F_i(c_{i+1},z_i^*(c_{i+1}))}{g_i^2}-\frac12\abs{w_i}^2.
+\]
+Then, exactly,
+\[
+ \frac{E_{d_0}(c_0)}{g_0^2}=\frac{E_{d_0+s}(c_s)}{g_s^2}+\frac12\sum_i\abs{w_i}^2+\sum_iU_i^{\mathrm{cl}}.
+\]
+\item Put $\mathcal L_i(c,z)=-\log(\mathcal J_i(c,z)/\mathcal J_i(I,0))$ and
+\[
+ \mathsf B_i(c)=\mathcal L_i(c,z_i^*(c))+\tfrac12\log\det K_i(c).
+\]
+Let $\widehat c_s=c_s$ and $\widehat c_i=b_i(\widehat c_{i+1},z_i^*(\widehat c_{i+1}))$ be the zero-fluctuation reconstruction, and set $\mathsf B_{\mathrm{ref}}(c_s)=\sum_i\mathsf B_i(\widehat c_{i+1})$. Define the fluctuation interaction
+\begin{equation}\label{ch09:eq:sequential-interaction}
+ H_{d_0,s}(\theta,w)=\sum_i\Bigl[U_i^{\mathrm{cl}}+\mathcal L_i(c_{i+1},z_i)-\mathcal L_i(c_{i+1},z_i^*(c_{i+1}))+\mathsf B_i(c_{i+1})-\mathsf B_i(\widehat c_{i+1})\Bigr].
+\end{equation}
+If $\mathscr D_s(c_s)$ is the image of $\Omega_p^{\mathrm{all}}$ under $w\mapsto(z_i)_{i<s}$, then
+\begin{equation}\label{ch09:eq:sequential-integral}
+\begin{split}
+ &\int_{\mathscr D_s(c_s)}e^{-E_{d_0}(c_0)/g_0^2}\prod_i\mathcal J_i(c_{i+1},z_i)\,dz_i\\
+ &\qquad=\Bigl(\prod_i\mathcal J_i(I,0)g_i^{D_i}\Bigr)e^{-E_{d_0+s}(c_s)/g_s^2-\mathsf B_{\mathrm{ref}}(c_s)}z_p^{\sum_if_i}\,\Xi_{d_0,s}(c_s),
+\end{split}
+\end{equation}
+where $\Xi_{d_0,s}=\E_{\pi_p^{\mathrm{all}}}e^{-H_{d_0,s}}$.
+\item There is an exact decomposition $H_{d_0,s}=\sum_XH_X$ into functions supported on connected sets of boxes with $\norm{\{H_X\}}_{u_J',8;p}\le\sigma_J$, for a fixed coarse-field radius $u_J'\in(0,u_J]$ that also lies inside the domain of the coefficient series of $\mathsf B_{\mathrm{ref}}$ described in the proof. Both expansions of \cref{ch09:thm:supported-log-holomorphy} apply; $\Xi_{d_0,s}\ne0$ on $\norm\theta_\infty<u_J'$, and the effective interaction
+\[
+ Q_{d_0,s}^{\mathrm w}=\mathsf B_{\mathrm{ref}}-\Bigl(\sum_if_i\Bigr)\log z_p-\log\Xi_{d_0,s}
+\]
+satisfies, on $\norm\theta_\infty\le u_J'/2$, $\norm{D_\theta^kQ_{d_0,s}^{\mathrm w}}_{b_J,\mathrm{root}}\le C_J^{k+1}k!$ for every $k\ge1$. The function $\mathsf B_{\mathrm{ref}}$ of the coarse field is kept in full.
+\item Let $c_s$ be real, and let $\tau$ be one of the operations of \cref{ch09:prop:one-step-symmetries}, applied to $c_s$. Assume that, for every $w\in\Omega_p^{\mathrm{all}}$ and every $i$, the field $c_{i+1}$ and the operation induced by $\tau$ on it satisfy the hypotheses of \cref{ch09:prop:one-step-symmetries} for the averaging step $i$, that is, they lie in the common symmetry domains of that step. Then the induced changes of variables $w_i'=O_i(c_{i+1})w_i$ are triangular, orthogonal at each scale for fixed coarser variables, preserve every ball, and have absolute joint Jacobian one; their dependence on the coarser fluctuations is retained. They transport every factor of \eqref{ch09:eq:sequential-integral}.
+\end{enumerate}
+The constants depend only on $M$, $J$, the larger chart margins, the box geometry, and the spatial decay rates; they do not depend on $d_0$, $m$, or on $t,p$ satisfying \eqref{ch09:eq:sequential-conditions}.
+\end{theorem}
+
+In the proof, we first construct one product of coordinates on which all compositions are controlled, before any integration. We then compute the Jacobian and the integral exactly, and finally we estimate the fluctuation interaction and apply the expansions.
+
+\begin{proof}
+For each $0\le i<s$ the averaging step $i$ has output side $m_i=mM^{s-i-1}\ge4$, input side $Mm_i$, and depth $d_0+i\ge0$. Thus \cref{ch09:lem:local-calculus,ch09:lem:centered-white-coarea} apply to every step, and the construction below checks their domain conditions at every argument reached by the reconstruction.
+
+\paragraph{Step 1: a common product.}
+In logarithmic coordinates, we define the map of one step
+\[
+ T_i(x,q)=\Log b_i\bigl(e^x,z_i^*(e^x)+S_i(e^x)q\bigr).
+\]
+Its value at $(0,0)$ is zero. By \cref{ch09:lem:local-calculus,ch09:lem:centered-white-coarea}, its output rows and all its input columns are bounded by one convergent majorant series, which we enlarge to $P(h)=Ah/(1-Ah)$; these bounds are uniform in $d_0+i$ and in $m_i$. We choose a smaller domain for each step, with a fixed positive margin $R_1$ to every classical and Haar disintegration boundary and to every denominator in these series.
+
+For a scalar variable $h$, we set $x_s(h)=h$ and successively $x_i(h)=P(x_{i+1}(h)+h)$. There are only $s\le J$ compositions, and their denominators equal one at $h=0$. We choose $r_J>0$ such that, for every $s\le J$ and $0\le i<s$, all denominators are at least $1/2$ and $x_{i+1}(h)+h<R_1/4$ for $0\le h\le2r_J$. These are finitely many continuous inequalities that hold strictly at $h=0$, so such an $r_J$ exists; it depends only on the data listed in the statement. By coefficientwise composition and the contraction rule of \cref{ch02:lem:coefficient-algebra}, these scalar series majorize the recursion with independent variables $q_i$. At a fixed input index, we use the column along its path to the output and the rows on the other branches, and the scalar compositions enumerate the partitions of the other inputs with their Taylor factorials. Thus all joint absolute coefficients are controlled, not only the values of the maps at real arguments.
+
+\paragraph{Step 2: units and volumes.}
+The output mesh of step $i$ is $M^{i+1-s}$ in units of the coarse lattice spacing. A length $l$ in the units of step $i$ therefore becomes $M^{i+1-s}l$, and the exponential bound of that step yields a bound at a fixed smaller rate in coarse units. The meshes of all inputs and outputs belong to the finite set $\{M^{-J},\ldots,1\}$. The column factors are the ratios of the corresponding volumes, as in \cref{ch02:lem:coefficient-algebra}. Passing between counting sums and volume-normalized sums introduces at most a factor $M^{3J}$ for each participating index, hence at most $M^{3J(k+1)}$ for a coefficient of order $k$, which is absorbed by a fixed smaller joint radius. The number of indices of the variables $q_i$ of the finitely many scales per unit cube is at most $C_MsM^{3s}$. In particular, no factor $M^{d_0}$ and no factor of the total volume occurs. We keep the composed networks until a single final replacement by trees on the external indices, which gives one fixed rate $a_J>0$.
+
+\paragraph{Step 3: the domain of the fluctuation variables.}
+We choose $u_J$ and $v_J$ below $r_J$ and below the last radius reduction. For $\norm\theta_\infty<u_J$ and $\max_i\norm{q_i}_\infty\le tp$, we enlarge $C_J$ so that \eqref{ch09:eq:sequential-conditions} implies $tp<v_J/2$. By Step 1, all charts then have fixed margins for every $w\in\Omega_p^{\mathrm{all}}$, and the recursion is jointly holomorphic in $(\theta,q)$ on the larger product. Taking maxima over $1\le s\le J$ fixes all these choices at once. This proves (1).
+
+\paragraph{Step 4: the Jacobian.}
+By \cref{ch03:lem:relative-coarea}, the scale $i$ has $2(M^3-1)(mM^{s-i-1})^3=f_i$ independent $\SU$ variables, hence $D_i=3f_i$ real coordinates. We order the scales as $s-1,s-2,\ldots,0$. The field $c_{i+1}$ depends only on the $w_l$ with $l>i$, so
+\[
+ D_{w_i}z_i=g_iS_i(c_{i+1}),\qquad D_{w_l}z_i=0\quad(l<i).
+\]
+For $l>i$, the derivative $D_{w_l}z_i$ contains both $Dz_i^*(c_{i+1})D_{w_l}c_{i+1}$ and $g_iDS_i(c_{i+1})[D_{w_l}c_{i+1}]w_i$, and we keep these entries. The derivative matrix is block triangular, and its determinant is as stated in (2); for real data, each diagonal determinant is positive. The recursion is one-to-one onto its image, since one recovers $w_{s-1}$ from $z_{s-1}$ first and proceeds to finer scales, using the invertibility of each $S_i$. Hence it is a change of variables on its image.
+
+\paragraph{Step 5: the exact integral.}
+By the nested minimization identity of \cref{ch07:thm:bellman} at scale $i$, and since $g_{i+1}^2=Mg_i^2$ (including $g_s=\sqrt Mt$), we have
+\[
+ \frac{E_{d_0+i}(c_i)}{g_i^2}-\frac{E_{d_0+i+1}(c_{i+1})}{g_{i+1}^2}=\frac{F_i(c_{i+1},z_i)-F_i(c_{i+1},z_i^*)}{g_i^2}=\frac12\abs{w_i}^2+U_i^{\mathrm{cl}}.
+\]
+Summing over $i$ proves (3). The product of the Haar disintegration densities and of the Jacobian is
+\[
+ \prod_i\mathcal J_i(I,0)g_i^{D_i}\exp\Bigl\{-\sum_i\Bigl[\mathcal L_i(c_{i+1},z_i)+\tfrac12\log\det K_i(c_{i+1})\Bigr]\Bigr\}.
+\]
+For each $i$ the exponent splits exactly as
+\begin{align*}
+ \mathcal L_i(c_{i+1},z_i)+\tfrac12\log\det K_i(c_{i+1})
+ ={}&\mathsf B_i(\widehat c_{i+1})+\mathcal L_i(c_{i+1},z_i)-\mathcal L_i(c_{i+1},z_i^*(c_{i+1}))\\
+ &+\mathsf B_i(c_{i+1})-\mathsf B_i(\widehat c_{i+1}).
+\end{align*}
+We add the terms $U_i^{\mathrm{cl}}$ from (3). The first terms on the right sum to $\mathsf B_{\mathrm{ref}}$, and all other terms together form $H_{d_0,s}$. Integrating the Gaussian factor over each ball contributes $z_p^{\sum_if_i}$, and the remaining expectation is $\Xi_{d_0,s}$. This proves \eqref{ch09:eq:sequential-integral}; the off-diagonal derivatives of the triangular change of variables contribute no additional determinant. The fluctuations of the determinants and of the Haar densities at the minimizers of the finer scales are exactly the terms $\mathsf B_i(c_{i+1})-\mathsf B_i(\widehat c_{i+1})$. For complex coarse fields, the formula again means integration over the same real product of the $w_i$.
+
+\paragraph{Step 6: bounds for the fluctuation interaction.}
+All coefficients of positive degree of $\mathsf B_i$ have factorial bounds with one index fixed; for the determinant we use the series \eqref{ch09:eq:determinant-series}, and for the negative logarithmic Haar density \cref{ch09:lem:local-calculus}. We compose these scalar series and the other tensors of one step with the maps bounded in Step 1. Fixing a scalar coefficient at any input and propagating the fixed index along columns, we sum all intermediate indices; the bounded density of the indices of the variables $q_i$ changes only the constants.
+
+By \eqref{ch09:eq:classical-remainder}, a classical term from scale $i$ has at least three $w_i$ inputs and the factor $g_i^{k-2}$ for its degree $k\ge3$ in $w_i$. Expanding its coarse field $c_{i+1}$ adds one factor $g_lw_l$ for each input from a coarser scale $l>i$. Since $0<g_i\le t$, the sum over these degrees and over all coarse-field degrees is bounded, on a smaller fixed coarse-field radius, by $C_Jtp^3/(1-C_Jtp)$. By \eqref{ch09:eq:coarea-remainder}, a difference of negative logarithmic Haar densities contains at least one factor $g_iw_i$. A difference $\mathsf B_i(c_{i+1})-\mathsf B_i(\widehat c_{i+1})$ has no term independent of the fluctuations, since at $q=0$ both arguments are the zero-fluctuation reconstruction. Each of its terms contains a factor $g_lw_l$ with $l>i$. These two kinds of differences together have the majorant $C_Jtp/(1-C_Jtp)$. For each of these terms, a fixed index of $q$ either fixes the outer scalar coefficient or reaches it through the column of an insertion, so these are bounds with one index fixed. Summing over the at most $J$ scales, we obtain the majorant
+\begin{equation}\label{ch09:eq:sequential-majorant}
+ C_J\frac{tp^3+tp}{1-C_Jtp},
+\end{equation}
+and every monomial of $H_{d_0,s}$ contains at least one fluctuation variable.
+
+We apply the construction of supports of \cref{ch09:lem:supported-activities}, with \eqref{ch09:eq:hull-size} and \eqref{ch09:eq:hull-payment}, in units of the coarse lattice spacing, with $a_J$ in place of $a$, and with the density of the indices of $q$ stated above in the sum over the location of the fixed index. We choose the box scale such that $8C_0/\mathscr L<a_J/4$, then the rate $b_1$, and then we reduce the joint radius to absorb the resulting factor $D_{\mathscr L}^{r+k}$. The geometric series of Step 4 of that proof now has the majorants \eqref{ch09:eq:sequential-majorant} in place of those of one step. After enlarging $C_J$, we obtain an exact decomposition $H_{d_0,s}=\sum_XH_X$ with norm at most $\sigma_J$ for the support weight $e^{8\abs X}$. All the conditions in \eqref{ch09:eq:sequential-conditions} use this final $C_J$.
+
+\paragraph{Step 7: the expansions and the effective interaction.}
+The connected-component expansion uses only the coefficient bound, the exact supports, and the independence of the fluctuation variables in disjoint supports, which holds for $\pi_p^{\mathrm{all}}$. Thus Step 1 of the proof of \cref{ch09:thm:supported-log-holomorphy} yields activities with $\norm{\{\Activity(P)\}}_{u_J',5}\le2\sigma_J$, and by \cref{ch09:thm:hard-core-log} we have $\Xi_{d_0,s}\ne0$ and the bound with support weight $e^{2\abs Y}$ for the logarithm. The bounded density of the indices also provides a network of length at most $C_J\abs Y$ joining all labels of a support. Then \eqref{ch09:eq:coefficient-to-jet} implies factorial bounds for the derivatives of $\log\Xi_{d_0,s}$ on $\norm\theta_\infty\le u_J'/2$, at one fixed rate $b_J>0$, which we take no larger than $a_J$.
+
+The zero-fluctuation reconstruction is the map of Step 1 at $q=0$. We compose its majorant series with the series of the coefficients of positive degree of the $\mathsf B_i$. This bounds the coefficients of positive degree of $\mathsf B_{\mathrm{ref}}$, with one coarse-field index fixed, at the rate $a_J$ on a fixed product of coarse fields. Translating to background points of a smaller product, we bound every derivative of positive order of $\mathsf B_{\mathrm{ref}}$ by $C_J^{k+1}k!$ there; the value of the extensive trace is not bounded. We choose the radius $u_J'$ of (5) such that $\norm\theta_\infty<u_J'$ lies inside this smaller product, and we restrict the derivative bounds to $\norm\theta_\infty\le u_J'/2$, where \eqref{ch09:eq:coefficient-to-jet} applies. Restoring this function and the truncated Gaussian constants in \eqref{ch09:eq:sequential-integral} proves the formula for $Q_{d_0,s}^{\mathrm w}$ and its bounds.
+
+\paragraph{Step 8: symmetries.}
+For each operation $\tau$, the hypothesis of (6) allows us to apply \cref{ch09:prop:one-step-symmetries} at scale $i$, which shows that $z_i^*(\tau c_{i+1})=O_iz_i^*(c_{i+1})$, $K_i(\tau c_{i+1})=O_iK_iO_i^{\mathsf T}$, and $S_i(\tau c_{i+1})=O_iS_iO_i^{\mathsf T}$, with $O_i=O_i(c_{i+1})$ independent of $w_i$. Proceeding from coarser to finer scales, we obtain $w_i'=O_i(c_{i+1})w_i$, which depends on every coarser fluctuation. This map is a bijection of $\Omega_p^{\mathrm{all}}$, since one inverts the block of the coarsest scale first and proceeds to finer scales. Its diagonal Jacobian blocks are the $O_i$, so its absolute Jacobian is one. Each block preserves its balls and $\sum_i\abs{w_i}^2$, and each Haar density and determinant is transported by the identity of one step. Since at zero fluctuations the transformed zero-fluctuation reconstruction is the zero-fluctuation reconstruction of $\tau c_s$, the function $\mathsf B_{\mathrm{ref}}$ is transported as well. This proves (6). All choices used only the fixed data and finitely many scales, which proves the stated uniformity; nothing is claimed as $J\to\infty$.
+\end{proof}
+
+\section{Perturbation by an input effective interaction}\label{ch09:sec:insertion}
+
+In the recursion of \cref{ch10:chapter}, the density at the finer scale contains, besides the effective classical action, an input effective interaction $R$, produced by the integrations at still finer scales and evaluated at the reconstructed fine field. In this subsection, we fix $s=J$, so that the $J$ averaging steps form one renormalization group step, and we compute the effect of $R$ on the integral of \cref{ch09:thm:sequential-density}. We set $\lambda_i=M^{(i-J+1)/2}$, so that $g_i=t\lambda_i$, and let $\RawRecon(\theta,q)$ be the fine field $c_0$ produced by the recursion of \cref{ch09:thm:sequential-density} with $q_i$ in place of $g_iw_i$. That is, $z_i=z_i^*(c_{i+1})+S_i(c_{i+1})q_i$, and the matrices $S_i$ remain in the map. This is the reconstruction before the gauge transformation used in \cref{ch10:chapter}.
+
+The following heuristic explains why the effect of $R$, beyond its value $R_{\mathrm{ref}}$ on the zero-fluctuation reconstruction, is of second order in the coupling.
+
+\begin{remark}\label{ch09:rem:second-order}
+Suppose that $H=\zeta H_1+\zeta^2H_2+\cdots$ and $A=\zeta A_1+\zeta^2A_2+\cdots$ are interactions depending on a small parameter $\zeta$, and that $\E_\pi A_1=0$. Expanding the logarithms to second order gives
+\[
+ -\log\E_\pi e^{-H-A}+\log\E_\pi e^{-H}=\zeta^2\Bigl(\E_\pi A_2-\Cov_\pi(H_1,A_1)-\tfrac12\Var_\pi(A_1)\Bigr)+O(\zeta^3).
+\]
+For the inserted interaction $A=R(c_0)-R_{\mathrm{ref}}$, the first-order term $A_1$ is linear in the normalized fluctuation variables, and its mean under the symmetric reference measure vanishes. The difference of the logarithms is therefore of order $\zeta^2$, and $\zeta$ will be set equal to $t$. \Cref{ch09:lem:marked-insertion} proves a uniform version of this statement for the families of \cref{ch09:thm:supported-log-holomorphy}, using \cref{ch09:cor:supported-mark-two-powers} instead of a finite-order expansion.
+\end{remark}
+
+To apply \cref{ch09:cor:supported-mark-two-powers} we vary the size of the fluctuations through a complex parameter $\zeta$, which takes the value $t$ for the integral of \cref{ch09:thm:sequential-density}.
+
+\begin{definition}\label{ch09:conv:auxiliary-baseline}
+For a complex parameter $\zeta$, substitute $q_i=\zeta\lambda_iw_i$ in the recursion, and write $c_i(\zeta)$ and $z_i(\zeta)=z_i^*(c_{i+1}(\zeta))+\zeta\lambda_iS_i(c_{i+1}(\zeta))w_i$ for the resulting fields and coordinates, so that $c_i(t)=c_i$ and $c_i(0)=\widehat c_i$. The auxiliary fluctuation interaction $H_{d_0,J}(\theta,w;\zeta)$ is obtained from \eqref{ch09:eq:sequential-interaction} by replacing $c_{i+1}$ and $z_i$ by $c_{i+1}(\zeta)$ and $z_i(\zeta)$, and the classical term $U_i^{\mathrm{cl}}$ by
+\begin{equation}\label{ch09:eq:auxiliary-classical}
+ \frac{F_i\bigl(c_{i+1}(\zeta),z_i^*+\zeta\lambda_iS_iw_i\bigr)-F_i\bigl(c_{i+1}(\zeta),z_i^*\bigr)}{\zeta^2\lambda_i^2}-\frac12\abs{w_i}^2,
+\end{equation}
+where $z_i^*$ and $S_i$ are evaluated at $c_{i+1}(\zeta)$. Thus the explicit inverse square of the coupling varies together with the increments, while the classical functions, the balls, and the cutoff are held fixed. Put
+\begin{equation}\label{ch09:eq:auxiliary-baseline}
+ \Xi_0(\theta;\zeta)=\E_{\pi_p^{\mathrm{all}}}e^{-H_{d_0,J}(\theta,w;\zeta)},
+\end{equation}
+where $\log\Xi_0$ is the branch of \cref{ch09:thm:supported-log-holomorphy}, with $\log\Xi_0(\theta;0)=0$.
+\end{definition}
+
+By stationarity and $S_i^{\mathsf T}K_iS_i=I$, the expression \eqref{ch09:eq:auxiliary-classical} equals
+\[
+ \sum_{k\ge3}\frac{\zeta^{k-2}\lambda_i^{k-2}}{k!}D_z^kF_i\bigl(c_{i+1}(\zeta),z_i^*\bigr)\bigl[(S_iw_i)^{\otimes k}\bigr],
+\]
+so it extends holomorphically across $\zeta=0$. The differences of negative logarithmic Haar densities and of the functions $\mathsf B_i$ in $H_{d_0,J}(\theta,w;\zeta)$ are evaluated at the same arguments $c_{i+1}(\zeta)$ and $z_i(\zeta)$. At $\zeta=t$, the auxiliary interaction is the interaction $H_{d_0,J}(\theta,w)$ of \cref{ch09:thm:sequential-density}, and $\Xi_0(\theta;t)=\Xi_{d_0,J}(e^\theta)$. At $\zeta=0$, every term vanishes, since the classical series starts at $\zeta^1$, $z_i(0)=z_i^*(\widehat c_{i+1})$, and $c_{i+1}(0)=\widehat c_{i+1}$.
+
+\begin{lemma}\label{ch09:lem:marked-insertion}
+Fix $J$ and the products, norms, and constants of \cref{ch09:thm:sequential-density} with $s=J$, and fix $u,v,b>0$. Let $R$ be a scalar function of the fine field such that its pullback
+\[
+ \widehat R(\theta,q)=R\bigl(\RawRecon(\theta,q)\bigr)
+\]
+is holomorphic on a product $\{\norm\theta_\infty<u_2,\ \max_i\norm{q_i}_\infty<v_2\}$ with $u_2>u$ and $v_2>v$, contained in the common product of \cref{ch09:thm:sequential-density}(1), and satisfies $\mathcal J_{u,v,b}(\widehat R)\le\epsilon$. The constant term of $\widehat R$ is unrestricted. Define
+\begin{align*}
+ R_{\mathrm{ref}}(\theta)&=\widehat R(\theta,0),\qquad A_R(\theta,w;\zeta)=\widehat R\bigl(\theta,(\zeta\lambda_iw_i)_i\bigr)-R_{\mathrm{ref}}(\theta),\\
+ \Xi_{J,R}(\theta;\zeta)&=\E_{\pi_p^{\mathrm{all}}}e^{-H_{d_0,J}(\theta,w;\zeta)-A_R(\theta,w;\zeta)},\qquad
+ \mathcal D_JR(\theta;\zeta)=-\log\Xi_{J,R}(\theta;\zeta)+\log\Xi_0(\theta;\zeta),
+\end{align*}
+both logarithms being the branches of \cref{ch09:thm:supported-log-holomorphy} that vanish at $\zeta=0$. All parameters internal to $R$, the balls, and the classical functions are held fixed when $\zeta$ varies. There exist $u',b',C_J,c_J>0$, depending only on $M$, $J$, $u$, $v$, $b$, the larger margins, and the spatial decay rates, and not on $d_0$, $m$, $t$, $p$, or $\epsilon$, such that the following holds for every $p\ge p_0$, with $R_\zeta=c_J/(p^3+\epsilon p)$.
+\begin{enumerate}
+\item For every complex $\zeta$ with $\abs\zeta\le R_\zeta$ and every $w\in\Omega_p^{\mathrm{all}}$, the variables $q_i=\zeta\lambda_iw_i$ satisfy $\norm{q_i}_\infty\le c_J\le\min\{v,v_J\}/2$. Consequently, for $\norm\theta_\infty\le u'$, the point $(\theta,q)$ lies in the product on which $\widehat R$ is holomorphic and in the common product of \cref{ch09:thm:sequential-density}(1), and $H_{d_0,J}(\theta,w;\zeta)$ and $A_R(\theta,w;\zeta)$ are holomorphic in $\zeta$ on a neighborhood of the closed disc $\abs\zeta\le R_\zeta$.
+\item Let $0<t\le c_J/[2(p^3+\epsilon p)]$. Then the conditions \eqref{ch09:eq:sequential-conditions} hold, and the integral \eqref{ch09:eq:sequential-integral} with the additional factor $e^{-R(c_0)}$ in the integrand equals the integral \eqref{ch09:eq:sequential-integral} times $\exp(-R_{\mathrm{ref}}(\theta)-\mathcal D_JR(\theta;t))$.
+\item Let $\boldsymbol{\mathcal D}(\zeta)=\boldsymbol{\mathcal L}(\boldsymbol H(\zeta)+\boldsymbol A_R(\zeta))-\boldsymbol{\mathcal L}(\boldsymbol H(\zeta))$ be the difference of the families of \cref{ch09:thm:supported-log-holomorphy}, at the coefficient radius $u'$, for the supported decompositions $\boldsymbol H(\zeta)$ and $\boldsymbol A_R(\zeta)$ constructed in the proof; its sum over supports is $\mathcal D_JR(\theta;\zeta)$. Its constant and linear coefficients in $\zeta$ vanish, support by support. For $0<t\le c_J/[2(p^3+\epsilon p)]$,
+\[
+ \norm{\boldsymbol{\mathcal D}(t)}_{\mathscr S_2}\le C_Jt^2\epsilon(p^4+\epsilon p^2),
+\]
+and, on $\norm\theta_\infty\le u'$, for every $k\ge1$,
+\[
+ \norm{D_\theta^k\mathcal D_JR(\cdot;t)}_{b',\mathrm{root}}\le C_J^{k+1}k!\,t^2\epsilon(p^4+\epsilon p^2).
+\]
+\end{enumerate}
+\end{lemma}
+
+The hypothesis concerns $\widehat R$ on a product containing all points described in (1). A bound for $R$ on a smaller set of fine fields, which misses part of the range of the reconstruction over this product, does not suffice. The hypothesis is verified for the effective interactions of the recursion in \cref{ch10:thm:common-analytic-class}.
+
+\begin{proof}
+We use \cref{ch09:conv:auxiliary-baseline} throughout. Since $H_{d_0,J}(\theta,w;0)=0$ and $A_R(\theta,w;0)=0$ for every coarse field, both partition functions equal one at $\zeta=0$.
+
+\paragraph{Step 1: supported decompositions.}
+We expand $\widehat R$ in the variables $\theta$ and $q$. Subtracting $\widehat R(\theta,0)$ removes exactly the terms of degree zero in $q$. Every remaining monomial therefore contains a variable $q_i$, and its coefficient sum with that index fixed, including the volume normalization, is controlled by $\mathcal J_{u,v,b}(\widehat R)\le\epsilon$. The support-weight estimate \eqref{ch09:eq:hull-payment}, in the form used in Step 6 of the proof of \cref{ch09:thm:sequential-density}, yields the bound $CD^{r+k}e^{b\Tree/2}e^{-b_1\dist(x,e)}$ for the weight $e^{8\abs X}$ of a monomial of degree $r$ in $\theta$, degree $k$ in $q$, and fixed location $e$ of an index of $q$. The sum over $e$ contributes only the density of these indices. We choose $u_1<u/(2D)$ and a radius $v_1<v/(2D)$ for the variables $q$, and we reduce them further to absorb the fixed color factors and the choice of the fixed index of $q$, which contributes at most a factor $k\le2^k$. A term of $\mathcal J_{u,v,b}(\widehat R)$ is then multiplied by at most $(Du_1/u)^r(C_J\abs\zeta p/v)^k$ with $k\ge1$. Summing, we obtain an exact supported decomposition $\boldsymbol A_R(\zeta)$ of $A_R$ with
+\begin{equation}\label{ch09:eq:insertion-norm}
+ \norm{\boldsymbol A_R(\zeta)}_{\mathscr S_8}\le\frac{C_J\epsilon\abs\zeta p}{1-C_J\abs\zeta p},
+\end{equation}
+an absolute coefficient bound at the coarse-field radius $u_1$. We use one box scale, chosen with the smaller of the two available rates, for $H$ and $A_R$. Repeating the calculation of Step 6 in the proof of \cref{ch09:thm:sequential-density}, with $\zeta$ in place of $t$, we obtain
+\begin{equation}\label{ch09:eq:auxiliary-baseline-norm}
+ \norm{\boldsymbol H(\zeta)}_{\mathscr S_8}\le\frac{C_J\abs\zeta(p^3+p)}{1-C_J\abs\zeta p}.
+\end{equation}
+Indeed, the classical terms have degree at least three in the fluctuation variables of their own scale, with the factor $\zeta^{k-2}$. The differences of negative logarithmic Haar densities and of the functions $\mathsf B_i$ have degree at least one in the fluctuation variables. Joint composition and the support-weight estimate then give exactly these two geometric sums. The assignment of supports does not depend on $\zeta$ or on the interpolation parameter $s$ below.
+
+\paragraph{Step 2: the auxiliary disc.}
+Let $R_\zeta=c_J/(p^3+\epsilon p)$. Since $p\ge1$, we have $R_\zeta p\le c_J$, $R_\zeta(p^3+p)\le2c_J$, and $R_\zeta\epsilon p\le c_J$. We choose $c_J$ so small that $C_Jc_J\le1/2$, that $6C_Jc_J\le\eta_0/2$, that $c_J\le\min\{v_1,v_J\}/2$, and that $4C_J'c_J\le\sigma_0$, where $\eta_0$ is the constant of \cref{ch09:thm:supported-log-holomorphy} and $C_J'$, $\sigma_0$ are the constants in \eqref{ch09:eq:sequential-conditions}. For $t\le R_\zeta/2$, we have $tp\le tp^3\le c_J/2$, hence $C_J'tp<1/2$ and $C_J'(tp^3+tp)/(1-C_J'tp)\le2C_J'c_J\le\sigma_0$, which are the conditions \eqref{ch09:eq:sequential-conditions}. Then (1) holds, the denominators in \eqref{ch09:eq:insertion-norm} and \eqref{ch09:eq:auxiliary-baseline-norm} are at least $1/2$ on a neighborhood of the closed disc $\abs\zeta\le R_\zeta$, and
+\[
+ \norm{\boldsymbol H(\zeta)+s\boldsymbol A_R(\zeta)}_{\mathscr S_8}\le4C_Jc_J+2C_Jc_J\le\eta_0/2\qquad(0\le s\le1).
+\]
+
+\paragraph{Step 3: cancellation of the first order.}
+By \cref{ch09:thm:supported-log-holomorphy} and \eqref{ch09:eq:insertion-norm}, the derivative family $D\boldsymbol{\mathcal L}(\boldsymbol H+s\boldsymbol A_R)[\boldsymbol A_R]$ has norm at most $C_J\epsilon p\abs\zeta$ on the disc. The coefficient of $\zeta$ in $A_R$ is $\sum_i\lambda_iD_{q_i}\widehat R(\theta,0)[w_i]$. Each monomial assigned to a support is linear in one fluctuation block, whose mean under the symmetric reference measure is zero. Thus its expectation vanishes before any sum over supports or coarse-field coefficients, and the hypothesis of \cref{ch09:cor:supported-mark-two-powers} holds. Applying that corollary with $R=R_\zeta$, and integrating over $s\in[0,1]$, we obtain for the difference $\boldsymbol{\mathcal D}(\zeta)$ the bounds
+\begin{equation}\label{ch09:eq:marked-linear-bound}
+ \norm{\boldsymbol{\mathcal D}(\zeta)}_{\mathscr S_2}\le C_J\epsilon p\abs\zeta,\qquad
+ \norm{\boldsymbol{\mathcal D}(t)}_{\mathscr S_2}\le C_J\epsilon p\frac{t^2}{R_\zeta}=C_Jt^2\epsilon(p^4+\epsilon p^2),
+\end{equation}
+the second for $t\le R_\zeta/2$. If $\epsilon=0$, then $\widehat R$ is constant, $A_R=0$, and the difference vanishes identically. Both terms $t^2\epsilon p^4$ and $t^2\epsilon^2p^2$ in the bound are needed.
+
+\paragraph{Step 4: derivatives.}
+With $u'=u_1/2$, the bound \eqref{ch09:eq:coefficient-to-jet} bounds the sum of the derivatives of order $k$ of each support term by $2^{k+1}k!u_1^{-k}$ times its coefficient norm. All coarse-field labels in a support $Y$ can be joined by a network of length at most $C_{\mathrm{geom},J}\abs Y$, and we choose $b'$ with $b'C_{\mathrm{geom},J}\le1$. Fixing a derivative index restricts the sum to the supports containing its box, and the factor $e^{2\abs Y}$ dominates the network weight. This proves the bound for the derivatives, with a single factorial. Reducing the coefficient radius from $u_1$ to $u'$ preserves the bound for $\boldsymbol{\mathcal D}(t)$.
+
+\paragraph{Step 5: proof of (2).}
+At $\zeta=t$, we have $q_i=g_iw_i$, so $R(c_0)=\widehat R(\theta,q)=R_{\mathrm{ref}}(\theta)+A_R(\theta,w;t)$. By \cref{ch09:thm:sequential-density}, the integral with the factor $e^{-R(c_0)}$, divided by the integral without it, equals $e^{-R_{\mathrm{ref}}}\Xi_{J,R}(\theta;t)/\Xi_0(\theta;t)$, since the two integrals have the same partition function without insertion and the same classical, Haar density, determinant, and Gaussian prefactors. The negative logarithm of this ratio is $R_{\mathrm{ref}}+\mathcal D_JR(\theta;t)$, which proves (2). The radii and the constants $C_J,c_J$ were chosen before $p$, $\epsilon$, and $t$, which enter only through the conditions $p\ge p_0$ and $t\le c_J/[2(p^3+\epsilon p)]$.
+\end{proof}
+
+\begin{remark}\label{ch09:rem:order-of-choices}
+The constants of this section are chosen in the following order. We first fix $M$ and the larger domains of the classical and Haar disintegration charts. Next, we choose the radii and rates of one averaging step, in \cref{ch09:lem:local-calculus,ch09:lem:centered-white-coarea}; these do not depend on $J$. Then we fix $J$. For this $J$, we choose the domain $r_J$ of the compositions in \cref{ch09:thm:sequential-density}, the box scale $\mathscr L$, and the rate $b_1$, we reduce the coefficient radius, and we fix $C_J$, $\sigma_0$, and the thresholds in \eqref{ch09:eq:sequential-conditions}. Finally, $d_0$, $m$, $t$, and $p$ vary subject to the stated inequalities. In \cref{ch09:lem:marked-insertion}, the numbers $u,v,b$ and the larger product of holomorphy are fixed before $C_J$ and $c_J$, and $\epsilon$, $p$, and $t$ enter only through the final smallness conditions. This section does not close the recursion; \cref{ch10:chapter} shows that the hypothesis of \cref{ch09:lem:marked-insertion} is preserved from one renormalization group step to the next, at the same radii.
+\end{remark}

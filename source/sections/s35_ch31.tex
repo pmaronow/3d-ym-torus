@@ -1,0 +1,994 @@
+\chapter{Normal fluctuations near regular commuting holonomies}\label{ch31:chapter}
+
+This section studies the continuum measure $\lambda_\gamma$ of \cref{s2:thm:main} at weak coupling near a regular point of the space of flat connections, and proves \cref{s2:thm:regular}. We observe the holonomies $H=(H_1,H_2,H_3)$ of a trajectory at the fixed time $t=\theta L^2$ around the three coordinate cycles of $\Torus$, and their logarithms $X=\Log H\in\su^3\simeq\R^9$ in a fixed identity chart. Commuting triples correspond to the cone $\CommMan$. Away from the origin it is a five-dimensional manifold whose normal space $\NormalFiber y$ at $y$ has dimension four, and near a regular point we write $X=y+b$ with $y\in\CommMan$ and $b\in\NormalFiber y$. We prove three results. After localization to a fixed regular patch, the normalized normal component $\gamma^{-1/2}\NormalCov(y)^{-1/2}b$ is compared, in the weighted normal-bundle sense, with a standard Gaussian vector in $\NormalFiber y$ and the same $\gamma$-dependent tangential marginal, where $\NormalCov$ is the explicit covariance of \eqref{ch01:eq:normal-covariance} (\cref{ch31:thm:invariant-normal-bundle-gaussian}). The localized quadratic form $q_*/\gamma=b^{\mathsf T}\NormalCov(y)^{-1}b/(2\gamma)$ has the limit law with density $se^{-s}$ on $[0,\infty)$ (\cref{ch31:thm:inserted-chi-square-law}). The normalized regression residual variance $\SchurStat$ of \cref{s2:thm:regular} equals $2\gamma^2+o(\gamma^2)$ (\cref{ch31:thm:regular-toron-statistic}).
+
+The following heuristic explains the coefficient. If $z=\gamma^{-1/2}\NormalCov(y)^{-1/2}b$ were exactly a standard Gaussian vector in four dimensions, independent of $y$, then $q_*/\gamma=\abs z^2/2$ would have mean $2$, second moment $6$, and variance $2$. The observables of \cref{s2:thm:regular} are $\ObsB=\psi$ and $\ObsA=\psi q_*$, where $\psi=\psi_0(y)\chi(b)$ is a fixed tangential cutoff times a normal cutoff equal to one near $b=0$. Omitting the normal cutoff, we set $B=\psi_0(y)$ and $A=\gamma B\abs z^2/2$. If $z$ is standard Gaussian and independent of $y$, the best affine predictor of $A$ from $B$ is $2\gamma B$, with mean square error $2\gamma^2\E B^2$, and dividing by $\E B^2$ gives $2\gamma^2$. The proofs control the effect of the normal cutoff. The coefficient $2$ is a property of four-dimensional Gaussian vectors, and a conditional normal Gaussian measure with the same covariance reproduces it (\cref{ch31:lem:reference-comparisons}). The theorems show that the continuum measure has this Gaussian behavior in the normal directions, with the precise covariance $\gamma\NormalCov(y)$, while its tangential marginal is not identified and may depend on $\gamma$. For comparison, the same statistic vanishes for the Abelian Maxwell measure with Haar cycle holonomies, and it is a positive constant independent of $\gamma$ for Gaussian holonomies with independent Haar factors (\cref{ch31:lem:reference-comparisons}).
+
+Near a regular point the flat connections form a nondegenerate critical manifold of the action in the sense of Bott \cite{Bott1954CriticalManifolds}, and the $\sqrt\gamma$ scaling in the normal directions is the usual Laplace asymptotics transverse to such a manifold (see \cite{Wong2001AsymptoticIntegrals}). The uniform versions on the coarse lattice that we use are proved in \cref{ch27:chapter}. The treatment of zero-momentum contributions to Wilson loops in finite periodic volume by Coste, Gonz\'alez-Arroyo, Jurkiewicz, and Korthals Altes \cite{CosteEtAl1985ZeroMomentum} is a related antecedent; the observables, normalization, and regression functional used here are defined below.
+
+The proof works at a finite lattice cutoff, under the conditioned Wilson measure $\nu=\nu_{N,n,\gamma}$ with $N=nB^K$ and the coarse side $n$ fixed before $\gamma$ varies. It rests on two ideas. First, we compare with a Gaussian only finitely many scale variables: the coarse field and the normalized fluctuation variables of the first $m$ renormalization group steps, counted from the coarse side. Their joint law is close to a Gaussian law in a space of fixed dimension, with error of order $\sqrt\gamma\abs{\log\gamma}$ (\cref{ch31:lem:weighted-prefix-gaussian}). Second, the remaining steps are controlled directly at the scale $\sqrt\gamma$ by \cref{ch30:chapter}: \cref{ch30:thm:scaled-matrix-tail} compares the flowed holonomies of the fine configuration with those of the finite-scale reconstruction, and \cref{ch30:lem:flat-gaussian-response-tail} bounds the part of the Gaussian covariance coming from the omitted steps. The Gaussian covariance of all $K$ steps is exactly the normal covariance of the finest lattice (\cref{ch27:lem:terminal-gaussian-telescope}), which converges to $\NormalCov$ as $N\to\infty$ (\cref{ch27:thm:flowed-log-covariance}). The resulting normalized moment errors have the form
+\[
+ C\bigl(\delta_m^{1/2}+\delta_m+N^{-2}\bigr)+e_m(\gamma),\qquad e_m(\gamma)\to0\ \text{as }\gamma\downarrow0\text{ for each fixed }m,
+\]
+where $\delta_m\to0$ is a fixed geometric envelope and $C$ does not depend on $m$. We then let $K\to\infty$ at fixed $\gamma$ and $m$, after removing the conditioning with \cref{ch20:cor:payment-all-powers} and passing to the continuum with \cref{ch26:thm:tier-one}; then $\gamma\downarrow0$ at fixed $m$; and finally $m\to\infty$. The constant $C_m$ in the finite-dimensional comparison may be very large; this is harmless because $m$ is fixed before $\gamma\to0$. The other inputs are the conditional fluctuation kernels and their means (\cref{ch10:thm:complete-white-law,ch10:thm:actual-means-and-scores}), the reconstruction maps (\cref{ch12:thm:replacement-family}), the flat refinements (\cref{ch11:lem:flat-lifts}), the parameter derivatives of the Wilson flow (\cref{ch22:thm:real-flow-variations}), the Laplace estimates and the normalization on the coarse lattice (\cref{ch27:lem:terminal-gaussian-telescope,ch27:cor:weighted-tube-density,ch27:thm:sharp-normalizer}), and the trace coordinates and conditioning identities of \cref{ch02:lem:seven-traces,ch02:lem:bounded-transfer}.
+
+Besides \cref{s2:thm:regular}, two results of this section are used in \cref{ch32:chapter}: the uniform regularity of the finite-scale flowed holonomy map near every flat configuration, including the central triples (\cref{ch31:thm:prefix-regularity}), and the comparison measures (\cref{ch31:lem:gaussian-supremum,ch31:lem:reference-comparisons}).
+
+The three main theorems are stated in \cref{ch31:sec:results} and proved in \cref{ch31:sec:proof-statistic,ch31:sec:chi-square,ch31:sec:invariant-normal-bundle-addendum}, after the auxiliary results of \cref{ch31:sec:gaussian-comparison,ch31:sec:covariance,ch31:sec:localization,ch31:sec:transport}; the section ends with the comparison measures (\cref{ch31:sec:references}) and the proof of \cref{s2:thm:regular}.
+
+\section{Setting and main results}\label{ch31:sec:results}
+
+\paragraph{Fixed data.}
+Throughout this section we fix $L>0$, $\theta>0$, a horizon $T\ge\theta L^2$, an odd integer $M\ge3$, an integer $J\ge1$, $B=M^J$, a coupling ceiling $0<\gamma_0\le1$, and the construction parameters of \cref{ch30:def:paired-history}: the cutoff amplitude $A_{\rm w}$, the radii $r<\rho$, the reconstruction maps of \cref{ch12:thm:replacement-family}, the flow exponents $1/2<\alpflow<2/3$ and $\sigma_{\rm sm}$, and the contraction constant $a_{\rm map}$ with $a_{\rm map}\sqrt B<1$ and $\mathfrak q=Ba_{\rm map}^2<1$. All of these are chosen before $\gamma$ varies. We fix $n\in4\N$ satisfying the minimum-side conditions of \cref{ch30:def:paired-history}; in particular
+\[
+ 2\pi/n<r_{\rm flat}/4,
+\]
+where $r_{\rm flat}<r$ is the flat margin of \cref{ch11:lem:flat-lifts}. For $K\ge0$ we set $N=nB^K$, let $\nu=\nu_{N,n,\gamma}$ be the conditioned Wilson measure of \cref{ch01:def:selected-law}, and let $\mu=\mu_{N,\gamma}$ be the Wilson measure. The renormalization group steps of the hierarchy are indexed by $j=1,\dots,K$, counted from the coarse side: the $j$-th step relates the lattices of sides $nB^{j-1}$ and $nB^j$. We write $w_j=(w_{j,r,e})_{r,e}$ for the normalized fluctuation variables of the $j$-th step, indexed by its $J$ intermediate scales $r$ and the links $e$, and $g_{j,r}$ for the coupling at the intermediate scale $r$, so that $g_{j,r}^2/\gamma$ is the reciprocal of a fixed lattice side.
+
+Let $\mathcal H^K=(\mathcal H^K_i)_{i=1}^3$ be the triple of coordinate-cycle holonomies, based at the origin, of the Wilson-flowed fine configuration at time $\theta L^2$ (lattice time $4\theta L^2/a_N^2=4\theta N^2$), computed for the reconstructed configuration $\exp\widehat\theta_K$ of \cref{ch30:def:paired-history} in the gauge frame at the basepoint fixed by the reconstruction maps. We call $\mathcal H^K$ the flowed holonomy triple. For $0\le m\le K$ let $\Xi_m^K$ be the same triple for the finite-scale reconstruction $\exp\widehat\theta_K^0$, in which the coarse field and the normalized fluctuation variables of the first $m$ steps are those of the same sample and all normalized fluctuation variables of the steps after the $m$-th are set to zero. Both triples are random variables under $\nu$, defined in the same gauge frame at the basepoint, and both are flowed on the finest lattice.
+
+Finally, $\lambda_\gamma=\OrbitLaw$ denotes the continuum measure on the trajectory space associated with the sequence $nB^K$ (\cref{ch26:cor:common-ladder-family}); by \cref{ch26:thm:full-M-ladder} it is the measure $\lambda_{L,\gamma,[n]_M}$ of \cref{s2:thm:main}. For a trajectory $X\in\OrbitSpace$, the coordinate-cycle holonomies of $X(\theta L^2)$ are defined up to simultaneous conjugation, and so are the coordinates introduced below; all observables we evaluate are invariant under simultaneous conjugation.
+
+\paragraph{Constants.}
+Unless stated otherwise, constants $c,C$ and thresholds in this section have the dependence described in item (6) of \cref{ch01:conv:constants}. They may depend on $n$, $L$, $\theta$, $M$, $J$, the construction parameters, the horizon, the flow exponents, the loop lengths, and the patches, tubes, test functions, and extensions fixed below, but not on $K$, $N$, the preceding classical depths, the index $m$, or $\gamma$ below the relevant threshold. A subscript $m$, as in $C_m$ or $\gamma_m$, allows additional dependence on $m$ (through the first $m$ steps and their finite dimensions); constants without this subscript do not depend on $m$. Further subscripts indicate dependence on moment orders, powers of $\gamma$, or test functions.
+
+\paragraph{Regular coordinates.}
+In the fixed identity chart we write $X=(x_1,x_2,x_3)=\Log H\in\R^9$, identifying $\su$ with $\R^3$ so that the bracket becomes the cross product. The cone of commuting triples is
+\[
+ \CommMan=\{y=(\vartheta_1u,\vartheta_2u,\vartheta_3u):\Toron\in\R^3,\ u\in S^2\},\qquad(\Toron,u)\sim(-\Toron,-u).
+\]
+On the regular region $0<r_0\le\abs\Toron\le r_1<\pi$ it is a smooth five-dimensional manifold, parametrized by the three angles $\Toron$ and the direction $u$. Its normal space at $y=(\vartheta_iu)_i$ is
+\[
+ \NormalFiber y=\Bigl\{b=(b_1,b_2,b_3):\ b_i\perp u,\ \sum_i\vartheta_ib_i=0\Bigr\}.
+\]
+The conditions $b_i\perp u$ leave six dimensions, and the relation $\sum_i\vartheta_ib_i=0$ removes two of them, which gives $\dim\NormalFiber y=4$. Simultaneous conjugation $H_i\mapsto gH_ig^{-1}$ acts on $\R^9$ by the same rotation $\Ad(g)$ in each component; it preserves $\CommMan$ and maps $\NormalFiber y$ isometrically onto $\NormalFiber{\Ad(g)y}$. Two of the five tangential directions of $\CommMan$ are orbits of this action, which is not removed by fixing a gauge at the basepoint.
+
+We write $\Pi_{\Toron}=I-\Toron\Toron^{\mathsf T}/\abs\Toron^2$ and let $\NormalCov(y)$ be the positive definite matrix on $\NormalFiber y$ defined in \eqref{ch01:eq:normal-covariance}. By \cref{ch27:thm:flowed-log-covariance}, $\gamma\NormalCov(y)$ is the covariance of the linearized flowed cycle logarithms, projected to $\NormalFiber y$, under the Gaussian measure of the Maxwell quadratic form around the flat connection with holonomy logarithms $y$. It does not depend on $\gamma$, depends smoothly on $y$, is equivariant under simultaneous conjugation, and satisfies $cI\le\NormalCov\le CI$ on the regular region. For comparisons of vectors in $\R^9$ we extend the inverse covariance to the ambient matrix $P_{\NormalFiber y}\NormalCov(y)^{-1}P_{\NormalFiber y}$, which is smooth on the regular region and has the same quadratic form on $\NormalFiber y$. Normal matrices are expressed in smooth orthonormal frames of a finite bundle atlas.
+
+For a positive semidefinite matrix $\Sigma$ we write $G_\Sigma$ for a centered Gaussian vector with covariance $\Sigma$, realized as a linear image of a standard Gaussian vector, so that $\Sigma$ may be singular. We write $G_d$ for a standard Gaussian vector in a $d$-dimensional Euclidean space and $\Gamma_y$ for the standard Gaussian measure on $\NormalFiber y$. For a bounded Lipschitz function $f$ we write $\norm f_{\rm BL}=\norm f_\infty+\Lip f$. Its dual distance is not the bounded-Lipschitz distance of \cref{ch01:sec:constants}, which uses the maximum of the two terms, but differs from it by at most a factor two.
+
+\begin{definition}\label{ch31:def:regular-observables}
+Fix compact regular patches $\mathsf P\subset\mathsf P^+\subset\mathsf P^{++}$ in $\CommMan\cap\{r_0\le\abs\Toron\le r_1\}$, invariant under simultaneous conjugation, each with nonempty relative interior and contained in the relative interior of the next, and radii $0<b_{\rm o}<b^+<b^{++}$. Put
+\[
+ \mathcal U=\{y+b:\ y\in\mathsf P,\ b\in\NormalFiber y,\ \abs b<b_{\rm o}\},
+\]
+and define $\mathcal U^+$ and $\mathcal U^{++}$ in the same way with $(\mathsf P^+,b^+)$ and $(\mathsf P^{++},b^{++})$. The radius $b^{++}$ is so small that $X=y+b$ are unique coordinates on $\mathcal U^{++}$ and that the closure of $\mathcal U^{++}$ lies in the identity chart at positive distance from its boundary. The following objects are fixed once, before $\gamma$ varies.
+\begin{enumerate}
+\item On the whole tube $\mathcal U^{++}$ put
+\[
+ q_*(y+b)=\frac12\,b^{\mathsf T}\NormalCov(y)^{-1}b .
+\]
+Outside $\mathcal U^{++}$, $q_*$ is a fixed bounded continuous nonnegative function, invariant under simultaneous conjugation; on $\SU^3$ it is evaluated through $X=\Log H$ and extended outside the identity chart by the same bounded function.
+\item Let $\psi_0:\mathsf P\to[0,1]$ be smooth and invariant, with compact support in the relative interior of $\mathsf P$, and suppose that there exist nonempty open subsets $O_0,O_+$ of $\mathsf P$, invariant under simultaneous conjugation, and $b_*>0$ with $\psi_0=0$ on $O_0$ and $\psi_0\ge2b_*$ on $O_+$. Let $\chi$ be a fixed smooth invariant normal cutoff with $0\le\chi\le1$, equal to one near the zero section and supported in $\{\abs b<b_{\rm o}\}$; it is a smooth function on the normal bundle. Put $\psi(y+b)=\psi_0(y)\chi(b)$ on $\mathcal U$ and $\psi=0$ elsewhere.
+\item Put $\ObsB=\psi$ and $\ObsA=\psi q_*$, regarded as functions on $\SU^3$ through $X=\Log H$ and extended by zero outside the identity chart.
+\item A localizing weight is a function $\widetilde w(y+b)=w(y)\chi_w(b)$, extended by zero outside $\mathcal U$, where $w\ge0$ is smooth and invariant with compact support in the relative interior of $\mathsf P$, and $0\le\chi_w\le1$ is smooth, invariant, equal to one near $b=0$, and supported in $\{\abs b<b_{\rm o}\}$.
+\end{enumerate}
+For a probability measure $P$ and bounded real random variables $A,B$ with $\E_PB^2>0$ and $\Var_PB>0$, define
+\begin{equation}\label{ch31:eq:statistic}
+ \mathscr C(P;A,B)=\frac{\Var_PA-\Cov_P(A,B)^2/\Var_PB}{\E_PB^2},
+\end{equation}
+and set $\SchurStat=\mathscr C(\lambda_\gamma;\ObsA,\ObsB)$, with $\ObsA,\ObsB$ evaluated at the coordinate-cycle holonomies of $X(\theta L^2)$.
+\end{definition}
+
+Every localizing weight, $\psi$, and $\psi^2$ are supported in $\mathcal U\subset\mathcal U^{++}$, so the products $\widetilde wq_*^l$, $\psi q_*^l$, and $\psi^2q_*^l$ involve only the exact quadratic form $b^{\mathsf T}\NormalCov(y)^{-1}b/2$, which is nonnegative. The extension of $q_*$ outside $\mathcal U^{++}$ plays no role in any of the results. All further patches and tubes used in the proofs (the coarse tubes, the output tubes, and the auxiliary tubes) are chosen before $\gamma$ varies, nested and with positive margins, between $\mathcal U$ and $\mathcal U^{++}$ (respectively over patches contained in $\mathsf P^{++}$). By \cref{ch31:lem:regression} below, $\mathscr C(P;A,B)$ is the minimal mean square error of an affine predictor of $A$ from $B$, divided by $\E_PB^2$.
+
+\paragraph{The envelope $\delta_m$.}
+We fix $c,\epsilon>0$ such that
+\[
+ \delta_m=(1+m)^cB^{-\epsilon m},\qquad m\ge0,
+\]
+dominates the envelopes in \cref{ch30:thm:scaled-matrix-tail,ch30:lem:flat-gaussian-response-tail}, which have the same form. Then $\sup_m\delta_m<\infty$ and $\delta_m\to0$ as $m\to\infty$. This choice does not change the dependence of any constant on $m$.
+
+\paragraph{Main results.}
+
+\begin{theorem}\label{ch31:thm:regular-toron-statistic}
+Evaluate $\ObsA=\psi q_*$ and $\ObsB=\psi$ at the coordinate-cycle holonomies of $X(\theta L^2)$. These are bounded continuous functions of the seven normalized traces of \cref{ch02:lem:seven-traces}, and they do not depend on $\gamma$. There exists $c>0$ such that, for all sufficiently small $\gamma>0$,
+\[
+ \E_{\lambda_\gamma}\ObsB^2\ge c,\qquad\Var_{\lambda_\gamma}\ObsB\ge c.
+\]
+For $f=\psi$ and $f=\psi^2$,
+\[
+ \E_{\lambda_\gamma}[fq_*]=2\gamma\,\E_{\lambda_\gamma}f+o(\gamma),\qquad
+ \E_{\lambda_\gamma}[fq_*^2]=6\gamma^2\,\E_{\lambda_\gamma}f+o(\gamma^2),
+\]
+and the normalized regression residual variance satisfies
+\[
+ \SchurStat=2\gamma^2+o(\gamma^2)\qquad(\gamma\downarrow0).
+\]
+Further, there exists $C$ such that for every fixed $m\ge0$,
+\[
+ \limsup_{\gamma\downarrow0}\Bigl\lvert\frac{\SchurStat}{\gamma^2}-2\Bigr\rvert\le C\bigl(\delta_m^{1/2}+\delta_m\bigr),
+\]
+and the right side tends to zero as $m\to\infty$.
+\end{theorem}
+
+\begin{theorem}\label{ch31:thm:inserted-chi-square-law}
+Let $\widetilde w=w\chi_w$ be a localizing weight with $w$ not identically zero, evaluated at the coordinate-cycle holonomies of $X(\theta L^2)$. There exist $c_w,\gamma_w>0$ such that $D_\gamma=\E_{\lambda_\gamma}\widetilde w\ge c_w$ for $0<\gamma\le\gamma_w$. For such $\gamma$ define the probability measure
+\[
+ \pi_\gamma(A)=\frac{\E_{\lambda_\gamma}\bigl[\widetilde w\,\one_{\{q_*/\gamma\in A\}}\bigr]}{\E_{\lambda_\gamma}\widetilde w},\qquad A\subset[0,\infty)\text{ Borel}.
+\]
+As $\gamma\downarrow0$, $\pi_\gamma$ converges weakly to the law of $\abs{G_4}^2/2$, which has density $se^{-s}$ on $[0,\infty)$. Equivalently, for every bounded continuous $f:[0,\infty)\to\R$,
+\[
+ \frac{\E_{\lambda_\gamma}[\widetilde w\,f(q_*/\gamma)]}{\E_{\lambda_\gamma}\widetilde w}\longrightarrow\E f(\abs{G_4}^2/2)=\int_0^\infty f(s)\,se^{-s}\,ds.
+\]
+Further, there exist $C_w$, independent of $m$, and for each fixed $m\ge0$ a function $e_{m,w}$ with $e_{m,w}(\gamma)\to0$ as $\gamma\downarrow0$, such that for every bounded Lipschitz $f$ and all sufficiently small $\gamma$, depending on $m$,
+\[
+ \Bigl\lvert\int f\,d\pi_\gamma-\E f(\abs{G_4}^2/2)\Bigr\rvert\le\norm f_{\rm BL}\bigl[C_w(\delta_m^{1/2}+\delta_m)+e_{m,w}(\gamma)\bigr].
+\]
+\end{theorem}
+
+Since $q_*\ge0$ on the support of $\widetilde w$, the measure $\pi_\gamma$ is a probability measure on $[0,\infty)$.
+
+\begin{theorem}\label{ch31:thm:invariant-normal-bundle-gaussian}
+Let $\widetilde w$, $D_\gamma$, $c_w$, and $\gamma_w$ be as in \cref{ch31:thm:inserted-chi-square-law}. On $\{\widetilde w\ne0\}$ write the logarithm of the coordinate-cycle holonomy triple of $X(\theta L^2)$ as $y_\gamma+b_\gamma$ and set
+\[
+ z_\gamma=\gamma^{-1/2}\NormalCov(y_\gamma)^{-1/2}b_\gamma\in\NormalFiber{y_\gamma},
+\]
+where $\NormalCov(y)^{-1/2}$ is the positive inverse square root on $\NormalFiber y$. These coordinates are defined up to simultaneous conjugation, and any representative may be used in the invariant expressions below. Let $\mathsf P'\subset\mathsf P^{++}$ be a compact invariant regular patch containing the support of $w$ in its relative interior. For a bounded continuous function $F$ on the normal bundle $\{(y,z):y\in\mathsf P',\ z\in\NormalFiber y\}\subset\R^9\times\R^9$, invariant under $(y,z)\mapsto(\Ad(g)y,\Ad(g)z)$ for $g\in\SU$, put
+\[
+ \overline F(y)=\int_{\NormalFiber y}F(y,z)\,\Gamma_y(dz).
+\]
+Products with $\widetilde w$ are defined to be zero where $\widetilde w=0$. Then
+\begin{equation}\label{ch31:eq:invariant-normal-bundle-comparison}
+ \frac{\E_{\lambda_\gamma}[\widetilde w\,F(y_\gamma,z_\gamma)]-\E_{\lambda_\gamma}[\widetilde w\,\overline F(y_\gamma)]}{D_\gamma}\longrightarrow0\qquad(\gamma\downarrow0).
+\end{equation}
+Let $\mathsf P'_{\rm orb}=\mathsf P'/\Ad(\SU)$, with its quotient Borel $\sigma$-algebra, and write $[y]$ for the class of $y$. The tangential marginal of the localized measure is the probability measure
+\[
+ \rho_\gamma(A)=D_\gamma^{-1}\,\E_{\lambda_\gamma}\bigl[\widetilde w\,\one_{\{[y_\gamma]\in A\}}\bigr],\qquad A\subset\mathsf P'_{\rm orb}\text{ Borel},
+\]
+the function $\overline F(y)$ depends only on $[y]$, and
+\[
+ D_\gamma^{-1}\,\E_{\lambda_\gamma}[\widetilde w\,\overline F(y_\gamma)]=\int_{\mathsf P'_{\rm orb}}\overline F(y)\,\rho_\gamma(d[y]).
+\]
+If $F$ is bounded Lipschitz for the Euclidean distance of $\R^9\times\R^9$, then the absolute value of the left side of \eqref{ch31:eq:invariant-normal-bundle-comparison} is at most
+\begin{equation}\label{ch31:eq:normal-bundle-ordered-error}
+ \norm F_{\rm BL}\bigl[C_w(\delta_m^{1/2}+\delta_m)+e_{m,w}(\gamma)\bigr]
+\end{equation}
+for every sufficiently large fixed $m$ and all sufficiently small $\gamma$, depending on $m$, where $C_w$ does not depend on $m$ or $F$, and $e_{m,w}(\gamma)\to0$ as $\gamma\downarrow0$ for each fixed $m$.
+\end{theorem}
+
+\begin{remark}\label{ch31:rem:scope}
+In the three theorems the continuum limit is taken first, at fixed $\gamma$. The proofs take the limits in the order $K\to\infty$ at fixed $\gamma$ and $m$, then $\gamma\downarrow0$ at fixed $m$, then $m\to\infty$. Only bounded observables, not divided by powers of $\gamma$, are compared between $\nu$ and $\mu$, and no rate of convergence uniform in $\gamma$ is used or asserted. The tangential marginal $\rho_\gamma$ is not identified: \cref{ch31:thm:invariant-normal-bundle-gaussian} states that the normal fluctuations are Gaussian over this marginal, not that the pair $(y_\gamma,z_\gamma)$ converges to a fixed limit law. Finally, \cref{ch31:thm:regular-toron-statistic} identifies no corrections to the coefficient $2$, which is the coefficient of a four-dimensional Gaussian vector and is reproduced by the conditional normal Gaussian measure of \cref{ch31:lem:reference-comparisons}(4).
+\end{remark}
+
+\begin{remark}\label{ch31:rem:nonradial}
+\Cref{ch31:thm:invariant-normal-bundle-gaussian} contains more information than the law of $\abs{z_\gamma}^2/2=q_*/\gamma$. For example,
+\[
+ F(y,z)=\frac{\abs{z_1}^2-\abs{z_2}^2}{1+\abs z^2}
+\]
+is bounded, Lipschitz, and invariant, and it requires no choice of a color frame. At $y=(0,0,ru)$ with $r_0<r<r_1$, its values at $(z_1,z_2,z_3)=(sv,0,0)$ and at $(0,sv,0)$, with $v\perp u$, are opposite, although the two points have the same radius. In general, writing $R=\abs{G_4}$ and $\Pi=\Pi_{\Toron}$,
+\[
+ \overline F(y)=\frac{\Pi_{11}-\Pi_{22}}2\,\E\frac{R^2}{1+R^2}.
+\]
+Indeed, $\NormalFiber y=\Toron^\perp\otimes u^\perp$, so the quadratic form $b\mapsto\abs{b_i}^2$ has trace $2\Pi_{ii}$ on the four-dimensional space $\NormalFiber y$, and the conditional second moment of $\abs{z_i}^2$ given $\abs z=R$ under $\Gamma_y$ is $R^2\Pi_{ii}/2$. In the theorem, both $\overline F$ and the normalization of $b_\gamma$ are evaluated at $y_\gamma$, and the normalization is by $D_\gamma$.
+\end{remark}
+
+\section{The coarse marginal and the finite-dimensional Gaussian comparison}\label{ch31:sec:gaussian-comparison}
+
+\begin{definition}\label{ch31:def:normal-response-rows}
+Let $\widehat\nu=(T_M^{JK})_\#\nu$ be the law of the coarse field $V=T_M^{JK}U$ under $\nu$. It has the density
+\[
+ d\widehat\nu=\widehat Z^{-1}\one_{D_r}\,e^{-nE_{JK,\mathrm{sat}}/\gamma-\overline R_{K,\gamma}}\,dH_n,\qquad
+ \overline R_{K,\gamma}=R_{K,\gamma}-R_{K,\gamma}(I),
+\]
+where $E_{JK,\mathrm{sat}}$ is the gauge-invariant extension of the effective classical action $E_{JK}$ from $B_r$ to $D_r$ of \cref{ch08:thm:compact-overlap} (that is, $E_{JK,\mathrm{sat}}(U)=E_{JK}(U^k)$ whenever $U^k\in B_r$), $R_{K,\gamma}$ is the effective interaction after $K$ renormalization group steps, of classical depth $JK$, $\overline R_{K,\gamma}$ is the centered effective interaction, and $\widehat Z$ is the normalizing constant of this density; it is the normalizing constant of \cref{ch27:thm:sharp-normalizer}.
+
+Near the flat configurations of $\Conf n$ whose holonomy logarithms lie in $\mathsf P^{++}$ we use the finite normal atlas $V=V(y,v)$ of \cref{ch27:lem:terminal-gaussian-telescope}. Here $y\in\CommMan$ is the logarithm of the holonomy triple of the flat configuration $V(y,0)$, and $v$ is a normal variable of dimension
+\[
+ d_{\rm reg}=6n^3-2,
+\]
+whereas $\dim\NormalFiber y=4$. A coarse regular tube is a set $\{V(y,v):y\in\mathsf P_{\rm c},\ \abs v\le\varepsilon_{\rm c}\}$, where $\mathsf P_{\rm c}\subset\mathsf P^{++}$ is a compact invariant regular patch and $\varepsilon_{\rm c}>0$ is fixed. Put
+\[
+ H_K(y)=D_v^2(nE_{JK})(V(y,0)),\qquad z_0=\gamma^{-1/2}H_K(y)^{1/2}v.
+\]
+Let $\mathscr H_K$ denote the triple of coordinate-cycle holonomies of the Wilson-flowed fine configuration at time $\theta L^2$, regarded as a function of the coarse coordinates $(y,v)$ and of all normalized fluctuation variables $(w_1,\dots,w_K)$. Evaluate derivatives at the zero-fluctuation reconstruction of the flat coarse field $V(y,0)$, that is, at the sequence of flat refinements of $V(y,0)$ obtained with $w=0$. Let $T_{0,K}$ be the derivative in $v$ of $P_{\NormalFiber y}(\Log\circ\mathscr H_K)$ there, and define
+\[
+ A_{0,K}=T_{0,K}H_K^{-1/2},\qquad
+ A_{j,K}=\gamma^{-1/2}P_{\NormalFiber y}D_{w_j}(\Log\circ\mathscr H_K)\big|_{\rm flat},\qquad1\le j\le K.
+\]
+The Hessian normalization of each step at the flat background and the factors $g_{j,r}/\sqrt\gamma$ are included in $A_{j,K}$, exactly once. These deterministic matrices do not depend on $\gamma$. Put
+\[
+ \Sigma_m^K(y)=A_{0,K}A_{0,K}^{\mathsf T}+\sum_{j=1}^mA_{j,K}A_{j,K}^{\mathsf T},\qquad0\le m\le K.
+\]
+\end{definition}
+
+The matrix $\Sigma_m^K(y)$ is the covariance of the image, under the linearized normal response, of independent standard Gaussian vectors placed in the coarse normal variable and in the first $m$ steps. We call the matrices $A_{j,K}$ the linear response matrices. On a sample, $\mathscr H_K$ takes the value $\mathcal H^K$, the flowed holonomy triple of \cref{ch30:def:paired-history}, in the same gauge frame at the basepoint. In the notation of \cref{ch27:lem:terminal-gaussian-telescope}, $H_K=H_K^{\mathrm{act}}$, the Hessian of the action phase $nE_{JK}$. For $j\ge1$ the matrices $A_{j,K}$ coincide with the matrices $\mathsf A_{j,K}$ of \cref{ch30:lem:flat-gaussian-response-tail}, as shown in the proof of \cref{ch31:thm:normal-covariance-calibration}.
+
+\paragraph{Hypotheses of the earlier results.}
+We record how the hypotheses of the results used below are met. None of these choices changes as $\gamma$ varies.
+
+\emph{Flat refinements.} Since $2\pi/n<r_{\rm flat}/4$ and $r_{\rm flat}<r$ lies below every fixed margin of the constrained minimizers, of the inverse of the block averaging constraint, of the Haar disintegration densities, and of the gauge charts, every flat coarse field has a commuting representative with link logarithms of norm at most $2\pi/n$. By \cref{ch11:lem:flat-lifts}, its zero-fluctuation reconstruction is the sequence of flat refinements, and it lies inside all these coordinate domains with a positive margin at every depth. On the fixed coarse lattice the compact set of flat configurations has a neighborhood in $D_r$ independent of the depth and of $\gamma$. This verifies the geometric hypothesis in every application of \cref{ch27:lem:terminal-gaussian-telescope} below.
+
+\emph{The coarse normal atlas.} The dimension in the Laplace integral on the coarse lattice is $d_{\rm reg}=\mathfrak d_n=6n^3-2$, the regular normal rank of \cref{ch27:lem:terminal-gaussian-telescope}, not four, and $d_{\rm reg}/2=3n^3-1$. We take the finite normal atlas on relatively compact smooth subcharts, in rooted spanning-tree gauge coordinates, whose charts and gauge transformations extend smoothly to neighborhoods of their closures. Their representatives and the closed normal tubes lie strictly inside the outer ball $B_\rho$, hence inside $B_{(1-\eta)\rho}$ for a fixed $0<\eta<1$, and all chart and gauge jets are bounded on these closures. We use the derivative bounds for the amplitude of the coarse density only on these subcharts; their constants may depend on $n$, $\eta$, the chart and gauge jets, and the outer domains, but not on the depth or on $\gamma$. In this atlas the density of $\widehat\nu$ is
+\[
+ \widehat Z^{-1}a_{K,\gamma}(y,v)\,e^{-nE_{JK}(V(y,v))/\gamma}\,dy\,dv,\qquad a_{K,\gamma}=e^{-\overline R_{K,\gamma}}\,J(y,v),
+\]
+where $J$ is the density of the product Haar measure in these coordinates, including the partition of unity of the atlas. On each compact subpatch, before the partition is applied, $a_{K,\gamma}$ is bounded above and below by positive constants and is uniformly Lipschitz in $v$. These are hypotheses of the coarse family of \cref{ch27:lem:terminal-gaussian-telescope}, which also has $nE_{JK,\mathrm{sat}}\ge\kappa_nE_0$ on its support and $\abs{\overline R_{K,\gamma}}\le C_n$. The phase and amplitude are smooth in the fixed charts, and the derivative bounds on the effective interaction in that family imply the amplitude bounds uniformly in the depth and in $\gamma$. In particular all phase, amplitude, and cutoff data are jointly Borel, $H_K$ is measurable, and the phase is coercive on each chosen cutoff support. These facts verify the measurability, spectral, Lipschitz, and coercivity hypotheses of \cref{ch27:lem:uniform-tube-laplace}, on which the coarse Laplace formula rests. The partition of the atlas is absorbed into the measurable tangential weights, after the positive bounds on the amplitude have been used.
+
+\emph{Coordinate domains of the reconstruction.} Every coarse field in the support of $\widehat\nu$ has a representative in $B_r$; the reconstruction maps take values in the inner coordinate domain, and the larger complex images lie inside $B_{\rho/2}$. The products of coarse and free coordinates lie strictly inside the nested domains $\mathscr D_{\rm in}\Subset\mathscr D_{\rm mid}\Subset\mathscr D_{\rm out}$ of \cref{ch12:thm:replacement-family}, and every intervening constrained minimizer, inverse, logarithm, and Haar disintegration density is defined there. In terms of majorizing series, the radius of the coarse field plus the fixed radius of the free coordinates lies strictly below the radius of the outer domain and below the radius of convergence of the series. These are the hypotheses of \cref{ch12:thm:replacement-family} on the images of the reconstruction maps; no auxiliary integral is evaluated outside $B_r$.
+
+\emph{Couplings and cutoffs.} Let $t_*>0$ be the common coupling ceiling in \cref{ch10:thm:complete-white-law,ch10:thm:actual-means-and-scores}. At the $j$-th step we set
+\begin{equation}\label{ch31:eq:common-kernel-gate}
+ t_j=M^{(J-1)/2}\sqrt{\gamma/(nB^j)},\qquad p_j=A_{\rm w}\log(1/t_j),\qquad t_1^2=\gamma/(Mn).
+\end{equation}
+We keep the ceiling $\gamma_0$ for the bound on the small-field failure probability and for the continuum limit theorem. At the fixed side $n$ we fix a threshold
+\begin{equation}\label{ch31:eq:weak-coupling-threshold}
+ 0<\gamma_W(n)\le\gamma_0,
+\end{equation}
+and all estimates below are restricted to $0<\gamma\le\gamma_W(n)$. The threshold may depend on $n$ and the fixed data, but not on $K$, $m$, or $\gamma$. It is so small that $t_1\le t_*$, $p_1\ge1$, $Ct_jp_j\le1/2$, and the Hessian bound of \cref{ch10:thm:complete-white-law} and the smallness condition on $t_jp_j^3$ of \cref{ch10:thm:actual-means-and-scores} hold for every $j\ge1$. One choice serves all $j$: we have $t_j\le t_1$, and each function $t^a\log^b(1/t)$ needed here is increasing on a sufficiently small fixed interval, since its derivative has the sign of $a\log(1/t)-b$. We also require that $t_1p_1$ fit within the fixed margin of the coordinate domains for the free coordinates. No radius, cutoff, reconstruction threshold, or side changes as $\gamma$ varies. Later reductions of the threshold concern only $\gamma_W(n)$, and every threshold $\gamma_m$ below is taken at most $\gamma_W(n)$. The reconstruction maps preserve the conditional potential, the product of cutoff balls, the normalized conditional kernels, and the coarse field. In particular, the two theorems of \cref{ch10:chapter} quoted above apply to every conditional kernel in this section, uniformly in the coarse field, the side, and the preceding depth. We write $E$ for their common bound $E_*$ on the effective interaction.
+
+\emph{Disintegration.} At finite $K$ we have the backward disintegration
+\begin{equation}\label{ch31:eq:product-disintegration}
+ d\nu=d\widehat\nu(V)\prod_{j=1}^Kk_j(V,w_1,\dots,w_{j-1};dw_j),
+\end{equation}
+where $k_j$ is the conditional fluctuation kernel of the $j$-th step, given the coarse field and the earlier steps. Restricting $\nu$ to an event depending only on the coarse field multiplies the first factor by an indicator and leaves the kernels $k_j$ unchanged. Each $k_j$ still integrates to one, including its Haar disintegration density, its determinant, and the input effective interaction in its potential. Conditioning further on $y$ changes the conditional law of $v$ in the first factor and leaves the same finer kernels. All conditional statements are understood for a version defined for almost every $y$; their uniform bounds hold on the whole compact patch wherever that version is defined by the displayed smooth densities.
+
+\begin{lemma}\label{ch31:lem:weighted-prefix-gaussian}
+Use \cref{ch31:def:normal-response-rows}, the disintegration \eqref{ch31:eq:product-disintegration}, and a fixed coarse regular tube, and condition on the coarse tangential coordinate $y$. For every fixed $m\ge0$ there exists $\gamma_m>0$ such that the following holds uniformly in $K\ge m$ and $0<\gamma\le\gamma_m$. Let $\mathcal F_{j-1}$ be the $\sigma$-algebra generated by the coarse field and the normalized fluctuation variables of the first $j-1$ steps, let $\bar w_j=\E(w_j\mid\mathcal F_{j-1})$ be the conditional mean under the conditional fluctuation kernel $k_j$, and put
+\[
+ Z_{K,m}=A_{0,K}(y)z_0+\sum_{j=1}^mA_{j,K}(y)(w_j-\bar w_j).
+\]
+For every fixed $s\ge0$ and every jointly Borel family of real functions $F_y$ on $\NormalFiber y$ with $\abs{F_y(z)}\le C_F(1+\abs z^s)$ in the finite smooth bundle atlas,
+\[
+ \bigl\lvert\E[F_y(Z_{K,m})\mid y]-\E F_y(G_{\Sigma_m^K(y)})\bigr\rvert\le C_{m,s}C_F\sqrt\gamma\,(1+\abs{\log\gamma}).
+\]
+All fixed moments of $Z_{K,m}$ and of its partial sums are bounded by constants $C_{m,s}$. More strongly, the same polynomially weighted comparison holds for the joint vector $(z_0,w_1-\bar w_1,\dots,w_m-\bar w_m)$ against a standard Gaussian vector of the same fixed finite dimension. The restriction to the coarse tube changes only the first factor of \eqref{ch31:eq:product-disintegration}; no conditional kernel and no nonlinear reconstruction is evaluated at a Gaussian argument.
+\end{lemma}
+
+\begin{proof}
+We first bound each conditional kernel and the probability that its variables come close to the boundary of the cutoff product (Steps 1 and 2). We then control the linear term of the conditional potential (Step 3), compare each conditional density with a Gaussian density in a weighted norm (Step 4), and treat the coarse variable (Step 5). Finally, a telescoping argument replaces the variables one at a time by Gaussian variables (Step 6), and we pass to the linear image (Step 7).
+
+\paragraph{Step 1: the conditional kernels.}
+Fix the coarse field and the first $j-1$ steps in the coordinate domains. By \cref{ch10:thm:complete-white-law}, whose conclusions are preserved by \cref{ch12:thm:replacement-family}, the kernel $k_j$ on the product $\Omega_j\subset\R^{D_j}$ of cutoff balls satisfies
+\[
+ \begin{gathered}
+ k_j(dw)=Z_j^{-1}\one_{\Omega_j}e^{-V_j(w)}\,dw,\qquad\norm{D^2V_j-I}\le\epsilon_j,\\
+ \Var F\le2\E\abs{\nabla F}^2,\qquad\Ent(F^2)\le4\E\abs{\nabla F}^2,
+ \end{gathered}
+\]
+where $\epsilon_j\le C\{t_jp_j+t_j^2(1+E)\}$ under the condition $Ct_jp_j<1/2$, with $t_j,p_j$ as in \eqref{ch31:eq:common-kernel-gate}, and $D_j\le9J(nB^j)^3$. By \cref{ch10:thm:actual-means-and-scores}, the conditional mean satisfies
+\begin{equation}\label{ch31:eq:actual-white-mean}
+ \norm{\bar w_j}_\infty\le Ct_j\norm{\widehat\theta_{j-1}}_\infty\le Ct_jr,
+\end{equation}
+where $\widehat\theta_{j-1}$ is the logarithm of the reconstructed field after $j-1$ steps. For $j\le m$ the dimension $D_j$ is fixed, and we have $\abs{\bar w_j}\le C_m\sqrt\gamma$ and $\epsilon_j\le C_m\sqrt\gamma(1+\abs{\log\gamma})$. These bounds are uniform over all earlier variables in the coordinate domains and over $K$.
+
+\paragraph{Step 2: concentration and an interior cutoff.}
+Let $f$ be a $1$-Lipschitz function of $w$, and let $\Lambda(\lambda)=\log\E e^{\lambda(f-\E f)}$. Inserting $e^{\lambda f/2}$ into the logarithmic Sobolev inequality, we find $\lambda\Lambda'-\Lambda\le\lambda^2$, which implies $\Lambda(\lambda)\le\lambda^2$. Applying this also to $-f$ and choosing $\lambda=u/2$ in Markov's inequality, we obtain $\Prob\{\abs{f-\E f}\ge u\}\le2e^{-u^2/4}$; this is the Herbst argument (see \cite[Section~2.3]{Ledoux1999}). Lipschitz functions are covered by smooth approximation on the compact product. Since $t_j=c_{n,M,J}\sqrt\gamma B^{-j/2}$ and $p_j=A_{\rm w}\log(1/t_j)$, we may decrease $\gamma_m$ so that $Ct_jr\le p_j/(4\sqrt3)$ and $p_j\ge1$ for $j\le m$. If a three-dimensional block $w_a$ has $\abs{w_a}\ge p_j/2$, then one of its scalar coordinates deviates from its conditional mean by at least $p_j/(4\sqrt3)$. A union bound over the scalar coordinates yields
+\[
+ \Prob\Bigl\{\max_a\abs{w_a}\ge p_j/2\Bigr\}\le2D_je^{-p_j^2/192}.
+\]
+Let $0\le\chi\le1$ be the product radial cutoff equal to one on the balls of half the cutoff radius and zero outside the balls of three quarters of it. Then $\chi\in C_c^\infty(\Omega_j)$, $\abs{\nabla\chi}\le C\sqrt{D_j}/p_j$, and $q_j^{\rm cut}=\Prob(\chi<1)\le CD_je^{-cp_j^2}$. At fixed $m$ we have $p_j\ge c\abs{\log\gamma}-C_m$. This implies that $q_j^{\rm cut}$ and the standard Gaussian mass outside $\Omega_j$ are $O_{m,q}(\gamma^q)$ for every fixed $q>0$; polynomially weighted Gaussian tails have the same property, with the fixed moment order in the constant. Decreasing $\gamma_m$ further, we may assume $q_j^{\rm cut}\le1/2$, $\abs{\bar w_j}\le1$, and $\epsilon_j\le1/4$ for $j\le m$.
+
+\paragraph{Step 3: the linear term.}
+We write $D=D_j$, $\mu=\bar w_j$, $\epsilon=\epsilon_j$, and
+\[
+ \begin{gathered}
+ V_j(w)-V_j(0)=\abs w^2/2+\ell\cdot w+R(w),\qquad\ell=\nabla V_j(0),\\
+ \abs{\nabla R(w)}\le\epsilon\abs w,\qquad\abs{R(w)}\le\epsilon\abs w^2/2.
+ \end{gathered}
+\]
+The bounds on $R$ follow from Taylor's formula along radial segments, since the product is convex and contains zero. Applying the Poincar\'e inequality to each coordinate, we have $\E\abs w^2\le2D+\abs\mu^2$. Integrating $\nabla(\chi e^{-V_j})$ over $\Omega_j$, which gives zero because $\chi$ has compact support in the interior, even at the corners of the product, we obtain
+\begin{equation}\label{ch31:eq:density-interior-score}
+ \ell\,\E\chi=\E\nabla\chi-\mu+\E[(1-\chi)w]-\E[\chi\nabla R(w)].
+\end{equation}
+Since $\nabla\chi$ is supported on $\{\chi<1\}$, we have $\abs{\E\nabla\chi}\le C\sqrt D\,q_j^{\rm cut}/p_j$. By the Cauchy--Schwarz inequality, $\abs{\E[(1-\chi)w]}\le\sqrt{q_j^{\rm cut}}(\E\abs w^2)^{1/2}$, and $\abs{\E[\chi\nabla R(w)]}\le\epsilon(\E\abs w^2)^{1/2}$. Since $\E\chi\ge1/2$, we obtain
+\[
+ \abs\ell\le C_m\bigl\{\sqrt\gamma+\epsilon+\sqrt{q_j^{\rm cut}}\bigr\}\le C_m\sqrt\gamma(1+\abs{\log\gamma}).
+\]
+Here we used the bound on the conditional mean $\mu$ from Step 1, not that $\mu$ vanishes. A bound on $D^2V_j-I$ alone would not control the linear coefficient $\ell$.
+
+\paragraph{Step 4: weighted density comparison.}
+Let $U=V_j-V_j(0)$. When $\epsilon\le1/4$, the preceding bounds imply $U(w)\ge\abs w^2/4-C\abs\ell^2$. After a further reduction of $\gamma_m$ we have $\abs\ell\le1$, and the exponential-difference identity \eqref{ch27:eq:exponential-difference}, used in the proof of \cref{ch27:cor:weighted-tube-density}, gives on $\Omega_j$
+\[
+ \bigl\lvert e^{-U(w)}-e^{-\abs w^2/2}\bigr\rvert\le C\bigl(\abs\ell\abs w+\epsilon\abs w^2\bigr)e^{-c\abs w^2}.
+\]
+We extend $e^{-U}$ by zero outside $\Omega_j$, integrate against $1+\abs w^s$, bound the Gaussian mass of the complement of $\Omega_j$ by Step 2, and compare the two normalizing constants. Since the Gaussian integral is $(2\pi)^{D/2}$, both normalizing constants have a common positive lower bound at this fixed $D$. Then the normalized conditional density $r_j$ of $w_j$ satisfies
+\begin{equation}\label{ch31:eq:weighted-fiber-density}
+ \int(1+\abs w^s)\abs{r_j(w)-\phi_D(w)}\,dw\le C_{m,s}\sqrt\gamma(1+\abs{\log\gamma}),
+\end{equation}
+where $\phi_D$ is the standard Gaussian density in $\R^D$. In particular all fixed uncentered conditional moments are bounded. The same bound holds for $x=w-\mu$ against $\phi_D(x)$. Indeed, translation changes the polynomial weights by a bounded factor when $\abs\mu\le1$, and
+\[
+ \phi_D(x+\mu)-\phi_D(x)=\int_0^1\mu\cdot\nabla\phi_D(x+u\mu)\,du
+\]
+has weighted $L^1$ norm at most $C_{D,s}\abs\mu$. No derivative of the mean in the earlier variables is needed.
+
+\paragraph{Step 5: the coarse variable.}
+We condition on $y$ in the coarse tube. The weighted comparison of the conditional density of $z_0$ with $\phi_{d_{\rm reg}}$ is given by \cref{ch27:cor:weighted-tube-density}, together with the extension to the whole tube established in its proof. That proof verifies the coercivity of the phase on the whole tube, the bounds on the amplitude, and the lower bound on the normalizing constant of the tube for the coarse family of \cref{ch27:lem:terminal-gaussian-telescope}, uniformly in $K$. The chart and amplitude checks recorded above supply the data on the subcharts. The comparison error for the coarse variable is $C_{n,s}\sqrt\gamma$. As noted after \eqref{ch31:eq:product-disintegration}, the restriction to the coarse tube leaves the finer kernels unchanged; this also follows from the fixed-target statement of \cref{ch10:thm:complete-white-law}. All bounds of Steps 1--4 hold under this conditional probability.
+
+\paragraph{Step 6: substitution of Gaussian variables.}
+Let $X_0=z_0$ and $X_j=w_j-\bar w_j$ for $1\le j\le m$, and let $F$ be a Borel function of $(X_0,\dots,X_m)$ bounded by $1+\abs{(X_0,\dots,X_m)}^s$. For $0\le j\le m$ let $I_j$ be the expectation of $F$ when the arguments $0,\dots,j$ are $X_0,\dots,X_j$ and the arguments $j+1,\dots,m$ are replaced by independent standard Gaussian vectors, independent of everything else. For $j\ge1$, integrating out these Gaussian vectors gives a function of the current variable bounded by
+\[
+ C_{m,s}\bigl(1+\abs{(X_0,\dots,X_{j-1})}^s+\abs{X_j}^s\bigr).
+\]
+For fixed values of the earlier variables, \eqref{ch31:eq:weighted-fiber-density} in its translated form bounds the change from a Gaussian $j$-th argument to $X_j$ by $C_{m,s}\sqrt\gamma(1+\abs{\log\gamma})$ times $1+\abs{(X_0,\dots,X_{j-1})}^s$. Taking expectations, we find that $\abs{I_j-I_{j-1}}$ is at most $C_{m,s}\sqrt\gamma(1+\abs{\log\gamma})$ times $\E(1+\abs{(X_0,\dots,X_{j-1})}^s)$. This expectation is uniformly bounded: the moments of the coarse variable follow from the corollary of Step 5, each conditional variable has all fixed moments by Step 4, and finite-dimensional norm inequalities bound the whole vector. The centered variables are measurable functions of the earlier variables, so no inverse transformation of a Gaussian argument is required. Finally the coarse argument in $I_0$ is replaced by a Gaussian one using Step 5. Summing the finitely many differences proves the joint weighted comparison. The Gaussian arguments enter only $F$, never a reconstruction, a conditional mean, or a conditional kernel.
+
+\paragraph{Step 7: the linear image.}
+The exact Gaussian decomposition of \cref{ch27:lem:terminal-gaussian-telescope} includes the bound
+\begin{equation}\label{ch31:eq:row-energy}
+ \norm{A_{0,K}}_{\rm HS}^2+\sum_{j=1}^K\norm{A_{j,K}}_{\rm HS}^2\le C.
+\end{equation}
+This implies that the linear map $(X_0,\dots,X_m)\mapsto A_{0,K}X_0+\sum_{j=1}^mA_{j,K}X_j$ has operator norm bounded uniformly in $K$ and $m$. Applying the joint comparison to $F_y$ composed with this map, which has polynomial growth with a fixed bound, proves the stated estimate. The Gaussian image has covariance $\Sigma_m^K(y)$ by definition, and the argument covers singular covariances. The same norm bound and the moments of each argument give the bounds on all moments of the partial sums. The kernels and the conditional means are Borel, as normal integrals of smooth conditional densities, and the Borel hypothesis on $F_y$ together with Fubini's theorem justifies every substitution of a test function and every integration in $y$.
+\end{proof}
+
+\section{Finite-scale reconstructions and the normal covariance}\label{ch31:sec:covariance}
+
+The proofs in this subsection use coordinates $q_{j,r}=g_{j,r}w_{j,r}$ on fixed finite lattices; as coordinates they do not depend on $\gamma$, and all domains below are chosen independently of $\gamma$ and of the number of later steps.
+
+\begin{theorem}\label{ch31:thm:prefix-regularity}
+Fix $m\ge0$, and express the triple $\Xi_m^K$ as a function of the coarse coordinates and of the coordinates $q_{j,r}=g_{j,r}w_{j,r}$, $1\le j\le m$, of the first $m$ steps. There exist a neighborhood of its flat inputs (the inputs whose coarse field is flat and whose coordinates of the first $m$ steps vanish) and a constant $C_m$ such that, on this neighborhood,
+\[
+ \sup_{K\ge m}\norm{\Xi_m^K}_{C^{1,1}}\le C_m.
+\]
+The derivatives are taken in smooth rooted spanning-tree gauge coordinates; no derivative of a measurable choice of gauge representatives is taken. The neighborhood and $C_m$ may depend on $m$ and on the fixed lattices of the first $m$ steps, but not on $K$, on $\gamma$, or on the preceding and later classical depths.
+
+Moreover, $\Xi_m^K$ extends to a fixed neighborhood of the set of all inputs $(V_0,0)$ with $V_0\in\Conf n$ flat, and there exists a function $\omega_m$ with $\omega_m(s)\to0$ as $s\downarrow0$ such that, for every flat $V_0$,
+\[
+ \max_i\norm{\Xi_{m,i}^K(V,z_{\le m})-\Hol_i(V_0)}_{\rm op}\le\omega_m\bigl(d_{\rm in}((V,z_{\le m}),(V_0,0))\bigr).
+\]
+Here $z_{\le m}$ denotes the physical coordinates $q_{j,r}$ of the first $m$ steps. For this comparison with the zero section, $d_{\rm in}((V,z_{\le m}),(V_0,0))$ is the sum of the distance between the based gauge classes of $V$ and $V_0$ in one fixed product Riemannian metric on the compact coarse quotient in rooted spanning-tree coordinates and the Euclidean norm of $z_{\le m}$. The triangular orthogonal transitions preserve this norm. This distance to a flat input is uniformly equivalent, on the finite cover used below, to the corresponding local product distances, with constants independent of $K$. Every chart uses the same gauge frame at the basepoint. Finally, $\Xi_m^K(V_0,0)=\Hol(V_0)$ for every finite $K\ge m$ and every flat $V_0$, including those whose holonomy triple is one of the central triples $(\pm I,\pm I,\pm I)$.
+\end{theorem}
+
+\begin{proof}
+Fix $m$. All parameter norms in this proof are norms on the coarse lattice and on the finite lattices of the first $m$ steps; their dimensions and the constants comparing different norms may depend on $m,n,M,J$. We write $u$ for these parameters. As arguments of the successive Hessian normalization we use the coordinates $q_{j,r}=g_{j,r}w_{j,r}$, which do not depend on $\gamma$. The changes of variables between these coordinates and the free logarithmic coordinates have uniformly bounded charts and inverse charts on each fixed set of first $m$ steps. On the coarse lattice we use analytic link coordinates or rooted spanning-tree gauge coordinates, keeping the initial gauge frame at the basepoint. The smooth normal atlas is composed with these coordinates only after the real derivative bounds have been obtained.
+
+\paragraph{Step 1: a domain for the inputs.}
+By \cref{ch11:lem:flat-lifts} and the condition $2\pi/n<r_{\rm flat}/4$, each of the first $m$ zero-fluctuation steps at a flat input is flat and lies strictly inside every margin of the constrained minimizers, of the inverse of the block averaging constraint, of the Haar disintegration densities, and of the gauge charts. Each fixed finite composition of reconstruction maps has uniformly bounded weighted analytic coefficients on the nested domains of \cref{ch12:thm:replacement-family}; in particular its first derivative is bounded there independently of the later depth. Let $F_m^K(u)$ be the field at the end of the $m$-th step, which is the input of the zero-fluctuation reconstruction of the later steps. At each flat chart center $u_0$ we start from a small commuting representative with link logarithm of norm at most $2\pi/n$, keeping the gauge frame at the basepoint. The reconstruction maps preserve flatness and the based cycle holonomies. Their zero-fluctuation maps $P_j$ satisfy $P_j(0)=0$ and $\|DP_j\|\le a_{\rm map}<1$ on the convex working ball, by \cref{ch12:lem:deterministic-prolongation-reserve,ch30:def:paired-history}. Integrating along segments and iterating therefore gives
+\[
+ \norm{F_m^K(u_0)}_\infty\le a_{\rm map}^m\frac{2\pi}{n}
+ \le\frac{2\pi}{n}<\frac{r_{\rm flat}}4<\frac r4.
+\]
+This bound applies to the actual reconstructed representative, which may differ from the constant commuting refinement by a based gauge transformation. The derivative bound just obtained gives a constant $C_{{\rm in},m}$ for $D_uF_m^K$, uniform in $K$ and in the depths, before any of the later steps is applied. Let $U_{\rm larger}$ be a real neighborhood of the flat inputs, of radius $\epsilon_m$, such that $C_{{\rm in},m}\epsilon_m<r/4$ and the derivative bound times $\epsilon_m$ is less than half of every image margin of the first $m$ steps. By the mean value formula, we have, in these fixed charts,
+\begin{equation}\label{ch31:eq:prefix-support-radius}
+ \sup_{K\ge m,\,u\in U_{\rm larger}}\norm{F_m^K(u)}_\infty\le r/4+C_{{\rm in},m}\epsilon_m<r/2<r,
+\end{equation}
+and every intermediate image stays in its coordinate domain. The same holomorphic coefficient bounds allow a larger complex polydisc, on which the complex image has norm below $3r/4$, and two smaller polydiscs. Indeed, the complex derivative bound times the added radius may be chosen below $r/4$ and below half of the remaining image margins. A finite cover of the compact set of flat inputs gives common positive radii and margins. These choices depend on $m$ and on the coefficient bounds, but not on $K$, on $\gamma$, or on the number of later steps. In particular, \eqref{ch31:eq:prefix-support-radius} verifies the bound $\norm{\theta_0}_\infty\le r$ on the initial field required in \cref{ch30:lem:zero-white-and-chaining}, independently of the larger radius and of the cutoffs.
+
+\paragraph{Step 2: the flow data of the zero-fluctuation reconstruction.}
+Let $a=\ell_K=(L/n)B^{-K}$. Let $\mathcal E_K(u)$ be the linear and quadratic flow data, in the sense of \cref{ch01:def:enhancement}, of the zero-fluctuation reconstruction from $F_m^K(u)$ down to the mesh $a$, including both weighted components and their first differences. We apply parts (1)--(3) of \cref{ch30:lem:zero-white-and-chaining}, including the analytic coefficient estimates and the finite-scale composition clause in part (3), starting at the mesh $\ell_m$ with this finite input. Its hypotheses are the bound \eqref{ch31:eq:prefix-support-radius}, the contraction condition $a_{\rm map}\sqrt B<1$, the complex domain of Step 1, and zero fluctuation variables at all later steps; they hold by Step 1 and \cref{ch30:def:paired-history}. We obtain a fixed smaller complex domain, a bound $R_m$, and a number $0<\tau<1$ such that, for every fixed $l\ge m$,
+\begin{equation}\label{ch31:eq:needed-enhanced-reserve}
+ \sup_{K\ge l,\,u}\norm{\mathcal E_K(u)}_{\mathrm{fl},a}\le R_m,\qquad
+ \sup_{K\ge l,\,u}\norm{\mathcal E_K(u)-\mathcal E_{K,l}(u)}_{\mathrm{fl},a}\le C_m(1+l)^c\tau^{\,l-m}.
+\end{equation}
+Here $\mathcal E_{K,l}$ is the flow data of the field at the end of the $l$-th step, embedded on the same finest lattice, and $\norm\cdot_{\mathrm{fl},a}$ is the sum of the four weighted value and first-difference norms of \cref{ch01:def:enhancement}. One can take $\tau=\max\{a_{\rm map}B^{1-\alpflow},\mathfrak q\}$; both terms are less than one, since $\alpflow>1/2$, $a_{\rm map}\sqrt B<1$, and $\mathfrak q=Ba_{\rm map}^2<1$. Starting at $\ell_m$ only changes $C_m$ and $R_m$, and the smaller complex domain does not shrink with the number of later steps.
+
+\paragraph{Step 3: parameter derivatives of the flow data.}
+Let $U_0\Subset U_1$ be real bounded parameter domains inside that complex domain, and let $s_m>0$ be a common complex distance from $U_1$ to its boundary. Applying Cauchy's integral formula for Banach-valued holomorphic functions in each input coordinate, we obtain
+\begin{equation}\label{ch31:eq:enhanced-parameter-derivatives}
+ \sup_{K,\,u\in U_1}\sum_{r=0}^2\norm{D_u^r\mathcal E_K(u)}_{\mathrm{fl},a}\le C_{\dim u}R_m\bigl(1+s_m^{-1}+s_m^{-2}\bigr)=R_{2,m}.
+\end{equation}
+For a mixed second derivative we use two coordinate circles of radius at most $s_m/2$, which only changes the finite-dimensional constant. The estimate covers the first-difference components as well as the values. Complex continuation is used only for the reconstruction and the flow data, not for the nonlinear Wilson flow.
+
+\paragraph{Step 4: real variations of the Wilson flow.}
+We apply \cref{ch22:thm:real-flow-variations} with the parameter domains $U_0,U_1$, dimension $\dim u$, bound $R_{2,m}$ on the flow data, horizon $T$, and smallest observation time $t_*=\theta L^2/2$. The flow data are twice continuously differentiable by \eqref{ch31:eq:enhanced-parameter-derivatives} and are bounded in the norms required there. Every damping gauge transformation starts at the identity in the same initial gauge frame at the basepoint. The early parameter variations given by that theorem satisfy the first-difference bound
+\[
+ C_m\bigl\{(s+a^2)^{-(\alpflow+1)/2}+(s+a^2)^{-\alpflow}+(s+a^2)^{\kapflow-1/2}\bigr\},
+\]
+which is integrable in $s$ near zero, uniformly in $a$, since $(\alpflow+1)/2<1$, $\alpflow<1$, and $\kapflow>0$. The condition keeping the links in the compact chart is
+\[
+ a\sup_{s\le T_{R_{2,m}}}\norm{A(s)}_\infty\le C_m\bigl\{a^{1-\alpflow}+a^{2-2\alpflow}+a(T_{R_{2,m}}+a^2)^{\kapflow}\bigr\}\longrightarrow0\qquad(a\to0).
+\]
+At a positive early restart time the same theorem gives smooth bounds at the restart and a finite reference family of smooth DeTurck solutions, joined by fixed gauge transformations, on an open neighborhood of the compact family of smooth restart configurations. We check its hypothesis that this family has a compact smooth closure, using the gauge transformations at the restart and the bounds on all fixed spatial differences given by the smoothing at positive time. For each restart array, the coefficients of its periodic trigonometric interpolant are bounded by $C_q(1+\abs k)^{-q}$ for every fixed $q$. To see this, we apply $q$ differences in a coordinate with maximal $\abs{k_i}$ and use $\abs{a^{-1}(e^{2\pi iak_i/L}-1)}\ge c_L\abs{k_i}$ on the centered Brillouin representatives, and at $k=0$ we use the bound on the values. The tails of the coefficients therefore tend to zero uniformly in each $C^s$ norm, taking $q>s+3$. Finite Fourier truncations have compact sets of coefficients, and successive finite nets in these truncations, followed by a diagonal subsequence, give a compact smooth closure, uniformly over the compact parameter domains. Taking real parts at the unpaired Nyquist modes preserves real arrays and the estimates. This verifies the compactness hypothesis. We use the fixed gauge transformations of that theorem at the restart for the varying input, keeping their conjugations at the basepoint. The theorem then bounds the first and second real parameter derivatives of the three cycle matrices at time $\theta L^2$ by $C_m$. Since the initial configurations are the finest configurations of the zero-fluctuation reconstruction that define $\Xi_m^K$, and the lattice flow time is $4\theta L^2/a^2$, this bounds the derivatives of the map $\Xi_m^K$ itself. The finitely many meshes for which the smallness conditions of that theorem fail are covered by its clause on compact smooth ordinary differential equations. Integrating the second derivative on smaller convex coordinate balls, we obtain $\sup_{K\ge m}\norm{\Xi_m^K}_{C^{1,1}}\le C_m$.
+
+\paragraph{Step 5: all flat configurations.}
+We repeat Steps 1--4 in ambient charts given by rooted spanning-tree gauges, covering the set of flat configurations, which is compact on the coarse lattice. Its quotient by gauge transformations fixed at the basepoint is parametrized by finitely many matrices on the non-tree links, because rooted spanning-tree gauges are unique and have no residual stabilizer. Hence smooth ambient charts exist also at flat configurations with central holonomies, although the set of flat configurations is singular there.
+
+For each flat chart center $V_*$, fix a periodic coarse gauge transformation $h_*$ with $h_*(0)=I$ taking $V_*$ to a small constant commuting representative, as in \cref{ch11:lem:flat-lifts}, and use this same fixed transformation on its whole ambient neighborhood. The strict margins at the center from Step~1 and the uniform coefficient bounds for the first $m$ steps give a neighborhood independent of $K$. On an overlap, transport both the coarse field and the first $m$ fluctuation coordinates by the triangular transitions $q_{j,r}'=O_{j,r}q_{j,r}$ of \cref{ch10:thm:actual-compact-cut,ch11:thm:all-point-torus-chart}, where $O_{j,r}$ depends on the coarser inputs. By \eqref{ch12:eq:replacement-overlap}, the corresponding reconstructions are related by a fine gauge transformation whose restriction to the coarse vertices is the original coarse transformation. It therefore equals $I$ at the common basepoint. Iterating this identity transports the whole prefix, and every subsequent zero fluctuation coordinate remains zero. The finest zero-fluctuation configurations and their Wilson flows thus have identical based cycle matrices on the overlap. These transitions also preserve the cutoff balls, the normalized conditional kernels, and the selected event. The uniform coefficient bounds on the first $m$ fixed lattices control the finite input charts; exact equality of the based matrices requires no derivative of a gauge transformation composed through the later steps.
+
+We take finitely many larger charts covering the compact flat set and smaller charts with compact closures inside them. Steps 1--4 then give a common constant $C_m$ and a common positive neighborhood on this finite cover. This construction chooses each center gauge once and uses neither a logarithm of a varying central matrix nor a regular normal Hessian.
+
+\paragraph{Step 6: exact values and the modulus.}
+At a flat input with zero fluctuation variables, \cref{ch11:lem:flat-lifts} identifies the successive constrained minimizers up to based gauge transformations with commuting flat refinements, which preserve the cycle holonomies. By \cref{ch12:thm:replacement-family}, the gauge transformations of the reconstruction maps are the identity at the roots and therefore preserve these values. The gradient of the Wilson action vanishes on the refinements, so the Wilson flow does not move them. We conclude that $\Xi_m^K(V_0,0)=\Hol(V_0)$ for every finite $K$, for central as well as regular flat configurations.
+
+It remains to obtain the modulus from the uniform first-derivative bounds. We take coordinate balls whose doubled closures lie in the larger charts, cover the set of flat configurations by finitely many of the corresponding half-balls, and let $\varrho_m>0$ be a common smaller radius. An input and a flat zero-section input at distance at most $\varrho_m$ lie in one of these charts, where the local product distance is bounded by a fixed multiple of $d_{\rm in}$. The norm of the transported fluctuation input is unchanged, so the first-derivative estimate and the fixed gauge frame at the basepoint bound their matrix difference by $C'_md_{\rm in}$. For larger distances the difference is at most two. After increasing $C'_m$ so that $C'_m\ge2/\varrho_m$, the function $\omega_m(s)=\min(2,C'_ms)$ is a common modulus. On overlaps the gauge transformations keep the same initial gauge frame at the basepoint. This proves the statement near all flat configurations.
+\end{proof}
+
+\begin{theorem}\label{ch31:thm:normal-covariance-calibration}
+For $y$ in the regular patch $\mathsf P^{++}$ and $N=nB^K$ we have the exact identity
+\[
+ \Sigma_K^K(y)=\Sigma_\theta^N(y),
+\]
+where $\Sigma_\theta^N(y)$ is the normal covariance, divided by $\gamma$, of the linearized flowed cycle logarithms under the Gaussian measure of the lattice Maxwell form of the finest lattice around the flat configuration $y$ (\cref{ch27:thm:flowed-log-covariance,ch27:lem:terminal-gaussian-telescope}). There exists $C$, independent of $m$, $K$, and $y$, such that
+\[
+ 0\le\Sigma_\theta^N(y)-\Sigma_m^K(y)\le C\delta_m\,I_{\NormalFiber y}\qquad(K\ge m).
+\]
+Put $\widetilde\Sigma_m^K(y)=\NormalCov(y)^{-1/2}\Sigma_m^K(y)\NormalCov(y)^{-1/2}$. With constants independent of $m$, $K$, and $y$,
+\begin{equation}\label{ch31:eq:finite-cutoff-covariance-error}
+ \sup_y\norm{\widetilde\Sigma_m^K(y)-I}_{\rm op}\le C\delta_m+C(nB^K)^{-2},\qquad K\ge m.
+\end{equation}
+The continuum covariance satisfies $cI\le\NormalCov\le CI$ and $\NormalCov(y)\ge\abs\Toron^{-2}e^{-2\theta\abs\Toron^2}I_{\NormalFiber y}$. For every fixed $m$, in the finite smooth normal atlas,
+\begin{equation}\label{ch31:eq:response-c1-bounds}
+ \sup_{K\ge m}\sum_{j=0}^m\bigl(\norm{A_{j,K}}_\infty+\Lip_yA_{j,K}\bigr)\le C_m.
+\end{equation}
+Finally, if $H_K^E=D_v^2E_{JK}(V(y,0))$, then $H_K=nH_K^E$ and
+\[
+ A_{0,K}A_{0,K}^{\mathsf T}=n^{-1}T_{0,K}(H_K^E)^{-1}T_{0,K}^{\mathsf T}.
+\]
+\end{theorem}
+
+\begin{proof}
+The exact identity is the Gaussian quadratic identity of \cref{ch27:lem:terminal-gaussian-telescope}, applied to the linear response matrices of \cref{ch31:def:normal-response-rows}. Its hypotheses concern the same reconstruction maps, the Hessians at the flat background, the coarse normal variable, and the derivative of the flowed cycle logarithms. In particular,
+\begin{equation}\label{ch31:eq:positive-gaussian-tail}
+ \Sigma_\theta^N-\Sigma_m^K=\sum_{j=m+1}^KA_{j,K}A_{j,K}^{\mathsf T}\ge0.
+\end{equation}
+If $G_j$ are independent standard Gaussian vectors, this positive matrix has trace
+\begin{equation}\label{ch31:eq:gaussian-tail-trace}
+ \tr\bigl(\Sigma_\theta^N-\Sigma_m^K\bigr)=\E\Bigl\lvert\sum_{j=m+1}^KA_{j,K}G_j\Bigr\rvert^2.
+\end{equation}
+
+To bound this trace we identify our matrices with those of \cref{ch30:lem:flat-gaussian-response-tail}. Its flat coarse field $V_y$ is $V(y,0)$ here. Its coordinates $q_{j,r}$ are our $g_{j,r}w_{j,r}$, taken before the Hessian normalization of each step at the flat background; that normalization and the zero-fluctuation reconstruction of all finer steps are included in the differentiated reconstruction on both sides. The two response matrices therefore agree:
+\[
+ \mathsf A_{j,K}=P_{\NormalFiber y}D_{q_j}(\Log\circ\mathscr H_K)\,\operatorname{diag}_{r,e}(g_{j,r}/\sqrt\gamma)
+ =\gamma^{-1/2}P_{\NormalFiber y}D_{w_j}(\Log\circ\mathscr H_K)\big|_{\rm flat}=A_{j,K}.
+\]
+The diagonal contains the coupling of every intermediate scale and every scalar color component. Its entries do not depend on $\gamma$, since each $g_{j,r}^2/\gamma$ is the reciprocal of a fixed lattice side. Both response maps use the Wilson flow at time $\theta L^2$ (lattice time $4\theta N^2$), the same based coordinate cycles, and the same initial gauge frame at the basepoint. Our patch is regular and has the margins of the identity chart and of the normal charts required by that lemma. Its flat refinements satisfy the coordinate-domain conditions by the condition $2\pi/n<r_{\rm flat}/4$ and \cref{ch11:lem:flat-lifts}, and $D\Log$ is the bounded differential of the identity chart. Thus every hypothesis of \cref{ch30:lem:flat-gaussian-response-tail} holds, and we obtain
+\begin{equation}\label{ch31:eq:needed-gaussian-tail}
+ \sup_{K\ge m,\,y}\E\Bigl\lvert\sum_{j=m+1}^KA_{j,K}(y)G_j\Bigr\rvert^2\le C\delta_m.
+\end{equation}
+Only a linear map acts on the independent Gaussian vectors, and the bound holds at each fixed flat $y$; it is not deduced from an averaged estimate for the interacting measure. A positive semidefinite matrix is bounded above by its trace times the identity, as one sees by diagonalizing it. Combining \eqref{ch31:eq:positive-gaussian-tail}, \eqref{ch31:eq:gaussian-tail-trace}, and \eqref{ch31:eq:needed-gaussian-tail}, we obtain the bound $0\le\Sigma_\theta^N-\Sigma_m^K\le C\delta_mI$.
+
+We next prove the derivative bounds at finite cutoff. The spectral bounds $c_nI\le H_K\le C_nI$ follow from \cref{ch27:lem:terminal-gaussian-telescope}. By the uniform bounds on the derivatives of the effective classical action in \cref{ch07:thm:all-root-classical}, composed with the fixed compact normal atlas, we have $\norm{H_K}_{C^1(y)}\le C_n$; only three derivatives of the action are needed. For the steps $j\ge1$ we use the coordinates $q_{j,r}=g_{j,r}w_{j,r}$ of \cref{ch09:thm:sequential-density}. The Hessian normalization of each step is part of the map in these coordinates and is preserved by \cref{ch12:thm:replacement-family}; these are the coordinates used in the proof of \cref{ch31:thm:prefix-regularity}, and no limit of a normalization matrix or of its derivative is needed.
+
+For the inverse square root, let $S$ be a symmetric matrix with $cI\le S\le CI$, choose $C'>C$ and write $S=C'(I-Q)$, so that $\norm Q\le1-c/C'<1$. The binomial series for $(I-Q)^{-1/2}$ and its term-by-term derivative converge uniformly: the derivative of $Q^k$ is a sum of $k$ terms bounded by $\norm Q^{k-1}\norm{DQ}$, and the coefficients of the series are bounded. This bounds $S^{-1/2}$ and its first tangential derivative without constructing any limit. Applied to $S=H_K$, it bounds $H_K^{-1/2}$ and its first tangential derivative.
+
+At the flat input, the derivative of $\Log\circ\Xi_m^K$ in the variables of a step $j\le m$ equals the corresponding derivative of $\Log\circ\mathscr H_K$ with all other fluctuation variables set to zero. Indeed, setting the later variables to zero does not change the derivative in an earlier variable at the flat refinements. For $j\ge1$ this gives the identity
+\[
+ A_{j,K}=P_{\NormalFiber y}D_{q_j}(\Log\circ\Xi_m^K)\big|_{\rm flat}\,\operatorname{diag}_{r,e}(g_{j,r}/\sqrt\gamma),
+\]
+with a fixed diagonal independent of $y$, $K$, and $\gamma$. Using the $C^{1,1}$ bounds of \cref{ch31:thm:prefix-regularity} in these coordinates, the bounds on the first two derivatives of the logarithm on the identity chart, and the smoothness of the embedding of the flat configurations, we bound each $A_{j,K}$ and its first tangential derivative. For $A_{0,K}$ we compose the corresponding coarse derivative with $H_K^{-1/2}$ and use the preceding bounds. Each step carries exactly one Hessian normalization, already included in the differentiated map, and the derivatives of the orthonormal frames and of the projections in the finite atlas are bounded. This proves \eqref{ch31:eq:response-c1-bounds}, and hence a Lipschitz bound for $\Sigma_m^K$ at each fixed $m$.
+
+By \cref{ch27:thm:flowed-log-covariance} we have $\norm{\Sigma_\theta^{nB^K}-\NormalCov}\le C(nB^K)^{-2}$, together with the spectral bounds $cI\le\NormalCov\le CI$. Adding this lattice error to the bound on the positive remainder proved above and conjugating by $\NormalCov^{-1/2}$, we obtain \eqref{ch31:eq:finite-cutoff-covariance-error}. By the same theorem, the constant off-diagonal color modes alone contribute $e^{-2\theta\abs\Toron^2}\abs\Toron^{-2}I_{\NormalFiber y}$ to $\NormalCov(y)$; since all other contributions are positive semidefinite, this gives the stated lower bound.
+
+Finally, $H_K=D_v^2(nE_{JK})=nH_K^E$, so
+\[
+ A_{0,K}A_{0,K}^{\mathsf T}=T_{0,K}H_K^{-1}T_{0,K}^{\mathsf T}=n^{-1}T_{0,K}(H_K^E)^{-1}T_{0,K}^{\mathsf T}.
+\]
+In particular the contribution of the coarse normal variable is included in $\Sigma_m^K$ for every $m$.
+\end{proof}
+
+\section{Finite-scale moments and localization}\label{ch31:sec:localization}
+
+This subsection combines the Gaussian comparison of \cref{ch31:lem:weighted-prefix-gaussian} with the deterministic results of \cref{ch31:sec:covariance}. Two facts about the coarse lattice drive the argument. First, the normalizing constant $\widehat Z$ is of order $\gamma^{3n^3-1}$ (\cref{ch27:thm:sharp-normalizer}). This is also the order of the Laplace mass of any fixed regular patch, so a fixed regular neighborhood has probability bounded below, uniformly in $\gamma$. Second, the action has a positive gap at a fixed distance from the flat configurations. Together with the uniform modulus of \cref{ch31:thm:prefix-regularity}, this shows that, with overwhelming probability, an output in a fixed regular tube comes from a coarse field near the corresponding regular flat configurations, and not from a neighborhood of other flat configurations, such as those with central holonomies.
+
+\begin{theorem}\label{ch31:thm:prefix-moments-no-return}
+Fix nested tubes as in \cref{ch31:sec:results}. For every fixed $m\ge0$ there exist $K_0(m)$ and $\gamma_m>0$ such that the following statements hold uniformly for $K\ge K_0(m)$ and $0<\gamma\le\gamma_m$.
+\begin{enumerate}
+\item Fix bounded Borel functions on $\SU^3$ that agree with the local maps $H\mapsto b(\Log H)$ and $H\mapsto y(\Log H)$ on a smaller fixed regular output tube; we denote them again by $b(\Log H)$ and $y(\Log H)$. Under the restriction of $\nu$ to a larger coarse regular tube, normalized by its own mass, we have for every fixed finite $r'$
+\[
+ \frac{b(\Log\Xi_m^K)}{\sqrt\gamma}=A_{0,K}(y)z_0+\sum_{j=1}^mA_{j,K}(y)w_j+\mathcal R_{K,m},
+\]
+\[
+ \norm{\mathcal R_{K,m}}_{L^{r'}}\le C_{m,r'}\sqrt\gamma(1+\abs{\log\gamma})^2,\qquad
+ \norm{y(\Log\Xi_m^K)-y}_{L^{r'}}\le C_{m,r'}\sqrt\gamma(1+\abs{\log\gamma}).
+\]
+The same integrated estimates hold for the expectation under $\nu$ with any bounded measurable multiplicative factor supported in the coarse tube. Replacing $w_j$ by $w_j-\bar w_j$ changes $\mathcal R_{K,m}$ by a term of norm $O_m(\sqrt\gamma)$ in $L^{r'}$.
+\item Let $w$ be any fixed real smooth tangential weight compactly supported in the relative interior of $\mathsf P$, and let $\chi_w$ be a fixed smooth normal cutoff supported in $\{\abs b<b_{\rm o}\}$ and equal to one near the zero section. Set $\widetilde w(y+b)=w(y)\chi_w(b)$, with the fixed zero extension; for this part, nonnegativity and invariance of $w$ and $\chi_w$ are not required. Choose a smooth normal cutoff $\zeta$ equal to one near the support of $\chi_w$ and supported in $\{\abs b<b^+\}$, and set $w^+(H)=w(y(\Log H))\zeta(b(\Log H))$, extended by zero. For $l=0,1,2$,
+\[
+ \begin{split}
+ &\E_\nu\Bigl[\widetilde w(\Log\Xi_m^K)\Bigl(\frac{q_*(\Log\Xi_m^K)}\gamma\Bigr)^l\Bigr]\\
+ &\qquad=\E_\nu\Bigl[w^+(\Xi_m^K)\,\mathfrak m_l\bigl(\widetilde\Sigma_m^K(y(\Log\Xi_m^K))\bigr)\Bigr]+O_{m,w}\bigl(\sqrt\gamma(1+\abs{\log\gamma})^{k_m}\bigr),
+ \end{split}
+\]
+where $k_m$ is a fixed exponent, $\widetilde\Sigma_m^K=\NormalCov^{-1/2}\Sigma_m^K\NormalCov^{-1/2}$, and
+\begin{equation}\label{ch31:eq:moment-polynomials}
+ \mathfrak m_0(C)=1,\qquad\mathfrak m_1(C)=\frac12\tr C,\qquad\mathfrak m_2(C)=\frac14\bigl\{(\tr C)^2+2\tr(C^2)\bigr\}.
+\end{equation}
+Only values in the support of $w^+$ are used on the right.
+\item For every fixed $r'$, the normal moments of the coarse variable satisfy $\E_\nu[\abs v^{r'}\one_{\{V\text{ in the coarse tube}\}}]\le C_{r'}\gamma^{r'/2}$, and for every fixed larger regular output tube $\mathcal V$,
+\[
+ \E_\nu\bigl[\abs{b(\Log\Xi_0^K)}^{r'}\one_{\{\Xi_0^K\in\mathcal V\}}\bigr]\le C_{r'}\gamma^{r'/2},
+\]
+where $C_{r'}$ depends on $\mathcal V$ but not on $m$.
+\item There exists $c_*>0$, independent of $K$, $m$, and $\gamma$, such that, after possibly decreasing $\gamma_m$,
+\[
+ \nu\{\psi(\Log\Xi_m^K)=0\}\ge c_*,\qquad\nu\{\psi(\Log\Xi_m^K)\ge b_*\}\ge c_*.
+\]
+\item For every compact regular output tube $\mathcal O$ over a patch in the relative interior of $\mathsf P^{++}$ there exists a larger coarse regular tube $\mathcal T^+$ such that, for every $q>0$,
+\[
+ \nu\{\Xi_m^K\in\mathcal O,\ V\notin\mathcal T^+\}\le C_{m,q}\gamma^q.
+\]
+This excludes contributions from neighborhoods of all other flat configurations, including those with central holonomies, as well as from nonflat coarse fields.
+\end{enumerate}
+Throughout, the normalizing constant satisfies $c_n\gamma^{3n^3-1}\le\widehat Z\le C_n\gamma^{3n^3-1}$.
+\end{theorem}
+
+\begin{proof}
+The cases of finitely many small $K$ are covered by the bounds of \cref{ch31:sec:covariance}, so we may take $K_0(m)=m$; any larger choice is also allowed. We first record the Laplace estimates on the coarse lattice (Step 1) and prove the localization (Step 2), then construct the bounded output coordinates and a good event (Steps 3 and 4), prove the expansion of part (1) (Steps 5--7), and finally prove parts (2), (3), and (4) (Steps 8--10).
+
+\paragraph{Step 1: Laplace estimates on the coarse lattice.}
+By the first part of \cref{ch27:lem:terminal-gaussian-telescope}, with its exact conditional normalizing constant, we have
+\begin{equation}\label{ch31:eq:terminal-natural-moments}
+ \E\bigl[\abs v^r\bigm|y,\ V\text{ in the coarse tube}\bigr]\le C_r\gamma^{r/2}\qquad(r<\infty).
+\end{equation}
+To obtain the mass of a patch, we apply the additive Laplace formula of the same lemma with a nonnegative smooth tangential bump $h$, supported strictly inside the patch, and a normal cutoff equal to one on a smaller ball. Positivity and the bounds on the amplitude and on the Hessian give
+\[
+ c_h\gamma^{3n^3-1}\le\widehat Z\,\E_{\widehat\nu}[h(y)\chi(v)]\le C_h\gamma^{3n^3-1}
+\]
+for all sufficiently small $\gamma$, uniformly in $K$; here the additive error $O_h(\sqrt\gamma)$ has been absorbed into the positive leading integral, and we used $(2\pi\gamma)^{d_{\rm reg}/2}=(2\pi\gamma)^{3n^3-1}$. By \cref{ch27:thm:sharp-normalizer}, $\widehat Z$ is bounded above and below by constant multiples of the same power $\gamma^{3n^3-1}$. Dividing the two bounds, we find that every fixed nonempty open regular subpatch has coarse probability bounded below by a positive constant, uniformly in $K$ and $\gamma$. No convergence of the tangential amplitude is used. Integrating \eqref{ch31:eq:terminal-natural-moments} over the coarse tube proves the first assertion of part (3), both under the normalized restriction to the tube and with any bounded multiplicative factor under $\nu$.
+
+\paragraph{Step 2: localization (part (5)).}
+We work on the compact quotient of the coarse configuration space by gauge transformations fixed at the basepoint. The zero set $\mathcal F_n$ of $E_0$ is the set of flat configurations, as in \cref{ch32:chapter}. For any fixed $\eta>0$, compactness and continuity give
+\[
+ c_\eta=\inf\{\kappa_nE_0(V):\dist(V,\mathcal F_n)\ge\eta\}>0,
+\]
+since otherwise a convergent sequence in this closed set would have a flat limit in the set. Since the centered effective interaction is bounded, $nE_{JK,\mathrm{sat}}\ge\kappa_nE_0$, and the product Haar measure has mass one, the lower bound on $\widehat Z$ implies
+\begin{equation}\label{ch31:eq:nonflat-gap}
+ \widehat\nu\{\dist(V,\mathcal F_n)\ge\eta\}\le C_n\gamma^{-(3n^3-1)}e^{-c_\eta/\gamma}\le C_{n,\eta,q}\gamma^q\qquad(q>0).
+\end{equation}
+The last bound follows by maximizing $x^{3n^3-1+q}e^{-c_\eta x}$ over $x\ge1/\gamma_0$.
+
+Let $\mathcal O$ be the given compact output tube. The flat holonomies meeting a sufficiently small neighborhood of $\mathcal O$ stay away from the central triples and from the boundary of the identity chart. We may therefore choose a strictly larger compact set of regular commuting holonomies in the relative interior of $\mathsf P^{++}$, and a coarse regular tube $\mathcal T^+$ over it. On the compact complement, within the set of flat configurations, of the flat configurations with holonomies in this larger patch, the distance of the flat holonomies from $\mathcal O$ is at least some $a_0>0$. By the modulus of \cref{ch31:thm:prefix-regularity}, there exists $\eta_m>0$ such that a change of the input by less than $2\eta_m$ changes every flat output by less than $a_0/2$. For the finitely many steps $j\le m$, the coordinates of the first $m$ steps satisfy deterministically
+\begin{equation}\label{ch31:eq:finite-physical-cut}
+ \abs{z_{\le m}}\le C_m\sqrt\gamma(1+\abs{\log\gamma}).
+\end{equation}
+Indeed each coordinate is a fixed ratio times $\sqrt\gamma\,w_{j,r}$, followed by the bounded Hessian normalization on these finite lattices, and $\abs{w_{j,r}}\le p_j$. For small enough $\gamma_m$ the right side of \eqref{ch31:eq:finite-physical-cut} is less than $\eta_m$. Decreasing $\eta_m$ if necessary, we may also assume that a coarse field within distance $\eta_m$ of a flat configuration with holonomies in the larger patch belongs to $\mathcal T^+$ whenever the holonomies of that flat configuration are within $a_0/2$ of $\mathcal O$. Now suppose that $\Xi_m^K\in\mathcal O$, $V\notin\mathcal T^+$, and $\dist(V,\mathcal F_n)<\eta_m$, and let $V_0$ be flat with $\dist(V,V_0)<\eta_m$. The input distance between $(V,z_{\le m})$ and $(V_0,0)$ is less than $2\eta_m$, so $\Hol(V_0)$ is within $a_0/2$ of $\Xi_m^K\in\mathcal O$. By the choice of $a_0$, the holonomies of $V_0$ lie in the larger patch, and then $V\in\mathcal T^+$, a contradiction. We conclude that an output in $\mathcal O$ coming from outside $\mathcal T^+$ forces $\dist(V,\mathcal F_n)\ge\eta_m$, and \eqref{ch31:eq:nonflat-gap} proves part (5). The flat configurations with central holonomies lie in the excluded part; the argument does not use that small curvature forces trivial holonomy.
+
+\paragraph{Step 3: bounded output coordinates.}
+We fix regular output tubes $\mathcal O_1\Subset\mathcal O_2\Subset\mathcal O_3$ with positive margins, such that $\mathcal O_1$ contains the flat outputs of the larger coarse patch being used. Let $\phi_{\rm out}$ be a smooth function equal to one on $\mathcal O_2$ and supported in $\mathcal O_3$. On $\mathcal O_3$ we multiply the local coordinate maps by $\phi_{\rm out}$, and we set both products equal to zero elsewhere on $\SU^3$. This gives the bounded Borel maps
+\begin{equation}\label{ch31:eq:bounded-output-coordinates}
+ b_{\rm ext}(H)=\phi_{\rm out}(H)\,b(\Log H),\qquad y_{\rm ext}(H)=\phi_{\rm out}(H)\,y(\Log H),
+\end{equation}
+where the right sides are used only on $\mathcal O_3$. They agree with the normal and tangential coordinates on $\mathcal O_2$, and they are the extensions used in part (1). They do not alter the invariant observables, which were extended by zero.
+
+\paragraph{Step 4: a good event.}
+We consider the restriction of $\nu$ to the coarse tube, normalized by its own mass. By the uniform first-derivative bound and the exact flat values of \cref{ch31:thm:prefix-regularity}, there exists $\varepsilon_m>0$, inside the input neighborhood of that theorem, such that $\abs v+\abs{z_{\le m}}\le2\varepsilon_m$ implies $\Xi_m^K\in\mathcal O_2$, uniformly in $K$. By \eqref{ch31:eq:finite-physical-cut}, after decreasing $\gamma_m$ we have $\abs{z_{\le m}}\le\varepsilon_m$ deterministically. Let $G_m=\{\abs v\le\varepsilon_m\}$ inside the coarse tube. Then
+\begin{equation}\label{ch31:eq:coordinate-exception}
+ \Prob(G_m^c\mid V\text{ in the coarse tube})\le C_m\gamma^{-(3n^3-1)}e^{-c_m/\gamma}.
+\end{equation}
+Indeed, the normal phase is at least $c_n\abs v^2$ throughout the coarse tube, the amplitude is bounded, and the conditional normalizing constant at each $y$ is bounded below by $c\gamma^{3n^3-1}$ by the coarse Laplace formula; we then integrate over the tangential distribution. The same estimate holds conditionally at each $y$ in the compact subpatch. Since no departure from $\mathcal O_2$ occurs on $G_m$, \eqref{ch31:eq:coordinate-exception} also bounds the probability of such a departure.
+
+\paragraph{Step 5: Taylor expansion on the good event.}
+On $G_m$ we use the local coordinates and write $u=(v,z_{\le m})$. By the uniform $C^{1,1}$ bound and the smoothness of the normal projection, Taylor's formula along the segment $su$, $0\le s\le1$, gives
+\begin{equation}\label{ch31:eq:nonlinear-taylor}
+ \Bigl\lvert b(\Log\Xi_m^K)-T_{0,K}v-\sqrt\gamma\sum_{j=1}^mA_{j,K}w_j\Bigr\rvert\le C_m\bigl(\abs v+\abs{z_{\le m}}\bigr)^2.
+\end{equation}
+The derivatives here are those of the flowed triple $\mathscr H_K$ of the fine configuration, since setting the later fluctuation variables to zero does not change the derivative in an earlier variable at the flat refinements. Substituting $v=\sqrt\gamma H_K^{-1/2}z_0$ gives the coarse term $\sqrt\gamma A_{0,K}z_0$. The normal moments \eqref{ch31:eq:terminal-natural-moments} and the deterministic bound \eqref{ch31:eq:finite-physical-cut} then bound the remainder divided by $\sqrt\gamma$, on $G_m$, by $C_{m,r'}\sqrt\gamma(1+\abs{\log\gamma})^2$ in $L^{r'}$. Using the first-order bound for the tangential coordinate, we similarly obtain the bound $C_{m,r'}\sqrt\gamma(1+\abs{\log\gamma})$ for its displacement.
+
+\paragraph{Step 6: the exceptional event.}
+On $G_m^c$ we define $\mathcal R_{K,m}$ by subtracting the displayed linear terms from $b_{\rm ext}(\Xi_m^K)/\sqrt\gamma$. Both extended coordinate maps are bounded, the coarse tube has bounded $v$, and the fluctuation terms are bounded by $C_m(1+\abs{\log\gamma})$ there. This remainder is at most $C_m\gamma^{-1/2}$ for small $\gamma$, and \eqref{ch31:eq:coordinate-exception} implies, for every fixed $r'<\infty$ and every $q>0$,
+\[
+ \norm{\one_{G_m^c}\mathcal R_{K,m}}_{L^{r'}}\le C_{m,r',q}\gamma^q,\qquad
+ \norm{\one_{G_m^c}\bigl(y_{\rm ext}(\Xi_m^K)-y\bigr)}_{L^{r'}}\le C_{m,r',q}\gamma^q;
+\]
+here we took the $r'$-th root of the exponential bound and absorbed the fixed negative power of $\gamma$. Together with Step 5 this proves both estimates of part (1). Multiplying the $r'$-th powers by the mass of the coarse tube, and then by the norm of a bounded multiplicative factor, proves the integrated versions. Any other fixed bounded Borel extensions agreeing with the coordinates on $\mathcal O_2$ satisfy the same estimates, with their own bound in the constant.
+
+\paragraph{Step 7: recentering.}
+For $j\le m$ the field at the start of the $j$-th step is a coarse field in $B_r$ satisfying the coordinate-domain conditions. Since the conditional fluctuation kernel and its cutoff are preserved by \cref{ch12:thm:replacement-family}, \cref{ch10:thm:actual-means-and-scores} applies with $t=t_j$. By \eqref{ch31:eq:actual-white-mean},
+\[
+ \abs{\bar w_j}\le C\sqrt{D_j}\,t_jr\le C_{m,n,M,J,r}\sqrt\gamma\qquad(1\le j\le m).
+\]
+The inequality holds for every value of the earlier variables, hence also in $L^{r'}$ under the restriction to the coarse tube. Using \eqref{ch31:eq:row-energy} and the Cauchy--Schwarz inequality, we obtain
+\begin{equation}\label{ch31:eq:mean-remainder}
+ \Bigl\lVert\sum_{j=1}^mA_{j,K}\bar w_j\Bigr\rVert_{L^{r'}}\le C\Bigl(\sum_{j=1}^mD_jt_j^2r^2\Bigr)^{1/2}\le C_{m,r'}\sqrt\gamma.
+\end{equation}
+The finite sum may grow with $m$, as allowed. This is the mean under the conditional fluctuation kernel, not under an enclosing product measure. Replacing $w_j$ by $w_j-\bar w_j$ changes the scaled remainder by exactly this quantity, which completes the proof of part (1).
+
+\paragraph{Step 8: the moment identities (part (2)).}
+At fixed $m$ all uncentered moments of the normalized fluctuation variables are bounded, since their centered moments were bounded in \cref{ch31:lem:weighted-prefix-gaussian} and their means are $O_m(\sqrt\gamma)$. Let $Z=Z_{K,m}$, $b'=b_{\rm ext}(\Xi_m^K)$, and $y'=y_{\rm ext}(\Xi_m^K)$. On $G_m$ these are the local coordinates, so $X'=y'+b'=\Log\Xi_m^K$ there. By Taylor's formula, the bound on the exceptional event, and \eqref{ch31:eq:mean-remainder}, we have, under the whole restriction to the coarse tube,
+\[
+ b'/\sqrt\gamma=Z+R,\qquad\norm R_{L^r}\le C_{m,r}\sqrt\gamma(1+\abs{\log\gamma})^2.
+\]
+Every fixed moment of $Z$ is bounded, by \cref{ch31:lem:weighted-prefix-gaussian}, and the error $R$ has bounded fixed moments for small $\gamma$. The inverse covariance $\NormalCov^{-1}$ has a fixed Lipschitz norm on the larger regular tube. Expanding the quadratic form in $Z+R$, and using $\norm{y'-y}_{L^{2r}}\le C_{m,r}\sqrt\gamma(1+\abs{\log\gamma})$ and H\"older's inequality with higher fixed moments of $Z$ and $R$ for each product, we obtain on $G_m$
+\[
+ \frac{q_*(X')}\gamma=\frac12Z^{\mathsf T}\NormalCov(y)^{-1}Z+O_{L^r,m}\bigl(\sqrt\gamma(1+\abs{\log\gamma})^2\bigr).
+\]
+For the square we use $a^2-b^2=(a-b)(a+b)$ and H\"older's inequality, which gives the same order with a possibly larger power of the logarithm. On $G_m^c$, each bounded weighted observable divided by $\gamma^l$ has expectation at most $C\gamma^{-l}\Prob(G_m^c)$, which is smaller than any power of $\gamma$ by \eqref{ch31:eq:coordinate-exception}. The corresponding polynomial in $Z$ has a bounded second moment, so its contribution from $G_m^c$ is at most $C_m\Prob(G_m^c)^{1/2}$; for $l\le2$ this uses moments of $Z$ only up to order eight. Thus the comparison extends to the weighted expectations, without evaluating a logarithm or the quadratic form at a point where they are not defined.
+
+The normal cutoff $\chi_w(b')$ differs from one only at a fixed positive normal radius. Using Taylor's formula, the coarse Laplace estimates, and the moments of the first $m$ steps, we find $\E[\abs{b'}^r\one_{\{\Xi_m^K\text{ in the larger tube}\}}]\le C_{m,r}\gamma^{r/2}$ for every fixed $r$. Markov's inequality with $r>2(q+l)$ bounds the effect of replacing $\chi_w(b')$ by one, even after division by $\gamma^l$, by $C_{m,q}\gamma^q$, and part (5) controls the complement of the larger tube. Next we replace the smooth tangential weight $w(y')$ by $w(y)$; the error is bounded by its Lipschitz norm times $\abs{y'-y}$, multiplied by a power of the scaled quadratic form that is bounded in $L^2$. We then apply \cref{ch31:lem:weighted-prefix-gaussian} to the resulting polynomial of degree $2l$, conditionally on $y$, and integrate over the tangential distribution of the coarse field. The coefficient fields of this polynomial are smooth on the fixed compact bundle subcharts, hence bounded and Borel, as required by that lemma. If $Z\sim G_{\Sigma_m^K(y)}$, then $Z^{\mathsf T}\NormalCov(y)^{-1}Z/2$ has the law of $G^{\mathsf T}CG/2$ with $C=\widetilde\Sigma_m^K(y)$ and $G$ standard Gaussian in four dimensions, and diagonalizing the nonnegative symmetric matrix $C$ gives
+\[
+ \E\Bigl(\frac12G^{\mathsf T}CG\Bigr)=\frac12\tr C,\qquad\E\Bigl(\frac12G^{\mathsf T}CG\Bigr)^2=\frac14\bigl\{(\tr C)^2+2\tr C^2\bigr\}.
+\]
+Here we used $\E G_i^2=1$, $\E G_i^4=3$, and, by independence, $\E G_i^2G_j^2=1$ for $i\ne j$ (special cases of Isserlis' theorem \cite{Isserlis1918GaussianMoments}); a zero eigenvalue simply deletes the corresponding summand. This identifies the polynomials $\mathfrak m_l$ of \eqref{ch31:eq:moment-polynomials}.
+
+\paragraph{Step 9: return to the output coordinates.}
+By \eqref{ch31:eq:response-c1-bounds}, $\Sigma_m^K$ has a uniformly bounded Lipschitz norm at each fixed $m$. The field $\NormalCov$ and its inverse square root are smooth, with fixed positive spectral bounds, on the larger regular patch by \cref{ch27:thm:flowed-log-covariance}, and the binomial series used in the proof of \cref{ch31:thm:normal-covariance-calibration} also bounds the derivative of the inverse square root. Then $\widetilde\Sigma_m^K$ has a uniform Lipschitz bound at each fixed $m$, and the tangential test $w(y)\mathfrak m_l(\widetilde\Sigma_m^K(y))$ can be moved back to $y'$ with error $C_{m,w}\sqrt\gamma(1+\abs{\log\gamma})^{k_m}$. Finally we multiply by the normal cutoff $\zeta(b')$; as before, $1-\zeta(b')$ is supported at a fixed positive normal radius, so this costs $C_{m,q}\gamma^q$, and part (5) controls the complement of the larger tube. The test on the right side is then exactly $w^+(\Xi_m^K)\mathfrak m_l(\widetilde\Sigma_m^K(y'))$, and the tube coordinates are never evaluated outside the support of $w^+$. This proves part (2).
+
+\paragraph{Step 10: normal moments for $m=0$ and the two value ranges of $\psi$ (parts (3) and (4)).}
+For $m=0$ there are no fluctuation variables. By the exact flat values and the uniform first derivative, we have $\abs{b(\Log\Xi_0^K)}\le C\abs v$ in the larger coarse tube on $G_0$, and \eqref{ch31:eq:terminal-natural-moments} gives the claimed moment bound on $G_0$. On its complement inside the larger coarse tube, the normal radius of an output in the given regular tube is bounded and \eqref{ch31:eq:coordinate-exception} is smaller than any power of $\gamma$. Outside the coarse tube, part (5) gives the same bound. These three cases prove the second assertion of part (3); the constant depends on $\mathcal V$ but, since only $m=0$ is used, not on $m$.
+
+For part (4), let $h_0,h_+\le1$ be nonnegative smooth tangential bumps, with positive integrals, supported strictly inside the open sets $O_0$ (where $\psi_0=0$) and $O_+$ (where $\psi_0\ge2b_*$), and fix a smaller normal ball on which $\chi=1$. By Step 1, the coarse probability of each of the two corresponding sets of coarse fields is at least some $a>0$. These compact supports have a fixed positive margin to the boundaries of $O_0$ and $O_+$ and to the boundary of $\{\chi=1\}$. Markov's inequality, applied to the tangential and normal displacement bounds of part (1), makes the probability of crossing these margins less than $a/2$, after decreasing $\gamma_m$. On the first remaining event $\psi(\Log\Xi_m^K)=0$, and on the second $\psi(\Log\Xi_m^K)\ge2b_*\ge b_*$. Thus $c_*=a/2$ works, independently of $m$, $K$, and $\gamma$; only the required threshold $\gamma_m$ depends on $m$. This completes the proof.
+\end{proof}
+
+\section{Regression identities, moment comparison, and removal of the conditioning}\label{ch31:sec:transport}
+
+This subsection collects the regression identities (\cref{ch31:lem:regression}), a comparison estimate for localized moments at nearby triples (\cref{ch31:lem:moment-transport-and-schur}), the removal of the conditioning together with the passage to the continuum (\cref{ch31:lem:continuum-transfer}), and lower bounds for fixed nonnegative observables (\cref{ch31:lem:positive-mass}).
+
+\begin{lemma}\label{ch31:lem:regression}
+Let $P$ be a probability measure and let $A,B$ be bounded real random variables with $s=\E_PB^2>0$ and $v=\Var_PB>0$. Then
+\[
+ \mathscr C(P;A,B)=\frac{\Var_PA-\Cov_P(A,B)^2/v}{s}=\frac{\inf_{\alpha,c\in\R}\E_P(A-\alpha B-c)^2}{s}.
+\]
+If $0\le B\le1$, $P\{B=0\}\ge p_0>0$, and $P\{B\ge b_*\}\ge p_1>0$, then $s\ge p_1b_*^2$ and $v\ge p_0p_1b_*^2$. Further, put $a=\E_PB$ and define $e_1,e_2,e_3$ by
+\[
+ \E_PA=\gamma(2a+e_1),\qquad\E_P[AB]=\gamma(2s+e_2),\qquad\E_PA^2=\gamma^2(6s+e_3)
+\]
+for some $\gamma>0$. Then
+\begin{equation}\label{ch31:eq:exact-schur-error}
+ \frac{\mathscr C(P;A,B)}{\gamma^2}=2+\frac{e_3-4e_2-e_1^2-(e_2-ae_1)^2/v}{s}.
+\end{equation}
+In particular, if $P=P_\gamma$ depends on $\gamma$, the bounds $p_0$, $p_1$, and $b_*$ hold uniformly, and $e_1,e_2,e_3\to0$ as $\gamma\downarrow0$, then $\mathscr C(P_\gamma;A,B)=2\gamma^2+o(\gamma^2)$, even if $\E_{P_\gamma}B$ and $\E_{P_\gamma}B^2$ have no limits.
+\end{lemma}
+
+\begin{proof}
+We minimize first over $c$. At a given $\alpha$ the unique minimizer is $c=\E A-\alpha\E B$, and the remaining quadratic is $\Var A-2\alpha\Cov(A,B)+\alpha^2v$. Since $v>0$, its minimizer is $\alpha=\Cov(A,B)/v$, and its minimum is the numerator in the first expression. This proves the regression identity.
+
+For an independent copy $B'$ of $B$ we have $\Var B=\E(B-B')^2/2$. The two events $\{B=0,\ B'\ge b_*\}$ and $\{B'=0,\ B\ge b_*\}$ each have probability at least $p_0p_1$, and $(B-B')^2\ge b_*^2$ on each of them, which implies $v\ge p_0p_1b_*^2$. Integrating $B^2$ over $\{B\ge b_*\}$ gives $s\ge p_1b_*^2$.
+
+For \eqref{ch31:eq:exact-schur-error}, note that $v=s-a^2$, that $\Cov(A,B)/\gamma=2v+e_2-ae_1$, and that $\Var A/\gamma^2=6s+e_3-(2a+e_1)^2$. Subtracting the square of the first expression divided by $v$ from the second, the terms linear in $ae_1$ cancel, and we obtain $2s+e_3-4e_2-e_1^2-(e_2-ae_1)^2/v$; dividing by $s$ gives \eqref{ch31:eq:exact-schur-error}. Uniform positive lower bounds on $s$ and $v$, together with $\abs a\le1$, make the correction in \eqref{ch31:eq:exact-schur-error} tend to zero when $e_1,e_2,e_3\to0$, without any limit for $a$ or $s$.
+\end{proof}
+
+\begin{lemma}\label{ch31:lem:moment-transport-and-schur}
+Let $\mathcal U\Subset\mathcal U^+\Subset\mathcal U^{++}$ be the tubes of \cref{ch31:def:regular-observables}, and let $\widetilde f$ be a smooth invariant weight supported strictly inside $\mathcal U$ (for example $\psi$, $\psi^2$, or a localizing weight $\widetilde w$). Assume that the inverse covariance $\NormalCov^{-1}$ is bounded and locally Lipschitz on $\mathcal U^{++}$ (it is in fact smooth there). Put $f_l=\widetilde fq_*^l$, with the fixed bounded zero extensions. For two random triples $H,H'$ in a common gauge frame at the basepoint let
+\[
+ D=\max_i\norm{H_i-H_i'}_{\rm op},\qquad d=\min(1,D),\qquad\beta=\abs{b(\Log H')}\one_{\{H'\in\mathcal U^+\}}.
+\]
+There exist $C<\infty$ and $0<\eta_0<1$, depending only on the tubes and their margins, on $\norm{\NormalCov^{-1}}_\infty+\Lip(\NormalCov^{-1})$ on $\mathcal U^{++}$, and on the weight, such that for every $p\ge1$ and $l=1,2$,
+\[
+ \abs{\E f_l(H)-\E f_l(H')}\le C\bigl[\E(\beta+d)^{4l-2}\bigr]^{1/2}\bigl[\E d^2\bigr]^{1/2}+C\eta_0^{-p}\,\E d^p,
+\]
+where the constant in front of $\eta_0^{-p}$ does not depend on $p$. For $l=0$ the bound is $C\,\E d$. Applied under $\nu$ to $H=\mathcal H^K$ and $H'=\Xi_m^K$, with $p=2l+2\le6$, these bounds give
+\[
+ \limsup_{K\to\infty}\gamma^{-l}\abs{\E_\nu f_l(\mathcal H^K)-\E_\nu f_l(\Xi_m^K)}\le C\delta_m^{1/2}+r_m(\gamma),\qquad l=1,2,
+\]
+where $r_m(\gamma)\to0$ as $\gamma\downarrow0$ for each fixed $m$, and $C$ does not depend on $m$.
+\end{lemma}
+
+\begin{proof}
+We first prove the comparison inequality without any probabilistic assumption on $H,H'$. In the coordinates $X=y+b$ write $\mathcal L(y)=\NormalCov(y)^{-1}$. The boundedness and local Lipschitz continuity of $\mathcal L$, and the smoothness of $y$ and $b$ on the tubes, give
+\[
+ \abs{q_*(X)-q_*(X')}\le C\bigl(\abs{b(X)}+\abs{b(X')}\bigr)\abs{X-X'}.
+\]
+Indeed, we expand the difference of the two quadratic forms, first changing $b$ with $\mathcal L$ fixed and then changing $\mathcal L$; the second term is at most $C\abs{b(X')}^2\abs{y(X)-y(X')}$, which is bounded by the displayed expression since the tube radius is bounded. For $l=1,2$, the factorization of a difference of $l$-th powers and the Lipschitz bound on $\widetilde f$ give
+\begin{equation}\label{ch31:eq:local-weight-difference}
+ \abs{f_l(X)-f_l(X')}\le C\bigl(\abs{b(X')}+\abs{X-X'}\bigr)^{2l-1}\abs{X-X'}
+\end{equation}
+whenever the segment between the two points lies in $\mathcal U^{++}$. The derivative of the weight contributes a term of order $\abs b^{2l}$, which we absorbed using the fixed upper bound on $\abs b$.
+
+We choose $\eta_0<1$ so small that any two triples at matrix distance at most $\eta_0$, one of which lies in the support of $f_l$, both lie in $\mathcal U^+$ and have their logarithmic segment in $\mathcal U^{++}$. Such a choice exists: we cover the compact support by finitely many coordinate balls whose doubled closures lie in $\mathcal U^{++}$ and use the positive margins to the complement of $\mathcal U^+$. The logarithm and the tube coordinates have bounded derivatives on these balls, so $\abs{X-X'}\le CD$ there. On $\{D\le\eta_0\}$, if both values of $f_l$ vanish there is no difference; otherwise \eqref{ch31:eq:local-weight-difference} gives
+\[
+ \abs{f_l(H)-f_l(H')}\le C(\beta+d)^{2l-1}d.
+\]
+On $\{D>\eta_0\}$ the difference is at most $2\norm{f_l}_\infty\le2\norm{f_l}_\infty\eta_0^{-p}d^p$. Taking expectations and applying the Cauchy--Schwarz inequality on the first event proves the inequality; the constant in front of $\eta_0^{-p}$ does not depend on $p$. For $l=0$, the fixed smooth zero extension of $\widetilde f$ is globally Lipschitz for the bounded distance $d$, and the same argument gives $C\,\E d$.
+
+We now prove the application, and first bound the moments of $\beta$ uniformly in $m$. Let $d_m=\min(1,D_{K,m})$ and $d_0=\min(1,D_{K,0})$, where $D_{K,m}=\max_i\norm{\mathcal H_i^K-\Xi_{m,i}^K}_{\rm op}$ as in \cref{ch30:thm:scaled-matrix-tail}, and let $e_m=\min(1,\max_i\norm{\Xi_{m,i}^K-\Xi_{0,i}^K}_{\rm op})$. By the triangle inequality, $e_m\le d_m+d_0$. On $\{e_m\le\eta_1\}$, with $\eta_1$ fixed sufficiently small, an endpoint $\Xi_m^K\in\mathcal U^+$ has $\Xi_0^K$ in a fixed larger regular tube $\mathcal V\subset\mathcal U^{++}$, and $\abs{b(\Log\Xi_m^K)}\le\abs{b(\Log\Xi_0^K)}+Ce_m$. On $\{e_m>\eta_1\}$, the bounded normal radius is at most $C\eta_1^{-1}e_m$. Combining the two cases, we find, for every fixed $r\le8$,
+\begin{equation}\label{ch31:eq:uniform-beta-moment}
+ \E\beta^r\le C_r\,\E\bigl[\abs{b(\Log\Xi_0^K)}^r\one_{\{\Xi_0^K\in\mathcal V\}}\bigr]+C_r\,\E(d_m+d_0)^r\le C_r\gamma^{r/2}.
+\end{equation}
+In the last step we used only part (3) of \cref{ch31:thm:prefix-moments-no-return} with $m=0$ and the bounds on high moments in \cref{ch30:thm:scaled-matrix-tail}. Both are estimates under $\nu$, at the fixed side and in the same gauge frame at the basepoint. The tube $\mathcal V$ is chosen before $m$, and both constants for the distance moments are independent of $m$, so the constant in \eqref{ch31:eq:uniform-beta-moment} does not depend on $m$.
+
+For $l=1,2$ we take $r=4l-2$, which is two or six. By \eqref{ch31:eq:uniform-beta-moment} and the moment bound for $d_m$, we have $\E(\beta+d_m)^{4l-2}\le C\gamma^{2l-1}$. The second-moment bound of \cref{ch30:thm:scaled-matrix-tail} gives
+\[
+ (\E d_m^2)^{1/2}\le C\sqrt\gamma\,\delta_m^{1/2}+C\gamma(1+\abs{\log\gamma})^k,
+\]
+where $k$ denotes the exponent written $d$ in that theorem. With $p=2l+2$, the exceptional term is at most $C_p\gamma^{l+1}$ by the same theorem. The comparison inequality therefore gives, at every finite $K\ge m$,
+\begin{equation}\label{ch31:eq:scaled-transport}
+ \gamma^{-l}\abs{\E f_l(\mathcal H^K)-\E f_l(\Xi_m^K)}\le C\delta_m^{1/2}+C\sqrt\gamma(1+\abs{\log\gamma})^k+C\gamma.
+\end{equation}
+This proves the claim, with $r_m(\gamma)=C\sqrt\gamma(1+\abs{\log\gamma})^k+C\gamma$. For $l=2$ the sixth normal moment is used in an essential way.
+\end{proof}
+
+\begin{lemma}\label{ch31:lem:continuum-transfer}
+Fix $0<\gamma\le\gamma_W(n)$, and let $F:\SU^3\to\R$ be bounded, continuous, and invariant under simultaneous conjugation; $F$ may depend on $\gamma$. Write $e=\mu_{N,\gamma}(S_{N,n,\gamma}^c)$, with $N=nB^K$. Then, for every $q>0$,
+\[
+ \abs{\E_{\mu_{N,\gamma}}F(\mathcal H^K)-\E_\nu F(\mathcal H^K)}\le2\norm F_\infty e\le2\norm F_\infty C_{n,q}\gamma^q,
+\]
+uniformly in $K$, and
+\[
+ \lim_{K\to\infty}\E_{\mu_{N,\gamma}}F(\mathcal H^K)=\E_{\lambda_\gamma}F(H),
+\]
+where $H$ denotes the coordinate-cycle holonomy triple of $X(\theta L^2)$.
+\end{lemma}
+
+\begin{proof}
+The value $F(\mathcal H^K)$ depends only on the gauge orbit of the fine configuration, since $F$ is invariant, the reconstruction maps produce a gauge-equivalent configuration, and the Wilson flow commutes with lattice gauge transformations. Hence $F(\mathcal H^K)$ equals $F$ evaluated at the coordinate-cycle holonomy triple of $\Psi^{(N)}_{\theta L^2}U$, which is a bounded measurable function on the whole configuration space; this is how $F(\mathcal H^K)$ is understood under $\mu_{N,\gamma}$. For any bounded $F$ and any event $S$ with $e=\mu(S^c)$ we have
+\begin{equation}\label{ch31:eq:bounded-selection-transfer}
+ \E_\mu F=(1-e)\E_\nu F+e\,\E_\mu(F\mid S^c),\qquad\abs{\E_\mu F-\E_\nu F}\le2\norm F_\infty e,
+\end{equation}
+where the last term of the identity is set to zero when $e=0$; see also \cref{ch02:lem:bounded-transfer}. By \cref{ch20:cor:payment-all-powers}, at the fixed side $n$ we have $e\le C_{n,q}\gamma^q$ for every fixed $q>0$, uniformly in $K$. This proves the first assertion.
+
+For the second, \cref{ch02:lem:seven-traces} writes $F=f\circ\mathfrak p$, where $\mathfrak p$ is the vector of the seven normalized traces of $H_1$, $H_2$, $H_3$, $H_1H_2$, $H_1H_3$, $H_2H_3$, and $H_1H_2H_3$, and $f$ is continuous on $[-1,1]^7$ with $\norm f_\infty\le\norm F_\infty$. These traces are the normalized fundamental Wilson loops of the three coordinate cycles and of their concatenations, which are fixed piecewise $C^1$ based loops of bounded length. On each lattice of the sequence they are exact lattice loops, which form admissible approximations. By \cref{ch26:thm:tier-one}, in the form of \cref{ch26:cor:common-ladder-family}, the joint law of these seven traces under $\mu_{N,\gamma}$, at the flow time $\theta L^2$, converges as $K\to\infty$ to their joint law under $\lambda_\gamma$. At fixed $\gamma$ the corollary may discard finitely many initial terms of the sequence $nB^K$; this does not affect the limit, and the side $n$ is not changed. Since $f$ is bounded and continuous, the expectations converge.
+\end{proof}
+
+\begin{lemma}\label{ch31:lem:positive-mass}
+Let $\mathsf K_1\subset\mathsf P^{++}$ be a compact invariant set with nonempty relative interior, contained in the relative interior of $\mathsf P^{++}$, and let $r_c>0$ be such that $\mathcal T_c=\{y+b:y\in\mathsf K_1,\ b\in\NormalFiber y,\ \abs b\le r_c\}\subset\mathcal U^{++}$. Let $\varphi:\SU^3\to[0,\infty)$ be bounded, invariant under simultaneous conjugation, and Lipschitz for the matrix distance, and assume $\varphi(H)\ge c_1>0$ whenever $\Log H\in\mathcal T_c$. Then there exist $a,\gamma_1>0$ such that, for $0<\gamma\le\gamma_1$ and $K\ge K_0(0)$,
+\[
+ \E_\nu\varphi(\Xi_0^K)\ge c_1a,\qquad\E_\nu\varphi(\mathcal H^K)\ge c_1a/2,\qquad\E_{\lambda_\gamma}\varphi(H)\ge c_1a/4.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\mathsf K_1'$ be a compact invariant subset of the relative interior of $\mathsf K_1$ with nonempty relative interior. At the flat coarse field $V(y,0)$ we have $\Log\Xi_0^K=y$, by the exact flat values of \cref{ch31:thm:prefix-regularity}. By the uniform first-derivative bound of that theorem with $m=0$, there exists $\varepsilon'>0$ such that, for every coarse field $V=V(y,v)$ with $y\in\mathsf K_1'$ and $\abs v\le\varepsilon'$, the tangential component of $\Log\Xi_0^K$ lies in $\mathsf K_1$ and its normal component has norm at most $r_c$; hence $\Log\Xi_0^K\in\mathcal T_c$, uniformly in $K$. Taking in Step 1 of the proof of \cref{ch31:thm:prefix-moments-no-return} a tangential bump supported in $\mathsf K_1'$ and a normal cutoff supported in $\{\abs v\le\varepsilon'\}$, we find that the set $\{V(y,v):y\in\mathsf K_1',\ \abs v\le\varepsilon'\}$ has $\widehat\nu$-probability at least some $a>0$, uniformly in $K$, for all sufficiently small $\gamma$. This gives $\E_\nu\varphi(\Xi_0^K)\ge c_1a$.
+
+Since $\varphi$ is Lipschitz for the bounded matrix distance, \cref{ch30:thm:scaled-matrix-tail} with $m=0$ gives
+\[
+ \abs{\E_\nu\varphi(\mathcal H^K)-\E_\nu\varphi(\Xi_0^K)}\le\Lip(\varphi)\,\bigl(\E_\nu\min(1,D_{K,0})^2\bigr)^{1/2}\le C\sqrt\gamma,
+\]
+so $\E_\nu\varphi(\mathcal H^K)\ge c_1a/2$ for small $\gamma$, uniformly in $K$. Finally, by \cref{ch31:lem:continuum-transfer} with a fixed $q>0$, we have $\E_{\mu_{N,\gamma}}\varphi(\mathcal H^K)\ge c_1a/2-2C_{n,q}\gamma^q$ for every $K$, and letting $K\to\infty$ gives $\E_{\lambda_\gamma}\varphi\ge c_1a/2-2C_{n,q}\gamma^q\ge c_1a/4$ for small $\gamma$.
+\end{proof}
+
+\section{Proof of the regression coefficient}\label{ch31:sec:proof-statistic}
+
+\begin{proof}[Proof of \cref{ch31:thm:regular-toron-statistic}]
+We first check that the observables are admissible continuum observables (Step 1) and prove the lower bounds on the denominators (Step 2). We then prove the normalized moment estimate at finite cutoff (Steps 3 and 4), take the limits in the stated order (Step 5), and conclude with \cref{ch31:lem:regression} (Step 6).
+
+\paragraph{Step 1: the observables.}
+The inverse covariance $\NormalCov^{-1}$, the tube coordinates, and the cutoffs are invariant under simultaneous conjugation. The supports of $\psi$ and $\psi^2$ have positive distance from the boundary of the identity chart, so their zero extensions, and their products with $q_*$ and $q_*^2$, are bounded and continuous on $\SU^3$; they contain no coupling parameter. The continuous invariant factorization of \cref{ch02:lem:seven-traces} applies on the whole compact space of triples, including central triples and triples of deficient rank. In particular, these observables are continuous functions of the seven normalized traces, as stated.
+
+\paragraph{Step 2: lower bounds on the denominators.}
+We choose compact invariant sets $\mathsf K_0\subset O_0$ and $\mathsf K_+\subset O_+$ with nonempty relative interiors, and a radius $r_c>0$ such that $\chi(b)=1$ whenever $\abs b\le2r_c$. Let $\rho_0,\rho_+:\SU^3\to[0,1]$ be smooth invariant functions, equal to one on the tubes of radius $r_c$ over $\mathsf K_0$ and $\mathsf K_+$ respectively, with $\rho_0$ supported in the interior of $\{\psi=0\}$ and $\rho_+$ supported inside $\{\psi>b_*\}$. The latter set has room for such a choice because $\psi_0\ge2b_*$ on $O_+$ and $\chi=1$ on the normal ball of radius $2r_c$. In finite coordinates such functions are obtained from a smooth function of the squared distance in finitely many small balls, by adding these bumps and truncating smoothly to one on their cores. Averaging over simultaneous conjugation with respect to the Haar probability measure makes them invariant; since the relevant sets are invariant, the support and core properties are preserved. Both functions are Lipschitz for the matrix distance. By \cref{ch31:lem:positive-mass}, there exists $a'>0$ such that $\E_{\lambda_\gamma}\rho_0\ge a'$ and $\E_{\lambda_\gamma}\rho_+\ge a'$ for all sufficiently small $\gamma$. By the support properties, $\lambda_\gamma\{\ObsB=0\}\ge a'$ and $\lambda_\gamma\{\ObsB\ge b_*\}\ge a'$. Since $0\le\ObsB\le1$, \cref{ch31:lem:regression} implies $\E_{\lambda_\gamma}\ObsB^2\ge a'b_*^2$ and $\Var_{\lambda_\gamma}\ObsB\ge(a')^2b_*^2$, which proves the first assertion.
+
+\paragraph{Step 3: the Gaussian moment polynomials.}
+On any bounded set of nonnegative $4\times4$ matrices we have
+\[
+ \abs{\mathfrak m_1(C)-2}+\abs{\mathfrak m_2(C)-6}\le C'\norm{C-I}.
+\]
+Indeed, $\abs{\tr(C-I)}\le4\norm{C-I}$, $\abs{\tr C^2-4}=\abs{\tr((C-I)(C+I))}\le4\norm{C-I}(\norm C+1)$, and $(\tr C)^2-16=(\tr C-4)(\tr C+4)$. By \eqref{ch31:eq:positive-gaussian-tail}, $0\le\Sigma_m^K\le\Sigma_\theta^N$, and together with the spectral bounds of \cref{ch27:thm:flowed-log-covariance} this bounds the norms of all $\widetilde\Sigma_m^K$ by a constant independent of $m$. Then \eqref{ch31:eq:finite-cutoff-covariance-error} compares the moment polynomials at finite $K$ directly with $\mathfrak m_1(I)=2$ and $\mathfrak m_2(I)=6$.
+
+\paragraph{Step 4: the normalized moments at finite cutoff.}
+We apply part (2) of \cref{ch31:thm:prefix-moments-no-return} with the tangential weights $\psi_0$ and $\psi_0^2$ and the normal cutoffs $\chi$ and $\chi^2$, so that $\widetilde w=\psi$ or $\psi^2$. On its right side, $w^+$ and $\widetilde w$ differ only at a fixed positive normal radius. The normal moment bounds of Step 8 of its proof, Markov's inequality, and the boundedness of $\mathfrak m_l(\widetilde\Sigma_m^K)$ show that replacing $w^+$ by $\widetilde w$ changes the expectation by $O_{m,q}(\gamma^q)$ for every fixed $q$; the polynomial comparison in that theorem is supplied by \cref{ch31:lem:weighted-prefix-gaussian}. We take $K_0(m)\ge\max\{m,K_0(0)\}$, as allowed. For $f=\psi$ and $f=\psi^2$ and $l=1,2$, we compare $\gamma^{-l}\E_\nu[fq_*^l(\mathcal H^K)]$ with $\gamma^{-l}\E_\nu[fq_*^l(\Xi_m^K)]$ by \eqref{ch31:eq:scaled-transport}, then with $\E_\nu[f(\Xi_m^K)\mathfrak m_l(\widetilde\Sigma_m^K(y'))]$ by part (2), then with $\mathfrak m_l(I)\E_\nu f(\Xi_m^K)$ by Step 3 and \eqref{ch31:eq:finite-cutoff-covariance-error}, and finally with $\mathfrak m_l(I)\E_\nu f(\mathcal H^K)$ by the case $l=0$ of \cref{ch31:lem:moment-transport-and-schur}, which costs $C\,\E d_m\le C\sqrt\gamma$. We obtain
+\begin{equation}\label{ch31:eq:selected-moment-modulus}
+ \begin{split}
+ &\bigl\lvert\gamma^{-l}\E_\nu[fq_*^l(\mathcal H^K)]-\mathfrak m_l(I)\E_\nu[f(\mathcal H^K)]\bigr\rvert\\
+ &\qquad\le C\bigl\{\delta_m^{1/2}+\delta_m+(nB^K)^{-2}\bigr\}+e_m(\gamma),\qquad K\ge K_0(m),
+ \end{split}
+\end{equation}
+where $e_m(\gamma)\to0$ as $\gamma\downarrow0$ for each fixed $m$; one may take for $e_m$ a finite sum of terms $C_m\sqrt\gamma(1+\abs{\log\gamma})^{k_m}$, $C\sqrt\gamma(1+\abs{\log\gamma})^k$, and $C_m\gamma$. The constants in front of $\delta_m^{1/2}$, $\delta_m$, and the lattice error do not depend on $m$.
+
+\paragraph{Step 5: the limits.}
+We apply \cref{ch31:lem:continuum-transfer} to each bounded product $fq_*^l$ and to $f$, before dividing by $\gamma^l$. For a fixed $q>2$, the cost of replacing $\nu$ by $\mu_{N,\gamma}$ is $O(\gamma^{q-l})=o(1)$ after division by $\gamma^l$, for every $l\le2$. Then \eqref{ch31:eq:selected-moment-modulus} holds for $\mu_{N,\gamma}$, with this additional error. At each fixed $\gamma$, \cref{ch31:lem:continuum-transfer} gives the limits as $K\to\infty$ of these expectations under $\mu_{N,\gamma}$, which are the corresponding expectations under $\lambda_\gamma$. When $K\to\infty$, the lattice error disappears, without any division by $\gamma$. Next we let $\gamma\downarrow0$ at the fixed $m$, which gives
+\[
+ \limsup_{\gamma\downarrow0}\bigl\lvert\gamma^{-l}\E_{\lambda_\gamma}[fq_*^l]-\mathfrak m_l(I)\E_{\lambda_\gamma}f\bigr\rvert\le C\bigl(\delta_m^{1/2}+\delta_m\bigr).
+\]
+Letting $m\to\infty$, we obtain the two moment identities. The side $n$ and the sequence $nB^K$ are fixed throughout; only finitely many initial terms of the sequence may be discarded in the inner limit $K\to\infty$, as allowed by \cref{ch26:cor:common-ladder-family}.
+
+\paragraph{Step 6: the statistic.}
+With $\ObsA=\psi q_*$ and $\ObsB=\psi$, the three errors of \cref{ch31:lem:regression} are
+\[
+ e_1=\gamma^{-1}\E[\psi q_*]-2\E\psi,\qquad e_2=\gamma^{-1}\E[\psi^2q_*]-2\E\psi^2,\qquad e_3=\gamma^{-2}\E[\psi^2q_*^2]-6\E\psi^2,
+\]
+with all expectations under $\lambda_\gamma$. By Step 5 they tend to zero. Combining the lower bounds of Step 2 with \eqref{ch31:eq:exact-schur-error}, we obtain $\SchurStat=2\gamma^2+o(\gamma^2)$. Further, Step 5 shows that at each fixed $m$ the upper limits of $\abs{e_1},\abs{e_2},\abs{e_3}$ are at most $C(\delta_m^{1/2}+\delta_m)$, and the exact identity \eqref{ch31:eq:exact-schur-error} then implies the stated bound on $\SchurStat/\gamma^2-2$, with a constant independent of $m$. The quadratic errors $e_1^2$ and $(e_2-ae_1)^2$ are absorbed using that $\delta_m$ is bounded in $m$ and that $\abs a\le1$.
+\end{proof}
+
+\section{A weighted chi-square limit with four degrees of freedom}\label{ch31:sec:chi-square}
+
+\begin{proof}[Proof of \cref{ch31:thm:inserted-chi-square-law}]
+Only the values of $q_*$ on the support of $\widetilde w$ enter, where $q_*$ is the exact nonnegative quadratic form; the extension of $q_*$ has no effect on $\pi_\gamma$. We first prove a finite-scale version of the statement for bounded Lipschitz $f$ (Steps 1--3) and replace the finite-scale triple by the triple of the fine configuration (Step 4). We then prove the lower bound on $D_\gamma$ (Step 5), pass to the continuum and take the limits (Step 6), and finally extend the result to bounded continuous $f$ and identify the limit law (Step 7).
+
+\paragraph{Step 1: the finite-scale expansion.}
+Fix $m$, let $K\ge K_0(m)\ge\max\{m,K_0(0)\}$, let $\gamma$ be below the threshold of \cref{ch31:thm:prefix-moments-no-return}, and write $H_m=\Xi_m^K$ and $a_f=\E f(\abs{G_4}^2/2)$. We choose a larger coarse regular tube before $m$: its flat holonomies cover a fixed larger regular patch and are separated from the compact support of $\widetilde w$ on the complementary part of the set of flat configurations. The modulus of \cref{ch31:thm:prefix-regularity} has an input margin depending on $m$, which changes the coupling threshold but not this tube. By part (5) of \cref{ch31:thm:prefix-moments-no-return}, there exists a larger coarse regular tube $\mathcal T^+$ such that an output in the support of $\widetilde w$ coming from outside $\mathcal T^+$ has probability $O_{m,q}(\gamma^q)$ for each fixed $q>0$. Inside the coarse tube we use the restriction of $\nu$ normalized by its own mass, and write $y$ for the tangential coordinate of the coarse field. Part (1) of the same theorem, with its bounded output coordinates, gives
+\[
+ b(H_m)/\sqrt\gamma=Z_{K,m}+\mathcal R_{K,m},\qquad\norm{\mathcal R_{K,m}}_{L^r}\le C_{m,r}\sqrt\gamma(1+\abs{\log\gamma})^2,
+\]
+and $\norm{y(H_m)-y}_{L^r}\le C_{m,r}\sqrt\gamma(1+\abs{\log\gamma})$ for every fixed finite $r$, where the recentering by the conditional means is included in $\mathcal R_{K,m}$. These formulas are local coordinate identities only on the good event $G_m$ of Step 4 of that proof, whose complement has probability $O_{m,q}(\gamma^q)$ for every fixed $q>0$ by \eqref{ch31:eq:coordinate-exception}. By \cref{ch31:lem:weighted-prefix-gaussian}, all required moments of $Z_{K,m}$ are bounded at this fixed $m$.
+
+\paragraph{Step 2: comparison with a Gaussian quadratic form.}
+The ambient inverse covariance $P_{\NormalFiber y}\NormalCov(y)^{-1}P_{\NormalFiber y}$ is smooth on the larger patch by \cref{ch27:thm:flowed-log-covariance}. Expanding the quadratic form and using H\"older's inequality, we obtain on the good event
+\[
+ \Bigl\lVert\frac{q_*(H_m)}\gamma-\frac12Z_{K,m}^{\mathsf T}\NormalCov(y)^{-1}Z_{K,m}\Bigr\rVert_{L^1}\le C_m\sqrt\gamma(1+\abs{\log\gamma})^{k_m}.
+\]
+Explicitly, the difference is bounded by a constant times $\abs{\mathcal R}(\abs Z+\abs{\mathcal R})+\abs{y(H_m)-y}(\abs Z+\abs{\mathcal R})^2$, and moments of order at most six suffice. Since $f$ is Lipschitz, the same bound times $\Lip f$ controls the change of $f(q_*(H_m)/\gamma)$. The smooth weight $w(y(H_m))$ can be moved to $w(y)$, and back, with an error of the same order. The normal cutoff $\chi_w$ differs from one only at a fixed positive normal radius, so arbitrarily high fixed moments of the normal coordinate of $H_m$ (Step 8 of the proof of \cref{ch31:thm:prefix-moments-no-return}) make the effect of replacing $\chi_w$ by one $O_{m,q}(\gamma^q)$. On the exceptional events we use only that $f$ and the weight are bounded, without taking a logarithm there. These comparisons hold after multiplication by the mass of the coarse tube, which is at most one.
+
+\paragraph{Step 3: the Gaussian value.}
+Conditionally on $y$, we apply \cref{ch31:lem:weighted-prefix-gaussian} to the bounded Borel function $z\mapsto f(z^{\mathsf T}\NormalCov(y)^{-1}z/2)$. This gives the Gaussian value
+\[
+ \kappa_f\bigl(\widetilde\Sigma_m^K(y)\bigr)=\E f\Bigl(\frac12G_4^{\mathsf T}\widetilde\Sigma_m^K(y)G_4\Bigr),
+\]
+with error $C_m\norm f_\infty\sqrt\gamma(1+\abs{\log\gamma})$. The equality of the laws of the two Gaussian quadratic forms follows by diagonalizing the nonnegative covariance matrix; no inverse of $\Sigma_m^K$ is used. Coupling the two quadratic forms through the same $G_4$, we obtain
+\[
+ \abs{\kappa_f(C)-a_f}\le\frac12\Lip f\,\norm{C-I}\,\E\abs{G_4}^2=2\Lip f\,\norm{C-I}.
+\]
+Integrating against the tangential law of the coarse field and using \eqref{ch31:eq:finite-cutoff-covariance-error}, we obtain
+\begin{equation}\label{ch31:eq:prefix-inserted-distribution}
+ \bigl\lvert\E_\nu[\widetilde w(H_m)f(q_*(H_m)/\gamma)]-a_f\E_\nu\widetilde w(H_m)\bigr\rvert
+ \le C_w\norm f_{\rm BL}\bigl\{\delta_m+(nB^K)^{-2}\bigr\}+\norm f_{\rm BL}\,e_{m,w}(\gamma),
+\end{equation}
+with $e_{m,w}(\gamma)\to0$ as $\gamma\downarrow0$. One may take for $e_{m,w}$ a finite sum of terms $C_{m,w}\sqrt\gamma(1+\abs{\log\gamma})^{k_m}$ and of arbitrarily high fixed powers of $\gamma$. The constant $C_w$ does not depend on $m$: only the bound on the weight and the uniform covariance error enter it.
+
+\paragraph{Step 4: comparison with the triple of the fine configuration.}
+We now replace $H_m$ by $H=\mathcal H^K$ in the bounded test $F_\gamma(H)=\widetilde w(H)f(q_*(H)/\gamma)$. This needs a separate estimate, because the Lipschitz constant of $f(q_*/\gamma)$ grows as $\gamma\downarrow0$. We use the nested tubes of \cref{ch31:lem:moment-transport-and-schur} and set
+\[
+ d_m=\min\Bigl(1,\max_i\norm{H_i-H_{m,i}}_{\rm op}\Bigr),\qquad\beta_m=\abs{b(\Log H_m)}\one_{\{H_m\in\mathcal U^+\}}.
+\]
+The normal coordinate is used only on the indicated tube. For a fixed $0<\eta<1$, if $d_m\le\eta$ and at least one of the two weights is nonzero, then both triples lie in $\mathcal U^+$ and their logarithmic segment lies in $\mathcal U^{++}$. On this event the smooth coordinates and the Lipschitz bound on $\NormalCov^{-1}$ give
+\[
+ \abs{q_*(H)-q_*(H_m)}\le C(\beta_m+d_m)d_m;
+\]
+indeed we expand the two quadratic forms and use $\abs{b(\Log H)}\le\abs{b(\Log H_m)}+Cd_m$. Therefore, on this event,
+\[
+ \abs{F_\gamma(H)-F_\gamma(H_m)}\le C_w\norm f_\infty d_m+C_w\Lip f\,\gamma^{-1}(\beta_m+d_m)d_m.
+\]
+If both weights vanish, the difference is zero. On $\{d_m>\eta\}$ the boundedness of $F_\gamma$ gives the bound $C_w\norm f_\infty\eta^{-4}d_m^4$.
+
+We bound the second normal moment with a constant independent of $m$. We compare $H_m$ with $H_0=\Xi_0^K$ and let $d_0=\min(1,\max_i\norm{H_i-H_{0,i}}_{\rm op})$; the truncated distance between $H_m$ and $H_0$ is at most $d_m+d_0$. When this distance is small and $H_m\in\mathcal U^+$, $H_0$ lies in a fixed larger regular tube $\mathcal V$ and $\beta_m\le\abs{b(\Log H_0)}+C(d_m+d_0)$. When the distance exceeds a fixed margin, the boundedness of the normal radius gives $\beta_m\le C(d_m+d_0)$. Combining the two cases, we obtain
+\[
+ \E_\nu\beta_m^2\le C\,\E_\nu\bigl[\abs{b(\Log H_0)}^2\one_{\{H_0\in\mathcal V\}}\bigr]+C\,\E_\nu(d_m+d_0)^2\le C\gamma,
+\]
+where we used part (3) of \cref{ch31:thm:prefix-moments-no-return} with $m=0$ and the moment bounds of \cref{ch30:thm:scaled-matrix-tail}, which hold for all $m$ with the same constants. The tube $\mathcal V$ is fixed before $m$. By the Cauchy--Schwarz inequality and \cref{ch30:thm:scaled-matrix-tail}, we have, uniformly for $K\ge K_0(m)$,
+\begin{equation}\label{ch31:eq:inserted-test-transport}
+ \abs{\E_\nu F_\gamma(H)-\E_\nu F_\gamma(H_m)}\le C_w\norm f_{\rm BL}\bigl\{\delta_m^{1/2}+\sqrt\gamma(1+\abs{\log\gamma})^k+\gamma^2\bigr\}.
+\end{equation}
+Indeed $(\E(\beta_m+d_m)^2)^{1/2}\le C\sqrt\gamma$ and $(\E d_m^2)^{1/2}\le C\sqrt\gamma\,\delta_m^{1/2}+C\gamma(1+\abs{\log\gamma})^k$, so the factor $\gamma^{-1}$ is compensated by the size of the quadratic form; the fourth moment on the far event is at most $C\gamma^2$. For the weight alone, its global Lipschitz continuity gives the simpler bound $\abs{\E\widetilde w(H)-\E\widetilde w(H_m)}\le C_w\sqrt\gamma$.
+
+\paragraph{Step 5: the lower bound on $D_\gamma$.}
+Since $w$ is continuous, nonnegative, and not identically zero, there exist a compact invariant set $\mathsf K_1$ with nonempty relative interior in the relative interior of $\mathsf P$ and $c_1>0$ with $w\ge c_1$ on $\mathsf K_1$; let $r_c>0$ be such that $\chi_w=1$ on $\{\abs b\le r_c\}$. Then $\widetilde w\ge c_1$ on the corresponding tube $\mathcal T_c$, and $\widetilde w$ is smooth, invariant, and Lipschitz for the matrix distance. By \cref{ch31:lem:positive-mass}, $\E_\nu\widetilde w(H)\ge c_w'$ uniformly in $K$ and $D_\gamma=\E_{\lambda_\gamma}\widetilde w\ge c_w>0$ for all sufficiently small $\gamma$.
+
+\paragraph{Step 6: the continuum and the limits.}
+For each fixed $\gamma>0$, $F_\gamma$ is a bounded continuous invariant function on the compact space of triples, with its fixed zero extension, and its supremum $\norm{\widetilde w}_\infty\norm f_\infty$ does not depend on $\gamma$. By \cref{ch31:lem:continuum-transfer}, the expectations of $F_\gamma(\mathcal H^K)$ and of $\widetilde w(\mathcal H^K)$ under $\nu$ and under $\mu_{N,\gamma}$ differ by at most $C_{w,q}\norm f_\infty\gamma^q$ for any fixed $q>0$, and the expectations under $\mu_{N,\gamma}$ converge to the expectations under $\lambda_\gamma$ as $K\to\infty$. This uses only the supremum of the test, never its Lipschitz constant, so no negative power of $\gamma$ appears. Combining \eqref{ch31:eq:prefix-inserted-distribution} and \eqref{ch31:eq:inserted-test-transport} with the bound for the weight alone, letting $K\to\infty$ at fixed $\gamma$ and $m$, and dividing by $D_\gamma\ge c_w$, we obtain the quantitative bound in the statement, after absorbing the terms from Step 4 and from the conditioning into $e_{m,w}$. The lattice error vanishes in this first limit. The estimates at finite cutoff were needed only for $K\ge K_0(m)$, which suffices for this limit. Letting $\gamma\downarrow0$ at fixed $m$, and then $m\to\infty$, we obtain $\int f\,d\pi_\gamma\to\E f(\abs{G_4}^2/2)$ for every bounded Lipschitz $f$.
+
+\paragraph{Step 7: bounded continuous tests and the limit law.}
+We extend the convergence to bounded continuous $f$ by tightness, without using convergence of moments. Let $\eta_R$ be zero on $[0,R]$, linear on $[R,R+1]$, and one on $[R+1,\infty)$. It is bounded and Lipschitz, so the convergence already proved gives
+\[
+ \limsup_{\gamma\downarrow0}\pi_\gamma([R+1,\infty))\le\E\eta_R(\abs{G_4}^2/2)\le\Prob\{\abs{G_4}^2/2>R\}\longrightarrow0\qquad(R\to\infty).
+\]
+On each compact interval a bounded continuous $f$ has uniformly accurate piecewise linear approximations, which we extend by constants outside the interval; they are bounded Lipschitz functions. The two tail probabilities bound the error outside the interval by a fixed multiple of $\norm f_\infty$. Increasing first the interval and then decreasing the approximation error, we obtain the convergence for $f$. Finally, each of $(G_1^2+G_2^2)/2$ and $(G_3^2+G_4^2)/2$ has density $e^{-u}\one_{\{u\ge0\}}$, by polar coordinates in the plane. They are independent, and their convolution has density $ue^{-u}\one_{\{u\ge0\}}$, which identifies the law of $\abs{G_4}^2/2$ and completes the proof.
+\end{proof}
+
+\section{Gaussian approximation on the regular normal bundle}\label{ch31:sec:invariant-normal-bundle-addendum}
+
+\begin{proof}[Proof of \cref{ch31:thm:invariant-normal-bundle-gaussian}]
+We first verify the geometric and measurability statements (Step 1) and extend a Lipschitz test to a larger bundle (Step 2). We then prove the quantitative bound for bounded Lipschitz $F$ at finite cutoff, first for the finite-scale triple (Steps 3--5) and then for the triple of the fine configuration (Step 6), and pass to the continuum (Step 7). Finally we extend the result to bounded continuous $F$ (Step 8).
+
+\paragraph{Step 1: geometry of the quotient.}
+All vector comparisons below use the Euclidean embedding of the normal spaces in $\R^9$; no global frame is introduced. On a finite smooth orthonormal bundle atlas, $\NormalCov$ and its inverse square root are smooth with bounded derivatives, by \cref{ch27:thm:flowed-log-covariance,ch31:thm:normal-covariance-calibration}, and they are equivariant under simultaneous conjugation, as are the normal coordinates. For $g\in\SU$ the isometry $\Ad(g):\NormalFiber y\to\NormalFiber{\Ad(g)y}$ therefore carries $\Gamma_y$ to $\Gamma_{\Ad(g)y}$, and the invariance of $F$ gives $\overline F(\Ad(g)y)=\overline F(y)$. The quotient of the compact invariant patch $\mathsf P'$ is compact and metrizable, for example by
+\[
+ d_{\rm orb}([y],[y'])=\min_{g\in\SU}\abs{y-\Ad(g)y'}.
+\]
+Since the group is compact, the minimum is attained and zero distance identifies exactly one orbit; the isometric action gives the triangle inequality. Its topology is the quotient topology, since the continuous bijection from the compact quotient to this metric space is a homeomorphism. On the compact support of $\widetilde w$, the tangential projection followed by the quotient map is continuous and invariant. By \cref{ch02:lem:seven-traces}, the seven traces separate the classes of simultaneous conjugacy; their map on this compact support is a continuous surjection onto its Hausdorff image, hence a quotient map, and the tangential class factors continuously through this image. In particular $[y_\gamma]$ is a Borel function on the support of $\widetilde w$; elsewhere we may assign any fixed point of the quotient, since the weight vanishes there. Thus $\rho_\gamma$ is a probability measure on the Borel quotient, and the identity $D_\gamma^{-1}\E[\widetilde w\,\overline F(y_\gamma)]=\int\overline F\,d\rho_\gamma$ holds and does not depend on the choice of representatives. For the regularity of the fiber integral, let $E_y:\R^4\to\NormalFiber y$ be a smooth orthonormal frame in one chart and write $\overline F(y)=\E F(y,E_yG_4)$. The bounded derivative of the frame gives
+\[
+ \abs{\overline F(y)-\overline F(y')}\le C\Lip F\,(1+\E\abs{G_4})\abs{y-y'},
+\]
+and a finite cover with positive interior margins gives the same bound on the compact patch. Hence $\overline F$ is bounded Lipschitz with $\norm{\overline F}_{\rm BL}\le C\norm F_{\rm BL}$. The same formula and dominated convergence show that $\overline F$ is continuous when $F$ is only continuous.
+
+\paragraph{Step 2: extension of a Lipschitz test.}
+Let $F$ be bounded Lipschitz. In the proof the test is evaluated at the tangential coordinate $y$ of the coarse field and at triples where the weight may vanish, and these tangential coordinates may lie outside $\mathsf P'$. We therefore first extend $F$. Let $\widehat F(x)=\inf_s\{F(s)+\Lip F\,\abs{x-s}\}$, the infimum over $s$ in the normal bundle over $\mathsf P'$, be the McShane extension to $\R^9\times\R^9$; it has the same Lipschitz constant. Truncating it at $\pm\norm F_\infty$ preserves the Lipschitz constant and gives the bound $\norm F_\infty$. Averaging the result with respect to the Haar probability measure over the diagonal action $(y,z)\mapsto(\Ad(g)y,\Ad(g)z)$, which acts by isometries of $\R^9\times\R^9$, preserves the bound and the Lipschitz constant and gives an invariant function. Since $F$ is invariant and the bundle over $\mathsf P'$ is invariant, the averaged function agrees with $F$ there. We denote this extension, restricted to the normal bundle over $\mathsf P^{++}$, again by $F$, and define $\overline F$ by the same formula on $\mathsf P^{++}$; Step 1 applies on $\mathsf P^{++}$ as well. Since $\widetilde w$ vanishes unless the tangential coordinate lies in $\mathsf P'$, the quantities in the theorem are unchanged.
+
+\paragraph{Step 3: the finite-scale expansion.}
+We work under $\nu$, with $H=\mathcal H^K$ and $H_m=\Xi_m^K$, the triple of the finite-scale reconstruction from the first $m$ steps on the same sample. All estimates are for $K\ge K_0(m)$, as allowed by \cref{ch31:thm:prefix-moments-no-return}. Under the restriction of $\nu$ to its larger coarse regular tube, normalized by its own mass, let $y$ be the tangential coordinate of the coarse field. That theorem and \cref{ch31:lem:weighted-prefix-gaussian} give
+\[
+ \gamma^{-1/2}b(H_m)=Z_{K,m}+\mathcal R_{K,m},\qquad\norm{\mathcal R_{K,m}}_{L^r}\le C_{m,r}\sqrt\gamma(1+\abs{\log\gamma})^2,
+\]
+\[
+ \norm{y(H_m)-y}_{L^r}\le C_{m,r}\sqrt\gamma(1+\abs{\log\gamma}),\qquad Z_{K,m}=A_{0,K}z_0+\sum_{j=1}^mA_{j,K}(w_j-\bar w_j),
+\]
+where $\bar w_j$ is the conditional mean of $w_j$ under the conditional fluctuation kernel and the error of the recentering is included in $\mathcal R_{K,m}$. All fixed moments of $Z_{K,m}$ are bounded uniformly in $K$ at this $m$. These are local coordinate identities only on the output tube, with the bounded extensions of part (1) of \cref{ch31:thm:prefix-moments-no-return}. By part (5) of that theorem, outputs in the support of the weight coming from outside the larger coarse tube have probability at most $C_{m,q}\gamma^q$ for every fixed $q>0$; inside, the exceptional event \eqref{ch31:eq:coordinate-exception} has the same bound. Bounded tests on these exceptional events therefore contribute only $C_{m,q}\norm F_\infty\gamma^q$.
+
+\paragraph{Step 4: comparison of the normalized normal vectors.}
+On the good event, using the bounded derivatives of the inverse square root, H\"older's inequality, and the preceding moments, we obtain
+\[
+ \E\bigl\lvert\gamma^{-1/2}\NormalCov(y(H_m))^{-1/2}b(H_m)-\NormalCov(y)^{-1/2}Z_{K,m}\bigr\rvert\le C_m\sqrt\gamma(1+\abs{\log\gamma})^{k_m};
+\]
+indeed the difference is bounded by $C\abs{\mathcal R_{K,m}}+C\abs{y(H_m)-y}\abs{Z_{K,m}}$. Since $F$ is Lipschitz in both arguments, $F(y(H_m),z(H_m))$ may be replaced by $F(y,\NormalCov(y)^{-1/2}Z_{K,m})$ with an error $\Lip F$ times this bound plus $\Lip F\,\E\abs{y(H_m)-y}$. Replacing $w(y(H_m))$ by $w(y)$ gives an error of the same type. The normal cutoff $\chi_w$ differs from one only at a fixed positive distance from zero, and arbitrarily high fixed normal moments from the same theorem bound the effect of replacing it by one by $C_{m,q}\gamma^q$.
+
+\paragraph{Step 5: the Gaussian value.}
+Conditionally on $y$, we apply \cref{ch31:lem:weighted-prefix-gaussian} to the function $v\mapsto F(y,\NormalCov(y)^{-1/2}v)$. Since it is a jointly Borel bounded function of the whole vector, the lemma applies without any radial restriction, and the Gaussian value is $\E F(y,(\widetilde\Sigma_m^K(y))^{1/2}G_y)$ with $G_y\sim\Gamma_y$. For every nonnegative self-adjoint $C$ we have
+\[
+ \norm{C^{1/2}-I}_{\rm op}\le\norm{C-I}_{\rm op},\qquad\abs{\E F(y,C^{1/2}G_y)-\overline F(y)}\le2\Lip F\,\norm{C-I}_{\rm op}.
+\]
+The first inequality follows on each eigenvalue from $\abs{\sqrt r-1}=\abs{r-1}/(\sqrt r+1)$, including $r=0$; the second uses $\E\abs{G_y}\le(\E\abs{G_y}^2)^{1/2}=2$. Moving $\overline F(y)$ back to $\overline F(y(H_m))$ with the Lipschitz bound of Step 1 and the weight back to $\widetilde w(H_m)$, and using the covariance error \eqref{ch31:eq:finite-cutoff-covariance-error}, we obtain
+\begin{equation}\label{ch31:eq:normal-bundle-prefix}
+ \begin{split}
+ &\Bigl\lvert\E_\nu\bigl\{\widetilde w(H_m)\bigl[F(y(H_m),z(H_m))-\overline F(y(H_m))\bigr]\bigr\}\Bigr\rvert\\
+ &\qquad\le C_w\norm F_{\rm BL}\bigl\{\delta_m+(nB^K)^{-2}\bigr\}+\norm F_{\rm BL}\,e^{1}_{m,w}(\gamma),
+ \end{split}
+\end{equation}
+where $z(H')=\gamma^{-1/2}\NormalCov(y(H'))^{-1/2}b(H')$ and $e^1_{m,w}(\gamma)\to0$ as $\gamma\downarrow0$ at fixed $m$. Multiplying by the mass of the coarse tube, which is at most one, justifies the use of the normalized conditional estimates. The tangential integration in this step is always against the law of the coarse field, and the constant in front of the covariance error does not depend on $m$.
+
+\paragraph{Step 6: comparison with the triple of the fine configuration.}
+We replace $H_m$ by $H$ on the same sample. Let $d_m=\min(1,\max_i\norm{H_i-H_{m,i}}_{\rm op})$, and fix nested regular output tubes with positive margins. There exists $\eta>0$, independent of $m$, such that if $d_m\le\eta$ and at least one of the two weights is nonzero, both triples lie in the larger identity chart. On that event the normal coordinate, the tangential coordinate, and the map $H'\mapsto\NormalCov(y(H'))^{-1/2}b(H')$ have bounded derivatives, as one sees by differentiating the product on the fixed bounded tube. Hence, for $J_\gamma(H')=\widetilde w(H')F(y(H'),z(H'))$,
+\[
+ \abs{J_\gamma(H)-J_\gamma(H_m)}\le C_w\norm F_{\rm BL}(1+\gamma^{-1/2})d_m.
+\]
+If both weights vanish, the difference is zero; on $\{d_m>\eta\}$ we use the bound $2\norm{\widetilde w}_\infty\norm F_\infty$. By \cref{ch30:thm:scaled-matrix-tail},
+\[
+ \gamma^{-1/2}\E_\nu d_m\le C\delta_m^{1/2}+C\sqrt\gamma(1+\abs{\log\gamma})^k,\qquad\nu\{d_m>\eta\}\le C_\eta\gamma^2.
+\]
+The same argument for $\widetilde w(H')\overline F(y(H'))$ involves no factor $\gamma^{-1/2}$. Combining these bounds with \eqref{ch31:eq:normal-bundle-prefix}, we obtain the same estimate for $H$ in place of $H_m$, with an additional term $C_w\norm F_{\rm BL}\delta_m^{1/2}$ and an additional error at fixed $m$ that tends to zero with $\gamma$.
+
+\paragraph{Step 7: the continuum and the limits.}
+For each fixed $\gamma>0$, both tests $J_\gamma$ and $\widetilde w\,\overline F(y(\cdot))$ are bounded continuous invariant functions on $\SU^3$, with the stated zero extensions. By \cref{ch31:lem:continuum-transfer}, the expectations under $\nu$ and $\mu_{N,\gamma}$ differ by at most $C_{w,q}\norm F_{\rm BL}\gamma^q$ for any fixed $q>0$, and the expectations under $\mu_{N,\gamma}$ converge to those under $\lambda_\gamma$ as $K\to\infty$. This uses only the supremum of the tests, not their Lipschitz constants, which depend on $\gamma$. Letting $K\to\infty$ at fixed $\gamma$ and $m$ and dividing by $D_\gamma\ge c_w$ (\cref{ch31:thm:inserted-chi-square-law}), we obtain \eqref{ch31:eq:normal-bundle-ordered-error}. Letting $\gamma\downarrow0$ at fixed $m$, and then $m\to\infty$, proves \eqref{ch31:eq:invariant-normal-bundle-comparison} for bounded Lipschitz $F$.
+
+\paragraph{Step 8: bounded continuous tests.}
+Let $F$ be bounded and continuous. On the support of the weight we have $\abs{z_\gamma}^2/2=q_*/\gamma$, so \cref{ch31:thm:inserted-chi-square-law} shows that the localized probabilities of $\{\abs{z_\gamma}>R\}$ satisfy $\limsup_{\gamma\downarrow0}\pi_\gamma((R^2/2,\infty))\to0$ as $R\to\infty$. For the comparison integral, the inner probability $\Gamma_y\{\abs z>R\}=\Prob\{\abs{G_4}>R\}$ does not depend on $y$ or on the representative, and integrating it against $\rho_\gamma$ gives the same tail bound. The set $\{(y,z):y\in\mathsf P',\ \abs z\le R\}$ is compact, and a continuous function on it admits uniformly accurate bounded Lipschitz approximations. To construct them, we take a sufficiently fine finite net, form the upper and lower cones of a sufficiently large finite slope through the values on the net, and truncate at the supremum bound. The uniform continuity of $F$ gives the approximation as the net is refined and the slope is increased, and these cone functions are defined on the whole ambient space. Averaging them over simultaneous conjugations with respect to the Haar probability measure makes them invariant, preserves their bound and their Lipschitz constant, and preserves the approximation on this invariant compact set. We apply the bounded Lipschitz case to each approximant; the two tail probabilities control the errors outside the compact set. Letting first the approximation error tend to zero and then $R\to\infty$, we obtain \eqref{ch31:eq:invariant-normal-bundle-comparison}.
+\end{proof}
+
+\section{Comparison probability measures}\label{ch31:sec:references}
+
+This subsection evaluates the observables of \cref{ch31:def:regular-observables} under the four comparison probability measures of \cref{ch01:def:references}: the Abelian Maxwell measure with Haar cycle holonomies (item (1) there, constructed in \cref{ch27:lem:abelian-reference}), Gaussian holonomies with independent Haar factors (item (2)), Gaussian holonomies with Gaussian constant modes (item (3)), and the conditional normal Gaussian measure (item (4)). These measures are different constructions, and their hypotheses are part of their definitions. The comparisons show how to read the conclusion of \cref{ch31:thm:regular-toron-statistic}. The conditional normal Gaussian measure has the same coefficient $2\gamma^2$. The two holonomy models without a non-Abelian flat background give a vanishing statistic or a statistic of order one, and the Gaussian holonomies with Gaussian constant modes give the regular patch an exponentially small mass.
+
+For the third measure we use Gaussian concentration. Its classical antecedents are the Gaussian isoperimetric inequalities of Borell \cite{Borell1975GaussianIsoperimetry} and of Sudakov and Tsirelson \cite{SudakovTsirelson1974GaussianIsoperimetry}, and the sample-function formulation of Cirel'son, Ibragimov, and Sudakov \cite{CirelsonIbragimovSudakov1976}; we use the formulation of Adler and Taylor \cite{AdlerTaylor2007}.
+
+\begin{lemma}\label{ch31:lem:gaussian-supremum}
+Let $d\ge1$, let $G$ be a standard Gaussian vector in $\R^d$, and let $F:\R^d\to\R$ be Lipschitz with constant $\ell$ for the Euclidean distance. Then for every $\lambda\in\R$,
+\[
+ \log\E e^{\lambda(F(G)-\E F(G))}\le\lambda^2\ell^2/2.
+\]
+Let $\mathcal T$ be a nonempty compact metric space and $(Z_t)_{t\in\mathcal T}$ a centered real Gaussian process, whose finite-dimensional covariances may be degenerate, with a separable realization having almost surely continuous paths, and assume $\sigma_Z^2=\sup_{t\in\mathcal T}\E Z_t^2<\infty$. For any fixed countable dense set $\mathcal T_0\subset\mathcal T$, the random variable $S_Z=\sup_{t\in\mathcal T}Z_t=\sup_{t\in\mathcal T_0}Z_t$ is measurable, almost surely finite, and integrable. If $\sigma_Z^2>0$, then, writing $m_Z=\E S_Z$,
+\[
+ \log\E e^{\lambda(S_Z-m_Z)}\le\lambda^2\sigma_Z^2/2\quad(\lambda\in\R),\qquad
+ \Prob\{S_Z-m_Z\ge u\}\le e^{-u^2/(2\sigma_Z^2)}\quad(u>0).
+\]
+If $\sigma_Z^2=0$, the process and its supremum vanish almost surely. In particular this applies to $\mathcal T=\Torus\times\{1,2,3\}\times S^2$ and $Z_{x,i,v}=\ip v{G_i(x)}$ for a continuous centered Gaussian field $G=(G_i)$ with this realization; its supremum is $\max_i\sup_x\abs{G_i(x)}$. The only constants are the displayed Lipschitz constant and supremum variance; no dimension, cardinality of the index set, or parameter of the Yang--Mills measure enters.
+\end{lemma}
+
+\begin{proof}
+We use two statements of Adler and Taylor. By \cite[Theorem~2.1.1, p.~50, (2.1.5)]{AdlerTaylor2007}, the supremum of an almost surely bounded centered Gaussian process has finite mean and satisfies an upper tail bound. By \cite[Lemma~2.1.5, p.~54, (2.1.13)]{AdlerTaylor2007}, with the boundedness assumption added in the authors' correction list (entry 54-6), we have $\E e^{th(G)}\le e^{t^2/2}$ for $t>0$, every bounded $C^2$ function $h$ with $\Lip(h)\le1$ and $\E h(G)=0$, and a vector $G$ of independent standard real Gaussian variables. The reference to Lemma~2.1.4 specifies this law of $G$.
+
+The case $\lambda=0$ is immediate, and if $\ell=0$ then $F$ is constant. Suppose $\ell>0$ and $\lambda\ne0$. Let $F_R=\max(-R,\min(F,R))$ and let $F_{R,\varepsilon}$ be its convolution with a nonnegative smooth probability kernel supported in a ball of radius $\varepsilon$. Then $F_{R,\varepsilon}$ is bounded and smooth with bounded derivatives, $\Lip(F_{R,\varepsilon})\le\ell$, and $\abs{F_{R,\varepsilon}-F_R}\le\ell\varepsilon$. Applying the corrected lemma to $h=\pm(F_{R,\varepsilon}-\E F_{R,\varepsilon}(G))/\ell$, with $t=\abs\lambda\ell$ and the sign of $\lambda$, gives the asserted exponential moment bound for $F_{R,\varepsilon}$. At fixed $R$, uniform convergence as $\varepsilon\downarrow0$ gives the bound for $F_R$; the centered functions differ by at most $2\ell\varepsilon$. Next $F_R\to F$ pointwise as $R\to\infty$ and $\abs{F_R}\le\abs F$. The bound $\abs{F(g)}\le\abs{F(0)}+\ell\abs g$ implies integrability of $F(G)$ and every $e^{c\abs{F(G)}}$, since $c\ell\abs g\le\abs g^2/4+c^2\ell^2$. In particular,
+\[
+ e^{\lambda(F_R(G)-\E F_R(G))}\le e^{\abs\lambda(\abs{F(G)}+\E\abs{F(G)})},
+\]
+an integrable bound independent of $R$. Dominated convergence for the expectations and centered exponentials proves the first assertion.
+
+For the process, we set all values equal to zero on the exceptional null set where the paths are not continuous; this does not change the finite-dimensional laws. Continuity on the compact metric space identifies $S_Z$ with the supremum over $\mathcal T_0$ and makes it measurable and almost surely finite. These properties, the centered Gaussian finite-dimensional laws, and separability are the hypotheses of the cited theorem, which gives a finite mean. Since $S_Z\ge Z_{t_1}$ for any fixed $t_1$, the negative part of $S_Z$ is bounded by $\abs{Z_{t_1}}$, so $S_Z$ is integrable. We enumerate $\mathcal T_0=\{t_1,t_2,\dots\}$, repeating points if it is finite, and let $M_N=\max_{i\le N}Z_{t_i}$. Let $C_N$ be the positive semidefinite covariance of $(Z_{t_i})_{i\le N}$, take a square root $C_N^{1/2}$, and denote its rows by $v_i$. Then $(Z_{t_i})_{i\le N}$ has the law of $(v_i\cdot G)_{i\le N}$, since both characteristic functions equal $\exp(-\xi^{\mathsf T}C_N\xi/2)$. Since $\abs{v_i}^2=(C_N)_{ii}\le\sigma_Z^2$, the map $g\mapsto\max_iv_i\cdot g$ is $\sigma_Z$-Lipschitz, and the first assertion gives its centered exponential moment bound uniformly in $N$; no inverse covariance is used, so singular covariances are included. Since $M_N-Z_{t_1}\uparrow S_Z-Z_{t_1}\ge0$, we have $\E M_N\to m_Z$ by monotone convergence, and Fatou's lemma yields, for each $\lambda\in\R$,
+\[
+ \E e^{\lambda(S_Z-m_Z)}\le\liminf_{N\to\infty}\E e^{\lambda(M_N-\E M_N)}\le e^{\lambda^2\sigma_Z^2/2}.
+\]
+If $\sigma_Z>0$, Markov's inequality with $\lambda=u/\sigma_Z^2$ gives the stated upper tail. If $\sigma_Z=0$, all coordinates on $\mathcal T_0$ vanish on one event of probability one, and continuity extends this to every index. Finally, the directional index space $\Torus\times\{1,2,3\}\times S^2$ is compact, and $\sup_{\abs v=1}\ip v{G_i(x)}=\abs{G_i(x)}$.
+\end{proof}
+
+\begin{lemma}\label{ch31:lem:reference-comparisons}
+Let $\psi$, $q_*$, $\ObsA$, and $\ObsB$ be as in \cref{ch31:def:regular-observables}, evaluated at the coordinate-cycle holonomy triple $H$ at the fixed observation time, under each of the following probability measures of \cref{ch01:def:references}.
+\begin{enumerate}
+\item Under the Abelian Maxwell measure with Haar cycle holonomies, all three holonomies commute, $\ObsA=0$, the statistic vanishes exactly, $\mathscr C_{\rm Ab}=0$, and $\E\ObsB^2,\ \Var\ObsB\ge c_{\rm Ab}>0$, independently of the coupling.
+\item Under Gaussian holonomies with independent Haar factors, the triple $H$ has the law $\Haar^{\otimes3}$ for every coupling, and its statistic is the fixed number $\mathscr C(\Haar^{\otimes3};\ObsA,\ObsB)>0$. More precisely, let $\mathsf K_1$ be a compact tangential subset of the regular patch $\mathsf P$ with positive relative volume and $\psi_0\ge b_*>0$ on $\mathsf K_1$, let $r_c>0$ with $\chi(b)=1$ whenever $\abs b\le r_c$, and put $\mathcal T_c=\{y+b:y\in\mathsf K_1,\ b\in\NormalFiber y,\ \abs b\le r_c\}$, a set contained in the tube $\mathcal U$ on which $q_*$ is the exact quadratic form. If $P$ is a probability measure on $\SU^3$ with $\Var_P\ObsB>0$ whose law of $X=\Log H$ dominates $c_0\,d^9X$ on $\mathcal T_c$, then $\mathscr C(P;\ObsA,\ObsB)\ge c_0\kappa_{\rm c}>0$, where $\kappa_{\rm c}$ depends only on $\mathcal T_c$, the Jacobian of the tube coordinates, $\NormalCov^{-1}$, and the cutoffs.
+\item Under Gaussian holonomies with Gaussian constant modes, assume the realization of \cref{ch01:def:references}(3): with $\mathsf S_ta$ the smoothed field at the observation time, the centered scalar Gaussian process $\ip v{(\mathsf S_ta)_i(x)/\sqrt\gamma}$, indexed by $(x,i,v)\in\Torus\times\{1,2,3\}\times S^2$, has a separable realization with continuous paths and
+\[
+ \sigma_*^2=\sup_{x,i,\abs v=1}\Var\ip v{(\mathsf S_ta)_i(x)/\sqrt\gamma}<\infty.
+\]
+Put $Z_*=\sup_{x,i,\abs v=1}\ip v{(\mathsf S_ta)_i(x)/\sqrt\gamma}$ and $m_*=\E Z_*$. Then $m_*<\infty$ and, by \cref{ch31:lem:gaussian-supremum}, $\Prob(Z_*-m_*>u)\le e^{-u^2/(2\sigma_*^2)}$ for $u>0$ if $\sigma_*>0$. Let $r_*=\inf_{\supp\psi}\abs{\Log H}>0$ and $a_*=r_*/(\sqrt3L)$. If $\sqrt\gamma m_*\le a_*/2$ and $\sigma_*>0$, then
+\[
+ \Prob\{\Log H\in\supp\psi\}\le\exp\Bigl\{-\frac{(a_*-\sqrt\gamma m_*)^2}{2\gamma\sigma_*^2}\Bigr\}\le e^{-a_*^2/(8\gamma\sigma_*^2)},
+\]
+and if $\sigma_*=0$ the regular patch has mass zero. In particular $\E\psi=O(e^{-c/\gamma})$. The constants may depend on the fixed covariance and smoothing of this measure, as well as on the fixed data.
+\item Under the conditional normal Gaussian measure, a fixed smooth positive probability density on the regular patch, charging $O_0$ and $O_+$, is followed, given $y$, by the normalized Gaussian law $b\sim N(0,\gamma\NormalCov(y))$ on $\NormalFiber y$ and by the map $X=y+b$; a fixed tube cutoff equal to one near $b=0$, followed by normalization, changes all moments below only by $O(e^{-c/\gamma})$. This measure has the moment identities of \cref{ch31:thm:regular-toron-statistic}, with errors $O(e^{-c/\gamma})$, and $\mathscr C=2\gamma^2+O(e^{-c'/\gamma})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{Item (1).} In the embedded Abelian theory every value of the connection lies in the same one-dimensional subalgebra, so path ordering reduces to exponentiation of the integral and the three cycle matrices commute. Their logarithms in the identity chart lie in $\CommMan$, so their normal coordinate is zero and $q_*=0$ on the tube; off the chart the observables vanish by definition. Thus $\ObsA=0$ everywhere for this measure. Conditionally on the field of the Abelian Maxwell measure, the three cycle angles are translates of the three independent uniformly distributed phases on $\R/4\pi\Z$, and their joint law is therefore the Haar probability measure on this three-dimensional torus, independently of the coupling (\cref{ch27:lem:abelian-reference}). The invariant open sets $O_0$ and $O_+$ contain smaller open sets of angles of positive Haar measure, and the invariance of $\psi_0$ makes these probabilities independent of the color axis of the embedded subgroup. At $b=0$ the normal cutoff equals one. If $a_0,a_+>0$ are the probabilities of these two sets of angles, then $\Prob\{\ObsB=0\}\ge a_0$ and $\Prob\{\ObsB\ge b_*\}\ge a_+$, and \cref{ch31:lem:regression} implies $\E\ObsB^2\ge a_+b_*^2$ and $\Var\ObsB\ge a_0a_+b_*^2$. This proves item (1).
+
+\emph{Item (2): the law of the triple.} We condition on the Gaussian field. Each factor $\Hol_i(\mathsf S_ta)$ is then deterministic, right multiplication of the Haar distributed $U_i^0$ by it preserves the Haar measure, and the three $U_i^0$ remain conditionally independent. For a bounded product test $\prod_if_i(H_i)$ the conditional expectation is therefore $\prod_i\int f_i\,dH$, independently of the field. Taking indicators of rectangles, we find that the triple has the law $\Haar^{\otimes3}$ at every coupling.
+
+\emph{Item (2): the lower bound.} On $\mathcal T_c$ the density of $d^9X$ in the tube coordinates, $d^9X=J(y,b)\,d\mathrm{vol}(y)\,db$, has a positive lower bound $J_c$. For $y\in\mathsf K_1$ we define
+\[
+ \overline q_y=\frac1{\abs{B^4_{r_c}}}\int_{\abs b\le r_c}q_*(y+b)\,db,\qquad V_c(y)=\int_{\abs b\le r_c}\bigl(q_*(y+b)-\overline q_y\bigr)^2\,db,
+\]
+where $B^4_{r_c}$ is the ball of radius $r_c$ in $\NormalFiber y$. The positive definite quadratic form $q_*(y+\cdot)$ is not constant on this ball, so $V_c(y)>0$. Since its coefficients vary continuously and the ball is fixed in any orthonormal bundle trivialization, $V_c$ is continuous on $\mathsf K_1$ and has a positive minimum by compactness. On $\mathcal T_c$ we have $\ObsB=\psi_0(y)\ge b_*$ and $\ObsA=\psi_0(y)q_*$. For all real $\alpha$ and $c$, subtracting the normal average shows
+\[
+ \int_{\abs b\le r_c}\bigl(\psi_0(y)(q_*(y+b)-\alpha)-c\bigr)^2\,db\ge\psi_0(y)^2V_c(y).
+\]
+If the law of $X$ under $P$ dominates $c_0\,d^9X$ on $\mathcal T_c$, the infimum in \cref{ch31:lem:regression} is therefore at least $c_0\kappa_{\rm c}$, where one choice is
+\[
+ \kappa_{\rm c}=J_cb_*^2\int_{\mathsf K_1}V_c(y)\,d\mathrm{vol}(y)>0.
+\]
+Since $\E_P\ObsB^2\le1$, the same lower bound holds for the statistic, whenever its denominators are positive, as assumed. In the identity chart the density of $\Haar^{\otimes3}$ is $(16\pi^2)^{-3}\prod_{i=1}^3\sinc^2(\abs{x_i}/2)$ by \eqref{ch01:eq:haar-coordinates}, which is smooth and strictly positive on $\mathcal T_c$ for any choice of $\mathsf K_1$ as above, for instance a compact subset of $O_+$ with positive relative volume. The open sets of triples over $O_0$ and $O_+$ near $b=0$ have positive Haar measure, so $\Var\ObsB>0$ and $\E\ObsB^2>0$ under $\Haar^{\otimes3}$, and the lower bound just proved shows that the statistic of $\Haar^{\otimes3}$ is a strictly positive number. This proves item (2).
+
+\emph{Item (3).} We consider the scalar process $f_{x,i,v}=\ip v{(\mathsf S_ta)_i(x)/\sqrt\gamma}$ on the nonempty compact metric space $\Torus\times\{1,2,3\}\times S^2$. Since the smoothing is linear and fixed, every finite vector of this process is centered Gaussian, possibly with singular covariance. Its continuous separable realization and the finiteness of $\sigma_*^2$ are the hypotheses imposed in the statement. By \cref{ch31:lem:gaussian-supremum}, we obtain measurability, almost sure finiteness, $m_*<\infty$, and the displayed tail bound above the mean; the supremum variance is $\sup\Var f_{x,i,v}=\sigma_*^2$ and the supremum is $Z_*=\max_i\sup_x\abs{(\mathsf S_ta)_i(x)}/\sqrt\gamma$. The covariance before smoothing is $\gamma C$ with $C$ fixed, so the law of the normalized field, $m_*$, and $\sigma_*^2$ do not depend on $\gamma$.
+
+We check the deterministic bound on the holonomies. Along a coordinate cycle $\ell_i$, the transport equation $H'=H(\mathsf S_ta)_i$ has speed $\abs{(\mathsf S_ta)_i}$ for the invariant metric with the norm $\abs\cdot$ on $\su$. The distance of its endpoint from the identity is at most the length of this path, which is at most $L\sup_{x,j}\abs{(\mathsf S_ta)_j(x)}$, and on the identity chart this distance is $\abs{\Log H_i}$. Taking the Euclidean norm of the three components, we obtain
+\[
+ \abs{\Log H}\le\sqrt3L\sup_{x,i}\abs{(\mathsf S_ta)_i(x)}=\sqrt3L\sqrt\gamma\,Z_*,
+\]
+where the equality uses the supremum over all unit vectors $v$, which includes both signs. Thus a triple with $\Log H\in\supp\psi$ forces $Z_*\ge a_*/\sqrt\gamma$. If $\sqrt\gamma m_*\le a_*/2$, this threshold lies strictly above the mean, and the tail bound of \cref{ch31:lem:gaussian-supremum} with $u=a_*/\sqrt\gamma-m_*>0$ gives both displayed exponential bounds; then $\E\psi\le\Prob\{\Log H\in\supp\psi\}$. If $\sigma_*^2=0$, the zero-variance clause of \cref{ch31:lem:gaussian-supremum} shows that the directional process and $Z_*$ vanish almost surely; the field vanishes, the holonomies are the identity, which lies outside the regular patch, and the patch has mass zero.
+
+\emph{Item (4).} In an orthonormal frame of the normal space let $G$ be a standard Gaussian vector in four dimensions, independent of $y$, and let $b=\sqrt\gamma\NormalCov(y)^{1/2}G$. The frame may change between charts, but the conditional law and the following quadratic form on the normal bundle are intrinsic. We define, on the whole normal bundle over the patch,
+\begin{equation}\label{ch31:eq:matched-coordinate-quadratic}
+ q_{\rm coord}(y,b)=\frac12b^{\mathsf T}\NormalCov(y)^{-1}b=\gamma Q_0,\qquad Q_0=\abs G^2/2.
+\end{equation}
+We choose $b_{\rm t}>0$ so that $\{\abs b<b_{\rm t}\}$ lies in a fixed smaller normal tube, where the tube coordinates are unique and the normal cutoff of $\psi$ equals one. Only on this event do we identify $q_*(y+b)=q_{\rm coord}(y,b)$ and $\psi(y+b)=\psi_0(y)$; outside it, $q_*$ and $\psi$ denote their fixed bounded extensions, not the unbounded quadratic form $q_{\rm coord}$. Gaussian integration by parts in one dimension gives $\E G_i^2=1$ and $\E G_i^4=3$, and expanding the square and using independence yields
+\[
+ \E Q_0=2,\qquad\E Q_0^2=6,\qquad\Var Q_0=2.
+\]
+The compact patch has spectral bounds $cI\le\NormalCov(y)\le CI$, by \cref{ch27:thm:flowed-log-covariance}. We fix $b_1>0$ smaller than $b_{\rm t}$ and than every radius on which a tube cutoff equals one. All departures from the preceding local identities, or from these cutoffs being one, occur on $\{\abs b\ge b_1\}$, which requires $\abs G\ge b_1/\sqrt{C\gamma}$. For every fixed $r$, the Gaussian polynomial tail on this event is at most $C_re^{-c/\gamma}$: the function $\abs G^re^{-\abs G^2/8}$ is bounded, and the remaining Gaussian density integrates to a finite constant after extracting $e^{-b_1^2/(8C\gamma)}$. These bounds are uniform in $y$. For $k=1,2$ and $j=0,1,2$, the difference between $\psi(y+b)^kq_*(y+b)^j$ and $\psi_0(y)^kq_{\rm coord}(y,b)^j$ vanishes on $\{\abs b<b_1\}$; on its complement the first is bounded by a fixed constant and the second by $C\gamma^j\abs G^{2j}$. The polynomial tail bound therefore makes the expectation of the difference exponentially small, uniformly in $y$. Inserting the fixed tube cutoff also changes these moments by exponentially small errors, and its total mass is $1+O(e^{-c/\gamma})$, so dividing by this mass preserves the errors; any polynomial factor in $\gamma^{-1}$ is absorbed by decreasing $c$.
+
+Up to these errors, $\ObsB=\psi_0(y)$ is independent of $Q_0$. The positive tangential density charges $O_0$ and $O_+$, and together with the normal ball near $b=0$ this gives fixed positive lower bounds on $\E\ObsB^2$ and $\Var\ObsB$ for small $\gamma$, by \cref{ch31:lem:regression}. For $f=\psi$ and $f=\psi^2$ we obtain
+\[
+ \E[fq_*]=2\gamma\E f+O(e^{-c/\gamma}),\qquad\E[fq_*^2]=6\gamma^2\E f+O(e^{-c/\gamma}).
+\]
+The identity \eqref{ch31:eq:exact-schur-error} of \cref{ch31:lem:regression} now implies $\mathscr C=2\gamma^2+O(e^{-c'/\gamma})$ for a smaller $c'>0$.
+\end{proof}
+
+\section{Proof of the theorem on regular commuting triples}\label{ch31:sec:proof-s2}
+
+\begin{proof}[Proof of \cref{s2:thm:regular}]
+Let $L$, $M$, $\theta$, and $n\in4\N$ be as in \cref{s2:thm:regular}, fix $J$ and the construction parameters as in \cref{ch31:sec:results}, and choose $a\ge0$ so large that $n'=nB^a$ satisfies the minimum-side conditions of \cref{ch31:sec:results}, including $2\pi/n'<r_{\rm flat}/4$. Since $[n']_M=[n]_M$, the measure $\lambda_\gamma=\lambda_{L,\gamma,[n]_M}$ of \cref{s2:thm:regular} is the measure of \cref{ch31:sec:results} for the side $n'$ (\cref{ch26:cor:common-ladder-family,ch26:thm:full-M-ladder}), so the results of this section apply with $n'$ in place of $n$. The function $\psi$ of \cref{s2:thm:regular}, with a sufficiently small tube, is a function as in \cref{ch31:def:regular-observables}(2). If necessary, we replace its normal cutoff by the average over simultaneous conjugation, which does not change $\psi$ because $\psi$ and its tangential factor are invariant. The tangential factor $\psi_0$ vanishes on a nonempty open set and is positive on another, hence at least $2b_*$ on a smaller nonempty open set for some $b_*>0$; these sets may be taken invariant since $\psi_0$ is invariant. On the tube, $q_*$ is the quadratic form of \cref{s2:thm:regular}. Part (1) of \cref{s2:thm:regular} is \cref{ch31:thm:regular-toron-statistic}. Part (2) is \cref{ch31:thm:inserted-chi-square-law}, since $w$ and $\chi_w$ satisfy the invariance and support conditions of \cref{ch31:def:regular-observables}(4); these invariant normal cutoffs, like the normal cutoff $\chi$ of $\psi$, need not be radial. Part (3) is \cref{ch31:thm:invariant-normal-bundle-gaussian}, applied to the restriction of $F$ to the normal bundle over a compact invariant regular patch containing the support of $w$ in its relative interior. The constants depend on $L$, $M$, $n$, $\theta$, and the test functions, but not on $\gamma$, and in each case the continuum limit is taken first, at fixed $\gamma$.
+\end{proof}

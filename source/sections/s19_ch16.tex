@@ -1,0 +1,1174 @@
+\chapter{Comparison of reconstructions on block regions}\label{ch16:chapter}
+
+This section compares one renormalization group step on a block region with the same step on the whole torus. Fix a composition $T_M^s$ of $s\le J$ averaging steps and a union $\Omega$ of blocks of its output lattice. In \cref{ch15:chapter} we reconstructed the fine configuration on $\Omega$ from the coarse field on $\Omega$ and free logarithmic coordinates, with the coordinates outside $\Omega$ held fixed. We also constructed the stationary point of the effective classical action in these coordinates and proved a gap for its free Hessian. Here we prove that the regional construction differs from the torus construction with the coarse field extended by zero outside $\Omega$ only by terms which decay exponentially with the distance to the boundary of $\Omega$. We also prove that the regional construction is stable under small analytic perturbations of the incoming action. All estimates are bounds on absolute Taylor coefficients. Their constants do not depend on the shape of $\Omega$, the number of its components, the depth, the number of preceding renormalization group steps, or the values of previously frozen coordinates.
+
+We use these estimates in the localized renormalization group analysis behind the exponential-moment bound for blocked actions (Step~1 in \cref{s3:largefield}). There the configurations are decomposed according to the regions where some averaged plaquette has large curvature, and the renormalization group is run outside these regions with the link variables inside them held fixed. \Cref{ch17:chapter} integrates the fluctuations on block regions using the reconstructions and perturbation estimates proved here. \Cref{ch18:chapter} uses the gauge transformation of \cref{ch16:lem:strict-hybrid-gauge} and the perturbation theorem \cref{ch16:thm:controlled-perturbation} to construct large-field decompositions, and \cref{ch20:chapter} uses the domain conditions of \cref{ch16:lem:admitted-products,ch16:lem:strict-two-radius-images,ch16:thm:controlled-perturbation} to choose the parameters.
+
+The results, in order, are as follows: \cref{ch16:lem:admitted-products} treats successive minimization; \cref{ch16:thm:nonflat-force-comparison} compares the regional and torus stationary points, together with the minimized actions, the Hessians, and the Haar disintegration densities; \cref{ch16:lem:strict-hybrid-gauge} constructs a gauge transformation which is the identity at prescribed vertices; \cref{ch16:thm:hybrid-columns} compares the gauge-transformed reconstructions and bounds their input columns; \cref{ch16:lem:strict-two-radius-images} collects the conditions on the radii; and \cref{ch16:thm:controlled-perturbation} proves stability under perturbations of the incoming action.
+
+The inputs are \cref{ch15:thm:regional-gap-and-center} (regional coordinates, the gap of the free Hessian, and the regional stationary point), \cref{ch15:lem:wall-networks} (coefficient bounds for connected networks which reach the fixed complement), \cref{ch15:lem:minimum-calculus} (derivatives of constrained stationary values), \cref{ch15:lem:freezing} (freezing of coordinates), the coefficient algebra of \cref{ch15:def:regional-norm}, the target-dependent gauge transformation of \cref{ch10:thm:whole-image-gauge}, the classical coefficient bounds of \cref{ch07:thm:all-root-classical}, and the equality of effective classical actions on compact gauge overlaps, \cref{ch08:thm:compact-overlap}.
+
+We compare constrained minimizers through the implicit equation for their response, and we control the response by an exponentially decaying inverse of the constrained Hessian. This approach follows Ba\l aban's analysis of the variational problem for background fields \cite[(182)--(190), pp.~307--308, and Proposition~9, p.~309]{Balaban1985Variational}, although our constraints, coordinate domains, and coefficient norms differ from his. The comparison between the regional and the torus problems and the gauge transformation fixing the prescribed endpoints are constructed here. The exponentially weighted resolvent bound, proved in \cref{ch15:lem:boundary-algebra}, is the finite-dimensional version of the exponential-conjugation method of Combes and Thomas \cite{CombesThomas1973}.
+
+\paragraph{The mechanism.}
+The regional problem and the torus problem with coarse field extended by zero have the same constraints away from a fixed neighborhood of the boundary of $\Omega$. If we restrict the torus stationary point to the regional coordinates, the gradient of the regional objective at this point is therefore concentrated near the boundary, up to exponentially decaying tails. This residual gradient has two sources, which are the two terms of the formula for $r_R$ in \cref{ch16:thm:nonflat-force-comparison}. First, the reconstructed fine field changes. Second, the tangent map of the constraints changes, since the regional problem omits the coarse constraints on links leaving $\Omega$. Writing $p$ for the restricted torus stationary point and $z_R$ for the regional stationary point, we have $z_R-p=-\mathcal A_R^{-1}r_R$, where $r_R$ is the residual gradient and $\mathcal A_R$, the regional Hessian averaged along the segment from $p$ to $z_R$, has a positive gap. Since this inverse decays exponentially in the distance, the two stationary points differ by an amount which decays exponentially away from the boundary.
+The remaining work is to make this mechanism stable under differentiation, composition, and successive minimization. This requires bounds on all Taylor coefficients, with any one external index fixed. A bound on the values of a holomorphic map does not give the spatial weights and the fixed-index sums which are needed when these functions are composed later.
+
+\Cref{ch16:fig:geometry} shows the sets which appear below. Two of them play different roles: the prescribed vertices, where the gauge transformation must be the identity, and the complement of the incoming list, which controls the spatial decay of the perturbation in \cref{ch16:thm:controlled-perturbation}.
+
+\begin{figure}[ht]
+\centering
+\setlength{\unitlength}{1pt}
+\begin{picture}(360,200)
+\put(0,0){\framebox(360,200){}}
+\put(10,182){$\Omega$}
+\put(95,30){\dashbox{1.5}(160,140){}}
+\put(107,42){\dashbox{1.5}(136,116){}}
+\put(120,55){\dashbox{5}(110,90){}}
+\put(135,70){\framebox(80,60){}}
+\put(196,113){$H$}
+\put(143,78){\dashbox{2}(42,30){}}
+\put(148,90){\scriptsize$D_{\mathrm{in}}^c$}
+\put(114,100){\circle*{4}}
+\put(114,100){\line(1,0){21}}
+\put(160,151){\circle*{4}}
+\put(160,151){\line(0,-1){21}}
+\put(265,150){\vector(-2,-1){48}}
+\put(268,150){\small$W$}
+\put(272,120){\vector(-1,0){40}}
+\put(276,117){\small$H_{L_J}$}
+\put(278,90){\vector(-1,0){33}}
+\put(282,87){\small$\chi=0$ inside}
+\put(278,60){\vector(-1,0){22}}
+\put(282,57){\small$\chi=1$ outside}
+\put(10,114){\small protected vertices}
+\put(60,108){\vector(4,-1){48}}
+\end{picture}
+\caption{The geometry in the output lattice (schematic). The solid inner rectangle is the fixed complement $H=\Omega^c$, and its boundary is the interface $W$. The dashed rectangle bounds the enlargement $H_{L_J}$ of $H$ by the reconstruction stencil. The cutoff $\chi$ of \cref{ch16:lem:strict-hybrid-gauge} vanishes inside the inner dotted rectangle and equals one outside the outer dotted rectangle. The black dots are protected vertices, here the endpoints of the paths of two based transports of frozen coordinates. The small dotted rectangle inside $H$ is the complement of the incoming list $D_{\mathrm{in}}$ of \cref{ch16:thm:controlled-perturbation}, which lies within a fixed distance of $H$.}
+\label{ch16:fig:geometry}
+\end{figure}
+
+\section{Setting and conventions}\label{ch16:sec:setting}
+
+\paragraph{Geometry.}
+Throughout this section $M\ge3$ is odd, $J\ge1$ is fixed, $1\le s\le J$, and $B_s=M^s$. The composition $T_M^s$ of $s$ averaging steps maps configurations of side $M^sm$ to configurations of side $m\ge4$, and the prior depth $d_0\ge0$ is an arbitrary integer. When $s=J$ the composition is one renormalization group step, with blocking factor $B=M^J$. Positions are measured in units of the output lattice, of side $m$. Let $\Omega$ be a union of blocks of the output lattice, let $H=\Omega^c$ be its fixed complement, let $W$ be the interface between $\Omega$ and $H$, and let $H_{L_J}$ be the enlargement of $H$ by the fixed reconstruction stencil $L_J$ of \cref{ch15:thm:regional-gap-and-center}. A coordinate is a label carrying a position, a direction, a color, and a scale index; its position is taken at the lattice where the coordinate was introduced and embedded in output units. In particular the newly frozen coordinates are counted with the density of the lattice on which they were introduced, not as coordinates of the output lattice. The density constant $v_J$ of \cref{ch15:def:regional-norm} includes the colors, the directions, and the at most $J$ scale indices. For a label $i$ in $\Omega$ we write $\delta(i)=\dist(i,W)$. Here $\dist$ and $\Tree$ are the graph distance and the $\ell^1$ network length of the refined position graph fixed before \cref{ch15:def:regional-norm}; coefficient bounds imported at a Euclidean rate $b$ are used at rate $b/\sqrt3$. If $\Omega$ is empty, every statement below with a fixed index in $\Omega$ is void. If $H$ is empty, every boundary difference considered below is zero; we never use an expression of the form $0\cdot e^{\infty}$.
+
+\paragraph{Coordinates.}
+We use the following coordinates.
+\begin{itemize}
+\item The coarse field $c$ is the logarithm of the output links internal to $\Omega$, and $c\oplus0$ is its extension by zero to all output links of the torus.
+\item The free logarithmic coordinates $z=(z_i)_{0\le i<s}$ of \cref{ch15:thm:regional-gap-and-center} parametrize the solutions of the block averaging constraints in $\Omega$, with one block $z_i$ for each intermediate scale $i$; here $i=0$ is the finest scale. On the torus we write $z=(z_L,z_H)$, where $z_L$ are the coordinates of the regional list and $z_H$ are the remaining torus coordinates.
+\item $\Psi_R(c,z;\xi)$ is the logarithm of the regional reconstruction of the fine field before gauge transformation, including its prescribed small values outside $\Omega$, and $\Psi_T(c_T,z_T)$ is the logarithm of the torus reconstruction before gauge transformation. We call the links of the input lattice of $T_M^s$ fine links.
+\item In the successive reconstruction the free coordinates of scale $i$ are $a_i+K_i^{-1/2}q_i$, where $a_i$ is the conditional stationary point and $K_i$ the constrained Hessian of that scale, and $q_i$ is the fluctuation increment. The increments $q_i$ replace $g_iw_i$, where $w_i$ are the normalized fluctuation variables; no coupling is absorbed into $K_i$.
+\item In \cref{ch16:sec:perturbation} we also use the jointly normalized coordinates $u$, defined by $z=z_0+K_0^{-1/2}u$, where $z_0$ is the joint stationary point and $K_0$ the Hessian there.
+\item The newly frozen coordinates $\xi$ are the small logarithmic coordinates frozen at the present step; they enter $\Psi_R$ through its prescribed values outside $\Omega$. The previously frozen coordinates $\Rec$ are fixed real parameters, kept at the lattices on which they were introduced.
+\end{itemize}
+The points $z=0$, $q=0$, and $u=0$ are different. Both $q=0$ and $u=0$ correspond to the joint stationary point $z=z_0$ (for $q$ this is part of \cref{ch16:lem:admitted-products}). The point $z=0$ is the origin of the constraint coordinates.
+
+\paragraph{Frozen coordinates and stationary points.}
+No derivative in the previously frozen coordinates $\Rec$ is taken or asserted in this section. In \cref{ch16:thm:nonflat-force-comparison,ch16:thm:hybrid-columns} the newly frozen coordinates $\xi$ are analytic variables, which may be complexified and differentiated. In \cref{ch16:thm:controlled-perturbation} the perturbed objects are differentiated only in the coarse field, the free coordinates, and the interpolation parameter, at fixed real $(\xi,\Rec)$. All stationary points below are the holomorphic stationary branches in the coordinate domains of \cref{ch15:thm:regional-gap-and-center}. At real data the positive free Hessian makes them local minima, and the conditional stationary points are the conditional constrained minimizers of the successive minimization.
+
+\paragraph{Dependence of constants.}
+All constants and radii in this section have the dependence described in item~(3) of \cref{ch01:conv:constants}. They may depend on $M$ and $J$, on the larger classical and reconstruction domains and the ratios of their radii, on the coefficient bounds on these domains, on the gaps of the free Hessians and the bounds on their weighted inverses, on the fixed spatial decay exponents, on $v_J$, and on any fixed bound on the size of the perturbation. In \cref{ch16:lem:strict-two-radius-images,ch16:thm:controlled-perturbation} they may also depend on the fixed analytic radii, on $K_*$, and on the ratios of these radii. They do not depend on $L$, $\gamma$, the lattice side, the depth $d_0$, the shape or topology of $\Omega$, the number of components of $\Omega$ or $H$, the values of the previously frozen coordinates, or the number of preceding renormalization group steps. They are evaluated before the later choices of the boundary-layer width $w_{\mathrm{bd}}$, the erosion width, the widths of the protected neighborhoods, the bound $\rrecord$ on newly frozen coordinates, and the enclosing product domains of \cref{ch17:chapter}. Each constant includes a finite maximum over $1\le s\le J$ and over the finitely many initial segments. We do not assert uniformity as $J\to\infty$. \Cref{ch15:thm:regional-gap-and-center} provides the gap of the free Hessian at every integer depth $d_0$, and when only this classical estimate is used, no condition on an effective interaction is imposed.
+
+\paragraph{The torus construction domain.}
+Every use of \cref{ch10:thm:whole-image-gauge} below takes place on its construction product. For a composition of $s$ averaging steps, we denote the radius and coefficient constant of that theorem by $r_s$ and $C_s^{\mathbb T}$. Before the later profiles and widths are chosen, we fix positive $U_T,Q_T$ in the common larger product of coarse fields and free coordinates such that
+\begin{equation}\label{ch16:eq:torus-reserve}
+ U_T+Q_T<\frac12\min_{1\le s\le J}r_s,\qquad
+ C_T(U_T+Q_T)<\frac12,
+ \qquad C_T=\max_{1\le s\le J}C_s^{\mathbb T}.
+\end{equation}
+Decreasing $U_T,Q_T$ if necessary, we may assume that the intermediate classical, inverse, and Haar-density margins of \cref{ch10:thm:whole-image-gauge} hold. Later radii for coarse fields and free coordinates are chosen below $U_T$ and $Q_T$, so each use of \cref{ch10:thm:whole-image-gauge} has $u+v<r_s$, a positive denominator, and its intermediate margins. The rational row bound of that theorem alone does not show that a larger product is allowed.
+
+\paragraph{Coefficient bounds.}
+We use the coefficient algebra of \cref{ch15:def:regional-norm,ch15:thm:regional-gap-and-center,ch15:lem:wall-networks} and its coefficient bounds with each external index fixed in turn. A rooted coefficient sum of a tensor fixes one external index, its root, which is either an output or an input, and sums the absolute values of the Taylor coefficients over the remaining indices, with the weight $e^{a\Tree}$, where $\Tree$ is the $\ell^1$ length of a shortest connected network spanning the positions involved. For a fixed input index the sum is the volume-normalized column sum of \cref{ch01:def:analytic-norms}, with the mesh of that input. A coefficient bound is a bound on all these sums, with any external index fixed. Taylor tensors at complex arguments use bilinear transposes. A majorant series is the series of absolute coefficients after the prescribed rooted sums and weights; the original coefficients need not be positive. In a scalar majorant the variable $t$ is a radius after these rooted sums, never a sum of radii over all lattice sites. We say that a tensor, or a convergent series of tensors, has boundary-localized coefficient bounds if it satisfies the bounds of \cref{ch15:lem:wall-networks}: with any index $i$ in $\Omega$ fixed, its rooted coefficient sums carry the additional weight $e^{c\delta(i)}$ for a fixed $c>0$.
+
+A product or contraction joins the connecting networks of its factors at the contracted indices. We root the joined network at any external index and sum over the internal indices, using the corresponding rooted bounds of the factors. The boundary-localized estimate applies if one factor is boundary-localized, or if the joined network visits $H_{L_J}$. An index deep in $H$ is bounded there, and the decay comes from its connection to the fixed index in $\Omega$. In particular, for decay exponents $b>a>0$, the sum over such indices is bounded by
+\begin{equation}\label{ch16:eq:hole-sum}
+ e^{a\delta(e)}\sum_{h\in H_{L_J}}e^{-b\dist(e,h)}
+       \le e^{aL'_J}S_J(b-a),\qquad
+ S_J(u)=C v_J\sum_{r\ge0}(r+1)^3e^{-ur},
+\end{equation}
+where $L'_J$ also includes the fixed convention for link endpoints. This is the case of a fixed index in $\Omega$ in \cref{ch15:lem:wall-networks}; there is no factor of the volume of $H$.
+
+\paragraph{Implicit series.}
+The implicit equations below are solved in the absolute coefficient algebra. After the construction constant $C_J$ is increased, the scalar majorant of the solution without boundary weight can be taken to satisfy
+\begin{equation}\label{ch16:eq:implicit-majorant}
+ Y=C_Jt+\frac12Y+
+             \frac{C_J(t+Y)^2}{1-C_J(t+Y)}.
+\end{equation}
+Fix $t_0>0$ such that, on $0\le t\le t_0$ and $0\le Y\le4C_Jt_0$, the rational term has $Y$-derivative at most $1/4$ and denominator at least $1/2$, and its value at $(t,4C_Jt)$ is at most $C_Jt$. Such a $t_0$ exists and depends only on $C_J$, since these are finitely many strict inequalities which hold at $t=0$. Iteration from zero produces series with nonnegative coefficients which stay below $4C_Jt$. The iteration converges uniformly on every smaller disc, since the derivative in $Y$ of the right side of \eqref{ch16:eq:implicit-majorant} is at most $3/4$ on its majorant disc. The degree-$l$ coefficients of the solution are bounded by $4C_Jt_0^{1-l}$, and dividing Taylor tensors by $l!$ before this comparison gives factorial tensor bounds. The argument works in the absolute multivariate coefficient algebra because each product satisfies the rooted contraction bound just described. Uniform convergence of the power series implies holomorphy.
+
+A derivative which inserts one difference factor, localized near $H$, has the majorant
+\begin{equation}\label{ch16:eq:marked-majorant}
+ Z\preceq H(t,Y(t))+A(t)Z,\qquad
+ A(t)=\frac12+
+ \partial_Y\frac{C_J(t+Y)^2}{1-C_J(t+Y)}\bigg|_{Y=Y(t)},
+\end{equation}
+where $\preceq$ denotes coefficientwise domination and $H(t,Y)$ is the series with the difference factor inserted. On a smaller fixed radius $A(t)\le3/4$, and the solution is majorized coefficientwise by $H(t,Y(t))/(1-A(t))$; this is a convergent majorant series with one inserted difference factor (compare \eqref{ch15:eq:marked-majorant}). Fixing an analytic input differentiates this same series and keeps the index of that input. By \cref{ch15:lem:wall-networks}, the connecting network and the route to the boundary are bounded once for the whole network, and their exponent is not divided by the Taylor order.
+
+\paragraph{Matrix functions.}
+We use matrix functions only on free coordinate spaces where a gap has been proved. The next lemma collects the facts we need.
+
+\begin{lemma}\label{ch16:lem:matrix-functions}
+Let $A^b\ge\lambda I$ be a real symmetric free matrix whose two-sided weighted Schur norm at exponent $b$ is at most $Q$, and set
+\[
+ \mu=\frac{b\lambda}{8(Q+\lambda)},\qquad
+ C_R=2S_J(\mu/2).
+\]
+\begin{enumerate}
+\item For every $t\ge0$, the entries of $(A^b+t)^{-1}$ are bounded by $2e^{-\mu\dist(x,y)}/(\lambda+t)$, and its weighted Schur norm at exponent $\mu/2$ is at most $C_R/(\lambda+t)$; the constant $C_R$ is the same for every subset of the label list.
+\item If $L$ is a complex coefficient perturbation with $C_R\|L\|_{\mu/2}/\lambda\le1/4$, then the series
+\begin{equation}\label{ch16:eq:resolvent-series}
+ (A^b+L+t)^{-1}
+ =\sum_{k\ge0}[-(A^b+t)^{-1}L]^k(A^b+t)^{-1}
+\end{equation}
+converges normally, and its coefficient Schur norm is at most $4C_R/[3(\lambda+t)]$.
+\item For positive definite real matrices $A,B$,
+\begin{align}
+ A^{-1/2}&=\frac1\pi\int_0^\infty t^{-1/2}(A+t)^{-1}\,dt,
+                                                    \label{ch16:eq:sqrt}\\
+ A^{-1/2}-B^{-1/2}
+ &=-\frac1\pi\int_0^\infty t^{-1/2}
+        (A+t)^{-1}(A-B)(B+t)^{-1}\,dt,                \label{ch16:eq:sqrt-difference}\\
+ \log A-\log B
+ &=\int_0^\infty (A+t)^{-1}(A-B)(B+t)^{-1}\,dt,      \label{ch16:eq:log-difference}
+\end{align}
+and these identities extend holomorphically to the complex perturbations in (2).
+\item If $T=\begin{pmatrix}A&B\\ C&D_0\end{pmatrix}$ is invertible with invertible blocks $A$ and $D_0-CA^{-1}B$, then
+\begin{equation}\label{ch16:eq:block-inverse}
+ (T^{-1})_{LL}-A^{-1}
+     =A^{-1}B(D_0-CA^{-1}B)^{-1}CA^{-1}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Parts (1) and (2) are the Combes--Thomas bounds proved in \cref{ch15:lem:boundary-algebra}(3); see \eqref{ch15:eq:coefficient-resolvent}. We recall the choice of constants. For a real one-Lipschitz function $f$ on the label metric, conjugation by $\operatorname{diag}(e^{\mu f})$ changes $A^b$ by a matrix of Schur norm at most $Q\mu/(b-\mu)\le\lambda/8$; here we used $e^{\mu r}-1\le\mu re^{\mu r}$ and $\sup_{r\ge0}re^{-(b-\mu)r}\le(b-\mu)^{-1}$. By the geometric resolvent series, the conjugated resolvent has operator norm at most $2/(\lambda+t)$ for $t\ge0$. Taking $f(x)=\dist(x,y)$, we obtain the entry bound, and summing at exponent $\mu/2$ gives $C_R/(\lambda+t)$, uniformly over every subset of the label list. Under the condition in (2) each term of \eqref{ch16:eq:resolvent-series} after the first is smaller than the preceding one by the factor $1/4$, which gives the bound $4C_R/[3(\lambda+t)]$.
+
+For (3), we diagonalize the positive matrices and substitute $t=\lambda u^2$ in each eigenvalue integral, which gives \eqref{ch16:eq:sqrt}. The resolvent identity $(A+t)^{-1}-(B+t)^{-1}=-(A+t)^{-1}(A-B)(B+t)^{-1}$ fixes the order of the three factors and gives \eqref{ch16:eq:sqrt-difference} after integration against $\pi^{-1}t^{-1/2}\,dt$. For \eqref{ch16:eq:log-difference}, we integrate $(1+t)^{-1}I-(A+t)^{-1}$ to obtain $\log A$ and subtract the corresponding formula for $B$. The series \eqref{ch16:eq:resolvent-series} extends these identities holomorphically to the complex perturbations in (2). Their majorants are integrable: they are bounded by $C_Jt^{-1/2}(\lambda+t)^{-2}$ and $C_J(\lambda+t)^{-2}$ for the two differences, whose integrals are $\pi/(2\lambda^{3/2})$ and $1/\lambda$. Thus a boundary-localized middle factor $A-B$ gives boundary-localized differences of these functions, rooted at every index, and differentiation under the integral is justified by the same normally convergent majorants. Restricted diagonal sums are taken after this calculation; only a complete scalar trace permits a cyclic permutation of the factors. Part (4) follows by block multiplication.
+\end{proof}
+
+\paragraph{Additive constants.}
+The coefficient seminorm with boundary decay $\mathcal X$ of \cref{ch15:def:regional-norm} vanishes on constants, so it never estimates additive constants. The constant term of a difference of minimized actions remains in the full action. Scalar determinants, Haar disintegration densities, and traces over $H$, which have no index in $\Omega$, are kept as their exact finite values. The difference between two exterior extensions of the classical action is kept with all its constants (\cref{ch16:thm:controlled-perturbation}). After freezing at $c$, replacing an effective interaction $R(v,c)$ by $R(v,c)-R(0,c)$ changes the normalization constant from $\Lambda$ to $\Lambda-R(0,c)$ and preserves the density, as in \cref{ch15:lem:freezing}.
+
+\section{Conditional minimization and successive substitution}\label{ch16:sec:conditional}
+
+The reconstruction of the fine field proceeds from the coarsest intermediate scale to the finest. At scale $i$ the free coordinates are $a_i(c,z_{>i})+K_i^{-1/2}q_i$, where $a_i$ is a conditional stationary point which depends on the coarser coordinates $z_{>i}$ already reconstructed. We must check two things. First, for every fixed value of the coarser coordinates in some domain, the conditional stationary point exists. Second, the coarser coordinates produced by the earlier substitutions lie in that domain. The first does not imply the second, as the following example shows.
+
+\begin{example}\label{ch16:ex:conditional-domain}
+Let $F_0(x,y)=(x^2+y^2)/2$ and $F_1(x,y)=F_0(x,y)-\delta y$ with $\delta>0$, and eliminate $x$ first, so that $y$ is the coarser coordinate. For every fixed $y$ the conditional stationary point of $F_1$ in $x$ is $x=0$, and the joint Hessian is the identity. The joint stationary point of $F_1$ is $(0,\delta)$. If the conditional stationary points are constructed only for $\abs y<\eta$ with $\eta<\delta$, the successive substitution never reaches the joint stationary point, however small the fluctuation radius in $x$ is chosen. The quantity $\delta_V$ of \cref{ch16:lem:admitted-products} detects this: for the initial segment consisting of both coordinates it equals $\delta$, so the condition in part~(3) of the lemma fails.
+\end{example}
+
+In the next lemma, $I$ is an initial segment of the finer scale coordinates eliminated in the successive minimization, and $y=z_{I^c}$ denotes the coarser coordinates held as parameters. The segment containing all free coordinates is included.
+
+\begin{lemma}\label{ch16:lem:admitted-products}
+Fix the larger construction domains of \cref{ch15:thm:regional-gap-and-center}, within \eqref{ch16:eq:torus-reserve}, and the margins of their coefficient, inverse, and image bounds and of the lower bound for the real constrained Hessian. Let $F_0(c,z;\xi)$ be the unperturbed regional objective and $z^0(c;\xi)$ its joint stationary point. For each initial segment $I$ write $y=z_{I^c}$, and let $a_I(c,y;\xi)$ be the conditional stationary point of $F_0$ in the variables $z_I$.
+\begin{enumerate}
+\item One can first choose a solution radius $r_I>0$, and then a strictly smaller radius $\eta_I$ for the deviation $y-z^0_{I^c}(c;\xi)$, uniformly over the coarse fields in the domain, such that
+\[
+ a_I(c,z^0_{I^c};\xi)=z_I^0,
+ \qquad D_ya_I=-F_{0,II}^{-1}F_{0,II^c},
+ \qquad \|a_I-z_I^0\|_{\mathrm{coeff}}
+          \le C_J\|y-z^0_{I^c}\|_{\mathrm{coeff}}.
+\]
+The derivative identity is evaluated at the conditional stationary point. We write $\mathcal T_I$ for the resulting domain of $y$.
+\item Let $F_\lambda=F_0+\lambda V$, $0\le\lambda\le1$, be holomorphic and real at real arguments, with the same coefficient bounds on the larger domains. Set $A_I=F_{0,II}(c,a_I,y;\xi)$ and assume that, throughout the domains of part~(1), in the operator norm of the coefficientwise majorant,
+\[
+ \|A_I^{-1}F_{\lambda,I}(c,a_I,y)\|\le r_I/4,
+ \qquad
+ \|A_I^{-1}(F_{\lambda,II}-A_I)\|\le1/2.
+\]
+Assume also that the real Hessian is perturbed by less than half of the lower bound for the constrained Hessian, and that the complex resolvent condition of \cref{ch16:lem:matrix-functions}(2) holds. Then for each $I$ and each $y\in\mathcal T_I$ there is a unique holomorphic stationary point $a_{\lambda,I}(c,y;\xi)$ of $F_\lambda$ in $z_I$ within distance $r_I/2$ of $a_I$. It is real at real data and a local real minimum there, and it is unique in the convex domain on which the second inequality holds.
+\item Put $V=\partial_\lambda F_\lambda$ and
+\[
+ \delta_V=\max_I\sup_{y\in\mathcal T_I}
+   \|A_I^{-1}V_I(c,a_I(c,y;\xi),y)\|_{\mathrm{coeff}},
+\]
+where the coefficient norm includes the common product of coarse fields, uniformly at fixed real frozen coordinates, and let $\varepsilon_{\mathrm{tube}}$ be the minimum over $I$ of the solution and parameter margins at $I$. Then, for every $I$ and every $y\in\mathcal T_I$,
+\[
+ \|a_{\lambda,I}(c,y;\xi)-a_I(c,y;\xi)\|_{\mathrm{coeff}}\le2\lambda\delta_V.
+\]
+Assume further that $\delta_V<\infty$, that the mixed coefficient bounds hold uniformly on the larger domains, and that $r_q>0$ satisfies
+\[
+ C_{\mathrm{seq},J}(2\delta_V+r_q)<\frac12\varepsilon_{\mathrm{tube}},
+\]
+where $C_{\mathrm{seq},J}$ is the constant given in the proof. Let $a_{\lambda,i}$ be the conditional stationary point of $F_\lambda$ at scale $i$, and let $K_{\lambda,i}$ be $M^i$ times the Schur block of $F_\lambda$ at scale $i$ in input units. Then, whenever $\max_i\|q_i\|_\infty\le r_q$, the successive substitutions in the original free coordinates
+\[
+ z_i=a_{\lambda,i}(c,z_{>i};\xi)
+                      +K_{\lambda,i}^{-1/2}(c,z_{>i};\xi)q_i
+\]
+stay in every parameter domain and every solution domain, with half of each margin unused. At $q=0$ they give the joint stationary point.
+\end{enumerate}
+The radii are chosen in the following order: first the unperturbed product, for which $\delta_V=0$; then a bound on the size of the perturbation on the fixed larger unperturbed products, and a smaller perturbed product; only afterwards the smaller enclosing and fluctuation radii. Reducing $r_q$ does not reduce the radius of the coarse field, since the chain at $q=0$ is the joint stationary point. All radii and constants have the dependence of \cref{ch16:sec:setting}, independently of the later widths, the depth, and the geometry of $\Omega$.
+\end{lemma}
+
+\begin{proof}
+Part~(1) is a quantitative implicit function argument about the joint stationary point, and part~(2) is the same argument about $a_I$. The new point is part~(3), which first bounds the displacement of the conditional stationary points at every fixed $y$ and then propagates these bounds through the successive substitution by a finite recurrence.
+
+\paragraph{Step 1: the unperturbed conditional stationary points.}
+Fix $I$ and write $y=z^0_{I^c}(c;\xi)+v$. This shift is an analytic change of coordinates with the coefficient bounds of \cref{ch15:thm:regional-gap-and-center}. In these coordinates we set $u=z_I-z_I^0(c;\xi)$ and
+\[
+ B_I(c;\xi)=F_{0,II}(c,z^0(c;\xi);\xi).
+\]
+By the bounds on the inverse and on the joint third derivative, there exist constants $I_0,C_0$ on the fixed larger products such that
+\begin{align}
+ \|B_I^{-1}F_{0,I}(c,z_I^0,z_{I^c}^0+v;\xi)\|_{\mathrm{coeff}}
+       &\le I_0C_0\|v\|_{\mathrm{coeff}},                    \label{ch16:eq:conditional-force}\\
+ \|B_I^{-1}(F_{0,II}(c,z_I^0+u,z_{I^c}^0+v;\xi)-B_I)\|_{\mathrm{coeff}}
+       &\le I_0C_0(\|u\|_{\mathrm{coeff}}+\|v\|_{\mathrm{coeff}}).
+                                                               \label{ch16:eq:conditional-variation}
+\end{align}
+For the first inequality we integrate $F_{0,II^c}$ in $v$, starting from the joint stationarity $F_{0,I}(c,z^0;\xi)=0$; for the second we integrate the third derivative tensor in $(u,v)$. These are coefficient inequalities, since integration along a segment from the origin multiplies each term of positive degree by a number at most one, and the rooted bounds on the larger domains control the products.
+
+Fix $r_I>0$ within a fixed fraction of the solution margin of the chart, with $I_0C_0r_I<1/8$. Then fix $0<\eta_I<r_I$ within the parameter margin, with $I_0C_0\eta_I<r_I/8$ and $I_0C_0(r_I+\eta_I)<1/4$. For $\|v\|\le\eta_I$, the map
+\[
+ u\longmapsto u-B_I^{-1}F_{0,I}(c,z_I^0+u,z_{I^c}^0+v;\xi)
+\]
+has derivative $-B_I^{-1}(F_{0,II}-B_I)$, whose norm is less than $1/4$ on $\|u\|\le r_I/2$ by \eqref{ch16:eq:conditional-variation}, and its value at $u=0$ has norm less than $r_I/8$ by \eqref{ch16:eq:conditional-force}. It is therefore a coefficient contraction of the ball $\|u\|\le r_I/2$ into itself. Its Picard iterates converge in the coefficient norm, and their power series converge locally uniformly on the parameter product, which implies that the limit $a_I-z_I^0$ is holomorphic. At $v=0$ the stationary point is the joint one, which proves the first identity of part~(1). Differentiating the gradient equation at the conditional stationary point and using \cref{ch15:lem:minimum-calculus}, we obtain
+\[
+ D_ya_I=-F_{0,II}^{-1}F_{0,II^c}.
+\]
+The inverse and the mixed matrices have convergent coefficient bounds on a product larger than the chosen one. Integrating this identity from $y=z^0_{I^c}$ to $y$, we obtain the Lipschitz bound of part~(1), with $C_J$ a common bound for the product of these matrices. The choices are uniform in the coarse field, because the estimates were made on its fixed larger domain before $v$ was introduced.
+
+\paragraph{Step 2: the perturbed conditional stationary points.}
+We write $z_I=a_I+Y$ and consider on the solution domain the map
+\begin{equation}\label{ch16:eq:preconditioned-map}
+ \mathcal T_\lambda(Y)=Y-A_I^{-1}
+                   F_{\lambda,I}(c,a_I+Y,y).
+\end{equation}
+Since $D_Y\mathcal T_\lambda=-A_I^{-1}(F_{\lambda,II}-A_I)$, the two inequalities of part~(2) imply
+\[
+ \|\mathcal T_\lambda(0)\|\le r_I/4,\qquad
+ \|D_Y\mathcal T_\lambda\|\le1/2.
+\]
+Then $\mathcal T_\lambda$ maps the coefficient ball of radius $r_I/2$ into itself and contracts differences by the factor $1/2$. Iterating from zero proves existence and convergence. The sum of the successive differences is a geometric series in the coefficient norm, so the limit is holomorphic. The differentiated series converge on a fixed smaller domain: they satisfy an equation $Z=H+TZ$ in which the majorant of $T$ is at most $1/2$, and the solution is $\sum_{j\ge0}T^jH$. This gives the coefficient bounds with any parameter index fixed.
+
+If two stationary points lie in the convex domain on which the derivative bound holds, their difference is unchanged by \eqref{ch16:eq:preconditioned-map} and has norm at most half of itself, so the two points coincide. Since $F_\lambda$ is real at real arguments, every Picard iterate is real at real data, and so is the limit. The margin on the real Hessian keeps at least half of the lower bound for the constrained Hessian on a neighborhood of the stationary point. Integrating the real Hessian along segments shows a positive quadratic increase away from it, so it is a local real minimum. The complex resolvent condition is a hypothesis, which provides the inverse square roots used below.
+
+\paragraph{Step 3: the displacement at fixed coarser coordinates.}
+For part~(3), note that $F_{0,I}(c,a_I,y)=0$, so the map \eqref{ch16:eq:preconditioned-map} satisfies $\mathcal T_\lambda(0)=-\lambda A_I^{-1}V_I(c,a_I,y)$. Writing $Y_{\lambda,I}=a_{\lambda,I}-a_I$ in the fixed point equation, we obtain for every $y\in\mathcal T_I$
+\begin{equation}\label{ch16:eq:conditional-force-displacement}
+ \|Y_{\lambda,I}\|_{\mathrm{coeff}}
+ \le\lambda\delta_V+\frac12\|Y_{\lambda,I}\|_{\mathrm{coeff}},
+ \qquad\text{hence}\qquad
+ \|Y_{\lambda,I}\|_{\mathrm{coeff}}\le2\lambda\delta_V.
+\end{equation}
+This estimate is uniform on the whole domain $\mathcal T_I$, with the common product of coarse fields. In particular it can be used after moving coarser coordinates have been substituted; only their range enters, not a derivative in the frozen coordinates.
+
+\paragraph{Step 4: the Lipschitz bound in the coarser coordinates.}
+By the coefficient bounds on the larger domains, the mixed matrices $F_{\lambda,II^c}$ are bounded by a common constant $Q_{\mathrm{mix}}$ and the reference inverse by $I_0$. The second inequality of part~(2) and the Neumann series imply that $\|F_{\lambda,II}^{-1}\|\le2I_0$. Implicit differentiation at the perturbed conditional stationary point yields
+\begin{equation}\label{ch16:eq:conditional-higher-lipschitz}
+ D_y a_{\lambda,I}
+     =-F_{\lambda,II}^{-1}F_{\lambda,II^c},\qquad
+ \|D_y a_{\lambda,I}\|_{\mathrm{coeff}}\le2I_0Q_{\mathrm{mix}}.
+\end{equation}
+The rooted versions follow from the same ordered products on a fixed smaller domain. From now on let $C_0$ denote a bound for these maps and their unperturbed versions, and let $C_S$ bound the rows of the inverse square roots. These constants depend on the common bound for the mixed tensors, not on $\delta_V$ or on the later free radius.
+
+\paragraph{Step 5: successive substitution.}
+Let $\varepsilon_{\mathrm{tube}}$ be as in part~(3). We use the successive maps in the original free coordinates, with $K_{\lambda,i}$ equal to $M^i$ times the Schur blocks in input units. Let $A_i$ bound all deviations of the coarser coordinates and all displacements of intermediate solutions at scale $i$, relative to the unperturbed joint stationary point. For the initial segment of all free coordinates, \eqref{ch16:eq:conditional-force-displacement} bounds the perturbed joint displacement by $2\delta_V$. At each finer scale we first compare the perturbed and the unperturbed conditional stationary points at the same coarser argument, using \eqref{ch16:eq:conditional-force-displacement}, and then change the coarser argument, using \eqref{ch16:eq:conditional-higher-lipschitz}. Inserting the free increment adds at most $C_Sr_q$. We obtain the recurrence
+\begin{equation}\label{ch16:eq:sequential-recurrence}
+ A_{i-1}\le(1+C_0)A_i+C_Sr_q+2\delta_V,
+ \qquad A_s\le2\delta_V,
+\end{equation}
+which also holds for the images under the majorants, since it is obtained by composing majorants. After the finite conversion between the original free coordinates and the coordinates centered at the joint stationary point is included in $C_0$ and $C_S$, we may take
+\[
+ C_{\mathrm{seq},J}=
+ 2(1+C_S)(1+C_0)^{J+1}
+       \Bigl(1+\sum_{j=0}^{J-1}(1+C_0)^j\Bigr).
+\]
+Indeed, iterating \eqref{ch16:eq:sequential-recurrence}, we find
+\[
+ A_i\le2\delta_V(1+C_0)^J+
+ (C_Sr_q+2\delta_V)\sum_{j=0}^{J-1}(1+C_0)^j,
+\]
+which is at most $C_{\mathrm{seq},J}(2\delta_V+r_q)$. The condition of part~(3) therefore leaves half of each margin unused. The same bound applies to all Picard reference points and solution balls used in the construction from the coarsest scale downward. In particular, no gradient is evaluated outside the domains already reached.
+
+\paragraph{Step 6: zero increments.}
+At $q=0$, the stationarity at the coarsest scale and the successive stationarities at the finer scales give the joint gradient equation. By uniqueness of its branch, this chain is the joint stationary point; Step~5 shows that the chain stays in the required domains.
+
+\paragraph{Step 7: the order of choices.}
+For $\delta_V=0$ we first choose $r_q$ by the condition of part~(3). On the fixed larger unperturbed products, we then choose the perturbed product and the bound on the perturbation so that the same condition holds, and all later radii are chosen inside that product. Decreasing $r_q$ changes only the terms of positive degree in $q$, and the image at $q=0$ is the joint stationary point for every coarse field in the domain; hence no later reduction of the coarse-field radius follows. Finite minima and maxima over the initial segments preserve the dependence of the constants.
+\end{proof}
+
+\section{Comparison of the regional and torus stationary points}\label{ch16:sec:comparison}
+
+We now compare the regional problem with the torus problem at a nonzero coarse field. Recall that $F_R(c,z;\xi)=E_{d_0}(\Psi_R(c,z;\xi))$ is the regional objective of \cref{ch15:thm:regional-gap-and-center}, and that the torus objective is the effective classical action of the torus reconstruction with the coarse field extended by zero. For a target $v$ of the torus we write $z_T(v)$ for the torus stationary point at $v$, and $P$ for the restriction from the torus free list to the regional list.
+
+\begin{theorem}\label{ch16:thm:nonflat-force-comparison}
+Fix the larger domains of \cref{ch15:thm:regional-gap-and-center}, an odd $M\ge3$, $J\ge1$, $1\le s\le J$, $m\ge4$, a depth $d_0\ge0$, and a union $\Omega$ of output blocks; positions are in output units. Use a smaller fixed product of $(c,z;\xi)$ on which the gap, inverse, and image margins of that theorem hold, with the previously frozen coordinates fixed. Write
+\[
+ F_R=E_{d_0}\circ\Psi_R(c,z;\xi),\qquad
+ F_T=E_{d_0}\circ\Psi_T(c\oplus0,z_L,z_H),
+ \qquad (p,h)=z_T(c\oplus0),
+\]
+put
+\[
+ \begin{gathered}
+ a_T^0=\Psi_T(c\oplus0,p,h),\qquad
+ \widehat a_R=\Psi_R(c,p;\xi),\qquad d_a=\widehat a_R-a_T^0,\\
+ J_R=\Psi_{R,z}(c,p;\xi),\qquad
+ J_T=\Psi_{T,z_L}(c\oplus0,p,h),
+ \end{gathered}
+\]
+and let $r_R=F_{R,z}(c,p;\xi)$ be the regional gradient at the restricted torus stationary point. Then the following statements hold.
+\begin{enumerate}
+\item (Gradient and response.) Let $z_R$ be the regional stationary point. Then
+\[
+ \begin{split}
+ r_R={}&(J_R-J_T)^{\mathsf T}E_{d_0}'(a_T^0)
+    +J_R^{\mathsf T}\int_0^1
+                 E_{d_0}''(a_T^0+u d_a)d_a\,du,\\
+ \mathcal A_R(z_R-p)={}&-r_R,\qquad
+ \mathcal A_R=\int_0^1F_{R,zz}(c,p+u(z_R-p);\xi)\,du.
+ \end{split}
+\]
+The first term of $r_R$ is the chain-rule contribution of the coarse constraints omitted in the regional problem. With $a_R=\Psi_R(c,z_R;\xi)$, for every free label or fine link $i$ in $\Omega$,
+\[
+ |(r_R)_i|+|(z_R-p)_i|+|(a_R-a_T^0)_i|
+ \le C_J(\|c\|_\infty+\|\xi\|_\infty)e^{-c_J\dist(i,W)},
+\]
+each summand being read on its own list. These three differences have factorial boundary-localized coefficient bounds, as in \cref{ch15:lem:wall-networks}. In particular, for a fixed input $x$ and a fixed output $e$ in $\Omega$, their differentiated coefficient series are bounded by $C_Je^{-c_J[\dist(e,W)+\dist(e,x)]}$.
+\item (Full output.) Let $u_*(c,\xi)=T_M^s\exp a_R$ be the full output of the $s$ averaging steps, including the values of the coarse links which are not constrained in $\Omega$. It lies in the common torus target chart on this product. The bounds of part~(1) on $\Omega$, including those with a fixed input, remain true if $c\oplus0$ is replaced by $\Log u_*$ and $a_T^0$ by the torus stationary field $a_T^*$ at the target $\Log u_*$. All derivatives through $u_*$, including those through $z_R$, are included.
+\item (Minimized action.) Let $V_R(c;\xi)=B_sF_R(c,z_R;\xi)$. There are fixed $\rho_0(J),a_W,\alpha_W,A_J^{\mathrm{cl}}>0$ such that
+\[
+ \mathcal X_{\Omega,a_W,\alpha_W}^{\rho_0,\mathrm{cl}}
+       \bigl(V_R-E_{d_0+s}(c\oplus0)\bigr)\le A_J^{\mathrm{cl}}.
+\]
+This is the seminorm of \cref{ch15:def:regional-norm} with the displayed constant classical radius and rates; it includes all degrees $l\ge1$. The constant term of the difference is kept in the full action.
+\item (Newly frozen coordinates.) For the newly frozen coordinates $\xi$, at their positions and with their density,
+\[
+ \begin{gathered}
+ D_\xi z_R=-F_{R,zz}^{-1}F_{R,z\xi},\qquad
+ \sum_f|(D_{\xi_f}z_R)_e|\le C_Je^{-a_W\dist(e,W)},\\
+ \|F_{R,z\xi}\|_{a_W}+\|F_{R,zc}\|_{a_W}\le C_J.
+ \end{gathered}
+\]
+\item (Hessians.) The constrained Hessians at the two stationary points satisfy
+\[
+ \bigl|\bigl[F_{R,zz}(c,z_R;\xi)
+       -PF_{T,zz}(c\oplus0,z_T)P^{\mathsf T}\bigr]_{ef}\bigr|
+ \le C_Je^{-a_W[\dist(e,f)+\dist(e,W)+\dist(f,W)]}.
+\]
+The order-$l$ coefficient tensors of this difference, with every coarse-field and free argument in the connecting network and any root in $\Omega$ fixed, are bounded by $(l+2)!C_J^{l+2}$ at fixed exponents.
+\item (Successive minima, inverse square roots, and Haar disintegration densities.) The statements of part~(5) hold for each conditional partial minimum, on a smaller product of the coarser coordinates about the joint stationary point, with the exact normalization $M^i$ at scale $i$. The inverse square roots of these Hessians and the nonconstant coefficients of the logarithms of the Haar disintegration densities satisfy the corresponding boundary-localized comparisons, with any index fixed. Scalar determinants and Haar disintegration densities which are not rooted at a label in $\Omega$ are kept as exact quantities.
+\end{enumerate}
+All constants have the dependence of \cref{ch16:sec:setting} and do not depend on the later widths.
+\end{theorem}
+
+The theorem gives no inverse on fixed boundary coordinates and no rank estimate for the boundary terms at a nonzero coarse field.
+
+\begin{proof}
+We pose both problems on the torus free list by interpolating between the torus objective and the augmented regional objective. The two objectives then differ by one inserted factor localized near $H$, and all estimates follow from the response of the interpolated stationary point to this factor and from the exponential decay of the inverse Hessian.
+
+\paragraph{Step 1: one coordinate list.}
+We write $z=(z_L,z_H)$ for the torus free list and set
+\begin{equation}\label{ch16:eq:augmented-objectives}
+ \widetilde F_R(c,z;\xi)=F_R(c,z_L;\xi)+\frac12|z_H|^2,
+ \qquad F_t=(1-t)F_T+t\widetilde F_R,\quad 0\le t\le1,
+ \qquad D=\widetilde F_R-F_T.
+\end{equation}
+Since its minimum is zero, the added auxiliary quadratic does not change the regional value. \Cref{ch15:thm:regional-gap-and-center} gives a positive gap at the identity for the Hessian of this interpolation, for all its principal blocks, and for its Schur complements. We reduce the construction product by a fixed amount so that the coefficient variation of each of these Hessians satisfies the condition of \cref{ch16:lem:matrix-functions}(2), uniformly in $t$. This is possible since the variation is at most $Q_J(\|c\|+\|z\|+\|\xi\|)$, and the gap at the identity of the interpolation is at least the minimum of the regional gap, the torus gap, and $1$. All straight segments of fine fields used below then lie strictly inside the larger classical chart.
+
+We retain a split resolvent margin for the later perturbation argument. Choose a common intrinsic exponent $b_{\mathrm{ref}}>0$ and a constant $C_{0,J}$ such that every flat principal and scale Schur reference $K_i^b$ has resolvent norm at most $C_{0,J}/(\lambda_J+t)$ at this exponent, including the factors $M^i$ at the scale stages. When the larger unperturbed products are fixed, reduce them once so that their conditional matrices $K_{0,i}$ satisfy
+\[
+ C_{0,J}\|K_{0,i}-K_i^b\|_{b_{\mathrm{ref}}}\le\lambda_J/8
+\]
+on those products, uniformly over the finitely many stages. We decrease the unperturbed reserve $c_J$ if necessary so that $c_J\le b_{\mathrm{ref}}$. These choices use only the unperturbed constructions at fixed $J$ and precede the incoming rates, perturbation threshold, and later widths.
+
+\paragraph{Step 2: localization of the difference of the reconstructions.}
+We use the comparison of the nonlinear words in \cref{ch15:thm:regional-gap-and-center}. At common internal coarse values and common regional free values, we set
+\[
+ d(c,z;\xi)=\Psi_R(c,z_L;\xi)-\Psi_T(c\oplus0,z_L,z_H).
+\]
+On fine links in $\Omega$, its defining words vanish outside the fixed interface band. The prescribed values on $H$ can differ, and their difference is a bounded source on $H$ with the separate coefficient bounds of the reconstruction charts. The difference is supported in $H$ together with that band, hence in $H_{L_J}$; the two extensions need not agree on $H$. Its coefficient tensors have the corresponding finite-range bounds, rooted at any index. To check the statement about fine links in $\Omega$ at nonzero arguments, consider an internal eliminated-edge equation at the coarsest intermediate scale. On the two sides it has the same endpoint blocks, the same coarse value, and the same free values, so by uniqueness on the common local branch its solution is the same. We repeat this down the $s$ intermediate scales. Only equations meeting a block of $H$ can differ, and the union of their at most $J$ stencils is contained in $H_{L_J}$. This argument keeps the values of the coarse links across the boundary of the block region as functions of the common free values; it imposes no value on an omitted coarse constraint.
+
+\paragraph{Step 3: the inserted difference.}
+The difference in \eqref{ch16:eq:augmented-objectives} is
+\begin{equation}\label{ch16:eq:action-insertion}
+ D=\int_0^1 E_{d_0}'(\Psi_T+v d)[d]\,dv
+                                          +\frac12|z_H|^2.
+\end{equation}
+Every derivative of the integral either differentiates $d$, whose fine position stays in $H_{L_J}$, or leaves such a factor undifferentiated. In the latter case the classical tensor of \cref{ch07:thm:all-root-classical}, which is bounded at every root, connects that position to every differentiated chart argument. A derivative in a coarse field or in a free variable in $\Omega$ therefore cannot disconnect the difference factor from the network. The auxiliary quadratic has only indices in $H$, and any connected contribution from it to an external index in $\Omega$ passes through an index in $H$ and is bounded by \eqref{ch16:eq:hole-sum}. This verifies the hypotheses of \cref{ch15:lem:wall-networks} for the whole inserted difference, at every order and with any external root.
+
+\paragraph{Step 4: the gradient formula and the bounds on values.}
+Torus stationarity says that $J_T^{\mathsf T}E_{d_0}'(a_T^0)=0$. Adding and subtracting $J_R^{\mathsf T}E_{d_0}'(a_T^0)$ in $F_{R,z}(c,p;\xi)=J_R^{\mathsf T}E_{d_0}'(\widehat a_R)$, and applying the fundamental theorem of calculus on the complex segment from $a_T^0$ to $\widehat a_R$, we obtain the formula for $r_R$. The difference $J_R-J_T$ is supported in the construction band, in its regional input indices and its fine output indices. Its product with the gradient of the action on the fine links is kept: torus stationarity makes only the projection of this gradient onto the torus free directions vanish. By the classical bounds, we have
+\[
+ \|E_{d_0}'(a_T^0)\|_\infty
+       +\|d_a\|_\infty\le C_J(\|c\|_\infty+\|\xi\|_\infty);
+\]
+for the first summand we used the bound on the torus stationary point, and for the second the word comparison of Step~2 and the same bound for $(p,h)$. Contracting the two terms of $r_R$ with their localized sources and using \eqref{ch16:eq:hole-sum}, we obtain
+\begin{equation}\label{ch16:eq:force-wall}
+ |(r_R)_i|\le C_J(\|c\|_\infty+\|\xi\|_\infty)
+                                                   e^{-c_J\delta(i)}.
+\end{equation}
+
+Subtracting the regional gradient equations at $z_R$ and at $p$ and integrating along the segment between them, we obtain $\mathcal A_R(z_R-p)=-r_R$. The segment lies in the convex larger free box, and its averaged Hessian is the positive regional Hessian at the identity plus a coefficient perturbation satisfying the condition of \cref{ch16:lem:matrix-functions}(2). By that lemma, the inverse has entries bounded by $C_Je^{-b_J\dist(e,i)}$. Convolving this bound with \eqref{ch16:eq:force-wall} and using $\delta(e)\le\delta(i)+\dist(e,i)+L'_J$, we obtain the bound on $z_R-p$, at a fixed smaller exponent. For the fine field we have the identity
+\begin{equation}\label{ch16:eq:physical-response}
+ a_R-a_T^0=d_a+
+ \int_0^1\Psi_{R,z}(c,p+v(z_R-p);\xi)(z_R-p)\,dv.
+\end{equation}
+The first term is supported in $H_{L_J}$, and the second is the product of a finite-range chart kernel, without boundary weight, with $z_R-p$. This proves the bound on fine links in $\Omega$. No decay is asserted at a fine link deep in $H$.
+
+\paragraph{Step 5: the coefficient bounds.}
+We now prove the coefficient bounds directly, using the interpolation \eqref{ch16:eq:augmented-objectives}. On a common smaller product of parameters, the stationary point $z_t$ of $F_t$ is obtained by the implicit iteration with the inverse of the free Hessian at the identity, which converges coefficientwise. The radius condition and the bound on the inverse times the gradient follow from \cref{ch15:thm:regional-gap-and-center}, and the scalar comparison equation is \eqref{ch16:eq:implicit-majorant}. Differentiating in $t$, we obtain
+\begin{equation}\label{ch16:eq:unperturbed-center-response}
+ \dot z_t=-F_{t,zz}^{-1}D_z(c,z_t;\xi).
+\end{equation}
+This expression contains exactly one inserted difference from \eqref{ch16:eq:action-insertion}, and its convergent majorant is \eqref{ch16:eq:marked-majorant}. A further derivative in an input may hit the inverse, the inserted difference, or its argument $z_t$; in each case the joined network still contains the inserted difference and the index of the new input. We apply \cref{ch15:lem:wall-networks} and integrate from $t=0$ to $t=1$. Since the endpoints are $z_T$ and $(z_R,0)$, their difference on the regional list has factorial boundary-localized coefficient bounds, rooted at every index. Reading \eqref{ch16:eq:physical-response} as an identity of convergent majorant series, we obtain the corresponding bounds for the fine field, and the same argument applied to the formula for $r_R$ gives its bounds. Keeping one input $x$ fixed and summing over the remaining indices, we obtain the decay with a fixed input stated in part~(1).
+
+\paragraph{Step 6: the full output.}
+The composition $T_M^s\exp\Psi_R$ is holomorphic on the common larger chart, by the construction in \cref{ch15:thm:regional-gap-and-center}. At the stationary point it satisfies
+\[
+ \|\Log u_*\|_\infty\le C_J(\|c\|_\infty+\|\xi\|_\infty).
+\]
+The internal coordinates of $\Log u_*$ are $c$, and its other coordinates are the values of the coarse links which are not constrained in $\Omega$. These are analytic functions of $(c,z;\xi)$, whose differentiated series compose the coefficient series of the chart words with the series of the stationary point from Step~5. For instance, for any analytic direction $v$ the first derivative is
+\[
+ D_v\Log u_*=D_c\mathcal T\,D_vc
+              +D_z\mathcal T\,D_vz_R+D_\xi\mathcal T\,D_v\xi,
+ \qquad \mathcal T=\Log(T_M^s\exp\Psi_R).
+\]
+Since higher derivatives are compositions of these factors, all derivatives through the stationary point are included. We reduce the parameter radius so that the segment from $\Log u_*$ to $c\oplus0$ lies in the common torus target chart. If $\mathcal A_T(v)$ denotes the torus stationary fine field at the target $v$, then
+\begin{equation}\label{ch16:eq:target-change}
+ a_T^*-a_T^0=\int_0^1
+ D\mathcal A_T(c\oplus0+t(\Log u_*-(c\oplus0)))
+                      [\Log u_*-(c\oplus0)]\,dt.
+\end{equation}
+The difference of targets is supported on coarse links which are not internal to $\Omega$. By the same implicit equation on the torus list, the lower bound for the torus constrained Hessian, the chart bounds, and the classical tensors give coefficient bounds without boundary weight for the response of $\mathcal A_T$. Each term of \eqref{ch16:eq:target-change} with a root in $\Omega$ therefore passes through a coarse link outside $\Omega$, and its composed network, including the derivatives of $u_*$, visits $H_{L_J}$. \Cref{ch15:lem:wall-networks} and the finite word bounds then give the same amplitude and fixed-input bounds as before. The same integral with $\mathcal A_T$ replaced by the torus free stationary point $z_T$ bounds $p^*-p$ on the regional free labels, where $(p^*,h^*)=z_T(\Log u_*)$. Thus $z_R-p^*=(z_R-p)-(p^*-p)$ satisfies the same bounds. For the new residual gradient, we subtract its value at $p$ and integrate $F_{R,zz}$ along the segment from $p$ to $p^*$. A Hessian without boundary weight multiplies this boundary-localized displacement, so the residual satisfies the same bounds. Its formula follows again from torus stationarity, now at the fixed target $\Log u_*$. These arguments are identities of convergent series in all variables, so they also give the fixed-input bounds at the full output. A representative in complementary forest coordinates, if needed, can use forest words of fixed depth based at the regional vertices and the coarse roots. These words change only the construction stencil outside $\Omega$, their coefficient series are among the chart bounds, and the comparison in $\Omega$ is unchanged.
+
+\paragraph{Step 7: the minimized action.}
+Let $f_t(c;\xi)=F_t(c,z_t;\xi)$. By stationarity and \cref{ch15:lem:minimum-calculus}, we have
+\begin{equation}\label{ch16:eq:value-envelope}
+ \partial_tf_t=D(c,z_t;\xi).
+\end{equation}
+At the endpoints, $B_sf_1=V_R$ and $B_sf_0=E_{d_0+s}(c\oplus0)$. The second identity follows by iterating the recurrence $E_{d+1}(c)=M\min_zE_d(b(c,z))$ which defines the effective classical action: by \cref{ch15:lem:minimum-calculus} the successive minima equal the joint minimum, and the product of the $s$ factors $M$ is $B_s$. A nonconstant derivative of the right side of \eqref{ch16:eq:value-envelope} has the network structure checked in Step~3. Therefore, for $k\ge1$ and a root $i$ in $\Omega$,
+\begin{equation}\label{ch16:eq:value-tensors}
+ \sum_{i_2,\ldots,i_k}
+ e^{c_J\Tree(i,i_2,\ldots,i_k)}
+ |D^k[B_s(f_1-f_0)](0;\xi)_{i,i_2,\ldots,i_k}|
+           \le k!C_J^{k+1}e^{-c_J\delta(i)},
+\end{equation}
+where the factor $B_s\le M^J$ is included in $C_J$. For a scalar series $f(c)=\sum_\nu f_\nu c^\nu$ we have, as in \eqref{ch15:eq:root-fraction},
+\begin{equation}\label{ch16:eq:root-fraction}
+ \sum_{|\nu|=k}\frac{\nu_i}{k}|f_\nu|e^{a\Tree(\nu)}
+ =\frac1{k!}\sum_{i_2,\ldots,i_k}
+       |D^kf(0)_{i,i_2,\ldots,i_k}|e^{a\Tree(i,i_2,\ldots,i_k)}.
+\end{equation}
+Indeed, the multiset obtained from $\nu$ by removing one occurrence of $i$ has $(k-1)!/[(\nu_i-1)!\prod_{j\ne i}\nu_j!]$ ordered listings, and $D^kf(0)$ evaluated on any of them is $\nu!f_\nu$. Fix $a_W,\alpha_W<c_J/4$, and then $\rho_0>0$ in the smaller construction domain with $C_J\rho_0<1/4$. Inserting \eqref{ch16:eq:value-tensors} into \eqref{ch16:eq:root-fraction}, we bound the regional seminorm by
+\[
+ \sum_{k\ge1}\rho_0^{k-2}C_J^{k+1}<\infty.
+\]
+This proves part~(3), including degree one. The value $B_s(f_1-f_0)(0;\xi)$ is never subtracted in \eqref{ch16:eq:value-envelope}; it remains in the full action.
+
+\paragraph{Step 8: derivatives in the newly frozen coordinates.}
+Differentiating the regional gradient equation in $\xi$ and using invertibility of the Hessian, we obtain $D_\xi z_R=-F_{R,zz}^{-1}F_{R,z\xi}$. The mixed derivative has exactly two terms,
+\begin{equation}\label{ch16:eq:full-mixed-hessian}
+ F_{R,uv}=\Psi_{R,u}^{\mathsf T}E_{d_0}''(\Psi_R)\Psi_{R,v}
+                         +E_{d_0}'(\Psi_R)\Psi_{R,uv},
+\end{equation}
+and the bounds of \cref{ch15:thm:regional-gap-and-center} on the larger products control both terms for $(u,v)=(z,\xi)$ and $(u,v)=(z,c)$. An index of $\xi$ is at a fine position outside $\Omega$ or in its fixed interface stencil. Contracting it with the free inverse and summing over the labels of $\xi$, we obtain the row sum $C_Je^{-a_W\delta(e)}$ by \eqref{ch16:eq:hole-sum}. This proves both bounds on the mixed matrices and the bound on $D_\xi z_R$, with no change of the density of the inputs.
+
+\paragraph{Step 9: the Hessians.}
+We compare the endpoints of \eqref{ch16:eq:augmented-objectives} at their stationary points. Before any elimination, the total derivative is
+\begin{equation}\label{ch16:eq:hessian-interpolation}
+ \frac{d}{dt}F_{t,zz}(c,z_t;\xi)
+        =D_{zz}(c,z_t;\xi)+F_t^{(3)}(c,z_t;\xi)[\dot z_t].
+\end{equation}
+Both terms contain the inserted difference, by \eqref{ch16:eq:action-insertion} and \eqref{ch16:eq:unperturbed-center-response}, and all terms of \eqref{ch16:eq:full-mixed-hessian}, including the one with the gradient of the action, are part of these tensors. For two matrix roots in $\Omega$, \cref{ch15:lem:wall-networks} gives the three distances in the Hessian bound of part~(5), and at degree $l$ in additional coarse-field and free arguments it gives the bound $(l+2)!C_J^{l+2}$ after $C_J$ is increased. For example, the corresponding coefficient series of the matrix is dominated on radius $R$ by
+\[
+ \sum_{l\ge0}\frac{(l+2)!}{l!}C_J^{l+2}R^l
+                  =\frac{2C_J^2}{(1-C_JR)^3},\qquad C_JR<1.
+\]
+The same majorant with a fixed input gives every version rooted at an input.
+
+\paragraph{Step 10: successive minima.}
+We restrict to smaller products for the initial segments before this comparison is used, following the construction of \cref{ch16:lem:admitted-products}(1) uniformly in $t$. For an initial segment $I$, we take a solution radius $r_I$ about the joint stationary point and a smaller radius $\eta_I$ for the deviation of the coarser coordinates. The principal inverse has bound $I_J$ and the mixed tensors have bound $C_J$, so at the joint stationary point the inverse times the conditional gradient is at most $I_JC_J\eta_I$. We require $I_JC_Jr_I<1/8$ and $I_JC_J\eta_I<r_I/8$ within the margin of the chart, uniformly in $t$. Then the conditional Newton map is a contraction on the solution domain. We reduce the radii of the coarse field and of $\xi$ so that $\sup_t\|z_t(c;\xi)\|_{\mathrm{coeff}}<\min_I\eta_I/8$. Then a common product $\|y\|_{\mathrm{coeff}}<\eta_I/2$ of coarser coordinates lies in the allowed domain for every $t$. On this product the conditional response is $\dot z_I=-F_{t,II}^{-1}D_I$ at fixed $y$, so the argument of Step~5 applies before a partial minimum is taken. Since there are finitely many initial segments, a common choice is possible, and this is the smaller product in part~(6). At such a partial minimum, \cref{ch15:lem:minimum-calculus} gives
+\[
+ f_{yy}=F_{yy}-F_{yI}F_{II}^{-1}F_{Iy},\qquad
+ D^3f[\eta_1,\eta_2,\eta_3]=D^3F[V_{\eta_1},V_{\eta_2},V_{\eta_3}].
+\]
+Differentiating the Schur formula in $t$ replaces one factor by its derivative, which contains the inserted difference; an inverse contributes $-F_{II}^{-1}\dot F_{II}F_{II}^{-1}$, and evaluation at a moving stationary point contributes its response, which also contains the inserted difference. Each resulting network keeps all external roots and a visit to $H_{L_J}$. At scale $i$ the formula is multiplied by the normalization $M^i$ of the action, and a finite composition over $i<J$ changes only $C_J$.
+
+\paragraph{Step 11: inverse square roots, and fixing versus eliminating.}
+We apply \eqref{ch16:eq:sqrt-difference} to the Hessians of Step~10. By the common gap and the resolvent condition, the differences of the inverse square roots have integrable boundary-localized coefficient bounds, rooted at every index. To compare $(K^T_{LL})^{-1/2}$ with $((K^T)^{-1/2})_{LL}$, we set $C=K^T_{LL}\oplus K^T_{HH}$ and apply the resolvent identity to $K^T-C$ before integrating the resolvents. Each off-diagonal factor connects the two sides of the boundary, and hence gives the same boundary-localized estimate rooted in $\Omega$. This also treats the difference between eliminating and fixing the torus free coordinates outside the regional list. For a free matrix $T$ written in blocks with respect to the regional and the remaining torus coordinates, \eqref{ch16:eq:block-inverse} expresses $(T^{-1})_{LL}-A^{-1}$ through the Schur complement $D_0-CA^{-1}B$ on the remaining coordinates, which has the gap of \cref{ch15:thm:regional-gap-and-center}. The factors $B$ and $C$ pass through the remaining coordinates and keep the visit to $H_{L_J}$, also after $T$ is replaced by $T+t$. The same identity inside a larger Schur formula for one scale treats elimination instead of fixing.
+
+\paragraph{Step 12: logarithms of the Haar disintegration densities.}
+In the fixed coordinates, the Haar disintegration density of one intermediate scale is that of \cref{ch15:lem:regional-coarea}:
+\begin{equation}\label{ch16:eq:coarea-factor}
+ c_{\mathrm{Haar}}^{f}
+ \frac{\prod_{e\text{ nonforest}}j_H(\Gamma_e)}
+      {\prod_c\det D_{X_{e^*_c}}\COconstraint_{b,c}(\Gamma)},
+ \qquad j_H(X)=\sinc^2(|X|/2),
+\end{equation}
+where $e^*_c$ is the eliminated edge of the constraint at the coarse link $c$; the Haar factors of the solved eliminated edges are included in the numerator. At the common zero the local factors of the numerator equal $1$ and the local constraint determinants equal $M^{-6}$. By the word coefficients of fixed depth and the bounds on the implicit chart, there exists a uniform smaller radius on which each factor, divided by its nonzero value at zero, has nonconstant part with absolute coefficient row sum less than $1/2$. The series $\log(1+x)=\sum_{k\ge1}(-1)^{k+1}x^k/k$ therefore converges absolutely, with the attached local networks. We compose these logarithms with the conditional stationary points and the inverse square roots. The words for fine links in $\Omega$ agree off the interface band, and the prescribed values on $H$ remain bounded sources. Thus every difference has an output in $H_{L_J}$, and the derivatives of the other factors stay joined to it. Logarithmic matrix factors are treated by \eqref{ch16:eq:log-difference}. A nonconstant scalar logarithmic coefficient has a differentiated index in $\Omega$ at which its trace cycle can be rooted, so the rooted sums above bound it. Pure scalar determinants, Haar disintegration densities, and traces over $H$ have no such index and are kept as their exact finite values. All choices involved only the fixed construction data of \cref{ch16:sec:setting}, which proves the stated dependence of the constants.
+\end{proof}
+
+\section{A gauge transformation fixing prescribed vertices}\label{ch16:sec:gauge}
+
+On the torus, \cref{ch10:thm:whole-image-gauge} brings the reconstructed field into a small neighborhood of the identity by a gauge transformation which depends only on the coarse field. On a block region this gauge transformation must not change the field at the vertices to which frozen coordinates are attached. A frozen coordinate is stored as its based transport $U(\sigma_e)a_e$: the transport along a path $\sigma_e$ from its basepoint to a link $e$, times the frozen value $a_e$ of that link (\cref{ch15:lem:regional-coarea}). Under a gauge transformation $G$ the frozen value transforms as $a_e^G=G_va_eG_w^{-1}$, where $v,w$ are the endpoints of $e$. We therefore multiply the logarithm of the torus gauge transformation by a cutoff which vanishes near $H$. To avoid a clash with the block region $\Omega$, we write $\Omega^{\mathbb T}_{d_0,s}$ for the gauge transformation of \cref{ch10:thm:whole-image-gauge}, applied to a composition of $s$ averaging steps at depth $d_0$.
+
+\begin{lemma}\label{ch16:lem:strict-hybrid-gauge}
+Fix $M$, $J$, and the geometry of a composition of $s\le J$ averaging steps as above. Let the prescribed protected set contain all vertices of $H$, every fine endpoint and every basepoint of each based transport of a newly or previously frozen coordinate, and all endpoints required in finer-lattice representations of these transports. Assume that its protected vertices outside $H$ lie in the fixed interface band $\mathcal B$, in output units. Let $0\le\chi\le1$ be fixed by the geometry, zero on $H$ and its neighborhood of width two blocks, one outside its neighborhood of width three blocks, and zero at every prescribed protected vertex. Define
+\[
+ k(c)=\Log\Omega^{\mathbb T}_{d_0,s}(c\oplus0),\qquad
+ G^\Omega(c)=\exp(\chi k(c)).
+\]
+There are $u_J,A_J,a_G>0$ such that the following statements hold on $\|c\|_\infty<u_J$.
+\begin{enumerate}
+\item The maps $k$ and $G^\Omega$ are holomorphic, periodic, and equivariant under constant global color rotations. At real data they take values in $\su$ and $\SU$, respectively, and $\|k(c)\|_\infty\le A_J\|c\|_\infty$. Their order-$l$ absolute coefficients are bounded by $l!C_J^{l+1}$, with the connecting-network weight at exponent $a_G$ and with the volume-normalized column of every fixed input. Replacing the volume normalization of a column for a fine output by counting measure costs at most the factor $M^{3s}\le M^{3J}$.
+\item At fixed geometry $G^\Omega$ depends only on $c$, not on the free coordinates or the frozen coordinates. It is exactly $I$ at $c=0$, at the coarse roots, and at all protected vertices, also for complex $c$.
+\item Consequently, for every reconstruction $U$ in the chart before gauge transformation,
+\[
+ (T_M^s U^{G^\Omega(c)})_{\mathrm{internal}}
+      =(T_M^sU)_{\mathrm{internal}},\qquad
+ (U^{G^\Omega(c)})(\sigma_e)a_e^{G^\Omega(c)}
+                                      =U(\sigma_e)a_e
+\]
+for every based transport of a frozen coordinate. A frozen link across the boundary of the block region with both fine endpoints protected is also unchanged.
+\item The gauge transformation is applied after the reconstruction in the rooted spanning-forest coordinates. It does not change the free coordinates, the support restrictions, the Haar disintegration density, or the determinant of the normalization of the fluctuation variables.
+\end{enumerate}
+The constants have the dependence of \cref{ch16:sec:setting} and do not depend on the later widths or on the size of the protected set. The existence of a large-field decomposition whose protected vertices satisfy these hypotheses is a geometric hypothesis, not a conclusion of the lemma.
+\end{lemma}
+
+\begin{proof}
+We take the torus gauge transformation of \cref{ch10:thm:whole-image-gauge} for each $s\le J$, with a common smaller domain of targets. Extending the target by zero on the coarse links outside $\Omega$ deletes coefficients from its majorant. After a construction constant $A$ is increased, the gauge transformation minus the identity has absolute row series at most
+\[
+ U(t)=\frac{At}{1-At};
+\]
+here and below this includes the connecting network and the versions with a fixed input. \Cref{ch10:thm:whole-image-gauge} also provides the logarithm of the gauge transformation. To check the domain condition, we fix $u_J\le U_T$ inside the larger target domain with $Au_J<1/4$. This is the case $Q_T=0$ of \eqref{ch16:eq:torus-reserve}, and it gives $u_J<r_s$, a positive denominator, and the fixed intermediate chart margins for every $s\le J$. The convergent matrix logarithm is bounded by
+\begin{equation}\label{ch16:eq:gauge-log-majorant}
+ \sum_{r\ge1}\frac{U(t)^r}{r}
+   =\log(1-At)-\log(1-2At)
+   \le\frac{At}{1-2At}\le2At\qquad(0\le t\le u_J).
+\end{equation}
+In the first inequality, we wrote the difference of logarithms as $\log(1+At/(1-2At))$ and used $\log(1+x)\le x$ for $x\ge0$. Products join coefficient networks. Fixing one input differentiates this majorant series, and on a further fixed smaller radius we obtain order-$l$ tensors bounded by $l!C_J^{l+1}$, for an output row or for the volume-normalized column of any input. The same bounds hold for $k(c)$, and in particular $\|k(c)\|_\infty\le A_J\|c\|_\infty$. The fine mesh in output units is $M^{-s}$, so the volume-normalized column of a fine output carries the factor $M^{-3s}$. Replacing it by counting measure multiplies the bound by the reciprocal, at most $M^{3J}$; no factor depending on the depth or the volume occurs.
+
+At fixed geometry, multiplication by $\chi(v)\in[0,1]$ can only decrease an absolute coefficient row. With $L(t)=\sum_{r\ge1}U(t)^r/r$, exponentiating $\chi k$ gives the coefficientwise majorant $\exp L(t)=(1-At)/(1-2At)$. This series and its fixed-input derivative series converge on a fixed smaller radius and give the asserted factorial coefficient bounds for $G^\Omega$. The numerical bound $L(t)\le2At$ in \eqref{ch16:eq:gauge-log-majorant} bounds values only and is not used in this coefficient comparison. Periodicity and global color equivariance hold for the torus gauge transformation and its logarithm by \cref{ch10:thm:whole-image-gauge}, and multiplication by the fixed scalar cutoff and exponentiation preserve them. For real targets the logarithm of the compact gauge transformation lies in $\su$, and its exponential lies in $\SU$; the complex functions are their holomorphic continuations with values in $\mathfrak{sl}_2(\C)$ and $\SL$.
+
+The torus gauge transformation is $I$ at $c=0$ and at each coarse root, so its logarithm vanishes at these points. At every other protected vertex $\chi=0$ by hypothesis. Hence $G^\Omega=I$ at all these points, identically as a holomorphic function and not only at real arguments.
+
+The transport along a path $\sigma$ from $v$ to $w$ transforms as
+\[
+ U^{G}(\sigma)=G_vU(\sigma)G_w^{-1},
+\]
+since all intermediate vertex factors cancel. A based transport $U(\sigma_e)a_e$ therefore transforms only at its basepoint and at the far fine endpoint of $e$. Both values of the gauge transformation there are $I$, which implies the second identity in part~(3). If both fine endpoints of a frozen link across the boundary of the block region are protected, the gauge transformation also leaves its value unchanged.
+
+For the coarse output, every based loop holonomy in the centered average \eqref{ch01:eq:ordinary-map} transforms by conjugation at its initial coarse root, and its reference path transforms at its two coarse endpoints. On the branch of the logarithm used here, the logarithm commutes with conjugation, term by term in its power series. Thus one averaging step is covariant, with the gauge transformation acting only at the coarse endpoints. Iterating $s$ steps cancels the intermediate gauge factors and leaves only the gauge transformation at the two coarse roots of the output link, where it is $I$. This proves the first identity in part~(3), also at complex data. No exceptional value of the Borel extension of $T_M$ occurs inside these charts.
+
+Finally, the gauge transformation acts on a field already reconstructed from its free coordinates in the rooted spanning-forest coordinates, and it changes neither these coordinates nor the integration variables. Hence the support restrictions, the Haar disintegration density, and the determinant of the normalization of the fluctuation variables remain the same functions of the original variables. The cutoff enters only as a bounded fixed multiplier; neither the size of its support nor a derivative in its geometric parameters enters any bound. This proves that the constants do not depend on the size of the protected set or on the later widths, under the stated hypothesis on the protected vertices.
+\end{proof}
+
+\section{The gauge-transformed reconstruction and its input columns}\label{ch16:sec:reconstruction}
+
+We now apply $G^\Omega(c)$ to the regional reconstruction and compare the result with the gauge-transformed torus reconstruction of \cref{ch10:thm:whole-image-gauge}. Let $a^{\mathrm{raw}}_R(c,q;\xi)$ be the logarithm of the regional reconstruction before gauge transformation, built from the successive regional conditional stationary points and constrained inverse square roots, and let $a^{\mathrm{raw}}_T$ be the corresponding torus reconstruction. For a fine link $e=(v,w)$ and a logarithmic gauge field $k$, we write
+\[
+ H_e^\chi(a,k)=\Log\bigl(e^{\chi(v)k(v)}e^{a_e}
+                                      e^{-\chi(w)k(w)}\bigr).
+\]
+Then $\Phi_R=H^\chi(a^{\mathrm{raw}}_R,k(c))$ is the logarithm of the regional reconstruction transformed by $G^\Omega(c)$, and $\Phi_{\mathbb T}=H^1(a^{\mathrm{raw}}_T,k(c))$ is the gauge-transformed torus reconstruction of \cref{ch10:thm:whole-image-gauge}.
+
+\begin{theorem}\label{ch16:thm:hybrid-columns}
+On the fixed products of \cref{ch16:thm:nonflat-force-comparison,ch16:lem:strict-hybrid-gauge}, build the reconstruction from the free coordinates with the successive regional conditional stationary points and constrained inverse square roots, with small newly frozen coordinates $\xi$. There are fixed larger construction radii and positive rates such that, on every smaller product of coarse fields and fluctuation increments satisfying the domain conditions,
+\[
+ \Phi_R(c,q;\xi)
+    =\Phi_{\mathbb T}(c\oplus0,q\oplus0)|_\Omega
+                                      +\Delta(c,q;\xi),
+\]
+where $q\oplus0$ uses the same scale indices on the regional list and sets the remaining torus increments to zero. The following statements also hold.
+\begin{enumerate}
+\item All terms have convergent majorant series in all variables. The correction $\Delta$ has factorial coefficient bounds with a root in $\Omega$, a connecting network through every input, and a visit to $H_{L_J}$. In particular, let $\boldsymbol R$ be a radius profile on a smaller construction product, let $a>0$ be a fixed network exponent, and let $\Delta_{e,\nu}$ be the Taylor coefficients of $\Delta_e$ in its analytic variables, namely the coarse field, the increments $q$, and the newly frozen coordinates $\xi$. For a fixed input $x$, the differentiated series
+\[
+ \mathcal D_{e,x}(\boldsymbol R)
+    =\sum_{\nu:\nu_x\ge1}\nu_x|\Delta_{e,\nu}|
+       \boldsymbol R^{\nu-\mathbf 1_x}
+       e^{a\Tree(\{e\}\cup\supp\nu)},
+\]
+with the measure conventions of \cref{ch16:sec:setting}, satisfies
+\[
+ \mathcal D_{e,x}(\boldsymbol R)\le C_Je^{-a_W[\dist(e,W)+\dist(e,x)]}.
+\]
+Unlike $C_{e,x}$ in part~(4), this series does not contain the factor $R_x$.
+\item At $q=0$, the dependence of $\Delta$ on the newly frozen coordinates satisfies, in the coefficient norm in $c$,
+\[
+ \|\Delta_e(\cdot,0;\xi)-\Delta_e(\cdot,0;0)\|_{\mathrm{coeff}}
+        \le C_F\|\xi\|_\infty e^{-a_W\dist(e,W)},
+ \qquad \Delta(0,0;0)=0.
+\]
+\item At radius $s_q$ for the fluctuation increments, the absolute coefficient row sum of the terms of $\Delta$ of positive degree in $q$ is at most $C_{\Delta,J}s_q$. The rows of the coarse-field terms near the boundary and all rows in the free variables are only bounded by finite constants depending on $J$; no contraction factor $M^{-J}$ is asserted for them.
+\item (Input columns.) Let $R_y\le K_*\rho$ be a construction profile, and choose $a_1,b_1>0$ with $b_1>\awall$ and with $a_1+b_1$ smaller than a decay exponent for which the full reconstruction has coefficient bounds without boundary weight. Define
+\[
+ C_{e,x}(\boldsymbol R)=\sum_\nu\nu_x|\Phi_{R,e,\nu}(\xi)|
+       \boldsymbol R^\nu
+             e^{a_1\Tree(\{e\}\cup\supp\nu)},
+\]
+where $\Phi_{R,e,\nu}(\xi)$ are the Taylor coefficients of $\Phi_R$ at the fine output $e$. Then $C_{e,x}(\boldsymbol R)\le D_JR_xe^{-b_1\dist(e,x)}$, and
+\[
+ \begin{gathered}
+ \sum_e e^{-\awall d_{\mathrm{old}}(e)}C_{e,x}(\boldsymbol R)
+       \le K_J\rho\,e^{-\awall d_{\mathrm{out}}(x)},\\
+ K_J\le C_{M,J}D_JK_*e^{\awall C_J}
+         \sum_{l\ge0}(l+1)^3e^{-(b_1-\awall)l}.
+ \end{gathered}
+\]
+Here $d_{\mathrm{old}}$ and $d_{\mathrm{out}}$ are the distances to the complements of the specified old and output position lists, respectively, both expressed in output units, and we assume that, for every summation label $e$ and every input $x$,
+\[
+ d_{\mathrm{out}}(x)\le d_{\mathrm{old}}(e)+\dist(e,x)+C_J,
+\]
+with a buffer $C_J$ depending only on the fixed construction geometry. The sum runs over the full list of old output labels (the fine labels), at their creation-scale density. For an input among the free coordinates the same statement holds with its own radius $R_x$ in place of $K_*\rho$ in the last bound. For a kernel from inputs to outputs, the column of a fixed input carries the volume of the output cells divided by the volume of the cell of that input. The same calculation applies to the profile $R_y=2\rho$ within the auxiliary construction ball and to the smaller spatially varying radius profiles of \cref{ch15:def:regional-norm}. These column bounds are different from the bounds on the image under the reconstruction majorant in \cref{ch16:lem:strict-two-radius-images}.
+\end{enumerate}
+The constants have the dependence of \cref{ch16:sec:setting}, are uniform in the depth and in the shape of $\Omega$, and do not depend on the later widths. No equality with a perturbed incoming constrained problem is asserted.
+\end{theorem}
+
+\begin{proof}
+We compare the successive regional and torus reconstructions before applying the gauge transformation with cutoff, and then estimate the differentiated coefficient series.
+
+\paragraph{Step 1: the domain of the successive substitutions.}
+We take a common larger construction product as in \cref{ch16:thm:nonflat-force-comparison}, with radii for coarse fields and free coordinates at most $U_T$ and $Q_T$ from \eqref{ch16:eq:torus-reserve}. Then the torus reconstruction, its gauge transformation, and all column series below are evaluated with $u+v<r_s$ and denominator at least $1/2$, and the smaller product keeps the intermediate classical and Haar-density margins. For the finitely many conditional problems at the intermediate scales, we use the smaller parameter domains of Step~10 of the proof of \cref{ch16:thm:nonflat-force-comparison}. We choose the radius of the fluctuation increments so that every successive substitution lies strictly inside these domains. Such a radius exists: by \cref{ch15:lem:minimum-calculus}, at $q=0$ the successive conditional stationary points are the joint stationary point. Each conditional stationary point and each inverse square root has a convergent majorant series without boundary weight on a larger product. If $A_i$ bounds the deviation of the coarser coordinates from the joint stationary point after the scales above $i$ have been reconstructed, then by these series we have
+\begin{equation}\label{ch16:eq:unperturbed-sequential-budget}
+ A_{i-1}\le(1+C_0)A_i+C_Ss_q,\qquad A_s=0,
+\end{equation}
+on a fixed smaller free ball, where the constants are maxima of the rows of the conditional derivatives and of the inverse square roots on the larger products. The same recurrence holds in the coefficient norms. Iterating it at most $J$ times, we obtain $A_i\le C_Ss_q\sum_{j=0}^{J-1}(1+C_0)^j$. Taking $s_q$ smaller than a fixed fraction of every domain margin divided by this finite sum places the successive product inside the domains. This is the case $\delta_V=0$ of \cref{ch16:lem:admitted-products}(3), and this choice does not reduce the radius of the coarse field.
+
+\paragraph{Step 2: one scale of the reconstruction.}
+On the original list of free coordinates, the reconstruction at scale $i$ is
+\begin{equation}\label{ch16:eq:raw-shell-step}
+ \Gamma_i\bigl(c_{i+1},
+      a_i(c_{i+1};\xi)+K_i(c_{i+1};\xi)^{-1/2}q_i;\xi\bigr).
+\end{equation}
+Here $a_i$ is the conditional stationary point of the partial minimum after the finer scales have been eliminated, $K_i$ is its constrained Hessian at scale $i$, and $\Gamma_i$ is the local inverse chart of the block averaging constraint. The action at this scale is $M^i$ times the partial minimum of the objective in input units, so $K_i$ includes exactly the factor $M^i$. The variable $q_i$ is the fluctuation increment, and no coupling is absorbed into $K_i$.
+
+\paragraph{Step 3: the reconstructions before gauge transformation.}
+On each common list the comparison of the stationary points is given by \cref{ch16:thm:nonflat-force-comparison}. To compare inverse square roots, we extend the regional matrix to the full list by its direct sum with a principal free block of the torus matrix on the complementary coordinates. Both summands have the gap. The internal difference is the difference of the regional and torus Hessians at nonzero coarse field, estimated in \cref{ch16:thm:nonflat-force-comparison}(5). The removed off-diagonal blocks of the torus matrix have their two roots on opposite sides of $W$, so they are boundary-localized. The identity \eqref{ch16:eq:sqrt-difference} then gives the comparison on the common list, with every coarse-field and free argument. When a list of finer coordinates is eliminated on one side and fixed on the other, the identity \eqref{ch16:eq:block-inverse} inserts a chain through that list, as in Step~11 of the proof of \cref{ch16:thm:nonflat-force-comparison}, and that chain visits $H_{L_J}$. Thus the statement concerns the regional matrix itself, not the torus problem with coordinates deleted.
+
+We subtract the regional and the torus versions of \eqref{ch16:eq:raw-shell-step}, with the torus free inputs outside the regional list set to zero. First we change the chart words at the same arguments; their difference lies in the fixed interface stencil. Then we change the conditional stationary point and the inverse square root, using the boundary-localized differences just proved. Finally we change their coarser arguments. The difference of an analytic function at two arguments is its derivative integrated along the common segment, that is, a tensor without boundary weight applied to a boundary-localized difference of arguments. At the coarsest scale these are all the terms. Each descent by one scale adds the boundary-localized difference from the scale above as one more difference of arguments. By induction over at most $J$ scales, the difference $a_R^{\mathrm{raw}}-a_T^{\mathrm{raw}}$ is a convergent boundary-localized series. The values of the torus reconstruction on the complementary outputs, which can be nonzero at zero complementary free input, are joined by networks without boundary weight from their output in $H$ to their inputs in $\Omega$. Such networks cross $W$, and they provide the visit to $H_{L_J}$ at the next substitution. No sum of sources over the volume of $H$ without decay occurs.
+
+\paragraph{Step 4: the gauge transformation.}
+We apply the same torus gauge transformation $k(c)$ to both fields and cut it off only on the regional side. After the construction radius is chosen, all arguments of $H_e^\chi$ lie in one fixed larger identity chart, and the difference is
+\begin{align}
+ \Delta_e={}&H_e^\chi(a_R^{\mathrm{raw}},k)-H_e^\chi(a_T^{\mathrm{raw}},k)
+                                                        \notag\\
+            &+H_e^\chi(a_T^{\mathrm{raw}},k)-H_e^1(a_T^{\mathrm{raw}},k).
+                                                        \label{ch16:eq:hybrid-split}
+\end{align}
+The first line contains $a_R^{\mathrm{raw}}-a_T^{\mathrm{raw}}$ as a factor, after the derivative in $a$ is integrated. The second line vanishes when both endpoint values of the cutoff equal $1$, so its output root lies in a fixed interface band of width three blocks, including the buffer for the endpoints of fine links. Its other factors have the torus and gauge coefficient bounds of \cref{ch10:thm:whole-image-gauge,ch16:lem:strict-hybrid-gauge}. These facts imply the boundary-localized estimate for both lines of \eqref{ch16:eq:hybrid-split}. A coarse-field derivative which hits a gauge factor appends the network of that factor to the existing network and does not remove the visit to $H_{L_J}$. The torus term without the cutoff is $\Phi_{\mathbb T}$. This proves the decomposition and its factorial coefficient bounds.
+
+\paragraph{Step 5: the cutoff at first order.}
+The contribution of the cutoff can be read off at first order. Let $k_1=Dk(0)c$. The cutoff part of the linearized correction on the link $(v,w)$ is the difference of $(1-\chi)k_1$ between its endpoints, which equals
+\[
+ (1-\chi(v))(k_1(w)-k_1(v))
+                         +(\chi(v)-\chi(w))k_1(w).
+\]
+Both terms are contained in \eqref{ch16:eq:hybrid-split}. In particular the second term, which contains the gradient of the cutoff, is not removed by treating the gauge transformation as constant in the target.
+
+\paragraph{Step 6: the local logarithms.}
+The local logarithms in this argument have uniform complex coefficient margins. Indeed, in a submultiplicative matrix norm the exponential series are dominated by $e^t$, and the logarithm of $I+X$ is dominated by $\sum_{l\ge1}t^l/l$ on $\|X\|\le t<1$. We take the rows of the reconstruction before gauge transformation and of the gauge transformation small enough that the product lies in such a disc with a fixed margin. Composition of majorants and the attached networks then bound every derivative of $H_e^\chi$, with constants independent of $\chi\in[0,1]$.
+
+\paragraph{Step 7: fixed inputs and the newly frozen coordinates.}
+Fix an input $x$ in the boundary-localized series of the reconstruction and keep its position while summing over the other indices. The connected network contains $e$, $x$, and a visit to $H_{L_J}$, so by the larger decay exponent and \cref{ch15:lem:wall-networks}, we have $\mathcal D_{e,x}(\boldsymbol R)\le C_Je^{-a_W[\delta(e)+\dist(e,x)]}$. At $q=0$ the dependence on $\xi$ satisfies the coefficient identity
+\begin{equation}\label{ch16:eq:record-integration}
+ \Delta_e(c,0;\xi)-\Delta_e(c,0;0)
+  =\int_0^1\sum_f\xi_fD_{\xi_f}\Delta_e(c,0;t\xi)\,dt.
+\end{equation}
+The derivatives in $\xi$ come from its analytic input slots. The bound on their sum follows from part~(4) of \cref{ch16:thm:nonflat-force-comparison}, the finite compositions of charts, and the fact that the gauge transformation does not depend on $\xi$. Integrating their coefficient series in $c$ in \eqref{ch16:eq:record-integration}, we obtain the bound $C_F\|\xi\|_\infty e^{-a_W\delta(e)}$ of part~(2). At $c=q=\xi=0$ the unperturbed stationary points vanish and both gauge transformations are the identity, so $\Delta(0,0;0)=0$.
+
+\paragraph{Step 8: terms of positive degree in $q$.}
+If a convergent majorant series in all variables is bounded on a larger fixed free radius $r_Q$, then, for $s_q\le r_Q/2$, its terms of positive total degree in $q$ are at most $s_q$ times a fixed bound for its derivative majorant on the larger product. Applying this to \eqref{ch16:eq:hybrid-split}, we obtain the bound $C_{\Delta,J}s_q$ of part~(3). The rows near the boundary and the rows in the free variables are bounded by the corresponding convergent majorants without boundary weight, with no factor $M^{-J}$.
+
+\paragraph{Step 9: the input columns.}
+Fix the input $x$ in the differentiated coefficient series. Removing one power of its radius $R_x$ and using the column bound with any input fixed, we see that the connecting network contains a path from $e$ to $x$. Assigning $b_1$ of the larger decay exponent to this path gives
+\begin{equation}\label{ch16:eq:column-local}
+ C_{e,x}(\boldsymbol R)\le D_JR_xe^{-b_1\dist(e,x)}
+\end{equation}
+on every smaller construction profile in the statement; since the majorant has nonnegative coefficients, we may restrict to that profile before summing. A free input is included, since it is an input of \eqref{ch16:eq:raw-shell-step} and of every later composition. By hypothesis the distances satisfy
+\[
+ d_{\mathrm{out}}(x)\le d_{\mathrm{old}}(e)+\dist(e,x)+C_J,
+\]
+where the additive constant is a fixed buffer. For an incoming list $D_{\mathrm{in}}$ whose complement lies in $H$ up to the fixed stencil, with $d_{\mathrm{old}}(e)=d_{D_{\mathrm{in}}}(e)/B_s$, this condition follows from \cref{ch16:lem:input-wall-distance} after the incoming distance and the buffer are divided by $B_s$; we do not identify the incoming and the current fixed complements. Since $B_s\ge1$, the condition also holds when $d_{\mathrm{old}}$ is measured in input units. Hence
+\begin{align*}
+ \sum_e e^{-\awall d_{\mathrm{old}}(e)}C_{e,x}(\boldsymbol R)
+ &\le D_JR_xe^{\awall C_J}e^{-\awall d_{\mathrm{out}}(x)}
+                    \sum_e e^{-(b_1-\awall)\dist(e,x)}\\
+ &\le C_{M,J}D_JR_xe^{\awall C_J}e^{-\awall d_{\mathrm{out}}(x)}
+        \sum_{l\ge0}(l+1)^3e^{-(b_1-\awall)l}.
+\end{align*}
+Using $R_x\le K_*\rho$, we obtain the bound on $K_J$; keeping $R_x$ gives the version for a free input. The sum includes every old output label at its density; restricting it to a sublist only decreases it. For a kernel from inputs to outputs it is multiplied by the volume of the fine output cells divided by the volume of the cell of the fixed input, as in \cref{ch01:def:analytic-norms}. The colors and the finitely many scale indices enter $C_{M,J}$, not a factor of the lattice volume. Setting $R_y=2\rho$ is allowed within the auxiliary ball since $K_*\ge2$, and the smaller spatially varying radius profile is another restriction of the same nonnegative coefficient series. This completes the proof.
+\end{proof}
+
+\section{Construction radii and bounds on the reconstruction majorant}\label{ch16:sec:images}
+
+The next lemma collects the conditions on the radii under which the reconstruction maps a product domain strictly inside the analytic domain used at the next step, in the following sense. For a map with a convergent Taylor series, the absolute coefficient row sum of the Taylor series, evaluated at the radii of the product domain, bounds the image of the domain under the majorant of the map. For the reconstruction we call this bound the image under the reconstruction majorant. For $c\ge0$ we write $S_c$ for this row sum with the weight $e^{c\ell}$, where $\ell$ is the length of the connecting network of a monomial including its output; thus $S_0$ is the unweighted row sum. A bound $S_c<\rho/2$ is stronger than a bound on the values of the map, and it is the hypothesis needed to substitute the reconstruction into a function whose coefficients are controlled at radius $\rho$. The lemma is applied twice, with the quantum radius $\rho$ and with the classical radius $\rho_{\mathrm{cl}}$.
+
+\begin{lemma}\label{ch16:lem:strict-two-radius-images}
+Fix the constants of the unperturbed constructions before the later choices of the boundary-layer width, the erosion width, the widths of the protected neighborhoods, and the bound $\rrecord$ on newly frozen coordinates.
+\begin{enumerate}
+\item (Construction radius.) Let $v_{\mathrm{free},J}>0$ be a free construction radius, distinct from the density constant $v_J$, with
+\[
+ Q_Jv_{\mathrm{free},J}<\lambda_J/64,
+ \qquad I_JQ_Jv_{\mathrm{free},J}<r_{z,J}/64.
+\]
+There is a radius $\Rraw>0$, inside both the chart of the block averaging constraint and the chart of \cref{ch08:thm:compact-overlap}, which may be chosen below
+\[
+ \min\Bigl\{\frac{\min(r_{\Gamma,J},r_E)}{64G_J},
+ \frac{\lambda_J}{64Q_J},\frac{r_{z,J}}{64I_JQ_J},
+ \frac{v_{\mathrm{free},J}}{64C_{\mathrm{lift},J}}\Bigr\}.
+\]
+Here $G_J$ and $r_{\Gamma,J}$ are the bound and the radius of the finite constraint words, $r_E$ is the larger radius of the torus action, and $C_{\mathrm{lift},J}$ bounds the block-constant lift and the coarse-field lift, including all embeddings for the initial segments. If
+\[
+ C_{\mathrm{lift},J}
+ [K_*\max(\rho,\rho_{\mathrm{cl}})+r+\rrecord+q_{\mathrm{raw}}]
+                                                <\Rraw/8,
+\]
+where $r$ is the radius of the small-link domain $B_r$ and $q_{\mathrm{raw}}$ is the radius allowed for the fluctuation increments before gauge transformation, then all images of the reconstruction before gauge transformation lie in these fixed larger charts, and their real free Hessians have gap at least $\lambda_J/2$, with the complex inverse margins. No factor $M^{-J}$ is required of the lift.
+\item (Zero fluctuations.) For each $\rho_\bullet\in\{\rho,\rho_{\mathrm{cl}}\}$, use its own spatially varying radius profile $\phi_\bullet$, equal to the boundary radius $\rho_{\partial,\bullet}$ at labels within distance $w_{\mathrm{bd}}$ of $H$ and to $\rho_\bullet$ elsewhere, the outer profile $K_*\phi_\bullet$, and the outer boundary radius $R_{\partial,\bullet}=K_*\rho_{\partial,\bullet}$. For a full renormalization group step, $s=J$ and $B=M^J$, assume the torus contraction inequality (the first inequality below) and impose the four inequalities
+\[
+ \begin{aligned}
+ B^{-1}Z_\bullet(K_*\rho_\bullet)&\le\rho_\bullet/16,&
+ C_{\Delta,\bullet}C_{a,\bullet}R_{\partial,\bullet}
+                                      &\le\rho_\bullet/16,\\
+ C_{\Delta,\bullet}C_{a,\bullet}e^{-a_Ww_{\mathrm{bd}}/2}
+                      K_*\rho_\bullet&\le\rho_\bullet/16,&
+ C_{F,\bullet}\rrecord&\le\rho_\bullet/16,
+ \end{aligned}
+\]
+where $Z_\bullet$ is the classical row majorant of \cref{ch10:thm:whole-image-gauge}, $C_{\Delta,\bullet}$ and $C_{F,\bullet}$ are the constants of \cref{ch16:thm:hybrid-columns}, and $C_{a,\bullet}$ is a summation constant fixed in the proof. These constants are evaluated on the larger auxiliary construction ball, before the radii and widths are chosen. The sum of the four left sides bounds the row sum $S_0$ at $q=0$ by $\rho_\bullet/4$.
+\item (Fluctuation increments.) For a radius $s_q$ of the fluctuation increments, the increment of $S_0$ is bounded by
+\[
+ W_\bullet(s_q)=
+ \frac{C_{T,\bullet}s_q}
+      {1-C_{T,\bullet}(K_*\rho_\bullet+s_q)}
+                         +C_{\Delta,\bullet}s_q.
+\]
+Require the denominator to be at least $1/2$ and $W_\bullet(s_q)\le\rho_\bullet/8$ for both radii. The same rule applies to the product in the jointly normalized coordinates $u$, with its finite-composition free radius and its own denominator, which includes $\rrecord$ if it occurs in that majorant. The products for the successive substitution must lie in this joint product.
+\item (Spatial weight.) The resulting unweighted absolute row sum satisfies $S_0\le3\rho_\bullet/8$. If $S_c\le C_J\rho_\bullet$ for a fixed $c>0$, then there is a fixed $0<\vartheta<1$, common to both radii and to the finitely many initial segments, such that
+\[
+ S_{\vartheta c}\le S_0^{1-\vartheta}S_c^\vartheta
+   \le\rho_\bullet(3/8)^{1-\vartheta}C_J^\vartheta
+                                      <\rho_\bullet/2.
+\]
+Thus, for both radii, the image under the reconstruction majorant, with connecting-network weight at one positive exponent, is less than half of the radius.
+\end{enumerate}
+All constants and thresholds have the dependence of \cref{ch16:sec:setting} and do not depend on the later widths. For a composition of $s<J$ averaging steps, the conclusion of part~(4) requires the torus contraction inequality with $B_s=M^s$ in place of $B$, which must be checked separately for that composition; the finiteness of the constants at fixed $J$ does not give it.
+\end{lemma}
+
+\begin{proof}
+We choose the construction radius, bound the unweighted row sum at zero fluctuation and its increment, and then add the spatial weight by interpolation.
+
+\paragraph{Step 1: the construction radius.}
+We choose the finite word and lift constants on the larger products of \cref{ch15:thm:regional-gap-and-center} and \cref{ch16:lem:admitted-products}. We increase $C_{\mathrm{lift},J}$ so that it bounds the block-constant lift of the target, the coarse-field lift, the extensions by zero and by the small newly frozen coordinates, and each of the finitely many embeddings for initial segments. Since a local lift uses only its block stencil of fixed depth, its row and input columns have one finite coefficient bound, independent of the number of components and of the later interface widths. Let $v_{\mathrm{free},J}$ satisfy the two strict inequalities in part~(1), and let $\Rraw$ lie below the listed bounds and below the common radii of the local Haar-density chart and of the compact-overlap chart. The lift inequality then places all images strictly inside the larger inverse and torus action charts, their free arguments inside the radius $v_{\mathrm{free},J}$, and their stationary points inside the solution radius $r_{z,J}$. Indeed, the variation of the free Hessian is bounded by the sum of its contributions from the free radius and from the lifted arguments, which is at most
+\[
+ Q_Jv_{\mathrm{free},J}+Q_J\Rraw<\lambda_J/32.
+\]
+Enlarging the fixed lift constant before the radii are chosen accounts for any finite number of such types of arguments. The displacement of the stationary point is bounded by the corresponding inverse times gradient, which is less than $I_JQ_J(v_{\mathrm{free},J}+\Rraw)<r_{z,J}/32$. The real gap $\lambda_J$ at the identity therefore implies a real gap at least $\lambda_J/2$ on all these products, with room for the complex margins. The term $E_{d_0}'\Psi_{zz}$, which contains the gradient of the action, is included in the bound on the variation of the Hessian in \cref{ch15:thm:regional-gap-and-center}. The conditional stationary points are those of \cref{ch16:lem:admitted-products}.
+
+\paragraph{Step 2: the row sum at zero fluctuation.}
+We carry out the following calculation for each $\rho_\bullet$, with its own profile and constants. The construction radii satisfy $K_*\rho_\bullet\le U_T$ and $s_q\le Q_T$, so $K_*\rho_\bullet+s_q<r_s$ and all intermediate margins hold by \eqref{ch16:eq:torus-reserve}; these domain checks precede each rational majorant. At $q=0$ we use \cref{ch16:thm:hybrid-columns}. By \cref{ch10:thm:whole-image-gauge}, the torus term has absolute row at most $B^{-1}Z_\bullet(K_*\rho_\bullet)$. We split the regional correction into its value at $\xi=0$ and its increment in $\xi$. By \cref{ch16:thm:hybrid-columns}(2), the latter is bounded by $C_{F,\bullet}\rrecord$ in the coefficient norm in the target. The former vanishes at zero target, and integrating its differentiated series with a fixed target input bounds it by
+\[
+ C_{\Delta,\bullet}\sum_x R_x
+       e^{-a_W[\delta(e)+\dist(e,x)]},
+ \qquad R_x=(K_*\phi_\bullet)(x),
+\]
+where $C_{\Delta,\bullet}$ is increased to include the fixed normalization of the derivative. Terms with $\delta(x)<w_{\mathrm{bd}}$ have $R_x=R_{\partial,\bullet}$, and their sum is at most $C_{a,\bullet}R_{\partial,\bullet}$, where $C_{a,\bullet}$ bounds the sum of the exponentials. For the other terms, by the conventions for endpoints, we have
+\[
+ \delta(e)+\dist(e,x)\ge\delta(x)-L'_J
+                                          \ge w_{\mathrm{bd}}-L'_J.
+\]
+We use half of the exponent for this inequality and sum the other half using the density bound. After $e^{a_WL'_J/2}$ is included in the fixed constant $C_{a,\bullet}$, these terms are at most $C_{a,\bullet}e^{-a_Ww_{\mathrm{bd}}/2}K_*\rho_\bullet$. This bounds the row at $q=0$ by the sum of the four terms of part~(2). Since each of them is at most $\rho_\bullet/16$, the row is at most $\rho_\bullet/4$. All constants in this calculation were evaluated on the larger unperturbed auxiliary ball, before $w_{\mathrm{bd}}$ or the smaller boundary radius was chosen.
+
+\paragraph{Step 3: terms of positive degree in the increments.}
+For positive degree in the free coordinates, the torus row is bounded by
+\[
+ \frac{C_{T,\bullet}s_q}
+ {1-C_{T,\bullet}(K_*\rho_\bullet+s_q)},
+\]
+which is the majorant of \cref{ch10:thm:whole-image-gauge}. The row of the correction of positive degree in $q$ is at most $C_{\Delta,\bullet}s_q$, by \cref{ch16:thm:hybrid-columns}(3). Adding the two, we obtain $W_\bullet(s_q)$, and under the two conditions of part~(3) the increment is at most $\rho_\bullet/8$. Combining this with Step~2, we obtain the absolute coefficient row bound
+\begin{equation}\label{ch16:eq:zero-exponent-image}
+ S_0\le3\rho_\bullet/8.
+\end{equation}
+The denominator cannot be discarded: its geometric series contains all higher degrees in the free coordinates and in the target.
+
+\paragraph{Step 4: the jointly normalized coordinates.}
+For the joint coordinate $u$, we substitute $z=z_0+K_0^{-1/2}u$ into the maps in the original coordinates before taking the majorant. The successive increments are recovered from $z$ by
+\[
+ q_i=K_i(c,z_{>i};\xi)^{1/2}
+                       \bigl(z_i-a_i(c,z_{>i};\xi)\bigr),
+\]
+which inverts the unperturbed insertion at scale $i$. The factor $K_i^{1/2}=K_iK_i^{-1/2}$ has the same larger coefficient bounds. At $u=0$ all these increments vanish, since the chain at zero fluctuation is the joint stationary point. By finite composition of majorants, there exists a joint radius for which the resulting majorant of the increments is at most $Q_T$. We take the product of $u$ inside this radius and inside the solution domains of the initial segments. Its target argument is at most $U_T$, so \eqref{ch16:eq:torus-reserve} also verifies the torus domain and the denominator for this composition. The finite composition has a rational majorant of the same kind for its increment, with its own constants and argument; in particular, a contribution of the newly frozen coordinates to that argument remains in its denominator. Requiring this majorant to be at most $\rho_\bullet/8$ gives \eqref{ch16:eq:zero-exponent-image} for the joint product as well. The products for the successive substitution are restricted to the preimage of this product and to the domains of \cref{ch16:lem:admitted-products}. This restricts a coefficient series which is already bounded.
+
+\paragraph{Step 5: the spatial weight.}
+For one output row, we write its terms as $b_\nu\ge0$ and let $\ell_\nu$ be the length of the attached network, including the output root. For finite partial sums, by Hölder's inequality with exponents $1/(1-\vartheta)$ and $1/\vartheta$, we have
+\[
+ \sum_\nu b_\nu e^{\vartheta c\ell_\nu}
+ =\sum_\nu b_\nu^{1-\vartheta}
+                   (b_\nu e^{c\ell_\nu})^\vartheta
+ \le\Bigl(\sum_\nu b_\nu\Bigr)^{1-\vartheta}
+        \Bigl(\sum_\nu b_\nu e^{c\ell_\nu}\Bigr)^\vartheta,
+\]
+and passing to increasing partial sums gives the inequality for the convergent series. Using $S_c\le C_J\rho_\bullet$ and \eqref{ch16:eq:zero-exponent-image}, we obtain the bound in part~(4). The function $\vartheta\mapsto(3/8)^{1-\vartheta}C_J^\vartheta$ is continuous at $\vartheta=0$, with value $3/8<1/2$. We fix $\vartheta\in(0,1)$ at which its value is below $1/2$ for both radii and for the finitely many initial segments. This proves both weighted bounds on the image under the reconstruction majorant at the same positive exponent. Because the weighted row bound is a bound of the unperturbed construction, this choice of exponent uses no later perturbative estimate.
+
+\paragraph{Step 6: shorter compositions.}
+For $s<J$, Step~1 and all estimates for finite compositions still apply, with $B_s=M^s$. The first inequality of part~(2), however, becomes $B_s^{-1}Z_\bullet(K_*\rho_\bullet)\le\rho_\bullet/16$, which follows only from a separate contraction inequality for that composition. This is the restriction for $s<J$ in the statement.
+\end{proof}
+
+\section{Perturbations of the incoming action}\label{ch16:sec:perturbation}
+
+The incoming action of a renormalization group step on a block region is the effective classical action plus a perturbation, defined on the list of variable labels of the previous step. This list and the current block region play different roles; in particular, the protected vertices of the gauge transformation alone do not determine the boundary of the incoming list. We first compare the distance to the boundary of the incoming list with the distance to the current boundary.
+
+\begin{lemma}\label{ch16:lem:input-wall-distance}
+Fix $1\le s\le J$, $B_s=M^s$, a list $D_{\mathrm{in}}$ of incoming positions, and a block region $\Omega$. Use the periodic graph metric, rescaled linearly on positions of coordinates introduced at finer lattices, and freeze all components of a label at one position together. Write $\pi_sx=x/B_s$. Suppose that every position $x\notin D_{\mathrm{in}}$ lies in $H$ up to the fixed chart stencil:
+\[
+ \dist(\pi_sx,\Omega^c)\le L_{\mathrm{buf},J}.
+\]
+Here $L_{\mathrm{buf},J}$ and the fixed buffer $c_{\mathrm{end},J}$ for the convention on link endpoints depend only on the construction geometry, and are fixed before the later widths. Let $d_{D_{\mathrm{in}}}(i)$ be the distance of $i$ to the complement of $D_{\mathrm{in}}$, in input units, and $d_{\mathrm{current}}(e)$ the distance of $e$ to $H$, in output units. Then for every $i\in D_{\mathrm{in}}$ and every position $e$ of a label in $\Omega$,
+\begin{equation}\label{ch16:eq:input-wall-comparison}
+ d_{D_{\mathrm{in}}}(i)\ge B_s d_{\mathrm{current}}(e)
+       -B_s\dist(e,\pi_si)-C_{\mathrm{buf},J},\qquad
+ C_{\mathrm{buf},J}=
+       \max_{1\le s\le J}B_s(L_{\mathrm{buf},J}+c_{\mathrm{end},J}).
+\end{equation}
+The same conclusion holds with $\dist(e,W)$ in place of $d_{\mathrm{current}}(e)$ after the fixed endpoint buffer is enlarged. It also holds if $H$ is enlarged by additional blocks.
+\end{lemma}
+
+\begin{proof}
+Suppose that the complement of $D_{\mathrm{in}}$ is nonempty, and choose a position $x\notin D_{\mathrm{in}}$ reached by a shortest path from $i$ to this complement; its length is $d_{D_{\mathrm{in}}}(i)$. The scaled path has length $d_{D_{\mathrm{in}}}(i)/B_s$, including the position of $x$ at its own lattice; scale indices and colors give no extra distance. By the triangle inequality and the hypothesis, we have
+\[
+ \begin{split}
+ d_{\mathrm{current}}(e)
+ &\le\dist(e,\pi_sx)+L_{\mathrm{buf},J}+c_{\mathrm{end},J}\\
+ &\le\dist(e,\pi_si)+d_{D_{\mathrm{in}}}(i)/B_s
+                         +L_{\mathrm{buf},J}+c_{\mathrm{end},J}.
+ \end{split}
+\]
+Multiplying by $B_s$, we obtain \eqref{ch16:eq:input-wall-comparison}. The endpoint buffer covers the difference between the distance to the positions in $H$ and the distance to the interface $W$. Enlarging $H$ can only decrease its distance from a fixed position in $\Omega$, so additional blocks of $H$ preserve both the hypothesis and the bound. If $D_{\mathrm{in}}$ has no complement, the finiteness of the boundary seminorm forces the nonconstant boundary part of the incoming perturbation to vanish, by the convention of \cref{ch15:def:regional-norm}, and there is no incoming boundary dependence to transport. If $D_{\mathrm{in}}$ is empty there is no incoming root.
+\end{proof}
+
+The constant incoming radius in the next theorem is the radius produced by freezing, in the following form of \cref{ch15:lem:freezing}. We start with a classical output profile $\phi$ of interior radius $r_c$ on a set $D$ of variable labels, keep $I\subset\{i\in D:d_D(i)\ge s_{\mathrm{er}}\}$ with $s_{\mathrm{er}}\ge\max(2,w_{\mathrm{bd}})$, and freeze $F=D\setminus I$, which contains the zone of reduced radius. For an analytic function $f$ and frozen values $c^\sharp$, we write $T_{c^\sharp}f(v)=f(v\oplus c^\sharp)-f(0\oplus c^\sharp)$. For $|c_j^\sharp|\le\eta\phi(j)$ with $\eta\le1/4$, \cref{ch15:lem:freezing} implies
+\begin{equation}\label{ch16:eq:uniform-input-after-freeze}
+ \phi|_I\equiv r_c,\qquad
+ \mathcal X_{I}^{r_c}(T_{c^\sharp}f)
+   \le2e^{-\alpha_{\mathrm{cl}}(s_{\mathrm{er}}-1)}
+                                      \mathcal X_D^\phi(f).
+\end{equation}
+The seminorms here have the classical normalization and the stated network and boundary rates. The identity $\phi|_I\equiv r_c$ holds because every remaining position lies outside the zone of reduced radius, and it is needed for the seminorm with constant profile on the left. The frozen values become fixed real parameters, not new variables of radius $r_c$. Applying \eqref{ch16:eq:uniform-input-after-freeze} to the boundary correction produced at the previous step, with $D_{\mathrm{in}}=I$, gives the incoming seminorm at the next step. A new classical boundary-completion difference of the torus action must in addition satisfy its own bound in the seminorm with constant profile, by the separate statement on such differences in \cref{ch15:lem:freezing}; erosion alone does not bound such a difference at an additional component of $H$. The theorem below assumes the bound on the incoming seminorm. That the regions and frozen values of a large-field decomposition satisfy its hypotheses is verified in the construction of that decomposition in \cref{ch18:chapter}.
+
+\begin{theorem}\label{ch16:thm:controlled-perturbation}
+Fix the domains, the protected geometry, the radius $\Rraw$, the conditions on the image under the reconstruction majorant for both radii, and the products for the initial segments of \cref{ch16:lem:admitted-products,ch16:lem:strict-hybrid-gauge,ch16:lem:strict-two-radius-images}, with $s=J$; compositions of $s<J$ averaging steps are treated at the end of the statement. Fix $K_*$, classical input rates $a_{\mathrm{cl}},\alpha_{\mathrm{cl}}>0$, and $r_c=\rho_{\mathrm{cl}}$. Let $b=(\xi,\Rec)$, where the newly frozen coordinates $\xi$ are small and the previously frozen coordinates $\Rec$ are arbitrary in their allowed real set.
+
+\emph{The incoming action.} Let $E_{\mathrm{in}}(a;b)=E_{d_0}(\iota_0a)+P(a;b)$ be holomorphic and real at real arguments in its variable input $a$, with $\Rec$ fixed, where $\iota_0$ extends $a$ by zero. Fix its incoming list $D_{\mathrm{in}}$ of variable labels, the positions of these labels at the lattices where they were introduced, and their cell volumes. The incoming seminorm is the seminorm $\mathcal X_{D_{\mathrm{in}},a_{\mathrm{cl}},\alpha_{\mathrm{cl}}}^{r_c}$ of \cref{ch15:def:regional-norm}, with the constant profile $\phi_{\mathrm{in}}\equiv r_c$ on every label of $D_{\mathrm{in}}$ at which $\Phi_0$ below is substituted; the labels of $\xi$ are fixed parameters of this seminorm. The spatially varying radius profiles are used only for the output. Assume that the complement of $D_{\mathrm{in}}$ lies in $H$ up to the fixed stencil, as in \cref{ch16:lem:input-wall-distance} ($H$ may contain additional blocks), and that, in input units, for every position $e$ of a label in $\Omega$ and every incoming position $i$,
+\[
+ d_{D_{\mathrm{in}}}(i)\ge
+ B_s d_{\mathrm{current}}(e)
+       -B_s\dist(e,i/B_s)-C_{\mathrm{buf},J},
+ \qquad B_s=M^s,
+\]
+where the positions on the right are in output units and the fixed buffer includes the chart stencils. If $D_{\mathrm{in}}$ has no complement, the nonconstant boundary part of the incoming perturbation is zero. All images of $\Phi_0$ and all connecting segments lie strictly inside the ball of the incoming seminorm. A difference of two perturbations uses the same incoming list, weights, and profile.
+
+\emph{The exterior extension.} If the unperturbed regional objective uses the extension $\iota_\xi$, which inserts the newly frozen coordinates into their slots while all previously frozen torus slots remain zero, define the classical boundary-completion difference and the adjusted perturbation
+\[
+ S_\xi^{\mathrm{cl}}(a)=E_{d_0}(\iota_\xi a)-E_{d_0}(\iota_0a),
+ \qquad\overline P=P-S_\xi^{\mathrm{cl}},
+\]
+and assume $\mathcal X_{D_{\mathrm{in}},a_{\mathrm{cl}},\alpha_{\mathrm{cl}}}^{r_c}(\overline P)\le2\sigma_*$. If the reference objective already uses the extension by zero, take $S_\xi^{\mathrm{cl}}=0$. All constants of $S_\xi^{\mathrm{cl}}$ remain in the full classical action. The corresponding difference for the effective interaction, if the reference extension is changed there, is kept with the exact sign of the constant term in \cref{ch15:lem:freezing}.
+
+\emph{The objective.} Let $z_0$ be the unperturbed joint stationary point, $K_0=F_{0,zz}(c,z_0;\xi)$, and $S_0=K_0^{-1/2}$, and put
+\[
+ \begin{split}
+ F_0(c,z;\xi)&=E_{d_0}(\iota_\xi\Psi_R(c,z;\xi)),\\
+ A_0(c,u;\xi)&=\Psi_R(c,z_0+S_0u;\xi),\\
+ \Phi_0(c,u;\xi)&=\Log[(\exp A_0(c,u;\xi))^{G^\Omega(c)}],\\
+ \mathcal F_\lambda(c,u;b)
+   &=F_0(c,z_0+S_0u;\xi)
+                         +\lambda\overline P(\Phi_0(c,u;\xi);b),
+                        \qquad0\le\lambda\le1,
+ \end{split}
+\]
+and $\mathcal Q_\lambda(c,z;b)=\mathcal F_\lambda(c,S_0^{-1}(z-z_0);b)$. The perturbation is evaluated on the gauge-transformed reconstruction $\Phi_0$, and the unperturbed Hessian of $\mathcal F_\lambda$ in $u$ at $u=0$ is $I$. Initial segments, the conditional stationary points $a_{\lambda,I}$, and the Hessians $K_{\lambda,i}$ refer to $\mathcal Q_\lambda$, in the original free coordinates.
+
+Then the following statements hold.
+\begin{enumerate}
+\item (Incoming derivatives.) If the inputs at which $\overline P$ is evaluated have absolute coefficient row sums at most $\kappa\rho_{\mathrm{cl}}$, with $0<\kappa<1$, then for every $j\ge1$,
+\[
+ \|D^j\overline P\|_{\mathrm{root}}
+ \le\frac{j!}{(1-\kappa)^{j+1}}
+                (2\sigma_*)\rho_{\mathrm{cl}}^{2-j},
+\]
+with the incoming network and boundary weights, and with any differentiated input as root.
+\item (Stationary points.) There exist $\sigma_{0,J},Q_{0,J}>0$ and a fixed smaller domain of $u$ such that the following holds for every $0\le\sigma_*\le\sigma_{0,J}$, every $0\le\lambda\le1$, and every product of increments with $\max_i\|q_i\|_\infty\le Q_{0,J}$ whose substitutions stay in that domain. Every initial segment of the original free coordinates has a unique holomorphic stationary point of $\mathcal Q_\lambda$ in the domains of \cref{ch16:lem:admitted-products}, and the inequalities of \cref{ch16:lem:admitted-products}(2) on the preconditioned gradient and Hessian hold, not only a spectral bound. The stationary points are real at real data, the real free Hessians satisfy
+\[
+ \frac12\lambda_J I\le K_{\lambda,i}\le\Lambda_J I,
+ \qquad\|u_\lambda\|_{\mathrm{coeff}}
+                                \le C_J\sigma_*\rho_{\mathrm{cl}},
+\]
+with the exact factors $M^i$ included in $K_{\lambda,i}$, and for every initial segment $I$ and every $y\in\mathcal T_I$,
+\[
+ \|a_{\lambda,I}(c,y;b)-a_I(c,y;\xi)\|_{\mathrm{coeff}}
+                       \le C_J\sigma_*\rho_{\mathrm{cl}}.
+\]
+The quantity $\delta_V$ of \cref{ch16:lem:admitted-products} satisfies $\delta_V\le I_0C_P\sigma_*\rho_{\mathrm{cl}}$, with constants $I_0,C_P$ depending only on the fixed data, and $\sigma_{0,J},Q_{0,J}$ are chosen so that the condition of \cref{ch16:lem:admitted-products}(3) holds for all initial segments. The weighted complex resolvents are bounded by $C_J/(\lambda_J+t)$ for $t\ge0$ at the allocated working rates of part~(4).
+\item (Differences.) The differences from $\lambda=0$ of the stationary points, the Hessians, their inverses and inverse square roots, and the successive reconstructions have convergent boundary-localized coefficient bounds in all variables, including every coarse-field input in $\Omega$ and every fluctuation increment; their networks carry the incoming boundary dependence. These differences are $O_J(\sigma_*)$, and the displacements of stationary points are $O_J(\sigma_*\rho_{\mathrm{cl}})$ on the fixed product. For example, at fixed coarser coordinates $y$,
+\[
+ \partial_\lambda z_{I,\lambda}
+    =-\mathcal Q_{\lambda,II}^{-1}V_I,
+\]
+where $V_I$ is the $I$-component of the gradient of $z\mapsto\overline P(\Phi_0(c,S_0^{-1}(z-z_0);\xi);b)$. Along the successive chain this derivative contains the additional term $-\mathcal Q_{\lambda,II}^{-1}\mathcal Q_{\lambda,II^c}\partial_\lambda z_{I^c}$ and the full derivative $(\partial_\lambda K_{\lambda,i}^{-1/2})q_i$. The function $V=\overline P\circ\Phi_0$ satisfies $\|V_u\|\le C_J\sigma_*\rho_{\mathrm{cl}}$ and $\|V_{uu}\|\le C_J\sigma_*$; the term $\overline P'\Phi_{0,uu}$ is kept in the second derivative.
+\item (Output rates.) The estimates of part~(3) hold at any fixed positive output rates $a_{\mathrm{out}},\alpha_{\mathrm{out}}$ with
+\[
+ a_{\mathrm{out}}+\alpha_{\mathrm{out}}<c_J/C_{\mathrm{geom}},\qquad
+ a_{\mathrm{out}}+\alpha_{\mathrm{out}}
+                   <B a_{\mathrm{cl}}/C_{\mathrm{geom}},\qquad
+ \alpha_{\mathrm{out}}<B\alpha_{\mathrm{cl}}/C_{\mathrm{geom}},
+\]
+where $C_{\mathrm{geom}}$ is fixed before $J$, the rates, and the later widths: it depends only on the dimension, the block geometry, and the allocation of exponents, not on $J$ or on the construction radii. Fixed stencil buffers depending on $J$ affect the amplitudes $C_J$, not the coefficients of the distances. In particular, the perturbation and every external argument stay in one connected coefficient network.
+\item (Two perturbations.) For two perturbations $\overline P_0,\overline P_1$ as above, the bounds of parts~(2) and~(3) on the differences hold with $\sigma_*$ replaced by $\mathcal X_{D_{\mathrm{in}},a_{\mathrm{cl}},\alpha_{\mathrm{cl}}}^{r_c}(\overline P_1-\overline P_0)$. The corresponding minimized full actions $V^{\mathrm{out}}_0,V^{\mathrm{out}}_1$ satisfy a Lipschitz bound in the output seminorm with constant $K_J^{\mathrm{cl}}$, namely \eqref{ch16:eq:output-lipschitz}.
+\item (The full action.) The outgoing full action is $M^s\mathcal F_1(c,u_1;b)$, and on the connected chart
+\[
+ \mathcal F_1(c,u;b)=E_{\mathrm{in}}(\Phi_0(c,u;\xi);b).
+\]
+This identity uses the equality of classical actions on compact gauge overlaps only for the torus term, together with the cancellation of the exact classical boundary-completion difference. It does not assert that $\overline P(\Phi_0)$ equals $\overline P(A_0)$, and it uses no gauge identity for an incoming branch.
+\item (Frozen coordinates.) All perturbed estimates differentiate the coarse-field and free variables at fixed real $b=(\xi,\Rec)$; no derivative of a perturbed quantity in $\xi$ or $\Rec$ is asserted, and the unperturbed estimates in $\xi$ of \cref{ch16:thm:nonflat-force-comparison} are unchanged. If the incoming coefficients and the charts are Borel (respectively continuous) functions of the real parameter $b$, then the stationary points, the matrix functions, and the minimized values are Borel (respectively continuous) in $b$.
+\end{enumerate}
+All constants have the dependence of \cref{ch16:sec:setting}; they do not depend on the later widths, the number of preceding steps, the shape of $\Omega$, the depth, or the smaller enclosing and fluctuation radii chosen later. For a composition of $s<J$ averaging steps, the same statements hold, with $B_s$ in place of $B$, whenever the separate conditions of \cref{ch16:lem:strict-two-radius-images} for that composition hold; no repeated reduction of radii is used. The theorem is a local analytic statement and does not compare probability densities.
+\end{theorem}
+
+\begin{proof}
+We extract the derivatives of the incoming perturbation from the incoming seminorm and transport its boundary dependence to the output. We then construct the stationary points with \cref{ch16:lem:admitted-products}, first jointly and then for the initial segments. The remaining steps treat the differences, two perturbations, the full action, and the dependence on the frozen coordinates.
+
+\paragraph{Step 1: conventions.}
+All functions in this proof are considered at a fixed real $b=(\xi,\Rec)$ in the allowed set, including the newly frozen coordinates $\xi$. Every estimate is uniform over this set, and the supremum over it is taken after the sums over degrees. Only the coarse field in $\Omega$, the free coordinates, and the interpolation parameter are differentiated, and the labels of $\xi$ are not roots of the incoming seminorm.
+
+\paragraph{Step 2: derivatives of the incoming perturbation.}
+We write $r_c=\rho_{\mathrm{cl}}$ and $\overline P(a;b)=\sum_\nu p_\nu(b)a^\nu$, where every multi-index runs over $D_{\mathrm{in}}$, with the positions of its labels at the lattices where they were introduced. Since $\phi_{\mathrm{in}}(i)=r_c$ for every such label, we define, for each degree $k$,
+\[
+ A_k(b)=r_c^{-2}\sup_{i\in D_{\mathrm{in}}}
+       e^{\alpha_{\mathrm{cl}}d_{D_{\mathrm{in}}}(i)}
+       \sum_{|\nu|=k}\frac{\nu_i}{k}|p_\nu(b)|r_c^k
+                                      e^{a_{\mathrm{cl}}\Tree_{\mathrm{in}}(\nu)}.
+\]
+By hypothesis, $\sup_{b\ \mathrm{real}}\sum_{k\ge1}A_k(b)\le2\sigma_*$. This uses the full input radius also at the incoming boundary; a reduced radius near the boundary appears only in the output product. By \eqref{ch16:eq:uniform-input-after-freeze}, the incoming action produced by freezing has this profile when the hypotheses of \cref{ch15:lem:freezing} on freezing the zone of reduced radius and on the frozen values hold. We consider inputs whose absolute coefficient row sums are at most $\kappa r_c$, and fix the first differentiated input label $i$. In degree $k\ge j$, summing over the other $j-1$ ordered differentiated labels gives the factor
+\[
+ \frac{\nu_i}{k}(k)_j,
+ \qquad (k)_j=k(k-1)\cdots(k-j+1),
+\]
+and the remaining input powers are bounded by $\kappa^{k-j}r_c^{k-j}$. Keeping the original incoming network keeps all differentiated roots and all contracted input labels in it. Therefore the rooted derivative of order $j$ is at most
+\[
+ r_c^{2-j}\sum_{k\ge j}A_k(k)_j\kappa^{k-j}
+ \le (2\sigma_*)r_c^{2-j}
+                      \frac{j!}{(1-\kappa)^{j+1}},
+\]
+where we used $\sum_{k\ge j}(k)_j\kappa^{k-j}=j!/(1-\kappa)^{j+1}$, which follows by differentiating the geometric series $j$ times. Any differentiated root can be chosen first, so this proves part~(1), with the incoming network and the boundary weight of its root. Degree one is included. The constant coefficient $p_0$ does not appear in these derivatives and is not restricted.
+
+\paragraph{Step 3: the normalized objective and the perturbing gradient.}
+Let $A_0$, $\Phi_0$, and $\mathcal F_\lambda$ be as in the statement, on the joint product of \cref{ch16:lem:strict-two-radius-images}. The image of this product under the reconstruction majorant, with weight at one fixed positive exponent of the connecting network, is less than $r_c/2$, so part~(1) applies with a fixed $\kappa<1$, for example $\kappa=1/2$. At $u=0$ we have
+\begin{equation}\label{ch16:eq:unit-joint-hessian}
+ D_uF_0(c,z_0+S_0u;\xi)\big|_{u=0}=0,\qquad
+ D_u^2F_0(c,z_0+S_0u;\xi)\big|_{u=0}
+                         =S_0^{\mathsf T}K_0S_0=I.
+\end{equation}
+The first identity is the joint stationarity, and the second uses the symmetric inverse square root on the branch connected to the identity. The coefficients of this function, and those of $z_0$, $\Psi_R$, and $G^\Omega$, are bounded on a larger product by the unperturbed results above.
+
+Let $V=\overline P\circ\Phi_0$. By the chain rule, we have
+\begin{align}
+ V_u&=\sum_i\overline P_i(\Phi_0)(\Phi_0)_{i,u},
+                                                        \label{ch16:eq:perturbing-force}\\
+ V_{uv}&=\sum_{i,j}\overline P_{ij}(\Phi_0)
+                   (\Phi_0)_{i,u}(\Phi_0)_{j,v}
+                +\sum_i\overline P_i(\Phi_0)(\Phi_0)_{i,uv}.
+                                                        \label{ch16:eq:perturbing-hessian}
+\end{align}
+By part~(1) with $j=1,2$, together with the fixed rows and volume-normalized columns of the chart, we obtain
+\begin{equation}\label{ch16:eq:perturbing-bounds}
+ \|V_u\|\le C_P\sigma_*r_c,\qquad
+ \|V_{uu}\|\le C_P\sigma_*.
+\end{equation}
+The term $\overline P'\Phi_{0,uu}$ in \eqref{ch16:eq:perturbing-hessian} contributes $C_J\sigma_*r_c$, which is included in $C_P\sigma_*$ since $r_c$ is fixed. We note that the perturbation need not have zero gradient at $u=0$.
+
+These bounds hold at all orders, as coefficient bounds with spatial weights. Let $B_J(t)=C_Jt/(1-C_Jt)$ majorize the increment series of the chart in a fixed displacement direction, on a fixed larger domain. After division by the factorials of the derivatives, part~(1) and the chain rule over partitions are bounded by the coefficients of
+\begin{equation}\label{ch16:eq:composed-jet-majorant}
+ 2\sigma_*r_c^2
+ \Bigl\{\frac1{1-\kappa-B_J(t)/r_c}
+                          -\frac1{1-\kappa}\Bigr\}.
+\end{equation}
+Fix $t_*>0$, a fixed multiple of $\min(r_c,1)$, with $B_J(t_*)\le(1-\kappa)r_c/2$. By nonnegativity of its coefficients, the coefficient of degree $j$ of \eqref{ch16:eq:composed-jet-majorant} is at most $C_J\sigma_*r_c^2t_*^{-j}$, and restoring $j!$ gives the factorial bounds $j!C_J^{j+1}\sigma_*r_c^{2-j}$, with constants depending on the fixed radius. Fixing a coarse-field or free input uses the column version of the same composition, with the cell volume of that input. Thus all derivatives used here satisfy coefficient bounds on the product.
+
+\paragraph{Step 4: transport of the incoming boundary dependence.}
+A rooted input monomial carries its incoming network and a path from its chosen input root to the complement of $D_{\mathrm{in}}$. The incoming list and its complement are those used in $A_k(b)$. By hypothesis the complement of $D_{\mathrm{in}}$ lies in $H$ up to the fixed stencil, so \cref{ch16:lem:input-wall-distance} implies \eqref{ch16:eq:input-wall-comparison} with its fixed buffer, and hence the comparison assumed in the statement. We scale these paths by $B^{-1}$ to output units and join every network of the chart at its fine input label. The union is connected and contains every external coarse-field and free argument. If the input root lies in $\Omega$, its path to the complement of $D_{\mathrm{in}}$ reaches $H$ after at most one additional leg of fixed length. If it lies in a newly removed region, the chart branch joining it to a root in $\Omega$ already reaches the boundary. Additional components of $H$ can only shorten the required distance to the boundary.
+
+To make this precise, let $\ell_0$ be the length of the incoming network in input units, $d_0^{\mathrm{in}}$ the distance of the chosen root to the complement of $D_{\mathrm{in}}$, and $\ell_\beta$ the lengths of the branches of the chart and of the free inverse in output units. Let $A$ be the set of external positions and $e$ any root in $\Omega$. There exists a constant $C_{\mathrm{dim}}$, depending only on the dimension and on the comparison of elementary paths, and fixed before $J$, such that
+\begin{equation}\label{ch16:eq:network-transport}
+ \begin{split}
+ a_{\mathrm{out}}\Tree(A)+\alpha_{\mathrm{out}}\delta(e)
+ \le{}&C_{\mathrm{dim}}(a_{\mathrm{out}}+\alpha_{\mathrm{out}})
+                   \Bigl(\ell_0/B+\sum_\beta\ell_\beta\Bigr)\\
+ &+C_{\mathrm{dim}}\alpha_{\mathrm{out}}d_0^{\mathrm{in}}/B
+          +(a_{\mathrm{out}}+\alpha_{\mathrm{out}})L'_J(k+1).
+ \end{split}
+\end{equation}
+Indeed, the scaled incoming network and the chart branches alone join all external positions, and adding the scaled path to the complement of $D_{\mathrm{in}}$ also reaches the boundary. The first network bounds $\Tree(A)$, and the second bounds the distance of $e$ to the boundary; this gives the separate coefficients of $\ell_0$ and $d_0^{\mathrm{in}}$ in \eqref{ch16:eq:network-transport}. Here $k$ is the number of attached input factors, and the last term accounts for their fixed displacements by the stencil. To see why $C_{\mathrm{dim}}$ depends only on the dimension, we take shortest paths in the graph metric and their connected union. Using a tree on the external vertices increases the length by at most a factor two, by traversing each edge of a Steiner tree twice. Replacing segments by the fixed paths in coordinate order increases it only by the fixed comparison constant of the three coordinate directions. Scaling is exact, and neither operation depends on the number of scales. An offset depending on the scale changes only the additive term with $L'_J$, whose exponential $e^{CL'_J(k+1)}$ is absorbed in the factorial amplitude $C_J^{k+1}$ on the fixed construction domain. More explicitly, we choose the working radii so that the larger unperturbed radii are at least $\zeta$ times the corresponding working radii, for a fixed $\zeta>1$. Then a monomial of degree $k$ gains the factor $\zeta^{-k}$. We reduce $c_J$ so that $e^{c_JL'_J}\le\zeta^{1/4}$, and the accumulated offset factors $e^{c_JL'_J(k+1)}$ are absorbed by these factors. This choice is made before the later profiles and widths, and it does not change $C_{\mathrm{geom}}$.
+
+We take $C_{\mathrm{geom}}\ge8C_{\mathrm{dim}}$, increased according to the fixed allocation of exponents among the external network, the route to the boundary, and the internal sums, and we keep part of the remaining exponent in each chart branch for its density sum $S_J(\varepsilon)$. Under the three strict inequalities of part~(4), the incoming factors $e^{a_{\mathrm{cl}}\ell_0}$ and $e^{\alpha_{\mathrm{cl}}d_0^{\mathrm{in}}}$, together with the exponent $c_J$ of the unperturbed branches, dominate the output network and boundary weights in \eqref{ch16:eq:network-transport}, and a positive part of the exponent is left for the summations. The exponent in the bound on the image under the reconstruction majorant from \cref{ch16:lem:strict-two-radius-images} is included in the choice of $c_J$ before these rates are specified. The allocation is applied to the whole network, so the exponent is not divided by the Taylor order or by the number of scales. This proves the boundary-localized versions of \eqref{ch16:eq:perturbing-bounds} and \eqref{ch16:eq:composed-jet-majorant} at every allowed output rate.
+
+\paragraph{Step 5: the joint stationary point.}
+We now verify the domain conditions, working first in $u$ near zero. By the unperturbed bound on the third derivative and \eqref{ch16:eq:unit-joint-hessian}, we have
+\[
+ \|D_u^2F_0(c,z_0+S_0u;\xi)-I\|\le C_1\|u\|_{\mathrm{coeff}}.
+\]
+Fix $u_0>0$ inside the joint product with $C_1u_0<1/8$, and fix $\sigma_{0,J}>0$ with $C_P\sigma_{0,J}<1/8$ and $C_P\sigma_{0,J}r_c<u_0/8$. Then $u\mapsto u-D_u\mathcal F_\lambda$ is a coefficient contraction with factor at most $1/4$ on the domain of radius $u_0$, and it maps the ball of radius $u_0/2$ into itself. Picard iteration gives a unique holomorphic joint stationary point, and from the fixed point inequality we obtain
+\begin{equation}\label{ch16:eq:joint-perturbed-displacement}
+ \|u_\lambda\|_{\mathrm{coeff}}
+           \le 2C_P\sigma_*r_c.
+\end{equation}
+The stationary point is real at real data, since $\mathcal F_\lambda$ is real at real arguments and the stationary point is unique.
+
+\paragraph{Step 6: initial segments in the original coordinates.}
+To treat initial segments, we return to the original free coordinates by the invertible affine map $u=S_0^{-1}(z-z_0)$ at fixed $c$ and $\xi$. The pullback is
+\begin{equation}\label{ch16:eq:raw-controlled-objective}
+ \mathcal Q_\lambda(c,z;b)=F_0(c,z;\xi)
+   +\lambda\overline P\left(
+       \Log[(\exp\Psi_R(c,z;\xi))^{G^\Omega(c)}];b\right).
+\end{equation}
+All subscripts referring to initial segments refer to this expression, with the original lists of scales. Because the affine map and its inverse have fixed coefficient bounds, \eqref{ch16:eq:perturbing-bounds} holds in the original coordinates with larger fixed constants. We take the solution domain of every initial segment from \cref{ch16:lem:admitted-products} small enough that its image under this affine map stays in the domain of radius $u_0$.
+
+At an unperturbed conditional stationary point $a_I(c,y;\xi)$, the preconditioned perturbed gradient is
+\[
+ A_I^{-1}\mathcal Q_{\lambda,I}(c,a_I,y;b)
+       =\lambda A_I^{-1}V_I(c,a_I,y;b),
+\]
+whose coefficient norm is at most $I_0C_P\sigma_*r_c$. This holds uniformly for every $y\in\mathcal T_I$, not only at the joint stationary point, since all these conditional reference points lie in the image of the same product under the reconstruction majorant. If $\delta_V$ is defined for the pullback of $V$ as in \cref{ch16:lem:admitted-products}, the same calculation yields
+\begin{equation}\label{ch16:eq:controlled-conditional-force}
+ \delta_V\le I_0C_P\sigma_*r_c.
+\end{equation}
+Across a conditional displacement of size $r_I$, the derivative bound is at most
+\begin{equation}\label{ch16:eq:prefix-perturbation-gates}
+ \|A_I^{-1}(\mathcal Q_{\lambda,II}-A_I)\|
+                    \le I_0(C_1r_I+C_P\sigma_*).
+\end{equation}
+We first take $r_I$ with $I_0C_1r_I<1/8$, and then reduce $\sigma_{0,J}$ so that, for every initial segment,
+\[
+ I_0C_P\sigma_{0,J}<1/8,\qquad
+ I_0C_P\sigma_{0,J}r_c<r_I/8.
+\]
+These inequalities are stronger than the two inequalities required in \cref{ch16:lem:admitted-products}(2). We also require that the error of the real Hessian is less than $\lambda_J/8$. The coefficient resolvent condition is imposed at the allocated working rates of Step~4, using the unperturbed resolvents as references, as detailed in Step~8 below. The larger construction products, their radii, and the unperturbed half of the resolvent margin are fixed first; after $J$ and these spatial rates are fixed, all perturbative constants in this condition are fixed before $\sigma_{0,J}$ is decreased and before the later widths and enclosing radii are chosen. Then \cref{ch16:lem:admitted-products} applies on each domain $\mathcal T_I$ of coarser coordinates, and its estimate \eqref{ch16:eq:conditional-force-displacement} implies that, for every such $y$,
+\begin{equation}\label{ch16:eq:conditional-perturbed-displacement}
+ \|a_{\lambda,I}(c,y;b)-a_I(c,y;\xi)\|_{\mathrm{coeff}}
+       \le2\lambda I_0C_P\sigma_*r_c
+       \le C_J\sigma_*r_c.
+\end{equation}
+This is the conditional bound of part~(2), with one common $C_J\ge2I_0C_P$, and it holds before any moving coarser coordinates are substituted. The mixed coefficient bounds in the original coordinates follow from \eqref{ch16:eq:composed-jet-majorant} and the affine inverse; together with the free inverse they verify \eqref{ch16:eq:conditional-higher-lipschitz} on the same products.
+
+\paragraph{Step 7: successive substitution.}
+The recurrence \eqref{ch16:eq:sequential-recurrence}, with the conditional and matrix-function bounds just obtained, gives a constant $C_{\mathrm{seq},J}$ for a fixed rough bound on the size of the perturbation. Fix $Q_{0,J}>0$ and, if necessary, reduce $\sigma_{0,J}$ further, so that
+\[
+ C_{\mathrm{seq},J}(2I_0C_P\sigma_{0,J}r_c+Q_{0,J})
+       <\frac12\varepsilon_{\mathrm{tube}},
+ \qquad Q_{0,J}\le r_c,
+\]
+where the conversion between the original and the normalized coordinates is included in the minimal margin. The bound \eqref{ch16:eq:controlled-conditional-force} verifies the condition of \cref{ch16:lem:admitted-products}(3) for every $y$. The recurrence bounds every conditional reference point and every Newton iterate, not only the final solution, so the hypothesis on the image under the reconstruction majorant holds throughout the construction. This proves the statements on stationary points in part~(2), for all initial segments simultaneously, on the product of increments.
+
+\paragraph{Step 8: the Hessians.}
+The unperturbed real Hessian in the original coordinates is at least $7\lambda_J/8$ on these products, since its variation from the Hessian at the identity is at most $\lambda_J/8$ by \cref{ch15:thm:regional-gap-and-center}, and the perturbation changes it by less than $\lambda_J/8$. Its principal blocks and Schur complements have the same lower bound, since for a symmetric matrix $H\ge\lambda I$
+\[
+ v^{\mathsf T}(H_{yy}-H_{yI}H_{II}^{-1}H_{Iy})v
+          =\min_x(x,v)^{\mathsf T}H(x,v)\ge\lambda|v|^2,
+\]
+as in \eqref{ch15:eq:schur-lower}. After the normalization by $M^i\ge1$, we obtain $K_{\lambda,i}\ge\lambda_JI/2$. The upper bounds on the tensors and on the inverses give a common upper bound $\Lambda_J$ on the same product.
+
+The complex resolvent condition is used at an allocated working exponent $b_{\mathrm w}$, with strict reserve for the network and boundary weights of part~(4). This exponent is smaller than $b_{\mathrm{ref}}$ and is within the transported incoming-rate allocation of Step~4. For each flat reference $K_i^b$, including the factor $M^i$ when present, the unperturbed bounds give
+\[
+ \|(K_i^b+t)^{-1}\|_{b_{\mathrm w}}
+       \le\frac{C_{0,J}}{\lambda_J+t}\qquad(t\ge0).
+\]
+Put $L_i=K_{\lambda,i}-K_i^b$. At each fixed coarser argument on the conditional products, the fixed-reference Picard bounds of Steps~5 and~6 give the coefficient displacement of the conditional center. Together with Step~4 and the unperturbed mixed tensor bounds, they bound the perturbative matrix difference at $b_{\mathrm w}$ by $C_{P,b_{\mathrm w},J}\sigma_*$. For a Schur block, telescope its defining product and use the principal inverses already constructed. This estimate is obtained before successive substitution. Since $b_{\mathrm w}<b_{\mathrm{ref}}$, monotonicity preserves the unperturbed half-margin on the fixed products. Fix the perturbative constants at the working rates and then reduce $\sigma_{0,J}$ so that
+\[
+ C_{0,J}C_{P,b_{\mathrm w},J}\sigma_{0,J}\le\lambda_J/8.
+\]
+The two halves give $C_{0,J}\|L_i\|_{b_{\mathrm w}}\le\lambda_J/4$ at every stage. With $R_i^b(t)=(K_i^b+t)^{-1}$, the ordered Neumann expansion
+\[
+ (K_{\lambda,i}+t)^{-1}
+   =\sum_{n\ge0}[-R_i^b(t)L_i]^nR_i^b(t)
+\]
+converges in the coefficient norm at this same working exponent and gives $4C_{0,J}/[3(\lambda_J+t)]$. The bounds with an analytic input fixed follow by inserting the differentiated tensor in this normally convergent series on a fixed smaller product. Thus the inverse uses the intrinsic decay of the unperturbed resolvent and the allocated working decay of the incoming perturbation.
+
+\paragraph{Step 9: the differences carry the perturbation.}
+It remains to prove that the differences carry the incoming boundary dependence, including through the moving coarser arguments. At fixed $y$, differentiating the gradient equation of an initial segment, we obtain
+\begin{equation}\label{ch16:eq:perturbed-center-response}
+ \partial_\lambda z_{I,\lambda}
+                 =-\mathcal Q_{\lambda,II}^{-1}V_I.
+\end{equation}
+The free inverse just constructed is a coefficient series at the allocated working rates without boundary weight, and $V_I$ is the boundary-localized series of Steps~3 and~4. The majorant of the product is \eqref{ch16:eq:marked-majorant}, and it is $O_J(\sigma_*r_c)$; integrating in $\lambda$ proves the bound on the difference of stationary points. Let $Z_\lambda$ be the stationary point at which a Hessian is evaluated, and let $H$ denote here this Hessian of $\mathcal Q_\lambda$. Its total derivative is
+\[
+ \dot H=V_{zz}+\mathcal Q_\lambda^{(3)}[\dot Z_\lambda],
+\]
+which is $O_J(\sigma_*)$ and boundary-localized. For a set $L$ of finer eliminated coordinates, the Schur block of scale $i$ is $S=H_{ii}-H_{iL}RH_{Li}$ with $R=H_{LL}^{-1}$, and its derivative is
+\begin{equation}\label{ch16:eq:schur-response}
+ \dot S=\dot H_{ii}-\dot H_{iL}RH_{Li}-H_{iL}R\dot H_{Li}
+                         +H_{iL}R\dot H_{LL}RH_{Li}.
+\end{equation}
+Every term has exactly one factor which carries the perturbation, including the term coming from the derivative of the inverse. Multiplication by $M^i$ gives the derivative of $K_{\lambda,i}$. The derivative of the inverse is $-K^{-1}\dot KK^{-1}$, and \eqref{ch16:eq:sqrt-difference}, or its differentiated integral, gives the derivative of the inverse square root, with integrable majorant $C_Jt^{-1/2}(\lambda_J+t)^{-2}\|\dot K\|$. These identities prove the stated bounds on all differences of matrix functions.
+
+Along the successive chain, the derivative in \eqref{ch16:eq:perturbed-center-response} becomes
+\[
+ \dot z_I=-\mathcal Q_{\lambda,II}^{-1}
+               (V_I+\mathcal Q_{\lambda,II^c}\dot z_{I^c}).
+\]
+An inserted increment has total derivative
+\[
+ \frac{d}{d\lambda}
+ [a_{\lambda,i}(c,z_{>i})+K_{\lambda,i}(c,z_{>i})^{-1/2}q_i]
+ =\partial_\lambda a_{\lambda,i}
+     +D_ya_{\lambda,i}\dot z_{>i}
+     +\frac{d}{d\lambda}K_{\lambda,i}^{-1/2}q_i,
+\]
+where the last derivative includes both the explicit change of the objective and the change of the coarser argument. We start at the coarsest conditional stationary point and descend. Each direct derivative carries the perturbation, and each new contribution from the coarser arguments contains a factor which is already known to carry it. By \eqref{ch16:eq:schur-response} and \eqref{ch16:eq:sqrt-difference} this remains true for every inverse square root used at the next scale. Since $\|q_i\|_\infty\le Q_{0,J}\le r_c$, the finite recurrence gives $O_J(\sigma_*r_c)$ for the stationary points and the reconstructed displacements, and $O_J(\sigma_*)$ for their matrix coefficients. Differentiating in a coarse-field or free input fixes the index of that input in these convergent series, and the allocation of Step~4 keeps the perturbation and every external argument in one connected network. This proves part~(3) on the product, and together with Step~4 it proves part~(4).
+
+\paragraph{Step 10: two perturbations.}
+For two perturbations we interpolate between them. Since the coefficient bounds are convex and the fixed bound $\sigma_{0,J}$ holds for both, every interpolated objective stays in the same domains. Its derivative in the interpolation parameter is given by \eqref{ch16:eq:perturbed-center-response} with $V=(\overline P_1-\overline P_0)\circ\Phi_0$. We set
+\begin{equation}\label{ch16:eq:input-difference-norm}
+ \Delta_{\mathrm{in}}=
+ \mathcal X_{D_{\mathrm{in}},a_{\mathrm{cl}},\alpha_{\mathrm{cl}}}^{r_c}
+                  (\overline P_1-\overline P_0),
+ \qquad \phi_{\mathrm{in}}\equiv r_c.
+\end{equation}
+Since both perturbations use the same $D_{\mathrm{in}}$, the same positions and cell volumes, and the same incoming boundary, all the preceding difference estimates are linear in $\Delta_{\mathrm{in}}$. We write $\mathcal Q_\lambda$ also for the interpolated objective. The derivative of the outgoing values in the interpolation parameter is
+\[
+ \partial_\lambda[M^s\mathcal Q_\lambda(c,z_\lambda;b)]
+ =M^s(\overline P_1-\overline P_0)
+                                     (\Phi_0(c,u_\lambda;\xi);b).
+\]
+Its nonconstant coefficient networks contain the same incoming difference, also when a derivative hits the stationary point. The fixed ratios of the radii, the composition bound, and \eqref{ch16:eq:root-fraction} convert them into
+\begin{equation}\label{ch16:eq:output-lipschitz}
+ \mathcal X_{\Omega,a_{\mathrm{out}},\alpha_{\mathrm{out}}}^{\phi_{\mathrm{cl}},
+                    \mathrm{cl}}
+       (V^{\mathrm{out}}_1-V^{\mathrm{out}}_0)
+                       \le K_J^{\mathrm{cl}}\Delta_{\mathrm{in}}.
+\end{equation}
+Here the outgoing classical seminorm uses the output profile $\phi_{\mathrm{cl}}$ with interior radius $r_c$. The seminorm in \eqref{ch16:eq:input-difference-norm} is the incoming seminorm with constant profile. The output seminorm includes degree one. A difference of incoming constants stays in the full value and has zero seminorm. This proves part~(5).
+
+\paragraph{Step 11: the full action.}
+We prove the identity of part~(6), with its constants. When $\Psi_R$ is written on its regional list, $\iota_\xi$ inserts the newly frozen coordinates once; when it is written as a complete fine field, the same insertion is already included. In either notation, the exact identities of \cref{ch16:lem:strict-hybrid-gauge} at the endpoints imply the equality of complete group fields
+\[
+ \exp(\iota_\xi\Phi_0)
+                  =(\exp(\iota_\xi A_0))^{G^\Omega(c)},
+\]
+since the basepoint and the fine endpoints of every based transport of a newly frozen coordinate are protected, and the gauge transformation is the identity on the previously frozen extension. For real data both complete fields lie in the common chart of \cref{ch08:thm:compact-overlap}: the field before gauge transformation by the choice of $\Rraw$, and the gauge-transformed field by the bound on the image under the reconstruction majorant and the bound on the newly frozen coordinates. The gauge transformation is periodic and compact there. Thus \cref{ch08:thm:compact-overlap} applies to the torus classical action, and only to it, and we obtain
+\begin{align*}
+ \mathcal F_1
+ &=E_{d_0}(\iota_\xi\Phi_0)
+                          +P(\Phi_0;b)-S_\xi^{\mathrm{cl}}(\Phi_0)\\
+ &=E_{d_0}(\iota_0\Phi_0)+P(\Phi_0;b)
+                          =E_{\mathrm{in}}(\Phi_0;b).
+\end{align*}
+These equalities keep $S_\xi^{\mathrm{cl}}(0)$ as well as all nonconstant coefficients of $S_\xi^{\mathrm{cl}}$; no constant Taylor coefficient has been subtracted. Both sides are holomorphic on the connected product, and they agree on its real open part. Expanding at a real interior point and differentiating the real identity in each coordinate, we find that all Taylor coefficients of the difference vanish. Continuation through overlapping polydiscs in the connected product gives the equality everywhere on it.
+
+If the reference extension of the effective interaction is changed, the corresponding difference is treated by \cref{ch15:lem:freezing}. In particular, replacing a resulting interaction $R(v,c)$ by $R(v,c)-R(0,c)$ changes the normalization constant from $\Lambda$ to $\Lambda-R(0,c)$ and preserves the density; the constant of the extension is not deleted. The perturbation has been evaluated on $\Phi_0$ throughout.
+
+\paragraph{Step 12: dependence on the frozen coordinates.}
+Fix the geometry, the finite lists of labels, and a strictly smaller analytic product, and suppose that the incoming coefficients and the charts are Borel functions of the real parameter $b$. A finite Taylor partial sum of any chart or incoming function is then jointly Borel in its analytic arguments and $b$. Since the common coefficient bounds on the larger radius give a geometric tail on the smaller product, uniformly in $b$, the limits of the series are jointly Borel. For the scalar incoming function this argument is applied to its part of positive degree, and the unrestricted coefficient $p_0(b)$ is kept as a separate Borel summand.
+
+Every finite-dimensional matrix inverse used in a Picard iterate is a quotient of polynomials in its entries with nonzero determinant on the domain, hence Borel there, and each Picard iterate is a composition of such operations and of the jointly Borel functions just obtained. The uniform contraction ratio bounds the distance of the iterates to the stationary point by a geometric sequence, uniformly in $b$, which implies that the stationary point is jointly Borel. This applies first to the joint problem and then to every conditional problem, at arbitrary coarser arguments in the domains, and the finite successive substitution of these maps is Borel.
+
+For matrix functions we use \eqref{ch16:eq:resolvent-series} and \eqref{ch16:eq:sqrt}. Finite Neumann sums are Borel, and their uniform geometric limit gives the resolvent. On a compact interval of integration inside $(0,\infty)$ the Riemann sums of the integral for the inverse square root are Borel, and the uniform bounds on the gap and the resolvent make the tails at zero and at infinity small, uniformly in the parameters; hence the integral is Borel. The same argument applies to the differences and to the logarithmic factors on their fixed nonvanishing branches. Evaluating the full objective at the stationary point gives Borel minimized values, with the incoming constant restored exactly.
+
+If the coefficients and charts are continuous in $b$, every finite partial sum, inverse, and Picard iterate in this argument is continuous. The common geometric bounds and contraction ratios make all limits uniform on the smaller products, and the tails of the integrals satisfy the same uniform bounds. The limits and the finite successive compositions are therefore continuous in $b$. This proves part~(7) without any derivative in $\xi$ or $\Rec$.
+
+\paragraph{Step 13: shorter compositions.}
+For $s<J$ we replace $B$ by $B_s$ in the scaling and use the separate conditions on the radius and on the image under the reconstruction majorant for that composition; the proof for the initial segments is unchanged, with $s$ in place of $J$. All constants were computed on fixed larger products, before the eventual free, enclosing, and geometric choices.
+\end{proof}
