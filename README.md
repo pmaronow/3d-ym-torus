@@ -1,5 +1,21 @@
 # The continuum limit of three-dimensional SU(2) lattice Yang–Mills theory on a torus
 
+**Note (10/28):** This repository is now dated and is here for historical reasons only. The latest version of this manuscript, including clarifications, was posted at Hexagon math in five parts:
+
+1. <https://hexagonmath.org/2610.00506v1>
+2. <https://hexagonmath.org/2610.00509v1>
+3. <https://hexagonmath.org/2610.00510v1>
+4. <https://hexagonmath.org/2610.00511v1>
+5. <https://hexagonmath.org/2610.00512v1>
+
+Related ongoing projects are here:
+
+- <https://github.com/ethanwsussman/Yang--Mills-LLM-experiment>
+- <https://github.com/marikgoldstein/scalar-qed-existence>
+- <https://www.kitp.ucsb.edu/statement-by-the-yangmills-working-group>
+
+---
+
 P. M. Aronow and Patrick Lopatto
 
 [Read the manuscript](3d-ym-torus.pdf) · [LaTeX source](source/)
